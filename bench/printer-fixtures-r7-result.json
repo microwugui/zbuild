@@ -1,0 +1,825 @@
+{
+  "fixtures": 8,
+  "opts": 6,
+  "cases": 48,
+  "mismatches": 0,
+  "rows": [
+    {
+      "fixture": "unicode-ident.js",
+      "opts": "default",
+      "equal": true,
+      "base": {
+        "ok": true,
+        "len": 68,
+        "sha": "5226c7b0aa1ee52b32972f8330c5c83814874ad9e44a96aba472a1599de60dfb",
+        "stage": null
+      },
+      "cand": {
+        "ok": true,
+        "len": 68,
+        "sha": "5226c7b0aa1ee52b32972f8330c5c83814874ad9e44a96aba472a1599de60dfb",
+        "stage": null
+      }
+    },
+    {
+      "fixture": "unicode-ident.js",
+      "opts": "asciiOnly",
+      "equal": true,
+      "base": {
+        "ok": true,
+        "len": 98,
+        "sha": "0945f9ef3fcff9a6a212ec686fb29b5f4a44ab8bde68f019c3847b599bff1006",
+        "stage": null
+      },
+      "cand": {
+        "ok": true,
+        "len": 98,
+        "sha": "0945f9ef3fcff9a6a212ec686fb29b5f4a44ab8bde68f019c3847b599bff1006",
+        "stage": null
+      }
+    },
+    {
+      "fixture": "unicode-ident.js",
+      "opts": "minifyWs",
+      "equal": true,
+      "base": {
+        "ok": true,
+        "len": 55,
+        "sha": "2f78929b01a23162ec09d37e6b517fb546f17bb6e555bd26f3cb14c2d1b78b4f",
+        "stage": null
+      },
+      "cand": {
+        "ok": true,
+        "len": 55,
+        "sha": "2f78929b01a23162ec09d37e6b517fb546f17bb6e555bd26f3cb14c2d1b78b4f",
+        "stage": null
+      }
+    },
+    {
+      "fixture": "unicode-ident.js",
+      "opts": "minifyWs+asciiOnly",
+      "equal": true,
+      "base": {
+        "ok": true,
+        "len": 85,
+        "sha": "e0b97527334a4458c5aa213e9243c15b779fc16a69a81af0a4c1305e523174b2",
+        "stage": null
+      },
+      "cand": {
+        "ok": true,
+        "len": 85,
+        "sha": "e0b97527334a4458c5aa213e9243c15b779fc16a69a81af0a4c1305e523174b2",
+        "stage": null
+      }
+    },
+    {
+      "fixture": "unicode-ident.js",
+      "opts": "addSourceMappings",
+      "equal": true,
+      "base": {
+        "ok": false,
+        "len": null,
+        "sha": null,
+        "stage": "worker"
+      },
+      "cand": {
+        "ok": false,
+        "len": null,
+        "sha": null,
+        "stage": "worker"
+      }
+    },
+    {
+      "fixture": "unicode-ident.js",
+      "opts": "legalEOF",
+      "equal": true,
+      "base": {
+        "ok": true,
+        "len": 68,
+        "sha": "5226c7b0aa1ee52b32972f8330c5c83814874ad9e44a96aba472a1599de60dfb",
+        "stage": null
+      },
+      "cand": {
+        "ok": true,
+        "len": 68,
+        "sha": "5226c7b0aa1ee52b32972f8330c5c83814874ad9e44a96aba472a1599de60dfb",
+        "stage": null
+      }
+    },
+    {
+      "fixture": "nonbmp-ident.js",
+      "opts": "default",
+      "equal": true,
+      "base": {
+        "ok": true,
+        "len": 50,
+        "sha": "9bd311bd1bf71fd79b57671b9e69e6cc3cd5f0c2a3035a52a83372fe656de82e",
+        "stage": null
+      },
+      "cand": {
+        "ok": true,
+        "len": 50,
+        "sha": "9bd311bd1bf71fd79b57671b9e69e6cc3cd5f0c2a3035a52a83372fe656de82e",
+        "stage": null
+      }
+    },
+    {
+      "fixture": "nonbmp-ident.js",
+      "opts": "asciiOnly",
+      "equal": true,
+      "base": {
+        "ok": false,
+        "len": null,
+        "sha": null,
+        "stage": "worker"
+      },
+      "cand": {
+        "ok": false,
+        "len": null,
+        "sha": null,
+        "stage": "worker"
+      }
+    },
+    {
+      "fixture": "nonbmp-ident.js",
+      "opts": "minifyWs",
+      "equal": true,
+      "base": {
+        "ok": true,
+        "len": 39,
+        "sha": "8d5bf2ff866e0f9a064bfcaa68f0dad8e459973a7c397b4daccceb4c85cbfe7f",
+        "stage": null
+      },
+      "cand": {
+        "ok": true,
+        "len": 39,
+        "sha": "8d5bf2ff866e0f9a064bfcaa68f0dad8e459973a7c397b4daccceb4c85cbfe7f",
+        "stage": null
+      }
+    },
+    {
+      "fixture": "nonbmp-ident.js",
+      "opts": "minifyWs+asciiOnly",
+      "equal": true,
+      "base": {
+        "ok": false,
+        "len": null,
+        "sha": null,
+        "stage": "worker"
+      },
+      "cand": {
+        "ok": false,
+        "len": null,
+        "sha": null,
+        "stage": "worker"
+      }
+    },
+    {
+      "fixture": "nonbmp-ident.js",
+      "opts": "addSourceMappings",
+      "equal": true,
+      "base": {
+        "ok": false,
+        "len": null,
+        "sha": null,
+        "stage": "worker"
+      },
+      "cand": {
+        "ok": false,
+        "len": null,
+        "sha": null,
+        "stage": "worker"
+      }
+    },
+    {
+      "fixture": "nonbmp-ident.js",
+      "opts": "legalEOF",
+      "equal": true,
+      "base": {
+        "ok": true,
+        "len": 50,
+        "sha": "9bd311bd1bf71fd79b57671b9e69e6cc3cd5f0c2a3035a52a83372fe656de82e",
+        "stage": null
+      },
+      "cand": {
+        "ok": true,
+        "len": 50,
+        "sha": "9bd311bd1bf71fd79b57671b9e69e6cc3cd5f0c2a3035a52a83372fe656de82e",
+        "stage": null
+      }
+    },
+    {
+      "fixture": "lone-surrogate.js",
+      "opts": "default",
+      "equal": true,
+      "base": {
+        "ok": true,
+        "len": 32,
+        "sha": "edadad834145eae094f64d1eb066ccaf266ec9535ed2251cb4cd011f920309ed",
+        "stage": null
+      },
+      "cand": {
+        "ok": true,
+        "len": 32,
+        "sha": "edadad834145eae094f64d1eb066ccaf266ec9535ed2251cb4cd011f920309ed",
+        "stage": null
+      }
+    },
+    {
+      "fixture": "lone-surrogate.js",
+      "opts": "asciiOnly",
+      "equal": true,
+      "base": {
+        "ok": true,
+        "len": 32,
+        "sha": "edadad834145eae094f64d1eb066ccaf266ec9535ed2251cb4cd011f920309ed",
+        "stage": null
+      },
+      "cand": {
+        "ok": true,
+        "len": 32,
+        "sha": "edadad834145eae094f64d1eb066ccaf266ec9535ed2251cb4cd011f920309ed",
+        "stage": null
+      }
+    },
+    {
+      "fixture": "lone-surrogate.js",
+      "opts": "minifyWs",
+      "equal": true,
+      "base": {
+        "ok": true,
+        "len": 25,
+        "sha": "a7404bd6fa07d105096b082975b00850eebad71fd9ae8f3b996f0bc463d2c7fa",
+        "stage": null
+      },
+      "cand": {
+        "ok": true,
+        "len": 25,
+        "sha": "a7404bd6fa07d105096b082975b00850eebad71fd9ae8f3b996f0bc463d2c7fa",
+        "stage": null
+      }
+    },
+    {
+      "fixture": "lone-surrogate.js",
+      "opts": "minifyWs+asciiOnly",
+      "equal": true,
+      "base": {
+        "ok": true,
+        "len": 25,
+        "sha": "a7404bd6fa07d105096b082975b00850eebad71fd9ae8f3b996f0bc463d2c7fa",
+        "stage": null
+      },
+      "cand": {
+        "ok": true,
+        "len": 25,
+        "sha": "a7404bd6fa07d105096b082975b00850eebad71fd9ae8f3b996f0bc463d2c7fa",
+        "stage": null
+      }
+    },
+    {
+      "fixture": "lone-surrogate.js",
+      "opts": "addSourceMappings",
+      "equal": true,
+      "base": {
+        "ok": false,
+        "len": null,
+        "sha": null,
+        "stage": "worker"
+      },
+      "cand": {
+        "ok": false,
+        "len": null,
+        "sha": null,
+        "stage": "worker"
+      }
+    },
+    {
+      "fixture": "lone-surrogate.js",
+      "opts": "legalEOF",
+      "equal": true,
+      "base": {
+        "ok": true,
+        "len": 32,
+        "sha": "edadad834145eae094f64d1eb066ccaf266ec9535ed2251cb4cd011f920309ed",
+        "stage": null
+      },
+      "cand": {
+        "ok": true,
+        "len": 32,
+        "sha": "edadad834145eae094f64d1eb066ccaf266ec9535ed2251cb4cd011f920309ed",
+        "stage": null
+      }
+    },
+    {
+      "fixture": "unicode-key.js",
+      "opts": "default",
+      "equal": true,
+      "base": {
+        "ok": true,
+        "len": 48,
+        "sha": "78d72968d38f0d72d1cb602c9fed9bf325e23d45e2eb7d78f37b619534cda5e4",
+        "stage": null
+      },
+      "cand": {
+        "ok": true,
+        "len": 48,
+        "sha": "78d72968d38f0d72d1cb602c9fed9bf325e23d45e2eb7d78f37b619534cda5e4",
+        "stage": null
+      }
+    },
+    {
+      "fixture": "unicode-key.js",
+      "opts": "asciiOnly",
+      "equal": true,
+      "base": {
+        "ok": true,
+        "len": 59,
+        "sha": "b8ff17dfbc2204def445752d4b76487052cb4cfe76c41dcfb89eb69e8fbdcf24",
+        "stage": null
+      },
+      "cand": {
+        "ok": true,
+        "len": 59,
+        "sha": "b8ff17dfbc2204def445752d4b76487052cb4cfe76c41dcfb89eb69e8fbdcf24",
+        "stage": null
+      }
+    },
+    {
+      "fixture": "unicode-key.js",
+      "opts": "minifyWs",
+      "equal": true,
+      "base": {
+        "ok": true,
+        "len": 36,
+        "sha": "4e58c136bdb6b9844f31cf3c8b89a12542169ffab5f4bbc6c7154690800268af",
+        "stage": null
+      },
+      "cand": {
+        "ok": true,
+        "len": 36,
+        "sha": "4e58c136bdb6b9844f31cf3c8b89a12542169ffab5f4bbc6c7154690800268af",
+        "stage": null
+      }
+    },
+    {
+      "fixture": "unicode-key.js",
+      "opts": "minifyWs+asciiOnly",
+      "equal": true,
+      "base": {
+        "ok": true,
+        "len": 47,
+        "sha": "4f0ca2f4b7d1577e1a996e3d434dd50b137313a3cc20ba01a0e16eff2310c840",
+        "stage": null
+      },
+      "cand": {
+        "ok": true,
+        "len": 47,
+        "sha": "4f0ca2f4b7d1577e1a996e3d434dd50b137313a3cc20ba01a0e16eff2310c840",
+        "stage": null
+      }
+    },
+    {
+      "fixture": "unicode-key.js",
+      "opts": "addSourceMappings",
+      "equal": true,
+      "base": {
+        "ok": false,
+        "len": null,
+        "sha": null,
+        "stage": "worker"
+      },
+      "cand": {
+        "ok": false,
+        "len": null,
+        "sha": null,
+        "stage": "worker"
+      }
+    },
+    {
+      "fixture": "unicode-key.js",
+      "opts": "legalEOF",
+      "equal": true,
+      "base": {
+        "ok": true,
+        "len": 48,
+        "sha": "78d72968d38f0d72d1cb602c9fed9bf325e23d45e2eb7d78f37b619534cda5e4",
+        "stage": null
+      },
+      "cand": {
+        "ok": true,
+        "len": 48,
+        "sha": "78d72968d38f0d72d1cb602c9fed9bf325e23d45e2eb7d78f37b619534cda5e4",
+        "stage": null
+      }
+    },
+    {
+      "fixture": "crlf.js",
+      "opts": "default",
+      "equal": true,
+      "base": {
+        "ok": true,
+        "len": 25,
+        "sha": "01aec92313485bf1c2c1a3a9bea7ccb646568079d54b483be770c78d7ec252b6",
+        "stage": null
+      },
+      "cand": {
+        "ok": true,
+        "len": 25,
+        "sha": "01aec92313485bf1c2c1a3a9bea7ccb646568079d54b483be770c78d7ec252b6",
+        "stage": null
+      }
+    },
+    {
+      "fixture": "crlf.js",
+      "opts": "asciiOnly",
+      "equal": true,
+      "base": {
+        "ok": true,
+        "len": 25,
+        "sha": "01aec92313485bf1c2c1a3a9bea7ccb646568079d54b483be770c78d7ec252b6",
+        "stage": null
+      },
+      "cand": {
+        "ok": true,
+        "len": 25,
+        "sha": "01aec92313485bf1c2c1a3a9bea7ccb646568079d54b483be770c78d7ec252b6",
+        "stage": null
+      }
+    },
+    {
+      "fixture": "crlf.js",
+      "opts": "minifyWs",
+      "equal": true,
+      "base": {
+        "ok": true,
+        "len": 18,
+        "sha": "036c3bc14d24d59939625c1925b27e40f1610e19d88b2943dc48fb7bee864603",
+        "stage": null
+      },
+      "cand": {
+        "ok": true,
+        "len": 18,
+        "sha": "036c3bc14d24d59939625c1925b27e40f1610e19d88b2943dc48fb7bee864603",
+        "stage": null
+      }
+    },
+    {
+      "fixture": "crlf.js",
+      "opts": "minifyWs+asciiOnly",
+      "equal": true,
+      "base": {
+        "ok": true,
+        "len": 18,
+        "sha": "036c3bc14d24d59939625c1925b27e40f1610e19d88b2943dc48fb7bee864603",
+        "stage": null
+      },
+      "cand": {
+        "ok": true,
+        "len": 18,
+        "sha": "036c3bc14d24d59939625c1925b27e40f1610e19d88b2943dc48fb7bee864603",
+        "stage": null
+      }
+    },
+    {
+      "fixture": "crlf.js",
+      "opts": "addSourceMappings",
+      "equal": true,
+      "base": {
+        "ok": false,
+        "len": null,
+        "sha": null,
+        "stage": "worker"
+      },
+      "cand": {
+        "ok": false,
+        "len": null,
+        "sha": null,
+        "stage": "worker"
+      }
+    },
+    {
+      "fixture": "crlf.js",
+      "opts": "legalEOF",
+      "equal": true,
+      "base": {
+        "ok": true,
+        "len": 25,
+        "sha": "01aec92313485bf1c2c1a3a9bea7ccb646568079d54b483be770c78d7ec252b6",
+        "stage": null
+      },
+      "cand": {
+        "ok": true,
+        "len": 25,
+        "sha": "01aec92313485bf1c2c1a3a9bea7ccb646568079d54b483be770c78d7ec252b6",
+        "stage": null
+      }
+    },
+    {
+      "fixture": "legal.js",
+      "opts": "default",
+      "equal": true,
+      "base": {
+        "ok": true,
+        "len": 25,
+        "sha": "01aec92313485bf1c2c1a3a9bea7ccb646568079d54b483be770c78d7ec252b6",
+        "stage": null
+      },
+      "cand": {
+        "ok": true,
+        "len": 25,
+        "sha": "01aec92313485bf1c2c1a3a9bea7ccb646568079d54b483be770c78d7ec252b6",
+        "stage": null
+      }
+    },
+    {
+      "fixture": "legal.js",
+      "opts": "asciiOnly",
+      "equal": true,
+      "base": {
+        "ok": true,
+        "len": 25,
+        "sha": "01aec92313485bf1c2c1a3a9bea7ccb646568079d54b483be770c78d7ec252b6",
+        "stage": null
+      },
+      "cand": {
+        "ok": true,
+        "len": 25,
+        "sha": "01aec92313485bf1c2c1a3a9bea7ccb646568079d54b483be770c78d7ec252b6",
+        "stage": null
+      }
+    },
+    {
+      "fixture": "legal.js",
+      "opts": "minifyWs",
+      "equal": true,
+      "base": {
+        "ok": true,
+        "len": 18,
+        "sha": "036c3bc14d24d59939625c1925b27e40f1610e19d88b2943dc48fb7bee864603",
+        "stage": null
+      },
+      "cand": {
+        "ok": true,
+        "len": 18,
+        "sha": "036c3bc14d24d59939625c1925b27e40f1610e19d88b2943dc48fb7bee864603",
+        "stage": null
+      }
+    },
+    {
+      "fixture": "legal.js",
+      "opts": "minifyWs+asciiOnly",
+      "equal": true,
+      "base": {
+        "ok": true,
+        "len": 18,
+        "sha": "036c3bc14d24d59939625c1925b27e40f1610e19d88b2943dc48fb7bee864603",
+        "stage": null
+      },
+      "cand": {
+        "ok": true,
+        "len": 18,
+        "sha": "036c3bc14d24d59939625c1925b27e40f1610e19d88b2943dc48fb7bee864603",
+        "stage": null
+      }
+    },
+    {
+      "fixture": "legal.js",
+      "opts": "addSourceMappings",
+      "equal": true,
+      "base": {
+        "ok": false,
+        "len": null,
+        "sha": null,
+        "stage": "worker"
+      },
+      "cand": {
+        "ok": false,
+        "len": null,
+        "sha": null,
+        "stage": "worker"
+      }
+    },
+    {
+      "fixture": "legal.js",
+      "opts": "legalEOF",
+      "equal": true,
+      "base": {
+        "ok": true,
+        "len": 25,
+        "sha": "01aec92313485bf1c2c1a3a9bea7ccb646568079d54b483be770c78d7ec252b6",
+        "stage": null
+      },
+      "cand": {
+        "ok": true,
+        "len": 25,
+        "sha": "01aec92313485bf1c2c1a3a9bea7ccb646568079d54b483be770c78d7ec252b6",
+        "stage": null
+      }
+    },
+    {
+      "fixture": "legal-multi.js",
+      "opts": "default",
+      "equal": true,
+      "base": {
+        "ok": true,
+        "len": 25,
+        "sha": "01aec92313485bf1c2c1a3a9bea7ccb646568079d54b483be770c78d7ec252b6",
+        "stage": null
+      },
+      "cand": {
+        "ok": true,
+        "len": 25,
+        "sha": "01aec92313485bf1c2c1a3a9bea7ccb646568079d54b483be770c78d7ec252b6",
+        "stage": null
+      }
+    },
+    {
+      "fixture": "legal-multi.js",
+      "opts": "asciiOnly",
+      "equal": true,
+      "base": {
+        "ok": true,
+        "len": 25,
+        "sha": "01aec92313485bf1c2c1a3a9bea7ccb646568079d54b483be770c78d7ec252b6",
+        "stage": null
+      },
+      "cand": {
+        "ok": true,
+        "len": 25,
+        "sha": "01aec92313485bf1c2c1a3a9bea7ccb646568079d54b483be770c78d7ec252b6",
+        "stage": null
+      }
+    },
+    {
+      "fixture": "legal-multi.js",
+      "opts": "minifyWs",
+      "equal": true,
+      "base": {
+        "ok": true,
+        "len": 18,
+        "sha": "036c3bc14d24d59939625c1925b27e40f1610e19d88b2943dc48fb7bee864603",
+        "stage": null
+      },
+      "cand": {
+        "ok": true,
+        "len": 18,
+        "sha": "036c3bc14d24d59939625c1925b27e40f1610e19d88b2943dc48fb7bee864603",
+        "stage": null
+      }
+    },
+    {
+      "fixture": "legal-multi.js",
+      "opts": "minifyWs+asciiOnly",
+      "equal": true,
+      "base": {
+        "ok": true,
+        "len": 18,
+        "sha": "036c3bc14d24d59939625c1925b27e40f1610e19d88b2943dc48fb7bee864603",
+        "stage": null
+      },
+      "cand": {
+        "ok": true,
+        "len": 18,
+        "sha": "036c3bc14d24d59939625c1925b27e40f1610e19d88b2943dc48fb7bee864603",
+        "stage": null
+      }
+    },
+    {
+      "fixture": "legal-multi.js",
+      "opts": "addSourceMappings",
+      "equal": true,
+      "base": {
+        "ok": false,
+        "len": null,
+        "sha": null,
+        "stage": "worker"
+      },
+      "cand": {
+        "ok": false,
+        "len": null,
+        "sha": null,
+        "stage": "worker"
+      }
+    },
+    {
+      "fixture": "legal-multi.js",
+      "opts": "legalEOF",
+      "equal": true,
+      "base": {
+        "ok": true,
+        "len": 25,
+        "sha": "01aec92313485bf1c2c1a3a9bea7ccb646568079d54b483be770c78d7ec252b6",
+        "stage": null
+      },
+      "cand": {
+        "ok": true,
+        "len": 25,
+        "sha": "01aec92313485bf1c2c1a3a9bea7ccb646568079d54b483be770c78d7ec252b6",
+        "stage": null
+      }
+    },
+    {
+      "fixture": "minify.js",
+      "opts": "default",
+      "equal": true,
+      "base": {
+        "ok": true,
+        "len": 55,
+        "sha": "05dfe06cdc6eccf349f5a82c61dbdabe5fec7366eecd75ce112271076e1c89ee",
+        "stage": null
+      },
+      "cand": {
+        "ok": true,
+        "len": 55,
+        "sha": "05dfe06cdc6eccf349f5a82c61dbdabe5fec7366eecd75ce112271076e1c89ee",
+        "stage": null
+      }
+    },
+    {
+      "fixture": "minify.js",
+      "opts": "asciiOnly",
+      "equal": true,
+      "base": {
+        "ok": true,
+        "len": 55,
+        "sha": "05dfe06cdc6eccf349f5a82c61dbdabe5fec7366eecd75ce112271076e1c89ee",
+        "stage": null
+      },
+      "cand": {
+        "ok": true,
+        "len": 55,
+        "sha": "05dfe06cdc6eccf349f5a82c61dbdabe5fec7366eecd75ce112271076e1c89ee",
+        "stage": null
+      }
+    },
+    {
+      "fixture": "minify.js",
+      "opts": "minifyWs",
+      "equal": true,
+      "base": {
+        "ok": true,
+        "len": 41,
+        "sha": "4f6dc1143db9a22bb9141c425961070ce4a23916364e9841eaad38624b3b67f8",
+        "stage": null
+      },
+      "cand": {
+        "ok": true,
+        "len": 41,
+        "sha": "4f6dc1143db9a22bb9141c425961070ce4a23916364e9841eaad38624b3b67f8",
+        "stage": null
+      }
+    },
+    {
+      "fixture": "minify.js",
+      "opts": "minifyWs+asciiOnly",
+      "equal": true,
+      "base": {
+        "ok": true,
+        "len": 41,
+        "sha": "4f6dc1143db9a22bb9141c425961070ce4a23916364e9841eaad38624b3b67f8",
+        "stage": null
+      },
+      "cand": {
+        "ok": true,
+        "len": 41,
+        "sha": "4f6dc1143db9a22bb9141c425961070ce4a23916364e9841eaad38624b3b67f8",
+        "stage": null
+      }
+    },
+    {
+      "fixture": "minify.js",
+      "opts": "addSourceMappings",
+      "equal": true,
+      "base": {
+        "ok": false,
+        "len": null,
+        "sha": null,
+        "stage": "worker"
+      },
+      "cand": {
+        "ok": false,
+        "len": null,
+        "sha": null,
+        "stage": "worker"
+      }
+    },
+    {
+      "fixture": "minify.js",
+      "opts": "legalEOF",
+      "equal": true,
+      "base": {
+        "ok": true,
+        "len": 55,
+        "sha": "05dfe06cdc6eccf349f5a82c61dbdabe5fec7366eecd75ce112271076e1c89ee",
+        "stage": null
+      },
+      "cand": {
+        "ok": true,
+        "len": 55,
+        "sha": "05dfe06cdc6eccf349f5a82c61dbdabe5fec7366eecd75ce112271076e1c89ee",
+        "stage": null
+      }
+    }
+  ],
+  "note": "基线树 vs 候选树，同 fixture/同打印机选项；覆盖 ASCIIOnly/MinifyWhitespace/LegalComments/AddSourceMappings/Unicode/孤立代理项/CRLF"
+}

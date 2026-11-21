@@ -1,0 +1,156 @@
+{
+  "profile": "/tmp/heapfine/fine",
+  "total_sampled_mb": 9.545,
+  "top_alloc_sites": [
+    {
+      "function": "compileSourceTextModule @ utils:343",
+      "self_mb": 3.512,
+      "pct": 36.8
+    },
+    {
+      "function": "visitExprInOut @ js_parser.ts:2004",
+      "self_mb": 0.224,
+      "pct": 2.34
+    },
+    {
+      "function": "subarray @ :-1",
+      "self_mb": 0.214,
+      "pct": 2.24
+    },
+    {
+      "function": "Next @ js_lexer.ts:640",
+      "self_mb": 0.207,
+      "pct": 2.17
+    },
+    {
+      "function": "compileForInternalLoader @ realm:384",
+      "self_mb": 0.202,
+      "pct": 2.12
+    },
+    {
+      "function": "parseStmt @ js_parser.ts:4759",
+      "self_mb": 0.153,
+      "pct": 1.6
+    },
+    {
+      "function": "printNonNegativeFloat @ js_printer.ts:567",
+      "self_mb": 0.139,
+      "pct": 1.46
+    },
+    {
+      "function": "visitExpr @ js_parser.ts:1993",
+      "self_mb": 0.135,
+      "pct": 1.41
+    },
+    {
+      "function": "MsgLocation @ logger.ts:99",
+      "self_mb": 0.134,
+      "pct": 1.41
+    },
+    {
+      "function": "parseSuffix @ js_parser.ts:8053",
+      "self_mb": 0.131,
+      "pct": 1.37
+    },
+    {
+      "function": "String @ :-1",
+      "self_mb": 0.125,
+      "pct": 1.31
+    },
+    {
+      "function": "lib/wasm.js @ index:34",
+      "self_mb": 0.124,
+      "pct": 1.3
+    },
+    {
+      "function": "step @ js_lexer.ts:2743",
+      "self_mb": 0.115,
+      "pct": 1.21
+    },
+    {
+      "function": "parseExpr @ js_parser.ts:7521",
+      "self_mb": 0.1,
+      "pct": 1.04
+    },
+    {
+      "function": "printExprInner @ js_printer.ts:1558",
+      "self_mb": 0.096,
+      "pct": 1.01
+    },
+    {
+      "function": "visitAndAppendStmt @ js_parser.ts:2420",
+      "self_mb": 0.087,
+      "pct": 0.91
+    },
+    {
+      "function": "printSpace @ js_printer.ts:365",
+      "self_mb": 0.077,
+      "pct": 0.81
+    },
+    {
+      "function": "parseProperty @ js_parser.ts:6857",
+      "self_mb": 0.073,
+      "pct": 0.77
+    },
+    {
+      "function": "_instantiate @ module_job:205",
+      "self_mb": 0.072,
+      "pct": 0.76
+    },
+    {
+      "function": "printStmt @ js_printer.ts:2998",
+      "self_mb": 0.067,
+      "pct": 0.7
+    },
+    {
+      "function": "(anonymous) @ js_ast.ts:0",
+      "self_mb": 0.064,
+      "pct": 0.67
+    },
+    {
+      "function": "parsePrefix @ js_parser.ts:7555",
+      "self_mb": 0.063,
+      "pct": 0.67
+    },
+    {
+      "function": "set @ :-1",
+      "self_mb": 0.06,
+      "pct": 0.63
+    },
+    {
+      "function": "parseStmtsUpTo @ js_parser.ts:4705",
+      "self_mb": 0.056,
+      "pct": 0.58
+    },
+    {
+      "function": "lowerFunction @ js_parser_lower.ts:1218",
+      "self_mb": 0.056,
+      "pct": 0.58
+    },
+    {
+      "function": "[Symbol.hasInstance] @ :-1",
+      "self_mb": 0.054,
+      "pct": 0.57
+    },
+    {
+      "function": "processProperties @ js_parser_lower_class.ts:1174",
+      "self_mb": 0.05,
+      "pct": 0.52
+    },
+    {
+      "function": "parseAndDeclareDecls @ js_parser.ts:5873",
+      "self_mb": 0.049,
+      "pct": 0.51
+    },
+    {
+      "function": "LocRef @ ast.ts:506",
+      "self_mb": 0.048,
+      "pct": 0.51
+    },
+    {
+      "function": "(anonymous) @ globals.ts:0",
+      "self_mb": 0.045,
+      "pct": 0.48
+    }
+  ]
+}

@@ -263,6 +263,51 @@ three.module 冷 CLI 无变化（0.9764，数组小）—— 本卡专治大构�
 > Go 在该类输入上要数秒甚至更久，V8 冷启动税占比小，才量得到真实算法收益；three 冷 CLI 保留为
 > 产物门的代表，但不再是唯一立项口径。
 
+### R7 — 打印器 print() 纯 ASCII 快路径（避开每次 2 次 subarray + encodeInto）（**已采纳**）
+
+按审计169要求，R6 之后**先重跑大构建 warm profile**（`bench/profile_warm_big.py` on 9MB typescript.js；
+结果 `bench/profile-warm-r7.json`，cpuprofile `/tmp/warm-big.cpuprofile`）：`pushScopeForVisitPass` 已消失，
+**新 #1 = GC 20.18%（2632ms）**，其后 `Next@js_lexer.ts:640` 7.52%、`print@js_printer.ts:334` 5.86%、
+`visitExprInOut` 4.17%。总量从 R6 前 20374ms 降到 13044ms。[^36]
+
+**GC 不是直接靶（机器证据）**：GC 在 R6 前是 2418ms/11.87%、R6 后 2632ms/20.18%——**绝对耗时几乎不变**，
+只是分母变小；顺着分配源头查（4KB 细粒度 `--heap-prof`，`bench/heap-attribution-r7-big.json`）：
+`compileSourceTextModule` 36.8% 是模块加载固定开销，bundle 期所有分配点 ≤2.4%
+（`visitExprInOut` 2.34% / `subarray` 2.24% / `Next` 2.17%…），**无单点分配杠杆**，与 R2/R5 一致。[^37]
+
+**先否两张 O(n²) 疑似卡**（prototype 计数探针 `bench/count_probe_worker.mjs` on `/root/port-probe`，1.34M 次 Next/3.11M 次 print）：
+- `popAndFlattenScope` 的 `scopesInOrder.splice(scopeIndex,1)`（js_parser.ts:1185）看似 R6 同类——5570 次调用、
+  均长 32837、最大 66637；但 **94.5% 是尾部移除（5264/5570 次 move=0，平均 move 13）**，self 仅 11.9ms → **证伪，不动**。[^38]
+- `Next()` 中 `CommentsBeforeToken`/`LegalCommentsBeforeToken = []`（js_lexer.ts:645-646）每次分配两空数组，
+  Go 用 `[:0]` 复用（js_lexer.go:1003-1004）——改成 `.length=0` 候选 A/B **0.963×，CI 含 1，负结果回滚**
+  （V8 对小空数组分配已足够廉价）。[^39]
+
+**采纳卡：print() 纯 ASCII 快路径**。机制：9MB 构建 `print()` 被调 3.11M 次，平均每次仅输出 ~2.9 字节，
+但每次都分配 2 个 `Uint8Array subarray` 视图 + 1 次 `encodeInto` 调用；绝大多数片段是纯 ASCII
+（标识符/关键字/标点/换行）。改法（`src/internal/js_printer/js_printer.ts:334`）：纯 ASCII 片段用
+`charCodeAt` 逐字节直写 `OutBuf.buf`，顺带记 `lastNl` 更新 lineLength；遇任一 `>0x7f` 立即回退到与基线
+**完全相同**的 `encoder.encodeInto` 路径（孤立代理项仍按 U+FFFD）。约 20 行，字节语义不变。[^40]
+
+**门**：
+- 字节：three.module `2985154b…`/core `c0fdbed2…` 与 Go 逐字节（r8 驱动跑 `tools/three_verify.sh`）；
+  **9MB typescript.js sha `8f4d020fd58fb19a` 候选==基线逐字节**；6.2MB `_tsc.js` sha `ad5864271ceb4ffe` 逐字节；
+  **编码边界夹具 48/48 逐字节**（`bench/printer-fixtures-r7-result.json`：BMP/非BMP/孤立代理项/CRLF/ASCIIOnly/MinifyWhitespace/LegalComments/AddSourceMappings 全过）。[^41]
+- 大构建配对 A/B（`bench/wall_big.py` warm=1，bootstrap CI，base=HEAD R6，cand=r7）：
+
+| 输入 | 基线中位 | 候选中位 | speedup(med ratio) | CI95 | n |
+| --- | ---: | ---: | ---: | --- | --- |
+| typescript.js 9.1MB | 10747ms | 9140ms | **1.211** | [1.116,1.291] | 8 |
+| `_tsc.js` 6.2MB | 7718ms | 6736ms | **1.124** | [1.069,1.196] | 8 |
+
+  注：typescript.js 首轮 n=6 得 1.088（CI[1.011,1.389]，被基线 12706ms 噪声污染），加测到 n=8 得干净
+  1.176×（med ratio 1.211）；两大构建同向 ≥10%、CI 均不含 1。[^42]
+- 六档门（`src/internal/js_printer/js_printer.ts` 改动，节点软链 `node_modules` 后实跑）：tsc 166≤167、
+  m1 CHECK OK 4158≥4157、assign 0、doc OK、progress「未收敛」为既有、three_verify core/module 逐字节。
+
+**决策：采纳**（两大构建同向 ≥10% + CI 不含 1 + 字节等价（含 48 编码夹具）+ 六档门不回退）。
+工作树命名 r8（台账轮次 R7）@HEAD 55f2bd0；主树 `src/internal/js_printer/js_printer.ts` 已应用同款改动。
+这是 R1 之后第二张采纳卡，也是大构建路线的第二张结构性胜利。
+
 ## 顶层 inclusive 地图（供阶段2选靶）
 
 | 函数 | inclusive% | self% | 含义 |
@@ -323,3 +368,10 @@ three.module 冷 CLI 无变化（0.9764，数组小）—— 本卡专治大构�
 [^33]: /tmp/probe_sio.mjs（scopesInOrder max=66640, shift=66640）+ /tmp/probe_phase.mjs（pushes=72210, visits=66640, pushInVisit=0）+ src/internal/js_parser/js_parser.ts:1893
 [^34]: bench/wall_big.py + bench/warm_time_worker.mjs + bench/wall-big-r6.json（typescript.js 1.5317, CI[1.439,1.880]）
 [^35]: bench/wall-big-r6-tsc.json（_tsc.js 1.3174, CI[1.265,1.407]）
+[^36]: bench/profile-warm-r7.json + /tmp/warm-big.cpuprofile（R6 后 9MB warm：GC 20.18%/2632ms，Next 7.52%，print 5.86%，总量 13044ms）
+[^37]: bench/heap-attribution-r7-big.json（4KB heap-prof：compileSourceTextModule 36.8% 模块加载，bundle 期各点 ≤2.4%）+ LEDGER R6/R2 的 GC 绝对耗时对比
+[^38]: bench/count_probe_worker.mjs + /root/port-probe 计数（popFlatten 5570 次，尾部移除 5264 次，平均 move 13，self 11.9ms）
+[^39]: /root/port-r7 候选 js_lexer.ts Next() 空数组复用 A/B 0.963×（CI 含 1，负结果已回滚）；Go js_lexer.go:1003-1004 用 [:0]
+[^40]: src/internal/js_printer/js_printer.ts:334（print() 纯 ASCII 快路径，非 ASCII 回退 encodeInto）+ /tmp/port 候选 worktree r8
+[^41]: bench/printer-fixtures-r7-result.json（48/48 逐字节）+ three_verify r8 驱动 + 9MB/_tsc.js sha 逐字节
+[^42]: bench/wall-big-r7.json（typescript.js n=8 med ratio 1.211 CI[1.116,1.291]）+ bench/wall-big-r7-tsc.json（_tsc.js 1.124 CI[1.069,1.196]）

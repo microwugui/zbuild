@@ -336,15 +336,35 @@ export class printer {
     // 阶段2：encodeInto 直接写入可增长缓冲，避免每次 print 分配一个 Uint8Array。
     // UTF-8 最坏 3 字节/UTF-16 码元（代理对按 2 码元 4 字节；孤立代理项按 U+FFFD 3 字节）。
     this.js.ensure(text.length * 3);
-    const r = encoder.encodeInto(text, this.js.buf.subarray(this.js.len));
+    const buf = this.js.buf;
+    const start = this.js.len;
+    const L = text.length;
+    let i = 0;
+    let j = start;
+    let lastNl = -1;
+    // 常见情形：纯 ASCII（含换行）——直接逐字节写，避开两次 subarray 分配与 encodeInto 调用开销。
+    for (; i < L; i++) {
+      const c = text.charCodeAt(i);
+      if (c > 0x7f) break;
+      if (c === 0x0a) lastNl = j;
+      buf[j++] = c;
+    }
+    if (i === L) {
+      if (lastNl >= 0) this.lineLength = j - lastNl - 1;
+      else this.lineLength += j - start;
+      this.js.len = j;
+      return;
+    }
+    // 非 ASCII：回退到同一 TextEncoder.encodeInto（孤立代理项按 U+FFFD，字节语义不变）。
+    const r = encoder.encodeInto(text, buf.subarray(start));
     const written = r.written as number;
     if (written > 0) {
-      const seg = this.js.buf.subarray(this.js.len, this.js.len + written);
+      const seg = buf.subarray(start, start + written);
       const nl = seg.lastIndexOf(0x0a);
       if (nl >= 0) this.lineLength = seg.length - nl - 1;
       else this.lineLength += seg.length;
     }
-    this.js.len += written;
+    this.js.len = start + written;
   }
 
   /** Go: func (p *printer) printBytes(bytes []byte) (js_printer.go:318) */
