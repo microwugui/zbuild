@@ -434,6 +434,32 @@ AST kind(R4)、分配(R8)、codec(R5/R8) 全部证伪。next 方向：若继续�
 **减少总算法工作量**而非加速现有算法——例如 tree-shaking / 死代码消除的覆盖率、或
 冷启动 JIT tiering（分解表已记，机制未确证）；这两者是尚未系统验证的顶层方向，需用户定夺。
 
+### R13 — 空间复杂度取证：内存为什么高（用户方向）→ **取证轮，无卡**
+
+用户问「内存占用为什么那么高」。用两件机器证据分层回答[^51]：
+① 内存曲线（`--trace-gc` + 各阶段 `global.gc()` 后 `memoryUsage`）：warm 后基线 heap 12MB/rss 340MB；
+**一次 Parse() 后 heap 12→145MB**（AST 常驻）+133MB；symbolmap/tree-build 阶段几乎不变；
+bundle 结束 heapUsed 回 12MB（**无泄漏**）。GC 峰值存活 167MB、回收后 15MB，548 次 Scavenge
+且 255→251MB 回收极少。
+② after-parse 存活堆 snapshot（`v8.writeHeapSnapshot` + 流式解析 `bench/heap_snapshot_top.py`）：
+**总存活 163MB / 2,807,210 节点**，top：`(object elements)` 21.26MB/152K、`Loc` 18.87MB/**618,425 个**、
+`JSArrayBufferData` 17.18MB、`Expr` 15.09MB/395K、`EIdentifier` 8.98MB/168K、`Array` 8.10MB/265K、
+`Scope` 4.94MB、`Symbol` 4.29MB、`Stmt` 3.45MB/90K、`Index32` 2.86MB、`Ref` 2.12MB。
+
+**根因（分层）**：(a) bundle 内存峰值 = Parse 阶段的整棵 AST 常驻（12→145MB），这是 esbuild
+「全 AST 在内存」模型的必然结果；(b) **Go 的 `Loc` 是 `{Start int32}` 值类型内联在结构体里，
+TS 移植成 32B 堆对象 × 618K = 18.87MB**，`Expr`/`EIdentifier`/`Stmt` 等每个 AST 节点同样有对象头开销
+——这是表示层面的 Go值语义→TS堆分配差异；(c) rss 340MB 基线在 bundle 前就存在 = 模块加载
+（compileSourceTextModule 占分配 36%）+ external 36MB + V8 预留堆，不是 bundle 工作本身；
+(d) 548 次 GC + 极低回收率 = parse/print 期短命对象高分配抖动（时间侧 GC 21.76% 的分配根源）。
+
+**决策：取证轮，无卡可开**。rss 大头（模块加载/预留堆/external）非 bundle 工作、不可由局部改动消除；
+存活大头（AST 节点 + Loc）是表示级结构性成本，且 R4 已写死 AST 表示级改动不作 ≥10% 杠杆。
+若未来要降 AST 内存，唯一量级手段是把 `Loc`/`Expr` 等改为数值索引+SoA（struct-of-arrays），
+属全量表示重构，须先证明它能降到 ≥10% 峰值 RSS 且不破坏逐字节，当前无此证据。
+next 方向：空间维度已定位到「AST 常驻 + Loc 堆对象 + 模块加载预留」，均非单点；等用户定夺是否
+立项 AST 表示重构（高风险大改）或转向其它顶层方向。
+
 ## 顶层 inclusive 地图（供阶段2选靶）
 
 | 函数 | inclusive% | self% | 含义 |
@@ -509,3 +535,4 @@ AST kind(R4)、分配(R8)、codec(R5/R8) 全部证伪。next 方向：若继续�
 [^48]: bench/hash-switch-bench.mjs（codePoint 哈希微基准，三语料 ± 注入共 6 组 equal）+ /tmp/hash-optcode.out（--print-opt-code：hash 826 jump table entry / cmp 799，big 0 entry / cmp 1552）
 [^49]: bench/wall-hotshort-ts.json + bench/wall-hotshort-tsc.json（大构建配对 A/B，n=8，bytes_equal=true，median ratio 0.949/0.986，bootstrap CI 跨 1）；候选 js_lexer.ts +13 行 fast-path 已回滚
 [^50]: bench/scaling-analysis.json（受控规模 warm profile 阶段聚合）+ bench/scaling_profile_worker.mjs（--driver 版 profile worker）；原始 cpuprofile 在 /tmp/prof-{tm,tc,full,gen1,gen2,gen4}.cpuprofile
+[^51]: bench/heap-space-analysis.json（内存曲线 + after-parse 存活构成）+ bench/heap_snapshot_top.py（流式 snapshot 解析）；原始 snapshot /tmp/parse-heap.heapsnapshot（274MB，未提交）；GC 日志 /tmp/memcurve.out、/tmp/gcm-baseline.out

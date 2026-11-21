@@ -1,0 +1,87 @@
+{
+  "question": "why is memory usage so high on the 9MB build",
+  "input": "/root/port-baseline/testdata/large/_tsc.js (6.2MB source, 5.9MB output)",
+  "memory_curve_mb": {
+    "baseline_after_warm": {
+      "heapUsed": 12,
+      "heapTotal": 68,
+      "rss": 340,
+      "external": 36
+    },
+    "after_parse": {
+      "heapUsed": 145,
+      "heapTotal": 170,
+      "rss": 359,
+      "external": 22
+    },
+    "after_symbolmap": {
+      "heapUsed": 145
+    },
+    "after_tree_build": {
+      "heapUsed": 145
+    },
+    "gc_peak_live_before": 167,
+    "gc_live_after": 15,
+    "gc_events": 548,
+    "note": "bundle-end heapUsed returns to 12MB (no leak); ~225MB rss is reserved heap + external + fragmentation, not live JS objects"
+  },
+  "live_heap_after_parse": {
+    "total_mb": 163,
+    "node_count": 2807210,
+    "top": {
+      "(object elements)": {
+        "mb": 21.26,
+        "n": 152543
+      },
+      "Loc": {
+        "mb": 18.87,
+        "n": 618425
+      },
+      "system/JSArrayBufferData": {
+        "mb": 17.18,
+        "n": 6028
+      },
+      "Expr": {
+        "mb": 15.09,
+        "n": 395494
+      },
+      "EIdentifier": {
+        "mb": 8.98,
+        "n": 168183
+      },
+      "Array": {
+        "mb": 8.1,
+        "n": 265436
+      },
+      "Scope": {
+        "mb": 4.94,
+        "n": 38124
+      },
+      "Symbol": {
+        "mb": 4.29,
+        "n": 46853
+      },
+      "Stmt": {
+        "mb": 3.45,
+        "n": 90329
+      },
+      "Index32": {
+        "mb": 2.86,
+        "n": 93693
+      },
+      "Ref": {
+        "mb": 2.12,
+        "n": 55617
+      }
+    }
+  },
+  "root_causes": [
+    "parse-phase AST is the live-set spike: heapUsed 12MB -> 145MB in a single Parse() call",
+    "Loc is a 1-field class {Start:number} = 32B heap object x618425 = 18.87MB; Go's Loc is an inlined value type (no per-node alloc)",
+    "AST node classes carry per-node object overhead (Expr 40B x395K, EIdentifier, Stmt, ...) \u2014 esbuild's whole-AST-in-memory model",
+    "rss 340MB baseline exists before bundle: module-load (compileSourceTextModule 36% of allocations) + external 36MB + V8 reserved heap",
+    "548 GC events with ~255->251MB scavenge = high allocation churn of short-lived objects during parse/print"
+  ],
+  "tool": "bench/heap_snapshot_top.py (streaming mmap parser; snapshot via v8.writeHeapSnapshot at after-parse point)",
+  "raw_snapshot": "/tmp/parse-heap.heapsnapshot (274MB, not committed)"
+}
