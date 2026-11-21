@@ -1,0 +1,71 @@
+{
+  "profile": "bench/profiles/after-r1-three.module.cpuprofile",
+  "total_ms": 5242.86,
+  "matrix_ms": {
+    "GC": {
+      "parse-lex": 0.0,
+      "print": 0.0,
+      "treeshake-link": 0.0,
+      "renamer": 0.0,
+      "root/unattributed": 552.89
+    },
+    "encode": {
+      "parse-lex": 239.93,
+      "print": 159.91,
+      "treeshake-link": 30.18,
+      "renamer": 21.1,
+      "root/unattributed": 0.0
+    },
+    "decode": {
+      "parse-lex": 93.31,
+      "print": 1.07,
+      "treeshake-link": 0.0,
+      "renamer": 0.0,
+      "root/unattributed": 1.09
+    },
+    "JIT-other": {
+      "parse-lex": 2865.86,
+      "print": 792.55,
+      "treeshake-link": 283.63,
+      "renamer": 56.95,
+      "root/unattributed": 144.37
+    }
+  },
+  "matrix_pct_of_total": {
+    "GC": {
+      "parse-lex": 0.0,
+      "print": 0.0,
+      "treeshake-link": 0.0,
+      "renamer": 0.0,
+      "root/unattributed": 10.55
+    },
+    "encode": {
+      "parse-lex": 4.58,
+      "print": 3.05,
+      "treeshake-link": 0.58,
+      "renamer": 0.4,
+      "root/unattributed": 0.0
+    },
+    "decode": {
+      "parse-lex": 1.78,
+      "print": 0.02,
+      "treeshake-link": 0.0,
+      "renamer": 0.0,
+      "root/unattributed": 0.02
+    },
+    "JIT-other": {
+      "parse-lex": 54.66,
+      "print": 15.12,
+      "treeshake-link": 5.41,
+      "renamer": 1.09,
+      "root/unattributed": 2.75
+    }
+  },
+  "phase_total_pct": {
+    "parse-lex": 61.02,
+    "print": 18.19,
+    "treeshake-link": 5.99,
+    "renamer": 1.49,
+    "root/unattributed": 13.32
+  }
+}

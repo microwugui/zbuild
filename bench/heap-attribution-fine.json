@@ -1,0 +1,156 @@
+{
+  "profile": "bench/profiles/after-r1-fine.heapprofile",
+  "total_sampled_mb": 8.083,
+  "top_alloc_sites": [
+    {
+      "function": "compileSourceTextModule @ utils:343",
+      "self_mb": 3.018,
+      "pct": 37.33
+    },
+    {
+      "function": "compileForInternalLoader @ realm:384",
+      "self_mb": 0.22,
+      "pct": 2.72
+    },
+    {
+      "function": "Next @ js_lexer.ts:640",
+      "self_mb": 0.184,
+      "pct": 2.28
+    },
+    {
+      "function": "identifierExpr @ js_parser.ts:4649",
+      "self_mb": 0.178,
+      "pct": 2.2
+    },
+    {
+      "function": "subarray @ :-1",
+      "self_mb": 0.159,
+      "pct": 1.97
+    },
+    {
+      "function": "(anonymous) @ js_ast.ts:0",
+      "self_mb": 0.156,
+      "pct": 1.94
+    },
+    {
+      "function": "parseStmt @ js_parser.ts:4756",
+      "self_mb": 0.154,
+      "pct": 1.9
+    },
+    {
+      "function": "visitExprInOut @ js_parser.ts:2001",
+      "self_mb": 0.136,
+      "pct": 1.68
+    },
+    {
+      "function": "parseSuffix @ js_parser.ts:8050",
+      "self_mb": 0.134,
+      "pct": 1.65
+    },
+    {
+      "function": "printExprInner @ js_printer.ts:1558",
+      "self_mb": 0.13,
+      "pct": 1.61
+    },
+    {
+      "function": "String @ :-1",
+      "self_mb": 0.125,
+      "pct": 1.55
+    },
+    {
+      "function": "ENew @ js_ast.ts:526",
+      "self_mb": 0.125,
+      "pct": 1.54
+    },
+    {
+      "function": "finishAndGenerateCode @ js_parser_lower_class.ts:1396",
+      "self_mb": 0.119,
+      "pct": 1.47
+    },
+    {
+      "function": "visitStmts @ js_parser.ts:3635",
+      "self_mb": 0.105,
+      "pct": 1.29
+    },
+    {
+      "function": "lib/wasm.js @ index:34",
+      "self_mb": 0.101,
+      "pct": 1.25
+    },
+    {
+      "function": "propertyAnalysis @ js_parser_lower_class.ts:591",
+      "self_mb": 0.101,
+      "pct": 1.25
+    },
+    {
+      "function": "pushScopeForParsePass @ js_parser.ts:1135",
+      "self_mb": 0.1,
+      "pct": 1.24
+    },
+    {
+      "function": "emit @ node:events:465",
+      "self_mb": 0.096,
+      "pct": 1.19
+    },
+    {
+      "function": "printExpr @ js_printer.ts:2444",
+      "self_mb": 0.081,
+      "pct": 1.01
+    },
+    {
+      "function": "Parse @ js_parser.ts:11238",
+      "self_mb": 0.079,
+      "pct": 0.97
+    },
+    {
+      "function": "push @ :-1",
+      "self_mb": 0.069,
+      "pct": 0.86
+    },
+    {
+      "function": "visitRightAndFinish @ js_parser.ts:1530",
+      "self_mb": 0.067,
+      "pct": 0.83
+    },
+    {
+      "function": "parseExprCommon @ js_parser.ts:7523",
+      "self_mb": 0.065,
+      "pct": 0.81
+    },
+    {
+      "function": "(anonymous) @ js_parser.ts:0",
+      "self_mb": 0.065,
+      "pct": 0.81
+    },
+    {
+      "function": "Loc @ logger.ts:49",
+      "self_mb": 0.063,
+      "pct": 0.78
+    },
+    {
+      "function": "(anonymous) @ js_lexer.ts:0",
+      "self_mb": 0.063,
+      "pct": 0.77
+    },
+    {
+      "function": "parsePrefix @ js_parser.ts:7552",
+      "self_mb": 0.061,
+      "pct": 0.75
+    },
+    {
+      "function": "ExprCanBeRemovedIfUnused @ js_ast_helpers.ts:745",
+      "self_mb": 0.046,
+      "pct": 0.56
+    },
+    {
+      "function": "lowerFunction @ js_parser_lower.ts:1218",
+      "self_mb": 0.044,
+      "pct": 0.54
+    },
+    {
+      "function": "ToBooleanWithSideEffects @ js_ast_helpers.ts:2760",
+      "self_mb": 0.041,
+      "pct": 0.51
+    }
+  ]
+}

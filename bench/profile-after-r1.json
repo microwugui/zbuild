@@ -1,0 +1,296 @@
+{
+  "generatedAt": "2026-11-21T05:07:00.176914+00:00",
+  "entry": "testdata/three/package/build/three.module.js",
+  "profile": "bench/profiles/stage1-three.module.cpuprofile",
+  "wall_s": 5.4,
+  "cpu": {
+    "total_self_ms": 5242.86,
+    "samples": 3939,
+    "by_category": [
+      {
+        "category": "parsing-lexing",
+        "self_ms": 2202.6,
+        "pct": 42.01
+      },
+      {
+        "category": "other",
+        "self_ms": 1037.71,
+        "pct": 19.79
+      },
+      {
+        "category": "printing",
+        "self_ms": 783.86,
+        "pct": 14.95
+      },
+      {
+        "category": "runtime-gc",
+        "self_ms": 552.89,
+        "pct": 10.55
+      },
+      {
+        "category": "utf8-encode",
+        "self_ms": 360.93,
+        "pct": 6.88
+      },
+      {
+        "category": "treeshake-link",
+        "self_ms": 249.09,
+        "pct": 4.75
+      },
+      {
+        "category": "renamer",
+        "self_ms": 55.8,
+        "pct": 1.06
+      }
+    ],
+    "top_functions": [
+      {
+        "function": "(garbage collector) @ :-1",
+        "category": "runtime-gc",
+        "self_ms": 528.03,
+        "pct": 10.07
+      },
+      {
+        "function": "visitExprInOut @ js_parser.ts:2001",
+        "category": "parsing-lexing",
+        "self_ms": 239.93,
+        "pct": 4.58
+      },
+      {
+        "function": "Next @ js_lexer.ts:640",
+        "category": "parsing-lexing",
+        "self_ms": 224.38,
+        "pct": 4.28
+      },
+      {
+        "function": "collectRefs @ bundle_multi.ts:96",
+        "category": "treeshake-link",
+        "self_ms": 202.73,
+        "pct": 3.87
+      },
+      {
+        "function": "printExprInner @ js_printer.ts:1558",
+        "category": "printing",
+        "self_ms": 201.51,
+        "pct": 3.84
+      },
+      {
+        "function": "print @ js_printer.ts:334",
+        "category": "printing",
+        "self_ms": 200.24,
+        "pct": 3.82
+      },
+      {
+        "function": "parseSuffix @ js_parser.ts:8050",
+        "category": "parsing-lexing",
+        "self_ms": 159.29,
+        "pct": 3.04
+      },
+      {
+        "function": "encode @ encoding:350",
+        "category": "utf8-encode",
+        "self_ms": 157.66,
+        "pct": 3.01
+      },
+      {
+        "function": "encodeInto @ :-1",
+        "category": "utf8-encode",
+        "self_ms": 108.5,
+        "pct": 2.07
+      },
+      {
+        "function": "visitExpr @ js_parser.ts:1990",
+        "category": "parsing-lexing",
+        "self_ms": 106.16,
+        "pct": 2.02
+      },
+      {
+        "function": "parseStmt @ js_parser.ts:4756",
+        "category": "parsing-lexing",
+        "self_ms": 96.92,
+        "pct": 1.85
+      },
+      {
+        "function": "parsePrefix @ js_parser.ts:7552",
+        "category": "parsing-lexing",
+        "self_ms": 96.01,
+        "pct": 1.83
+      },
+      {
+        "function": "parseExprCommon @ js_parser.ts:7523",
+        "category": "parsing-lexing",
+        "self_ms": 93.4,
+        "pct": 1.78
+      },
+      {
+        "function": "decode @ encoding:441",
+        "category": "other",
+        "self_ms": 85.94,
+        "pct": 1.64
+      },
+      {
+        "function": "pushScopeForVisitPass @ js_parser.ts:1893",
+        "category": "parsing-lexing",
+        "self_ms": 75.3,
+        "pct": 1.44
+      },
+      {
+        "function": "decodeUTF8 @ :-1",
+        "category": "other",
+        "self_ms": 71.24,
+        "pct": 1.36
+      },
+      {
+        "function": "Raw @ js_lexer.ts:324",
+        "category": "parsing-lexing",
+        "self_ms": 70.25,
+        "pct": 1.34
+      },
+      {
+        "function": "visitAndAppendStmt @ js_parser.ts:2417",
+        "category": "parsing-lexing",
+        "self_ms": 69.09,
+        "pct": 1.32
+      },
+      {
+        "function": "printExpr @ js_printer.ts:2444",
+        "category": "printing",
+        "self_ms": 67.75,
+        "pct": 1.29
+      },
+      {
+        "function": "parseStmtsUpTo @ js_parser.ts:4702",
+        "category": "parsing-lexing",
+        "self_ms": 55.05,
+        "pct": 1.05
+      },
+      {
+        "function": "encodeUtf8String @ :-1",
+        "category": "utf8-encode",
+        "self_ms": 52.07,
+        "pct": 0.99
+      },
+      {
+        "function": "Expect @ js_lexer.ts:497",
+        "category": "parsing-lexing",
+        "self_ms": 49.41,
+        "pct": 0.94
+      },
+      {
+        "function": "Parse @ js_parser.ts:11238",
+        "category": "parsing-lexing",
+        "self_ms": 46.77,
+        "pct": 0.89
+      },
+      {
+        "function": "init @ init.ts:10",
+        "category": "other",
+        "self_ms": 45.61,
+        "pct": 0.87
+      },
+      {
+        "function": "visitStmts @ js_parser.ts:3635",
+        "category": "parsing-lexing",
+        "self_ms": 42.8,
+        "pct": 0.82
+      },
+      {
+        "function": "encodeInto @ encoding:355",
+        "category": "utf8-encode",
+        "self_ms": 42.7,
+        "pct": 0.81
+      },
+      {
+        "function": "compileSourceTextModule @ utils:343",
+        "category": "other",
+        "self_ms": 42.56,
+        "pct": 0.81
+      },
+      {
+        "function": "compileForInternalLoader @ realm:384",
+        "category": "other",
+        "self_ms": 40.57,
+        "pct": 0.77
+      },
+      {
+        "function": "parseAndDeclareDecls @ js_parser.ts:5870",
+        "category": "parsing-lexing",
+        "self_ms": 35.98,
+        "pct": 0.69
+      },
+      {
+        "function": "step @ js_lexer.ts:2743",
+        "category": "parsing-lexing",
+        "self_ms": 35.82,
+        "pct": 0.68
+      },
+      {
+        "function": "wasm-function[133] @ 0098dfc6:0",
+        "category": "other",
+        "self_ms": 35.61,
+        "pct": 0.68
+      },
+      {
+        "function": "scanTo @ logger.ts:882",
+        "category": "other",
+        "self_ms": 34.8,
+        "pct": 0.66
+      },
+      {
+        "function": "printStmt @ js_printer.ts:2998",
+        "category": "printing",
+        "self_ms": 28.92,
+        "pct": 0.55
+      },
+      {
+        "function": "CommentTextWithoutIndent @ logger.ts:683",
+        "category": "other",
+        "self_ms": 27.55,
+        "pct": 0.53
+      },
+      {
+        "function": "parseProperty @ js_parser.ts:6854",
+        "category": "parsing-lexing",
+        "self_ms": 25.8,
+        "pct": 0.49
+      },
+      {
+        "function": "printBlock @ js_printer.ts:2773",
+        "category": "printing",
+        "self_ms": 25.69,
+        "pct": 0.49
+      },
+      {
+        "function": "parseFile @ bundle_multi.ts:51",
+        "category": "parsing-lexing",
+        "self_ms": 25.23,
+        "pct": 0.48
+      },
+      {
+        "function": "(program) @ :-1",
+        "category": "runtime-gc",
+        "self_ms": 24.86,
+        "pct": 0.47
+      },
+      {
+        "function": "pushScopeForParsePass @ js_parser.ts:1135",
+        "category": "parsing-lexing",
+        "self_ms": 23.6,
+        "pct": 0.45
+      },
+      {
+        "function": "visitBinding @ js_parser.ts:2350",
+        "category": "parsing-lexing",
+        "self_ms": 23.6,
+        "pct": 0.45
+      }
+    ]
+  },
+  "gc": {
+    "gc_events": 142,
+    "total_gc_pause_ms": 362.14,
+    "by_type_events": {
+      "Scavenge": 142
+    }
+  }
+}

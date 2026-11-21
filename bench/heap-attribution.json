@@ -1,0 +1,71 @@
+{
+  "profile": "bench/profiles/after-r1.heapprofile",
+  "total_sampled_mb": 8.647,
+  "top_alloc_sites": [
+    {
+      "function": "compileSourceTextModule @ utils:343",
+      "self_mb": 2.033,
+      "pct": 23.51
+    },
+    {
+      "function": "[Symbol.hasInstance] @ :-1",
+      "self_mb": 1.007,
+      "pct": 11.65
+    },
+    {
+      "function": "printExprInner @ js_printer.ts:1558",
+      "self_mb": 0.55,
+      "pct": 6.36
+    },
+    {
+      "function": "processProperties @ js_parser_lower_class.ts:1174",
+      "self_mb": 0.527,
+      "pct": 6.1
+    },
+    {
+      "function": "StringToUTF16 @ utf.ts:35",
+      "self_mb": 0.521,
+      "pct": 6.03
+    },
+    {
+      "function": "visitFn @ js_parser.ts:3254",
+      "self_mb": 0.502,
+      "pct": 5.81
+    },
+    {
+      "function": "parseNumericLiteralOrDot @ js_lexer.ts:2027",
+      "self_mb": 0.502,
+      "pct": 5.81
+    },
+    {
+      "function": "ExprCanBeRemovedIfUnused @ js_ast_helpers.ts:745",
+      "self_mb": 0.502,
+      "pct": 5.8
+    },
+    {
+      "function": "printNumber @ js_printer.ts:658",
+      "self_mb": 0.501,
+      "pct": 5.79
+    },
+    {
+      "function": "Parse @ js_parser.ts:11238",
+      "self_mb": 0.501,
+      "pct": 5.79
+    },
+    {
+      "function": "compileForInternalLoader @ realm:384",
+      "self_mb": 0.5,
+      "pct": 5.78
+    },
+    {
+      "function": "lib/wasm.js @ index:34",
+      "self_mb": 0.5,
+      "pct": 5.78
+    },
+    {
+      "function": "(anonymous) @ js_parser.ts:0",
+      "self_mb": 0.5,
+      "pct": 5.78
+    }
+  ]
+}

@@ -56,7 +56,9 @@
 | 主-3 | `_tsc.js` 5.9MB（bundle1，非 three） | 1.3755 | [1.3229,1.4657] | SIGNIFICANT_FASTER |
 | 辅 | three.module end-to-end wall | 1.1143 | [1.0844,1.1425] | SIGNIFICANT_FASTER |
 
-字节：three.core `c0fdbed2…`、three.module `2985154b…` 与 Go 逐字节；wide 子集 100/100 PASS。
+字节：three.core `c0fdbed2…`、three.module `2985154b…` 与 Go 逐字节；wide 子集 100/100 PASS；
+**全量 448 条：440 PASS + 8 PASS_BOTH_ERROR，0 BYTES_DIFFER/EMPTY/WORKER_FAIL（591.3s）**；
+**覆盖缺口夹具 48/48 相等**（8 fixture × 6 选项：ASCIIOnly / MinifyWhitespace / LegalComments / AddSourceMappings / Unicode / 非 BMP / 孤立代理项 / CRLF）。
 门：tsc 166、m1 4158≥4157、assign 0、doc OK、test:cov 1746 pass / 10 基线 F64、three_verify core/module 逐字节。
 **决策：采纳**（三手同向 + 字节等价 + 门不回退）。代码 sha `74437a3b…`（js_printer.ts），提交 `db0f7da501f9d13b96085dbd62a3ae060adfada9`。
 
@@ -67,6 +69,35 @@
 - 9 条 Go 报错：JSX loader / import attributes / package.json type 等 CLI 配置差异。
 - 6 条双方不同：3 条 three tsl/webgpu/nodes（已知 2431/15159 首距）；3 条边界语义（`x;0&&(()=>{});(()=>{})()`、`export default function(){}`、`undefined=1`）。
 - **结论**："产物等价"目前只在「候选==基线」意义成立；「基线==Go」在宽语料上不成立，属既有保真缺口，单独立项，不阻塞本次采纳。
+
+### R2 — 取证完成，结论：**当前证据不支持 ≥10% 靶，不立项**
+
+R1 后重跑 profile（`bench/profile-after-r1.json`、`bench/cost-attribution-after-r1.json`）：
+- encode 14.5% → **6.88%**（打印侧 10.76%→3.05%；解析侧仍 4.58%）；GC 12.8% → **10.55%**；wall 6.24s → **5.4s**。
+- 现 self-time：parse-lex **42.01%**、other 19.79%、printing 14.95%、GC 10.55%、encode 6.88%、treeshake 4.75%。
+
+**parse 内部摊开**（`bench/profile-inclusive-after-r1.json`，top250 self 汇总）：
+parse-* 18.73% + visitor 12.25% + lexer 8.52% + utf16/decode 7.50%；单函数 self 最高
+`visitExprInOut` 4.6%、`Next` 4.3%、`appendPart` inclusive 16.3%（self 仅 1.1ms）。
+
+**分配侧证据（`--heap-prof`，8KB 采样，`bench/heap-attribution-8k.json`）**：
+- `compileSourceTextModule` 38.97% 是模块加载固定开销（非 bundle 工作）。
+- bundle 期分配分散：`step@lexer` 2.17%、`parseStmt` 1.6%、`printExprInner` 1.52%、`String` 1.48%、
+  `set` 1.46%、`[Symbol.hasInstance]` 1.38%、`parseSuffix` 1.35%、`Next` 1.15% —— **无单点 >2.2%**。
+
+**JIT 证据（`--trace-deopt`）**：123 次 deopt，主因 **58 次 "Insufficient type feedback for generic
+named access"**（AST 多形状属性访问）+ 10 次 "wrong map"（`Loc`），集中在 `Parse`/`Next`/`Loc`/`Raw`。
+
+**卡片 A（GC 分配）→ 不立项**：GC 总量仅 10.55%，需消掉几乎全部才能换 10% 总量；
+分配点分散、单点 ≤2.2%。做局部减分配预期 <3% 总量，按规则不立项。
+
+**卡片 B（对象形状 / deopt）→ 暂不立项**：deopt 主因是 AST 多形状属性访问与 `Loc` wrong-map，
+但 deopt 多发生在预热早期；要证明它能换 ≥10%，必须量到**稳态**（预热后）仍占 parse ≥25% 的样本。
+- 证伪方式：在预热后重置 deopt 计数或分段采集，统计 `Next`/`visitExprInOut` 稳态 deopt 频率与
+  重编译样本占比；若 <15% 则删除本卡。
+- 破字节条件：任何 AST 形状 / 打印改动都必须候选==基线字节（全量 align + 48 夹具）。
+
+**结论**：本轮不强行立项 <10% 的微调；R2 候选靶需先补齐「稳态 deopt 占比」证据，达标再开工。
 
 > 度量口径（自本轮起）：每个实验至少三手 —— three.module + three.core + 一个非 three 大输入；三处同向才算赢。wide 全量留收口，单次实验跑 100 条代表性子集（记 `subsetIds`）。
 

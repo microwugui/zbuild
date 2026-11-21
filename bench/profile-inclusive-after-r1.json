@@ -1,0 +1,1758 @@
+{
+  "profile": "bench/profiles/after-r1-three.module.cpuprofile",
+  "total_self_ms": 5242.86,
+  "samples": 3939,
+  "note": "inclusive=沿调用栈含被调子树；同一函数每栈只计一次；分类 rollup 因容器函数会污染子树，不提供，改用 profile-stage1.json 的 self-time 分类",
+  "top_inclusive_functions": [
+    {
+      "function": "(root) @ :-1",
+      "category": "other",
+      "inclusive_ms": 5242.86,
+      "inclusive_pct": 100.0,
+      "self_ms": 0.0
+    },
+    {
+      "function": "evaluate @ :-1",
+      "category": "other",
+      "inclusive_ms": 4138.48,
+      "inclusive_pct": 78.94,
+      "self_ms": 1.11
+    },
+    {
+      "function": "run @ module_job:331",
+      "category": "other",
+      "inclusive_ms": 4123.98,
+      "inclusive_pct": 78.66,
+      "self_ms": 4.1
+    },
+    {
+      "function": "(anonymous) @ bundle_multi.ts:0",
+      "category": "treeshake-link",
+      "inclusive_ms": 4106.75,
+      "inclusive_pct": 78.33,
+      "self_ms": 5.44
+    },
+    {
+      "function": "bundleWithImports @ bundle_multi.ts:120",
+      "category": "treeshake-link",
+      "inclusive_ms": 4101.3,
+      "inclusive_pct": 78.23,
+      "self_ms": 21.27
+    },
+    {
+      "function": "parseFile @ bundle_multi.ts:51",
+      "category": "parsing-lexing",
+      "inclusive_ms": 2804.51,
+      "inclusive_pct": 53.49,
+      "self_ms": 25.23
+    },
+    {
+      "function": "load @ bundle_multi.ts:128",
+      "category": "treeshake-link",
+      "inclusive_ms": 2804.51,
+      "inclusive_pct": 53.49,
+      "self_ms": 0.0
+    },
+    {
+      "function": "Parse @ js_parser.ts:11238",
+      "category": "parsing-lexing",
+      "inclusive_ms": 2777.96,
+      "inclusive_pct": 52.99,
+      "self_ms": 46.77
+    },
+    {
+      "function": "parseStmtsUpTo @ js_parser.ts:4702",
+      "category": "parsing-lexing",
+      "inclusive_ms": 1849.52,
+      "inclusive_pct": 35.28,
+      "self_ms": 55.05
+    },
+    {
+      "function": "parseStmt @ js_parser.ts:4756",
+      "category": "parsing-lexing",
+      "inclusive_ms": 1842.31,
+      "inclusive_pct": 35.14,
+      "self_ms": 96.92
+    },
+    {
+      "function": "parseFn @ js_parser.ts:6519",
+      "category": "parsing-lexing",
+      "inclusive_ms": 1472.39,
+      "inclusive_pct": 28.08,
+      "self_ms": 16.11
+    },
+    {
+      "function": "parseFnBody @ js_parser.ts:1942",
+      "category": "parsing-lexing",
+      "inclusive_ms": 1426.46,
+      "inclusive_pct": 27.21,
+      "self_ms": 23.06
+    },
+    {
+      "function": "parseClassStmt @ js_parser.ts:6704",
+      "category": "parsing-lexing",
+      "inclusive_ms": 1125.13,
+      "inclusive_pct": 21.46,
+      "self_ms": 5.47
+    },
+    {
+      "function": "parseClass @ js_parser.ts:6771",
+      "category": "parsing-lexing",
+      "inclusive_ms": 1119.66,
+      "inclusive_pct": 21.36,
+      "self_ms": 21.02
+    },
+    {
+      "function": "parseProperty @ js_parser.ts:6854",
+      "category": "parsing-lexing",
+      "inclusive_ms": 1113.71,
+      "inclusive_pct": 21.24,
+      "self_ms": 25.8
+    },
+    {
+      "function": "printOne @ bundle_multi.ts:264",
+      "category": "printing",
+      "inclusive_ms": 965.22,
+      "inclusive_pct": 18.41,
+      "self_ms": 0.0
+    },
+    {
+      "function": "Print @ js_printer.ts:3529",
+      "category": "printing",
+      "inclusive_ms": 963.8,
+      "inclusive_pct": 18.38,
+      "self_ms": 4.23
+    },
+    {
+      "function": "parseExpr @ js_parser.ts:7518",
+      "category": "parsing-lexing",
+      "inclusive_ms": 962.18,
+      "inclusive_pct": 18.35,
+      "self_ms": 12.41
+    },
+    {
+      "function": "printStmt @ js_printer.ts:2998",
+      "category": "printing",
+      "inclusive_ms": 959.57,
+      "inclusive_pct": 18.3,
+      "self_ms": 28.92
+    },
+    {
+      "function": "parseExprCommon @ js_parser.ts:7523",
+      "category": "parsing-lexing",
+      "inclusive_ms": 954.62,
+      "inclusive_pct": 18.21,
+      "self_ms": 93.4
+    },
+    {
+      "function": "printExpr @ js_printer.ts:2444",
+      "category": "printing",
+      "inclusive_ms": 888.34,
+      "inclusive_pct": 16.94,
+      "self_ms": 67.75
+    },
+    {
+      "function": "printExprInner @ js_printer.ts:1558",
+      "category": "printing",
+      "inclusive_ms": 882.2,
+      "inclusive_pct": 16.83,
+      "self_ms": 201.51
+    },
+    {
+      "function": "appendPart @ js_parser.ts:10339",
+      "category": "parsing-lexing",
+      "inclusive_ms": 855.16,
+      "inclusive_pct": 16.31,
+      "self_ms": 1.1
+    },
+    {
+      "function": "visitStmts @ js_parser.ts:3635",
+      "category": "parsing-lexing",
+      "inclusive_ms": 854.06,
+      "inclusive_pct": 16.29,
+      "self_ms": 42.8
+    },
+    {
+      "function": "visitStmtsAndPrependTempRefs @ js_parser.ts:3601",
+      "category": "parsing-lexing",
+      "inclusive_ms": 854.06,
+      "inclusive_pct": 16.29,
+      "self_ms": 10.63
+    },
+    {
+      "function": "visitAndAppendStmt @ js_parser.ts:2417",
+      "category": "parsing-lexing",
+      "inclusive_ms": 851.88,
+      "inclusive_pct": 16.25,
+      "self_ms": 69.09
+    },
+    {
+      "function": "printExprWithoutLeadingNewline @ js_printer.ts:1538",
+      "category": "printing",
+      "inclusive_ms": 820.91,
+      "inclusive_pct": 15.66,
+      "self_ms": 8.91
+    },
+    {
+      "function": "printDecls @ js_printer.ts:2458",
+      "category": "printing",
+      "inclusive_ms": 810.86,
+      "inclusive_pct": 15.47,
+      "self_ms": 2.62
+    },
+    {
+      "function": "printDeclStmt @ js_printer.ts:2747",
+      "category": "printing",
+      "inclusive_ms": 797.92,
+      "inclusive_pct": 15.22,
+      "self_ms": 1.08
+    },
+    {
+      "function": "printFn @ js_printer.ts:1313",
+      "category": "printing",
+      "inclusive_ms": 744.59,
+      "inclusive_pct": 14.2,
+      "self_ms": 3.26
+    },
+    {
+      "function": "visitFn @ js_parser.ts:3254",
+      "category": "parsing-lexing",
+      "inclusive_ms": 730.21,
+      "inclusive_pct": 13.93,
+      "self_ms": 10.95
+    },
+    {
+      "function": "printBlock @ js_printer.ts:2773",
+      "category": "printing",
+      "inclusive_ms": 712.02,
+      "inclusive_pct": 13.58,
+      "self_ms": 25.69
+    },
+    {
+      "function": "parseSuffix @ js_parser.ts:8050",
+      "category": "parsing-lexing",
+      "inclusive_ms": 688.27,
+      "inclusive_pct": 13.13,
+      "self_ms": 159.29
+    },
+    {
+      "function": "printProperty @ js_printer.ts:1320",
+      "category": "printing",
+      "inclusive_ms": 663.84,
+      "inclusive_pct": 12.66,
+      "self_ms": 11.89
+    },
+    {
+      "function": "visitExprInOut @ js_parser.ts:2001",
+      "category": "parsing-lexing",
+      "inclusive_ms": 651.79,
+      "inclusive_pct": 12.43,
+      "self_ms": 239.93
+    },
+    {
+      "function": "printClass @ js_printer.ts:2863",
+      "category": "printing",
+      "inclusive_ms": 624.83,
+      "inclusive_pct": 11.92,
+      "self_ms": 2.16
+    },
+    {
+      "function": "parseFnStmt @ js_parser.ts:6459",
+      "category": "parsing-lexing",
+      "inclusive_ms": 610.41,
+      "inclusive_pct": 11.64,
+      "self_ms": 0.0
+    },
+    {
+      "function": "getModuleJobForImport @ loader:318",
+      "category": "other",
+      "inclusive_ms": 551.83,
+      "inclusive_pct": 10.53,
+      "self_ms": 2.17
+    },
+    {
+      "function": "visitClass @ js_parser.ts:2931",
+      "category": "parsing-lexing",
+      "inclusive_ms": 547.59,
+      "inclusive_pct": 10.44,
+      "self_ms": 21.6
+    },
+    {
+      "function": "(garbage collector) @ :-1",
+      "category": "runtime-gc",
+      "inclusive_ms": 528.03,
+      "inclusive_pct": 10.07,
+      "self_ms": 528.03
+    },
+    {
+      "function": "#getJobFromResolveResult @ loader:346",
+      "category": "other",
+      "inclusive_ms": 518.81,
+      "inclusive_pct": 9.9,
+      "self_ms": 1.1
+    },
+    {
+      "function": "#createModuleJob @ loader:631",
+      "category": "other",
+      "inclusive_ms": 516.61,
+      "inclusive_pct": 9.85,
+      "self_ms": 1.09
+    },
+    {
+      "function": "loadAndTranslate @ loader:607",
+      "category": "other",
+      "inclusive_ms": 514.42,
+      "inclusive_pct": 9.81,
+      "self_ms": 0.0
+    },
+    {
+      "function": "parsePrefix @ js_parser.ts:7552",
+      "category": "parsing-lexing",
+      "inclusive_ms": 513.07,
+      "inclusive_pct": 9.79,
+      "self_ms": 96.01
+    },
+    {
+      "function": "afterLoad @ loader:609",
+      "category": "other",
+      "inclusive_ms": 504.42,
+      "inclusive_pct": 9.62,
+      "self_ms": 1.1
+    },
+    {
+      "function": "#translate @ loader:549",
+      "category": "other",
+      "inclusive_ms": 503.32,
+      "inclusive_pct": 9.6,
+      "self_ms": 1.11
+    },
+    {
+      "function": "visitExpr @ js_parser.ts:1990",
+      "category": "parsing-lexing",
+      "inclusive_ms": 498.17,
+      "inclusive_pct": 9.5,
+      "self_ms": 106.16
+    },
+    {
+      "function": "parseBlockStmts @ js_parser.ts:5861",
+      "category": "parsing-lexing",
+      "inclusive_ms": 488.1,
+      "inclusive_pct": 9.31,
+      "self_ms": 9.3
+    },
+    {
+      "function": "(anonymous) @ translators:655",
+      "category": "other",
+      "inclusive_ms": 482.51,
+      "inclusive_pct": 9.2,
+      "self_ms": 2.17
+    },
+    {
+      "function": "Next @ js_lexer.ts:640",
+      "category": "parsing-lexing",
+      "inclusive_ms": 442.15,
+      "inclusive_pct": 8.43,
+      "self_ms": 224.38
+    },
+    {
+      "function": "stripTypeScriptModuleTypes @ typescript:152",
+      "category": "other",
+      "inclusive_ms": 417.43,
+      "inclusive_pct": 7.96,
+      "self_ms": 0.0
+    },
+    {
+      "function": "parseTypeScript @ typescript:51",
+      "category": "parsing-lexing",
+      "inclusive_ms": 416.32,
+      "inclusive_pct": 7.94,
+      "self_ms": 1.1
+    },
+    {
+      "function": "processTypeScriptCode @ typescript:131",
+      "category": "other",
+      "inclusive_ms": 416.32,
+      "inclusive_pct": 7.94,
+      "self_ms": 0.0
+    },
+    {
+      "function": "print @ js_printer.ts:334",
+      "category": "printing",
+      "inclusive_ms": 356.73,
+      "inclusive_pct": 6.8,
+      "self_ms": 200.24
+    },
+    {
+      "function": "module2.exports.transformSync @ index:228",
+      "category": "other",
+      "inclusive_ms": 347.98,
+      "inclusive_pct": 6.64,
+      "self_ms": 1.14
+    },
+    {
+      "function": "transformSync @ index:575",
+      "category": "other",
+      "inclusive_ms": 347.98,
+      "inclusive_pct": 6.64,
+      "self_ms": 0.0
+    },
+    {
+      "function": "wasm-function[91] @ 0098dfc6:0",
+      "category": "other",
+      "inclusive_ms": 346.84,
+      "inclusive_pct": 6.62,
+      "self_ms": 3.31
+    },
+    {
+      "function": "wasm-function[2565] @ 0098dfc6:0",
+      "category": "other",
+      "inclusive_ms": 346.84,
+      "inclusive_pct": 6.62,
+      "self_ms": 0.0
+    },
+    {
+      "function": "js-to-wasm @ :-1",
+      "category": "other",
+      "inclusive_ms": 346.84,
+      "inclusive_pct": 6.62,
+      "self_ms": 0.0
+    },
+    {
+      "function": "parseAndDeclareDecls @ js_parser.ts:5870",
+      "category": "parsing-lexing",
+      "inclusive_ms": 323.7,
+      "inclusive_pct": 6.17,
+      "self_ms": 35.98
+    },
+    {
+      "function": "printIf @ js_printer.ts:2944",
+      "category": "printing",
+      "inclusive_ms": 310.49,
+      "inclusive_pct": 5.92,
+      "self_ms": 21.01
+    },
+    {
+      "function": "wasm-function[63] @ 0098dfc6:0",
+      "category": "other",
+      "inclusive_ms": 299.72,
+      "inclusive_pct": 5.72,
+      "self_ms": 6.4
+    },
+    {
+      "function": "visitSingleStmt @ js_parser.ts:4488",
+      "category": "parsing-lexing",
+      "inclusive_ms": 279.03,
+      "inclusive_pct": 5.32,
+      "self_ms": 12.07
+    },
+    {
+      "function": "Expect @ js_lexer.ts:497",
+      "category": "parsing-lexing",
+      "inclusive_ms": 255.23,
+      "inclusive_pct": 4.87,
+      "self_ms": 49.41
+    },
+    {
+      "function": "wasm-function[616] @ 0098dfc6:0",
+      "category": "other",
+      "inclusive_ms": 233.59,
+      "inclusive_pct": 4.46,
+      "self_ms": 2.2
+    },
+    {
+      "function": "wasm-function[992] @ 0098dfc6:0",
+      "category": "other",
+      "inclusive_ms": 233.59,
+      "inclusive_pct": 4.46,
+      "self_ms": 0.0
+    },
+    {
+      "function": "visitRightAndFinish @ js_printer.ts:2425",
+      "category": "printing",
+      "inclusive_ms": 223.95,
+      "inclusive_pct": 4.27,
+      "self_ms": 7.33
+    },
+    {
+      "function": "parseCallArgs @ js_parser.ts:8711",
+      "category": "parsing-lexing",
+      "inclusive_ms": 213.24,
+      "inclusive_pct": 4.07,
+      "self_ms": 21.29
+    },
+    {
+      "function": "encode @ encoding:350",
+      "category": "utf8-encode",
+      "inclusive_ms": 210.85,
+      "inclusive_pct": 4.02,
+      "self_ms": 157.66
+    },
+    {
+      "function": "collectRefs @ bundle_multi.ts:96",
+      "category": "treeshake-link",
+      "inclusive_ms": 210.33,
+      "inclusive_pct": 4.01,
+      "self_ms": 202.73
+    },
+    {
+      "function": "wasm-function[65] @ 0098dfc6:0",
+      "category": "other",
+      "inclusive_ms": 203.47,
+      "inclusive_pct": 3.88,
+      "self_ms": 1.09
+    },
+    {
+      "function": "wasm-function[377] @ 0098dfc6:0",
+      "category": "other",
+      "inclusive_ms": 199.86,
+      "inclusive_pct": 3.81,
+      "self_ms": 1.09
+    },
+    {
+      "function": "wasm-function[1220] @ 0098dfc6:0",
+      "category": "other",
+      "inclusive_ms": 199.86,
+      "inclusive_pct": 3.81,
+      "self_ms": 0.0
+    },
+    {
+      "function": "wasm-function[66] @ 0098dfc6:0",
+      "category": "other",
+      "inclusive_ms": 197.0,
+      "inclusive_pct": 3.76,
+      "self_ms": 0.0
+    },
+    {
+      "function": "wasm-function[1119] @ 0098dfc6:0",
+      "category": "other",
+      "inclusive_ms": 186.09,
+      "inclusive_pct": 3.55,
+      "self_ms": 0.0
+    },
+    {
+      "function": "wasm-function[898] @ 0098dfc6:0",
+      "category": "other",
+      "inclusive_ms": 186.09,
+      "inclusive_pct": 3.55,
+      "self_ms": 0.0
+    },
+    {
+      "function": "wasm-function[1343] @ 0098dfc6:0",
+      "category": "other",
+      "inclusive_ms": 186.09,
+      "inclusive_pct": 3.55,
+      "self_ms": 0.0
+    },
+    {
+      "function": "wasm-function[990] @ 0098dfc6:0",
+      "category": "other",
+      "inclusive_ms": 184.98,
+      "inclusive_pct": 3.53,
+      "self_ms": 0.0
+    },
+    {
+      "function": "wasm-function[651] @ 0098dfc6:0",
+      "category": "other",
+      "inclusive_ms": 183.89,
+      "inclusive_pct": 3.51,
+      "self_ms": 2.18
+    },
+    {
+      "function": "decode @ encoding:441",
+      "category": "utf8-encode",
+      "inclusive_ms": 156.07,
+      "inclusive_pct": 2.98,
+      "self_ms": 85.94
+    },
+    {
+      "function": "wasm-function[1459] @ 0098dfc6:0",
+      "category": "other",
+      "inclusive_ms": 153.31,
+      "inclusive_pct": 2.92,
+      "self_ms": 0.0
+    },
+    {
+      "function": "wasm-function[3379] @ 0098dfc6:0",
+      "category": "other",
+      "inclusive_ms": 152.46,
+      "inclusive_pct": 2.91,
+      "self_ms": 1.1
+    },
+    {
+      "function": "encodeInto @ encoding:355",
+      "category": "utf8-encode",
+      "inclusive_ms": 151.19,
+      "inclusive_pct": 2.88,
+      "self_ms": 42.7
+    },
+    {
+      "function": "wasm-function[1134] @ 0098dfc6:0",
+      "category": "other",
+      "inclusive_ms": 143.96,
+      "inclusive_pct": 2.75,
+      "self_ms": 0.0
+    },
+    {
+      "function": "wasm-function[251] @ 0098dfc6:0",
+      "category": "other",
+      "inclusive_ms": 143.7,
+      "inclusive_pct": 2.74,
+      "self_ms": 0.0
+    },
+    {
+      "function": "parseObjectLiteral @ js_parser.ts:7474",
+      "category": "parsing-lexing",
+      "inclusive_ms": 143.33,
+      "inclusive_pct": 2.73,
+      "self_ms": 10.92
+    },
+    {
+      "function": "wasm-function[173] @ 0098dfc6:0",
+      "category": "other",
+      "inclusive_ms": 142.5,
+      "inclusive_pct": 2.72,
+      "self_ms": 1.09
+    },
+    {
+      "function": "wasm-function[728] @ 0098dfc6:0",
+      "category": "other",
+      "inclusive_ms": 142.5,
+      "inclusive_pct": 2.72,
+      "self_ms": 0.0
+    },
+    {
+      "function": "wasm-function[74] @ 0098dfc6:0",
+      "category": "other",
+      "inclusive_ms": 141.41,
+      "inclusive_pct": 2.7,
+      "self_ms": 2.48
+    },
+    {
+      "function": "wasm-function[1183] @ 0098dfc6:0",
+      "category": "other",
+      "inclusive_ms": 137.62,
+      "inclusive_pct": 2.62,
+      "self_ms": 11.83
+    },
+    {
+      "function": "wasm-function[327] @ 0098dfc6:0",
+      "category": "other",
+      "inclusive_ms": 133.22,
+      "inclusive_pct": 2.54,
+      "self_ms": 1.82
+    },
+    {
+      "function": "printBody @ js_printer.ts:2906",
+      "category": "printing",
+      "inclusive_ms": 131.59,
+      "inclusive_pct": 2.51,
+      "self_ms": 2.16
+    },
+    {
+      "function": "ExpectOrInsertSemicolon @ js_lexer.ts:505",
+      "category": "parsing-lexing",
+      "inclusive_ms": 129.24,
+      "inclusive_pct": 2.46,
+      "self_ms": 2.17
+    },
+    {
+      "function": "wasm-function[1087] @ 0098dfc6:0",
+      "category": "other",
+      "inclusive_ms": 125.11,
+      "inclusive_pct": 2.39,
+      "self_ms": 2.18
+    },
+    {
+      "function": "printQuotedUTF16 @ js_printer.ts:1012",
+      "category": "printing",
+      "inclusive_ms": 124.6,
+      "inclusive_pct": 2.38,
+      "self_ms": 21.11
+    },
+    {
+      "function": "bytesToString @ js_parser.ts:89",
+      "category": "parsing-lexing",
+      "inclusive_ms": 112.98,
+      "inclusive_pct": 2.16,
+      "self_ms": 6.83
+    },
+    {
+      "function": "wasm-function[294] @ 0098dfc6:0",
+      "category": "other",
+      "inclusive_ms": 111.34,
+      "inclusive_pct": 2.12,
+      "self_ms": 2.18
+    },
+    {
+      "function": "wasm-function[241] @ 0098dfc6:0",
+      "category": "other",
+      "inclusive_ms": 109.16,
+      "inclusive_pct": 2.08,
+      "self_ms": 6.2
+    },
+    {
+      "function": "encodeInto @ :-1",
+      "category": "utf8-encode",
+      "inclusive_ms": 108.5,
+      "inclusive_pct": 2.07,
+      "self_ms": 108.5
+    },
+    {
+      "function": "scanCommentText @ js_lexer.ts:2806",
+      "category": "parsing-lexing",
+      "inclusive_ms": 100.73,
+      "inclusive_pct": 1.92,
+      "self_ms": 18.72
+    },
+    {
+      "function": "compileForInternalLoader @ realm:384",
+      "category": "other",
+      "inclusive_ms": 99.0,
+      "inclusive_pct": 1.89,
+      "self_ms": 40.57
+    },
+    {
+      "function": "requireBuiltin @ realm:421",
+      "category": "other",
+      "inclusive_ms": 99.0,
+      "inclusive_pct": 1.89,
+      "self_ms": 0.0
+    },
+    {
+      "function": "printOptionalChainTarget @ js_printer.ts:1475",
+      "category": "printing",
+      "inclusive_ms": 98.36,
+      "inclusive_pct": 1.88,
+      "self_ms": 3.24
+    },
+    {
+      "function": "wasm-function[114] @ 0098dfc6:0",
+      "category": "other",
+      "inclusive_ms": 95.02,
+      "inclusive_pct": 1.81,
+      "self_ms": 7.64
+    },
+    {
+      "function": "printUnquotedUTF16 @ js_printer.ts:1058",
+      "category": "printing",
+      "inclusive_ms": 94.48,
+      "inclusive_pct": 1.8,
+      "self_ms": 14.39
+    },
+    {
+      "function": "wasm-function[1799] @ 0098dfc6:0",
+      "category": "other",
+      "inclusive_ms": 92.96,
+      "inclusive_pct": 1.77,
+      "self_ms": 10.64
+    },
+    {
+      "function": "visitLoopBody @ js_parser.ts:4482",
+      "category": "parsing-lexing",
+      "inclusive_ms": 86.64,
+      "inclusive_pct": 1.65,
+      "self_ms": 0.0
+    },
+    {
+      "function": "wasm-function[3705] @ 0098dfc6:0",
+      "category": "other",
+      "inclusive_ms": 81.72,
+      "inclusive_pct": 1.56,
+      "self_ms": 0.0
+    },
+    {
+      "function": "hasPrefixWithWordBoundary @ js_lexer.ts:2929",
+      "category": "parsing-lexing",
+      "inclusive_ms": 79.85,
+      "inclusive_pct": 1.52,
+      "self_ms": 2.44
+    },
+    {
+      "function": "pushScopeForVisitPass @ js_parser.ts:1893",
+      "category": "parsing-lexing",
+      "inclusive_ms": 75.3,
+      "inclusive_pct": 1.44,
+      "self_ms": 75.3
+    },
+    {
+      "function": "parseParenExpr @ js_parser.ts:8808",
+      "category": "parsing-lexing",
+      "inclusive_ms": 73.4,
+      "inclusive_pct": 1.4,
+      "self_ms": 12.5
+    },
+    {
+      "function": "maybeRewritePropertyAccess @ js_parser.ts:1420",
+      "category": "parsing-lexing",
+      "inclusive_ms": 72.04,
+      "inclusive_pct": 1.37,
+      "self_ms": 4.35
+    },
+    {
+      "function": "decodeUTF8 @ :-1",
+      "category": "other",
+      "inclusive_ms": 71.24,
+      "inclusive_pct": 1.36,
+      "self_ms": 71.24
+    },
+    {
+      "function": "Raw @ js_lexer.ts:324",
+      "category": "parsing-lexing",
+      "inclusive_ms": 70.25,
+      "inclusive_pct": 1.34,
+      "self_ms": 70.25
+    },
+    {
+      "function": "saveExprCommentsHere @ js_parser.ts:4681",
+      "category": "parsing-lexing",
+      "inclusive_ms": 69.51,
+      "inclusive_pct": 1.33,
+      "self_ms": 12.31
+    },
+    {
+      "function": "wasm-function[668] @ 0098dfc6:0",
+      "category": "other",
+      "inclusive_ms": 69.32,
+      "inclusive_pct": 1.32,
+      "self_ms": 0.0
+    },
+    {
+      "function": "wasm-function[947] @ 0098dfc6:0",
+      "category": "other",
+      "inclusive_ms": 69.32,
+      "inclusive_pct": 1.32,
+      "self_ms": 0.0
+    },
+    {
+      "function": "wasm-function[4094] @ 0098dfc6:0",
+      "category": "other",
+      "inclusive_ms": 69.32,
+      "inclusive_pct": 1.32,
+      "self_ms": 0.0
+    },
+    {
+      "function": "wasm-function[179] @ 0098dfc6:0",
+      "category": "other",
+      "inclusive_ms": 67.63,
+      "inclusive_pct": 1.29,
+      "self_ms": 8.76
+    },
+    {
+      "function": "(anonymous) @ typescript:39",
+      "category": "other",
+      "inclusive_ms": 67.25,
+      "inclusive_pct": 1.28,
+      "self_ms": 0.0
+    },
+    {
+      "function": "(anonymous) @ util:793",
+      "category": "other",
+      "inclusive_ms": 67.25,
+      "inclusive_pct": 1.28,
+      "self_ms": 0.0
+    },
+    {
+      "function": "printIdentifier @ js_printer.ts:304",
+      "category": "printing",
+      "inclusive_ms": 66.92,
+      "inclusive_pct": 1.28,
+      "self_ms": 11.91
+    },
+    {
+      "function": "assignNamesRecursive @ renamer.ts:341",
+      "category": "renamer",
+      "inclusive_ms": 63.18,
+      "inclusive_pct": 1.21,
+      "self_ms": 17.64
+    },
+    {
+      "function": "AssignNamesByScope @ renamer.ts:354",
+      "category": "renamer",
+      "inclusive_ms": 63.18,
+      "inclusive_pct": 1.21,
+      "self_ms": 0.0
+    },
+    {
+      "function": "parseBinding @ js_parser.ts:6234",
+      "category": "parsing-lexing",
+      "inclusive_ms": 59.99,
+      "inclusive_pct": 1.14,
+      "self_ms": 9.31
+    },
+    {
+      "function": "printExprCommentsAtLoc @ js_printer.ts:449",
+      "category": "printing",
+      "inclusive_ms": 55.58,
+      "inclusive_pct": 1.06,
+      "self_ms": 19.12
+    },
+    {
+      "function": "encodeUtf8String @ :-1",
+      "category": "utf8-encode",
+      "inclusive_ms": 52.07,
+      "inclusive_pct": 0.99,
+      "self_ms": 52.07
+    },
+    {
+      "function": "parseExprOrLetOrUsingStmt @ js_parser.ts:1315",
+      "category": "parsing-lexing",
+      "inclusive_ms": 51.81,
+      "inclusive_pct": 0.99,
+      "self_ms": 14.72
+    },
+    {
+      "function": "printIndent @ js_printer.ts:358",
+      "category": "printing",
+      "inclusive_ms": 48.92,
+      "inclusive_pct": 0.93,
+      "self_ms": 2.27
+    },
+    {
+      "function": "wasm-function[324] @ 0098dfc6:0",
+      "category": "other",
+      "inclusive_ms": 48.71,
+      "inclusive_pct": 0.93,
+      "self_ms": 0.0
+    },
+    {
+      "function": "parseExprOrBindings @ js_parser.ts:1936",
+      "category": "parsing-lexing",
+      "inclusive_ms": 47.83,
+      "inclusive_pct": 0.91,
+      "self_ms": 0.0
+    },
+    {
+      "function": "(anonymous) @ index:0",
+      "category": "other",
+      "inclusive_ms": 46.39,
+      "inclusive_pct": 0.88,
+      "self_ms": 3.29
+    },
+    {
+      "function": "rawIdentifier @ js_lexer.ts:329",
+      "category": "parsing-lexing",
+      "inclusive_ms": 46.37,
+      "inclusive_pct": 0.88,
+      "self_ms": 8.56
+    },
+    {
+      "function": "init @ init.ts:10",
+      "category": "other",
+      "inclusive_ms": 45.61,
+      "inclusive_pct": 0.87,
+      "self_ms": 45.61
+    },
+    {
+      "function": "assignNamesInScope @ renamer.ts:326",
+      "category": "renamer",
+      "inclusive_ms": 45.53,
+      "inclusive_pct": 0.87,
+      "self_ms": 19.46
+    },
+    {
+      "function": "moduleStrategy @ translators:101",
+      "category": "other",
+      "inclusive_ms": 43.65,
+      "inclusive_pct": 0.83,
+      "self_ms": 1.09
+    },
+    {
+      "function": "printFnArgs @ js_printer.ts:1282",
+      "category": "printing",
+      "inclusive_ms": 43.24,
+      "inclusive_pct": 0.82,
+      "self_ms": 16.08
+    },
+    {
+      "function": "__require @ index:7",
+      "category": "other",
+      "inclusive_ms": 43.1,
+      "inclusive_pct": 0.82,
+      "self_ms": 23.17
+    },
+    {
+      "function": "CommentTextWithoutIndent @ logger.ts:683",
+      "category": "other",
+      "inclusive_ms": 42.84,
+      "inclusive_pct": 0.82,
+      "self_ms": 27.55
+    },
+    {
+      "function": "compileSourceTextModule @ utils:343",
+      "category": "other",
+      "inclusive_ms": 42.56,
+      "inclusive_pct": 0.81,
+      "self_ms": 42.56
+    },
+    {
+      "function": "wasm-to-js @ :-1",
+      "category": "other",
+      "inclusive_ms": 41.63,
+      "inclusive_pct": 0.79,
+      "self_ms": 7.65
+    },
+    {
+      "function": "computeLineAndColumn @ logger.ts:950",
+      "category": "other",
+      "inclusive_ms": 40.37,
+      "inclusive_pct": 0.77,
+      "self_ms": 4.48
+    },
+    {
+      "function": "MsgLocationOrNil @ logger.ts:989",
+      "category": "other",
+      "inclusive_ms": 40.37,
+      "inclusive_pct": 0.77,
+      "self_ms": 0.0
+    },
+    {
+      "function": "MsgData @ logger.ts:874",
+      "category": "other",
+      "inclusive_ms": 40.37,
+      "inclusive_pct": 0.77,
+      "self_ms": 0.0
+    },
+    {
+      "function": "AddErrorWithNotes @ logger.ts:1105",
+      "category": "other",
+      "inclusive_ms": 40.37,
+      "inclusive_pct": 0.77,
+      "self_ms": 0.0
+    },
+    {
+      "function": "forbidLexicalDecl @ js_parser.ts:7167",
+      "category": "parsing-lexing",
+      "inclusive_ms": 40.37,
+      "inclusive_pct": 0.77,
+      "self_ms": 0.0
+    },
+    {
+      "function": "printSpace @ js_printer.ts:365",
+      "category": "printing",
+      "inclusive_ms": 40.2,
+      "inclusive_pct": 0.77,
+      "self_ms": 6.53
+    },
+    {
+      "function": "lowerClass @ js_parser_lower_class.ts:1592",
+      "category": "parsing-lexing",
+      "inclusive_ms": 39.09,
+      "inclusive_pct": 0.75,
+      "self_ms": 6.57
+    },
+    {
+      "function": "wasm-function[102] @ 0098dfc6:0",
+      "category": "other",
+      "inclusive_ms": 37.94,
+      "inclusive_pct": 0.72,
+      "self_ms": 1.09
+    },
+    {
+      "function": "pushScopeForParsePass @ js_parser.ts:1135",
+      "category": "parsing-lexing",
+      "inclusive_ms": 37.7,
+      "inclusive_pct": 0.72,
+      "self_ms": 23.6
+    },
+    {
+      "function": "step @ js_lexer.ts:2743",
+      "category": "parsing-lexing",
+      "inclusive_ms": 37.32,
+      "inclusive_pct": 0.71,
+      "self_ms": 35.82
+    },
+    {
+      "function": "wasm-function[619] @ 0098dfc6:0",
+      "category": "other",
+      "inclusive_ms": 36.71,
+      "inclusive_pct": 0.7,
+      "self_ms": 0.0
+    },
+    {
+      "function": "wasm-function[579] @ 0098dfc6:0",
+      "category": "other",
+      "inclusive_ms": 36.26,
+      "inclusive_pct": 0.69,
+      "self_ms": 0.0
+    },
+    {
+      "function": "scanTo @ logger.ts:882",
+      "category": "other",
+      "inclusive_ms": 35.89,
+      "inclusive_pct": 0.68,
+      "self_ms": 34.8
+    },
+    {
+      "function": "wasm-function[1269] @ 0098dfc6:0",
+      "category": "other",
+      "inclusive_ms": 35.78,
+      "inclusive_pct": 0.68,
+      "self_ms": 0.0
+    },
+    {
+      "function": "wasm-function[133] @ 0098dfc6:0",
+      "category": "other",
+      "inclusive_ms": 35.61,
+      "inclusive_pct": 0.68,
+      "self_ms": 35.61
+    },
+    {
+      "function": "wasm-function[239] @ 0098dfc6:0",
+      "category": "other",
+      "inclusive_ms": 33.9,
+      "inclusive_pct": 0.65,
+      "self_ms": 6.74
+    },
+    {
+      "function": "wasm-function[874] @ 0098dfc6:0",
+      "category": "other",
+      "inclusive_ms": 33.9,
+      "inclusive_pct": 0.65,
+      "self_ms": 0.0
+    },
+    {
+      "function": "wasm-function[3575] @ 0098dfc6:0",
+      "category": "other",
+      "inclusive_ms": 33.9,
+      "inclusive_pct": 0.65,
+      "self_ms": 0.0
+    },
+    {
+      "function": "wasm-function[3784] @ 0098dfc6:0",
+      "category": "other",
+      "inclusive_ms": 33.9,
+      "inclusive_pct": 0.65,
+      "self_ms": 0.0
+    },
+    {
+      "function": "wasm-function[3554] @ 0098dfc6:0",
+      "category": "other",
+      "inclusive_ms": 33.9,
+      "inclusive_pct": 0.65,
+      "self_ms": 0.0
+    },
+    {
+      "function": "printIndentedComment @ js_printer.ts:425",
+      "category": "printing",
+      "inclusive_ms": 33.48,
+      "inclusive_pct": 0.64,
+      "self_ms": 4.29
+    },
+    {
+      "function": "declareSymbol @ js_parser.ts:3467",
+      "category": "parsing-lexing",
+      "inclusive_ms": 33.43,
+      "inclusive_pct": 0.64,
+      "self_ms": 20.43
+    },
+    {
+      "function": "assignName @ renamer.ts:299",
+      "category": "renamer",
+      "inclusive_ms": 33.3,
+      "inclusive_pct": 0.64,
+      "self_ms": 1.23
+    },
+    {
+      "function": "wasm-function[3718] @ 0098dfc6:0",
+      "category": "other",
+      "inclusive_ms": 33.25,
+      "inclusive_pct": 0.63,
+      "self_ms": 2.91
+    },
+    {
+      "function": "identifierExpr @ js_parser.ts:4649",
+      "category": "parsing-lexing",
+      "inclusive_ms": 32.42,
+      "inclusive_pct": 0.62,
+      "self_ms": 17.36
+    },
+    {
+      "function": "wasm-function[1622] @ 0098dfc6:0",
+      "category": "other",
+      "inclusive_ms": 32.24,
+      "inclusive_pct": 0.62,
+      "self_ms": 4.44
+    },
+    {
+      "function": "utf16FromString @ js_parser.ts:99",
+      "category": "parsing-lexing",
+      "inclusive_ms": 32.09,
+      "inclusive_pct": 0.61,
+      "self_ms": 9.67
+    },
+    {
+      "function": "wasm-function[325] @ 0098dfc6:0",
+      "category": "other",
+      "inclusive_ms": 32.01,
+      "inclusive_pct": 0.61,
+      "self_ms": 3.11
+    },
+    {
+      "function": "findUnusedName @ renamer.ts:66",
+      "category": "renamer",
+      "inclusive_ms": 30.91,
+      "inclusive_pct": 0.59,
+      "self_ms": 6.12
+    },
+    {
+      "function": "resolve @ loader:714",
+      "category": "other",
+      "inclusive_ms": 30.85,
+      "inclusive_pct": 0.59,
+      "self_ms": 1.08
+    },
+    {
+      "function": "_link @ module_job:160",
+      "category": "treeshake-link",
+      "inclusive_ms": 30.79,
+      "inclusive_pct": 0.59,
+      "self_ms": 3.23
+    },
+    {
+      "function": "printNumber @ js_printer.ts:658",
+      "category": "printing",
+      "inclusive_ms": 30.09,
+      "inclusive_pct": 0.57,
+      "self_ms": 5.62
+    },
+    {
+      "function": "#cachedDefaultResolve @ loader:738",
+      "category": "other",
+      "inclusive_ms": 29.77,
+      "inclusive_pct": 0.57,
+      "self_ms": 0.0
+    },
+    {
+      "function": "visitArgs @ js_parser.ts:3287",
+      "category": "parsing-lexing",
+      "inclusive_ms": 28.83,
+      "inclusive_pct": 0.55,
+      "self_ms": 4.35
+    },
+    {
+      "function": "wasm-function[477] @ 0098dfc6:0",
+      "category": "other",
+      "inclusive_ms": 28.52,
+      "inclusive_pct": 0.54,
+      "self_ms": 1.1
+    },
+    {
+      "function": "defaultResolve @ resolve:943",
+      "category": "other",
+      "inclusive_ms": 27.58,
+      "inclusive_pct": 0.53,
+      "self_ms": 1.11
+    },
+    {
+      "function": "wasm-function[695] @ 0098dfc6:0",
+      "category": "other",
+      "inclusive_ms": 26.24,
+      "inclusive_pct": 0.5,
+      "self_ms": 0.97
+    },
+    {
+      "function": "wasm-function[355] @ 0098dfc6:0",
+      "category": "other",
+      "inclusive_ms": 25.27,
+      "inclusive_pct": 0.48,
+      "self_ms": 4.38
+    },
+    {
+      "function": "(program) @ :-1",
+      "category": "runtime-gc",
+      "inclusive_ms": 24.86,
+      "inclusive_pct": 0.47,
+      "self_ms": 24.86
+    },
+    {
+      "function": "printNonNegativeFloat @ js_printer.ts:567",
+      "category": "printing",
+      "inclusive_ms": 24.48,
+      "inclusive_pct": 0.47,
+      "self_ms": 12.04
+    },
+    {
+      "function": "module2.exports.__wbindgen_string_new @ index:539",
+      "category": "other",
+      "inclusive_ms": 24.47,
+      "inclusive_pct": 0.47,
+      "self_ms": 0.0
+    },
+    {
+      "function": "wasm-function[3864] @ 0098dfc6:0",
+      "category": "other",
+      "inclusive_ms": 24.47,
+      "inclusive_pct": 0.47,
+      "self_ms": 0.0
+    },
+    {
+      "function": "wasm-function[3220] @ 0098dfc6:0",
+      "category": "other",
+      "inclusive_ms": 24.47,
+      "inclusive_pct": 0.47,
+      "self_ms": 0.0
+    },
+    {
+      "function": "processProperties @ js_parser_lower_class.ts:1174",
+      "category": "parsing-lexing",
+      "inclusive_ms": 23.77,
+      "inclusive_pct": 0.45,
+      "self_ms": 9.59
+    },
+    {
+      "function": "visitBinding @ js_parser.ts:2350",
+      "category": "parsing-lexing",
+      "inclusive_ms": 23.6,
+      "inclusive_pct": 0.45,
+      "self_ms": 23.6
+    },
+    {
+      "function": "wasm-function[387] @ 0098dfc6:0",
+      "category": "other",
+      "inclusive_ms": 22.72,
+      "inclusive_pct": 0.43,
+      "self_ms": 1.1
+    },
+    {
+      "function": "wasm-function[571] @ 0098dfc6:0",
+      "category": "other",
+      "inclusive_ms": 22.72,
+      "inclusive_pct": 0.43,
+      "self_ms": 0.0
+    },
+    {
+      "function": "checkAndPrepare @ js_printer.ts:2347",
+      "category": "printing",
+      "inclusive_ms": 22.12,
+      "inclusive_pct": 0.42,
+      "self_ms": 20.64
+    },
+    {
+      "function": "wasm-function[440] @ 0098dfc6:0",
+      "category": "other",
+      "inclusive_ms": 22.1,
+      "inclusive_pct": 0.42,
+      "self_ms": 0.0
+    },
+    {
+      "function": "loadNameFromRef @ js_parser.ts:4571",
+      "category": "parsing-lexing",
+      "inclusive_ms": 21.37,
+      "inclusive_pct": 0.41,
+      "self_ms": 8.54
+    },
+    {
+      "function": "lib/wasm.js @ index:34",
+      "category": "other",
+      "inclusive_ms": 19.94,
+      "inclusive_pct": 0.38,
+      "self_ms": 0.0
+    },
+    {
+      "function": "getStringFromWasm0 @ index:69",
+      "category": "other",
+      "inclusive_ms": 19.73,
+      "inclusive_pct": 0.38,
+      "self_ms": 0.0
+    },
+    {
+      "function": "lazyLoadStreams @ node:fs:3134",
+      "category": "other",
+      "inclusive_ms": 19.7,
+      "inclusive_pct": 0.38,
+      "self_ms": 0.0
+    },
+    {
+      "function": "get ReadStream @ node:fs:3313",
+      "category": "other",
+      "inclusive_ms": 19.7,
+      "inclusive_pct": 0.38,
+      "self_ms": 0.0
+    },
+    {
+      "function": "getOwn @ realm:204",
+      "category": "other",
+      "inclusive_ms": 19.7,
+      "inclusive_pct": 0.38,
+      "self_ms": 0.0
+    },
+    {
+      "function": "syncExports @ realm:372",
+      "category": "other",
+      "inclusive_ms": 19.7,
+      "inclusive_pct": 0.38,
+      "self_ms": 0.0
+    },
+    {
+      "function": "(anonymous) @ realm:357",
+      "category": "other",
+      "inclusive_ms": 19.7,
+      "inclusive_pct": 0.38,
+      "self_ms": 0.0
+    },
+    {
+      "function": "getESMFacade @ realm:347",
+      "category": "other",
+      "inclusive_ms": 19.7,
+      "inclusive_pct": 0.38,
+      "self_ms": 0.0
+    },
+    {
+      "function": "builtinStrategy @ translators:454",
+      "category": "other",
+      "inclusive_ms": 19.7,
+      "inclusive_pct": 0.38,
+      "self_ms": 0.0
+    },
+    {
+      "function": "maybeFoldVisitedBinary @ js_parser.ts:8617",
+      "category": "parsing-lexing",
+      "inclusive_ms": 19.34,
+      "inclusive_pct": 0.37,
+      "self_ms": 6.45
+    },
+    {
+      "function": "stringify @ helpers:424",
+      "category": "other",
+      "inclusive_ms": 19.27,
+      "inclusive_pct": 0.37,
+      "self_ms": 0.0
+    },
+    {
+      "function": "parseStringLiteral @ js_parser.ts:8750",
+      "category": "parsing-lexing",
+      "inclusive_ms": 18.83,
+      "inclusive_pct": 0.36,
+      "self_ms": 0.0
+    },
+    {
+      "function": "lowerAssign @ js_parser_lower.ts:535",
+      "category": "parsing-lexing",
+      "inclusive_ms": 18.82,
+      "inclusive_pct": 0.36,
+      "self_ms": 7.22
+    },
+    {
+      "function": "(anonymous) @ streams:0",
+      "category": "other",
+      "inclusive_ms": 18.59,
+      "inclusive_pct": 0.35,
+      "self_ms": 0.0
+    },
+    {
+      "function": "wasm-function[215] @ 0098dfc6:0",
+      "category": "other",
+      "inclusive_ms": 18.35,
+      "inclusive_pct": 0.35,
+      "self_ms": 3.28
+    },
+    {
+      "function": "wasm-function[1086] @ 0098dfc6:0",
+      "category": "other",
+      "inclusive_ms": 18.35,
+      "inclusive_pct": 0.35,
+      "self_ms": 0.0
+    },
+    {
+      "function": "printForLoopInit @ js_printer.ts:2757",
+      "category": "printing",
+      "inclusive_ms": 18.26,
+      "inclusive_pct": 0.35,
+      "self_ms": 3.17
+    },
+    {
+      "function": "wasm-function[240] @ 0098dfc6:0",
+      "category": "other",
+      "inclusive_ms": 17.22,
+      "inclusive_pct": 0.33,
+      "self_ms": 8.27
+    },
+    {
+      "function": "wasm-function[537] @ 0098dfc6:0",
+      "category": "other",
+      "inclusive_ms": 17.03,
+      "inclusive_pct": 0.32,
+      "self_ms": 0.0
+    },
+    {
+      "function": "StringLiteral @ js_lexer.ts:334",
+      "category": "parsing-lexing",
+      "inclusive_ms": 16.65,
+      "inclusive_pct": 0.32,
+      "self_ms": 4.37
+    },
+    {
+      "function": "opForBinaryToken @ js_parser.ts:11569",
+      "category": "parsing-lexing",
+      "inclusive_ms": 16.49,
+      "inclusive_pct": 0.31,
+      "self_ms": 16.49
+    },
+    {
+      "function": "wasm-function[2648] @ 0098dfc6:0",
+      "category": "other",
+      "inclusive_ms": 16.42,
+      "inclusive_pct": 0.31,
+      "self_ms": 1.12
+    },
+    {
+      "function": "warnAboutDuplicateProperties @ js_parser.ts:7421",
+      "category": "parsing-lexing",
+      "inclusive_ms": 16.23,
+      "inclusive_pct": 0.31,
+      "self_ms": 12.96
+    },
+    {
+      "function": "printBinding @ js_printer.ts:1161",
+      "category": "printing",
+      "inclusive_ms": 15.89,
+      "inclusive_pct": 0.3,
+      "self_ms": 4.98
+    },
+    {
+      "function": "wasm-function[1776] @ 0098dfc6:0",
+      "category": "other",
+      "inclusive_ms": 15.89,
+      "inclusive_pct": 0.3,
+      "self_ms": 0.0
+    },
+    {
+      "function": "parseAsyncPrefixExpr @ js_parser.ts:7976",
+      "category": "parsing-lexing",
+      "inclusive_ms": 15.67,
+      "inclusive_pct": 0.3,
+      "self_ms": 0.64
+    },
+    {
+      "function": "concatBytes @ bytes.ts:56",
+      "category": "other",
+      "inclusive_ms": 15.29,
+      "inclusive_pct": 0.29,
+      "self_ms": 15.29
+    },
+    {
+      "function": "wasm-function[1740] @ 0098dfc6:0",
+      "category": "other",
+      "inclusive_ms": 15.29,
+      "inclusive_pct": 0.29,
+      "self_ms": 0.0
+    },
+    {
+      "function": "wasm-function[4075] @ 0098dfc6:0",
+      "category": "other",
+      "inclusive_ms": 15.06,
+      "inclusive_pct": 0.29,
+      "self_ms": 1.09
+    },
+    {
+      "function": "parseFnExpr @ js_parser.ts:7960",
+      "category": "parsing-lexing",
+      "inclusive_ms": 15.03,
+      "inclusive_pct": 0.29,
+      "self_ms": 3.28
+    },
+    {
+      "function": "Fn @ js_ast.ts:347",
+      "category": "other",
+      "inclusive_ms": 14.67,
+      "inclusive_pct": 0.28,
+      "self_ms": 12.56
+    },
+    {
+      "function": "Scope @ js_ast.ts:1231",
+      "category": "other",
+      "inclusive_ms": 14.09,
+      "inclusive_pct": 0.27,
+      "self_ms": 12.26
+    },
+    {
+      "function": "latin1 @ js_lexer.ts:122",
+      "category": "parsing-lexing",
+      "inclusive_ms": 13.98,
+      "inclusive_pct": 0.27,
+      "self_ms": 13.98
+    },
+    {
+      "function": "wasm-function[80] @ 0098dfc6:0",
+      "category": "other",
+      "inclusive_ms": 13.95,
+      "inclusive_pct": 0.27,
+      "self_ms": 3.84
+    },
+    {
+      "function": "Module @ :-1",
+      "category": "other",
+      "inclusive_ms": 13.6,
+      "inclusive_pct": 0.26,
+      "self_ms": 13.6
+    },
+    {
+      "function": "moduleResolve @ resolve:830",
+      "category": "other",
+      "inclusive_ms": 13.53,
+      "inclusive_pct": 0.26,
+      "self_ms": 1.08
+    },
+    {
+      "function": "wasm-function[2334] @ 0098dfc6:0",
+      "category": "other",
+      "inclusive_ms": 13.48,
+      "inclusive_pct": 0.26,
+      "self_ms": 3.62
+    },
+    {
+      "function": "wasm-function[90] @ 0098dfc6:0",
+      "category": "other",
+      "inclusive_ms": 13.46,
+      "inclusive_pct": 0.26,
+      "self_ms": 0.0
+    },
+    {
+      "function": "isUnsightlyPrimitive @ js_parser.ts:8526",
+      "category": "parsing-lexing",
+      "inclusive_ms": 13.03,
+      "inclusive_pct": 0.25,
+      "self_ms": 13.03
+    },
+    {
+      "function": "printSemicolonAfterStatement @ js_printer.ts:375",
+      "category": "printing",
+      "inclusive_ms": 13.01,
+      "inclusive_pct": 0.25,
+      "self_ms": 4.33
+    },
+    {
+      "function": "wasm-function[1717] @ 0098dfc6:0",
+      "category": "other",
+      "inclusive_ms": 12.98,
+      "inclusive_pct": 0.25,
+      "self_ms": 7.69
+    },
+    {
+      "function": "Loc @ js_lexer.ts:314",
+      "category": "parsing-lexing",
+      "inclusive_ms": 12.96,
+      "inclusive_pct": 0.25,
+      "self_ms": 2.53
+    },
+    {
+      "function": "visitRightAndFinish @ js_parser.ts:1530",
+      "category": "parsing-lexing",
+      "inclusive_ms": 12.91,
+      "inclusive_pct": 0.25,
+      "self_ms": 8.61
+    },
+    {
+      "function": "Expr @ js_ast.ts:439",
+      "category": "other",
+      "inclusive_ms": 12.88,
+      "inclusive_pct": 0.25,
+      "self_ms": 11.79
+    },
+    {
+      "function": "wasm-function[1665] @ 0098dfc6:0",
+      "category": "other",
+      "inclusive_ms": 12.76,
+      "inclusive_pct": 0.24,
+      "self_ms": 1.08
+    },
+    {
+      "function": "wasm-function[4357] @ 0098dfc6:0",
+      "category": "other",
+      "inclusive_ms": 12.76,
+      "inclusive_pct": 0.24,
+      "self_ms": 0.0
+    },
+    {
+      "function": "wasm-function[2481] @ 0098dfc6:0",
+      "category": "other",
+      "inclusive_ms": 12.73,
+      "inclusive_pct": 0.24,
+      "self_ms": 0.0
+    },
+    {
+      "function": "parseNumericLiteralOrDot @ js_lexer.ts:2027",
+      "category": "parsing-lexing",
+      "inclusive_ms": 12.6,
+      "inclusive_pct": 0.24,
+      "self_ms": 9.36
+    },
+    {
+      "function": "finalizeResolution @ resolve:228",
+      "category": "other",
+      "inclusive_ms": 12.45,
+      "inclusive_pct": 0.24,
+      "self_ms": 1.07
+    },
+    {
+      "function": "newSymbol @ js_parser.ts:3360",
+      "category": "parsing-lexing",
+      "inclusive_ms": 11.96,
+      "inclusive_pct": 0.23,
+      "self_ms": 5.34
+    },
+    {
+      "function": "hoistSymbols @ js_parser.ts:3514",
+      "category": "parsing-lexing",
+      "inclusive_ms": 11.93,
+      "inclusive_pct": 0.23,
+      "self_ms": 10.84
+    },
+    {
+      "function": "visitArrow @ js_parser.ts:3314",
+      "category": "parsing-lexing",
+      "inclusive_ms": 11.81,
+      "inclusive_pct": 0.23,
+      "self_ms": 3.23
+    },
+    {
+      "function": "ToBooleanWithSideEffects @ js_ast_helpers.ts:2760",
+      "category": "other",
+      "inclusive_ms": 11.76,
+      "inclusive_pct": 0.22,
+      "self_ms": 11.76
+    },
+    {
+      "function": "EFunction @ js_ast.ts:623",
+      "category": "other",
+      "inclusive_ms": 11.46,
+      "inclusive_pct": 0.22,
+      "self_ms": 3.22
+    },
+    {
+      "function": "tryToDecodeEscapeSequences @ js_lexer.ts:2372",
+      "category": "parsing-lexing",
+      "inclusive_ms": 11.21,
+      "inclusive_pct": 0.21,
+      "self_ms": 4.79
+    },
+    {
+      "function": "wasm-function[113] @ 0098dfc6:0",
+      "category": "other",
+      "inclusive_ms": 11.18,
+      "inclusive_pct": 0.21,
+      "self_ms": 7.95
+    },
+    {
+      "function": "wasm-function[589] @ 0098dfc6:0",
+      "category": "other",
+      "inclusive_ms": 10.98,
+      "inclusive_pct": 0.21,
+      "self_ms": 2.21
+    },
+    {
+      "function": "(anonymous) @ node:stream:0",
+      "category": "other",
+      "inclusive_ms": 10.96,
+      "inclusive_pct": 0.21,
+      "self_ms": 1.09
+    },
+    {
+      "function": "(anonymous) @ run_main_module:0",
+      "category": "other",
+      "inclusive_ms": 10.94,
+      "inclusive_pct": 0.21,
+      "self_ms": 0.0
+    }
+  ]
+}
