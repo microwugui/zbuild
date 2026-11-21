@@ -9,8 +9,8 @@
 
 | 项 | 值 |
 | --- | --- |
-| git HEAD | `3dcd35a9ee03b7d1eaa1e6a0e388d2f194477392` |
-| 冻结基线 | `/root/port-baseline`（HEAD + import 守卫，`src` 树与 port `diff -rq` 零差异） |
+| 代码提交（基线锚点） | `d1e4942696e926b9fe601de817e1bdefdfa13cad`（stage0：守卫 + bench 底座 + 台账） |
+| 冻结基线 | `/root/port-baseline` 以 `git worktree` 锚到 `d1e4942`，`src` 树与 port `diff -rq` 应为空 |
 | three.module 输入 | sha `104f5614…e341`，658900 B；产物 `2985154b…cda9b4`，1709893 B |
 | Node / 核数 | v22.23.3；2 核 VM；`GOMAXPROCS=1`，无后台负载 |
 | 测量噪声地板 | 相同代码空自测 |speedup−1| 实测 ~3%（v3.1 0.9664 / v3.2 1.0330，方向会翻转；成因未确证） |
