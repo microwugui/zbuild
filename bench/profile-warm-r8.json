@@ -1,0 +1,310 @@
+{
+  "input": "/root/port/node_modules/typescript/lib/typescript.js",
+  "warm": 2,
+  "total_self_ms": 10695.4,
+  "samples": 28212,
+  "top_self": [
+    {
+      "fn": "(garbage collector)@:-1",
+      "self_ms": 2325.4,
+      "pct": 21.74
+    },
+    {
+      "fn": "Next@js_lexer.ts:640",
+      "self_ms": 937.6,
+      "pct": 8.77
+    },
+    {
+      "fn": "visitExprInOut@js_parser.ts:2004",
+      "self_ms": 454.8,
+      "pct": 4.25
+    },
+    {
+      "fn": "parsePrefix@js_parser.ts:7555",
+      "self_ms": 350.0,
+      "pct": 3.27
+    },
+    {
+      "fn": "parseSuffix@js_parser.ts:8053",
+      "self_ms": 348.7,
+      "pct": 3.26
+    },
+    {
+      "fn": "encode@encoding:350",
+      "self_ms": 295.3,
+      "pct": 2.76
+    },
+    {
+      "fn": "decodeUTF8@:-1",
+      "self_ms": 274.9,
+      "pct": 2.57
+    },
+    {
+      "fn": "parseStmt@js_parser.ts:4759",
+      "self_ms": 243.0,
+      "pct": 2.27
+    },
+    {
+      "fn": "init@init.ts:10",
+      "self_ms": 231.5,
+      "pct": 2.16
+    },
+    {
+      "fn": "printExprInner@js_printer.ts:1578",
+      "self_ms": 217.1,
+      "pct": 2.03
+    },
+    {
+      "fn": "decode@encoding:441",
+      "self_ms": 193.7,
+      "pct": 1.81
+    },
+    {
+      "fn": "parseExprCommon@js_parser.ts:7526",
+      "self_ms": 187.5,
+      "pct": 1.75
+    },
+    {
+      "fn": "findSymbol@js_parser.ts:4540",
+      "self_ms": 165.1,
+      "pct": 1.54
+    },
+    {
+      "fn": "FastBuffer@buffer:955",
+      "self_ms": 155.7,
+      "pct": 1.46
+    },
+    {
+      "fn": "visitAndAppendStmt@js_parser.ts:2420",
+      "self_ms": 130.0,
+      "pct": 1.22
+    },
+    {
+      "fn": "subarray@node:buffer:1180",
+      "self_ms": 128.2,
+      "pct": 1.2
+    },
+    {
+      "fn": "parseStmtsUpTo@js_parser.ts:4705",
+      "self_ms": 126.7,
+      "pct": 1.18
+    },
+    {
+      "fn": "pushScopeForParsePass@js_parser.ts:1138",
+      "self_ms": 118.8,
+      "pct": 1.11
+    },
+    {
+      "fn": "computeLineAndColumn@logger.ts:950",
+      "self_ms": 118.2,
+      "pct": 1.11
+    },
+    {
+      "fn": "visitExpr@js_parser.ts:1993",
+      "self_ms": 106.3,
+      "pct": 0.99
+    },
+    {
+      "fn": "step@js_lexer.ts:2743",
+      "self_ms": 101.3,
+      "pct": 0.95
+    },
+    {
+      "fn": "Expect@js_lexer.ts:497",
+      "self_ms": 97.1,
+      "pct": 0.91
+    },
+    {
+      "fn": "parseFn@js_parser.ts:6522",
+      "self_ms": 96.0,
+      "pct": 0.9
+    },
+    {
+      "fn": "identifierExpr@js_parser.ts:4652",
+      "self_ms": 93.3,
+      "pct": 0.87
+    },
+    {
+      "fn": "encodeUtf8String@:-1",
+      "self_ms": 92.6,
+      "pct": 0.87
+    },
+    {
+      "fn": "parseCallArgs@js_parser.ts:8714",
+      "self_ms": 80.0,
+      "pct": 0.75
+    },
+    {
+      "fn": "declareSymbol@js_parser.ts:3470",
+      "self_ms": 77.4,
+      "pct": 0.72
+    },
+    {
+      "fn": "post@node:inspector:117",
+      "self_ms": 73.1,
+      "pct": 0.68
+    },
+    {
+      "fn": "utf16FromString@js_parser.ts:99",
+      "self_ms": 69.6,
+      "pct": 0.65
+    },
+    {
+      "fn": "parseObjectLiteral@js_parser.ts:7477",
+      "self_ms": 66.2,
+      "pct": 0.62
+    }
+  ],
+  "top_inclusive": [
+    {
+      "fn": "parseStmt@js_parser.ts:4759",
+      "incl_ms": 26939.6,
+      "pct": 251.88
+    },
+    {
+      "fn": "parseStmtsUpTo@js_parser.ts:4705",
+      "incl_ms": 22905.4,
+      "pct": 214.16
+    },
+    {
+      "fn": "parseExprCommon@js_parser.ts:7526",
+      "incl_ms": 22242.5,
+      "pct": 207.96
+    },
+    {
+      "fn": "parsePrefix@js_parser.ts:7555",
+      "incl_ms": 17238.5,
+      "pct": 161.18
+    },
+    {
+      "fn": "parseExpr@js_parser.ts:7521",
+      "incl_ms": 15096.4,
+      "pct": 141.15
+    },
+    {
+      "fn": "parseParenExpr@js_parser.ts:8811",
+      "incl_ms": 13829.7,
+      "pct": 129.3
+    },
+    {
+      "fn": "(root)@:-1",
+      "incl_ms": 10695.4,
+      "pct": 100.0
+    },
+    {
+      "fn": "(anon)@warm_profile_worker.mjs:-1",
+      "incl_ms": 8368.5,
+      "pct": 78.24
+    },
+    {
+      "fn": "bundle@warm_profile_worker.mjs:13",
+      "incl_ms": 8287.9,
+      "pct": 77.49
+    },
+    {
+      "fn": "bundleSingleFile@bundle1.ts:23",
+      "incl_ms": 8275.7,
+      "pct": 77.38
+    },
+    {
+      "fn": "parseFn@js_parser.ts:6522",
+      "incl_ms": 7837.1,
+      "pct": 73.28
+    },
+    {
+      "fn": "parseFnBody@js_parser.ts:1945",
+      "incl_ms": 7526.5,
+      "pct": 70.37
+    },
+    {
+      "fn": "parseFnStmt@js_parser.ts:6462",
+      "incl_ms": 7333.8,
+      "pct": 68.57
+    },
+    {
+      "fn": "Parse@js_parser.ts:11241",
+      "incl_ms": 7014.2,
+      "pct": 65.58
+    },
+    {
+      "fn": "parseArrowBody@js_parser.ts:8908",
+      "incl_ms": 6962.4,
+      "pct": 65.1
+    },
+    {
+      "fn": "parseExprOrBindings@js_parser.ts:1939",
+      "incl_ms": 6670.7,
+      "pct": 62.37
+    },
+    {
+      "fn": "visitExprInOut@js_parser.ts:2004",
+      "incl_ms": 5231.0,
+      "pct": 48.91
+    },
+    {
+      "fn": "visitStmts@js_parser.ts:3638",
+      "incl_ms": 4948.0,
+      "pct": 46.26
+    },
+    {
+      "fn": "visitAndAppendStmt@js_parser.ts:2420",
+      "incl_ms": 4879.8,
+      "pct": 45.63
+    },
+    {
+      "fn": "parseSuffix@js_parser.ts:8053",
+      "incl_ms": 4765.8,
+      "pct": 44.56
+    },
+    {
+      "fn": "visitStmtsAndPrependTempRefs@js_parser.ts:3604",
+      "incl_ms": 4188.5,
+      "pct": 39.16
+    },
+    {
+      "fn": "printStmt@js_printer.ts:3018",
+      "incl_ms": 3818.2,
+      "pct": 35.7
+    },
+    {
+      "fn": "printExpr@js_printer.ts:2464",
+      "incl_ms": 3802.8,
+      "pct": 35.56
+    },
+    {
+      "fn": "printExprInner@js_printer.ts:1578",
+      "incl_ms": 3699.1,
+      "pct": 34.59
+    },
+    {
+      "fn": "visitExpr@js_parser.ts:1993",
+      "incl_ms": 3697.0,
+      "pct": 34.57
+    },
+    {
+      "fn": "parseBlockStmts@js_parser.ts:5864",
+      "incl_ms": 3213.1,
+      "pct": 30.04
+    },
+    {
+      "fn": "printBlock@js_printer.ts:2793",
+      "incl_ms": 2848.7,
+      "pct": 26.64
+    },
+    {
+      "fn": "parseCallArgs@js_parser.ts:8714",
+      "incl_ms": 2398.9,
+      "pct": 22.43
+    },
+    {
+      "fn": "(garbage collector)@:-1",
+      "incl_ms": 2325.4,
+      "pct": 21.74
+    },
+    {
+      "fn": "parseAndDeclareDecls@js_parser.ts:5873",
+      "incl_ms": 2086.1,
+      "pct": 19.5
+    }
+  ]
+}

@@ -308,6 +308,31 @@ three.module 冷 CLI 无变化（0.9764，数组小）—— 本卡专治大构�
 工作树命名 r8（台账轮次 R7）@HEAD 55f2bd0；主树 `src/internal/js_printer/js_printer.ts` 已应用同款改动。
 这是 R1 之后第二张采纳卡，也是大构建路线的第二张结构性胜利。
 
+### R8 — 根因复查：GC 分配源头 + 五个候选逐一证伪 → **无采纳卡，记账**
+
+按审计要求，R7 后第一件事重跑 9MB warm profile（`bench/profile-warm-r8.json`）：
+**新 #1 = GC 21.74%（2325ms，绝对耗时与 R6 前 2418ms 几乎不变，纯分母效应）**，#2 `Next` 8.77%、
+#3 `visitExprInOut` 4.25%；print 已从 top10 消失（R7 生效）。[^43]
+
+**GC 分配源头（4KB heap-prof，post-R7）**：`compileSourceTextModule` 36% 是模块加载固定开销；
+bundle 期所有点 ≤2.1%（visitExprInOut 2.09%、set 1.84%、parseStmt 1.63%、parsePrefix 1.42%、
+Raw 0.61%、init 0.53%、exprOut 0.34%）——**无单点 ≥10% 分配杠杆**，与 R2/R5 一致。[^44]
+
+**逐一证伪（均机器证据，无一进入门）：**
+1. `popAndFlattenScope.splice`（js_parser.ts:1185）：5570 次、94.5% 尾部移除、平均 move 13 → R7 已证伪，未重开。
+2. `Next()` 两空数组 `=[]`：R7 的 `.length=0` A/B 已负（0.963×），未重开。
+3. `exprIn`/`exprOut`（Go 栈值 vs TS 各 591,830 次 new）：**256B padding 实验证明 V8 已标量替换**——
+   padded GC pause 4310ms vs baseline 4411ms、max heap 均 312MB，pooling 无收益 → 删除此卡。[^45]
+4. `bytesToString`（744,314 次 / 96.4% 重复，纯 ASCII 分支）：ASCII 快路径候选 A/B **0.982×（CI 含 1，更慢）**；
+   两遍扫描成本 > 单次 decode → 回滚，且 R5 内容 memo 已负 → 删除此卡。[^46]
+5. `pendingStmtLists`（js_parser.ts:972/4754）：**只写不读**（全 src 无消费点），9MB 上 34,837 次 push；
+   但 ~1.7MB <1% 天花板，不值得一个门周期 → 记账不动。
+
+**结论：本轮无采纳卡**。GC 是分散分配症状（非单点），五个候选逐一证伪或低于天花板；与 R2/R4/R5
+结论一致——大构建 warm 帧下可局部消除的单点均 <10%。next 方向：继续沿大构建 warm profile，
+按 inclusive/顶层算法找「一优化一大片」的结构卡；用户 [39497] 的「Go 自身 ≥10s 超大构建」目标仍未达成，
+只在 1GB 内用真实大源码树试，不为凑 10s 制造 OOM/超时。
+
 ## 顶层 inclusive 地图（供阶段2选靶）
 
 | 函数 | inclusive% | self% | 含义 |
@@ -375,3 +400,7 @@ three.module 冷 CLI 无变化（0.9764，数组小）—— 本卡专治大构�
 [^40]: src/internal/js_printer/js_printer.ts:334（print() 纯 ASCII 快路径，非 ASCII 回退 encodeInto）+ /tmp/port 候选 worktree r8
 [^41]: bench/printer-fixtures-r7-result.json（48/48 逐字节）+ three_verify r8 驱动 + 9MB/_tsc.js sha 逐字节
 [^42]: bench/wall-big-r7.json（typescript.js n=8 med ratio 1.211 CI[1.116,1.291]）+ bench/wall-big-r7-tsc.json（_tsc.js 1.124 CI[1.069,1.196]）
+[^43]: bench/profile-warm-r8.json（R7 后 9MB warm：GC 21.74%/2325ms，Next 8.77%，visitExprInOut 4.25%，总量 10695ms）
+[^44]: /tmp/hf/f（post-R7 4KB heap-prof：compileSourceTextModule 36%，bundle 期各点 ≤2.1%）+ bench/analyze_heap.py
+[^45]: /tmp/gcm-padded.* vs /tmp/gcm-baseline.*（exprIn/exprOut +256B padding：GC pause 4310 vs 4411ms，max heap 均 312MB → 标量替换）
+[^46]: /root/port-r9 bytesToString ASCII 快路径 A/B 0.982×（CI 含 1，已回滚）+ /tmp/wall-big-r9.json
