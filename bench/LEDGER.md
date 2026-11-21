@@ -333,6 +333,31 @@ Raw 0.61%、init 0.53%、exprOut 0.34%）——**无单点 ≥10% 分配杠杆**
 按 inclusive/顶层算法找「一优化一大片」的结构卡；用户 [39497] 的「Go 自身 ≥10s 超大构建」目标仍未达成，
 只在 1GB 内用真实大源码树试，不为凑 10s 制造 OOM/超时。
 
+### R9 — 函数指针表 + ASCII 查表（Next 大 switch 候选）→ **微基准证伪，不立项**
+
+调研 `bench/switch-opt-research.md` §2/§4 判读的下一张卡：社区 opcode 场景（case 0–255 连续）用
+函数表直跳快 25×，本项目能否复用。写四版简化词法微基准 `bench/fn-table-bench.mjs`：
+A big（稀疏 codePoint 大 switch = 真实写法）、B table（128 项 Uint8Array `cp→槽位` + 10 handler
+函数指针数组直跳）、C hotif（顺序 if 热点排前）、D active（R8 已知最强写法）。三语料 token 直方图
+逐项相等，配对 ratio=big/variant（>1 为该版更快）+ bootstrap 95% CI（seed 固定）。[^47]
+
+| 输入 | tokens | table/big | hotif/big | active/big |
+| --- | ---: | --- | --- | --- |
+| `_tsc.js` 6.2MB | 885238 | 0.668 CI[0.644,0.743] | 1.115 CI[1.007,1.118] | 1.565 CI[1.406,1.554] |
+| three.core.min 1.47MB | 131018 | 0.744 CI[0.742,0.894] | 1.099 CI[0.99,1.185] | 1.707 CI[1.686,2.101] |
+| `js_lexer.ts` 100KB | 15278 | 0.636 CI[0.613,0.707] | 1.147 CI[1.07,1.219] | 1.596 CI[1.477,1.779] |
+
+**根因（机器证据）**：`--trace-turbo-inlining`（`/tmp/fntable-inline.stdout`）显示 10 个 handler
+彼此内联 44 次（函数本身可内联），但**内联进 `Next()` 的 handler 数为 0**——因为调用走
+`HANDLERS[slot](...)` 数组元素间接调用，call site 是 megamorphic（`FeedbackCell[many closures]`），
+V8 拒绝内联；再加一次 Uint8Array 查表 → table 比 big 慢 31–41%（三手 CI 全不含 1 且 <1）。
+与调研判读吻合：opcode 的 25× 依赖 case 连续 + handler 够大，本项目 codePoint 稀疏、handler 微小、
+调用点 megamorphic，套不过来。hotif 仅 ~10–15%（three 手 CI 含 1），active 仍最强（1.56–1.71×）。
+
+**决策：不立项**。函数表方向在微基准层即证伪（负结果），不进六档门/大构建 A/B，不改真实 lexer。
+next 方向：active 主动 while 仍是唯一 >10% 的写法，但属全量重写级改动；用户若要推进，
+下一步应在真实 `js_lexer.ts` 上做 active 重写的配对 A/B 与六档门，而非函数表。
+
 ## 顶层 inclusive 地图（供阶段2选靶）
 
 | 函数 | inclusive% | self% | 含义 |
@@ -404,3 +429,4 @@ Raw 0.61%、init 0.53%、exprOut 0.34%）——**无单点 ≥10% 分配杠杆**
 [^44]: /tmp/hf/f（post-R7 4KB heap-prof：compileSourceTextModule 36%，bundle 期各点 ≤2.1%）+ bench/analyze_heap.py
 [^45]: /tmp/gcm-padded.* vs /tmp/gcm-baseline.*（exprIn/exprOut +256B padding：GC pause 4310 vs 4411ms，max heap 均 312MB → 标量替换）
 [^46]: /root/port-r9 bytesToString ASCII 快路径 A/B 0.982×（CI 含 1，已回滚）+ /tmp/wall-big-r9.json
+[^47]: bench/fn-table-bench.mjs（四版简化词法微基准，三语料 equal）+ /tmp/fntable-inline.stdout（--trace-turbo-inlining：0 handler 内联进 Next，FeedbackCell[many closures]）
