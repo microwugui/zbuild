@@ -1,0 +1,60 @@
+{
+  "method": "warm profile (warm=2, gc release, 1 measured run) at controlled input scales; worker bench/scaling_profile_worker.mjs",
+  "real_corpus": {
+    "three.module 0.66M": {
+      "other": 173.30000000000052,
+      "parser": 579.3999999999995,
+      "utf8-codec": 126.29999999999949,
+      "lexer": 213.40000000000066,
+      "GC": 116.59999999999981,
+      "renamer": 26.600000000000026,
+      "printer": 71.9999999999998
+    },
+    "three.core 1.47M": {
+      "other": 281.5000000000037,
+      "parser": 1246.0999999999506,
+      "lexer": 358.50000000000466,
+      "utf8-codec": 376.0000000000058,
+      "GC": 287.300000000001,
+      "renamer": 70.59999999999981,
+      "printer": 727.9999999999908
+    },
+    "_tsc 6.21M": {
+      "other": 738.699999999988,
+      "parser": 2678.400000000138,
+      "lexer": 959.899999999958,
+      "GC": 1336.7999999999513,
+      "utf8-codec": 952.7999999999654,
+      "renamer": 155.20000000000027,
+      "printer": 1247.5999999999087
+    }
+  },
+  "generated_same_style": {
+    "2.33M": {
+      "other": 320.40000000000595,
+      "parser": 576.200000000001,
+      "utf8-codec": 911.4999999999538,
+      "lexer": 321.20000000000624,
+      "GC": 1171.4999999999507,
+      "printer": 382.80000000000774
+    },
+    "4.69M": {
+      "other": 546.1000000000072,
+      "parser": 919.7999999999568,
+      "lexer": 568.5000000000052,
+      "utf8-codec": 1564.7999999998672,
+      "GC": 1975.599999999877,
+      "printer": 502.70000000001295
+    },
+    "9.46M": {
+      "other": 1005.3999999999445,
+      "parser": 1894.2999999998253,
+      "lexer": 1116.7999999999276,
+      "GC": 5251.300000001196,
+      "utf8-codec": 3115.8000000004185,
+      "renamer": 1.2,
+      "printer": 1009.8999999999451
+    }
+  },
+  "conclusion": "all stages scale linearly or sub-linearly with input size (4x scale -> parser 3.25x, lexer 3.44x, codec 3.38x, printer 2.61x); GC ~linear (ms/MB roughly constant). No super-linear (O(n^2)) algorithm hot spot exists in parse/lex/print/codec."
+}

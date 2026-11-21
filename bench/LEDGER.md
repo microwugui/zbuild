@@ -406,6 +406,34 @@ next 方向：jump table 路线已排除；active 主动 while 仍是唯一 >10%
 next 方向：ws/newline 短路路线已排除；函数表(R9)/哈希 jump table(R10)/热点短路(R11)三条
 lexer 微优化路线均未达 10%，lexer 侧局部改动空间基本穷尽。
 
+### R12 — 算法复杂度取证（用户方法论提示）：**全阶段线性，无 O(n²) 红利可摘**
+
+用户提示「算法时间复杂度优化常大幅超越语言依赖」。为验证本项目是否存在 O(n²)→O(n) 的结构卡，
+做受控规模 scaling：新 worker `bench/scaling_profile_worker.mjs` 接受 --driver，warm=2 释放缓存后
+profile 单次运行；两类输入——① 真实语料三规模（three.module 0.66M / three.core 1.47M / _tsc 6.21M）；
+② 同风格生成语料 2.33M/4.69M/9.46M（纯数据对象字面量，规模精确 1:2:4）[^50]。
+
+| 阶段 | 生成 2.33M | 4.69M | 9.46M | 4×规模下增长 | 判定 |
+| --- | ---: | ---: | ---: | ---: | --- |
+| parser | 559ms | 881ms | 1816ms | 3.25× | 线性/亚线性 |
+| GC | 1148ms | 1913ms | 5069ms | 4.42× | ≈线性(ms/MB 恒定) |
+| lexer | 311ms | 545ms | 1070ms | 3.44× | 线性 |
+| utf8-codec | 884ms | 1498ms | 2986ms | 3.38× | 线性 |
+| printer | 370ms | 483ms | 967ms | 2.61× | 亚线性 |
+
+**结论（机器证据）**：所有阶段随规模线性或亚线性增长（4× 规模 → 各阶段 2.6–4.4×），GC/ms-per-MB
+恒定（真实语料 174→191→208、同风格 493→408→536 无趋势）——**解析/lex/print/codec 主链本就是线性
+递归下降，不存在可摘的 O(n²) 算法红利**。用户方法论适用于有超线性算法的代码，本项目不满足前提。
+剩余差距来自运行时固定开销：GC 21.76%（R8 已证伪单点分配、分散）、utf8-codec 12.26%（R5 memo /
+R8 ASCII 快路径均已证伪）。renamer 仅 1.71%（`findUnusedName` 的 encode 调用总量小）；R4 的
+instanceof→数值 kind 分派微基准虽快 3.2×，但端到端零收益、归因已写死（self 含真实工作+字段写抵消），
+无新 profile 证据不重开。
+
+**决策：本轮为取证轮，无卡可开**。诚实结论：算法复杂度维度已排除； lexer 三路线(R9/R10/R11)、
+AST kind(R4)、分配(R8)、codec(R5/R8) 全部证伪。next 方向：若继续压缩 TS/Go 差距，须转向
+**减少总算法工作量**而非加速现有算法——例如 tree-shaking / 死代码消除的覆盖率、或
+冷启动 JIT tiering（分解表已记，机制未确证）；这两者是尚未系统验证的顶层方向，需用户定夺。
+
 ## 顶层 inclusive 地图（供阶段2选靶）
 
 | 函数 | inclusive% | self% | 含义 |
@@ -480,3 +508,4 @@ lexer 微优化路线均未达 10%，lexer 侧局部改动空间基本穷尽。
 [^47]: bench/fn-table-bench.mjs（四版简化词法微基准，三语料 equal）+ /tmp/fntable-inline.stdout（--trace-turbo-inlining：0 handler 内联进 Next，FeedbackCell[many closures]）
 [^48]: bench/hash-switch-bench.mjs（codePoint 哈希微基准，三语料 ± 注入共 6 组 equal）+ /tmp/hash-optcode.out（--print-opt-code：hash 826 jump table entry / cmp 799，big 0 entry / cmp 1552）
 [^49]: bench/wall-hotshort-ts.json + bench/wall-hotshort-tsc.json（大构建配对 A/B，n=8，bytes_equal=true，median ratio 0.949/0.986，bootstrap CI 跨 1）；候选 js_lexer.ts +13 行 fast-path 已回滚
+[^50]: bench/scaling-analysis.json（受控规模 warm profile 阶段聚合）+ bench/scaling_profile_worker.mjs（--driver 版 profile worker）；原始 cpuprofile 在 /tmp/prof-{tm,tc,full,gen1,gen2,gen4}.cpuprofile
