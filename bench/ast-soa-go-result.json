@@ -1,0 +1,36 @@
+{
+  "question": "does compact/SoA AST representation reduce Go memory (language-agnostic check)?",
+  "go_version": "go1.27.3 linux/amd64",
+  "workload": "binary-expr tree with identifier leaves + Loc, isomorphic to esbuild AST (Expr{Data interface,Loc}; EBinary{Left,Right,Op})",
+  "fidelity": "microbench sizeof matches real esbuild: Expr=24 EBinary=56 ECall=56 EIdent=12 Loc=4 Ref=8 (verified via go run in /root/esbuild)",
+  "method": "independent process per variant, runtime.ReadMemStats after GC with sink holding result; GOMAXPROCS=1; 3 sizes",
+  "results_bytes_per_node": {
+    "A_esbuild_interface_pernode_alloc": 88.0,
+    "B_compact_flat_struct_no_interface": 20.0,
+    "C_SoA_parallel_typed_arrays": 20.0
+  },
+  "results_live_MB": {
+    "100k": {
+      "A": 8.39,
+      "B": 1.91,
+      "C": 1.91
+    },
+    "1M": {
+      "A": 83.93,
+      "B": 19.08,
+      "C": 19.1
+    },
+    "4M": {
+      "A": 335.69,
+      "B": 76.3,
+      "C": 76.33
+    }
+  },
+  "finding": [
+    "Compact representation cuts Go AST memory 4.4x (88 -> 20 B/node), stable across 100k/1M/4M scale.",
+    "Benefit is language-agnostic: bottleneck is 'interface + per-node heap alloc', not Go-vs-TS.",
+    "B (flat struct, no interface) and C (SoA) are IDENTICAL at 20B \u2014 the win comes from removing interface indirection + per-node allocation, NOT from SoA layout itself.",
+    "esbuild's Loc is already a value type (4B inline) unlike TS (32B heap object), so Go starts ahead; yet interface+node-alloc still costs 88B."
+  ],
+  "caveat": "This isolates AST node storage only; real bundle memory also has source buffer, strings, symbol tables, GC churn. A 4.4x node reduction is an upper bound on what representation change alone can save."
+}

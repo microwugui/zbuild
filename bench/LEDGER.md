@@ -460,6 +460,36 @@ TS 移植成 32B 堆对象 × 618K = 18.87MB**，`Expr`/`EIdentifier`/`Stmt` 等
 next 方向：空间维度已定位到「AST 常驻 + Loc 堆对象 + 模块加载预留」，均非单点；等用户定夺是否
 立项 AST 表示重构（高风险大改）或转向其它顶层方向。
 
+### R14 — 紧凑/SoA AST 表示对 Go 是否益：微基准 → **有益且语言无关（4.4×），仅测表示本身**
+
+用户设想「重做 AST 表示（SoA/typed-array）大幅提升一次性编译」，先验证该思想对 Go 是否成立
+（判断瓶颈是语言还是表示）。写 `bench/ast-soa-go-bench.go`（go1.27.3、GOMAXPROCS=1、独立进程、
+`runtime.ReadMemStats` + sink 保活），构造与 esbuild AST 同构的二叉表达式树，三版对照：
+A esbuild 现状（`Expr{Data interface, Loc value}` + 逐节点 new）、B 紧凑扁平结构体（去 interface、
+无逐节点分配）、C SoA（并行 typed 数组）。保真度：`sizeof` 与真实 esbuild 一致
+（Expr=24/EBinary=56/ECall=56/Loc=4，`go run` 于 /root/esbuild 核对）。[^52]
+
+| 规模 | A esbuild | B 紧凑 | C SoA | B/C vs A |
+| --- | ---: | ---: | ---: | --- |
+| 10 万节点 | 8.39MB | 1.91MB | 1.91MB | 4.4× |
+| 100 万节点 | 83.93MB | 19.08MB | 19.10MB | 4.4× |
+| 400 万节点 | 335.69MB | 76.30MB | 76.33MB | 4.4× |
+
+即 **88 B/节点 → 20 B/节点，稳定 4.4×，三规模完全线性**。
+
+**结论（机器证据）**：① 紧凑表示对 Go 同样有益——瓶颈是「interface 间接 + 逐节点堆分配」这一
+**表示方式**，不是 Go-vs-TS 语言差异，故重构思想是语言无关的；esbuild 的 Loc 已是 4B 值类型
+（领先 TS 的 32B 对象），但 interface+节点分配仍使每节点 88B。② **反直觉关键点：B（扁平结构体）
+与 C（SoA）内存完全相同（20B）**——收益来自「去 interface + 消除逐节点分配」，不是 SoA 布局本身；
+SoA 的价值在缓存局部性/遍历速度（需另行测时间），不在内存。③ 边界：此微基准只隔离 AST 节点存储，
+真实 bundle 还有源缓冲/字符串/符号表/GC 抖动；4.4× 是「纯表示改动」的收益上限，不是整体内存降幅。
+
+**决策：取证轮，不立项**。结论支持「表示重构思想正确」，但 (a) 对 Go 原版无改动机（esbuild 已是最优
+实用折中，且用户目标是比较 TS 移植而非改 Go）；(b) 对 TS 侧，R4/R13 仍成立——V8 上无法 `#[repr(packed)]`，
+要复刻 20B 需手搓 typed-array SoA，是全量重构；(c) 本轮证明 SoA 不比扁平结构体省内存，故若做，
+先用更简单的「去多态、值化」而非完整 SoA。next：等用户定夺是否在 TS 侧立表示重构卡（先做
+`Loc→Int32Array` 单点原型量收益上限），或转向其它方向。
+
 ## 顶层 inclusive 地图（供阶段2选靶）
 
 | 函数 | inclusive% | self% | 含义 |
@@ -536,3 +566,4 @@ next 方向：空间维度已定位到「AST 常驻 + Loc 堆对象 + 模块加�
 [^49]: bench/wall-hotshort-ts.json + bench/wall-hotshort-tsc.json（大构建配对 A/B，n=8，bytes_equal=true，median ratio 0.949/0.986，bootstrap CI 跨 1）；候选 js_lexer.ts +13 行 fast-path 已回滚
 [^50]: bench/scaling-analysis.json（受控规模 warm profile 阶段聚合）+ bench/scaling_profile_worker.mjs（--driver 版 profile worker）；原始 cpuprofile 在 /tmp/prof-{tm,tc,full,gen1,gen2,gen4}.cpuprofile
 [^51]: bench/heap-space-analysis.json（内存曲线 + after-parse 存活构成）+ bench/heap_snapshot_top.py（流式 snapshot 解析）；原始 snapshot /tmp/parse-heap.heapsnapshot（274MB，未提交）；GC 日志 /tmp/memcurve.out、/tmp/gcm-baseline.out
+[^52]: bench/ast-soa-go-bench.go（go1.27.3、三版 AST 表示、独立进程 ReadMemStats）+ bench/ast-soa-go-result.json（三规模数据与 sizeof 核对）；真实 esbuild sizeof 由 `go run` 于 /root/esbuild 验证
