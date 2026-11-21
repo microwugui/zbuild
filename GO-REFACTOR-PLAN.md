@@ -9,6 +9,8 @@
 - **基线（比对对象，保留不删）**：`/root/esbuild` @ `f6058f8`（esbuild 0.28.2），二进制 `/tmp/esbuild-go`
   sha256 `b8387dbab66e8c2ce90ce0397e7efd94814f61601c6e351a59d1f7dd0abbee11`。
   Go 工具链 `go.version=1.26.5`（`GOTOOLCHAIN=go1.26.5` 可下载）。
+  **基线二进制已固化**：`/root/goport/baselines/esbuild-go.base`（sha256 同 b8387d，见 `baselines/SHA256SUMS`），
+  抗 `/tmp` 清理；已提交进 goport 孤儿分支。
 - **工作树**：`/root/goport`（本分支 checkout 处）。`/root/port`（TS 侧）已按用户指示删除。
 
 ## 为什么立项（收益证据，机器实测）
@@ -57,8 +59,8 @@ R14 微基准（`bench/ast-soa-go-bench.go`，在 TS 侧 zbuild 仓库构造，�
 
 | 里程碑 | 状态 | 证据 | 日期 |
 | --- | --- | --- | --- |
-| 立项/分支建立 | 进行中 | 本文件 + goport 孤儿分支 | — |
-| M0 基线固化 | 未开始 | — | — |
+| 立项/分支建立 | 完成 | 本文件 + goport 孤儿分支 @ b10d888 | 2026-11-21 |
+| M0 基线固化 | 完成 | 5/5 入口字节一致 + go test 全绿 + 基线二进制固化，见 `baselines/m0-result.md` | 2026-11-21 |
 | M1 表示设计 | 未开始 | — | — |
 | M2 机械改造 | 未开始 | — | — |
 | M3 收益验收 | 未开始 | — | — |

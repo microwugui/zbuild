@@ -1,0 +1,4 @@
+# 可复现产物，不入库（golden 基线输出与基线二进制才入库，作为字节参照系）
+# m0-candidate 与 baselines/goport-go126.base 是同一二进制（同源码同工具链 go1.26.5）
+/m0-candidate
+/m0-candidate-out/
