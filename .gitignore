@@ -8,3 +8,6 @@ testdata/oracle-diffs/
 *.log
 *.tmp
 .DS_Store
+
+# 冷 CLI 三手用的大 JS（从 node_modules/typescript 复制，可重建）
+testdata/large/

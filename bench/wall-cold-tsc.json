@@ -1,0 +1,20 @@
+{
+  "generatedAt": "2026-11-21T05:38:54.767088+00:00",
+  "entry": "testdata/large/_tsc.js",
+  "driver": "single",
+  "n": 6,
+  "warmup": 2,
+  "input_bytes": 6213092,
+  "base_ms_median": 13545.463,
+  "cand_ms_median": 10790.164,
+  "speedup_base_over_cand": 1.2428,
+  "ci95_speedup": [
+    1.1629,
+    1.4543
+  ],
+  "bytes_equal": true,
+  "out_bytes": 5922383,
+  "out_sha256": "ad5864271ceb4ffef5439c4676f3459bf03435cf7c620f795178ad8437f7043a",
+  "verdict": "SIGNIFICANT_FASTER",
+  "note": "end-to-end CLI subprocess wall time; paired bootstrap B=20000; >1=cand faster; CI含1不算赢"
+}

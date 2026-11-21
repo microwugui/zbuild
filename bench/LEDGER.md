@@ -1,9 +1,15 @@
 # 性能优化实验台账（阶段0 起）
 
-决策规则（写死）：**字节等价 ∧ 统计显著（且超过噪声地板）∧ 门不回退** 三者全满足才采纳；
-否则回滚并记账，负结果照记。CI 含 1.0 一律不算赢；<5% 的「改善」一律视为噪声。
-主指标=进程级交叉配对 A/B，辅指标=end-to-end wall time，正确性门=宽差异语料逐字节对齐。
-方法论见 [38390]，harness 校准见 `bench/AB_NOTES.md`。[^1][^2]
+决策规则（写死）：**字节等价 ∧ 统计显著 ∧ 门不回退** 三者全满足才采纳；
+否则回滚并记账，负结果照记。CI 含 1.0 一律不算赢。
+
+**决策主指标（第166代重锚）= 冷 CLI 配对 A/B（`bench/wall.py`）**：每个被测样本都是一次冷子进程
+（含 Node 启动 + `--experimental-strip-types` 类型剥离 + V8 冷 tier），这才是用户对标的 22×
+（Go 0.2194s 也是冷静态二进制）。立项线 = **冷 CLI 总量降幅 ≥10%**。
+进程内预热交叉 A/B（`ab_worker.ts`/`ab_orch.ts`）**降为辅指标**（只覆盖稳态 ~1.86s，
+约为冷 CLI 的 40%，不能当立项门槛）。正确性门=宽差异语料 + 覆盖夹具逐字节。
+为什么重锚：主指标只量 `run()`（预热后），漏掉冷 CLI 中模块加载 ~0.57s + 首轮低 tier 执行
+~4.1s 里的大头；R1 主指标 1.3758 而冷 CLI wall 仅 1.1595 就是证据。[^1][^2][^14]
 
 ## 基线锚点
 
@@ -14,6 +20,30 @@
 | three.module 输入 | sha `104f5614…e341`，658900 B；产物 `2985154b…cda9b4`，1709893 B |
 | Node / 核数 | v22.23.3；2 核 VM；`GOMAXPROCS=1`，无后台负载 |
 | 测量噪声地板 | 相同代码空自测 |speedup−1| 实测 ~3%（v3.1 0.9664 / v3.2 1.0330，方向会翻转；成因未确证） |
+
+## 冷启动分解表（第166代 b) 机器证据，一项一行）
+
+冷 CLI 口径：three.module，候选 ~4.96s（5 次 4.64/5.06/5.19/4.95/4.96），Go 0.311s。
+
+| 项 | 毫秒 | 来源 | 结论 |
+| --- | ---: | --- | --- |
+| Go 冷跑（对标） | 311 | 7 次中位 `/tmp/esbuild-go` | TS/Go 冷比 ~15–17×（core 16.9×、_tsc 14.3×）|
+| 模块加载 + 类型剥离 | ~570 | `await import(bundle_multi.ts)` 3 次 0.55–0.61s | 41 模块 / 1.5MB，无未用子系统 |
+| 首轮 bundle（冷） | ~4114 | warmup 曲线 run0 | 稳态 run5=1864ms，冷/热 2.2× |
+| 稳态 bundle（预热） | ~1864 | warmup 曲线 run5 | 主指标只量这一段 |
+| TurboFan 贡献 | ~3700 | `--no-opt` 8.65s vs default ~4.96s | 优化器在首轮内即生效 |
+| `--jitless` | N/A | `ERR_WEBASSEMBLY_NOT_SUPPORTED` | 本环境不可运行，边界未测到 |
+| `--maglev` / `--stress-maglev` | ~4880 / ~5110 | 3 次中位 | ~1.6% / 更差，噪声内 |
+| `--no-lazy-feedback-allocation` / `--max-opt=8` | ~4950 / ~4920 | 3 次中位 | 无 ≥10% 收益 |
+| `NODE_COMPILE_CACHE` | 4880/4850/5050 | 3 次热缓存 | 只否证编译缓存一法 |
+| 预编译单文件 .mjs（esbuild bundle） | 4900–5320 | `run-bundled.mjs` 3 次 | 不比现状 4.96s 快 → 构建层打包无收益 |
+| GC | ~528（10.07%） | after-r1 profile | 分配点分散、单点 ≤2.2% |
+| deopt 分段 | 112→14→4→2→0→1 | trace-deopt 6 轮 | 纯预热一次性，稳态无 deopt |
+
+**口径纠错**：`NODE_COMPILE_CACHE` 无改善**只否证「编译缓存」这一机制**，
+不能推出「冷启动是 JIT tiering」，更不能推出「冷启动不可由局部代码改动消除」。
+`--no-opt` 显示优化器首轮即贡献 ~3.7s，故「首轮在低 tier 执行」有机器证据，
+但**冷启动的内部机制仍未确证**，以上表为准，禁止再写断言式归因。[^15]
 
 ## 轮次记录
 
@@ -113,6 +143,17 @@ CLI 单次 ~4.7s ≈ 冷 run0 4.1s + 模块加载 0.57s；主指标（预热后 
 
 > 度量口径（自本轮起）：每个实验至少三手 —— three.module + three.core + 一个非 three 大输入；三处同向才算赢。wide 全量留收口，单次实验跑 100 条代表性子集（记 `subsetIds`）。
 
+### R3 — 删除死 `lineLength` 更新 → **回滚并记账（负结果）**
+
+取证：`lineLength` 在 `src/**/*.ts`（含测试）**只写不读**（`currentLineLength` 自行回扫缓冲，
+`src/internal/js_printer/js_printer.ts:930`）；`print`/`printBytes` 里每次调用的 `subarray` +
+`lastIndexOf` 是纯死工作。改码删除之，tsc 166、字节 `2985154b`/`c0fdbed2` 不变。
+
+冷 CLI 增量对比（基线=`/root/port-r1` @ db0f7da，候选=删除死代码）：three.module冷跑
+**speedup 1.0415（快 4.15%），CI 不含 1，bytesEqual=true**（`bench/wall-r3-module.json`）。
+虽显著但远低于立项线 **10%** → **按规则回滚**（`git checkout -- js_printer.ts`），
+tsc/字节复原。记负结果：真实但 <10% 的收益不采纳。[^16]
+
 ## 顶层 inclusive 地图（供阶段2选靶）
 
 | 函数 | inclusive% | self% | 含义 |
@@ -151,3 +192,6 @@ CLI 单次 ~4.7s ≈ 冷 run0 4.1s + 模块加载 0.57s；主指标（预热后 
 [^11]: tools/three_verify.sh（实跑 core/module 逐字节；tsl/webgpu 首差为 HEAD 既有）+ PLAN.md:5218 + src/bundle1.ts:145
 [^12]: bench/profile-stage1.json + bench/profiles/stage1-three.module.cpuprofile
 [^13]: bench/profile-inclusive.json + bench/analyze_inclusive.py（inclusive=沿栈含被调子树，同函数每栈计一次）
+[^14]: bench/wall-cold-module.json / wall-cold-core.json / wall-cold-tsc.json（冷 CLI 三手）+ Go 7 次中位 311/200/754ms；bench/wall.py:39-41（冷子进程、字节硬门）
+[^15]: bench/LEDGER.md 冷启动分解表 + /tmp/opt.out（trace-opt 322 次优化）+ /tmp/deopt-runs.log + /tmp/probe_warmup.mjs；机制未确证
+[^16]: bench/wall-r3-module.json（1.0415）+ src/internal/js_printer/js_printer.ts:342-354（已回滚）+ git checkout 复原

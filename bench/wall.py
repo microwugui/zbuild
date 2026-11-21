@@ -30,8 +30,9 @@ def needs_multi(entry: Path) -> bool:
 
 
 def run(tree: Path, entry_rel: str, driver: str) -> tuple:
+    modfile = "bundle_multi.ts" if driver == "multi" else "bundle1.ts"
     cmd = ["node", "--experimental-strip-types",
-           str(tree / "src" / f"bundle_{driver}.ts"), entry_rel]
+           str(tree / "src" / modfile), entry_rel]
     env = {**os.environ, "GOMAXPROCS": "1"}
     t0 = time.perf_counter()
     p = subprocess.run(cmd, capture_output=True, cwd=str(tree), env=env)
@@ -60,7 +61,12 @@ def main():
     ap.add_argument("--n", type=int, default=20)
     ap.add_argument("--warmup", type=int, default=3)
     ap.add_argument("--out", default="bench/wall-result.json")
+    ap.add_argument("--base-dir", default=None, help="覆盖基线树路径（用于增量对比某次提交）")
+    ap.add_argument("--cand-dir", default=None, help="覆盖候选树路径")
     a = ap.parse_args()
+    global BASE, CAND
+    if a.base_dir: BASE = Path(a.base_dir)
+    if a.cand_dir: CAND = Path(a.cand_dir)
     entry_rel = a.entry
     entry = ROOT / entry_rel
     if not entry.exists():
