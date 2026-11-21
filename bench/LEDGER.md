@@ -513,6 +513,24 @@ SoA 的价值在缓存局部性/遍历速度（需另行测时间），不在内
 5. 跑六档门（tsc/assign/m1/doc/cov/three_verify core+module）不回退。
 6. 全绿才采纳；任一不过 → 回滚 + 本台账记负结果。
 
+### R15 — Go 侧 AST 紧凑化 goport M2-a 竞技场化实测 → **负结果，回滚并记账**
+
+立项 R14 的 4.4× 来自 TS 侧同构 AST 微基准；goport 孤儿分支把它落到真实 esbuild 0.28.2 上验证。
+M0（基线固化：5 入口逐字节 + go test 全绿）、M1（表示设计 `docs/repr-design.md`）通过。
+M2-a 实施 77 类型 typed-chunk 竞技场（去逐节点 malloc），Go-AST codemod 改 389+152+45 处节点分配：
+构建/字节门/go test 全绿，但收益实测为负——
+
+- 交错 A/B n=12（`_tsc.js` 6.2MB，`GOMAXPROCS=1`，TotalAlloc）：baseline 中位 156,476,636 vs arena 156,974,152 = **+0.32%（不降反升）**，距 −10% 门极远；chunk=8 更差 +3.1%。
+- 根因（`alloc_space` pprof）：AST node 字面量分配仅 20.01MB/156.5MB = **12.8%**；大头是 scope/symbol slice 增长 ~20%、printer ~15%、文件 IO ~9%。竞技场只省 malloc 头与 size-class 取整，小节点已被 Go tiny allocator 打包，省的少于分块头开销 → 净增。
+- R14 不可外推：同构微基准里 AST≈全部内存，真实构建里 AST 节点表示只是零头。
+
+按立项书「<10% 回滚止损、负结果照记」：M2-a 代码已回滚到 `856493b`，字节门复验 OK；
+goport 收口提交 `733da4e`，工作树干净。**不采纳竞技场化这一子法**。
+注意：本轮只否证「去逐节点 malloc 头」这一代理法；「去 16B interface / 压缩 Expr 包装」的核心杠杆与
+「峰值存活堆」口径尚未在真实构建上直接测（R14 微基准未覆盖），不能据此宣布整条紧凑表示路线失败——路线继续推进。
+
+证据：goport `baselines/m2a-result.md`、`baselines/m0-result.md`、`docs/m4-closeout.md`、`docs/repr-design.md`。
+
 ## 脚注
 
 [^1]: bench/AB_NOTES.md（harness 演进 v1→v3.2）+ 方法论交付 [38390]
