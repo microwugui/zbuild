@@ -1495,7 +1495,7 @@ func (p *parser) parseTypeScriptEnumStmt(loc logger.Loc, opts parseStmtOpts) js_
 		//     foo[foo["bar"] = foo] = "bar";
 		//   })(foo || (foo = {}));
 		//
-		if _, ok := p.currentScope.Members[nameText]; ok {
+		if _, ok := p.currentScope.Members.Get(nameText); ok {
 			// Add a "_" to make tests easier to read, since non-bundler tests don't
 			// run the renamer. For external-facing things the renamer will avoid
 			// collisions automatically so this isn't important for correctness.
@@ -1597,7 +1597,7 @@ func (p *parser) parseTypeScriptImportEqualsStmt(loc logger.Loc, opts parseStmtO
 // use that earlier namespace's object instead.
 func (p *parser) getOrCreateExportedNamespaceMembers(name string, isExport bool) js_ast.TSNamespaceMembers {
 	// Merge with a sibling namespace from the same scope
-	if existingMember, ok := p.currentScope.Members[name]; ok {
+	if existingMember, ok := p.currentScope.Members.Get(name); ok {
 		if memberData, ok := p.refToTSNamespaceMemberData[existingMember.Ref]; ok {
 			if nsMemberData, ok := memberData.(*js_ast.TSNamespaceMemberNamespace); ok {
 				return nsMemberData.ExportedMembers
@@ -1794,7 +1794,7 @@ func (p *parser) parseTypeScriptNamespaceStmt(loc logger.Loc, opts parseStmtOpts
 		//     console.log(foo_1.foo);
 		//   })(foo || (foo = {}));
 		//
-		if _, ok := p.currentScope.Members[nameText]; ok {
+		if _, ok := p.currentScope.Members.Get(nameText); ok {
 			// Add a "_" to make tests easier to read, since non-bundler tests don't
 			// run the renamer. For external-facing things the renamer will avoid
 			// collisions automatically so this isn't important for correctness.

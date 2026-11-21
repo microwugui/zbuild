@@ -32,12 +32,12 @@ func ComputeReservedNames(moduleScopes []*js_ast.Scope, symbols ast.SymbolMap) m
 }
 
 func computeReservedNamesForScope(scope *js_ast.Scope, symbols ast.SymbolMap, names map[string]uint32) {
-	for _, member := range scope.Members {
+	scope.Members.ForEach(func(_ string, member js_ast.ScopeMember) {
 		symbol := symbols.Get(member.Ref)
 		if symbol.Kind == ast.SymbolUnbound || symbol.Flags.Has(ast.MustNotBeRenamed) {
 			names[symbol.OriginalName] = 1
 		}
-	}
+	})
 	for _, ref := range scope.Generated {
 		symbol := symbols.Get(ref)
 		if symbol.Kind == ast.SymbolUnbound || symbol.Flags.Has(ast.MustNotBeRenamed) {
@@ -318,9 +318,9 @@ func AssignNestedScopeSlots(moduleScope *js_ast.Scope, symbols []ast.Symbol) (sl
 	// scope that are actually hoisted up to the module scope to become a top-
 	// level symbol.
 	validSlot := ast.MakeIndex32(1)
-	for _, member := range moduleScope.Members {
+	moduleScope.Members.ForEach(func(_ string, member js_ast.ScopeMember) {
 		symbols[member.Ref.InnerIndex].NestedScopeSlot = validSlot
-	}
+	})
 	for _, ref := range moduleScope.Generated {
 		symbols[ref.InnerIndex].NestedScopeSlot = validSlot
 	}
@@ -332,9 +332,9 @@ func AssignNestedScopeSlots(moduleScope *js_ast.Scope, symbols []ast.Symbol) (sl
 
 	// Then set the nested scope slots of top-level symbols back to zero. Top-
 	// level symbols are not supposed to have nested scope slots.
-	for _, member := range moduleScope.Members {
+	moduleScope.Members.ForEach(func(_ string, member js_ast.ScopeMember) {
 		symbols[member.Ref.InnerIndex].NestedScopeSlot = ast.Index32{}
-	}
+	})
 	for _, ref := range moduleScope.Generated {
 		symbols[ref.InnerIndex].NestedScopeSlot = ast.Index32{}
 	}
@@ -343,10 +343,10 @@ func AssignNestedScopeSlots(moduleScope *js_ast.Scope, symbols []ast.Symbol) (sl
 
 func assignNestedScopeSlotsHelper(scope *js_ast.Scope, symbols []ast.Symbol, slot ast.SlotCounts) ast.SlotCounts {
 	// Sort member map keys for determinism
-	sortedMembers := make([]int, 0, len(scope.Members))
-	for _, member := range scope.Members {
+	sortedMembers := make([]int, 0, scope.Members.Len())
+	scope.Members.ForEach(func(_ string, member js_ast.ScopeMember) {
 		sortedMembers = append(sortedMembers, int(member.Ref.InnerIndex))
-	}
+	})
 	sort.Ints(sortedMembers)
 
 	// Assign slots for this scope's symbols. Only do this if the slot is
@@ -475,12 +475,12 @@ func (r *NumberRenamer) assignName(scope *numberScope, ref ast.Ref) {
 func (r *NumberRenamer) assignNamesInScope(scope *js_ast.Scope, sourceIndex uint32, parent *numberScope, sorted *[]int) *numberScope {
 	s := &numberScope{parent: parent, nameCounts: make(map[string]uint32)}
 
-	if len(scope.Members) > 0 {
+	if scope.Members.Len() > 0 {
 		// Sort member map keys for determinism, reusing a shared memory buffer
 		*sorted = (*sorted)[:0]
-		for _, member := range scope.Members {
+		scope.Members.ForEach(func(_ string, member js_ast.ScopeMember) {
 			*sorted = append(*sorted, int(member.Ref.InnerIndex))
-		}
+		})
 		sort.Ints(*sorted)
 
 		// Rename all user-defined symbols in this scope
@@ -501,7 +501,7 @@ func (r *NumberRenamer) assignNamesRecursive(scope *js_ast.Scope, sourceIndex ui
 	// For performance in extreme cases (e.g. 10,000 nested scopes), traversing
 	// through singly-nested scopes uses iteration instead of recursion
 	for {
-		if len(scope.Members) > 0 || len(scope.Generated) > 0 {
+		if scope.Members.Len() > 0 || len(scope.Generated) > 0 {
 			// For performance in extreme cases (e.g. 10,000 nested scopes), only
 			// allocate a scope when it's necessary. I'm not quite sure why allocating
 			// one scope per level is so much overhead. It's not that many objects.

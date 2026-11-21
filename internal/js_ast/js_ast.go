@@ -1283,10 +1283,86 @@ func (kind ScopeKind) StopsHoisting() bool {
 	return kind >= ScopeEntry
 }
 
+// ScopeMember is a value in a scope's member table, used for resolving
+// identifiers to symbols and for detecting duplicate symbol declarations.
 type ScopeMember struct {
 	Ref ast.Ref
 	Loc logger.Loc
 }
+
+// ScopeMembers is a compact container for a scope's named members. Most scopes
+// have only a few members, so up to 2 are stored inline in the Scope itself
+// (no separate hmap+bucket allocation). Larger scopes spill to a map. Iteration
+// order is unspecified, exactly as with a Go map.
+type scopeMemberKV struct {
+	Name   string
+	Member ScopeMember
+}
+
+type ScopeMembers struct {
+	inline [2]scopeMemberKV
+	n      uint8
+	m      map[string]ScopeMember
+}
+
+func (s *ScopeMembers) Get(key string) (ScopeMember, bool) {
+	for i := uint8(0); i < s.n; i++ {
+		if s.inline[i].Name == key {
+			return s.inline[i].Member, true
+		}
+	}
+	if s.m != nil {
+		v, ok := s.m[key]
+		return v, ok
+	}
+	return ScopeMember{}, false
+}
+
+func (s *ScopeMembers) GetRef(key string) ScopeMember {
+	v, _ := s.Get(key)
+	return v
+}
+
+func (s *ScopeMembers) Set(key string, member ScopeMember) {
+	// Once spilled, n is permanently 0 and every write routes through m. This
+	// keeps inline and map storage mutually exclusive (no duplicate entries).
+	if s.m != nil {
+		s.m[key] = member
+		return
+	}
+	for i := uint8(0); i < s.n; i++ {
+		if s.inline[i].Name == key {
+			s.inline[i].Member = member
+			return
+		}
+	}
+	if s.n < 2 {
+		s.inline[s.n] = scopeMemberKV{Name: key, Member: member}
+		s.n++
+		return
+	}
+	s.m = make(map[string]ScopeMember, 8)
+	for i := uint8(0); i < s.n; i++ {
+		s.m[s.inline[i].Name] = s.inline[i].Member
+	}
+	s.n = 0
+	s.m[key] = member
+}
+
+func (s *ScopeMembers) Len() int { return int(s.n) + len(s.m) }
+
+func (s *ScopeMembers) MembersPtr() *ScopeMembers { return s }
+
+// ForEach visits every member; order is unspecified (same as a Go map).
+func (s *ScopeMembers) ForEach(fn func(string, ScopeMember)) {
+	for i := uint8(0); i < s.n; i++ {
+		fn(s.inline[i].Name, s.inline[i].Member)
+	}
+	for k, v := range s.m {
+		fn(k, v)
+	}
+}
+
 
 type Scope struct {
 	// This will be non-nil if this is a TypeScript "namespace" or "enum"
@@ -1294,7 +1370,7 @@ type Scope struct {
 
 	Parent    *Scope
 	Children  []*Scope
-	Members   map[string]ScopeMember
+	Members   ScopeMembers
 	Replaced  []ScopeMember
 	Generated []ast.Ref
 

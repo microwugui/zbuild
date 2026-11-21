@@ -1802,7 +1802,7 @@ func (c *linkerContext) scanImportsAndExports() {
 		// parallel and can't safely mutate the "importsToBind" map of another file.
 		if repr.Meta.NeedsExportSymbolFromRuntime {
 			runtimeRepr := c.graph.Files[runtime.SourceIndex].InputFile.Repr.(*graph.JSRepr)
-			exportRef := runtimeRepr.AST.ModuleScope.Members["__export"].Ref
+			exportRef := runtimeRepr.AST.ModuleScope.Members.GetRef("__export").Ref
 			c.graph.GenerateSymbolImportAndUse(sourceIndex, js_ast.NSExportPartIndex, exportRef, 1, runtime.SourceIndex)
 		}
 
@@ -2350,7 +2350,7 @@ func (c *linkerContext) createExportsForFile(sourceIndex uint32) {
 	exportRef := ast.InvalidRef
 	if len(properties) > 0 {
 		runtimeRepr := c.graph.Files[runtime.SourceIndex].InputFile.Repr.(*graph.JSRepr)
-		exportRef = runtimeRepr.AST.ModuleScope.Members["__export"].Ref
+		exportRef = runtimeRepr.AST.ModuleScope.Members.GetRef("__export").Ref
 		nsExportStmts = append(nsExportStmts, js_ast.Stmt{Data: &js_ast.SExpr{Value: js_ast.Expr{Data: &js_ast.ECall{
 			Target: js_ast.Expr{Data: &js_ast.EIdentifier{Ref: exportRef}},
 			Args: []js_ast.Expr{
@@ -4400,7 +4400,7 @@ func (c *linkerContext) convertStmtsForChunk(sourceIndex uint32, stmtList *stmtL
 					}
 
 					// Prefix this module with "__reExport(exports, ns, module.exports)"
-					exportStarRef := c.graph.Files[runtime.SourceIndex].InputFile.Repr.(*graph.JSRepr).AST.ModuleScope.Members["__reExport"].Ref
+					exportStarRef := c.graph.Files[runtime.SourceIndex].InputFile.Repr.(*graph.JSRepr).AST.ModuleScope.Members.GetRef("__reExport").Ref
 					args := []js_ast.Expr{
 						{Loc: stmt.Loc, Data: &js_ast.EIdentifier{Ref: repr.AST.ExportsRef}},
 						{Loc: stmt.Loc, Data: &js_ast.EIdentifier{Ref: s.NamespaceRef}},
@@ -4445,7 +4445,7 @@ func (c *linkerContext) convertStmtsForChunk(sourceIndex uint32, stmtList *stmtL
 							ImportRecordIndex: s.ImportRecordIndex,
 						}
 					}
-					exportStarRef := c.graph.Files[runtime.SourceIndex].InputFile.Repr.(*graph.JSRepr).AST.ModuleScope.Members["__reExport"].Ref
+					exportStarRef := c.graph.Files[runtime.SourceIndex].InputFile.Repr.(*graph.JSRepr).AST.ModuleScope.Members.GetRef("__reExport").Ref
 					args := []js_ast.Expr{
 						{Loc: stmt.Loc, Data: &js_ast.EIdentifier{Ref: repr.AST.ExportsRef}},
 						{Loc: record.Range.Loc, Data: target},
@@ -5580,10 +5580,10 @@ func (c *linkerContext) generateChunkJS(chunkIndex int, chunkWaitGroup *sync.Wai
 
 	chunkRepr := chunk.chunkRepr.(*chunkReprJS)
 	compileResults := make([]compileResultJS, 0, len(chunkRepr.partsInChunkInOrder))
-	runtimeMembers := c.graph.Files[runtime.SourceIndex].InputFile.Repr.(*graph.JSRepr).AST.ModuleScope.Members
-	toCommonJSRef := ast.FollowSymbols(c.graph.Symbols, runtimeMembers["__toCommonJS"].Ref)
-	toESMRef := ast.FollowSymbols(c.graph.Symbols, runtimeMembers["__toESM"].Ref)
-	runtimeRequireRef := ast.FollowSymbols(c.graph.Symbols, runtimeMembers["__require"].Ref)
+	runtimeMembers := c.graph.Files[runtime.SourceIndex].InputFile.Repr.(*graph.JSRepr).AST.ModuleScope.Members.MembersPtr()
+	toCommonJSRef := ast.FollowSymbols(c.graph.Symbols, runtimeMembers.GetRef("__toCommonJS").Ref)
+	toESMRef := ast.FollowSymbols(c.graph.Symbols, runtimeMembers.GetRef("__toESM").Ref)
+	runtimeRequireRef := ast.FollowSymbols(c.graph.Symbols, runtimeMembers.GetRef("__require").Ref)
 	r := c.renameSymbolsInChunk(chunk, chunkRepr.filesInChunkInOrder, timer)
 	dataForSourceMaps := c.dataForSourceMaps()
 
@@ -6985,9 +6985,9 @@ func (c *linkerContext) preventExportsFromBeingRenamed(sourceIndex uint32) {
 	// since they are all potentially exported (e.g. if this is used in a
 	// <script> tag). All symbols in nested scopes are still minified.
 	if !hasImportOrExport {
-		for _, member := range repr.AST.ModuleScope.Members {
+		repr.AST.ModuleScope.Members.ForEach(func(_ string, member js_ast.ScopeMember) {
 			c.graph.Symbols.Get(member.Ref).Flags |= ast.MustNotBeRenamed
-		}
+		})
 	}
 }
 

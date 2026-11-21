@@ -1171,7 +1171,6 @@ func (p *parser) pushScopeForParsePass(kind js_ast.ScopeKind, loc logger.Loc) in
 	scope := &js_ast.Scope{
 		Kind:    kind,
 		Parent:  parent,
-		Members: make(map[string]js_ast.ScopeMember),
 		Label:   ast.LocRef{Ref: ast.InvalidRef},
 	}
 	if parent != nil {
@@ -1197,14 +1196,14 @@ func (p *parser) pushScopeForParsePass(kind js_ast.ScopeKind, loc logger.Loc) in
 		if scope.Parent.Kind != js_ast.ScopeFunctionArgs {
 			panic("Internal error")
 		}
-		for name, member := range scope.Parent.Members {
+		scope.Parent.Members.ForEach(func(name string, member js_ast.ScopeMember) {
 			// Don't copy down the optional function expression name. Re-declaring
 			// the name of a function expression is allowed.
 			kind := p.symbols[member.Ref.InnerIndex].Kind
 			if kind != ast.SymbolHoistedFunction {
-				scope.Members[name] = member
+				scope.Members.Set(name, member)
 			}
-		}
+		})
 	}
 
 	// Remember the length in case we call popAndDiscardScope() later
@@ -1216,7 +1215,7 @@ func (p *parser) pushScopeForParsePass(kind js_ast.ScopeKind, loc logger.Loc) in
 func (p *parser) popScope() {
 	// We cannot rename anything inside a scope containing a direct eval() call
 	if p.currentScope.ContainsDirectEval {
-		for _, member := range p.currentScope.Members {
+		p.currentScope.Members.ForEach(func(_ string, member js_ast.ScopeMember) {
 			// Using direct eval when bundling is not a good idea in general because
 			// esbuild must assume that it can potentially reach anything in any of
 			// the containing scopes. We try to make it work but this isn't possible
@@ -1259,11 +1258,11 @@ func (p *parser) popScope() {
 			// that "eval" will be able to reach these symbols and we allow them to be
 			// renamed or removed by tree shaking.
 			if p.options.mode == config.ModeBundle && p.currentScope.Parent == nil && p.isFileConsideredESM {
-				continue
+				return
 			}
 
 			p.symbols[member.Ref.InnerIndex].Flags |= ast.MustNotBeRenamed
-		}
+		})
 	}
 
 	p.currentScope = p.currentScope.Parent
@@ -1483,7 +1482,7 @@ func (p *parser) declareSymbol(kind ast.SymbolKind, loc logger.Loc, name string)
 	ref := p.newSymbol(kind, name)
 
 	// Check for a collision in the declaring scope
-	if existing, ok := p.currentScope.Members[name]; ok {
+	if existing, ok := p.currentScope.Members.Get(name); ok {
 		symbol := &p.symbols[existing.Ref.InnerIndex]
 
 		switch p.canMergeSymbols(p.currentScope, symbol.Kind, kind) {
@@ -1516,7 +1515,7 @@ func (p *parser) declareSymbol(kind ast.SymbolKind, loc logger.Loc, name string)
 	}
 
 	// Overwrite this name in the declaring scope
-	p.currentScope.Members[name] = js_ast.ScopeMember{Ref: ref, Loc: loc}
+	p.currentScope.Members.Set(name, js_ast.ScopeMember{Ref: ref, Loc: loc})
 	return ref
 }
 
@@ -1544,7 +1543,7 @@ func (p *parser) hoistSymbols(scope *js_ast.Scope) {
 		for _, replaced := range scope.Replaced {
 			symbol := &p.symbols[replaced.Ref.InnerIndex]
 			if symbol.Kind.IsFunction() {
-				if member, ok := scope.Members[symbol.OriginalName]; ok && p.symbols[member.Ref.InnerIndex].Kind.IsFunction() {
+				if member, ok := scope.Members.Get(symbol.OriginalName); ok && p.symbols[member.Ref.InnerIndex].Kind.IsFunction() {
 					var notes []logger.MsgData
 					if scope.Parent == nil && p.isFileConsideredESM {
 						_, notes = p.whyESModule()
@@ -1572,10 +1571,10 @@ func (p *parser) hoistSymbols(scope *js_ast.Scope) {
 	if !scope.Kind.StopsHoisting() {
 		// We create new symbols in the loop below, so the iteration order of the
 		// loop must be deterministic to avoid generating different minified names
-		sortedMembers := make(scopeMemberArray, 0, len(scope.Members))
-		for _, member := range scope.Members {
+		sortedMembers := make(scopeMemberArray, 0, scope.Members.Len())
+		scope.Members.ForEach(func(_ string, member js_ast.ScopeMember) {
 			sortedMembers = append(sortedMembers, member)
-		}
+		})
 		sort.Sort(sortedMembers)
 
 	nextMember:
@@ -1595,7 +1594,7 @@ func (p *parser) hoistSymbols(scope *js_ast.Scope) {
 			//   CatchParameter : BindingIdentifier .
 			//
 			if scope.Parent.Kind == js_ast.ScopeCatchBinding && symbol.Kind != ast.SymbolHoisted {
-				if existingMember, ok := scope.Parent.Members[symbol.OriginalName]; ok {
+				if existingMember, ok := scope.Parent.Members.Get(symbol.OriginalName); ok {
 					p.addSymbolAlreadyDeclaredError(symbol.OriginalName, member.Loc, existingMember.Loc)
 					continue
 				}
@@ -1661,7 +1660,7 @@ func (p *parser) hoistSymbols(scope *js_ast.Scope) {
 					symbol.Flags |= ast.MustNotBeRenamed
 				}
 
-				if existingMember, ok := s.Members[symbol.OriginalName]; ok {
+				if existingMember, ok := s.Members.Get(symbol.OriginalName); ok {
 					existingSymbol := &p.symbols[existingMember.Ref.InnerIndex]
 
 					// We can hoist the symbol from the child scope into the symbol in
@@ -1676,7 +1675,7 @@ func (p *parser) hoistSymbols(scope *js_ast.Scope) {
 						(existingSymbol.Kind.IsFunction() && (s.Kind == js_ast.ScopeEntry || s.Kind == js_ast.ScopeFunctionBody)) {
 						// Silently merge this symbol into the existing symbol
 						symbol.Link = existingMember.Ref
-						s.Members[symbol.OriginalName] = existingMember
+						s.Members.Set(symbol.OriginalName, existingMember)
 						continue nextMember
 					}
 
@@ -1698,12 +1697,12 @@ func (p *parser) hoistSymbols(scope *js_ast.Scope) {
 					// If this is a catch identifier, silently merge the existing symbol
 					// into this symbol but continue hoisting past this catch scope
 					existingSymbol.Link = member.Ref
-					s.Members[symbol.OriginalName] = member
+					s.Members.Set(symbol.OriginalName, member)
 				}
 
 				if s.Kind.StopsHoisting() {
 					// Declare the member in the scope that stopped the hoisting
-					s.Members[symbol.OriginalName] = member
+					s.Members.Set(symbol.OriginalName, member)
 					break
 				}
 				s = s.Parent
@@ -6339,7 +6338,7 @@ func (p *parser) parseFn(
 	// shadows any variable called "arguments" in any parent scopes. But only do
 	// this if it wasn't already declared above because arguments are allowed to
 	// be called "arguments", in which case the real "arguments" is inaccessible.
-	if _, ok := p.currentScope.Members["arguments"]; !ok {
+	if _, ok := p.currentScope.Members.Get("arguments"); !ok {
 		fn.ArgumentsRef = p.declareSymbol(ast.SymbolArguments, fn.OpenParenLoc, "arguments")
 		p.symbols[fn.ArgumentsRef.InnerIndex].Flags |= ast.MustNotBeRenamed
 	}
@@ -8700,7 +8699,7 @@ func (p *parser) findSymbol(loc logger.Loc, name string) findSymbolResult {
 		}
 
 		// Is the symbol a member of this scope?
-		if member, ok := s.Members[name]; ok {
+		if member, ok := s.Members.Get(name); ok {
 			ref = member.Ref
 			declareLoc = member.Loc
 			break
@@ -8737,7 +8736,7 @@ func (p *parser) findSymbol(loc logger.Loc, name string) findSymbolResult {
 			p.checkForUnrepresentableIdentifier(loc, name)
 			ref = p.newSymbol(ast.SymbolUnbound, name)
 			declareLoc = loc
-			p.moduleScope.Members[name] = js_ast.ScopeMember{Ref: ref, Loc: logger.Loc{Start: -1}}
+			p.moduleScope.Members.Set(name, js_ast.ScopeMember{Ref: ref, Loc: logger.Loc{Start: -1}})
 			break
 		}
 	}
@@ -10065,7 +10064,7 @@ func (p *parser) recordDeclaredSymbol(ref ast.Ref) {
 
 	// Check whether this symbol was hoisted out of a nested scope into the module scope
 	if !isTopLevel {
-		if symbol := p.symbols[ref.InnerIndex]; symbol.Kind.IsHoisted() && p.moduleScope.Members[symbol.OriginalName].Ref == ref {
+		if symbol := p.symbols[ref.InnerIndex]; symbol.Kind.IsHoisted() && p.moduleScope.Members.GetRef(symbol.OriginalName).Ref == ref {
 			isTopLevel = true
 		}
 	}
@@ -12274,7 +12273,7 @@ func (p *parser) visitClass(nameScopeLoc logger.Loc, class *js_ast.Class, defaul
 	if class.Name != nil {
 		name := p.symbols[class.Name.Ref.InnerIndex].OriginalName
 		result.innerClassNameRef = p.newSymbol(ast.SymbolConst, "_"+name)
-		p.currentScope.Members[name] = js_ast.ScopeMember{Loc: class.Name.Loc, Ref: result.innerClassNameRef}
+		p.currentScope.Members.Set(name, js_ast.ScopeMember{Loc: class.Name.Loc, Ref: result.innerClassNameRef})
 	} else {
 		name := "_this"
 		if defaultNameRef != ast.InvalidRef {
@@ -16877,7 +16876,7 @@ func (p *parser) warnAboutImportNamespaceCall(target js_ast.Expr, kind importNam
 
 			var notes []logger.MsgData
 			name := p.symbols[id.Ref.InnerIndex].OriginalName
-			if member, ok := p.moduleScope.Members[name]; ok && member.Ref == id.Ref {
+			if member, ok := p.moduleScope.Members.Get(name); ok && member.Ref == id.Ref {
 				if star := p.source.RangeOfOperatorBefore(member.Loc, "*"); star.Len > 0 {
 					if as := p.source.RangeOfOperatorBefore(member.Loc, "as"); as.Len > 0 && as.Loc.Start > star.Loc.Start {
 						note := p.tracker.MsgData(
@@ -17740,7 +17739,10 @@ func newParser(log logger.Log, source logger.Source, lexer js_lexer.Lexer, optio
 		options.defines = &defaultDefines
 	}
 
+	symCap := len(source.Contents) / 110
 	p := &parser{
+		symbols:       make([]ast.Symbol, 0, symCap),
+		scopesInOrder: make([]scopeOrder, 0, len(source.Contents)/157),
 		log:                log,
 		source:             source,
 		tracker:            logger.MakeLineColumnTracker(&source),
@@ -17785,6 +17787,10 @@ func newParser(log logger.Log, source logger.Source, lexer js_lexer.Lexer, optio
 		shouldAddKeyComment: options.mangleProps != nil || options.reserveProps != nil,
 
 		suppressWarningsAboutWeirdCode: helpers.IsInsideNodeModules(source.KeyPath.Text),
+	}
+
+	if options.ts.Parse {
+		p.tsUseCounts = make([]uint32, 0, symCap)
 	}
 
 	if len(options.dropLabels) > 0 {
@@ -17930,7 +17936,7 @@ func Parse(log logger.Log, source logger.Source, options Options) (result js_ast
 		nextExport:
 			for _, export := range file.Exports {
 				// Skip injecting this symbol if it's already declared locally (i.e. it's not a reference to a global)
-				if _, ok := p.moduleScope.Members[export.Alias]; ok {
+				if _, ok := p.moduleScope.Members.Get(export.Alias); ok {
 					continue
 				}
 
@@ -17947,7 +17953,7 @@ func Parse(log logger.Log, source logger.Source, options Options) (result js_ast
 				symbols[export.Alias] = ast.LocRef{Ref: ref}
 				if len(parts) == 1 {
 					// Handle the identifier case by generating an injected symbol directly
-					p.moduleScope.Members[export.Alias] = js_ast.ScopeMember{Ref: ref}
+					p.moduleScope.Members.Set(export.Alias, js_ast.ScopeMember{Ref: ref})
 				} else {
 					// Handle the dot case using a map. This map is similar to the map
 					// "options.defines.DotDefines" but is kept separate instead of being
@@ -18430,7 +18436,7 @@ func (p *parser) prepareForVisitPass() {
 }
 
 func (p *parser) declareCommonJSSymbol(kind ast.SymbolKind, name string) ast.Ref {
-	member, ok := p.moduleScope.Members[name]
+	member, ok := p.moduleScope.Members.Get(name)
 
 	// If the code declared this symbol using "var name", then this is actually
 	// not a collision. For example, node will let you do this:
@@ -18462,7 +18468,7 @@ func (p *parser) declareCommonJSSymbol(kind ast.SymbolKind, name string) ast.Ref
 	// to this name will become bound to this symbol after this (since we haven't
 	// run the visit pass yet).
 	if !ok {
-		p.moduleScope.Members[name] = js_ast.ScopeMember{Ref: ref, Loc: logger.Loc{Start: -1}}
+		p.moduleScope.Members.Set(name, js_ast.ScopeMember{Ref: ref, Loc: logger.Loc{Start: -1}})
 		return ref
 	}
 
@@ -18502,12 +18508,12 @@ func (p *parser) computeCharacterFrequency() *ast.CharFreq {
 	// Subtract out all symbols that will be minified
 	var visit func(*js_ast.Scope)
 	visit = func(scope *js_ast.Scope) {
-		for _, member := range scope.Members {
+		scope.Members.ForEach(func(_ string, member js_ast.ScopeMember) {
 			symbol := &p.symbols[member.Ref.InnerIndex]
 			if symbol.SlotNamespace() != ast.SlotMustNotBeRenamed {
 				charFreq.Scan(symbol.OriginalName, -int32(symbol.UseCountEstimate))
 			}
-		}
+		})
 		if scope.Label.Ref != ast.InvalidRef {
 			symbol := &p.symbols[scope.Label.Ref.InnerIndex]
 			if symbol.SlotNamespace() != ast.SlotMustNotBeRenamed {
