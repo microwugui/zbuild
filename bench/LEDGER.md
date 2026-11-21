@@ -188,6 +188,43 @@ parser 381、printer 152；profile-inclusive-after-r1 中 `visitExprInOut` self 
 主树 `/root/port` 未受污染。结论写死：**AST 表示级 instanceof→数值 kind 分派不是本项目的 ≥10% 杠杆**，
 不要再以「顶层算法」之名重开此卡（除非先有新的 profile 证据推翻上述归因）。
 
+### R5 — 冷首趟 inclusive/调用树取证 + 降重复工作量卡 → **回滚并记账（负结果）**
+
+按第168代审计要求：不再看 self-time，先做**冷首趟** inclusive/调用树 profile（`bench/cold_calltree.py`，
+源 `bench/profiles/after-r1-three.module.cpuprofile`，单次冷 bundle wall 5.4s），定位真正吃工作量的顶层调用根。[^22]
+
+**冷首趟调用树（机器证据）**：`bundleWithImports` inclusive **78.23%** → `load`/`Parse` **53.49%**、
+`printOne`/`Print` **18.41%**、`collectRefs` **4.01%**（self 202.73ms）、GC self 528ms（10.07%）。
+在探针 worktree 加阶段计时器（`/root/port-probe`，不动主树）：run0 = parse **2812ms(68%)** +
+print 993ms + treeshake 237ms + renamer 90ms；连续 6 次 parse **3157→1301→1400→1102→1025→1122ms**，
+与 deopt **112→14→4→2→0→1**（主因 generic named access）同形 → **4114↔1864ms 差额 = parse 首轮 JIT tier-up**。[^23]
+
+**为何不直接改 tier-up**：R4 已证 dispatch 数值化端到端 0%；实测预热卡也无效——小输入 8 次预热
+（31ms）后真跑仍 4069–4538ms，116KB 多样本预热花 1014ms 后真跑 4082ms（不降）。预热不可廉价付清 tier-up。[^24]
+
+**选卡（根因=降真实重复工作量）**：计数探针（`/root/port-probe`）实测一次 bundle 中
+- `bytesToString`（`src/internal/js_parser/js_parser.ts:90`）调用 **146,073 次 `dec.decode`，95% 重复**（仅 7,410 种不同字节串）；[^25]
+- `collectRefs`（`src/bundle_multi.ts:97`）`Object.keys` 反射递归 **536,963 次 / 552,400 节点**，其中 223,964 个键是 `Uint16Array` 字符串字面量的逐字符元素（Ref 不可能是数字，纯浪费）；[^26]
+- `encoder.encode` 112,223 次（7,386 种不同串，热点 `__PURE__`/`__KEY__` 各 ~7.5K 次）。[^25]
+
+**改法与门**（候选 `/root/port-c5` @594850e，基线 `/root/port-r1`@db0f7da）：
+1. `bytesToString` 加内容 memo：冷 CLI speedup **1.0266**（CI[0.9771,1.0561]，byte 等）；[^27]
+2. memo + `collectRefs` 剪掉 typed-array 元素：**0.9946**（CI[0.9631,1.0095]，byte 等）；[^28]
+3. 仅短串（≤24B）memo：**0.9946**（CI[0.964,1.0083]，byte 等）。[^29]
+
+三手均 `NOT_SIGNIFICANT`、无一 ≥10%，且都字节等价（module `2985154b…`/core `c0fdbed2…`）、tsc 166。
+**天花板实证**：decode 全量仅 167ms、encode 245ms、collectRefs self 202ms —— 三者合计 ~614ms 分散在
+~4240ms bundle，各 ~4%，即使全消也到不了 10%；缓存键构造还倒吃收益（短串 memo 反慢）。[^24][^25]
+
+**决策：回滚并记账**。`git reset --hard 594850e` 复原临时 worktree `/root/port-c5`（主树 `/root/port` 未动）。
+结论写死：**R2/R3/R4/R5 四张负卡共同证明——冷 CLI 的大头是 parse 首轮 JIT tier-up，可由局部代码消除的
+重复工作量每处仅 ~4% 且分散，无单点 ≥10%**；继续在此方向逐卡试错不会产生采纳卡。要缩小 15–17× 差距，
+需换**非逐卡**的结构路线（例如让首轮直接跑优化 tier 的构建/执行方式），而非再找单函数重复工作。[^23][^24]
+
+> **安全规矩（第168代审计，写死）**：`reset --hard` 只允许在临时 worktree（`/root/port-kind`/`-r1`/
+> `-probe`/`-c5`）上做；对 `/root/port`（main）动破坏性命令前先 `git rev-parse --show-toplevel` +
+> `git log -1` 确认 cwd/HEAD；主树回滚用新 worktree 或先说明，不许就地 reset。
+
 ## 顶层 inclusive 地图（供阶段2选靶）
 
 | 函数 | inclusive% | self% | 含义 |
@@ -234,3 +271,11 @@ parser 381、printer 152；profile-inclusive-after-r1 中 `visitExprInOut` self 
 [^19]: bench/wall-kind-module.json（1.0022, NOT_SIGNIFICANT, bytes_equal=true）
 [^20]: bench/wall-kind-module-v2.json（1.0002, NOT_SIGNIFICANT, bytes_equal=true）
 [^21]: bench/inst_micro.mjs（inst ~205ms / kind ~64ms / switch ~6ms，20 万节点冷进程）
+[^22]: bench/cold_calltree.py + bench/profiles/after-r1-three.module.cpuprofile（冷首趟 bundleWithImports 78.23%/load·Parse 53.49%/Print 18.41%/collectRefs 4.01%）
+[^23]: /root/port-probe 阶段计时器（run0 parse 2812ms/print 993ms；6 次 parse 3157→1122ms）+ /tmp/deopt-runs.log（deopt 112→14→4→2→0→1）
+[^24]: /tmp/probe_warm2.mjs（小输入 8 次预热 31ms 后真跑 4069ms）+ /tmp/probe_warmfresh.mjs（116KB 预热 1014ms 后真跑 4082ms）+ /tmp/probe_ceiling.mjs（decode 167ms/4240ms）
+[^25]: /tmp/probe_callsites.mjs（bytesToString→dec.decode 146,073 次；hasPrefixWithWordBoundary→encode 62,739 次）+ /tmp/probe_dedup.mjs（95% decode 重复、7,410 唯一）+ /tmp/probe_prefix.mjs（112,223 encode/7,386 唯一，245ms）
+[^26]: /tmp/probe_shape2.mjs（唯一形状变体是 Uint16Array）+ /tmp/probe_typed.mjs（223,964 typed-array 键）+ /tmp/probe_cr.mjs（collectRefs 1.47M 调用/552K 节点）
+[^27]: bench/wall-r5-module.json（1.0266, NOT_SIGNIFICANT, bytes_equal=true）
+[^28]: bench/wall-r5-combined-module.json（0.9946, NOT_SIGNIFICANT, bytes_equal=true）
+[^29]: bench/wall-r5-shortmemo-module.json（0.9946, NOT_SIGNIFICANT, bytes_equal=true）
