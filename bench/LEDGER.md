@@ -385,6 +385,27 @@ jump table entry。用户"哈希骗 jump table"的机制假设成立。但性能
 next 方向：jump table 路线已排除；active 主动 while 仍是唯一 >10% 写法，若要推进须在真实
 `js_lexer.ts` 上做配对 A/B + 六档门。
 
+### R11 — 真实 Next() 热点短路（ws/newline fast-path）→ **无显著收益，回滚不采纳**
+
+用户方向 [40144后]：把 R10 微基准里占优的"热点短路"落到真实 `js_lexer.ts`。
+在 `Next()` 的 `switch(this.codePoint)` 前插入 fast-path：newline(0x0a/0x0d/0x2028/0x2029)
+与 space(0x09/0x20) 命中即 `step()`+`continue`，语义与 switch 里原 case 逐字节等价
+（候选树 `/root/port-hotshort` @7067522，改动仅 +13 行；base 树 `/root/port-hotbase` 同 sha）[^49]。
+
+大构建配对 A/B（`bench/wall_big.py`，warm=2 释放缓存后单次测量，n=8，byte sha 硬门）:
+
+| 输入 | speedup(mean) | median ratio | bootstrap median CI95 | bytes_equal |
+| --- | --- | --- | --- | --- |
+| typescript.js 9MB | 1.0052 | 0.9486 | [0.924,1.041] | true |
+| `_tsc.js` 6.2MB | 0.9934 | 0.9859 | [0.952,1.037] | true |
+
+**决策：回滚不采纳**。两手 median ratio 均 <1（候选反而略慢），CI 都跨 1 → 噪声内、无
+≥10% 降幅；产物字节对齐但性能不达标。主树从未改动；候选临时树已 `git checkout` 复原
+（sha 回到 d709b9…）。根因与 R10 一致：V8 已对 `Next()` switch 的热点 case 做了优化，
+短路省下的几个 cmp 不足 10%；真正占大头的是 GC/分配与顶层 parse 主链（R8/R10）。
+next 方向：ws/newline 短路路线已排除；函数表(R9)/哈希 jump table(R10)/热点短路(R11)三条
+lexer 微优化路线均未达 10%，lexer 侧局部改动空间基本穷尽。
+
 ## 顶层 inclusive 地图（供阶段2选靶）
 
 | 函数 | inclusive% | self% | 含义 |
@@ -458,3 +479,4 @@ next 方向：jump table 路线已排除；active 主动 while 仍是唯一 >10%
 [^46]: /root/port-r9 bytesToString ASCII 快路径 A/B 0.982×（CI 含 1，已回滚）+ /tmp/wall-big-r9.json
 [^47]: bench/fn-table-bench.mjs（四版简化词法微基准，三语料 equal）+ /tmp/fntable-inline.stdout（--trace-turbo-inlining：0 handler 内联进 Next，FeedbackCell[many closures]）
 [^48]: bench/hash-switch-bench.mjs（codePoint 哈希微基准，三语料 ± 注入共 6 组 equal）+ /tmp/hash-optcode.out（--print-opt-code：hash 826 jump table entry / cmp 799，big 0 entry / cmp 1552）
+[^49]: bench/wall-hotshort-ts.json + bench/wall-hotshort-tsc.json（大构建配对 A/B，n=8，bytes_equal=true，median ratio 0.949/0.986，bootstrap CI 跨 1）；候选 js_lexer.ts +13 行 fast-path 已回滚

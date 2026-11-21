@@ -1,0 +1,39 @@
+{
+  "input": "/root/port-baseline/testdata/large/_tsc.js",
+  "warm": 2,
+  "n": 8,
+  "base_ms_median": 6415.5,
+  "cand_ms_median": 6458.0,
+  "speedup_base_over_cand": 0.9934,
+  "ratios": [
+    0.974,
+    1.0374,
+    0.9397,
+    0.9978,
+    0.9738,
+    1.0793,
+    1.0223,
+    0.9521
+  ],
+  "base_ms": [
+    6479,
+    6379,
+    6452,
+    6271,
+    6203,
+    7065,
+    6510,
+    6262
+  ],
+  "cand_ms": [
+    6652,
+    6149,
+    6866,
+    6285,
+    6370,
+    6546,
+    6368,
+    6577
+  ],
+  "bytes_equal": true
+}
