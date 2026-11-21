@@ -601,6 +601,37 @@ n=48 GOMAXPROCS=1 +5.86% CI[1.022,1.099] —— **4/4 独立 run 的 CI95 全部
 
 证据：goport `baselines/m2d-wall-result.md`、`baselines/wall/*.json`（10 份原始配对数据）；harness /tmp/cold_wall.py、/root/wallbench3/。
 
+### R19 — 移植 M2-d 到 TS 的收益天花板评估 + Loc→number PoC → **两路均无 ≥10% 杠杆，记账**
+
+接续 R18「评估移植到 TS」。不改源码，纯机器取证两条剩余候选路的上限。
+
+**路径 1：把 M2-d（Scope Members 内联小 map）移植到 TS**。用 R13 的 after-parse 堆快照
+（`/tmp/parse-heap.heapsnapshot`，流式解析）按构造函数精确计数：
+- `Map` = **1.16MB / 38,161 个**（即 Scope.Members Map，对应 38,124 个 Scope）；
+- `ScopeMember` = 1.79MB / 46,841、`Scope` = 4.94MB / 38,124。
+Scope 机制三者合计 ~7.9MB / 163MB 存活堆 = **4.8%**；而 Go 侧该机制占存活堆 ~21%（R17），
+这就是 M2-d 在 Go 拿 −10% 而 TS 不可能拿到的根因（TS 里它本就是小头）。
+即便全部清零也 <5% 存活堆，且 V8 Map 非分配热点（bundle 期各分配点 ≤2.4%，R8）。
+**结论：移植 M2-d 到 TS 天花板远低于 10% 门，不立项**（避免 706 式大改无根因投入）。[^55]
+
+**路径 2：Loc 从 32B 堆对象改为数值索引（R13 点名的"唯一量级手段"）**。
+PoC（`/tmp/loc_poc.mjs`，618,425 元素，3 轮）：Loc-as-object 堆增量 ~24MB、强制 GC ~72–99ms；
+Loc-as-number 堆增量 ~4.7MB、GC ~34–48ms → 消掉 618K Loc 对象约省 19MB 存活 + 40–50ms GC/轮。
+但：(a) 冷 CLI 主指标（three.module ~5s）这点 GC 节省 <1%，warm 大构建（~10s）也仅 ~4–6%，
+均不稳过 ≥10% 门；(b) 真实改动需重写 1,894 处 Loc 引用 / 121 文件 / 337 处 `.Start`（且 `Start`
+同时属于 Token/ComplexSelector，需类型感知 codemod），字节等价门风险极高——R4 更简单的 1,097 处
+kind codemod 尚且零收益回滚。**结论：PoC 收益不足以支撑如此高风险的全量表示重构，不立项**。[^56]
+
+**两路合并结论**：TS 侧可预见的 ≥10% 代码级杠杆已用尽——复杂度维度线性（R12）、GC 分配分散
+（R8）、AST 表示级 kind（R4）/codec（R5/R8）/lexer（R9–R11）/Scope（本轮）全负，
+M2-d 与 Loc 移植天花板均 <10%。剩余 TS/Go 差距主体是 V8 冷启动税（模块加载 ~570ms +
+首轮低 tier ~4.1s，分解表）与运行时固定开销，属结构性、非局部代码改动可消除。
+**决策：本轮取证、无卡、不立项。** 若用户仍要压缩差距，须换范式（预编译/AOT/换引擎），
+属需拍板的战略分叉，不在无根因盲改之列。
+
+证据：goport `baselines/m2d-wall-result.md`（R18 冷 CLI 真收益）；R13 堆快照 `/tmp/parse-heap.heapsnapshot`；
+`/tmp/loc_poc.mjs` 三次原始输出（见本轮控制台）。
+
 ## 脚注
 
 [^1]: bench/AB_NOTES.md（harness 演进 v1→v3.2）+ 方法论交付 [38390]
