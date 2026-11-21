@@ -583,6 +583,24 @@ R15（去 malloc 头 +0.32%）、R16（预分配 −9.29% TotalAlloc/−0.6% 存
 证据：goport `baselines/m2d-scopecompact-result.md`；`/tmp/sc3-ta.txt`、`/tmp/sc3-live.txt`（n=24 原始数）；
 `/tmp/pk-b-1.prof`（pprof 按行）；`/tmp/mb-sc-*`、`/tmp/ml-sc-*`（配对 A/B 二进制）。
 
+### R18 — Go 侧 M2-d 采纳基线的 wall time 取证 → **冷 CLI 真收益（+4.2~5.9%，4/4 CI 不含 1）**
+
+接续 R17「下一步测冷 CLI wall」。不改源码，只配对量 wall，回答"内存收益是否转化为用户主指标（编译速度）"。
+两 CLI 同 flags 同工具链现重建（pristine 733da4e vs 采纳 892402d），字节门 1/1 PASS（sha c9eb18c0…）。
+
+**冷 CLI 端到端（主指标，全新子进程 + perf_counter，交错 A/B，bootstrap 20000）**：
+n=32 +4.30% CI[1.011,1.073]、n=32 +4.16% CI[1.022,1.063]、n=64 +4.43% CI[1.021,1.070]、
+n=48 GOMAXPROCS=1 +5.86% CI[1.022,1.099] —— **4/4 独立 run 的 CI95 全部不含 1**，中位数法亦如此。
+**预热后 build 阶段（辅指标，进程内 harness）**：符号在 +10%/−2% 间翻转（FreeOSMemory 缺页噪声 +
+宿主瞬态，同空自测 ±3% 噪声地板），只作方向参考、不用于决策。
+
+根因闭环：M2-d TotalAlloc −10.92%/存活 −10.06%（CI 极窄）→ 本轮 wall +4~6% 方向一致（分配少→GC 少→build 快），
+非无根因盲改；wall 增幅小于内存增幅符合 GC 只占 build 一部分。**决策：M2-d 在用户主指标上被验证，无回滚。**
+下一步：评估把 Scope Members 内联小 map + 热切片预分配移植到 TS 侧（`js_ast.ts:1236 Members:Map`、
+`js_parser.ts:893/894`），先用 TS GC 占比（profile-warm-r7/r8 ~20%）估收益天花板再决定是否投入大改。
+
+证据：goport `baselines/m2d-wall-result.md`、`baselines/wall/*.json`（10 份原始配对数据）；harness /tmp/cold_wall.py、/root/wallbench3/。
+
 ## 脚注
 
 [^1]: bench/AB_NOTES.md（harness 演进 v1→v3.2）+ 方法论交付 [38390]
