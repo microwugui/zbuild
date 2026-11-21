@@ -94,3 +94,39 @@ name content 已在 8.16MB 源码 buffer 里，不额外分配。所以 Symbol i
 - 两者叠加是正确方向：Expr（大改，主收益）+ Symbol（小改，稳收益）→ 合计有希望显著过 10% 门。
 
 证据：`/tmp/alloc-big40.prof`；graph.go 临时探针输出（已还原）；lexer Raw()/MaybeSubstring（js_lexer.go:374,236）。
+
+## 追加取证（第222代）：Expr 去 interface 收益用真实构建坐实，推翻 −89% 微基准
+
+审计指出方法论矛盾：一边用真实探针推翻 Symbol 微基准高估，一边仍拿 Expr 纯节点微基准 −89% 当决策依据。
+本轮按同一标准验证 Expr。**结论：−89% 是高估，真实收益 −31.1%。**
+
+### 真实分配形态（big40，MemProfileRate=1 的 alloc-big40.prof，按构造行 flat）
+所有 E* 负载对象实际分配合计 **43.93MB**（不是微基准里凭空消失）：
+EString 10.99MB / EFunction 8.55MB / EBinary 4.89MB / EIdentifier 4.56MB / EDot 3.67MB /
+EArray 3.66MB / EObject 3.66MB / ECall 2.45MB / ENumber 1.50MB。
+
+### 精确核算（分配字节÷size-class=节点数，再按 sizeof 打包紧凑 arena）
+| 项 | 当前 | 紧凑(handle+arena) |
+| --- | ---: | ---: |
+| 节点数 | ~131 万 | 同 |
+| payload 对象 | 43.93MB | arena 40.96MB（去 malloc 头/对齐，payload 字节不可消） |
+| Expr wrapper | 24B×N = 30.06MB | handle 8B×N = 10.02MB |
+| **合计** | **73.99MB** | **50.98MB** |
+
+**真实收益 = −31.1%**（来自 wrapper 24→8B + 去 malloc 头/对齐），**不是微基准的 −89%**。
+微基准 B 版错在把 payload 整体丢弃（7.63MB 只有 handle），而真实 arena 必须承载 40.96MB 负载。
+
+### 对决策的影响（修正上轮错误）
+- 上轮称"Expr 是唯一能过 10% 门的单靶（−18% 存活堆）"——**错**，那是拿 −89% 微基准 × 20.5% 占比算的。
+- 坐实后：Expr −31.1% × 存活占比 20.5% ≈ **整构建存活堆 −6.4%**，单靶**同样过不了 10% 门**。
+- Symbol（~2%）+ Expr（~6.4%）+ ScopeMembers/Scope 边际，三者全叠加乐观上也仅 ~10% 边缘，
+  且 Expr 需 706 处 `.Data.` 改造、风险极高。**本机 1GB/594MB 案例不可外推 16G**（口径边界保持）。
+
+### 结论
+Expr 与 Symbol 的微基准收益在真实构建下都大幅缩水（−89%→−31%、−65%→−2%），根因同为
+"payload/name content 不可消，微基准错误丢弃"。这印证 R14 同构微基准不可外推的老问题。
+在动真实源码前，此轮先把两个靶的真实收益都坐实——**没有任何单靶能过 10% 门**，
+叠加也仅边缘。是否仍要做 706 处 Expr 改造，属需拍板的方向，不在本取证轮擅自开工。
+
+证据：`/tmp/alloc-big40.prof`；`go tool pprof -list 'js_parser'` 按构造行；`unsafe.Sizeof` 各 E* 负载；
+本机 1GB / big40 峰值 594MB（不可外推用户 16G）。
