@@ -58,7 +58,7 @@
 
 字节：three.core `c0fdbed2…`、three.module `2985154b…` 与 Go 逐字节；wide 子集 100/100 PASS。
 门：tsc 166、m1 4158≥4157、assign 0、doc OK、test:cov 1746 pass / 10 基线 F64、three_verify core/module 逐字节。
-**决策：采纳**（三手同向 + 字节等价 + 门不回退）。代码 sha `74437a3b…`（js_printer.ts）。
+**决策：采纳**（三手同向 + 字节等价 + 门不回退）。代码 sha `74437a3b…`（js_printer.ts），提交 `db0f7da501f9d13b96085dbd62a3ae060adfada9`。
 
 ### 审计：基线产物 vs Go 0.28.2（此前只测过自洽）
 
