@@ -632,7 +632,14 @@ M2-d 与 Loc 移植天花板均 <10%。剩余 TS/Go 差距主体是 V8 冷启动
 证据：goport `baselines/m2d-wall-result.md`（R18 冷 CLI 真收益）；R13 堆快照 `/tmp/parse-heap.heapsnapshot`；
 `/tmp/loc_poc.mjs` 三次原始输出（见本轮控制台）。
 
+补证（本轮现采冷 profile，`/tmp/freshprof/cold-current.cpuprofile`，当前基线 three.module）：
+flat self top = GC 8.34% / printExprInner 4.5% / Next 4.45% / visitExprInOut 3.49% /
+compileSourceTextModule 3.1%（Node 模块加载，冷启动税） / parseSuffix 2.97% / decode 2.61%…；
+calltree: Parse 46.65%incl、Print 12.73%incl。`encode@node:internal/encoding` 已降至 1.19%（R1/R7 快路径生效）。
+无单一可攻 ≥10% 顶层热点，与前 R12（全线性）/R8（GC 分散）结论一致。[^57]
+
 ## 脚注
+[^57]: bench/profiles 现采 /tmp/freshprof/cold-current.cpuprofile（node --cpu-prof + bench/analyze_profile.py / bench/cold_calltree.py）；R1/R7 打印快路径见 LEDGER R1/R7。
 
 [^1]: bench/AB_NOTES.md（harness 演进 v1→v3.2）+ 方法论交付 [38390]
 [^2]: bench/README.md:1-9（口径）+ bench/FINDINGS.md（阶段②③历史，含 −5.7% 噪声结论）
