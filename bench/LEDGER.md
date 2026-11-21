@@ -556,6 +556,33 @@ R15/R16 只否证「去 malloc 头」「切片预分配」两类代理法；核�
 证据：goport `baselines/m2c-prealloc-result.md`、`baselines/m2c-prealloc-experiment.patch`、`baselines/m2b-scope-result.md`；
 `/tmp/ab-def.txt`（n=40 原始数）、`/tmp/pk-b-1.prof`（inuse_space 59.56MB / 667K 对象）。
 
+### R17 — Go 侧 M2-d 紧凑 Scope Members + 热切片预分配 → **过门，采纳**（goport `892402d`）
+
+接续 R15/R16 的「峰值存活堆也要测」路线。`pprof -list` on 峰值 inuse 59.56MB 按分配行摊开：
+`&Scope{}` 5MB、函数体 copy-down 5MB、`declareSymbol` 的 Members map 写入 6.5MB、map 头 ~1MB
+——Scope member 机制合计 ≈12.5MB/59.6MB ≈ **21%**，是存活堆第一大项，远大于 Expr。
+R15（去 malloc 头 +0.32%）、R16（预分配 −9.29% TotalAlloc/−0.6% 存活）各否证一个代理法；M2-d 叠加三个
+**不同分配类**（非比例微调）：
+
+- **内联小 map**：`Scope.Members` 从 `map[string]ScopeMember` 改为 `ScopeMembers`（2 内联槽 + 溢出 map），
+  ≤2 成员的 scope 不再分配 hmap+bucket。10 处 `range Members` 全部显式排序或顺序无关，ForEach 无序等价；
+  修一处溢出后重复写入的潜在 bug；唯一 Scope 结构拷贝点（ModuleScope）语义核对无回归。
+- **热切片预分配**（复用 R16 口径）：symbols=/110、scopesInOrder=/157、tsUseCounts=/110。
+
+门：`go build`/`go test ./...` 全绿（30 包）；**5 入口字节门 5/5 PASS**（candidate==pristine 现重建，
+同 flags；冻结 golden 与 pristine 本就差 3–9B 属 m0 已知遗留，不作参照）。
+配对交错 A/B（`_tsc.js` 6.2MB，GOMAXPROCS=1，n=24 + bootstrap 30000）：
+**TotalAlloc −10.92%**（CI b/c [1.1226,1.1228]）、**峰值存活堆 −10.06%**（CI [1.0580,1.1641]），
+两 CI 均不含 1。存活堆三簇噪声（59M/65M/75M）用中位数 + 配对比值 bootstrap 处理。
+
+**决策：采纳**（字节等价 ∧ 双指标 ≥10% ∧ CI 不含 1 ∧ go test 全绿）。源码提交 goport 孤儿分支
+`892402d` 并推 origin/goport。`m4-closeout`「不可达 10%」结论仅基于 TotalAlloc 口径，本轮以存活堆口径
++ 结构性压缩推翻之；至此 R14 立项的「紧凑表示缩小内存差距」路线首次在真实构建上拿到过门证据。
+下一步方向：在此基线上继续压缩剩余大头（如把 2 内联槽扩到 4、或 Scope 冷字段 sidecar），并测冷 CLI wall。
+
+证据：goport `baselines/m2d-scopecompact-result.md`；`/tmp/sc3-ta.txt`、`/tmp/sc3-live.txt`（n=24 原始数）；
+`/tmp/pk-b-1.prof`（pprof 按行）；`/tmp/mb-sc-*`、`/tmp/ml-sc-*`（配对 A/B 二进制）。
+
 ## 脚注
 
 [^1]: bench/AB_NOTES.md（harness 演进 v1→v3.2）+ 方法论交付 [38390]
