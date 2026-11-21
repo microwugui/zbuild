@@ -358,6 +358,33 @@ V8 拒绝内联；再加一次 Uint8Array 查表 → table 比 big 慢 31–41%�
 next 方向：active 主动 while 仍是唯一 >10% 的写法，但属全量重写级改动；用户若要推进，
 下一步应在真实 `js_lexer.ts` 上做 active 重写的配对 A/B 与六档门，而非函数表。
 
+### R10 — codePoint 哈希到 0~255 再 switch → **机制成立但性能未达标，不立项**
+
+用户方向 [40144]：针对"稀疏"病根，把 codePoint 哈希压到 0~255 连续域骗 V8 建 jump table，
+case 内二次区分冲突桶。写 `bench/hash-switch-bench.mjs`（输入用解码后 codePoint 的 Int32Array，
+注入 U+2028/U+2029 触发稀疏标签与冲突桶），三版对照：big（真实稀疏 switch）、hash
+（`switch(cp&0xff)`）、active（参照）。字母数字在两版都显式列为 case 标签（真实 Next 如此，
+是哈希后达到 98 case 密集域的前提）。正确性：三语料 ± 注入共 6 组 token 直方图逐项相等[^48]。
+
+| 输入 | hash/big | active/big | hash 是否显著 |
+| --- | --- | --- | --- |
+| `_tsc.js` 6.2MB | 1.034 CI[1.02,1.066] | 0.999 CI[0.932,1.067] | 是但 <10% |
+| three.core.min | 1.013 CI[1.001,1.046] | 1.109 CI[1.044,1.164] | 是但 <10% |
+| `js_lexer.ts` | 1.037 CI[0.991,1.089] | 1.064 CI[0.967,1.201] | 否(CI 含 1) |
+| `_tsc.js`+注入离群 | 0.914 CI[0.883,1.003] | 1.004 CI[1.015,1.113] | 否，甚至变慢 |
+
+**根因（反汇编机器证据 `/tmp/hash-optcode.out`）**：hash 版**确实生成 jump table**——826 个
+`jump table entry`、`jmp [r10+rX*8]` 间接跳转，cmp 从 big 的 1552 降到 799；big 版 0 个
+jump table entry。用户"哈希骗 jump table"的机制假设成立。但性能只有 1.01–1.04×：
+① 哈希有前置成本——≥0x80 codePoint 必须按 identifier 先分流（否则低 8 位撞进 ASCII 桶误判，
+实测首次跑 js_lexer.ts 因此直方图不等），冲突桶 0x28/0x29 还要 case 内二次区分；
+② 更关键——token 分布极度倾斜，jump table 每次都算索引+间接跳转，而顺序 if 让热点
+(ws/ident) 第一次比较就命中。与调研 §3 的 RE2C"换 jump table 换 if 有时略快"吻合。
+
+**决策：不立项**。机制成立但收益 1–4%（远低于 10% 线），注入离群后部分反慢，且输给 active。
+next 方向：jump table 路线已排除；active 主动 while 仍是唯一 >10% 写法，若要推进须在真实
+`js_lexer.ts` 上做配对 A/B + 六档门。
+
 ## 顶层 inclusive 地图（供阶段2选靶）
 
 | 函数 | inclusive% | self% | 含义 |
@@ -430,3 +457,4 @@ next 方向：active 主动 while 仍是唯一 >10% 的写法，但属全量重�
 [^45]: /tmp/gcm-padded.* vs /tmp/gcm-baseline.*（exprIn/exprOut +256B padding：GC pause 4310 vs 4411ms，max heap 均 312MB → 标量替换）
 [^46]: /root/port-r9 bytesToString ASCII 快路径 A/B 0.982×（CI 含 1，已回滚）+ /tmp/wall-big-r9.json
 [^47]: bench/fn-table-bench.mjs（四版简化词法微基准，三语料 equal）+ /tmp/fntable-inline.stdout（--trace-turbo-inlining：0 handler 内联进 Next，FeedbackCell[many closures]）
+[^48]: bench/hash-switch-bench.mjs（codePoint 哈希微基准，三语料 ± 注入共 6 组 equal）+ /tmp/hash-optcode.out（--print-opt-code：hash 826 jump table entry / cmp 799，big 0 entry / cmp 1552）
