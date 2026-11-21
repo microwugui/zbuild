@@ -1,0 +1,20 @@
+{
+  "generatedAt": "2026-11-21T07:36:53.154980+00:00",
+  "entry": "testdata/three/package/build/three.module.js",
+  "driver": "multi",
+  "n": 12,
+  "warmup": 2,
+  "input_bytes": 658900,
+  "base_ms_median": 4953.58,
+  "cand_ms_median": 5013.808,
+  "speedup_base_over_cand": 0.9764,
+  "ci95_speedup": [
+    0.9635,
+    1.0362
+  ],
+  "bytes_equal": true,
+  "out_bytes": 1709893,
+  "out_sha256": "2985154b88b53598f62e3801c362c0f9c90f6a4154667fd4cd2754f242cda9b4",
+  "verdict": "NOT_SIGNIFICANT",
+  "note": "end-to-end CLI subprocess wall time; paired bootstrap B=20000; >1=cand faster; CI含1不算赢"
+}

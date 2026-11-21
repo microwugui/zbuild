@@ -225,6 +225,44 @@ print 993ms + treeshake 237ms + renamer 90ms；连续 6 次 parse **3157→1301�
 > `-probe`/`-c5`）上做；对 `/root/port`（main）动破坏性命令前先 `git rev-parse --show-toplevel` +
 > `git log -1` 确认 cwd/HEAD；主树回滚用新 worktree 或先说明，不许就地 reset。
 
+### R6 — visit-pass scope 消费 Array.shift() → O(1) 游标（**已采纳**）
+
+第169代用户直觉扭转口径：R1–R5 全在 ~5s 冷 CLI 上找卡，而 V8 冷启动税 ~5s 对 Go 静态二进制
+结构性打不过；应改用「Go 自己也要跑数秒」的大构建，让启动占比变小，量真实工作量。
+**先证伪审计建议的 megamorphic 假设**：冷首趟 `--log-ic` 8.8MB 日志显示 **0 个 IC 站点进入
+megamorphic**（最大状态只到 premonomorphic）；`--trace-deopt-verbose` 定位 60 处 generic named access
++ 8 处 wrong map，但全部 deopt 仅耗时 **260ms/110 次**（~2.4ms/次）—— 形状多态/JIT deopt 不是靶。[^30][^31]
+真正的大头经大构建 warm profile（`bench/profile_warm_big.py` + inspector）暴露：
+**`pushScopeForVisitPass` self 7700ms = 37.8%**（three.module 上仅 75ms/1.44%，R1–R5 从未看见）。[^32]
+
+**根因（机器证据）**：`pushScopeForVisitPass`（`src/internal/js_parser/js_parser.ts:1893`）调用
+`this.scopesInOrder.shift()`；在 9MB typescript.js 上该数组长度达 **66,640**，`shift()` 被调用
+**66,640 次**，每次 O(n) memmove → ~22 亿次元素搬移 = 那 7.7s。探针证实 **pushInVisit=0**
+（72,210 次 parse-pass push 全部先于 66,640 次 visit-pass 消费完成，两阶段不交错），故可用 O(1) 游标
+精确替代。[^33]
+
+**改法**：加 `scopesInOrderHead=0` 字段，`scopesInOrder[0]`→`[head]`、`shift()`→`head++`（5 行）。
+ semantics=同一批 scope 顺序消费，字节不变。
+
+**门**：three.module `2985154b…`/core `c0fdbed2…` 逐字节；**9MB typescript.js 产物候选==基线逐字节**
+（identical-command A/B, sha `c2983579…`）；tsc 166、m1 CHECK OK 4158≥4157、assign 0、doc OK、
+three_verify core/module 逐字节（tsl/webgpu 首差 2431/15159 为 HEAD 既有）。progress 「未收敛」为既有。
+
+**大构建 A/B（用户口径：warm 后释放缓存再计时，`bench/wall_big.py`+`warm_time_worker.mjs`，
+bootstrap CI）**：[^34][^35]
+| 输入 | 基线中位 | 候选中位 | speedup | CI95 |
+| --- | ---: | ---: | ---: | --- |
+| typescript.js 9.1MB | 18418ms | 12024ms | **1.5317** | [1.439,1.880] |
+| `_tsc.js` 6.2MB | 9570ms | 7264ms | **1.3174** | [1.265,1.407] |
+
+three.module 冷 CLI 无变化（0.9764，数组小）—— 本卡专治大构建，符合用户第169代方向。
+**决策：采纳**（两大构建同向 ≥10% 且 CI 不含 1 + 字节等价 + 六档门不回退）。
+这是 R1 之后首张采纳卡，也是首个「顶层算法一优化一大片」的结构性胜利。
+
+> 口径更新（第169代起）：大构建优化以「warm-build 配对 A/B（`bench/wall_big.py`）」为主指标——
+> Go 在该类输入上要数秒甚至更久，V8 冷启动税占比小，才量得到真实算法收益；three 冷 CLI 保留为
+> 产物门的代表，但不再是唯一立项口径。
+
 ## 顶层 inclusive 地图（供阶段2选靶）
 
 | 函数 | inclusive% | self% | 含义 |
@@ -279,3 +317,9 @@ print 993ms + treeshake 237ms + renamer 90ms；连续 6 次 parse **3157→1301�
 [^27]: bench/wall-r5-module.json（1.0266, NOT_SIGNIFICANT, bytes_equal=true）
 [^28]: bench/wall-r5-combined-module.json（0.9946, NOT_SIGNIFICANT, bytes_equal=true）
 [^29]: bench/wall-r5-shortmemo-module.json（0.9946, NOT_SIGNIFICANT, bytes_equal=true）
+[^30]: /tmp/ic2.log（--log-ic 8.8MB，0 个 mega 站点）+ /tmp/deoptverbose.out（--trace-deopt-verbose，60 generic named access + 8 wrong map，总 260ms/110 次）
+[^31]: bench/LEDGER.md R6 节「先证伪 megamorphic 假设」（信源同上）
+[^32]: bench/profile_warm_big.py + bench/warm_profile_worker.mjs + bench/profile-warm-big.json（typescript.js warm，pushScopeForVisitPass self 7700ms/37.8%）
+[^33]: /tmp/probe_sio.mjs（scopesInOrder max=66640, shift=66640）+ /tmp/probe_phase.mjs（pushes=72210, visits=66640, pushInVisit=0）+ src/internal/js_parser/js_parser.ts:1893
+[^34]: bench/wall_big.py + bench/warm_time_worker.mjs + bench/wall-big-r6.json（typescript.js 1.5317, CI[1.439,1.880]）
+[^35]: bench/wall-big-r6-tsc.json（_tsc.js 1.3174, CI[1.265,1.407]）

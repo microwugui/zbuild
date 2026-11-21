@@ -1,0 +1,27 @@
+{
+  "input": "/root/port/node_modules/typescript/lib/_tsc.js",
+  "warm": 1,
+  "n": 4,
+  "base_ms_median": 9570.5,
+  "cand_ms_median": 7264.5,
+  "speedup_base_over_cand": 1.3174,
+  "ratios": [
+    1.2996,
+    1.4069,
+    1.265,
+    1.3311
+  ],
+  "base_ms": [
+    9556,
+    9841,
+    9585,
+    9552
+  ],
+  "cand_ms": [
+    7353,
+    6995,
+    7577,
+    7176
+  ],
+  "bytes_equal": true
+}
