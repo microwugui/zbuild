@@ -63,3 +63,34 @@ mix = 40%EIdent/20%ENum/15%EDot/10%EBin/10%ECall/5%EStr。
 - 剖面 big40.js：`/tmp/pk-big40.js.prof`；gen8.js：`/tmp/pk-gen8.js.prof`；`go tool pprof -top -inuse_space /tmp/mempeak-adopt`。
 - sizeof + 微基准：goport-exp 内临时 `internal/sizeprobe2`、`internal/symbench`、`internal/exprbench`（均 go1.26.5，跑完已删除，工作树 0 dirty）。
 - Symbol 字段：`internal/ast/ast.go:519`（Symbol）、`:385`（Ref）、`:237`（Index32）；Expr 负载：`internal/js_ast/js_ast.go`。
+
+## 追加取证（[41533] 后）：微基准假设被真实构建验证/修正
+
+### alloc_space 剖面（big40，`/tmp/alloc-big40.prof`，MemProfileRate=1）
+累计分配 top：`newSymbol` **91.2MB/20.2%（第一大）**、`pushScopeForParsePass` 87.3MB/19.4%、
+`parsePrefix`(Expr) 74.3MB/16.5%、`ScopeMembers.Set` 46MB/10.2%。但 `newSymbol` 的 flat 仅 21.47MB
+（Symbol slice 反复增长的累计拷贝），其余是增长历史 + 零拷贝 name（见下）。**inuse（存活）口径仍是
+Scope 46MB/Expr 43MB/Symbol 25MB**，两个口径排布不同，双指标都要看。
+
+### 真实字段分布探针（graph.go:167 克隆点，跑完已 git restore，0 dirty）
+对 big40 真实构建的 44 万 symbols 逐个统计：
+
+| 字段 | 实测 | 含义 |
+| --- | --- | --- |
+| `NamespaceAlias != nil` | **0 / 440004** | 指针 8B 全程为 nil |
+| `Link != Invalid` | **0 / 440004** | Ref 8B 全程无效 |
+| `OriginalName` 唯一率 | 200008 / 440004（重复 54.5%） | interning 有真实去重空间 |
+
+**根因确认**：`OriginalName` 是 `source.Contents` 的零拷贝子串（`lexer.Raw()` 直接切片，`MaybeSubstring`），
+name content 已在 8.16MB 源码 buffer 里，不额外分配。所以 Symbol interning 的真实收益 =
+省 16B string header→4B offset（×44万≈5.3MB）+ 去两个死字段 16B（×44万≈6.7MB）
+≈ **12MB / 存活堆 594MB ≈ 2%**，加上 slice 增长消除（alloc_space 21.47MB）后 TotalAlloc 侧更高。
+微基准 C/D 版（−46~65%）高估了，因为把 name content 当额外分配；真实收益需以改造后 A/B 为准。
+
+### 修正后的认知
+- Expr 去 interface 仍是唯一有 ≥10% 潜力的单靶（存活 20.5% × 微基准 −89%）。
+- Symbol 表改造（去死字段 16B + interning）真实收益约 2% 存活堆，单独不过门，但**改动面小、风险低**，
+  可与 Expr 叠加（用户 [41533] 明确两靶可合用）。
+- 两者叠加是正确方向：Expr（大改，主收益）+ Symbol（小改，稳收益）→ 合计有希望显著过 10% 门。
+
+证据：`/tmp/alloc-big40.prof`；graph.go 临时探针输出（已还原）；lexer Raw()/MaybeSubstring（js_lexer.go:374,236）。
