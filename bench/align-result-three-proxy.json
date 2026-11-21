@@ -1,0 +1,112 @@
+{
+  "generatedAt": "2026-11-21T02:28:10.964116+00:00",
+  "group": "three-proxy",
+  "corpus": "/root/port/bench/align-corpus.json",
+  "corpusCases": 5,
+  "totalWallS": 65.87,
+  "counts": {
+    "PASS": 5
+  },
+  "results": [
+    {
+      "id": "three/three.core.js",
+      "group": "three-proxy",
+      "driver": "single",
+      "status": "PASS",
+      "base": {
+        "ok": true,
+        "len": 1114554,
+        "sha256": "c0fdbed276f75d0c1e621c3f0a1b26c4306463bc336c84600cc58d46673cdd63",
+        "status": "OK",
+        "wall_ms": 4003.2
+      },
+      "cand": {
+        "ok": true,
+        "len": 1114554,
+        "sha256": "c0fdbed276f75d0c1e621c3f0a1b26c4306463bc336c84600cc58d46673cdd63",
+        "status": "OK",
+        "wall_ms": 3712.8
+      }
+    },
+    {
+      "id": "three/three.module.js",
+      "group": "three-proxy",
+      "driver": "multi",
+      "status": "PASS",
+      "base": {
+        "ok": true,
+        "len": 1709893,
+        "sha256": "2985154b88b53598f62e3801c362c0f9c90f6a4154667fd4cd2754f242cda9b4",
+        "status": "OK",
+        "wall_ms": 5750.6
+      },
+      "cand": {
+        "ok": true,
+        "len": 1709893,
+        "sha256": "2985154b88b53598f62e3801c362c0f9c90f6a4154667fd4cd2754f242cda9b4",
+        "status": "OK",
+        "wall_ms": 5649.8
+      }
+    },
+    {
+      "id": "three/three.tsl.js",
+      "group": "three-proxy",
+      "driver": "multi",
+      "status": "PASS",
+      "base": {
+        "ok": true,
+        "len": 1251189,
+        "sha256": "3ce61080c41d90cb7545146ac6f1b380666e478e6ffc593fec73948ee0658909",
+        "status": "OK",
+        "wall_ms": 5332.5
+      },
+      "cand": {
+        "ok": true,
+        "len": 1251189,
+        "sha256": "3ce61080c41d90cb7545146ac6f1b380666e478e6ffc593fec73948ee0658909",
+        "status": "OK",
+        "wall_ms": 5386.9
+      }
+    },
+    {
+      "id": "three/three.webgpu.js",
+      "group": "three-proxy",
+      "driver": "multi",
+      "status": "PASS",
+      "base": {
+        "ok": true,
+        "len": 2906890,
+        "sha256": "0aa04325b02f23df6de7e570c830fe85427ea3fca15a027aa4fe8cc1967d5b09",
+        "status": "OK",
+        "wall_ms": 8624.6
+      },
+      "cand": {
+        "ok": true,
+        "len": 2906890,
+        "sha256": "0aa04325b02f23df6de7e570c830fe85427ea3fca15a027aa4fe8cc1967d5b09",
+        "status": "OK",
+        "wall_ms": 8210.4
+      }
+    },
+    {
+      "id": "three/three.webgpu.nodes.js",
+      "group": "three-proxy",
+      "driver": "multi",
+      "status": "PASS",
+      "base": {
+        "ok": true,
+        "len": 3002600,
+        "sha256": "f5fdca678d8e57c9f302cf099788ce88c06c5f9faa6c9397ca411e6ae23dc2e8",
+        "status": "OK",
+        "wall_ms": 9163.2
+      },
+      "cand": {
+        "ok": true,
+        "len": 3002600,
+        "sha256": "f5fdca678d8e57c9f302cf099788ce88c06c5f9faa6c9397ca411e6ae23dc2e8",
+        "status": "OK",
+        "wall_ms": 10027.6
+      }
+    }
+  ]
+}

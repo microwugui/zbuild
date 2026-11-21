@@ -1,0 +1,3181 @@
+{
+  "generatedAt": "2026-11-21T02:14:25.276636+00:00",
+  "note": "宽差异产物对齐语料；候选 vs 冻结基线逐字节；每条 timeout_s 上限；three-proxy 单独分组",
+  "counts": {
+    "wide": 448,
+    "three-proxy": 5
+  },
+  "cases": [
+    {
+      "id": "b1fix/class.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/b1fix/class.js",
+      "timeout_s": 10
+    },
+    {
+      "id": "b1fix/legal.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/b1fix/legal.js",
+      "timeout_s": 10
+    },
+    {
+      "id": "b1fix/multidecl.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/b1fix/multidecl.js",
+      "timeout_s": 10
+    },
+    {
+      "id": "b1multi/entry.go.js",
+      "group": "wide",
+      "driver": "multi",
+      "entry": "testdata/b1multi/entry.go.js",
+      "timeout_s": 15
+    },
+    {
+      "id": "b1multi/entry.js",
+      "group": "wide",
+      "driver": "multi",
+      "entry": "testdata/b1multi/entry.js",
+      "timeout_s": 15
+    },
+    {
+      "id": "esbuild/00184171a8b3.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/00184171a8b3.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/00a8e33e1a22.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/00a8e33e1a22.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/01330fba86dc.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/01330fba86dc.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/02194291dcd0.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/02194291dcd0.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/02c42bc6a302.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/02c42bc6a302.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/034b6f84e602.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/034b6f84e602.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/03dd8a3c098f.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/03dd8a3c098f.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/043909ed38c3.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/043909ed38c3.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/04f41b5062d6.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/04f41b5062d6.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/063e47c1e369.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/063e47c1e369.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/0693ee859d40.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/0693ee859d40.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/07503f7518b6.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/07503f7518b6.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/07d5a91ace41.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/07d5a91ace41.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/080a9ed42855.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/080a9ed42855.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/09290b199db2.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/09290b199db2.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/0987c3b67956.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/0987c3b67956.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/09f742eecd2b.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/09f742eecd2b.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/0a5006ffa808.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/0a5006ffa808.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/0b06dce970ca.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/0b06dce970ca.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/0b9fa734e490.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/0b9fa734e490.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/0c939a710049.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/0c939a710049.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/0d6987e83c9c.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/0d6987e83c9c.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/0dd3cc22cb03.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/0dd3cc22cb03.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/0e664548d0bd.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/0e664548d0bd.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/0ed7a8cae7cc.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/0ed7a8cae7cc.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/0fa2c66284c0.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/0fa2c66284c0.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/102fe580e682.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/102fe580e682.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/10ad73601da8.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/10ad73601da8.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/119dfcdd509b.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/119dfcdd509b.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/120970d81283.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/120970d81283.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/12c4aef03133.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/12c4aef03133.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/135b3d4da34f.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/135b3d4da34f.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/1440aff4a4e7.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/1440aff4a4e7.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/14b50760490c.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/14b50760490c.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/156feecbcad8.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/156feecbcad8.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/16042b9e69d8.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/16042b9e69d8.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/1674b8e9de34.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/1674b8e9de34.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/17a24c421a86.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/17a24c421a86.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/188ead5c7c29.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/188ead5c7c29.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/194e7b7e8478.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/194e7b7e8478.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/19a1bfb989de.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/19a1bfb989de.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/1a1f3881e188.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/1a1f3881e188.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/1abe6761534c.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/1abe6761534c.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/1b80012d708e.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/1b80012d708e.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/1bc7b00a9dbc.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/1bc7b00a9dbc.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/1c304ce03a25.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/1c304ce03a25.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/1cdab029bbed.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/1cdab029bbed.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/1d1ba56da740.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/1d1ba56da740.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/1d4b5b73d4d6.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/1d4b5b73d4d6.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/1dbfa76f1e05.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/1dbfa76f1e05.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/1e3198f69b27.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/1e3198f69b27.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/1eb79602411e.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/1eb79602411e.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/1f4d6994673d.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/1f4d6994673d.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/1feda0917af0.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/1feda0917af0.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/208037361237.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/208037361237.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/210ca12cf85b.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/210ca12cf85b.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/21a56d29b6f4.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/21a56d29b6f4.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/21e36b6c78eb.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/21e36b6c78eb.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/22890f088158.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/22890f088158.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/237ac7fbc747.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/237ac7fbc747.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/23f34c571bb3.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/23f34c571bb3.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/2464c2a51658.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/2464c2a51658.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/252df4b18baf.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/252df4b18baf.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/2614e6c2d6e4.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/2614e6c2d6e4.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/266935405947.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/266935405947.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/26f767791319.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/26f767791319.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/2759d67d2375.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/2759d67d2375.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/27bc0aef5322.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/27bc0aef5322.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/281355b6d85d.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/281355b6d85d.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/28833c97ec9b.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/28833c97ec9b.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/296cd8f0985c.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/296cd8f0985c.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/29eabdd5efc4.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/29eabdd5efc4.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/2a836f489344.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/2a836f489344.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/2ae93f5efc1a.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/2ae93f5efc1a.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/2bb465267edc.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/2bb465267edc.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/2c56e24c01b5.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/2c56e24c01b5.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/2cdff586dceb.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/2cdff586dceb.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/2d3db15d8a52.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/2d3db15d8a52.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/2d7fb5448e2b.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/2d7fb5448e2b.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/2e7100875f0a.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/2e7100875f0a.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/2f2f3125c91c.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/2f2f3125c91c.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/2f9ea773e218.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/2f9ea773e218.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/302596f03a8c.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/302596f03a8c.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/30dc929b0a0d.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/30dc929b0a0d.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/3116d7ba34f9.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/3116d7ba34f9.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/31a20822b184.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/31a20822b184.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/31f2951b1007.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/31f2951b1007.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/32c36fc5ea52.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/32c36fc5ea52.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/33427b7e0fdf.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/33427b7e0fdf.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/340c09449a04.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/340c09449a04.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/34f27d5a545f.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/34f27d5a545f.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/359996f9cf09.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/359996f9cf09.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/36096fccfdd8.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/36096fccfdd8.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/36b38ffc455e.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/36b38ffc455e.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/372d9de649b0.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/372d9de649b0.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/37920555ffd7.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/37920555ffd7.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/385eda1e09c3.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/385eda1e09c3.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/39a5a4878e39.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/39a5a4878e39.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/3a60dad7784c.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/3a60dad7784c.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/3a8e3f9e083b.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/3a8e3f9e083b.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/3b2faa93821d.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/3b2faa93821d.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/3bb3b83ac596.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/3bb3b83ac596.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/3c0158f03f66.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/3c0158f03f66.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/3c6a22d4d4bc.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/3c6a22d4d4bc.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/3d1838f02d64.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/3d1838f02d64.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/3daad01b04dc.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/3daad01b04dc.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/3e4df3549fca.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/3e4df3549fca.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/3f451b76dbdc.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/3f451b76dbdc.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/401407001192.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/401407001192.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/40671471b407.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/40671471b407.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/411f63a29032.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/411f63a29032.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/41a323d98e37.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/41a323d98e37.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/42284eb429c7.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/42284eb429c7.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/42933ff81a67.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/42933ff81a67.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/4394c3b13f37.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/4394c3b13f37.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/440d8a2008e3.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/440d8a2008e3.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/4493323a4f8e.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/4493323a4f8e.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/44f99c6efc79.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/44f99c6efc79.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/45a9536be093.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/45a9536be093.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/467c9e955ae3.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/467c9e955ae3.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/46f948065d46.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/46f948065d46.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/478ab63a87bc.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/478ab63a87bc.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/483554de50e5.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/483554de50e5.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/48b9307387bf.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/48b9307387bf.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/4973f03c4e64.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/4973f03c4e64.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/49f6f81dfe72.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/49f6f81dfe72.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/4ac25fff845e.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/4ac25fff845e.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/4b8084f0df27.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/4b8084f0df27.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/4bfa9fd85806.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/4bfa9fd85806.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/4c7b91e6123c.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/4c7b91e6123c.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/4cf3e356c803.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/4cf3e356c803.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/4d6f8c3ec1c4.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/4d6f8c3ec1c4.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/4e2f4c121b8c.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/4e2f4c121b8c.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/4eba2b0a2224.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/4eba2b0a2224.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/4f2f19d43f55.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/4f2f19d43f55.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/4f98cdbf553f.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/4f98cdbf553f.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/5011b33ee08a.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/5011b33ee08a.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/507869776b38.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/507869776b38.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/50c4593019c0.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/50c4593019c0.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/5127a27fa5da.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/5127a27fa5da.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/51d37ab696d7.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/51d37ab696d7.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/528785f6e1c3.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/528785f6e1c3.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/530f7f9a8bb1.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/530f7f9a8bb1.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/538b343e1d04.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/538b343e1d04.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/53f251d8a00a.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/53f251d8a00a.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/546ba524aeb5.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/546ba524aeb5.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/54c55142285d.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/54c55142285d.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/554fea8c7a94.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/554fea8c7a94.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/55815d642fed.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/55815d642fed.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/5603b67c86e8.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/5603b67c86e8.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/566c2ddd0c5b.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/566c2ddd0c5b.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/57293674ff9b.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/57293674ff9b.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/579a9c27b342.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/579a9c27b342.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/5871c255024a.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/5871c255024a.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/58b5de4c1425.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/58b5de4c1425.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/597f841c1e66.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/597f841c1e66.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/59fd7afe9404.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/59fd7afe9404.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/5a783d5f5ddc.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/5a783d5f5ddc.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/5b20eff0ff9a.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/5b20eff0ff9a.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/5ba1ab970b7d.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/5ba1ab970b7d.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/5c9116b9d9c4.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/5c9116b9d9c4.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/5d34d4eba56c.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/5d34d4eba56c.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/5dc43d9fb0fe.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/5dc43d9fb0fe.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/5e6dfc09cbfc.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/5e6dfc09cbfc.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/5ef5492cfe09.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/5ef5492cfe09.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/5fb52025f6a0.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/5fb52025f6a0.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/6051ee315adb.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/6051ee315adb.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/612498220f14.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/612498220f14.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/6192fe8c9a45.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/6192fe8c9a45.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/62055895a1e1.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/62055895a1e1.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/62b0e8708c49.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/62b0e8708c49.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/630e7f9b2032.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/630e7f9b2032.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/63786750b2ed.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/63786750b2ed.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/63db3305a656.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/63db3305a656.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/641ab2dcf139.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/641ab2dcf139.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/64813497c65f.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/64813497c65f.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/64d549bfa5c8.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/64d549bfa5c8.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/658224580ab9.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/658224580ab9.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/661018945652.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/661018945652.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/66683cb0a7f5.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/66683cb0a7f5.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/670da2fcea5c.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/670da2fcea5c.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/67598385fdbe.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/67598385fdbe.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/6848ffcc80e9.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/6848ffcc80e9.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/68ac9d2368d5.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/68ac9d2368d5.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/69040266a68f.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/69040266a68f.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/696e139a09a0.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/696e139a09a0.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/6a040fe1d8fa.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/6a040fe1d8fa.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/6ab78fc7ec5c.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/6ab78fc7ec5c.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/6b3033449d69.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/6b3033449d69.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/6c62472d8a68.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/6c62472d8a68.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/6d2267a4145f.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/6d2267a4145f.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/6daadd324f3f.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/6daadd324f3f.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/6e2a79c50cb7.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/6e2a79c50cb7.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/6e7c59469843.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/6e7c59469843.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/6f555603ecfb.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/6f555603ecfb.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/7013af85cd90.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/7013af85cd90.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/71273530adb0.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/71273530adb0.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/71777bdf8e5b.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/71777bdf8e5b.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/7207a37d573f.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/7207a37d573f.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/72883b343070.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/72883b343070.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/7337a458dad9.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/7337a458dad9.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/73ee728b164e.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/73ee728b164e.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/746dee18150b.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/746dee18150b.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/752cdc61238c.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/752cdc61238c.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/75e2f9ef2cf3.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/75e2f9ef2cf3.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/7656c07fa9f0.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/7656c07fa9f0.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/76fdffc8025c.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/76fdffc8025c.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/7792b252e10e.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/7792b252e10e.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/783bb225ba1e.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/783bb225ba1e.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/78e6751fe9a2.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/78e6751fe9a2.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/7951b6b6d9dd.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/7951b6b6d9dd.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/79e87006cc32.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/79e87006cc32.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/7a824810c892.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/7a824810c892.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/7b170d547ebc.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/7b170d547ebc.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/7b796de47fa2.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/7b796de47fa2.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/7c3aa6a15a55.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/7c3aa6a15a55.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/7d07a1dbb71c.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/7d07a1dbb71c.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/7da064641570.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/7da064641570.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/7e2bcfbd1d98.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/7e2bcfbd1d98.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/7ec506f79201.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/7ec506f79201.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/80045fc1411f.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/80045fc1411f.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/8089b3a959c7.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/8089b3a959c7.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/811c94bd364c.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/811c94bd364c.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/81932f60d040.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/81932f60d040.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/828df6fa927f.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/828df6fa927f.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/8302f6445e96.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/8302f6445e96.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/8389a571d16c.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/8389a571d16c.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/840f7913efe5.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/840f7913efe5.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/84a4a08b5129.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/84a4a08b5129.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/8534f6db62c2.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/8534f6db62c2.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/860ba7e85dfb.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/860ba7e85dfb.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/86e5a02d4323.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/86e5a02d4323.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/873d416bbcbd.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/873d416bbcbd.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/87ab273e02d7.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/87ab273e02d7.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/8825bf76fa15.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/8825bf76fa15.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/8894a644fc55.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/8894a644fc55.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/88ecd278673b.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/88ecd278673b.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/899eb409b8eb.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/899eb409b8eb.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/8a526a55a92d.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/8a526a55a92d.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/8ae043b80e62.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/8ae043b80e62.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/8b89b8c13298.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/8b89b8c13298.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/8bf51d1ab36e.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/8bf51d1ab36e.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/8cbe3fbadbe1.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/8cbe3fbadbe1.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/8d98277ed4d6.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/8d98277ed4d6.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/8e25001d84db.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/8e25001d84db.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/8ea23f3c1e34.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/8ea23f3c1e34.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/8f5cc71784fe.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/8f5cc71784fe.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/8fac92e6e27c.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/8fac92e6e27c.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/905d011ab422.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/905d011ab422.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/90a9763d9c68.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/90a9763d9c68.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/914d529af473.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/914d529af473.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/91c764d27a8d.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/91c764d27a8d.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/92828b983b9d.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/92828b983b9d.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/9309e1552fec.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/9309e1552fec.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/93b6522b4a59.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/93b6522b4a59.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/94347d58708c.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/94347d58708c.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/94edf1461ad4.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/94edf1461ad4.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/959cbed8df20.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/959cbed8df20.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/95f19926e253.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/95f19926e253.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/969261a06eb3.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/969261a06eb3.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/9719d67ce774.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/9719d67ce774.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/9792820a5f61.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/9792820a5f61.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/97d600cee2f9.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/97d600cee2f9.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/98902549090f.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/98902549090f.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/9925ad0fb9b2.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/9925ad0fb9b2.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/998a335c737b.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/998a335c737b.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/9a5378d639e3.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/9a5378d639e3.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/9b19c376400c.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/9b19c376400c.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/9babdc95e845.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/9babdc95e845.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/9c51697b0dcc.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/9c51697b0dcc.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/9cdabf3478e8.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/9cdabf3478e8.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/9d54718ab2c0.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/9d54718ab2c0.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/9dea6b0c1f0d.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/9dea6b0c1f0d.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/9e6010550db7.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/9e6010550db7.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/9ebc2ea3ad42.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/9ebc2ea3ad42.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/9f168ad00ea6.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/9f168ad00ea6.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/9f6e1354888a.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/9f6e1354888a.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/9fe80629c2ae.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/9fe80629c2ae.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/a05ea4c2595c.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/a05ea4c2595c.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/a132596f48b9.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/a132596f48b9.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/a1c0728a0f11.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/a1c0728a0f11.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/a2a44baaed4d.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/a2a44baaed4d.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/a3503c2ba255.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/a3503c2ba255.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/a40b6d67a05f.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/a40b6d67a05f.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/a472b2c97d37.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/a472b2c97d37.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/a55b6412dc40.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/a55b6412dc40.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/a5dba96edf1d.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/a5dba96edf1d.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/a65141430436.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/a65141430436.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/a6b6060462d3.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/a6b6060462d3.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/a73ea7ef1e86.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/a73ea7ef1e86.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/a7a1bf483467.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/a7a1bf483467.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/a812a69ba685.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/a812a69ba685.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/a8e642da5111.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/a8e642da5111.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/a9514400076b.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/a9514400076b.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/a9eab68c1c2a.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/a9eab68c1c2a.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/aa71ecbee5ca.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/aa71ecbee5ca.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/aaf769433ad1.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/aaf769433ad1.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/abbe30c31653.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/abbe30c31653.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/ac599a8fce4d.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/ac599a8fce4d.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/ad17fedd14e4.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/ad17fedd14e4.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/ad8d9afbfdff.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/ad8d9afbfdff.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/ae23f96bc22e.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/ae23f96bc22e.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/aeb8192d5c2a.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/aeb8192d5c2a.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/af17bb5cd5db.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/af17bb5cd5db.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/afb6bb1a9cfc.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/afb6bb1a9cfc.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/b043ebceaca5.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/b043ebceaca5.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/b11fe3ea9c9b.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/b11fe3ea9c9b.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/b19cb60007ba.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/b19cb60007ba.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/b2319a349f5e.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/b2319a349f5e.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/b2ac4a1d6ff3.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/b2ac4a1d6ff3.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/b3693ef15524.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/b3693ef15524.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/b3f23b4168ba.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/b3f23b4168ba.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/b479aec0ad24.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/b479aec0ad24.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/b57e41c90792.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/b57e41c90792.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/b620e79c11cf.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/b620e79c11cf.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/b6d89c5098a4.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/b6d89c5098a4.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/b740c024120c.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/b740c024120c.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/b803b9ffab14.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/b803b9ffab14.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/b964838724b0.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/b964838724b0.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/ba0a87488e37.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/ba0a87488e37.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/ba76992f75e4.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/ba76992f75e4.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/badd29f00ebe.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/badd29f00ebe.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/bb2c136b644f.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/bb2c136b644f.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/bbc3ec6bb8c5.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/bbc3ec6bb8c5.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/bc65b1851a03.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/bc65b1851a03.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/bcf741f3d9ca.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/bcf741f3d9ca.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/bdd87a149268.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/bdd87a149268.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/bed8bf3a1c67.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/bed8bf3a1c67.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/bf4a211794b8.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/bf4a211794b8.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/bf9b261f84b9.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/bf9b261f84b9.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/bffcd1a06b1d.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/bffcd1a06b1d.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/c06beb0c2e47.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/c06beb0c2e47.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/c12d9e3e1666.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/c12d9e3e1666.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/c1c8f6f8976a.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/c1c8f6f8976a.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/c200e60fa3b8.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/c200e60fa3b8.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/c2cd92d73f6c.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/c2cd92d73f6c.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/c335677b5e7f.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/c335677b5e7f.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/c38db52be537.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/c38db52be537.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/c45c5e9d1c09.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/c45c5e9d1c09.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/c4d9fa564ef1.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/c4d9fa564ef1.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/c535a57555d6.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/c535a57555d6.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/c5f596dde699.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/c5f596dde699.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/c683da602f6b.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/c683da602f6b.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/c72448961b86.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/c72448961b86.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/c7d8fda89062.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/c7d8fda89062.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/c839b031dc31.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/c839b031dc31.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/c8a04b7fabaa.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/c8a04b7fabaa.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/c931f7613b02.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/c931f7613b02.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/c9d0997d7a85.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/c9d0997d7a85.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/ca96cbdc5806.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/ca96cbdc5806.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/cb23e3ee6c38.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/cb23e3ee6c38.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/cc03ec74d5d8.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/cc03ec74d5d8.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/cca39135c34a.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/cca39135c34a.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/cd5061f1cab1.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/cd5061f1cab1.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/cdc6a5bb0f60.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/cdc6a5bb0f60.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/ce52a17a2c9f.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/ce52a17a2c9f.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/ceee45a43cff.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/ceee45a43cff.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/cf949640ee07.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/cf949640ee07.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/d0449e503e2e.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/d0449e503e2e.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/d0f77d00e108.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/d0f77d00e108.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/d18b565c8798.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/d18b565c8798.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/d1fdc7597713.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/d1fdc7597713.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/d2a6a26430e6.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/d2a6a26430e6.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/d3254642e6cd.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/d3254642e6cd.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/d35f5ee6f2c3.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/d35f5ee6f2c3.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/d3bdf719cf12.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/d3bdf719cf12.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/d43f002f28c1.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/d43f002f28c1.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/d4cc3f10748a.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/d4cc3f10748a.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/d56f3374e087.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/d56f3374e087.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/d5f3e4c9906d.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/d5f3e4c9906d.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/d6413a3ee46f.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/d6413a3ee46f.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/d6986337d4ee.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/d6986337d4ee.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/d799d76e6385.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/d799d76e6385.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/d84c5d57b193.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/d84c5d57b193.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/d8e4694ba34d.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/d8e4694ba34d.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/d99b96011a61.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/d99b96011a61.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/da8187186b72.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/da8187186b72.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/daca2d747a37.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/daca2d747a37.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/db6f24ae73b1.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/db6f24ae73b1.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/dc4196bd7360.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/dc4196bd7360.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/dc9101334054.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/dc9101334054.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/dd13511a9ba5.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/dd13511a9ba5.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/ddc4e45a170a.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/ddc4e45a170a.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/de4eb2ec02aa.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/de4eb2ec02aa.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/df1fc03ccd66.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/df1fc03ccd66.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/dfd6944c241e.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/dfd6944c241e.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/e0255a7b9209.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/e0255a7b9209.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/e138a33b2cc6.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/e138a33b2cc6.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/e1b0da2795a8.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/e1b0da2795a8.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/e240d256bbf6.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/e240d256bbf6.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/e3726c19ce48.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/e3726c19ce48.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/e41741ae94ae.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/e41741ae94ae.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/e4dbdc10bd3a.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/e4dbdc10bd3a.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/e57d63569ed6.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/e57d63569ed6.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/e64645977860.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/e64645977860.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/e6a6cff63172.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/e6a6cff63172.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/e74241beb895.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/e74241beb895.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/e899d8572f86.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/e899d8572f86.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/e95cf9a6b4ed.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/e95cf9a6b4ed.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/ea21c76108b9.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/ea21c76108b9.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/eab6231825e7.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/eab6231825e7.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/eb473e964ca9.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/eb473e964ca9.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/ebdfe142ca28.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/ebdfe142ca28.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/ec8fc345bc8a.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/ec8fc345bc8a.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/ed0b8acb4dbd.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/ed0b8acb4dbd.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/ed6337897380.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/ed6337897380.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/edd737da0cfe.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/edd737da0cfe.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/ee8092857735.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/ee8092857735.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/eed8650b2598.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/eed8650b2598.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/ef74913bc609.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/ef74913bc609.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/f0575533420a.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/f0575533420a.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/f101e2ae4b28.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/f101e2ae4b28.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/f1fb48df3c0b.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/f1fb48df3c0b.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/f2494177a84b.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/f2494177a84b.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/f2d26ca911eb.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/f2d26ca911eb.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/f365578a41b4.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/f365578a41b4.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/f3f14328608e.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/f3f14328608e.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/f466793fc1df.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/f466793fc1df.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/f58214155f21.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/f58214155f21.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/f5ff9b2eb362.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/f5ff9b2eb362.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/f6aa0071a4ea.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/f6aa0071a4ea.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/f711ff112eec.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/f711ff112eec.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/f7d100fbee2c.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/f7d100fbee2c.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/f878612f4a72.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/f878612f4a72.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/f997fc68a13e.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/f997fc68a13e.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/fa28d5f1e876.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/fa28d5f1e876.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/fa96749dbd7a.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/fa96749dbd7a.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/fb1fe2c636e9.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/fb1fe2c636e9.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/fba7565891ac.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/fba7565891ac.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/fc1186747c23.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/fc1186747c23.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/fc7e6385a227.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/fc7e6385a227.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/fd03a3b9cb54.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/fd03a3b9cb54.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/fd84993f3d0b.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/fd84993f3d0b.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/fe994fe614e0.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/fe994fe614e0.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/ff5afbe9b7e7.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/ff5afbe9b7e7.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "esbuild/k3ie-04.js",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/esbuild-cases/k3ie-04.js",
+      "timeout_s": 6
+    },
+    {
+      "id": "enum/enum-auto.ts",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/enum-chain-src/enum-auto.ts",
+      "timeout_s": 10
+    },
+    {
+      "id": "enum/enum-basic.ts",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/enum-chain-src/enum-basic.ts",
+      "timeout_s": 10
+    },
+    {
+      "id": "enum/enum-export.ts",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/enum-chain-src/enum-export.ts",
+      "timeout_s": 10
+    },
+    {
+      "id": "enum/enum-string.ts",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/enum-chain-src/enum-string.ts",
+      "timeout_s": 10
+    },
+    {
+      "id": "enum/enum-values.ts",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/enum-chain-src/enum-values.ts",
+      "timeout_s": 10
+    },
+    {
+      "id": "enum/namespace-basic.ts",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/enum-chain-src/namespace-basic.ts",
+      "timeout_s": 10
+    },
+    {
+      "id": "enum/namespace-export.ts",
+      "group": "wide",
+      "driver": "single",
+      "entry": "testdata/enum-chain-src/namespace-export.ts",
+      "timeout_s": 10
+    },
+    {
+      "id": "three/three.core.js",
+      "group": "three-proxy",
+      "driver": "single",
+      "entry": "testdata/three/package/build/three.core.js",
+      "timeout_s": 120
+    },
+    {
+      "id": "three/three.module.js",
+      "group": "three-proxy",
+      "driver": "multi",
+      "entry": "testdata/three/package/build/three.module.js",
+      "timeout_s": 120
+    },
+    {
+      "id": "three/three.tsl.js",
+      "group": "three-proxy",
+      "driver": "multi",
+      "entry": "testdata/three/package/build/three.tsl.js",
+      "timeout_s": 120
+    },
+    {
+      "id": "three/three.webgpu.js",
+      "group": "three-proxy",
+      "driver": "multi",
+      "entry": "testdata/three/package/build/three.webgpu.js",
+      "timeout_s": 120
+    },
+    {
+      "id": "three/three.webgpu.nodes.js",
+      "group": "three-proxy",
+      "driver": "multi",
+      "entry": "testdata/three/package/build/three.webgpu.nodes.js",
+      "timeout_s": 120
+    }
+  ]
+}

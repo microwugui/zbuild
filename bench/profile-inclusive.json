@@ -1,0 +1,218 @@
+{
+  "profile": "bench/profiles/stage1-three.module.cpuprofile",
+  "total_self_ms": 6235.32,
+  "samples": 4777,
+  "note": "inclusive=沿调用栈含被调子树；同一函数每栈只计一次；分类 rollup 因容器函数会污染子树，不提供，改用 profile-stage1.json 的 self-time 分类",
+  "top_inclusive_functions": [
+    {
+      "function": "(root) @ :-1",
+      "category": "other",
+      "inclusive_ms": 6235.32,
+      "inclusive_pct": 100.0,
+      "self_ms": 0.0
+    },
+    {
+      "function": "evaluate @ :-1",
+      "category": "other",
+      "inclusive_ms": 4899.06,
+      "inclusive_pct": 78.57,
+      "self_ms": 1.04
+    },
+    {
+      "function": "run @ module_job:331",
+      "category": "other",
+      "inclusive_ms": 4877.2,
+      "inclusive_pct": 78.22,
+      "self_ms": 1.1
+    },
+    {
+      "function": "(anonymous) @ bundle_multi.ts:0",
+      "category": "treeshake-link",
+      "inclusive_ms": 4862.93,
+      "inclusive_pct": 77.99,
+      "self_ms": 4.33
+    },
+    {
+      "function": "bundleWithImports @ bundle_multi.ts:120",
+      "category": "treeshake-link",
+      "inclusive_ms": 4843.44,
+      "inclusive_pct": 77.68,
+      "self_ms": 15.2
+    },
+    {
+      "function": "parseFile @ bundle_multi.ts:51",
+      "category": "parsing-lexing",
+      "inclusive_ms": 2925.96,
+      "inclusive_pct": 46.93,
+      "self_ms": 16.41
+    },
+    {
+      "function": "load @ bundle_multi.ts:128",
+      "category": "treeshake-link",
+      "inclusive_ms": 2925.96,
+      "inclusive_pct": 46.93,
+      "self_ms": 0.0
+    },
+    {
+      "function": "Parse @ js_parser.ts:11238",
+      "category": "parsing-lexing",
+      "inclusive_ms": 2905.7,
+      "inclusive_pct": 46.6,
+      "self_ms": 34.63
+    },
+    {
+      "function": "parseStmtsUpTo @ js_parser.ts:4702",
+      "category": "parsing-lexing",
+      "inclusive_ms": 2096.07,
+      "inclusive_pct": 33.62,
+      "self_ms": 87.16
+    },
+    {
+      "function": "parseStmt @ js_parser.ts:4756",
+      "category": "parsing-lexing",
+      "inclusive_ms": 2090.08,
+      "inclusive_pct": 33.52,
+      "self_ms": 104.11
+    },
+    {
+      "function": "parseFn @ js_parser.ts:6519",
+      "category": "parsing-lexing",
+      "inclusive_ms": 1704.15,
+      "inclusive_pct": 27.33,
+      "self_ms": 17.86
+    },
+    {
+      "function": "parseFnBody @ js_parser.ts:1942",
+      "category": "parsing-lexing",
+      "inclusive_ms": 1636.83,
+      "inclusive_pct": 26.25,
+      "self_ms": 13.02
+    },
+    {
+      "function": "printOne @ bundle_multi.ts:264",
+      "category": "printing",
+      "inclusive_ms": 1495.68,
+      "inclusive_pct": 23.99,
+      "self_ms": 0.0
+    },
+    {
+      "function": "Print @ js_printer.ts:3492",
+      "category": "printing",
+      "inclusive_ms": 1495.0,
+      "inclusive_pct": 23.98,
+      "self_ms": 22.78
+    },
+    {
+      "function": "printStmt @ js_printer.ts:2961",
+      "category": "printing",
+      "inclusive_ms": 1471.73,
+      "inclusive_pct": 23.6,
+      "self_ms": 43.69
+    },
+    {
+      "function": "parseClassStmt @ js_parser.ts:6704",
+      "category": "parsing-lexing",
+      "inclusive_ms": 1362.96,
+      "inclusive_pct": 21.86,
+      "self_ms": 10.84
+    },
+    {
+      "function": "parseClass @ js_parser.ts:6771",
+      "category": "parsing-lexing",
+      "inclusive_ms": 1343.39,
+      "inclusive_pct": 21.54,
+      "self_ms": 16.48
+    },
+    {
+      "function": "printExpr @ js_printer.ts:2407",
+      "category": "printing",
+      "inclusive_ms": 1330.72,
+      "inclusive_pct": 21.34,
+      "self_ms": 79.26
+    },
+    {
+      "function": "printExprInner @ js_printer.ts:1521",
+      "category": "printing",
+      "inclusive_ms": 1320.24,
+      "inclusive_pct": 21.17,
+      "self_ms": 228.62
+    },
+    {
+      "function": "parseProperty @ js_parser.ts:6854",
+      "category": "parsing-lexing",
+      "inclusive_ms": 1311.68,
+      "inclusive_pct": 21.04,
+      "self_ms": 28.79
+    },
+    {
+      "function": "printExprWithoutLeadingNewline @ js_printer.ts:1501",
+      "category": "printing",
+      "inclusive_ms": 1195.41,
+      "inclusive_pct": 19.17,
+      "self_ms": 5.04
+    },
+    {
+      "function": "printDecls @ js_printer.ts:2421",
+      "category": "printing",
+      "inclusive_ms": 1166.09,
+      "inclusive_pct": 18.7,
+      "self_ms": 19.84
+    },
+    {
+      "function": "printDeclStmt @ js_printer.ts:2710",
+      "category": "printing",
+      "inclusive_ms": 1159.07,
+      "inclusive_pct": 18.59,
+      "self_ms": 4.39
+    },
+    {
+      "function": "printFn @ js_printer.ts:1276",
+      "category": "printing",
+      "inclusive_ms": 1107.92,
+      "inclusive_pct": 17.77,
+      "self_ms": 7.2
+    },
+    {
+      "function": "printBlock @ js_printer.ts:2736",
+      "category": "printing",
+      "inclusive_ms": 1087.13,
+      "inclusive_pct": 17.44,
+      "self_ms": 51.67
+    },
+    {
+      "function": "parseExpr @ js_parser.ts:7518",
+      "category": "parsing-lexing",
+      "inclusive_ms": 1017.77,
+      "inclusive_pct": 16.32,
+      "self_ms": 4.39
+    },
+    {
+      "function": "parseExprCommon @ js_parser.ts:7523",
+      "category": "parsing-lexing",
+      "inclusive_ms": 1014.48,
+      "inclusive_pct": 16.27,
+      "self_ms": 139.49
+    },
+    {
+      "function": "printProperty @ js_printer.ts:1283",
+      "category": "printing",
+      "inclusive_ms": 930.96,
+      "inclusive_pct": 14.93,
+      "self_ms": 18.48
+    },
+    {
+      "function": "encode @ encoding:350",
+      "category": "utf8-encode",
+      "inclusive_ms": 904.5,
+      "inclusive_pct": 14.51,
+      "self_ms": 694.82
+    },
+    {
+      "function": "printClass @ js_printer.ts:2826",
+      "category": "printing",
+      "inclusive_ms": 891.33,
+      "inclusive_pct": 14.29,
+      "self_ms": 5.4
+    }
+  ]
+}

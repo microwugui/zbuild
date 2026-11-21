@@ -1,0 +1,20 @@
+{
+  "entry": "/root/port/testdata/three/package/build/three.module.js",
+  "n": 12,
+  "warmup": 3,
+  "outBytes": 1709893,
+  "pass1_base_ms_median": 2816.6124,
+  "pass1_cand_ms_median": 2898.8886,
+  "pass2_base_ms_median": 2970.9597,
+  "pass2_cand_ms_median": 3164.3783,
+  "pass1_ratio": 0.9716,
+  "pass2_ratio": 0.9389,
+  "speedup_base_over_cand": 0.9551,
+  "ci95_speedup": [
+    0.9337,
+    0.9719
+  ],
+  "bytesEqual": true,
+  "verdict": "SIGNIFICANT_SLOWER",
+  "note": "crossover 4-instance in-process paired A/B; rc=sqrt(r1*r2) cancels multiplicative first-import bias; CI of median(base/cand) via paired bootstrap B=20000; >1=cand faster; CI含1不算赢"
+}

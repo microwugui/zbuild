@@ -303,10 +303,13 @@ export function bundleWithImports(entryPath: string): BundleMultiResult {
   }
 }
 
+// 阶段0：仅在被直接执行（node src/<file>.ts ...）时跑 CLI；被 import 时不跑，
+// 供 bench/ab.ts 进程内配对 A/B 加载两个模块实例（CLI 行为不变）。
+const _invoked = process.argv[1] && /bundle_(multi|1)\.ts$/.test(process.argv[1]);
 const argv = process.argv.slice(2);
 let entry = "";
 for (const arg of argv) if (!arg.startsWith("--")) { entry = arg; break; }
-if (entry) {
+if (entry && _invoked) {
   const res = bundleWithImports(entry);
   if (!res.ok) { console.error("bundle_multi: " + res.error); process.exit(1); }
   writeFileSync(1, res.output);

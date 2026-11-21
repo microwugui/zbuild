@@ -1,0 +1,64 @@
+{
+  "generatedAt": "2026-11-21T04:17:27.312267+00:00",
+  "base": "/root/port-baseline/src/bundle_multi.ts",
+  "cand": "/root/port/src/bundle_multi.ts",
+  "entry": "testdata/three/package/build/three.module.js",
+  "blocks_per_order": 3,
+  "n_per_block": 10,
+  "warmup": 3,
+  "samples_forward": 30,
+  "samples_reverse": 30,
+  "forward_ratio_median": 0.9608,
+  "reverse_ratio_median": 0.9721,
+  "outBytes": 1709893,
+  "outSha": "2985154b88b53598f62e3801c362c0f9c90f6a4154667fd4cd2754f242cda9b4",
+  "speedup_base_over_cand": 0.9664,
+  "ci95_speedup": [
+    0.9501,
+    0.98
+  ],
+  "bytesEqual": true,
+  "verdict": "NOT_SIGNIFICANT",
+  "ciExcludes1": true,
+  "minEffect": 0.05,
+  "effectExceedsFloor": false,
+  "per_block": [
+    {
+      "order": "base-first",
+      "baseMed": 2622.006,
+      "candMed": 2703.718,
+      "n": 10
+    },
+    {
+      "order": "base-first",
+      "baseMed": 2531.329,
+      "candMed": 2583.042,
+      "n": 10
+    },
+    {
+      "order": "base-first",
+      "baseMed": 2587.6,
+      "candMed": 2716.289,
+      "n": 10
+    },
+    {
+      "order": "cand-first",
+      "baseMed": 2538.872,
+      "candMed": 2676.147,
+      "n": 10
+    },
+    {
+      "order": "cand-first",
+      "baseMed": 2557.235,
+      "candMed": 2672.357,
+      "n": 10
+    },
+    {
+      "order": "cand-first",
+      "baseMed": 2657.091,
+      "candMed": 2648.986,
+      "n": 10
+    }
+  ],
+  "note": "process-level crossover; speedup=sqrt(median(base-first)*median(cand-first)); bootstrap B=20000 re-samples each order group; >1=cand faster; CI含1不算赢"
+}

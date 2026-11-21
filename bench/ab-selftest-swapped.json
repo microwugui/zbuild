@@ -1,0 +1,23 @@
+{
+  "entry": "/root/port/testdata/three/package/build/three.module.js",
+  "n": 24,
+  "warmup": 4,
+  "base_ms": {
+    "median": 2624.0711,
+    "p10": 2488.2018,
+    "p90": 2847.2695
+  },
+  "cand_ms": {
+    "median": 2737.3087,
+    "p10": 2576.5571,
+    "p90": 3080.109
+  },
+  "ratio_base_over_cand": 0.9586,
+  "ci95_ratio": [
+    0.9266,
+    1.0187
+  ],
+  "bytesEqual": true,
+  "verdict": "NOT_SIGNIFICANT",
+  "note": "in-process paired A/B; CI of median(base/cand) via paired bootstrap B=20000; CI 含 1.0 不算赢"
+}
