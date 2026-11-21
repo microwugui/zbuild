@@ -1,0 +1,849 @@
+{
+  "note": "基线 TS 产物 vs Go 0.28.2 逐字节；ERROR==ERROR 视为等价失败；three tsl/webgpu 的已知未收敛会单列",
+  "cases": 55,
+  "mismatches": 24,
+  "mismatchIds": [
+    "esbuild/0b9fa734e490.js",
+    "esbuild/1b80012d708e.js",
+    "esbuild/1eb79602411e.js",
+    "esbuild/237ac7fbc747.js",
+    "esbuild/27bc0aef5322.js",
+    "esbuild/30dc929b0a0d.js",
+    "esbuild/359996f9cf09.js",
+    "esbuild/3f451b76dbdc.js",
+    "esbuild/4d6f8c3ec1c4.js",
+    "esbuild/597f841c1e66.js",
+    "esbuild/630e7f9b2032.js",
+    "esbuild/6ab78fc7ec5c.js",
+    "esbuild/7013af85cd90.js",
+    "esbuild/8894a644fc55.js",
+    "esbuild/8d98277ed4d6.js",
+    "esbuild/91c764d27a8d.js",
+    "esbuild/a812a69ba685.js",
+    "esbuild/b19cb60007ba.js",
+    "esbuild/bbc3ec6bb8c5.js",
+    "esbuild/c06beb0c2e47.js",
+    "esbuild/d6986337d4ee.js",
+    "three/three.tsl.js",
+    "three/three.webgpu.js",
+    "three/three.webgpu.nodes.js"
+  ],
+  "results": [
+    {
+      "id": "b1fix/class.js",
+      "driver": "single",
+      "ts": {
+        "status": "OK",
+        "sha": "38e5786886a15ae6735ee460e43572857a148700cf270fbb4260dce47fb3a767",
+        "len": 188
+      },
+      "go": {
+        "status": "OK",
+        "sha": "38e5786886a15ae6735ee460e43572857a148700cf270fbb4260dce47fb3a767",
+        "len": 188
+      },
+      "equal": true
+    },
+    {
+      "id": "esbuild/02194291dcd0.js",
+      "driver": "single",
+      "ts": {
+        "status": "OK",
+        "sha": "a3aef4c2eefef094683fe2e262e226c696cd32c9cc272a64fa113d37dec0e978",
+        "len": 52
+      },
+      "go": {
+        "status": "OK",
+        "sha": "a3aef4c2eefef094683fe2e262e226c696cd32c9cc272a64fa113d37dec0e978",
+        "len": 52
+      },
+      "equal": true
+    },
+    {
+      "id": "esbuild/07503f7518b6.js",
+      "driver": "single",
+      "ts": {
+        "status": "OK",
+        "sha": "f4abec1b823e52ede51fa979eaf51d05a1c64682320e3afcf75b6eca508b0bde",
+        "len": 58
+      },
+      "go": {
+        "status": "OK",
+        "sha": "f4abec1b823e52ede51fa979eaf51d05a1c64682320e3afcf75b6eca508b0bde",
+        "len": 58
+      },
+      "equal": true
+    },
+    {
+      "id": "esbuild/0b9fa734e490.js",
+      "driver": "single",
+      "ts": {
+        "status": "OK",
+        "sha": "b3ed8284109fc28d9d80e2164d2fb799f9853f8f87a212caaa92cf2d6be50e75",
+        "len": 79
+      },
+      "go": {
+        "status": "OK",
+        "sha": "7324c14f33228c7fad7ac849089fac12306afd421777490cf06dd1d24d5a6dcd",
+        "len": 45
+      },
+      "equal": false
+    },
+    {
+      "id": "esbuild/10ad73601da8.js",
+      "driver": "single",
+      "ts": {
+        "status": "OK",
+        "sha": "b428a635843082944775cf1421fcea8c93509b5953bc8290c897f756b0eeb9a0",
+        "len": 54
+      },
+      "go": {
+        "status": "OK",
+        "sha": "b428a635843082944775cf1421fcea8c93509b5953bc8290c897f756b0eeb9a0",
+        "len": 54
+      },
+      "equal": true
+    },
+    {
+      "id": "esbuild/16042b9e69d8.js",
+      "driver": "single",
+      "ts": {
+        "status": "OK",
+        "sha": "59a684be5e5eff07d01c691aa4f9051ea95548f93487592b9bf4751403fa161f",
+        "len": 58
+      },
+      "go": {
+        "status": "OK",
+        "sha": "59a684be5e5eff07d01c691aa4f9051ea95548f93487592b9bf4751403fa161f",
+        "len": 58
+      },
+      "equal": true
+    },
+    {
+      "id": "esbuild/1b80012d708e.js",
+      "driver": "single",
+      "ts": {
+        "status": "OK",
+        "sha": "7f8baf2cda45a1a23933faf00e89c184e3c1447d843fb1ecb51491fc569b6417",
+        "len": 91
+      },
+      "go": {
+        "status": "OK",
+        "sha": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "len": 0
+      },
+      "equal": false
+    },
+    {
+      "id": "esbuild/1eb79602411e.js",
+      "driver": "single",
+      "ts": {
+        "status": "OK",
+        "sha": "d24314e36815d2fd047a30e5e40ebe17414aa67abefa09e3f816b4ef9b947ed2",
+        "len": 48
+      },
+      "go": {
+        "status": "OK",
+        "sha": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "len": 0
+      },
+      "equal": false
+    },
+    {
+      "id": "esbuild/237ac7fbc747.js",
+      "driver": "single",
+      "ts": {
+        "status": "OK",
+        "sha": "55c4ac214e33d1cb9fdd4bad28cec53313d73b88520a12bea1c4cc9bfaa37a3e",
+        "len": 67
+      },
+      "go": {
+        "status": "ERROR",
+        "detail": "idered to be an ECMAScript module because the enclosing \"package.json\" file sets the type of this file to \"module\":\n\n    package.json:4:10:\n      4 │   \"type\": \"module\",\n        ╵           ~~~~~~~~\n\n"
+      },
+      "equal": false
+    },
+    {
+      "id": "esbuild/27bc0aef5322.js",
+      "driver": "single",
+      "ts": {
+        "status": "OK",
+        "sha": "ee85355569cf6baa56c664aab45c26e859f952550c0e0448451e28632dd1a6ed",
+        "len": 141
+      },
+      "go": {
+        "status": "ERROR",
+        "detail": ".js:1:0:\n      1 │ <a>\n        ╵ ^\n\n  The esbuild loader for this file is currently set to \"js\" but it must be set to \"jsx\" to be able to parse JSX syntax. You can use \"--loader:.js=jsx\" to do that.\n\n"
+      },
+      "equal": false
+    },
+    {
+      "id": "esbuild/2c56e24c01b5.js",
+      "driver": "single",
+      "ts": {
+        "status": "OK",
+        "sha": "c5c375f33e89a91ec537ff123e75bdea1038e9f7621b654d9fb4e3962d7c2f6c",
+        "len": 51
+      },
+      "go": {
+        "status": "OK",
+        "sha": "c5c375f33e89a91ec537ff123e75bdea1038e9f7621b654d9fb4e3962d7c2f6c",
+        "len": 51
+      },
+      "equal": true
+    },
+    {
+      "id": "esbuild/30dc929b0a0d.js",
+      "driver": "single",
+      "ts": {
+        "status": "OK",
+        "sha": "826263a1065a18018a663f24f3e33c81eef34cdc552bc59877efd4f8e045e157",
+        "len": 90
+      },
+      "go": {
+        "status": "OK",
+        "sha": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "len": 0
+      },
+      "equal": false
+    },
+    {
+      "id": "esbuild/359996f9cf09.js",
+      "driver": "single",
+      "ts": {
+        "status": "OK",
+        "sha": "1ac53c2604d3e8669b766d38169b45e340f5d9df7b2a7fcef5e89f38b1c1fe68",
+        "len": 82
+      },
+      "go": {
+        "status": "ERROR",
+        "detail": "m 'x' with {x: 'y'}\n        ╵                    ~~~\n\n  You can mark the path \"x\" as external to exclude it from the bundle, which will remove this error and leave the unresolved path in the bundle.\n\n"
+      },
+      "equal": false
+    },
+    {
+      "id": "esbuild/3a8e3f9e083b.js",
+      "driver": "single",
+      "ts": {
+        "status": "OK",
+        "sha": "ac0d438330f361e5601700fa8cba76fa652af4c84fcddb60185c65fc72e71a16",
+        "len": 71
+      },
+      "go": {
+        "status": "OK",
+        "sha": "ac0d438330f361e5601700fa8cba76fa652af4c84fcddb60185c65fc72e71a16",
+        "len": 71
+      },
+      "equal": true
+    },
+    {
+      "id": "esbuild/3f451b76dbdc.js",
+      "driver": "single",
+      "ts": {
+        "status": "OK",
+        "sha": "211b6213e3b1cf25aba02174529ea39ed16ea588aa18c311b2e6f95a07937ee9",
+        "len": 87
+      },
+      "go": {
+        "status": "OK",
+        "sha": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "len": 0
+      },
+      "equal": false
+    },
+    {
+      "id": "esbuild/440d8a2008e3.js",
+      "driver": "single",
+      "ts": {
+        "status": "OK",
+        "sha": "771e9d640bfb449e80398525e0a89bc0f3d3d650c6a88799873c7ab22431c114",
+        "len": 55
+      },
+      "go": {
+        "status": "OK",
+        "sha": "771e9d640bfb449e80398525e0a89bc0f3d3d650c6a88799873c7ab22431c114",
+        "len": 55
+      },
+      "equal": true
+    },
+    {
+      "id": "esbuild/48b9307387bf.js",
+      "driver": "single",
+      "ts": {
+        "status": "OK",
+        "sha": "2c821db4b567fe7b8d274d3cea6489801dfd3fb77bf625db55b1506e01be5bae",
+        "len": 64
+      },
+      "go": {
+        "status": "OK",
+        "sha": "2c821db4b567fe7b8d274d3cea6489801dfd3fb77bf625db55b1506e01be5bae",
+        "len": 64
+      },
+      "equal": true
+    },
+    {
+      "id": "esbuild/4d6f8c3ec1c4.js",
+      "driver": "single",
+      "ts": {
+        "status": "OK",
+        "sha": "1ededb592bbbe1c8f3852f21b75f28fe8de35963e23c7aec8d9c418ddf537381",
+        "len": 106
+      },
+      "go": {
+        "status": "OK",
+        "sha": "19adb9562b140d5c00a69fb33fc133d29901582a5155f0c96eb22983f3aae222",
+        "len": 122
+      },
+      "equal": false
+    },
+    {
+      "id": "esbuild/5127a27fa5da.js",
+      "driver": "single",
+      "ts": {
+        "status": "OK",
+        "sha": "fe3e8156b87207f415f274267f9b2e73f9ab1fb55f063e18f66719a6af22f329",
+        "len": 77
+      },
+      "go": {
+        "status": "OK",
+        "sha": "fe3e8156b87207f415f274267f9b2e73f9ab1fb55f063e18f66719a6af22f329",
+        "len": 77
+      },
+      "equal": true
+    },
+    {
+      "id": "esbuild/554fea8c7a94.js",
+      "driver": "single",
+      "ts": {
+        "status": "OK",
+        "sha": "e8dd240af2f3e0ba3caa60b387c802a42ab069ba43e5b59ce73e7c0c2224d9ff",
+        "len": 52
+      },
+      "go": {
+        "status": "OK",
+        "sha": "e8dd240af2f3e0ba3caa60b387c802a42ab069ba43e5b59ce73e7c0c2224d9ff",
+        "len": 52
+      },
+      "equal": true
+    },
+    {
+      "id": "esbuild/597f841c1e66.js",
+      "driver": "single",
+      "ts": {
+        "status": "OK",
+        "sha": "eff4d3953fd4577bd4fd48c523fc3ca0eb3a8e5f7a6a16cb4fe7d88eb23ac49f",
+        "len": 128
+      },
+      "go": {
+        "status": "ERROR",
+        "detail": ".js:2:0:\n      2 │ <></>\n        ╵ ^\n\n  You can mark the path \"react/jsx-runtime\" as external to exclude it from the bundle, which will remove this error and leave the unresolved path in the bundle.\n\n"
+      },
+      "equal": false
+    },
+    {
+      "id": "esbuild/5e6dfc09cbfc.js",
+      "driver": "single",
+      "ts": {
+        "status": "OK",
+        "sha": "cec0785d0d957307059ffa614146bf3469dec8d96ada19c6ffa292e23c285358",
+        "len": 59
+      },
+      "go": {
+        "status": "OK",
+        "sha": "cec0785d0d957307059ffa614146bf3469dec8d96ada19c6ffa292e23c285358",
+        "len": 59
+      },
+      "equal": true
+    },
+    {
+      "id": "esbuild/630e7f9b2032.js",
+      "driver": "single",
+      "ts": {
+        "status": "OK",
+        "sha": "5b945e9b7d1773ee9d2a058569121fe456f232cb418a56af192bcb93f25f60eb",
+        "len": 88
+      },
+      "go": {
+        "status": "OK",
+        "sha": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "len": 0
+      },
+      "equal": false
+    },
+    {
+      "id": "esbuild/66683cb0a7f5.js",
+      "driver": "single",
+      "ts": {
+        "status": "OK",
+        "sha": "1bf91138686feb49d0fffbe6d3a93b11c3a65aa9ad1190d08d35851ffdc99da3",
+        "len": 57
+      },
+      "go": {
+        "status": "OK",
+        "sha": "1bf91138686feb49d0fffbe6d3a93b11c3a65aa9ad1190d08d35851ffdc99da3",
+        "len": 57
+      },
+      "equal": true
+    },
+    {
+      "id": "esbuild/6ab78fc7ec5c.js",
+      "driver": "single",
+      "ts": {
+        "status": "OK",
+        "sha": "6e021c2dc5fee63dc59221c368612ce1c24201b1c28e9536074c309d560d00e9",
+        "len": 78
+      },
+      "go": {
+        "status": "ERROR",
+        "detail": "mport 'x' with {'type': 'json'}\n        ╵        ~~~\n\n  You can mark the path \"x\" as external to exclude it from the bundle, which will remove this error and leave the unresolved path in the bundle.\n\n"
+      },
+      "equal": false
+    },
+    {
+      "id": "esbuild/7013af85cd90.js",
+      "driver": "single",
+      "ts": {
+        "status": "OK",
+        "sha": "0b10e519445f7493a77d90b21cc436ec9615b942c589fe1b4c276c79168a098c",
+        "len": 75
+      },
+      "go": {
+        "status": "OK",
+        "sha": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "len": 0
+      },
+      "equal": false
+    },
+    {
+      "id": "esbuild/752cdc61238c.js",
+      "driver": "single",
+      "ts": {
+        "status": "OK",
+        "sha": "101525174535efe60799d463d6eea92a548f6a4cdb3b609612a8c329f0c4992f",
+        "len": 68
+      },
+      "go": {
+        "status": "OK",
+        "sha": "101525174535efe60799d463d6eea92a548f6a4cdb3b609612a8c329f0c4992f",
+        "len": 68
+      },
+      "equal": true
+    },
+    {
+      "id": "esbuild/79e87006cc32.js",
+      "driver": "single",
+      "ts": {
+        "status": "OK",
+        "sha": "57e84f7e4dd9c5ad02c5b738ee91f3f945f53beb606a9b1288a4e4c550b046d6",
+        "len": 62
+      },
+      "go": {
+        "status": "OK",
+        "sha": "57e84f7e4dd9c5ad02c5b738ee91f3f945f53beb606a9b1288a4e4c550b046d6",
+        "len": 62
+      },
+      "equal": true
+    },
+    {
+      "id": "esbuild/7ec506f79201.js",
+      "driver": "single",
+      "ts": {
+        "status": "OK",
+        "sha": "ab0a0271eb4d08894a75ae8af5d38ee02f71738e3187d59fce1a29d1c637f856",
+        "len": 58
+      },
+      "go": {
+        "status": "OK",
+        "sha": "ab0a0271eb4d08894a75ae8af5d38ee02f71738e3187d59fce1a29d1c637f856",
+        "len": 58
+      },
+      "equal": true
+    },
+    {
+      "id": "esbuild/840f7913efe5.js",
+      "driver": "single",
+      "ts": {
+        "status": "OK",
+        "sha": "9f0e2798559fa0628944a4093f09cf725d8f97c6631768b5385a05429a6b4189",
+        "len": 75
+      },
+      "go": {
+        "status": "OK",
+        "sha": "9f0e2798559fa0628944a4093f09cf725d8f97c6631768b5385a05429a6b4189",
+        "len": 75
+      },
+      "equal": true
+    },
+    {
+      "id": "esbuild/8894a644fc55.js",
+      "driver": "single",
+      "ts": {
+        "status": "OK",
+        "sha": "fb563dcf0ea5d7f594bf1500d9abefcf9b2d1f610b5515706efd8db474069231",
+        "len": 54
+      },
+      "go": {
+        "status": "OK",
+        "sha": "7dc960de4c9be16056481cd34f674969e9cc50011c2ece25aa840ed1d3547946",
+        "len": 57
+      },
+      "equal": false
+    },
+    {
+      "id": "esbuild/8d98277ed4d6.js",
+      "driver": "single",
+      "ts": {
+        "status": "OK",
+        "sha": "c725dbd772ff43ac945400959d5bfd31c5d7199c28f2249ddd7770d3c28a5d04",
+        "len": 77
+      },
+      "go": {
+        "status": "OK",
+        "sha": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "len": 0
+      },
+      "equal": false
+    },
+    {
+      "id": "esbuild/91c764d27a8d.js",
+      "driver": "single",
+      "ts": {
+        "status": "OK",
+        "sha": "9896e58ddcbc6c29b6faeaca997154bf2ddfd5d595968794883fdd8e4bb4adc6",
+        "len": 62
+      },
+      "go": {
+        "status": "ERROR",
+        "detail": ":1:7:\n      1 │ import 'x' with\n        ╵        ~~~\n\n  You can mark the path \"x\" as external to exclude it from the bundle, which will remove this error and leave the unresolved path in the bundle.\n\n"
+      },
+      "equal": false
+    },
+    {
+      "id": "esbuild/969261a06eb3.js",
+      "driver": "single",
+      "ts": {
+        "status": "OK",
+        "sha": "d6368a459b03e929728cb4b82eb2a23d20c6ef5ac18d9b7ac26c77bcc5ee06e7",
+        "len": 53
+      },
+      "go": {
+        "status": "OK",
+        "sha": "d6368a459b03e929728cb4b82eb2a23d20c6ef5ac18d9b7ac26c77bcc5ee06e7",
+        "len": 53
+      },
+      "equal": true
+    },
+    {
+      "id": "esbuild/9b19c376400c.js",
+      "driver": "single",
+      "ts": {
+        "status": "OK",
+        "sha": "6f2b4fdedff33df29e30461405b438ebee20adaa1f5cad06977772601564a75d",
+        "len": 60
+      },
+      "go": {
+        "status": "OK",
+        "sha": "6f2b4fdedff33df29e30461405b438ebee20adaa1f5cad06977772601564a75d",
+        "len": 60
+      },
+      "equal": true
+    },
+    {
+      "id": "esbuild/9f168ad00ea6.js",
+      "driver": "single",
+      "ts": {
+        "status": "OK",
+        "sha": "332bdff6b5c5cde50f2f84653f0e3ca9a61a04106664860b961e49983ab9cec8",
+        "len": 53
+      },
+      "go": {
+        "status": "OK",
+        "sha": "332bdff6b5c5cde50f2f84653f0e3ca9a61a04106664860b961e49983ab9cec8",
+        "len": 53
+      },
+      "equal": true
+    },
+    {
+      "id": "esbuild/a40b6d67a05f.js",
+      "driver": "single",
+      "ts": {
+        "status": "OK",
+        "sha": "f6229a83b6619305b85255497addda0920d1006f02aec567e47426944a543a90",
+        "len": 53
+      },
+      "go": {
+        "status": "OK",
+        "sha": "f6229a83b6619305b85255497addda0920d1006f02aec567e47426944a543a90",
+        "len": 53
+      },
+      "equal": true
+    },
+    {
+      "id": "esbuild/a812a69ba685.js",
+      "driver": "single",
+      "ts": {
+        "status": "OK",
+        "sha": "c6b5f5eb6696cc74f4144fcc2bf6dd0683c54ca440b7f537e562b2b0cf3b5c76",
+        "len": 90
+      },
+      "go": {
+        "status": "ERROR",
+        "detail": "1:0:\n      1 │ <a></a>\n        ╵ ^\n\n  The esbuild loader for this file is currently set to \"js\" but it must be set to \"jsx\" to be able to parse JSX syntax. You can use \"--loader:.js=jsx\" to do that.\n\n"
+      },
+      "equal": false
+    },
+    {
+      "id": "esbuild/ad17fedd14e4.js",
+      "driver": "single",
+      "ts": {
+        "status": "OK",
+        "sha": "a281edf2fec9570e39ec4ee60ba56755b19d9189af1a1f544dee79881f9a649a",
+        "len": 139
+      },
+      "go": {
+        "status": "OK",
+        "sha": "a281edf2fec9570e39ec4ee60ba56755b19d9189af1a1f544dee79881f9a649a",
+        "len": 139
+      },
+      "equal": true
+    },
+    {
+      "id": "esbuild/b19cb60007ba.js",
+      "driver": "single",
+      "ts": {
+        "status": "OK",
+        "sha": "f1f5684973cf2a0ba48acbb69603f7ffa5316667cf811efc4adcdacf8e7b5751",
+        "len": 73
+      },
+      "go": {
+        "status": "ERROR",
+        "detail": "a) {} })\n        ╵                    ^\n\n  The name \"a\" was originally bound here:\n\n    testdata/esbuild-cases/b19cb60007ba.js:1:16:\n      1 │ ({ f: function*(a, a) {} })\n        ╵                 ^\n\n"
+      },
+      "equal": false
+    },
+    {
+      "id": "esbuild/b6d89c5098a4.js",
+      "driver": "single",
+      "ts": {
+        "status": "OK",
+        "sha": "66e2b5ddf198bb6745203abd33c3bfaa732bcf700f6f6a191356e5327a01ce80",
+        "len": 59
+      },
+      "go": {
+        "status": "OK",
+        "sha": "66e2b5ddf198bb6745203abd33c3bfaa732bcf700f6f6a191356e5327a01ce80",
+        "len": 59
+      },
+      "equal": true
+    },
+    {
+      "id": "esbuild/bbc3ec6bb8c5.js",
+      "driver": "single",
+      "ts": {
+        "status": "OK",
+        "sha": "539dc9c27231aac714fb95d17ab55f6dd581f0291ab9a99de3c1ffb30eac3e7f",
+        "len": 77
+      },
+      "go": {
+        "status": "ERROR",
+        "detail": "idered to be an ECMAScript module because the enclosing \"package.json\" file sets the type of this file to \"module\":\n\n    package.json:4:10:\n      4 │   \"type\": \"module\",\n        ╵           ~~~~~~~~\n\n"
+      },
+      "equal": false
+    },
+    {
+      "id": "esbuild/c06beb0c2e47.js",
+      "driver": "single",
+      "ts": {
+        "status": "OK",
+        "sha": "c8411fbb7d2b144070941e19e460245a3a94c6cd21f55d0324563f4fd818e287",
+        "len": 77
+      },
+      "go": {
+        "status": "OK",
+        "sha": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "len": 0
+      },
+      "equal": false
+    },
+    {
+      "id": "esbuild/c4d9fa564ef1.js",
+      "driver": "single",
+      "ts": {
+        "status": "OK",
+        "sha": "f195a71c20b3d4c547a65ca2bda556cef35cac75af6718d572c4055b106759ad",
+        "len": 106
+      },
+      "go": {
+        "status": "OK",
+        "sha": "f195a71c20b3d4c547a65ca2bda556cef35cac75af6718d572c4055b106759ad",
+        "len": 106
+      },
+      "equal": true
+    },
+    {
+      "id": "esbuild/c931f7613b02.js",
+      "driver": "single",
+      "ts": {
+        "status": "OK",
+        "sha": "6258903398201677ecf0a5506518c9f029efb4e137546521cf28b1fb502e267f",
+        "len": 53
+      },
+      "go": {
+        "status": "OK",
+        "sha": "6258903398201677ecf0a5506518c9f029efb4e137546521cf28b1fb502e267f",
+        "len": 53
+      },
+      "equal": true
+    },
+    {
+      "id": "esbuild/ce52a17a2c9f.js",
+      "driver": "single",
+      "ts": {
+        "status": "OK",
+        "sha": "a8fe18d6242c61914f81ab990c831ef4e155d1c1203acf5942b8ad0f055dd646",
+        "len": 47
+      },
+      "go": {
+        "status": "OK",
+        "sha": "a8fe18d6242c61914f81ab990c831ef4e155d1c1203acf5942b8ad0f055dd646",
+        "len": 47
+      },
+      "equal": true
+    },
+    {
+      "id": "esbuild/d3254642e6cd.js",
+      "driver": "single",
+      "ts": {
+        "status": "OK",
+        "sha": "fbb279154a7ad21a8c57a8312531d4b8a7dfb6ac6c0c2e0bf30af8b38e299667",
+        "len": 57
+      },
+      "go": {
+        "status": "OK",
+        "sha": "fbb279154a7ad21a8c57a8312531d4b8a7dfb6ac6c0c2e0bf30af8b38e299667",
+        "len": 57
+      },
+      "equal": true
+    },
+    {
+      "id": "esbuild/d6986337d4ee.js",
+      "driver": "single",
+      "ts": {
+        "status": "OK",
+        "sha": "55643c02b278855954b335c6508b7780d17296117d1e039aafb6ab6e3110c1b6",
+        "len": 72
+      },
+      "go": {
+        "status": "OK",
+        "sha": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "len": 0
+      },
+      "equal": false
+    },
+    {
+      "id": "esbuild/dc4196bd7360.js",
+      "driver": "single",
+      "ts": {
+        "status": "OK",
+        "sha": "2c9be96a1c9683f1beb27b799e422f6920cae06cd789df62bbcc6de22b8be0af",
+        "len": 52
+      },
+      "go": {
+        "status": "OK",
+        "sha": "2c9be96a1c9683f1beb27b799e422f6920cae06cd789df62bbcc6de22b8be0af",
+        "len": 52
+      },
+      "equal": true
+    },
+    {
+      "id": "esbuild/e138a33b2cc6.js",
+      "driver": "single",
+      "ts": {
+        "status": "OK",
+        "sha": "a74d7526ecb1cdd5d35ad8ec6c38d1e72589780e4eb8a66603dccd7007deee09",
+        "len": 56
+      },
+      "go": {
+        "status": "OK",
+        "sha": "a74d7526ecb1cdd5d35ad8ec6c38d1e72589780e4eb8a66603dccd7007deee09",
+        "len": 56
+      },
+      "equal": true
+    },
+    {
+      "id": "three/three.core.js",
+      "driver": "single",
+      "ts": {
+        "status": "OK",
+        "sha": "c0fdbed276f75d0c1e621c3f0a1b26c4306463bc336c84600cc58d46673cdd63",
+        "len": 1114554
+      },
+      "go": {
+        "status": "OK",
+        "sha": "c0fdbed276f75d0c1e621c3f0a1b26c4306463bc336c84600cc58d46673cdd63",
+        "len": 1114554
+      },
+      "equal": true
+    },
+    {
+      "id": "three/three.module.js",
+      "driver": "multi",
+      "ts": {
+        "status": "OK",
+        "sha": "2985154b88b53598f62e3801c362c0f9c90f6a4154667fd4cd2754f242cda9b4",
+        "len": 1709893
+      },
+      "go": {
+        "status": "OK",
+        "sha": "2985154b88b53598f62e3801c362c0f9c90f6a4154667fd4cd2754f242cda9b4",
+        "len": 1709893
+      },
+      "equal": true
+    },
+    {
+      "id": "three/three.tsl.js",
+      "driver": "multi",
+      "ts": {
+        "status": "OK",
+        "sha": "3ce61080c41d90cb7545146ac6f1b380666e478e6ffc593fec73948ee0658909",
+        "len": 1251189
+      },
+      "go": {
+        "status": "OK",
+        "sha": "5215390f52b49db49ee749577223af72fce4556894b116cea252a4b70ed12a4d",
+        "len": 1251805
+      },
+      "equal": false
+    },
+    {
+      "id": "three/three.webgpu.js",
+      "driver": "multi",
+      "ts": {
+        "status": "OK",
+        "sha": "0aa04325b02f23df6de7e570c830fe85427ea3fca15a027aa4fe8cc1967d5b09",
+        "len": 2906890
+      },
+      "go": {
+        "status": "OK",
+        "sha": "0e9cee6bdff950e2a3821fe6aa6d5ddd3d3b15717eb1fea59e3db3e67c65c3a0",
+        "len": 3010201
+      },
+      "equal": false
+    },
+    {
+      "id": "three/three.webgpu.nodes.js",
+      "driver": "multi",
+      "ts": {
+        "status": "OK",
+        "sha": "f5fdca678d8e57c9f302cf099788ce88c06c5f9faa6c9397ca411e6ae23dc2e8",
+        "len": 3002600
+      },
+      "go": {
+        "status": "OK",
+        "sha": "f4442c8afcb86da2ef3a96ac5faec7f7675755df2246948a0096c29ce5773cc6",
+        "len": 3003693
+      },
+      "equal": false
+    }
+  ]
+}

@@ -57,7 +57,8 @@ def boot_combined_ci(fwd, rev, B=20000, seed=0x2f6e2b1):
 def run_block(order, a, env):
     cmd = ["node", "--experimental-strip-types", str(WORKER),
            "--base", a.base, "--cand", a.cand, "--entry", str(ROOT / a.entry),
-           "--n", str(a.n), "--warmup", str(a.warmup), "--order", order]
+           "--n", str(a.n), "--warmup", str(a.warmup), "--order", order,
+           "--driver", a.driver]
     p = subprocess.run(cmd, capture_output=True, text=True, cwd=str(ROOT), env=env)
     try:
         info = json.loads(p.stdout.strip().splitlines()[-1])
@@ -75,6 +76,8 @@ def main():
     ap.add_argument("--blocks-per-order", type=int, default=3)
     ap.add_argument("--n", type=int, default=10)
     ap.add_argument("--warmup", type=int, default=3)
+    ap.add_argument("--driver", choices=["multi", "single"], default="multi",
+                    help="multi=bundleWithImports；single=bundleSingleFile")
     ap.add_argument("--min-effect", type=float, default=0.05,
                     help="决策阈值：|speedup-1| 必须超过实测空自测噪声地板（默认 0.05=5%%）")
     ap.add_argument("--out", default="bench/ab-result.json")
@@ -104,6 +107,7 @@ def main():
         "generatedAt": datetime.now(timezone.utc).isoformat(),
         "base": a.base, "cand": a.cand, "entry": a.entry,
         "blocks_per_order": a.blocks_per_order, "n_per_block": a.n, "warmup": a.warmup,
+        "driver": a.driver,
         "samples_forward": len(fwd), "samples_reverse": len(rev),
         "forward_ratio_median": round(s_f, 4), "reverse_ratio_median": round(s_r, 4),
         "outBytes": out_len, "outSha": out_sha,

@@ -20,11 +20,17 @@ CAND_MOD = "/root/port/src"
 CORPUS = ROOT / "bench/align-corpus.json"
 
 group = sys.argv[1] if len(sys.argv) > 1 else "wide"
+limit = 0
+if "--limit" in sys.argv:
+    limit = int(sys.argv[sys.argv.index("--limit") + 1])
 if not CORPUS.exists():
     print("corpus missing; run gen_align_corpus.py first", file=sys.stderr)
     sys.exit(3)
 manifest = json.loads(CORPUS.read_text())
 cases = [c for c in manifest["cases"] if c["group"] == group]
+if limit and len(cases) > limit:
+    stride = max(1, len(cases) // limit)
+    cases = cases[::stride][:limit]
 
 
 def run_one(mod_dir: str, case: dict) -> dict:
@@ -86,14 +92,17 @@ report = {
     "group": group,
     "corpus": str(CORPUS),
     "corpusCases": len(cases),
+    "subsetIds": [c["id"] for c in cases],
     "totalWallS": round(time.perf_counter() - t_start, 2),
     "counts": counts,
     "results": results,
 }
 suffix = "" if group == "wide" else "-" + group.replace("/", "_")
+if limit:
+    suffix += f"-sub{limit}"
 out = ROOT / f"bench/align-result{suffix}.json"
 out.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n")
-print(json.dumps({"group": group, "cases": len(cases), "counts": counts,
+print(json.dumps({"group": group, "subset": bool(limit), "cases": len(cases), "counts": counts,
                   "totalWallS": report["totalWallS"], "out": str(out)}, ensure_ascii=False))
 bad = (counts.get("BYTES_DIFFER", 0) + counts.get("STATUS_DIFFER", 0)
        + counts.get("WORKER_FAIL", 0) + counts.get("EMPTY_OUTPUT", 0))

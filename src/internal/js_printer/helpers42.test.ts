@@ -59,7 +59,7 @@ test("currentLineLength / printNewlinePastLineLimit 逐位等于 Go 探针", () 
   ];
   for (const [s, want] of cases) {
     const p = mkPrinter();
-    p.js = Array.from(new TextEncoder().encode(s));
+    p.js.append(new TextEncoder().encode(s));
     assert.equal(p.currentLineLength(), want, `currentLineLength(${JSON.stringify(s)})`);
   }
   // printNewlinePastLineLimit: LineLimit=4
@@ -68,12 +68,12 @@ test("currentLineLength / printNewlinePastLineLimit 逐位等于 Go 探针", () 
   p1.indent = 1;
   p1.print("abcdef");
   assert.equal(p1.printNewlinePastLineLimit(), true);
-  assert.equal(new TextDecoder().decode(Uint8Array.from(p1.js)), "abcdef\n  ");
+  assert.equal(new TextDecoder().decode(p1.js.toUint8Array()), "abcdef\n  ");
   const p2 = mkPrinter();
   p2.options.LineLimit = 4;
   p2.print("ab");
   assert.equal(p2.printNewlinePastLineLimit(), false);
-  assert.equal(new TextDecoder().decode(Uint8Array.from(p2.js)), "ab");
+  assert.equal(new TextDecoder().decode(p2.js.toUint8Array()), "ab");
 });
 
 test("printDotThenPrefix/Suffix Arrow 位两分支字节", () => {
@@ -84,7 +84,7 @@ test("printDotThenPrefix/Suffix Arrow 位两分支字节", () => {
   p1.print("body");
   p1.printDotThenSuffix();
   // Go 探针实测：".then(() => body)"（printSpace 在 `=>` 后确实输出空格）
-  assert.equal(new TextDecoder().decode(Uint8Array.from(p1.js)), ".then(() => body)");
+  assert.equal(new TextDecoder().decode(p1.js.toUint8Array()), ".then(() => body)");
 
   // Arrow 降级（UnsupportedFeatures.Arrow）：.then(function(){return ...}) + ";})"
   const p2 = mkPrinter();
@@ -93,7 +93,7 @@ test("printDotThenPrefix/Suffix Arrow 位两分支字节", () => {
   p2.print("body");
   p2.printDotThenSuffix();
   assert.equal(
-    new TextDecoder().decode(Uint8Array.from(p2.js)),
+    new TextDecoder().decode(p2.js.toUint8Array()),
     ".then(function() {\n  return body;\n})",
   );
 });

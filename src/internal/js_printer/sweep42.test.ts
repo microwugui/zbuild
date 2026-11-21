@@ -96,7 +96,7 @@ test("wrapInlinedEnum 结构逐位等于 Go 探针", () => {
   p.print("x =");
   p.printSpace();
   p.printExpr(wrapped, js_ast.L.LComma, 0);
-  assert.equal(new TextDecoder().decode(Uint8Array.from(p.js)), "x = 1 /* A */");
+  assert.equal(new TextDecoder().decode(p.js.toUint8Array()), "x = 1 /* A */");
 
   // comment 含注释结束符则不包（返回原表达式）
   assert.equal(wrapInlinedEnum(num, "a*/b").Data, num.Data);

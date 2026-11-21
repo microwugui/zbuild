@@ -1,0 +1,41 @@
+{
+  "generatedAt": "2026-11-21T04:53:49.804161+00:00",
+  "base": "/root/port-baseline/src/bundle1.ts",
+  "cand": "/root/port/src/bundle1.ts",
+  "entry": "node_modules/typescript/lib/_tsc.js",
+  "blocks_per_order": 1,
+  "n_per_block": 4,
+  "warmup": 2,
+  "driver": "single",
+  "samples_forward": 4,
+  "samples_reverse": 4,
+  "forward_ratio_median": 1.3432,
+  "reverse_ratio_median": 1.4085,
+  "outBytes": 5922396,
+  "outSha": "666fb682655c3dbb47e489b99b8936891444b4a8ad6b06807b0e561bf5779f6e",
+  "speedup_base_over_cand": 1.3755,
+  "ci95_speedup": [
+    1.3229,
+    1.4657
+  ],
+  "bytesEqual": true,
+  "verdict": "SIGNIFICANT_FASTER",
+  "ciExcludes1": true,
+  "minEffect": 0.05,
+  "effectExceedsFloor": true,
+  "per_block": [
+    {
+      "order": "base-first",
+      "baseMed": 11194.351,
+      "candMed": 8256.684,
+      "n": 4
+    },
+    {
+      "order": "cand-first",
+      "baseMed": 10510.867,
+      "candMed": 7430.703,
+      "n": 4
+    }
+  ],
+  "note": "process-level crossover; speedup=sqrt(median(base-first)*median(cand-first)); bootstrap B=20000 re-samples each order group; >1=cand faster; CI含1不算赢"
+}

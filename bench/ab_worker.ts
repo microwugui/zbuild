@@ -8,6 +8,7 @@
 //  - 输出逐配对 ratios[i]=base_ms/cand_ms 与 bytesEqual，供 orchestrator 汇总 bootstrap。
 import { performance } from "node:perf_hooks";
 import { createHash } from "node:crypto";
+import { readFileSync } from "node:fs";
 
 function arg(n: string): string | undefined {
   const a = process.argv.slice(2); const i = a.indexOf(n); return i >= 0 ? a[i + 1] : undefined;
@@ -20,6 +21,7 @@ async function main() {
   const basePath = arg("--base")!, candPath = arg("--cand")!, entry = arg("--entry")!;
   const n = Number(arg("--n") ?? 10), warmup = Number(arg("--warmup") ?? 3);
   const order = arg("--order") ?? "base-first";
+  const driver = arg("--driver") ?? "multi";
   const stamp = Date.now() + "-" + Math.random();
   let base: any, cand: any;
   if (order === "cand-first") {
@@ -29,7 +31,9 @@ async function main() {
     base = await import(basePath + "?v=b-" + stamp);
     cand = await import(candPath + "?v=c-" + stamp);
   }
-  const run = (m: any) => m.bundleWithImports(entry);
+  const run = driver === "single"
+    ? (m: any) => m.bundleSingleFile(new Uint8Array(readFileSync(entry)), entry)
+    : (m: any) => m.bundleWithImports(entry);
   // 关键：预热顺序必须跟随 import 顺序。若恒为 base→cand，则 base 永远拿到「首次执行」的
   // JIT 优势，cand-first 的交叉就被抵消——这正是 v3.1 残留 ~3% 偏置的根因。
   const first = order === "cand-first" ? cand : base;

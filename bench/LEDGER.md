@@ -36,8 +36,39 @@
 | 阶段1 profile | `profile_run.py` | self-time：parse/lex 36.5%、other 16.7%、encode 14.5%、print 12.9%、GC 12.8%、treeshake 5.2%、renamer 1.3%；GC 138 次 Scavenge / 411 ms | **记账**，非优化决策[^12] |
 | 阶段1 inclusive | `analyze_inclusive.py` | bundleWithImports 77.7%、parseFile/Parse 46.9%、printOne/Print 24.0%；parseStmt 33.5%、parseFn 27.3%、printStmt 23.6% | **顶层地图**：parse+print 占 bundle 主链约 9 成；大优化优先这两条[^13] |
 
-**R0 结论**：测量底座已建立并诚实校准（噪声地板 ~3–5%），产物行为零改动，尚未做任何产物优化，
-故「性能提升」为空 —— 不编造。
+**R0 结论**：测量底座已建立并诚实校准（噪声地板 ~3–5%），产物行为零改动。
+
+### R1 — 阶段2 首个结构性优化：打印器 encodeInto + 可增长 Uint8Array（**已采纳**）
+
+**假设卡片 A（采纳）**：打印器逐片段编码是 encode 成本主源。
+- 靶成本：encode 占 self-time 14.5%，其中 **10.76% 记在打印侧**、4.49% 解析侧；GC 12.8% 独立、无法挂阶段（`bench/cost-attribution.json`）。
+- 机制：`printer.print(text)` 每次 `TextEncoder.encode(text)` 分配一个 Uint8Array；`printBytes` 再逐字节 `js.push(c)` 进 `number[]`。实测 three.module 输出 1.71MB 触发 **744,311 次 encode（445 次/KB，平均 6.4B/次）**、149,303 次 decode。
+- 改法：`js: number[]` → 可增长 `Uint8Array`（OutBuf，保留 `.length` getter 与 `.at()`）；`print` 改 `encoder.encodeInto` 直写；`printBytes` 用 `set` 批量追加；lineLength 用 `lastIndexOf(0x0a)`。字节语义不变（同一 UTF-8 编码器）。
+- 预期 ≥10%；破字节条件：孤立代理项处理差异 / 扩容偏移错 / lineLength 错。
+
+**假设卡片 B（当场证伪，删除）**：parse 对同一子树跑两趟。
+- 计数证据：`parseFile` 仅由 `load` 在 `byAbs` 去重后调用一次（`src/bundle_multi.ts:133`），`Parse` 每文件一次（`src/bundle_multi.ts:58`）；parser 内部 visit+lower 与 Go 同构。驾驶层无重复 Parse，不立项。
+
+| 手 | 输入 | speedup | 95% CI | verdict |
+| --- | --- | ---: | --- | --- |
+| 主-1 | three.module（bundle_multi） | 1.3758 | [1.3407,1.4136] | SIGNIFICANT_FASTER |
+| 主-2 | three.core（bundle1） | 1.3156 | [1.2735,1.3455] | SIGNIFICANT_FASTER |
+| 主-3 | `_tsc.js` 5.9MB（bundle1，非 three） | 1.3755 | [1.3229,1.4657] | SIGNIFICANT_FASTER |
+| 辅 | three.module end-to-end wall | 1.1143 | [1.0844,1.1425] | SIGNIFICANT_FASTER |
+
+字节：three.core `c0fdbed2…`、three.module `2985154b…` 与 Go 逐字节；wide 子集 100/100 PASS。
+门：tsc 166、m1 4158≥4157、assign 0、doc OK、test:cov 1746 pass / 10 基线 F64、three_verify core/module 逐字节。
+**决策：采纳**（三手同向 + 字节等价 + 门不回退）。代码 sha `74437a3b…`（js_printer.ts）。
+
+### 审计：基线产物 vs Go 0.28.2（此前只测过自洽）
+
+55 例（50 wide 分层 + three 5 入口）：**31 相等、9 Go 空输出、9 Go 报错、6 双方不同**（含 3 three 已知未收敛）。
+- 9 条 Go 空输出：Go tree-shaking 丢弃无导出/无副作用片段；TS 单文件驱动未开 treeShaking（既有）。
+- 9 条 Go 报错：JSX loader / import attributes / package.json type 等 CLI 配置差异。
+- 6 条双方不同：3 条 three tsl/webgpu/nodes（已知 2431/15159 首距）；3 条边界语义（`x;0&&(()=>{});(()=>{})()`、`export default function(){}`、`undefined=1`）。
+- **结论**："产物等价"目前只在「候选==基线」意义成立；「基线==Go」在宽语料上不成立，属既有保真缺口，单独立项，不阻塞本次采纳。
+
+> 度量口径（自本轮起）：每个实验至少三手 —— three.module + three.core + 一个非 three 大输入；三处同向才算赢。wide 全量留收口，单次实验跑 100 条代表性子集（记 `subsetIds`）。
 
 ## 顶层 inclusive 地图（供阶段2选靶）
 

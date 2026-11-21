@@ -189,8 +189,36 @@ interface BinaryPrintState {
   flags: number;
 }
 
+/**
+ * 阶段2：输出字节缓冲。替代 number[] + 逐字节 push + 每次 encode 分配 Uint8Array。
+ * - length getter 保持既有 `this.js.length` 偏移比较语义不变；
+ * - at(i) 取代 `this.js[i]` 的读取；
+ * - print() 用 encoder.encodeInto 直接写入（UTF-8 语义与 TextEncoder.encode 相同）。
+ */
+class OutBuf {
+  buf: Uint8Array = new Uint8Array(1 << 16);
+  len: number = 0;
+  get length(): number { return this.len; }
+  ensure(n: number): void {
+    if (this.len + n > this.buf.length) {
+      let cap = this.buf.length;
+      while (cap < this.len + n) cap *= 2;
+      const nb = new Uint8Array(cap);
+      nb.set(this.buf.subarray(0, this.len));
+      this.buf = nb;
+    }
+  }
+  at(i: number): number { return this.buf[i]; }
+  append(bytes: Uint8Array): void {
+    this.ensure(bytes.length);
+    this.buf.set(bytes, this.len);
+    this.len += bytes.length;
+  }
+  toUint8Array(): Uint8Array { return this.buf.subarray(0, this.len); }
+}
+
 export class printer {
-  js: number[] = [];
+  js: OutBuf = new OutBuf();
   options: Options;
   symbols: Symbol[];
   renamer: Renamer;
@@ -247,7 +275,7 @@ export class printer {
   /** Go: func (p *printer) addSourceMapping(loc logger.Loc) (js_printer.go:333) */
   addSourceMapping(loc: Loc): void {
     if (this.options.AddSourceMappings) {
-      this.builder.AddSourceMapping(loc, "", new Uint8Array(this.js));
+      this.builder.AddSourceMapping(loc, "", this.js.toUint8Array());
     }
   }
 
@@ -256,8 +284,8 @@ export class printer {
     if (this.options.AddSourceMappings) {
       const followed = this.followSymbols(ref);
       const originalName = this.symbols[followed.InnerIndex]?.OriginalName ?? "";
-      if (originalName !== name) this.builder.AddSourceMapping(loc, originalName, new Uint8Array(this.js));
-      else this.builder.AddSourceMapping(loc, "", new Uint8Array(this.js));
+      if (originalName !== name) this.builder.AddSourceMapping(loc, originalName, this.js.toUint8Array());
+      else this.builder.AddSourceMapping(loc, "", this.js.toUint8Array());
     }
   }
 
@@ -305,17 +333,26 @@ export class printer {
 
   /** Go: func (p *printer) print(text string) (js_printer.go:312) */
   print(text: string): void {
-    this.printBytes(encoder.encode(text));
+    // 阶段2：encodeInto 直接写入可增长缓冲，避免每次 print 分配一个 Uint8Array。
+    // UTF-8 最坏 3 字节/UTF-16 码元（代理对按 2 码元 4 字节；孤立代理项按 U+FFFD 3 字节）。
+    this.js.ensure(text.length * 3);
+    const r = encoder.encodeInto(text, this.js.buf.subarray(this.js.len));
+    const written = r.written as number;
+    if (written > 0) {
+      const seg = this.js.buf.subarray(this.js.len, this.js.len + written);
+      const nl = seg.lastIndexOf(0x0a);
+      if (nl >= 0) this.lineLength = seg.length - nl - 1;
+      else this.lineLength += seg.length;
+    }
+    this.js.len += written;
   }
 
   /** Go: func (p *printer) printBytes(bytes []byte) (js_printer.go:318) */
   printBytes(bytes: Uint8Array): void {
-    for (let i = 0; i < bytes.length; i++) {
-      const c = bytes[i];
-      this.js.push(c);
-      if (c === 0x0a) this.lineLength = 0;
-      else this.lineLength += 1;
-    }
+    const nl = bytes.lastIndexOf(0x0a);
+    if (nl >= 0) this.lineLength = bytes.length - nl - 1;
+    else this.lineLength += bytes.length;
+    this.js.append(bytes);
   }
 
   /** Go: func (p *printer) printIndent() (js_printer.go:349) */
@@ -460,7 +497,7 @@ export class printer {
   /** Go: func (p *printer) printSpaceBeforeIdentifier() (js_printer.go:852) */
   printSpaceBeforeIdentifier(): void {
     if (this.js.length === 0) return;
-    const last = this.js[this.js.length - 1];
+    const last = this.js.at(this.js.length - 1);
     // 多字节 UTF-8 的末字节落在 0x80..0xBF：Go 的 DecodeLastRune 对残片返回 RuneError，
     // 而 RuneError 不是标识符继续字符，所以只看末字节与 Go 一致（非 ASCII 全字符名按 ASCII 判定）。
     if (last === 0x24 || last === 0x5f || (last >= 0x30 && last <= 0x39) ||
@@ -521,7 +558,7 @@ export class printer {
           (next === js_ast.OpCode.BinOpSub || next === js_ast.OpCode.UnOpNeg || next === js_ast.OpCode.UnOpPreDec)) ||
         (prev === js_ast.OpCode.UnOpPostDec && next === js_ast.OpCode.BinOpGt) ||
         (prev === js_ast.OpCode.UnOpNot && next === js_ast.OpCode.UnOpPreDec &&
-          this.js.length > 1 && this.js[this.js.length - 2] === 0x3c)) {
+          this.js.length > 1 && this.js.at(this.js.length - 2) === 0x3c)) {
         this.print(" ");
       }
     }
@@ -895,7 +932,7 @@ export class printer {
     const n = js.length;
     const stop = this.oldLineEnd;
     for (let i = n; i > stop; i--) {
-      const c = js[i - 1];
+      const c = js.at(i - 1);
       if (c === 0x0d || c === 0x0a) { // '\r' / '\n'
         this.oldLineStart = i;
         break;
@@ -3519,12 +3556,12 @@ export function Print(
   }
 
   const result = init(new PrintResult(), {
-    JS: new Uint8Array(p.js),
+    JS: p.js.toUint8Array(),
     ExtractedLegalComments: p.extractedLegalComments,
   });
   // Go: js_printer.go:5021 —— SourceMap != None 时生成 chunk（M2 sourcemap 通道）
   if (options.SourceMap !== 0) {
-    result.SourceMapChunk = p.builder.GenerateChunk(new Uint8Array(p.js));
+    result.SourceMapChunk = p.builder.GenerateChunk(p.js.toUint8Array());
   }
   return result;
 }
