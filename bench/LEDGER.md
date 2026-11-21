@@ -154,6 +154,40 @@ CLI 单次 ~4.7s ≈ 冷 run0 4.1s + 模块加载 0.57s；主指标（预热后 
 虽显著但远低于立项线 **10%** → **按规则回滚**（`git checkout -- js_printer.ts`），
 tsc/字节复原。记负结果：真实但 <10% 的收益不采纳。[^16]
 
+### R4 — 给 AST 加数值 kind 判别、把 instanceof 链换成数值分派 → **回滚并记账（负结果）**
+
+追回第 167 代自己提出却未验证就放弃的「顶层结构线索」：`visitExprInOut`
+（`src/internal/js_parser/js_parser.ts:2002`）用 `instanceof js_ast.E*` 长链分派，`EIdentifier` 要过 10+
+检查；用户方法论明确点名「顶层算法一优化一大片」，故必须机器求证，不许一句话放弃。
+
+**代码实证（先证根因）**：`E` 基类（`src/internal/js_ast/js_ast.ts:447`）是空类，只有 `isExpr()`，**无任何
+数值 kind 判别字段**；`S` 基类（`:871`）同理。全 `src` 有 1399 处 `instanceof js_ast.E*/S*`，其中
+parser 381、printer 152；profile-inclusive-after-r1 中 `visitExprInOut` self 239.93ms（12.43% inclusive）、
+`printExprInner` self 201.51ms（16.83% inclusive），两条链 self 合计 ~8.4% 总量。[^17]
+
+**改法**：机械 codemod（`bench/kind_codemod.mjs`，TypeScript AST 遍历）给 73 个 E/S 子类各加
+`_kind = ExprKind.X` 单字段，`E/S` 基类不加字段（避免 super + 子类双写），新增 `kindIs<T>()` 类型守卫，
+1097 处 `instanceof js_ast.X` → `js_ast.kindIs<js_ast.X>(v, ExprKind.X)`。用 const 对象而非 TS `enum`
+（`node --experimental-strip-types` 不支持 enum，实测 `ERR_UNSUPPORTED_TYPESCRIPT_SYNTAX`）。[^18]
+
+**门**：three.module `2985154b…`、three.core `c0fdbed2…` 逐字节；tsc 166（与基线错误集合逐条相同，
+新增/删除均为 0）。
+
+**冷 CLI 主指标**（基线 `/root/port-r1`@db0f7da，候选 `/root/port-kind`，n=12 warmup=2）：
+- v1（基类+子类双写 `_kind`）：speedup **1.0022**，CI[0.98,1.0476]，`NOT_SIGNIFICANT`。[^19]
+- v2（仅子类写 `_kind`）：speedup **1.0002**，CI[0.9888,1.0427]，`NOT_SIGNIFICANT`。[^20]
+
+**为何不是 ≥10% 的杠杆（机器证据，非印象）**：独立冷进程微基准（`bench/inst_micro.mjs`，20 万节点、
+73 类、热 kind 加权）实测：instanceof 链 ~205ms、kind 数值链 ~64ms（~3.2×）、switch ~6ms。
+即单看分派，数值化确实更快；但端到端冷 CLI 零收益，说明 (a) 真实调用点 V8 的多态 IC 已把 instanceof
+压到远低于合成基准；(b) 每节点 `_kind` 字段写 + `kindIs` 调用开销抵消分派节省；(c) 首轮低 tier 的
+大头不在分派而在 JIT 编译/模块加载（分解表已记）。把函数级 self（两条链合计 ~8.4%）当成可消除的
+纯分派成本是错误归因——self 里含 define 替换、usage 计数、lowering 等真实工作，非纯 instanceof。[^17][^21]
+
+**决策：回滚并记账**。符合规则 <10% 不采纳；`git reset --hard db0f7da` 复原 `/root/port-kind`，
+主树 `/root/port` 未受污染。结论写死：**AST 表示级 instanceof→数值 kind 分派不是本项目的 ≥10% 杠杆**，
+不要再以「顶层算法」之名重开此卡（除非先有新的 profile 证据推翻上述归因）。
+
 ## 顶层 inclusive 地图（供阶段2选靶）
 
 | 函数 | inclusive% | self% | 含义 |
@@ -195,3 +229,8 @@ tsc/字节复原。记负结果：真实但 <10% 的收益不采纳。[^16]
 [^14]: bench/wall-cold-module.json / wall-cold-core.json / wall-cold-tsc.json（冷 CLI 三手）+ Go 7 次中位 311/200/754ms；bench/wall.py:39-41（冷子进程、字节硬门）
 [^15]: bench/LEDGER.md 冷启动分解表 + /tmp/opt.out（trace-opt 322 次优化）+ /tmp/deopt-runs.log + /tmp/probe_warmup.mjs；机制未确证
 [^16]: bench/wall-r3-module.json（1.0415）+ src/internal/js_printer/js_printer.ts:342-354（已回滚）+ git checkout 复原
+[^17]: bench/profile-inclusive-after-r1.json（visitExprInOut 12.43%/self 239.93ms、printExprInner 16.83%/self 201.51ms）+ src/internal/js_ast/js_ast.ts:447,871（E/S 基类无 kind）
+[^18]: bench/kind_codemod.mjs（TS AST codemod，73 子类 _kind + 1097 处替换）；node --experimental-strip-types enum 报错见 /tmp/kind-module.err
+[^19]: bench/wall-kind-module.json（1.0022, NOT_SIGNIFICANT, bytes_equal=true）
+[^20]: bench/wall-kind-module-v2.json（1.0002, NOT_SIGNIFICANT, bytes_equal=true）
+[^21]: bench/inst_micro.mjs（inst ~205ms / kind ~64ms / switch ~6ms，20 万节点冷进程）
