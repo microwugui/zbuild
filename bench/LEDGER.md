@@ -531,6 +531,31 @@ goport 收口提交 `733da4e`，工作树干净。**不采纳竞技场化这一�
 
 证据：goport `baselines/m2a-result.md`、`baselines/m0-result.md`、`docs/m4-closeout.md`、`docs/repr-design.md`。
 
+### R16 — Go 侧 M2-c 热切片预分配 → **强负结果（−9.29% TotalAlloc，未过 −10% 门），回滚并记账**
+
+接续 R15：紧凑表示路线继续。M2-b（scope Members 懒分配）已否证（TotalAlloc −0.43%、存活堆 −0.99%，回滚）。
+M2-c 针对 pprof alloc/inuse 前 4 的两个 append 增长热点：`p.symbols`（52,533×48B）与
+`p.scopesInOrder`（39,521×16B）从 cap 0 各经 ~16 次 realloc。实施为纯 byte-safe 预分配：
+`newParser` 按源码长度定标（sym=/110、scope=/157，TS 时 `tsUseCounts` 同 cap），并把 10 处
+`Members[k]=v` 收敛到 `Scope.AddMember` 懒分配 map。
+
+- 交错配对 A/B（`_tsc.js` 6.2MB，GOMAXPROCS=1，n=40 + bootstrap）：TotalAlloc 中位
+  156,525,008 → 141,985,528 = **−9.29%**，CI95 [−9.30%,−9.26%] 不含 0，统计显著、可复现；
+  但 **< −10% 立项门**。比值 sweep（sym 80..260 × scope 120..260）最优也只 ~−9.8%，flat plateau。
+- 峰值存活堆：mempeak + `pprof -inuse_space` 实测 ~68.9MB → ~68.4MB = **−0.6%**：预分配只省转瞬复制，
+  不留存活收益。node payload（含 Scope）存活堆 20.6/59.6MB = **34.6%**，远高于 TotalAlloc 口径 12.8%，
+  确认 TotalAlloc 低估长寿命 AST。
+- 门：候选 `go build`/`go test` 全绿、5 入口字节门 5/5 PASS。
+
+按「<10% 回滚止损、负结果照记」：M2-c 代码已按 gate 回滚（`/root/goport` 工作树 tracked 文件恢复到
+`733da4e`，未就地 `reset --hard`），残留 `js_parser.go.work` 已清理；实验 diff 留档
+`baselines/m2c-prealloc-experiment.patch`，结论留档 `baselines/m2c-prealloc-result.md`。**不采纳预分配这一子法**。
+R15/R16 只否证「去 malloc 头」「切片预分配」两类代理法；核心杠杆（去 16B interface 的紧凑 Expr，
+针对 34.6% 存活堆）与峰值存活堆口径仍未在真实构建上直接测，路线继续推进。
+
+证据：goport `baselines/m2c-prealloc-result.md`、`baselines/m2c-prealloc-experiment.patch`、`baselines/m2b-scope-result.md`；
+`/tmp/ab-def.txt`（n=40 原始数）、`/tmp/pk-b-1.prof`（inuse_space 59.56MB / 667K 对象）。
+
 ## 脚注
 
 [^1]: bench/AB_NOTES.md（harness 演进 v1→v3.2）+ 方法论交付 [38390]
