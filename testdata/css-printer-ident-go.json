@@ -1,0 +1,72 @@
+[
+  {
+    "fn": "printIdent",
+    "arg": "Zm9v|0|0|false",
+    "out": "Zm9v"
+  },
+  {
+    "fn": "printIdent",
+    "arg": "MWFiYw==|0|0|false",
+    "out": "XDMxIGFiYw=="
+  },
+  {
+    "fn": "printIdent",
+    "arg": "Mng=|2|0|false",
+    "out": "XDMyeA=="
+  },
+  {
+    "fn": "printIdent",
+    "arg": "ZTJ4|2|0|false",
+    "out": "XDY1IDJ4"
+  },
+  {
+    "fn": "printIdent",
+    "arg": "ZTJ4|3|0|false",
+    "out": "ZTJ4"
+  },
+  {
+    "fn": "printIdent",
+    "arg": "ZS0yeA==|2|0|false",
+    "out": "XDY1LTJ4"
+  },
+  {
+    "fn": "printIdent",
+    "arg": "YS1i|0|0|false",
+    "out": "YS1i"
+  },
+  {
+    "fn": "printIdent",
+    "arg": "YSBi|0|1|false",
+    "out": "YVwgYg=="
+  },
+  {
+    "fn": "printIdent",
+    "arg": "5pel5pys|0|0|false",
+    "out": "5pel5pys"
+  },
+  {
+    "fn": "printIdent",
+    "arg": "5pel5pys|0|0|true",
+    "out": "XDY1ZTVcNjcyYyA="
+  },
+  {
+    "fn": "printIdent",
+    "arg": "I2Zvbw==|1|0|false",
+    "out": "XCNmb28="
+  },
+  {
+    "fn": "printIdent",
+    "arg": "YVxi|0|0|false",
+    "out": "YVxcYg=="
+  },
+  {
+    "fn": "printIdent",
+    "arg": "LXdlYmtpdC14|2|0|false",
+    "out": "LXdlYmtpdC14"
+  },
+  {
+    "fn": "printIdent",
+    "arg": "YQ1i|0|0|false",
+    "out": "YVxkIGI="
+  }
+]

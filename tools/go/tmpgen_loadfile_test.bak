@@ -1,0 +1,86 @@
+package resolver
+
+// 第 163 批 Go 探针：loadAsFile + loadAsIndex 逐字节固化（fs.Entry.Kind 底座）。
+import (
+	"encoding/json"
+	"os"
+	"testing"
+
+	"github.com/evanw/esbuild/internal/config"
+	"github.com/evanw/esbuild/internal/fs"
+	"github.com/evanw/esbuild/internal/logger"
+)
+
+type lfRow struct {
+	Fn  string                 `json:"fn"`
+	Arg map[string]interface{} `json:"arg"`
+	Out interface{}            `json:"out"`
+}
+
+func dumpDC(dc *fs.DifferentCase) interface{} {
+	if dc == nil { return nil }
+	return []interface{}{dc.Dir, dc.Query, dc.Actual}
+}
+
+func TestTmpGenLoadFile(t *testing.T) {
+	var out []lfRow
+	// files 集合：用 mockFS 构造，自动建 dirs + kind
+	files := map[string]string{
+		"/dir/a.js": "", "/dir/b.ts": "", "/dir/index.js": "",
+		"/dir/sub/c.tsx": "", "/dir/x.json": "",
+	}
+	fsObj := fs.MockFS(files, fs.MockUnix, "/")
+	extOrders := [][]string{
+		{".js", ".ts", ".tsx", ".json"},
+		{".ts", ".js"},
+		{},
+	}
+
+	mkCtx := func() resolverQuery {
+		log := logger.NewDeferLog(logger.DeferLogAll, nil)
+		r := resolverQuery{Resolver: &Resolver{log: log}, debugLogs: &debugLogs{}}
+		r.options = config.Options{Platform: config.PlatformNode}
+		r.fs = fsObj
+		return r
+	}
+
+	// loadAsFile cases: (path, extensionOrder)
+	fileCases := []struct{ path string; eo []string }{
+		{"/dir/a.js", extOrders[0]},        // exact
+		{"/dir/a", extOrders[0]},           // via .js ext
+		{"/dir/b", extOrders[0]},           // via .ts ext
+		{"/dir/x", extOrders[1]},           // no ext match in custom order
+		{"/dir/missing", extOrders[0]},     // missing
+		{"/dir/x.js", extOrders[0]},        // rewrite .js->.ts (a.js exists? no a.ts; test b.js->b.ts)
+		{"/dir/b.js", extOrders[0]},        // rewrite .js -> .ts finds b.ts
+		{"/dir/sub/c", extOrders[0]},       // nested dir
+		{"/dir", extOrders[0]},             // dir itself not a file
+	}
+	for _, c := range fileCases {
+		r := mkCtx()
+		abs, ok, dc := r.loadAsFile(c.path, c.eo)
+		notes := []string{}; for _, n := range r.debugLogs.notes { notes = append(notes, n.Text) }
+		out = append(out, lfRow{Fn: "loadAsFile", Arg: map[string]interface{}{"path": c.path, "eo": c.eo}, Out: []interface{}{abs, ok, dumpDC(dc), notes}})
+	}
+
+	// loadAsIndex cases: build dirInfo with entries from ReadDirectory
+	indexCases := []struct{ dir string; eo []string }{
+		{"/dir", extOrders[0]},
+		{"/dir", extOrders[1]},
+		{"/dir/sub", extOrders[0]},
+		{"/dir/sub", extOrders[1]},
+	}
+	for _, c := range indexCases {
+		r := mkCtx()
+		entries, _, _ := r.fs.ReadDirectory(c.dir)
+		di := &dirInfo{absPath: c.dir, entries: entries}
+		pair, ok, dc := r.loadAsIndex(di, c.eo)
+		notes := []string{}; for _, n := range r.debugLogs.notes { notes = append(notes, n.Text) }
+		out = append(out, lfRow{Fn: "loadAsIndex", Arg: map[string]interface{}{"dir": c.dir, "eo": c.eo}, Out: []interface{}{pair.Primary.Text, pair.Primary.Namespace, ok, dumpDC(dc), notes}})
+	}
+
+	b, err := json.Marshal(out)
+	if err != nil { t.Fatal(err) }
+	if err := os.WriteFile("/root/port/testdata/load-file-go.json", b, 0644); err != nil { t.Fatal(err) }
+	t.Logf("wrote %d cases", len(out))
+}

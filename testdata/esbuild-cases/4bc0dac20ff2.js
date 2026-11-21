@@ -1,0 +1,1 @@
+import 'x' assert {y: 'z'}; import('x', {assert: {y: 'z'}})

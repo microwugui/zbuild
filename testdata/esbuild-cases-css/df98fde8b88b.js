@@ -1,0 +1,1 @@
+@media not (width > 1px) { a { color: red } }

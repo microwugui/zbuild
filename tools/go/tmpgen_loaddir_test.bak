@@ -1,0 +1,118 @@
+package resolver
+
+// 第 167 批 Go 探针：loadAsMainField + loadAsDirectory + loadAsFileOrDirectory 逐字节固化（Resolve 链目录加载三连）。
+import (
+	"encoding/json"
+	"os"
+	"testing"
+
+	"github.com/evanw/esbuild/internal/ast"
+	"github.com/evanw/esbuild/internal/cache"
+	"github.com/evanw/esbuild/internal/config"
+	"github.com/evanw/esbuild/internal/fs"
+	"github.com/evanw/esbuild/internal/logger"
+)
+
+type ldRow struct {
+	Fn  string                 `json:"fn"`
+	Arg map[string]interface{} `json:"arg"`
+	Out interface{}            `json:"out"`
+}
+
+func dumpPair(p PathPair) interface{} {
+	return []interface{}{p.Primary.Text, p.Primary.Namespace, p.Secondary.Text, int(p.Primary.Flags)}
+}
+func dumpDC(dc *fs.DifferentCase) interface{} { if dc==nil{return nil}; return []interface{}{dc.Dir,dc.Query,dc.Actual} }
+
+func TestTmpGenLoadDir(t *testing.T) {
+	var out []ldRow
+	extOrder := []string{".js", ".ts"}
+
+	buildDirInfo := func(tree map[string]string, path string) (*dirInfo, fs.FS) {
+		fsobj := fs.MockFS(tree, fs.MockUnix, "/")
+		d,_,_ := fsobj.ReadDirectory(path)
+		di := &dirInfo{absPath: path, entries: d, packageJSON: nil}
+		return di, fsobj
+	}
+	setPj := func(di *dirInfo, mf map[string]interface{}) {
+		pj := &packageJSON{mainFields: map[string]mainField{}}
+		for k,v := range mf {
+			loc:=0; s:=""
+			switch x:=v.(type){case string:s=x;case []interface{}:if len(x)==2{s=x[0].(string);loc=x[1].(int)}}
+			pj.mainFields[k]=mainField{relPath:s,keyLoc:logger.Loc{Start:int32(loc)}}
+		}
+		pj.source.KeyPath.Text = "/pkg/package.json"
+		di.packageJSON = pj
+	}
+	newR := func(fsobj fs.FS, platform config.Platform, mainFields []string, kind ast.ImportKind) (resolverQuery, *debugLogs) {
+		log := logger.NewDeferLog(logger.DeferLogAll, nil)
+		dl := &debugLogs{}
+		r := resolverQuery{Resolver: &Resolver{log: log}, debugLogs: dl}
+		r.options = config.Options{Platform: platform, MainFields: mainFields, ExtensionOrder: extOrder}
+		r.fs = fsobj
+		r.caches = cache.MakeCacheSet()
+		r.dirCache = make(map[string]*dirInfo)
+		r.pnpManifestWasChecked = true
+		r.kind = kind
+		return r, dl
+	}
+	collectNotes := func(dl *debugLogs, dm *DebugMeta) ([]string, []string) {
+		notes:=[]string{}; for _,n:=range dl.notes{notes=append(notes,n.Text)}
+		dmn:=[]string{}; if dm!=nil{for _,n:=range dm.notes{dmn=append(dmn,n.Text)}}
+		return notes,dmn
+	}
+
+	// ---- loadAsMainField ----
+	mfCases := []struct{ name string; tree map[string]string; mf map[string]interface{}; platform config.Platform; mainFields []string; kind ast.ImportKind }{
+		{"main-only", map[string]string{"/pkg/main.js":""}, map[string]interface{}{"main":"main.js"}, config.PlatformNode, nil, ast.ImportStmt},
+		{"module-auto-import", map[string]string{"/pkg/mod.js":"","/pkg/main.js":""}, map[string]interface{}{"module":"mod.js","main":"main.js"}, config.PlatformNode, nil, ast.ImportStmt},
+		{"module-auto-require", map[string]string{"/pkg/mod.js":"","/pkg/main.js":""}, map[string]interface{}{"module":"mod.js","main":"main.js"}, config.PlatformNode, nil, ast.ImportRequire},
+		{"custom-order", map[string]string{"/pkg/feature.js":"","/pkg/main.js":""}, map[string]interface{}{"feature":"feature.js","main":"main.js"}, config.PlatformNode, []string{"feature"}, ast.ImportStmt},
+		{"no-match", map[string]string{"/pkg/x.js":""}, map[string]interface{}{"main":"missing.js"}, config.PlatformNode, nil, ast.ImportStmt},
+		{"no-pj", map[string]string{"/pkg/x.js":""}, nil, config.PlatformNode, nil, ast.ImportStmt},
+	}
+	for _,c:=range mfCases{
+		di,fsobj:=buildDirInfo(c.tree,"/pkg")
+		if c.mf!=nil{setPj(di,c.mf)}
+		r,dl:=newR(fsobj,c.platform,c.mainFields,c.kind)
+		pair,ok,dc:=r.loadAsMainField(di,"/pkg",extOrder)
+		notes,dmn:=collectNotes(dl,r.debugMeta)
+		out=append(out,ldRow{Fn:"loadAsMainField",Arg:map[string]interface{}{"name":c.name},Out:[]interface{}{dumpPair(pair),ok,dumpDC(dc),notes,dmn}})
+	}
+
+	// ---- loadAsDirectory ----
+	dirCases := []struct{ name string; tree map[string]string; mf map[string]interface{} }{
+		{"dir-main", map[string]string{"/pkg/main.js":""}, map[string]interface{}{"main":"main.js"}},
+		{"dir-index", map[string]string{"/pkg/index.js":""}, nil},
+		{"dir-empty", map[string]string{"/pkg/other.js":""}, nil},
+	}
+	for _,c:=range dirCases{
+		di,fsobj:=buildDirInfo(c.tree,"/pkg")
+		if c.mf!=nil{setPj(di,c.mf)}
+		r,dl:=newR(fsobj,config.PlatformNode,nil,ast.ImportStmt)
+		// dirInfoCached must return our di for "/pkg"
+		r.dirCache["/pkg"]=di
+		pair,ok,dc:=r.loadAsDirectory("/pkg")
+		notes,dmn:=collectNotes(dl,r.debugMeta)
+		out=append(out,ldRow{Fn:"loadAsDirectory",Arg:map[string]interface{}{"name":c.name},Out:[]interface{}{dumpPair(pair),ok,dumpDC(dc),notes,dmn}})
+	}
+
+	// ---- loadAsFileOrDirectory ----
+	fodCases := []struct{ name string; tree map[string]string; path string }{
+		{"fod-file", map[string]string{"/pkg/file.js":""}, "/pkg/file"},
+		{"fod-dir", map[string]string{"/pkg/index.js":""}, "/pkg"},
+		{"fod-miss", map[string]string{"/pkg/other.js":""}, "/pkg/miss"},
+	}
+	for _,c:=range fodCases{
+		_,fsobj:=buildDirInfo(c.tree,"/pkg")
+		r,dl:=newR(fsobj,config.PlatformNode,nil,ast.ImportStmt)
+		for p:=range r.dirCache{delete(r.dirCache,p)}
+		pair,ok,dc:=r.loadAsFileOrDirectory(c.path)
+		notes,dmn:=collectNotes(dl,r.debugMeta)
+		out=append(out,ldRow{Fn:"loadAsFileOrDirectory",Arg:map[string]interface{}{"name":c.name},Out:[]interface{}{dumpPair(pair),ok,dumpDC(dc),notes,dmn}})
+	}
+
+	b,err:=json.Marshal(out);if err!=nil{t.Fatal(err)}
+	if err:=os.WriteFile("/root/port/testdata/load-dir-go.json",b,0644);err!=nil{t.Fatal(err)}
+	t.Logf("wrote %d cases",len(out))
+}

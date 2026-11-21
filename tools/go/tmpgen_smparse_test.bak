@@ -1,0 +1,81 @@
+package js_parser
+
+// 第 104 轮 Go 探针：ParseSourceMap 逐字节（合法/非法/无 version/空/sections/错误 mappings/sourceRoot/URL）。
+import (
+  "encoding/json"
+  "os"
+  "testing"
+
+  "github.com/evanw/esbuild/internal/ast"
+  "github.com/evanw/esbuild/internal/sourcemap"
+  "github.com/evanw/esbuild/internal/logger"
+)
+
+type smpMapping struct {
+  GL int32 `json:"gl"`; GC int32 `json:"gc"`
+  SI int32 `json:"si"`; OL int32 `json:"ol"`; OC int32 `json:"oc"`
+  ON int `json:"on"`; ONValid bool `json:"onv"`
+}
+type smpContent struct { Quoted string `json:"q"`; Value []uint16 `json:"v"` }
+type smpResult struct {
+  Nil bool `json:"nil"`
+  Sources []string `json:"sources"`
+  SourcesContent []smpContent `json:"contents"`
+  Mappings []smpMapping `json:"mappings"`
+  Names []string `json:"names"`
+}
+type smpMsg struct { ID int `json:"id"`; Kind int `json:"kind"`; Text string `json:"text"` }
+type smpRow struct { Name string `json:"name"`; Out smpResult `json:"out"`; Msgs []smpMsg `json:"msgs"` }
+
+func dumpSM(sm *sourcemap.SourceMap) smpResult {
+  if sm == nil { return smpResult{Nil: true} }
+  r := smpResult{
+    Sources: sm.Sources,
+    SourcesContent: make([]smpContent, 0, len(sm.SourcesContent)),
+    Mappings: make([]smpMapping, 0, len(sm.Mappings)),
+    Names: sm.Names,
+  }
+  for _, c := range sm.SourcesContent { r.SourcesContent = append(r.SourcesContent, smpContent{c.Quoted, c.Value}) }
+  for _, m := range sm.Mappings {
+    r.Mappings = append(r.Mappings, smpMapping{m.GeneratedLine, m.GeneratedColumn, m.SourceIndex, m.OriginalLine, m.OriginalColumn, int(m.OriginalName.GetIndex()), m.OriginalName.IsValid()})
+  }
+  return r
+}
+
+func TestTmpGenSMParse104(t *testing.T) {
+  cases := []struct{ name, src, keypath string; ns string }{
+    {"valid-simple", `{"version":3,"sources":["a.js"],"names":["foo"],"mappings":"AAAAA","sourcesContent":["let foo = 1"]}`, "<stdin>", ""},
+    {"valid-multi", `{"version":3,"sources":["a.js","b.js"],"names":["x","y"],"mappings":"AAAAA,CAAC;AACD"}`, "<stdin>", ""},
+    {"valid-no-names", `{"version":3,"sources":["a.js"],"mappings":"AAAA"}`, "<stdin>", ""},
+    {"invalid-json", `{`, "<stdin>", ""},
+    {"non-object", `[1,2,3]`, "<stdin>", ""},
+    {"no-version", `{"sources":["a.js"],"mappings":"AAAA"}`, "<stdin>", ""},
+    {"bad-version", `{"version":2,"sources":["a.js"],"mappings":"AAAA"}`, "<stdin>", ""},
+    {"empty-mappings", `{"version":3,"sources":["a.js"],"mappings":""}`, "<stdin>", ""},
+    {"empty-sources", `{"version":3,"sources":[],"mappings":"AAAA"}`, "<stdin>", ""},
+    {"bad-mappings-char", `{"version":3,"sources":["a.js"],"names":["x"],"mappings":"AAAA!"}`, "<stdin>", ""},
+    {"bad-source-index", `{"version":3,"sources":["a.js"],"names":["x"],"mappings":"ACAA"}`, "<stdin>", ""},
+    {"source-root", `{"version":3,"sourceRoot":"/static","sources":["a.js"],"mappings":"AAAA"}`, "<stdin>", ""},
+    {"source-root-slash", `{"version":3,"sourceRoot":"/static/","sources":["a.js"],"mappings":"AAAA"}`, "<stdin>", ""},
+    {"with-sections", `{"version":3,"sections":[{"offset":{"line":0,"column":0},"map":{"version":3,"sources":["a.js"],"names":["x"],"mappings":"AAAAA"}}]}`, "<stdin>", ""},
+    {"bad-sections-type", `{"sections":123}`, "<stdin>", ""},
+    {"file-url", `{"version":3,"sources":["a.js"],"mappings":"AAAA"}`, "/p/src/main.js", "file"},
+    {"null-source-entry", `{"version":3,"sources":[null,"a.js"],"mappings":"AAAA"}`, "<stdin>", ""},
+  }
+  rows := make([]smpRow, 0, len(cases))
+  for _, c := range cases {
+    log := logger.NewDeferLog(logger.DeferLogAll, nil)
+    src := logger.Source{Contents: c.src, KeyPath: logger.Path{Text: c.keypath, Namespace: c.ns}}
+    sm := ParseSourceMap(log, src)
+    row := smpRow{Name: c.name, Out: dumpSM(sm), Msgs: []smpMsg{}}
+    for _, m := range log.Done() {
+      row.Msgs = append(row.Msgs, smpMsg{int(m.ID), int(m.Kind), m.Data.Text})
+    }
+    rows = append(rows, row)
+  }
+  b, err := json.MarshalIndent(rows, "", "  ")
+  if err != nil { t.Fatal(err) }
+  if err := os.WriteFile("/root/port/testdata/sourcemap-parse-go.json", b, 0644); err != nil { t.Fatal(err) }
+  t.Logf("wrote %d rows bytes=%d", len(rows), len(b))
+  _ = ast.MakeIndex32
+}

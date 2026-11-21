@@ -1,0 +1,163 @@
+[
+  {
+    "fn": "TNumber",
+    "text": "",
+    "unit": 0,
+    "kind": 0,
+    "out": "30"
+  },
+  {
+    "fn": "PseudoClassNthChild",
+    "text": "",
+    "unit": 0,
+    "kind": 0,
+    "out": "5"
+  },
+  {
+    "fn": "PseudoClassNthOfType",
+    "text": "",
+    "unit": 0,
+    "kind": 0,
+    "out": "8"
+  },
+  {
+    "fn": "PercentageValue",
+    "text": "50%",
+    "unit": 2,
+    "kind": 0,
+    "out": "50"
+  },
+  {
+    "fn": "DimensionValue",
+    "text": "50%",
+    "unit": 2,
+    "kind": 0,
+    "out": "50"
+  },
+  {
+    "fn": "DimensionUnit",
+    "text": "50%",
+    "unit": 2,
+    "kind": 0,
+    "out": "%"
+  },
+  {
+    "fn": "PercentageValue",
+    "text": "12px",
+    "unit": 2,
+    "kind": 0,
+    "out": "12p"
+  },
+  {
+    "fn": "DimensionValue",
+    "text": "12px",
+    "unit": 2,
+    "kind": 0,
+    "out": "12"
+  },
+  {
+    "fn": "DimensionUnit",
+    "text": "12px",
+    "unit": 2,
+    "kind": 0,
+    "out": "px"
+  },
+  {
+    "fn": "PercentageValue",
+    "text": "100",
+    "unit": 3,
+    "kind": 0,
+    "out": "10"
+  },
+  {
+    "fn": "DimensionValue",
+    "text": "100",
+    "unit": 3,
+    "kind": 0,
+    "out": "100"
+  },
+  {
+    "fn": "DimensionUnit",
+    "text": "100",
+    "unit": 3,
+    "kind": 0,
+    "out": ""
+  },
+  {
+    "fn": "PercentageValue",
+    "text": "9.5em",
+    "unit": 3,
+    "kind": 0,
+    "out": "9.5e"
+  },
+  {
+    "fn": "DimensionValue",
+    "text": "9.5em",
+    "unit": 3,
+    "kind": 0,
+    "out": "9.5"
+  },
+  {
+    "fn": "DimensionUnit",
+    "text": "9.5em",
+    "unit": 3,
+    "kind": 0,
+    "out": "em"
+  },
+  {
+    "fn": "IsZero",
+    "text": "0",
+    "unit": 0,
+    "kind": 30,
+    "out": "true"
+  },
+  {
+    "fn": "IsOne",
+    "text": "0",
+    "unit": 0,
+    "kind": 30,
+    "out": "false"
+  },
+  {
+    "fn": "IsZero",
+    "text": "1",
+    "unit": 0,
+    "kind": 30,
+    "out": "false"
+  },
+  {
+    "fn": "IsOne",
+    "text": "1",
+    "unit": 0,
+    "kind": 30,
+    "out": "true"
+  },
+  {
+    "fn": "IsZero",
+    "text": "0px",
+    "unit": 0,
+    "kind": 30,
+    "out": "false"
+  },
+  {
+    "fn": "IsOne",
+    "text": "0px",
+    "unit": 0,
+    "kind": 30,
+    "out": "false"
+  },
+  {
+    "fn": "IsZero",
+    "text": "0",
+    "unit": 0,
+    "kind": 29,
+    "out": "false"
+  },
+  {
+    "fn": "IsOne",
+    "text": "0",
+    "unit": 0,
+    "kind": 29,
+    "out": "false"
+  }
+]

@@ -1,0 +1,1 @@
+a { animation: b 1000ms }

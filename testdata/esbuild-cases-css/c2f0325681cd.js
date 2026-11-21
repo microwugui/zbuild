@@ -1,0 +1,1 @@
+a { before: 0; box-shadow: 1px color(display-p3 1 0 0); after: 1 }

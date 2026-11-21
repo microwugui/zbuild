@@ -1,0 +1,488 @@
+[
+  {
+    "name": "binary",
+    "contents": "x = 1 + 2 * 3;",
+    "jsx": true,
+    "ts": false
+  },
+  {
+    "name": "decls",
+    "contents": "var a = 1, b;",
+    "jsx": true,
+    "ts": false
+  },
+  {
+    "name": "if-else",
+    "contents": "if (a) { b; } else c;",
+    "jsx": true,
+    "ts": false
+  },
+  {
+    "name": "fn",
+    "contents": "function f(a, b) { return a + b; }",
+    "jsx": true,
+    "ts": false
+  },
+  {
+    "name": "member-call",
+    "contents": "a.b[0](x, \"s\");",
+    "jsx": true,
+    "ts": false
+  },
+  {
+    "name": "tagged-template",
+    "contents": "tag`a${b}c`;",
+    "jsx": true,
+    "ts": false
+  },
+  {
+    "name": "template",
+    "contents": "x = `a${b}c`;",
+    "jsx": true,
+    "ts": false
+  },
+  {
+    "name": "regexp",
+    "contents": "/(a)\\/b/gi;",
+    "jsx": true,
+    "ts": false
+  },
+  {
+    "name": "regexp-class",
+    "contents": "/[a-z/]+x/;",
+    "jsx": true,
+    "ts": false
+  },
+  {
+    "name": "jsx-attrs",
+    "contents": "<a b=\"x\" c={y}>hi &amp; bye</a>;",
+    "jsx": true,
+    "ts": false
+  },
+  {
+    "name": "jsx-nested",
+    "contents": "<A.B><c/></A.B>;",
+    "jsx": true,
+    "ts": false
+  },
+  {
+    "name": "jsx-fragment",
+    "contents": "<></>;",
+    "jsx": true,
+    "ts": false
+  },
+  {
+    "name": "unary",
+    "contents": "-x * !y;",
+    "jsx": true,
+    "ts": false
+  },
+  {
+    "name": "nested-call",
+    "contents": "f(g(1), [2, 3]);",
+    "jsx": true,
+    "ts": false
+  },
+  {
+    "name": "string-escape",
+    "contents": "q; \"a\\nb\";",
+    "jsx": true,
+    "ts": false
+  },
+  {
+    "name": "bigint",
+    "contents": "10n + 1;",
+    "jsx": true,
+    "ts": false
+  },
+  {
+    "name": "let",
+    "contents": "let x = 1;",
+    "jsx": true,
+    "ts": false
+  },
+  {
+    "name": "nullish-assign",
+    "contents": "x ??= y;",
+    "jsx": true,
+    "ts": false
+  },
+  {
+    "name": "directive",
+    "contents": "\"use strict\"; x;",
+    "jsx": true,
+    "ts": false
+  },
+  {
+    "name": "template-crlf",
+    "contents": "x = `a\r\nb${y}c`;",
+    "jsx": true,
+    "ts": false
+  },
+  {
+    "name": "jsx-text-unicode",
+    "contents": "<a>héllo 世界</a>;",
+    "jsx": true,
+    "ts": false
+  },
+  {
+    "name": "parse-error",
+    "contents": "x = ;",
+    "jsx": true,
+    "ts": false
+  },
+  {
+    "name": "jsx-mismatch",
+    "contents": "<a></b>;",
+    "jsx": true,
+    "ts": false
+  },
+  {
+    "name": "jsx-unclosed",
+    "contents": "<a>",
+    "jsx": true,
+    "ts": false
+  },
+  {
+    "name": "object",
+    "contents": "x = { a: 1, b: \"s\" };",
+    "jsx": true,
+    "ts": false
+  },
+  {
+    "name": "object-computed",
+    "contents": "x = { [a]: 1, \"b\": 2, 3: 4 };",
+    "jsx": true,
+    "ts": false
+  },
+  {
+    "name": "object-multiline",
+    "contents": "x = {\n  a: 1,\n  b: 2\n};",
+    "jsx": true,
+    "ts": false
+  },
+  {
+    "name": "object-nested",
+    "contents": "x = { a: { b: 1 }, c: [1, 2] };",
+    "jsx": true,
+    "ts": false
+  },
+  {
+    "name": "object-empty",
+    "contents": "x = {};",
+    "jsx": true,
+    "ts": false
+  },
+  {
+    "name": "array-multiline",
+    "contents": "x = [\n  1,\n  2\n];",
+    "jsx": true,
+    "ts": false
+  },
+  {
+    "name": "array-empty",
+    "contents": "x = [];",
+    "jsx": true,
+    "ts": false
+  },
+  {
+    "name": "export-const",
+    "contents": "export const x = 1, y = \"s\";",
+    "jsx": true,
+    "ts": false
+  },
+  {
+    "name": "export-let",
+    "contents": "export let z;",
+    "jsx": true,
+    "ts": false
+  },
+  {
+    "name": "export-var",
+    "contents": "export var v = 1;",
+    "jsx": true,
+    "ts": false
+  },
+  {
+    "name": "export-function",
+    "contents": "export function f(a) { return a; }",
+    "jsx": true,
+    "ts": false
+  },
+  {
+    "name": "class",
+    "contents": "class C {}",
+    "jsx": true,
+    "ts": false
+  },
+  {
+    "name": "class-methods",
+    "contents": "class C { m(a) { return a; } get g() { return 1; } set s(v) {} }",
+    "jsx": true,
+    "ts": false
+  },
+  {
+    "name": "class-extends",
+    "contents": "class C extends D { constructor() { x; } }",
+    "jsx": true,
+    "ts": false
+  },
+  {
+    "name": "class-static",
+    "contents": "class C { static x = 1; static m() {} }",
+    "jsx": true,
+    "ts": false
+  },
+  {
+    "name": "class-expr",
+    "contents": "x = class extends D {};",
+    "jsx": true,
+    "ts": false
+  },
+  {
+    "name": "object-shorthand",
+    "contents": "x = { a, b: 1, [c]: 2, \"d\": 3 };",
+    "jsx": true,
+    "ts": false
+  },
+  {
+    "name": "object-method",
+    "contents": "x = { m(a) { return a; }, ...s };",
+    "jsx": true,
+    "ts": false
+  },
+  {
+    "name": "export-class",
+    "contents": "export class C {}",
+    "jsx": true,
+    "ts": false
+  },
+  {
+    "name": "arrow",
+    "contents": "x = a => a;",
+    "jsx": true,
+    "ts": false
+  },
+  {
+    "name": "arrow-block",
+    "contents": "x = (a, b) => { return a + b; };",
+    "jsx": true,
+    "ts": false
+  },
+  {
+    "name": "arrow-destructure",
+    "contents": "x = ({ a, b = 2 }, [c, ...d]) => a;",
+    "jsx": true,
+    "ts": false
+  },
+  {
+    "name": "arrow-obj",
+    "contents": "x = a => ({ y: 1 });",
+    "jsx": true,
+    "ts": false
+  },
+  {
+    "name": "spread-array",
+    "contents": "x = [...a, b];",
+    "jsx": true,
+    "ts": false
+  },
+  {
+    "name": "call-spread",
+    "contents": "f(...a, b);",
+    "jsx": true,
+    "ts": false
+  },
+  {
+    "name": "import-default",
+    "contents": "import a from \"./a.js\";",
+    "jsx": true,
+    "ts": false
+  },
+  {
+    "name": "import-named",
+    "contents": "import { b, c as d } from \"./b.js\";",
+    "jsx": true,
+    "ts": false
+  },
+  {
+    "name": "import-namespace",
+    "contents": "import * as ns from \"./ns.js\";",
+    "jsx": true,
+    "ts": false
+  },
+  {
+    "name": "import-bare",
+    "contents": "import \"./side.js\";",
+    "jsx": true,
+    "ts": false
+  },
+  {
+    "name": "import-default-named",
+    "contents": "import a, { b } from \"./ab.js\";",
+    "jsx": true,
+    "ts": false
+  },
+  {
+    "name": "import-default-ns",
+    "contents": "import a, * as ns from \"./ans.js\";",
+    "jsx": true,
+    "ts": false
+  },
+  {
+    "name": "export-clause",
+    "contents": "const a = 1, b = 2;\nexport { a, b as c };\n",
+    "jsx": true,
+    "ts": false
+  },
+  {
+    "name": "export-from",
+    "contents": "export { x as y } from \"./x.js\";",
+    "jsx": true,
+    "ts": false
+  },
+  {
+    "name": "export-star",
+    "contents": "export * from \"./all.js\";",
+    "jsx": true,
+    "ts": false
+  },
+  {
+    "name": "export-star-as",
+    "contents": "export * as ns from \"./ns.js\";",
+    "jsx": true,
+    "ts": false
+  },
+  {
+    "name": "export-default-expr",
+    "contents": "export default 1 + 2;",
+    "jsx": true,
+    "ts": false
+  },
+  {
+    "name": "export-default-fn",
+    "contents": "export default function () {}",
+    "jsx": true,
+    "ts": false
+  },
+  {
+    "name": "export-default-class",
+    "contents": "export default class {}",
+    "jsx": true,
+    "ts": false
+  },
+  {
+    "name": "new-expr",
+    "contents": "x = new Foo(1, 2);\ny = new a.b.C();\nz = new.target;",
+    "jsx": true,
+    "ts": false
+  },
+  {
+    "name": "super-expr",
+    "contents": "class A extends B { constructor() { super(1); this.x = super.y; } }",
+    "jsx": true,
+    "ts": false
+  },
+  {
+    "name": "conditional",
+    "contents": "x = a ? b : c ? d : e;",
+    "jsx": true,
+    "ts": false
+  },
+  {
+    "name": "optional-chain",
+    "contents": "x = a?.b;\ny = a?.[b];\nz = a?.();\nw = (a?.b).c;",
+    "jsx": true,
+    "ts": false
+  },
+  {
+    "name": "loops",
+    "contents": "for (let i = 0; i < 3; i++) {\n  x(i);\n}\nfor (const k in o) y(k);\nfor (const v of a) z(v);\nwhile (a) {\n  b();\n}\ndo {\n  c();\n} while (d);\n",
+    "jsx": true,
+    "ts": false
+  },
+  {
+    "name": "try-switch",
+    "contents": "try {\n  a();\n} catch (e) {\n  b();\n} finally {\n  c();\n}\nswitch (x) {\n  case 1:\n    d();\n    break;\n  default:\n    e();\n}\nthrow new Error(\"x\");\n",
+    "jsx": true,
+    "ts": false
+  },
+  {
+    "name": "label-break",
+    "contents": "outer: for (;;) {\n  if (a) break outer;\n  continue outer;\n}\n",
+    "jsx": true,
+    "ts": false
+  },
+  {
+    "name": "binding-patterns",
+    "contents": "const { a, b: c, d = 1, ...rest } = obj;\nconst [x, , y = 2, ...zs] = arr;\nfunction f({ p, q = 3 }, [r], ...more) {}\n",
+    "jsx": true,
+    "ts": false
+  },
+  {
+    "name": "await-yield",
+    "contents": "async function f() {\n  await g();\n}\nfunction* h() {\n  yield 1;\n  yield* i;\n}\nconst j = async (a, b) => a + b;\n",
+    "jsx": true,
+    "ts": false
+  },
+  {
+    "name": "class-super-methods",
+    "contents": "class A extends B {\n  m() {\n    return super.m();\n  }\n  static s = 1;\n  get g() {\n    return 1;\n  }\n}\n",
+    "jsx": true,
+    "ts": false
+  },
+  {
+    "name": "export-default-async",
+    "contents": "export default async function () {\n  await x();\n}\n",
+    "jsx": true,
+    "ts": false
+  },
+  {
+    "name": "compound-assign",
+    "contents": "a |= 1;\nb >>= 2;\nc **= 3;\nd++;\n--e;\n",
+    "jsx": true,
+    "ts": false
+  },
+  {
+    "name": "comments-class-member",
+    "contents": "class C {\n  /** doc */\n  m() {}\n}\n",
+    "jsx": true,
+    "ts": false
+  },
+  {
+    "name": "comments-array",
+    "contents": "x = [\n  // one\n  a,\n  b\n];\n",
+    "jsx": true,
+    "ts": false
+  },
+  {
+    "name": "comments-call-arg",
+    "contents": "f(\n  a,\n  // two\n  b\n);\n",
+    "jsx": true,
+    "ts": false
+  },
+  {
+    "name": "comments-object-close",
+    "contents": "x = {\n  a: 1 // trailing\n};\n",
+    "jsx": true,
+    "ts": false
+  },
+  {
+    "name": "comments-paren",
+    "contents": "x = a && // c\n  (b);\n",
+    "jsx": true,
+    "ts": false
+  },
+  {
+    "name": "comments-param",
+    "contents": "function f(\n  a,\n  // p\n  b\n) {}\n",
+    "jsx": true,
+    "ts": false
+  },
+  {
+    "name": "comments-switch-case",
+    "contents": "switch (x) {\n  // c\n  case 1:\n    break;\n}\n",
+    "jsx": true,
+    "ts": false
+  }
+]

@@ -1,0 +1,113 @@
+package api
+
+// 第 105 轮 Go 探针：pluginImpl.onStart/onResolve/onLoad 整族状态机（filter 编译 + append + 错误日志 + 回调转换）。
+// 回调用固定参数当场调用，dump config 结果；全部确定。一探针覆盖一族 3 方法。
+import (
+  "encoding/json"
+  "os"
+  "testing"
+
+  "github.com/evanw/esbuild/internal/ast"
+  "github.com/evanw/esbuild/internal/config"
+  "github.com/evanw/esbuild/internal/fs"
+  "github.com/evanw/esbuild/internal/logger"
+)
+
+type prEntry struct { Name string `json:"name"`; Namespace string `json:"ns"`; Filter string `json:"filter"` }
+type prMsg struct { Text string `json:"text"`; Kind int `json:"kind"` }
+type prResult struct {
+  PluginName string `json:"pluginName"`
+  Path string `json:"path"`; PathNS string `json:"pathNS"`
+  External bool `json:"external"`; SideEffectFree bool `json:"sef"`
+  AbsResolveDir string `json:"absResolveDir"`; Loader int `json:"loader"`
+  Contents string `json:"contents"`
+  Msgs []prMsg `json:"msgs"`
+}
+type prRow struct {
+  Name string `json:"name"`
+  OnStart []string `json:"onStart"`
+  OnResolve []prEntry `json:"onResolve"`
+  OnLoad []prEntry `json:"onLoad"`
+  Msgs []prMsg `json:"msgs"`
+  StartResult prResult `json:"startResult"`
+  ResolveResults []prResult `json:"resolveResults"`
+  LoadResults []prResult `json:"loadResults"`
+}
+
+func msgsOf(ms []logger.Msg) []prMsg { out:=[]prMsg{}; for _,m:=range ms { out=append(out,prMsg{m.Data.Text,int(m.Kind)}) }; return out }
+func dumpCfg(impl *pluginImpl, log logger.Log) prRow {
+  r := prRow{Name: impl.plugin.Name, OnStart: []string{}, OnResolve: []prEntry{}, OnLoad: []prEntry{}, Msgs: []prMsg{}}
+  for _, s := range impl.plugin.OnStart { r.OnStart = append(r.OnStart, s.Name) }
+  for _, x := range impl.plugin.OnResolve { f:=""; if x.Filter!=nil{f=x.Filter.String()}; r.OnResolve=append(r.OnResolve,prEntry{x.Name,x.Namespace,f}) }
+  for _, x := range impl.plugin.OnLoad { f:=""; if x.Filter!=nil{f=x.Filter.String()}; r.OnLoad=append(r.OnLoad,prEntry{x.Name,x.Namespace,f}) }
+  for _, m := range log.Done() { r.Msgs=append(r.Msgs,prMsg{m.Data.Text,int(m.Kind)}) }
+  // invoke callbacks with fixed args
+  for _, s := range impl.plugin.OnStart {
+    res := s.Callback()
+    r.StartResult = prResult{PluginName:"",Msgs:msgsOf(res.Msgs)}
+  }
+  for _, x := range impl.plugin.OnResolve {
+    res := x.Callback(config.OnResolveArgs{Path:"a.js", ResolveDir:"/r", Importer:logger.Path{Text:"imp.js",Namespace:"file"}, Kind:ast.ImportStmt})
+    r.ResolveResults=append(r.ResolveResults,prResult{res.PluginName,res.Path.Text,res.Path.Namespace,res.External,res.IsSideEffectFree,"",0,"",msgsOf(res.Msgs)})
+  }
+  for _, x := range impl.plugin.OnLoad {
+    res := x.Callback(config.OnLoadArgs{Path:logger.Path{Text:"a.js",Namespace:"file"}})
+    c:=""; if res.Contents!=nil{c=*res.Contents}
+    r.LoadResults=append(r.LoadResults,prResult{res.PluginName,"","",false,false,res.AbsResolveDir,int(res.Loader),c,msgsOf(res.Msgs)})
+  }
+  return r
+}
+
+func TestTmpGenPluginReg105(t *testing.T) {
+  mfs := fs.MockFS(map[string]string{}, fs.MockUnix, "/")
+  mkMsg:=func(txt string) Message { return Message{Text: txt} }
+  startCB := func() (OnStartResult, error) { return OnStartResult{Warnings:[]Message{mkMsg("start-warn")}}, nil }
+  resolveCB := func(args OnResolveArgs) (OnResolveResult, error) {
+    return OnResolveResult{PluginName:"rp", Path:args.Path, Namespace:"outns", External:false, SideEffects:SideEffectsFalse,
+      WatchFiles:[]string{"w.js"}, Warnings:[]Message{mkMsg("resolve-warn:"+args.Path)}}, nil
+  }
+  loadCB := func(args OnLoadArgs) (OnLoadResult, error) {
+    c:="loaded:"+args.Path
+    return OnLoadResult{PluginName:"lp", Contents:&c, ResolveDir:"/r", Loader:LoaderTS,
+      WatchDirs:[]string{"d"}, Errors:[]Message{mkMsg("load-err:"+args.Path)}}, nil
+  }
+  rows := []prRow{}
+
+  { // 1: 全合法各一次
+    log := logger.NewDeferLog(logger.DeferLogAll, nil)
+    impl := &pluginImpl{fs: mfs, log: log, plugin: config.Plugin{Name:"demo"}}
+    impl.onStart(startCB)
+    impl.onResolve(OnResolveOptions{Filter:`.*\.js$`, Namespace:"file"}, resolveCB)
+    impl.onLoad(OnLoadOptions{Filter:`.*\.ts$`}, loadCB)
+    rows=append(rows,dumpCfg(impl,log))
+  }
+  { // 2: 多次 append
+    log := logger.NewDeferLog(logger.DeferLogAll, nil)
+    impl := &pluginImpl{fs: mfs, log: log, plugin: config.Plugin{Name:"multi"}}
+    impl.onResolve(OnResolveOptions{Filter:`a`,Namespace:"ns1"},resolveCB)
+    impl.onResolve(OnResolveOptions{Filter:`b`},resolveCB)
+    impl.onLoad(OnLoadOptions{Filter:`c`,Namespace:"ns2"},loadCB)
+    impl.onStart(startCB); impl.onStart(startCB)
+    rows=append(rows,dumpCfg(impl,log))
+  }
+  { // 3: 非法 filter —— 报错且不 append
+    log := logger.NewDeferLog(logger.DeferLogAll, nil)
+    impl := &pluginImpl{fs: mfs, log: log, plugin: config.Plugin{Name:"bad"}}
+    impl.onResolve(OnResolveOptions{Filter:``},resolveCB)
+    impl.onResolve(OnResolveOptions{Filter:`(`},resolveCB)
+    impl.onLoad(OnLoadOptions{Filter:``},loadCB)
+    impl.onStart(startCB)
+    rows=append(rows,dumpCfg(impl,log))
+  }
+  { // 4: 内联标志 filter + thrown error 回调
+    log := logger.NewDeferLog(logger.DeferLogAll, nil)
+    impl := &pluginImpl{fs: mfs, log: log, plugin: config.Plugin{Name:"flags"}}
+    impl.onResolve(OnResolveOptions{Filter:`(?i)\.JS$`}, func(OnResolveArgs)(OnResolveResult,error){ return OnResolveResult{}, os.ErrClosed })
+    impl.onLoad(OnLoadOptions{Filter:`(?s)^x.*y$`,Namespace:"n"},loadCB)
+    rows=append(rows,dumpCfg(impl,log))
+  }
+
+  b,err:=json.MarshalIndent(rows,"","  "); if err!=nil{t.Fatal(err)}
+  if err:=os.WriteFile("/root/port/testdata/plugin-reg-go.json",b,0644);err!=nil{t.Fatal(err)}
+  t.Logf("wrote %d rows bytes=%d",len(rows),len(b))
+}

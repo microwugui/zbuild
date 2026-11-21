@@ -1,0 +1,127 @@
+{
+  "profile": "bench/profiles/three-module.cpuprofile",
+  "total_samples": 4660,
+  "total_self_ms": 5989.06,
+  "top": [
+    {
+      "function": "encode @ encoding:350",
+      "self_ms": 731.48,
+      "self_pct": 12.21,
+      "samples": 655
+    },
+    {
+      "function": "(garbage collector) @ :-1",
+      "self_ms": 650.65,
+      "self_pct": 10.86,
+      "samples": 418
+    },
+    {
+      "function": "printExprInner @ js_printer.ts:1521",
+      "self_ms": 230.53,
+      "self_pct": 3.85,
+      "samples": 194
+    },
+    {
+      "function": "visitExprInOut @ js_parser.ts:2001",
+      "self_ms": 224.13,
+      "self_pct": 3.74,
+      "samples": 203
+    },
+    {
+      "function": "Next @ js_lexer.ts:640",
+      "self_ms": 220.53,
+      "self_pct": 3.68,
+      "samples": 169
+    },
+    {
+      "function": "collectRefs @ bundle_multi.ts:96",
+      "self_ms": 218.28,
+      "self_pct": 3.64,
+      "samples": 186
+    },
+    {
+      "function": "encodeUtf8String @ :-1",
+      "self_ms": 216.71,
+      "self_pct": 3.62,
+      "samples": 197
+    },
+    {
+      "function": "parseSuffix @ js_parser.ts:8050",
+      "self_ms": 186.77,
+      "self_pct": 3.12,
+      "samples": 113
+    },
+    {
+      "function": "parseStmt @ js_parser.ts:4756",
+      "self_ms": 104.12,
+      "self_pct": 1.74,
+      "samples": 81
+    },
+    {
+      "function": "printBytes @ js_printer.ts:311",
+      "self_ms": 102.82,
+      "self_pct": 1.72,
+      "samples": 85
+    },
+    {
+      "function": "printExpr @ js_printer.ts:2407",
+      "self_ms": 96.97,
+      "self_pct": 1.62,
+      "samples": 80
+    },
+    {
+      "function": "parseStmtsUpTo @ js_parser.ts:4702",
+      "self_ms": 87.93,
+      "self_pct": 1.47,
+      "samples": 51
+    },
+    {
+      "function": "visitExpr @ js_parser.ts:1990",
+      "self_ms": 81.96,
+      "self_pct": 1.37,
+      "samples": 61
+    },
+    {
+      "function": "parsePrefix @ js_parser.ts:7552",
+      "self_ms": 78.19,
+      "self_pct": 1.31,
+      "samples": 61
+    },
+    {
+      "function": "parseExprCommon @ js_parser.ts:7523",
+      "self_ms": 74.82,
+      "self_pct": 1.25,
+      "samples": 61
+    },
+    {
+      "function": "pushScopeForVisitPass @ js_parser.ts:1893",
+      "self_ms": 73.74,
+      "self_pct": 1.23,
+      "samples": 62
+    },
+    {
+      "function": "decode @ encoding:441",
+      "self_ms": 64.83,
+      "self_pct": 1.08,
+      "samples": 50
+    },
+    {
+      "function": "decodeUTF8 @ :-1",
+      "self_ms": 60.51,
+      "self_pct": 1.01,
+      "samples": 49
+    },
+    {
+      "function": "visitAndAppendStmt @ js_parser.ts:2417",
+      "self_ms": 58.03,
+      "self_pct": 0.97,
+      "samples": 43
+    },
+    {
+      "function": "compileSourceTextModule @ utils:343",
+      "self_ms": 53.77,
+      "self_pct": 0.9,
+      "samples": 44
+    }
+  ]
+}

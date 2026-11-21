@@ -1,0 +1,87 @@
+[
+  {
+    "fn": "resolveKindToString",
+    "arg": "1",
+    "out": "entry-point"
+  },
+  {
+    "fn": "resolveKindToString",
+    "arg": "2",
+    "out": "import-statement"
+  },
+  {
+    "fn": "resolveKindToString",
+    "arg": "3",
+    "out": "require-call"
+  },
+  {
+    "fn": "resolveKindToString",
+    "arg": "4",
+    "out": "dynamic-import"
+  },
+  {
+    "fn": "resolveKindToString",
+    "arg": "5",
+    "out": "require-resolve"
+  },
+  {
+    "fn": "resolveKindToString",
+    "arg": "6",
+    "out": "import-rule"
+  },
+  {
+    "fn": "resolveKindToString",
+    "arg": "7",
+    "out": "composes-from"
+  },
+  {
+    "fn": "resolveKindToString",
+    "arg": "8",
+    "out": "url-token"
+  },
+  {
+    "fn": "stringToResolveKind",
+    "arg": "entry-point",
+    "out": "1|true"
+  },
+  {
+    "fn": "stringToResolveKind",
+    "arg": "import-statement",
+    "out": "2|true"
+  },
+  {
+    "fn": "stringToResolveKind",
+    "arg": "require-call",
+    "out": "3|true"
+  },
+  {
+    "fn": "stringToResolveKind",
+    "arg": "dynamic-import",
+    "out": "4|true"
+  },
+  {
+    "fn": "stringToResolveKind",
+    "arg": "require-resolve",
+    "out": "5|true"
+  },
+  {
+    "fn": "stringToResolveKind",
+    "arg": "import-rule",
+    "out": "6|true"
+  },
+  {
+    "fn": "stringToResolveKind",
+    "arg": "composes-from",
+    "out": "7|true"
+  },
+  {
+    "fn": "stringToResolveKind",
+    "arg": "url-token",
+    "out": "8|true"
+  },
+  {
+    "fn": "stringToResolveKind",
+    "arg": "bad",
+    "out": "0|false"
+  }
+]

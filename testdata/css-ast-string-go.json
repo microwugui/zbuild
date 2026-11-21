@@ -1,0 +1,22 @@
+{
+ "mq": [
+  "=",
+  "=",
+  "\u003c",
+  "\u003c=",
+  "\u003e",
+  "\u003e="
+ ],
+ "pc": [
+  "global",
+  "has",
+  "is",
+  "local",
+  "not",
+  "nth-child",
+  "nth-last-child",
+  "nth-last-of-type",
+  "nth-of-type",
+  "where"
+ ]
+}

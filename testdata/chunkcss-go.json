@@ -1,0 +1,20 @@
+[
+  {
+    "fn": "generateChunkCSS",
+    "arg": {
+      "case": "banner-footer"
+    },
+    "out": {
+      "bytes": "2f2a206373732062616e6e6572202a2f0a2f2a2063737320666f6f746572202a2f0a"
+    }
+  },
+  {
+    "fn": "generateChunkCSS",
+    "arg": {
+      "case": "empty"
+    },
+    "out": {
+      "bytes": ""
+    }
+  }
+]

@@ -1,0 +1,1090 @@
+{
+ "bitset": [
+  {
+   "count": 0,
+   "set": null,
+   "hasTrue": null,
+   "hasFalse": null,
+   "entries": ""
+  },
+  {
+   "count": 1,
+   "set": [
+    0
+   ],
+   "hasTrue": [
+    0
+   ],
+   "hasFalse": null,
+   "entries": "01"
+  },
+  {
+   "count": 8,
+   "set": [
+    0,
+    7
+   ],
+   "hasTrue": [
+    0,
+    7
+   ],
+   "hasFalse": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+   ],
+   "entries": "81"
+  },
+  {
+   "count": 17,
+   "set": [
+    1,
+    8,
+    16
+   ],
+   "hasTrue": [
+    1,
+    8,
+    16
+   ],
+   "hasFalse": [
+    0,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15
+   ],
+   "entries": "020101"
+  }
+ ],
+ "escape": [
+  {
+   "text": "a\u003c/b\u003ec",
+   "slashTag": "\u003c/b\u003e",
+   "out": "a\u003c/b\u003ec"
+  },
+  {
+   "text": "a\u003c/B\u003ec",
+   "slashTag": "\u003c/b\u003e",
+   "out": "a\u003c/B\u003ec"
+  },
+  {
+   "text": "\u003c/script\u003e\u003c/SCRIPT\u003e",
+   "slashTag": "\u003c/script\u003e",
+   "out": "\u003c/script\u003e\u003c/SCRIPT\u003e"
+  },
+  {
+   "text": "a\u003c/b",
+   "slashTag": "\u003c/b\u003e",
+   "out": "a\u003c/b"
+  },
+  {
+   "text": "",
+   "slashTag": "\u003c/b\u003e",
+   "out": ""
+  },
+  {
+   "text": "\u003c/b\u003e\u003c/b\u003e",
+   "slashTag": "\u003c/b\u003e",
+   "out": "\u003c/b\u003e\u003c/b\u003e"
+  },
+  {
+   "text": "x\u003c/scRiPt \u003e",
+   "slashTag": "\u003c/script\u003e",
+   "out": "x\u003c/scRiPt \u003e"
+  }
+ ],
+ "floatBinary": [
+  {
+   "a": "3ff8000000000000",
+   "add": "bff0000000000000",
+   "atan2": "4004cf33dec5e9e0",
+   "b": "c004000000000000",
+   "div": "bfe3333333333333",
+   "lerp": "3fe0000000000000",
+   "max2": "3ff8000000000000",
+   "max3": "3ff8000000000000",
+   "min2": "c004000000000000",
+   "min3": "c01c000000000000",
+   "mul": "c00e000000000000",
+   "pow": "3fd7398bf1d1ee6f",
+   "sign": "bff8000000000000",
+   "sub": "4010000000000000"
+  },
+  {
+   "a": "0000000000000000",
+   "add": "0000000000000000",
+   "atan2": "0000000000000000",
+   "b": "0000000000000000",
+   "div": "fff8000000000000",
+   "lerp": "0000000000000000",
+   "max2": "0000000000000000",
+   "max3": "0000000000000000",
+   "min2": "0000000000000000",
+   "min3": "c01c000000000000",
+   "mul": "0000000000000000",
+   "pow": "3ff0000000000000",
+   "sign": "0000000000000000",
+   "sub": "0000000000000000"
+  },
+  {
+   "a": "7ff8000000000001",
+   "add": "7ff8000000000001",
+   "atan2": "7ff8000000000001",
+   "b": "3ff0000000000000",
+   "div": "7ff8000000000001",
+   "lerp": "7ff8000000000001",
+   "max2": "7ff8000000000001",
+   "max3": "7ff8000000000001",
+   "min2": "7ff8000000000001",
+   "min3": "7ff8000000000001",
+   "mul": "7ff8000000000001",
+   "pow": "7ff8000000000001",
+   "sign": "7ff8000000000001",
+   "sub": "7ff8000000000001"
+  },
+  {
+   "a": "4000000000000000",
+   "add": "4004000000000000",
+   "atan2": "3ff5368c951e9cfc",
+   "b": "3fe0000000000000",
+   "div": "4010000000000000",
+   "lerp": "3ffa000000000000",
+   "max2": "4000000000000000",
+   "max3": "4000000000000000",
+   "min2": "3fe0000000000000",
+   "min3": "c01c000000000000",
+   "mul": "3ff0000000000000",
+   "pow": "3ff6a09e667f3bcd",
+   "sign": "4000000000000000",
+   "sub": "3ff8000000000000"
+  },
+  {
+   "a": "c008000000000000",
+   "add": "bff0000000000000",
+   "atan2": "bfef730bd281f69b",
+   "b": "4000000000000000",
+   "div": "bff8000000000000",
+   "lerp": "bffc000000000000",
+   "max2": "4000000000000000",
+   "max3": "4000000000000000",
+   "min2": "c008000000000000",
+   "min3": "c01c000000000000",
+   "mul": "c018000000000000",
+   "pow": "4022000000000000",
+   "sign": "4008000000000000",
+   "sub": "c014000000000000"
+  },
+  {
+   "a": "7e37e43c8800759c",
+   "add": "7e47e43c8800759c",
+   "atan2": "3fe921fb54442d18",
+   "b": "7e37e43c8800759c",
+   "div": "3ff0000000000000",
+   "lerp": "7e37e43c8800759c",
+   "max2": "7e37e43c8800759c",
+   "max3": "7e37e43c8800759c",
+   "min2": "7e37e43c8800759c",
+   "min3": "c01c000000000000",
+   "mul": "7ff0000000000000",
+   "pow": "7ff0000000000000",
+   "sign": "7e37e43c8800759c",
+   "sub": "0000000000000000"
+  },
+  {
+   "a": "7ff0000000000000",
+   "add": "7ff0000000000000",
+   "atan2": "3ff921fb54442d18",
+   "b": "4000000000000000",
+   "div": "7ff0000000000000",
+   "lerp": "fff8000000000000",
+   "max2": "7ff0000000000000",
+   "max3": "7ff0000000000000",
+   "min2": "4000000000000000",
+   "min3": "c01c000000000000",
+   "mul": "7ff0000000000000",
+   "pow": "7ff0000000000000",
+   "sign": "7ff0000000000000",
+   "sub": "7ff0000000000000"
+  },
+  {
+   "a": "0000000000000000",
+   "add": "4014000000000000",
+   "atan2": "0000000000000000",
+   "b": "4014000000000000",
+   "div": "0000000000000000",
+   "lerp": "3ff4000000000000",
+   "max2": "4014000000000000",
+   "max3": "4014000000000000",
+   "min2": "0000000000000000",
+   "min3": "c01c000000000000",
+   "mul": "0000000000000000",
+   "pow": "0000000000000000",
+   "sign": "0000000000000000",
+   "sub": "c014000000000000"
+  }
+ ],
+ "floatUnary": [
+  {
+   "abs": "0000000000000000",
+   "addConst": "4004000000000000",
+   "cbrt": "0000000000000000",
+   "ceil": "0000000000000000",
+   "cos": "3ff0000000000000",
+   "cube": "0000000000000000",
+   "divConst": "0000000000000000",
+   "floor": "0000000000000000",
+   "isNaN": "false",
+   "log2": "fff0000000000000",
+   "mulConst": "8000000000000000",
+   "neg": "8000000000000000",
+   "powConst": "0000000000000000",
+   "round": "0000000000000000",
+   "sin": "0000000000000000",
+   "sq": "0000000000000000",
+   "sqrt": "0000000000000000",
+   "subConst": "c004000000000000",
+   "value": "0000000000000000",
+   "x": "0000000000000000"
+  },
+  {
+   "abs": "0000000000000000",
+   "addConst": "4004000000000000",
+   "cbrt": "8000000000000000",
+   "ceil": "8000000000000000",
+   "cos": "3ff0000000000000",
+   "cube": "8000000000000000",
+   "divConst": "8000000000000000",
+   "floor": "8000000000000000",
+   "isNaN": "false",
+   "log2": "fff0000000000000",
+   "mulConst": "0000000000000000",
+   "neg": "0000000000000000",
+   "powConst": "8000000000000000",
+   "round": "8000000000000000",
+   "sin": "8000000000000000",
+   "sq": "0000000000000000",
+   "sqrt": "8000000000000000",
+   "subConst": "c004000000000000",
+   "value": "8000000000000000",
+   "x": "8000000000000000"
+  },
+  {
+   "abs": "3fe0000000000000",
+   "addConst": "4008000000000000",
+   "cbrt": "3fe965fea53d6e3c",
+   "ceil": "3ff0000000000000",
+   "cos": "3fec1528065b7d50",
+   "cube": "3fc0000000000000",
+   "divConst": "3fc5555555555555",
+   "floor": "0000000000000000",
+   "isNaN": "false",
+   "log2": "bff0000000000000",
+   "mulConst": "bfe4000000000000",
+   "neg": "bfe0000000000000",
+   "powConst": "3fc0000000000000",
+   "round": "3ff0000000000000",
+   "sin": "3fdeaee8744b05f0",
+   "sq": "3fd0000000000000",
+   "sqrt": "3fe6a09e667f3bcd",
+   "subConst": "c000000000000000",
+   "value": "3fe0000000000000",
+   "x": "3fe0000000000000"
+  },
+  {
+   "abs": "3fe0000000000000",
+   "addConst": "4000000000000000",
+   "cbrt": "bfe965fea53d6e3c",
+   "ceil": "8000000000000000",
+   "cos": "3fec1528065b7d50",
+   "cube": "bfc0000000000000",
+   "divConst": "bfc5555555555555",
+   "floor": "bff0000000000000",
+   "isNaN": "false",
+   "log2": "7ff8000000000001",
+   "mulConst": "3fe4000000000000",
+   "neg": "3fe0000000000000",
+   "powConst": "bfc0000000000000",
+   "round": "bff0000000000000",
+   "sin": "bfdeaee8744b05f0",
+   "sq": "3fd0000000000000",
+   "sqrt": "fff8000000000000",
+   "subConst": "c008000000000000",
+   "value": "bfe0000000000000",
+   "x": "bfe0000000000000"
+  },
+  {
+   "abs": "3ff8000000000000",
+   "addConst": "4010000000000000",
+   "cbrt": "3ff250bfe1b082f5",
+   "ceil": "4000000000000000",
+   "cos": "3fb21bd54fc5f9a7",
+   "cube": "400b000000000000",
+   "divConst": "3fe0000000000000",
+   "floor": "3ff0000000000000",
+   "isNaN": "false",
+   "log2": "3fe2b803473f7ad2",
+   "mulConst": "bffe000000000000",
+   "neg": "bff8000000000000",
+   "powConst": "400b000000000000",
+   "round": "4000000000000000",
+   "sin": "3fefeb7a9b2c6d8b",
+   "sq": "4002000000000000",
+   "sqrt": "3ff3988e1409212e",
+   "subConst": "bff0000000000000",
+   "value": "3ff8000000000000",
+   "x": "3ff8000000000000"
+  },
+  {
+   "abs": "3ff8000000000000",
+   "addConst": "3ff0000000000000",
+   "cbrt": "bff250bfe1b082f5",
+   "ceil": "bff0000000000000",
+   "cos": "3fb21bd54fc5f9a7",
+   "cube": "c00b000000000000",
+   "divConst": "bfe0000000000000",
+   "floor": "c000000000000000",
+   "isNaN": "false",
+   "log2": "7ff8000000000001",
+   "mulConst": "3ffe000000000000",
+   "neg": "3ff8000000000000",
+   "powConst": "c00b000000000000",
+   "round": "c000000000000000",
+   "sin": "bfefeb7a9b2c6d8b",
+   "sq": "4002000000000000",
+   "sqrt": "fff8000000000000",
+   "subConst": "c010000000000000",
+   "value": "bff8000000000000",
+   "x": "bff8000000000000"
+  },
+  {
+   "abs": "4004000000000000",
+   "addConst": "4014000000000000",
+   "cbrt": "3ff5b7209557b0ee",
+   "ceil": "4008000000000000",
+   "cos": "bfe9a2f7ef858b7d",
+   "cube": "402f400000000000",
+   "divConst": "3feaaaaaaaaaaaab",
+   "floor": "4000000000000000",
+   "isNaN": "false",
+   "log2": "3ff5269e12f346e2",
+   "mulConst": "c009000000000000",
+   "neg": "c004000000000000",
+   "powConst": "402f400000000000",
+   "round": "4008000000000000",
+   "sin": "3fe326af0dcfcab0",
+   "sq": "4019000000000000",
+   "sqrt": "3ff94c583ada5b53",
+   "subConst": "0000000000000000",
+   "value": "4004000000000000",
+   "x": "4004000000000000"
+  },
+  {
+   "abs": "4004000000000000",
+   "addConst": "0000000000000000",
+   "cbrt": "bff5b7209557b0ee",
+   "ceil": "c000000000000000",
+   "cos": "bfe9a2f7ef858b7d",
+   "cube": "c02f400000000000",
+   "divConst": "bfeaaaaaaaaaaaab",
+   "floor": "c008000000000000",
+   "isNaN": "false",
+   "log2": "7ff8000000000001",
+   "mulConst": "4009000000000000",
+   "neg": "4004000000000000",
+   "powConst": "c02f400000000000",
+   "round": "c008000000000000",
+   "sin": "bfe326af0dcfcab0",
+   "sq": "4019000000000000",
+   "sqrt": "fff8000000000000",
+   "subConst": "c014000000000000",
+   "value": "c004000000000000",
+   "x": "c004000000000000"
+  },
+  {
+   "abs": "400d99999999999a",
+   "addConst": "4018cccccccccccd",
+   "cbrt": "3ff8bf33eb6b7487",
+   "ceil": "4010000000000000",
+   "cos": "bfeb23a2ad7dd937",
+   "cube": "40495395810624de",
+   "divConst": "3ff3bbbbbbbbbbbc",
+   "floor": "4008000000000000",
+   "isNaN": "false",
+   "log2": "3ffe334db2c356b0",
+   "mulConst": "c012800000000000",
+   "neg": "c00d99999999999a",
+   "powConst": "40495395810624de",
+   "round": "4010000000000000",
+   "sin": "bfe0f46aec2e1b41",
+   "sq": "402b6147ae147ae2",
+   "sqrt": "3ffec6d0353167a9",
+   "subConst": "3ff3333333333334",
+   "value": "400d99999999999a",
+   "x": "400d99999999999a"
+  },
+  {
+   "abs": "400d99999999999a",
+   "addConst": "bff3333333333334",
+   "cbrt": "bff8bf33eb6b7487",
+   "ceil": "c008000000000000",
+   "cos": "bfeb23a2ad7dd937",
+   "cube": "c0495395810624de",
+   "divConst": "bff3bbbbbbbbbbbc",
+   "floor": "c010000000000000",
+   "isNaN": "false",
+   "log2": "7ff8000000000001",
+   "mulConst": "4012800000000000",
+   "neg": "400d99999999999a",
+   "powConst": "c0495395810624de",
+   "round": "c010000000000000",
+   "sin": "3fe0f46aec2e1b41",
+   "sq": "402b6147ae147ae2",
+   "sqrt": "fff8000000000000",
+   "subConst": "c018cccccccccccd",
+   "value": "c00d99999999999a",
+   "x": "c00d99999999999a"
+  },
+  {
+   "abs": "3fdfffffffffffff",
+   "addConst": "4008000000000000",
+   "cbrt": "3fe965fea53d6e3c",
+   "ceil": "3ff0000000000000",
+   "cos": "3fec1528065b7d50",
+   "cube": "3fbffffffffffffd",
+   "divConst": "3fc5555555555555",
+   "floor": "0000000000000000",
+   "isNaN": "false",
+   "log2": "bff0000000000001",
+   "mulConst": "bfe3ffffffffffff",
+   "neg": "bfdfffffffffffff",
+   "powConst": "3fbffffffffffffd",
+   "round": "0000000000000000",
+   "sin": "3fdeaee8744b05ef",
+   "sq": "3fcffffffffffffe",
+   "sqrt": "3fe6a09e667f3bcc",
+   "subConst": "c000000000000000",
+   "value": "3fdfffffffffffff",
+   "x": "3fdfffffffffffff"
+  },
+  {
+   "abs": "3fd5555555555555",
+   "addConst": "4006aaaaaaaaaaab",
+   "cbrt": "3fe63003fbb4c375",
+   "ceil": "3ff0000000000000",
+   "cos": "3fee3d165991982c",
+   "cube": "3fa2f684bda12f68",
+   "divConst": "3fbc71c71c71c71c",
+   "floor": "0000000000000000",
+   "isNaN": "false",
+   "log2": "bff95c01a39fbd69",
+   "mulConst": "bfdaaaaaaaaaaaaa",
+   "neg": "bfd5555555555555",
+   "powConst": "3fa2f684bda12f68",
+   "round": "0000000000000000",
+   "sin": "3fd4f0c2068a80c6",
+   "sq": "3fbc71c71c71c71c",
+   "sqrt": "3fe279a74590331c",
+   "subConst": "c001555555555555",
+   "value": "3fd5555555555555",
+   "x": "3fd5555555555555"
+  },
+  {
+   "abs": "444b1ae4d6e2ef50",
+   "addConst": "444b1ae4d6e2ef50",
+   "cbrt": "416312d000000000",
+   "ceil": "444b1ae4d6e2ef50",
+   "cos": "3fe7d6a19e03cfa6",
+   "cube": "4d03726987666191",
+   "divConst": "443211ede4974a35",
+   "floor": "444b1ae4d6e2ef50",
+   "isNaN": "false",
+   "log2": "405170abde37d342",
+   "mulConst": "c450f0cf064dd592",
+   "neg": "c44b1ae4d6e2ef50",
+   "powConst": "4d03726987666191",
+   "round": "444b1ae4d6e2ef50",
+   "sin": "bfe5590c69e0cddf",
+   "sq": "48a6f578c4e0a061",
+   "sqrt": "421d73751c66bc34",
+   "subConst": "444b1ae4d6e2ef50",
+   "value": "444b1ae4d6e2ef50",
+   "x": "444b1ae4d6e2ef50"
+  },
+  {
+   "abs": "444b1ae4d6e2ef50",
+   "addConst": "c44b1ae4d6e2ef50",
+   "cbrt": "c16312d000000000",
+   "ceil": "c44b1ae4d6e2ef50",
+   "cos": "3fe7d6a19e03cfa6",
+   "cube": "cd03726987666191",
+   "divConst": "c43211ede4974a35",
+   "floor": "c44b1ae4d6e2ef50",
+   "isNaN": "false",
+   "log2": "7ff8000000000001",
+   "mulConst": "4450f0cf064dd592",
+   "neg": "444b1ae4d6e2ef50",
+   "powConst": "cd03726987666191",
+   "round": "c44b1ae4d6e2ef50",
+   "sin": "3fe5590c69e0cddf",
+   "sq": "48a6f578c4e0a061",
+   "sqrt": "fff8000000000000",
+   "subConst": "c44b1ae4d6e2ef50",
+   "value": "c44b1ae4d6e2ef50",
+   "x": "c44b1ae4d6e2ef50"
+  },
+  {
+   "abs": "01a56e1fc2f8f359",
+   "addConst": "4004000000000000",
+   "cbrt": "2b2bff2ee48e0530",
+   "ceil": "3ff0000000000000",
+   "cos": "3ff0000000000000",
+   "cube": "0000000000000000",
+   "divConst": "018c92d503f699cc",
+   "floor": "0000000000000000",
+   "isNaN": "false",
+   "log2": "c08f24a09f1a8b89",
+   "mulConst": "81aac9a7b3b7302f",
+   "neg": "81a56e1fc2f8f359",
+   "powConst": "0000000000000000",
+   "round": "0000000000000000",
+   "sin": "01a56e1fc2f8f359",
+   "sq": "0000000000000000",
+   "sqrt": "20ca2fe76a3f9475",
+   "subConst": "c004000000000000",
+   "value": "01a56e1fc2f8f359",
+   "x": "01a56e1fc2f8f359"
+  },
+  {
+   "abs": "4340000000000000",
+   "addConst": "4340000000000001",
+   "cbrt": "410965fea53d6e3c",
+   "ceil": "4340000000000000",
+   "cos": "bfe0e9918bb35aac",
+   "cube": "49e0000000000000",
+   "divConst": "4325555555555555",
+   "floor": "4340000000000000",
+   "isNaN": "false",
+   "log2": "404a800000000000",
+   "mulConst": "c344000000000000",
+   "neg": "c340000000000000",
+   "powConst": "49e0000000000000",
+   "round": "4340000000000000",
+   "sin": "bfeb2a66c8f35587",
+   "sq": "4690000000000000",
+   "sqrt": "4196a09e667f3bcd",
+   "subConst": "433ffffffffffffe",
+   "value": "4340000000000000",
+   "x": "4340000000000000"
+  },
+  {
+   "abs": "7ff8000000000001",
+   "addConst": "7ff8000000000001",
+   "cbrt": "7ff8000000000001",
+   "ceil": "7ff8000000000001",
+   "cos": "7ff8000000000001",
+   "cube": "7ff8000000000001",
+   "divConst": "7ff8000000000001",
+   "floor": "7ff8000000000001",
+   "isNaN": "true",
+   "log2": "7ff8000000000001",
+   "mulConst": "7ff8000000000001",
+   "neg": "fff8000000000001",
+   "powConst": "7ff8000000000001",
+   "round": "7ff8000000000001",
+   "sin": "7ff8000000000001",
+   "sq": "7ff8000000000001",
+   "sqrt": "7ff8000000000001",
+   "subConst": "7ff8000000000001",
+   "value": "7ff8000000000001",
+   "x": "7ff8000000000001"
+  },
+  {
+   "abs": "7ff0000000000000",
+   "addConst": "7ff0000000000000",
+   "cbrt": "7ff0000000000000",
+   "ceil": "7ff0000000000000",
+   "cos": "7ff8000000000001",
+   "cube": "7ff0000000000000",
+   "divConst": "7ff0000000000000",
+   "floor": "7ff0000000000000",
+   "isNaN": "false",
+   "log2": "7ff0000000000000",
+   "mulConst": "fff0000000000000",
+   "neg": "fff0000000000000",
+   "powConst": "7ff0000000000000",
+   "round": "7ff0000000000000",
+   "sin": "7ff8000000000001",
+   "sq": "7ff0000000000000",
+   "sqrt": "7ff0000000000000",
+   "subConst": "7ff0000000000000",
+   "value": "7ff0000000000000",
+   "x": "7ff0000000000000"
+  },
+  {
+   "abs": "7ff0000000000000",
+   "addConst": "fff0000000000000",
+   "cbrt": "fff0000000000000",
+   "ceil": "fff0000000000000",
+   "cos": "7ff8000000000001",
+   "cube": "fff0000000000000",
+   "divConst": "fff0000000000000",
+   "floor": "fff0000000000000",
+   "isNaN": "false",
+   "log2": "7ff8000000000001",
+   "mulConst": "7ff0000000000000",
+   "neg": "7ff0000000000000",
+   "powConst": "fff0000000000000",
+   "round": "fff0000000000000",
+   "sin": "7ff8000000000001",
+   "sq": "7ff0000000000000",
+   "sqrt": "fff8000000000000",
+   "subConst": "fff0000000000000",
+   "value": "fff0000000000000",
+   "x": "fff0000000000000"
+  },
+  {
+   "abs": "3ff0000000000000",
+   "addConst": "400c000000000000",
+   "cbrt": "3ff0000000000000",
+   "ceil": "3ff0000000000000",
+   "cos": "3fe14a280fb5068c",
+   "cube": "3ff0000000000000",
+   "divConst": "3fd5555555555555",
+   "floor": "3ff0000000000000",
+   "isNaN": "false",
+   "log2": "0000000000000000",
+   "mulConst": "bff4000000000000",
+   "neg": "bff0000000000000",
+   "powConst": "3ff0000000000000",
+   "round": "3ff0000000000000",
+   "sin": "3feaed548f090cee",
+   "sq": "3ff0000000000000",
+   "sqrt": "3ff0000000000000",
+   "subConst": "bff8000000000000",
+   "value": "3ff0000000000000",
+   "x": "3ff0000000000000"
+  },
+  {
+   "abs": "3ff0000000000000",
+   "addConst": "3ff8000000000000",
+   "cbrt": "bff0000000000000",
+   "ceil": "bff0000000000000",
+   "cos": "3fe14a280fb5068c",
+   "cube": "bff0000000000000",
+   "divConst": "bfd5555555555555",
+   "floor": "bff0000000000000",
+   "isNaN": "false",
+   "log2": "7ff8000000000001",
+   "mulConst": "3ff4000000000000",
+   "neg": "3ff0000000000000",
+   "powConst": "bff0000000000000",
+   "round": "bff0000000000000",
+   "sin": "bfeaed548f090cee",
+   "sq": "3ff0000000000000",
+   "sqrt": "fff8000000000000",
+   "subConst": "c00c000000000000",
+   "value": "bff0000000000000",
+   "x": "bff0000000000000"
+  },
+  {
+   "abs": "4000000000000000",
+   "addConst": "4012000000000000",
+   "cbrt": "3ff428a2f98d728b",
+   "ceil": "4000000000000000",
+   "cos": "bfdaa22657537205",
+   "cube": "4020000000000000",
+   "divConst": "3fe5555555555555",
+   "floor": "4000000000000000",
+   "isNaN": "false",
+   "log2": "3ff0000000000000",
+   "mulConst": "c004000000000000",
+   "neg": "c000000000000000",
+   "powConst": "4020000000000000",
+   "round": "4000000000000000",
+   "sin": "3fed18f6ead1b445",
+   "sq": "4010000000000000",
+   "sqrt": "3ff6a09e667f3bcd",
+   "subConst": "bfe0000000000000",
+   "value": "4000000000000000",
+   "x": "4000000000000000"
+  },
+  {
+   "abs": "4024000000000000",
+   "addConst": "4029000000000000",
+   "cbrt": "40013c484138704f",
+   "ceil": "4024000000000000",
+   "cos": "bfead9ac890c6b1f",
+   "cube": "408f400000000000",
+   "divConst": "400aaaaaaaaaaaab",
+   "floor": "4024000000000000",
+   "isNaN": "false",
+   "log2": "400a934f0979a371",
+   "mulConst": "c029000000000000",
+   "neg": "c024000000000000",
+   "powConst": "408f400000000000",
+   "round": "4024000000000000",
+   "sin": "bfe1689ef5f34f53",
+   "sq": "4059000000000000",
+   "sqrt": "40094c583ada5b53",
+   "subConst": "401e000000000000",
+   "value": "4024000000000000",
+   "x": "4024000000000000"
+  }
+ ],
+ "hash": [
+  {
+   "seed": 0,
+   "hash": 0,
+   "out": 2654435769
+  },
+  {
+   "seed": 1,
+   "hash": 2,
+   "out": 2654435834
+  },
+  {
+   "seed": 4294967295,
+   "hash": 1,
+   "out": 566789766
+  },
+  {
+   "seed": 12345,
+   "hash": 67890,
+   "out": 2655300864
+  }
+ ],
+ "hashString": [
+  {
+   "seed": 7,
+   "text": "",
+   "out": 2654436221
+  },
+  {
+   "seed": 7,
+   "text": "a",
+   "out": 3448982661
+  },
+  {
+   "seed": 7,
+   "text": "abc",
+   "out": 667607387
+  },
+  {
+   "seed": 7,
+   "text": "héllo",
+   "out": 262370211
+  },
+  {
+   "seed": 7,
+   "text": "日本語",
+   "out": 1702720837
+  },
+  {
+   "seed": 7,
+   "text": "😀",
+   "out": 3448854446
+  }
+ ],
+ "joiner": [
+  {
+   "strings": [
+    "a",
+    "bc"
+   ],
+   "bytes": [],
+   "length": 3,
+   "last": 99,
+   "done": "616263",
+   "hasStr": true,
+   "hasByte": true
+  },
+  {
+   "strings": null,
+   "bytes": [
+    "0102",
+    "03"
+   ],
+   "length": 3,
+   "last": 3,
+   "done": "010203",
+   "hasStr": true,
+   "hasByte": true
+  },
+  {
+   "strings": [
+    "x"
+   ],
+   "bytes": [
+    "ff"
+   ],
+   "length": 2,
+   "last": 255,
+   "done": "78ff",
+   "hasStr": true,
+   "hasByte": true
+  },
+  {
+   "strings": [
+    "",
+    "tail"
+   ],
+   "bytes": [],
+   "length": 4,
+   "last": 108,
+   "done": "7461696c",
+   "hasStr": false,
+   "hasByte": true
+  },
+  {
+   "strings": [
+    "abc"
+   ],
+   "bytes": null,
+   "length": 4,
+   "last": 10,
+   "done": "6162630a",
+   "hasStr": true,
+   "hasByte": true,
+   "ensureNewline": true
+  }
+ ],
+ "source": "esbuild internal/helpers (Go, commit f6058f83)",
+ "strings": [
+  {
+   "a": [
+    "a",
+    "b"
+   ],
+   "b": [
+    "a",
+    "b"
+   ],
+   "eq": true,
+   "aa": [
+    [
+     "a",
+     "b"
+    ]
+   ],
+   "bb": [
+    [
+     "a",
+     "b"
+    ]
+   ],
+   "aaEq": true,
+   "joined": "\"a\", \"b\""
+  },
+  {
+   "a": [
+    "a"
+   ],
+   "b": [
+    "a",
+    "b"
+   ],
+   "eq": false,
+   "aa": [
+    [
+     "a"
+    ]
+   ],
+   "bb": [
+    [
+     "a",
+     "b"
+    ]
+   ],
+   "aaEq": false,
+   "joined": "\"a\""
+  },
+  {
+   "a": null,
+   "b": null,
+   "eq": true,
+   "aa": [
+    null
+   ],
+   "bb": [
+    null
+   ],
+   "aaEq": true,
+   "joined": ""
+  },
+  {
+   "a": [
+    "plain"
+   ],
+   "b": null,
+   "eq": true,
+   "aa": null,
+   "bb": null,
+   "aaEq": true,
+   "joined": "\"plain\""
+  },
+  {
+   "a": [
+    "with space"
+   ],
+   "b": null,
+   "eq": true,
+   "aa": null,
+   "bb": null,
+   "aaEq": true,
+   "joined": "\"with space\""
+  },
+  {
+   "a": [
+    "quote\"inside"
+   ],
+   "b": null,
+   "eq": true,
+   "aa": null,
+   "bb": null,
+   "aaEq": true,
+   "joined": "\"quote\\\"inside\""
+  },
+  {
+   "a": [
+    "back\\slash"
+   ],
+   "b": null,
+   "eq": true,
+   "aa": null,
+   "bb": null,
+   "aaEq": true,
+   "joined": "\"back\\\\slash\""
+  },
+  {
+   "a": [
+    "tab\tnewline\n"
+   ],
+   "b": null,
+   "eq": true,
+   "aa": null,
+   "bb": null,
+   "aaEq": true,
+   "joined": "\"tab\\tnewline\\n\""
+  },
+  {
+   "a": [
+    "\u0000\u001f"
+   ],
+   "b": null,
+   "eq": true,
+   "aa": null,
+   "bb": null,
+   "aaEq": true,
+   "joined": "\"\\x00\\x1f\""
+  },
+  {
+   "a": [
+    "héllo"
+   ],
+   "b": null,
+   "eq": true,
+   "aa": null,
+   "bb": null,
+   "aaEq": true,
+   "joined": "\"héllo\""
+  },
+  {
+   "a": [
+    "日本"
+   ],
+   "b": null,
+   "eq": true,
+   "aa": null,
+   "bb": null,
+   "aaEq": true,
+   "joined": "\"日本\""
+  },
+  {
+   "a": [
+    "😀"
+   ],
+   "b": null,
+   "eq": true,
+   "aa": null,
+   "bb": null,
+   "aaEq": true,
+   "joined": "\"😀\""
+  },
+  {
+   "a": [
+    " nbsp"
+   ],
+   "b": null,
+   "eq": true,
+   "aa": null,
+   "bb": null,
+   "aaEq": true,
+   "joined": "\"\\u00a0nbsp\""
+  },
+  {
+   "a": [
+    "​zwsp"
+   ],
+   "b": null,
+   "eq": true,
+   "aa": null,
+   "bb": null,
+   "aaEq": true,
+   "joined": "\"\\u200bzwsp\""
+  }
+ ],
+ "typo": {
+  "valid": [
+   "esnext",
+   "es2015",
+   "node",
+   "browser"
+  ],
+  "queries": [
+   "esnxt",
+   "esnext",
+   "es2015",
+   "es215",
+   "nod",
+   "ndoe",
+   "browsr",
+   "xyz",
+   ""
+  ],
+  "results": [
+   "esnext",
+   "esnext",
+   "es2015",
+   "es2015",
+   "node",
+   "node",
+   "browser",
+   "",
+   ""
+  ],
+  "oks": [
+   true,
+   true,
+   true,
+   true,
+   true,
+   true,
+   true,
+   false,
+   false
+  ]
+ }
+}

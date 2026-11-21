@@ -1,0 +1,1 @@
+x = function y() { return eval('y') }

@@ -1,0 +1,496 @@
+#!/usr/bin/env node
+/**
+ * progress.ts —— esbuild → TypeScript 移植进度看板
+ *
+ * 三维度，全部机器统计：
+ *   1. 已移植：Go 函数（inventory.json）在对应 TS 文件里找到同名函数/方法
+ *   2. 已测试：该函数在 V8 覆盖率中出现且执行次数 > 0
+ *   3. 已等价：该函数所在包的全部 oracle 用例（cli 端到端 + fixture 函数级差分）
+ *      都通过时，才算等价。包未跑过 oracle 一律显示「未验证」，不用单元测试冒充。
+ *
+ * 用法: node --experimental-strip-types tools/progress.ts [--root .] [--oracle oracle.json]
+ *       [--md PROGRESS.md] [--json progress.json] [--check]
+ */
+
+import * as fs from "node:fs";
+import * as path from "node:path";
+import { createHash } from "node:crypto";
+import ts from "typescript";
+
+interface GoFunc { pkg: string; file: string; recv?: string; name: string; start: number; end: number; body: boolean; test: boolean; }
+interface DeclInfo { names: Set<string>; testCases: number; }
+interface OracleCase { name: string; kind: "cli" | "fixture" | "unit"; equal: boolean; status: string; exercises: string[]; }
+interface OracleData {
+  total: number; applicable: number; equal: number; tsMissing?: boolean; cases: OracleCase[];
+  byStatus?: Record<string, number>;
+  limit?: number;
+  params?: string[];
+  corpus?: { cliCases: number; fixtureCases: number; corpusTotal?: number; corpusTotalAllParams?: number; sources?: { id: string; files: number; bytes: number; caseCount: number }[] };
+}
+
+function parseArgs(argv: string[]) {
+  const o = {
+    root: process.cwd(), inventory: "inventory.json", src: "src", cov: "coverage",
+    oracle: "oracle.json", unit: "unit-oracle.json", goBytes: "tools/go-bytes-functions.json", md: "PROGRESS.md", json: "progress.json", check: false, quiet: false,
+  };
+  for (let i = 0; i < argv.length; i++) {
+    switch (argv[i]) {
+      case "--root": o.root = argv[++i]; break;
+      case "--inventory": o.inventory = argv[++i]; break;
+      case "--src": o.src = argv[++i]; break;
+      case "--cov": o.cov = argv[++i]; break;
+      case "--oracle": o.oracle = argv[++i]; break;
+      case "--unit": o.unit = argv[++i]; break;
+      case "--go-bytes": o.goBytes = argv[++i]; break;
+      case "--md": o.md = argv[++i]; break;
+      case "--json": o.json = argv[++i]; break;
+      case "--check": o.check = true; break;
+      case "--quiet": o.quiet = true; break;
+      default: if (argv[i].startsWith("--")) { console.error(`未知参数: ${argv[i]}`); process.exit(2); }
+    }
+  }
+  return o;
+}
+
+const tsPathFor = (goFile: string): string =>
+  goFile.endsWith("_test.go") ? goFile.replace(/_test\.go$/, ".test.ts") : goFile.replace(/\.go$/, ".ts");
+
+function collectDecls(fileName: string): DeclInfo {
+  const sf = ts.createSourceFile(fileName, fs.readFileSync(fileName, "utf8"), ts.ScriptTarget.Latest, false, ts.ScriptKind.TS);
+  const names = new Set<string>();
+  let testCases = 0;
+  const visit = (node: ts.Node, className?: string): void => {
+    if (ts.isFunctionDeclaration(node) && node.name) names.add(node.name.text);
+    else if (ts.isMethodDeclaration(node) && node.name && ts.isIdentifier(node.name)) {
+      names.add(node.name.text);
+      if (className) names.add(`${className}.${node.name.text}`);
+    } else if (ts.isClassDeclaration(node) && node.name) {
+      const cn = node.name.text;
+      for (const m of node.members) {
+        if (ts.isMethodDeclaration(m) && ts.isIdentifier(m.name)) {
+          names.add(m.name.text); names.add(`${cn}.${m.name.text}`);
+        } else if (ts.isPropertyDeclaration(m) && ts.isIdentifier(m.name) && m.initializer &&
+          (ts.isArrowFunction(m.initializer) || ts.isFunctionExpression(m.initializer))) {
+          names.add(m.name.text); names.add(`${cn}.${m.name.text}`);
+        }
+      }
+      ts.forEachChild(node, (c) => visit(c, cn));
+      return;
+    } else if (ts.isVariableDeclaration(node) && ts.isIdentifier(node.name) && node.initializer) {
+      const init = node.initializer;
+      if (ts.isArrowFunction(init) || ts.isFunctionExpression(init)) names.add(node.name.text);
+    } else if (ts.isCallExpression(node) && ts.isIdentifier(node.expression)) {
+      const c = node.expression.text;
+      if (c === "test" || c === "it") testCases++;
+    }
+    ts.forEachChild(node, (c) => visit(c, className));
+  };
+  visit(sf);
+  return { names, testCases };
+}
+
+function walkTsFiles(dir: string): string[] {
+  const out: string[] = [];
+  if (!fs.existsSync(dir)) return out;
+  for (const e of fs.readdirSync(dir, { withFileTypes: true })) {
+    const p = path.join(dir, e.name);
+    if (e.isDirectory()) {
+      if (e.name === "node_modules" || e.name.startsWith(".")) continue;
+      out.push(...walkTsFiles(p));
+    } else if (e.name.endsWith(".ts")) out.push(p);
+  }
+  return out;
+}
+
+type CovMap = Map<string, Map<string, number>>;
+function loadCoverage(covDir: string, srcDir: string): CovMap {
+  const cov: CovMap = new Map();
+  if (!fs.existsSync(covDir)) return cov;
+  const srcAbs = path.resolve(srcDir);
+  for (const f of fs.readdirSync(covDir)) {
+    if (!f.endsWith(".json")) continue;
+    let data: { result?: { url?: string; functions?: { functionName?: string; ranges?: { count: number }[] }[] }[] };
+    try { data = JSON.parse(fs.readFileSync(path.join(covDir, f), "utf8")); } catch { continue; }
+    for (const r of data.result ?? []) {
+      const url = r.url ?? "";
+      if (!url.startsWith("file://")) continue;
+      const abs = path.resolve(decodeURIComponent(url.slice("file://".length)));
+      if (!abs.startsWith(srcAbs)) continue;
+      let m = cov.get(abs);
+      if (!m) { m = new Map(); cov.set(abs, m); }
+      for (const fn of r.functions ?? []) {
+        const name = fn.functionName || "";
+        if (!name) continue;
+        // 一次执行可能对应多个 range（V8 按嵌套块拆分）；函数是否被执行要看所有 range 的
+        // 最大值，而不是 ranges[0]（类方法/带嵌套块的函数里 ranges[0] 可能是 0，例如
+        // scopeMemberArray 的 Less/Swap）。
+        let count = 0;
+        for (const r of fn.ranges ?? []) count = Math.max(count, r.count);
+        m.set(name, Math.max(m.get(name) ?? 0, count));
+      }
+    }
+  }
+  return cov;
+}
+function isCovered(exec: Map<string, number> | undefined, name: string): boolean {
+  if (!exec) return false;
+  if ((exec.get(name) ?? 0) > 0) return true;
+  const suffix = "." + name;
+  for (const [k, v] of exec) if (v > 0 && k.endsWith(suffix)) return true;
+  return false;
+}
+
+const opts = parseArgs(process.argv.slice(2));
+const root = path.resolve(opts.root);
+const srcDir = path.resolve(root, opts.src);
+const invPath = path.resolve(root, opts.inventory);
+if (!fs.existsSync(invPath)) {
+  console.error(`找不到 inventory: ${invPath}\n先运行: go run tools/inventory.go <esbuild根目录> ${opts.inventory}`);
+  process.exit(2);
+}
+const inventory: GoFunc[] = JSON.parse(fs.readFileSync(invPath, "utf8"));
+const srcFuncs = inventory.filter((f) => !f.test);
+const testFuncs = inventory.filter((f) => f.test);
+
+const oraclePath = path.resolve(root, opts.oracle);
+const oracle: OracleData | null = fs.existsSync(oraclePath)
+  ? JSON.parse(fs.readFileSync(oraclePath, "utf8")) as OracleData : null;
+
+// 「单元差分」通道（tools/unit-oracle.ts 生成）：js_lexer / js_ast / js_parser 的等价证据是
+// 单元测试形态的 Go 实测差分，不是 cli/fixture 通道；不并入这里的话这几个包会永久显示「已等价 0」。
+const unitPath = path.resolve(root, opts.unit);
+const unitOracle: OracleData | null = fs.existsSync(unitPath)
+  ? JSON.parse(fs.readFileSync(unitPath, "utf8")) as OracleData : null;
+
+// 「期望值来源 = Go 实测」：只统计 tools/go-verified.json 里登记过的包（人工登记，必须附 evidence）。
+// notEquiv：该包里有 Go 同名函数、但期望值没有被 Go 实测比对过的函数，不得计入「已等价」。
+interface GoVerifiedReg { pkg: string; count: number; notEquiv?: { fn: string; reason: string }[] }
+const goVerifiedByPkg = new Map<string, number>();
+const notEquiv = new Set<string>();
+{
+  const p = path.resolve(root, "tools/go-verified.json");
+  if (fs.existsSync(p)) {
+    const reg = JSON.parse(fs.readFileSync(p, "utf8")) as { packages?: GoVerifiedReg[] };
+    for (const e of reg.packages ?? []) {
+      goVerifiedByPkg.set(e.pkg, e.count);
+      for (const n of e.notEquiv ?? []) notEquiv.add(`${e.pkg}:${n.fn}`);
+    }
+  }
+}
+const goVerifiedTotal = [...goVerifiedByPkg.values()].reduce((a, b) => a + b, 0);
+
+// 两条等价通道必须分列，不许混装：
+//   oracle = cli 端到端 + fixture 函数级差分（当场重跑 Go，强一档）
+//   unit   = 单元测试形态的 Go 实测差分（只校验夹具 sha256 + 测试全绿，弱一档，属「临时等价」）
+interface ChanStat { total: number; passed: number; cli: number; fixture: number }
+function countChan(cases: OracleCase[] | undefined): Map<string, ChanStat> {
+  const out = new Map<string, ChanStat>();
+  for (const c of cases ?? []) {
+    // go-error：Go 侧在该参数下真报错，不适用；
+    // ts-missing：TS CLI 还没实现（M4），属「未评估」而不是「不通过」——
+    // 否则未实现的 CLI 会永久把 js_lexer/js_ast/js_parser 的等价归零。
+    if (c.status === "go-error" || c.status === "ts-missing") continue;
+    for (const pkg of c.exercises ?? []) {
+      const s = out.get(pkg) ?? { total: 0, passed: 0, cli: 0, fixture: 0 };
+      s.total++;
+      if (c.equal) s.passed++;
+      if (c.kind === "cli") s.cli++; else s.fixture++;
+      out.set(pkg, s);
+    }
+  }
+  return out;
+}
+const oracleByPkg = countChan(oracle?.cases);
+const unitByPkg = countChan(unitOracle?.cases);
+
+const declCache = new Map<string, DeclInfo>();
+const declsFor = (abs: string): DeclInfo => {
+  let d = declCache.get(abs);
+  if (!d) { d = fs.existsSync(abs) ? collectDecls(abs) : { names: new Set(), testCases: 0 }; declCache.set(abs, d); }
+  return d;
+};
+const cov = loadCoverage(path.resolve(root, opts.cov), srcDir);
+
+interface PkgStat {
+  pkg: string; total: number; ported: number; covered: number; equiv: number;
+  equivOracle: number; equivUnit: number; equivGoBytes: number; equivExcluded: number;
+  testTotal: number; testCases: number; oracleTotal: number; oraclePassed: number;
+  oracleCli: number; oracleFixture: number; oracleOk: boolean;
+  unitTotal: number; unitPassed: number; unitOk: boolean;
+}
+const byPkg = new Map<string, PkgStat>();
+const uncovered: { file: string; name: string; line: number }[] = [];
+const missing: { file: string; name: string; line: number }[] = [];
+const coveredByPkg = new Map<string, string[]>();
+
+for (const gf of srcFuncs) {
+  const rel = tsPathFor(gf.file);
+  const abs = path.join(srcDir, rel);
+  const ported = declsFor(abs).names.has(gf.name);
+  let st = byPkg.get(gf.pkg);
+  if (!st) {
+    st = { pkg: gf.pkg, total: 0, ported: 0, covered: 0, equiv: 0, equivOracle: 0, equivUnit: 0, equivGoBytes: 0, equivExcluded: 0,
+      testTotal: 0, testCases: 0, oracleTotal: 0, oraclePassed: 0, oracleCli: 0, oracleFixture: 0, oracleOk: false,
+      unitTotal: 0, unitPassed: 0, unitOk: false };
+    byPkg.set(gf.pkg, st);
+  }
+  st.total++;
+  if (ported) {
+    st.ported++;
+    if (isCovered(cov.get(abs), gf.name)) {
+      st.covered++;
+      const arr = coveredByPkg.get(gf.pkg) ?? [];
+      arr.push(gf.name);
+      coveredByPkg.set(gf.pkg, arr);
+    } else uncovered.push({ file: rel, name: gf.name, line: gf.start });
+  } else {
+    missing.push({ file: rel, name: gf.name, line: gf.start });
+  }
+}
+for (const gf of testFuncs) { const st = byPkg.get(gf.pkg); if (st) st.testTotal++; }
+// 「逐函数 Go 实测等价」登记（go-bytes 通道）：每条必须 fixture SHA 匹配、inventory 有该 Go 函数、
+// 且该函数当前被测试执行；三条全过才计入。互斥优先级 oracle > unit > go-bytes，故只影响此前 equiv=0 的包。
+const goBytesByPkg = new Map<string, { key: string; fn: string }[]>();
+const goBytesRejected: string[] = [];
+{
+  const gp = path.resolve(root, opts.goBytes);
+  if (fs.existsSync(gp)) {
+    const reg = JSON.parse(fs.readFileSync(gp, "utf8")) as {
+      entries?: { pkg: string; recv?: string; fn: string; fixture: string; sha: string }[];
+    };
+    for (const e of reg.entries ?? []) {
+      const fx = path.resolve(root, "testdata", e.fixture);
+      if (!fs.existsSync(fx)) { goBytesRejected.push(`${e.pkg}:${e.fn} fixture缺失`); continue; }
+      const sha = createHash("sha256").update(fs.readFileSync(fx)).digest("hex");
+      if (sha !== e.sha) { goBytesRejected.push(`${e.pkg}:${e.fn} SHA不符`); continue; }
+      if (!inventory.some((g) => !g.test && g.pkg === e.pkg && g.name === e.fn)) {
+        goBytesRejected.push(`${e.pkg}:${e.fn} inventory缺失`); continue;
+      }
+      const cov = coveredByPkg.get(e.pkg) ?? [];
+      if (cov.indexOf(e.fn) < 0) { goBytesRejected.push(`${e.pkg}:${e.fn} 未测试执行`); continue; }
+      const arr = goBytesByPkg.get(e.pkg) ?? [];
+      // 逐函数去重键 = recv.fn（区分同名方法的不同 receiver）；covered 判定仍按 name（V8 coverage 口径）
+      const key = (e.recv ? e.recv + "." : "") + e.fn;
+      if (!arr.some((x) => x.key === key)) arr.push({ key, fn: e.fn });
+      goBytesByPkg.set(e.pkg, arr);
+    }
+  }
+}
+
+for (const st of byPkg.values()) {
+  for (const f of walkTsFiles(path.join(srcDir, st.pkg))) {
+    if (f.endsWith(".test.ts")) st.testCases += declsFor(f).testCases;
+  }
+  const o = oracleByPkg.get(st.pkg);
+  if (o) {
+    st.oracleTotal = o.total; st.oraclePassed = o.passed;
+    st.oracleCli = o.cli; st.oracleFixture = o.fixture;
+  }
+  const u = unitByPkg.get(st.pkg);
+  if (u) { st.unitTotal = u.total; st.unitPassed = u.passed; }
+  st.oracleOk = st.oracleTotal > 0 && st.oraclePassed === st.oracleTotal;
+  st.unitOk = st.unitTotal > 0 && st.unitPassed === st.unitTotal;
+  // 只有该包对应通道的用例全部通过，已移植且被测试执行的函数才计为「已等价」。
+  // notEquiv 里的函数（有 Go 同名函数、但期望值未被 Go 实测比对）要从覆盖数里扣掉。
+  st.equivExcluded = (coveredByPkg.get(st.pkg) ?? []).filter((n) => notEquiv.has(`${st.pkg}:${n}`)).length;
+  const base = Math.max(0, st.covered - st.equivExcluded);
+  // 同一包两条通道都绿时只算一次，优先记在更强的 oracle 通道。
+  st.equivOracle = st.oracleOk ? base : 0;
+  st.equivUnit = !st.oracleOk && st.unitOk ? base : 0;
+  // go-bytes：仅当前面两条通道都不适用时，按逐函数登记数补齐（受 base 上限约束）。
+  const gb = goBytesByPkg.get(st.pkg);
+  st.equivGoBytes = !st.oracleOk && !st.unitOk && gb ? Math.min(gb.length, base) : 0;
+  st.equiv = st.equivOracle + st.equivUnit + st.equivGoBytes;
+}
+
+const stats = [...byPkg.values()].sort((a, b) => b.total - a.total);
+const total = stats.reduce((s, x) => s + x.total, 0);
+const portedTotal = stats.reduce((s, x) => s + x.ported, 0);
+const coveredTotal = stats.reduce((s, x) => s + x.covered, 0);
+const equivTotal = stats.reduce((s, x) => s + x.equiv, 0);
+const equivOracleTotal = stats.reduce((s, x) => s + x.equivOracle, 0);
+const equivUnitTotal = stats.reduce((s, x) => s + x.equivUnit, 0);
+const equivGoBytesTotal = stats.reduce((s, x) => s + x.equivGoBytes, 0);
+const pct = (n: number, d: number) => (d === 0 ? "—" : `${((n / d) * 100).toFixed(1)}%`);
+const eqLabel = (s: PkgStat): string => {
+  if (s.oracleTotal === 0 && s.unitTotal === 0) return "未验证";
+  const tag = s.equivOracle > 0 ? " oracle" : s.equivUnit > 0 ? " unit" : s.equivGoBytes > 0 ? " go-bytes" : "";
+  const bad: string[] = [];
+  if (s.oracleTotal > 0 && !s.oracleOk) bad.push(`case ${s.oraclePassed}/${s.oracleTotal}`);
+  if (s.unitTotal > 0 && !s.unitOk) bad.push(`unit ${s.unitPassed}/${s.unitTotal}`);
+  return `${s.equiv}/${s.total}${tag}${bad.length ? ` (${bad.join("，")})` : ""}`;
+};
+
+if (!opts.quiet) {
+  console.log("包".padEnd(26) + "Go函数".padStart(8) + "已移植".padStart(8) + "已测试".padStart(8) +
+    "移植率".padStart(9) + "测试率".padStart(9) + "  函数等价");
+  console.log("-".repeat(88));
+  for (const s of stats) {
+    console.log(s.pkg.padEnd(26) + String(s.total).padStart(8) + String(s.ported).padStart(8) +
+      String(s.covered).padStart(8) + pct(s.ported, s.total).padStart(9) +
+      pct(s.covered, s.total).padStart(9) + "  " + eqLabel(s));
+  }
+  console.log("-".repeat(88));
+  console.log("合计".padEnd(26) + String(total).padStart(8) + String(portedTotal).padStart(8) +
+    String(coveredTotal).padStart(8) + pct(portedTotal, total).padStart(9) +
+    pct(coveredTotal, total).padStart(9) + "  " + `${equivTotal}/${total}`);
+  console.log("");
+  console.log(`Go 非测试函数 ${total}；已移植 ${portedTotal}；已被测试执行 ${coveredTotal}；` +
+    `已等价 ${equivTotal} = oracle 通道 ${equivOracleTotal} + unit 通道 ${equivUnitTotal} + go-bytes 通道 ${equivGoBytesTotal}（unit 为临时等价，go-bytes 为逐函数 Go 实测等价）；` +
+    `未移植 ${missing.length}；已移植未测试 ${uncovered.length}`);
+  console.log(`测试用例：Go 测试函数 ${stats.reduce((s, x) => s + x.testTotal, 0)} 个，` +
+    `TS test() ${stats.reduce((s, x) => s + x.testCases, 0)} 个`);
+  if (oracle || unitOracle) {
+    const cliCount = oracle?.cases.filter((c) => c.kind === "cli").length ?? 0;
+    const fixtureCount = oracle?.cases.filter((c) => c.kind === "fixture").length ?? 0;
+    const unitCount = unitOracle?.cases.length ?? 0;
+    if (oracle) {
+      const statusCount = (s: string) => oracle.cases.filter((c) => c.status === s).length;
+      const evaluated = oracle.cases.filter((c) => c.status !== "ts-missing" && c.status !== "go-error").length;
+      const cliMissing = oracle.cases.filter((c) => c.kind === "cli" && c.status === "ts-missing").length;
+      console.log(`差分 oracle：已评估 ${evaluated}（equal ${statusCount("equal")} + fixture-fail ${statusCount("fixture-fail")}` +
+        `${statusCount("differ") ? ` + differ ${statusCount("differ")}` : ""}` +
+        `${statusCount("ts-error") ? ` + ts-error ${statusCount("ts-error")}` : ""}）；` +
+        `${cliMissing} 条 cli 用例 ts-missing 未评估；go-error ${statusCount("go-error")} 不适用` +
+        `（cli ${cliCount}，fixture ${fixtureCount}）`);
+    } else {
+      console.log("差分 oracle：未运行（跑 tools/oracle.ts 生成 oracle.json）");
+    }
+    if (unitOracle) {
+      console.log(`单元差分：${unitOracle.equal}/${unitOracle.total} 通过` +
+        `（${unitOracle.cases.map((c) => `${c.exercises[0]}:${c.equal ? "OK" : c.status}`).join("，")}）`);
+    } else {
+      console.log("单元差分：未运行（跑 tools/unit-oracle.ts 生成 unit-oracle.json）");
+    }
+    for (const [pkg, o] of [...oracleByPkg].sort()) {
+      if (o.fixture > 0) console.log(`  oracle fixture 通道 ${pkg}: ${o.passed}/${o.total}`);
+    }
+    for (const [pkg, o] of [...unitByPkg].sort()) {
+      console.log(`  unit 通道（临时等价，M4 前须回 oracle 重跑） ${pkg}: ${o.passed}/${o.total}`);
+    }
+    for (const [pkg, set] of [...goBytesByPkg].sort()) {
+      console.log(`  go-bytes 通道（逐函数 Go 实测等价，fixture SHA 已校验） ${pkg}: ${set.length} 函数`);
+    }
+  } else {
+    console.log("差分 oracle：未运行（跑 tools/oracle.ts 生成 oracle.json）");
+  }
+  // 已知偏差 / M2 未移植：只做展示，不参与 oracleOk 判定
+  const kdPath = path.resolve(root, "tools/known-deviations.json");
+  if (fs.existsSync(kdPath)) {
+    const kd = JSON.parse(fs.readFileSync(kdPath, "utf8"));
+    const by = new Map<string, string[]>();
+    for (const e of kd.entries ?? []) {
+      const arr = by.get(e.pkg) ?? [];
+      arr.push(e.fn);
+      by.set(e.pkg, arr);
+    }
+    for (const [pkg, fns] of by) {
+      const st = byPkg.get(pkg);
+      const deferred = kd.m2Deferred?.pkg === pkg ? `，M2 未移植 ${(st?.total ?? 0) - (st?.ported ?? 0)}` : "";
+      console.log(`已知偏差 ${pkg}: ${fns.length} 个（${fns.join("/")}）${deferred}—— 均不计入本档阻塞`);
+    }
+  }
+
+  if (uncovered.length) {
+    console.log("\n已移植但未被测试覆盖（前 20）:");
+    for (const u of uncovered.slice(0, 20)) console.log(`  ${u.file}:${u.line}  ${u.name}`);
+  }
+}
+
+// 「期望值来源 = Go 实测」已在前面从 tools/go-verified.json 解析（含 notEquiv 名单）。
+
+const oracleStatusCount = (s: string) => oracle ? oracle.cases.filter((c) => c.status === s).length : 0;
+const oracleEvaluated = oracle
+  ? oracle.cases.filter((c) => c.status !== "ts-missing" && c.status !== "go-error").length : 0;
+const oracleCliMissing = oracle
+  ? oracle.cases.filter((c) => c.kind === "cli" && c.status === "ts-missing").length : 0;
+
+// 按 status 动态展开（不手写加和，避免漏项：第 14 次推进漏了 diff 1，和=199≠200）
+const oracleStatusParts = (exclude: string[]) => {
+  const byStatus = oracle?.byStatus ?? oracle?.cases.reduce<Record<string, number>>((m, c) => {
+    m[c.status] = (m[c.status] ?? 0) + 1;
+    return m;
+  }, {});
+  return Object.entries(byStatus ?? {})
+    .filter(([k]) => !exclude.includes(k))
+    .sort((a, b) => b[1] - a[1])
+    .map(([k, v]) => `${k} ${v}`);
+};
+const oracleCorpusTotal = oracle?.corpus
+  ? (oracle.corpus.corpusTotal ?? oracle.corpus.cliCases * 4 + oracle.corpus.fixtureCases)
+  : 0;
+const oracleSubset = oracle && oracleCorpusTotal > 0 && oracle.total < oracleCorpusTotal;
+
+if (opts.md) {
+  const lines = [
+    "# 移植进度看板", "",
+    "> 由 `tools/progress.ts` 自动生成（AST 分析 + V8 覆盖率 + 差分 oracle），请勿手改。", "",
+    `- Go 非测试函数总数：**${total}**`,
+    `- 已移植：**${portedTotal}**（${pct(portedTotal, total)}）`,
+    `- 已被测试执行：**${coveredTotal}**（${pct(coveredTotal, total)}）`,
+    `- 已等价：**${equivTotal}**（oracle 通道 **${equivOracleTotal}** + unit 通道 **${equivUnitTotal}** + go-bytes 通道 **${equivGoBytesTotal}**；unit 为临时等价、M4 前必须回 oracle 重跑；go-bytes 为逐函数 Go 实测等价、fixture SHA 已校验）`,
+    `- 期望值来源 = Go 实测：**${goVerifiedTotal}**（仅 tools/go-verified.json 登记过的包；已等价不得超过该值）`,
+    `- 未移植：${missing.length}；已移植未测试：${uncovered.length}`,
+    `- 差分 oracle：${oracle ? `已评估 **${oracleEvaluated}${oracleCorpusTotal ? ` / ${oracleCorpusTotal}` : ""}**` +
+      `${oracleSubset ? "（**子集**：" + `limit=${oracle.limit ?? "?"}，params=${(oracle.params ?? []).join(",") || "?"}` +
+        (oracle.corpus?.corpusTotalAllParams ? `；全量 ${oracle.corpus.corpusTotalAllParams}` : "") + "）" : ""}` +
+      `；${oracleStatusParts(["ts-missing", "go-error"]).join(" + ")}` +
+      `；**${oracleCliMissing}** 条 cli 用例 \`ts-missing\` 未评估；` +
+      `go-error ${oracleStatusCount("go-error")} 不适用` : "未运行"}`,
+    ...(function () {
+      const testedNotEquiv = stats.filter((s) => s.covered > s.equiv).map((s) => `\`${s.pkg}\` ${s.covered - s.equiv}`);
+      return testedNotEquiv.length > 0
+        ? [`- 口径：「已测试未等价」= 已测试 − 已等价：${testedNotEquiv.join("，")}（fixture 的 equal 只等于 pin 校验通过，不等于函数级等价）`]
+        : [];
+    })(),
+    "",
+    "| 包 | Go 函数 | 已移植 | 已测试 | 已等价(oracle) | 已等价(unit·临时) | 已等价(go-bytes) | Go 实测期望值 | 移植率 | 测试率 |",
+    "| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |",
+    ...stats.map((s) =>
+      `| \`${s.pkg}\` | ${s.total} | ${s.ported} | ${s.covered} | ${s.equivOracle} | ${s.equivUnit} | ${s.equivGoBytes} | ${goVerifiedByPkg.get(s.pkg) ?? 0} | ${pct(s.ported, s.total)} | ${pct(s.covered, s.total)} |`),
+    `| **合计** | **${total}** | **${portedTotal}** | **${coveredTotal}** | **${equivOracleTotal}** | **${equivUnitTotal}** | **${equivGoBytesTotal}** | **${goVerifiedTotal}** | **${pct(portedTotal, total)}** | **${pct(coveredTotal, total)}** |`,
+    "",
+  ];
+  if (uncovered.length) {
+    lines.push("## 已移植但未被测试覆盖", "", "| 文件:行 | 函数 |", "| --- | --- |");
+    for (const u of uncovered) lines.push(`| \`${u.file}:${u.line}\` | \`${u.name}\` |`);
+    lines.push("");
+  }
+  if (missing.length && missing.length <= 200) {
+    lines.push("## 未移植函数", "", "| 文件:行 | 函数 |", "| --- | --- |");
+    for (const m of missing) lines.push(`| \`${m.file}:${m.line}\` | \`${m.name}\` |`);
+    lines.push("");
+  }
+  fs.writeFileSync(path.resolve(root, opts.md), lines.join("\n"));
+  console.log(`\n已写出 ${opts.md}`);
+}
+
+if (opts.json) {
+  fs.writeFileSync(path.resolve(root, opts.json), JSON.stringify({
+    generatedAt: new Date().toISOString(),
+    total, ported: portedTotal, covered: coveredTotal, equivalent: equivTotal,
+    equivalentByChannel: { oracle: equivOracleTotal, unit: equivUnitTotal, goBytes: equivGoBytesTotal },
+    missing: missing.length, portedUntested: uncovered.length,
+    oracle: oracle ? { applicable: oracle.applicable, equal: oracle.equal, tsMissing: !!oracle.tsMissing } : null,
+    packages: stats,
+  }, null, 2) + "\n");
+}
+
+// 不变量：登记过 Go 实测的包，「已等价」不得超过有 Go 实测期望值的函数数。
+const equivOverflow = stats
+  .filter((s) => goVerifiedByPkg.has(s.pkg) && s.equiv > (goVerifiedByPkg.get(s.pkg) ?? 0))
+  .map((s) => `${s.pkg} 已等价 ${s.equiv} > Go 实测 ${goVerifiedByPkg.get(s.pkg)}`);
+// 分母只用「已评估」的用例（ts-missing / go-error 不算不通过）。
+const oracleFailures = oracle
+  ? oracle.cases.filter((c) => c.status !== "ts-missing" && c.status !== "go-error" && !c.equal).length : 0;
+const oracleBad = oracle ? oracleFailures > 0 : false;
+if (opts.check) {
+  if (equivOverflow.length > 0) console.error(`\n[check] 已等价超过 Go 实测登记: ${equivOverflow.join("；")}`);
+  if (missing.length > 0 || uncovered.length > 0 || oracleBad || equivOverflow.length > 0) {
+    console.error(`\n[check] 未通过: 未移植 ${missing.length}，未覆盖 ${uncovered.length}` +
+      (oracle
+        ? `，已评估用例不一致 ${oracleFailures}（${oracleStatusParts(["equal", "ts-missing", "go-error"]).join(" + ")}）—— 属未收敛，不是不变量破裂`
+        : "，oracle 未运行"));
+    process.exit(1);
+  }
+}

@@ -1,0 +1,388 @@
+[
+  {
+    "ops": [
+      {
+        "m": "mangleCorners",
+        "toks": [
+          {
+            "k": 30,
+            "t": "0"
+          }
+        ],
+        "imp": false,
+        "corner": 0
+      }
+    ],
+    "minify": false,
+    "nrules": 0,
+    "out": [
+      [
+        "decl",
+        66,
+        "border-radius",
+        [
+          [
+            30,
+            "0",
+            1
+          ]
+        ],
+        false,
+        0
+      ]
+    ]
+  },
+  {
+    "ops": [
+      {
+        "m": "mangleCorners",
+        "toks": [
+          {
+            "k": 26,
+            "t": "1px",
+            "u": 1
+          },
+          {
+            "k": 26,
+            "t": "2px",
+            "u": 1
+          },
+          {
+            "k": 26,
+            "t": "3px",
+            "u": 1
+          },
+          {
+            "k": 26,
+            "t": "4px",
+            "u": 1
+          }
+        ],
+        "imp": false,
+        "corner": 0
+      }
+    ],
+    "minify": false,
+    "nrules": 0,
+    "out": [
+      [
+        "decl",
+        66,
+        "border-radius",
+        [
+          [
+            26,
+            "1px",
+            3
+          ],
+          [
+            26,
+            "2px",
+            3
+          ],
+          [
+            26,
+            "3px",
+            3
+          ],
+          [
+            26,
+            "4px",
+            1
+          ]
+        ],
+        false,
+        0
+      ]
+    ]
+  },
+  {
+    "ops": [
+      {
+        "m": "mangleCorners",
+        "toks": [
+          {
+            "k": 26,
+            "t": "10px",
+            "u": 2
+          },
+          {
+            "k": 26,
+            "t": "20px",
+            "u": 2
+          },
+          {
+            "k": 24,
+            "t": "/"
+          },
+          {
+            "k": 26,
+            "t": "30px",
+            "u": 2
+          },
+          {
+            "k": 26,
+            "t": "40px",
+            "u": 2
+          }
+        ],
+        "imp": false,
+        "corner": 0
+      }
+    ],
+    "minify": false,
+    "nrules": 0,
+    "out": [
+      [
+        "decl",
+        66,
+        "border-radius",
+        [
+          [
+            26,
+            "10px",
+            3
+          ],
+          [
+            26,
+            "20px",
+            1
+          ],
+          [
+            24,
+            "/",
+            3
+          ],
+          [
+            26,
+            "30px",
+            3
+          ],
+          [
+            26,
+            "40px",
+            1
+          ]
+        ],
+        false,
+        0
+      ]
+    ]
+  },
+  {
+    "ops": [
+      {
+        "m": "mangleCorners",
+        "toks": [
+          {
+            "k": 30,
+            "t": "0"
+          },
+          {
+            "k": 30,
+            "t": "0"
+          },
+          {
+            "k": 30,
+            "t": "0"
+          },
+          {
+            "k": 30,
+            "t": "0"
+          }
+        ],
+        "imp": false,
+        "corner": 0
+      }
+    ],
+    "minify": false,
+    "nrules": 0,
+    "out": [
+      [
+        "decl",
+        66,
+        "border-radius",
+        [
+          [
+            30,
+            "0",
+            1
+          ]
+        ],
+        false,
+        0
+      ]
+    ]
+  },
+  {
+    "ops": [
+      {
+        "m": "mangleCorner",
+        "toks": [
+          {
+            "k": 30,
+            "t": "0"
+          }
+        ],
+        "imp": false,
+        "corner": 0
+      },
+      {
+        "m": "mangleCorner",
+        "toks": [
+          {
+            "k": 30,
+            "t": "0"
+          }
+        ],
+        "imp": false,
+        "corner": 1
+      },
+      {
+        "m": "mangleCorner",
+        "toks": [
+          {
+            "k": 30,
+            "t": "0"
+          }
+        ],
+        "imp": false,
+        "corner": 2
+      },
+      {
+        "m": "mangleCorner",
+        "toks": [
+          {
+            "k": 30,
+            "t": "0"
+          }
+        ],
+        "imp": false,
+        "corner": 3
+      }
+    ],
+    "minify": false,
+    "nrules": 0,
+    "out": [
+      "empty",
+      "empty",
+      "empty",
+      [
+        "decl",
+        66,
+        "border-radius",
+        [
+          [
+            30,
+            "0",
+            1
+          ]
+        ],
+        false,
+        0
+      ]
+    ]
+  },
+  {
+    "ops": [
+      {
+        "m": "mangleCorners",
+        "toks": [
+          {
+            "k": 30,
+            "t": "0"
+          }
+        ],
+        "imp": false,
+        "corner": 0
+      },
+      {
+        "m": "mangleCorners",
+        "toks": [
+          {
+            "k": 30,
+            "t": "0"
+          }
+        ],
+        "imp": true,
+        "corner": 0
+      }
+    ],
+    "minify": false,
+    "nrules": 0,
+    "out": [
+      [
+        "decl",
+        66,
+        "border-radius",
+        [
+          [
+            30,
+            "0",
+            1
+          ]
+        ],
+        false,
+        0
+      ],
+      [
+        "decl",
+        66,
+        "border-radius",
+        [
+          [
+            30,
+            "0",
+            1
+          ]
+        ],
+        true,
+        0
+      ]
+    ]
+  },
+  {
+    "ops": [
+      {
+        "m": "mangleCorners",
+        "toks": [
+          {
+            "k": 26,
+            "t": "10px",
+            "u": 2
+          },
+          {
+            "k": 26,
+            "t": "20px",
+            "u": 2
+          }
+        ],
+        "imp": false,
+        "corner": 0
+      }
+    ],
+    "minify": true,
+    "nrules": 0,
+    "out": [
+      [
+        "decl",
+        66,
+        "border-radius",
+        [
+          [
+            26,
+            "10px",
+            2
+          ],
+          [
+            26,
+            "20px",
+            1
+          ]
+        ],
+        false,
+        0
+      ]
+    ]
+  }
+]

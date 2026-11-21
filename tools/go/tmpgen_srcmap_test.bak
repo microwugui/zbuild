@@ -1,0 +1,64 @@
+package bundler
+
+// 第 112 轮 Go 探针：Bundle.computeDataForSourceMapsInParallel（SourceMapNone + 简单 sourcesContent 子集）。
+// 手工构造 reachableFiles 的 JSRepr（Source.Contents），调函数后 dump LineOffsetTables/QuotedContents。
+import (
+	"encoding/json"
+	"os"
+	"testing"
+
+	"github.com/evanw/esbuild/internal/ast"
+	"github.com/evanw/esbuild/internal/config"
+	"github.com/evanw/esbuild/internal/graph"
+	"github.com/evanw/esbuild/internal/js_ast"
+	"github.com/evanw/esbuild/internal/logger"
+)
+
+func TestTmpGenSrcMap112(t *testing.T) {
+	type drow struct {
+		Name       string     `json:"name"`
+		Count      int        `json:"count"`
+		LOTCounts  []int      `json:"lotCounts"`
+		Quoted     [][]string `json:"quoted"`
+	}
+	rows := []drow{}
+
+	run := func(name string, smMode config.SourceMap, contents []string, exclude bool, ascii bool) {
+		b := &Bundle{}
+		b.files = make([]scannerFile, len(contents))
+		for i, c := range contents {
+			src := logger.Source{Index: uint32(i), Contents: c, KeyPath: logger.Path{Text: "f.js"}}
+			repr := &graph.JSRepr{}
+			repr.AST.ApproximateLineCount = 0
+			b.files[i].inputFile.Source = src
+			b.files[i].inputFile.Loader = config.LoaderJS
+			b.files[i].inputFile.Repr = repr
+		}
+		opts := &config.Options{SourceMap: smMode, ExcludeSourcesContent: exclude, ASCIIOnly: ascii}
+		reachable := make([]uint32, len(contents))
+		for i := range reachable { reachable[i] = uint32(i) }
+		data := b.computeDataForSourceMapsInParallel(opts, reachable)()
+		r := drow{Name: name, Count: len(data)}
+		for _, d := range data {
+			r.LOTCounts = append(r.LOTCounts, len(d.LineOffsetTables))
+			qs := []string{}
+			for _, q := range d.QuotedContents { qs = append(qs, string(q)) }
+			r.Quoted = append(r.Quoted, qs)
+		}
+		rows = append(rows, r)
+	}
+
+	run("none", config.SourceMapNone, []string{"var x = 1;\n"}, false, false)
+	run("simple", config.SourceMapInline, []string{"var x = 1;\nvar y = 2;\n"}, false, false)
+	run("two-files", config.SourceMapInline, []string{"a\nb\n", "x\ny\nz\n"}, false, false)
+	run("exclude-content", config.SourceMapInline, []string{"var x = 1;\n"}, true, false)
+	run("ascii", config.SourceMapInline, []string{"var s = \"\u00e9\";\n"}, false, true)
+
+	b, err := json.MarshalIndent(rows, "", "  ")
+	if err != nil { t.Fatal(err) }
+	if err := os.WriteFile("/root/port/testdata/srcmap-go.json", b, 0644); err != nil { t.Fatal(err) }
+	t.Logf("wrote %d rows bytes=%d", len(rows), len(b))
+}
+
+var _ = ast.InvalidRef
+var _ = js_ast.AST{}

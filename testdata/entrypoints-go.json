@@ -1,0 +1,26 @@
+[
+  {
+    "name": "relative",
+    "outputPath": "a",
+    "sourceIndex": 1,
+    "auto": true
+  },
+  {
+    "name": "relative",
+    "outputPath": "b",
+    "sourceIndex": 2,
+    "auto": true
+  },
+  {
+    "name": "explicit-output",
+    "outputPath": "custom",
+    "sourceIndex": 1,
+    "auto": false
+  },
+  {
+    "name": "one-file",
+    "outputPath": "index",
+    "sourceIndex": 1,
+    "auto": true
+  }
+]

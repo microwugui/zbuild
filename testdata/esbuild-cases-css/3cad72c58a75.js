@@ -1,0 +1,1 @@
+.bar:before { :hover & { color: red } }

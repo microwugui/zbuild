@@ -1,0 +1,1 @@
+.foo, .bar { composes: bar from github }

@@ -1,0 +1,1 @@
+.foo, [bar~='abc'] { .baz { color: red } }

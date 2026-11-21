@@ -1,0 +1,1 @@
+div { zoom: 2; && { color: red } }

@@ -1,0 +1,1 @@
+a { color: green; b, :foo :where() { color: red } }

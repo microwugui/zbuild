@@ -1,0 +1,69 @@
+package api
+
+// Batch 92 Go probe: pkg/api validate cluster (3 functions, one oracle) — bigger batch.
+import (
+	"encoding/json"
+	"os"
+	"sort"
+	"strconv"
+	"testing"
+
+	"github.com/evanw/esbuild/internal/config"
+	"github.com/evanw/esbuild/internal/fs"
+	"github.com/evanw/esbuild/internal/logger"
+)
+
+func TestTmpGenApiCluster(t *testing.T) {
+	type row struct { Fn string `json:"fn"`; Arg string `json:"arg"`; Out string `json:"out"` }
+	var out []row
+	mkLog := func() logger.Log { return logger.NewDeferLog(logger.DeferLogNoVerboseOrDebug, nil) }
+
+	// validateSupported: arg = JSON map name->bool ; out = js|jsmask|css|cssmask
+	for _, s := range []string{
+		`{"bigint":true,"optional-chain":false}`,
+		`{"hex-rgb-ha":true,"nesting":false}`,
+		`{"unknown-feature":true}`,
+		`{}`,
+	} {
+		var supported map[string]bool
+		json.Unmarshal([]byte(s), &supported)
+		jf, jm, cf, cm := validateSupported(mkLog(), supported)
+		out = append(out, row{"validateSupported", s,
+			strconv.FormatUint(uint64(jf), 10) + "|" + strconv.FormatUint(uint64(jm), 10) + "|" +
+				strconv.FormatUint(uint64(cf), 10) + "|" + strconv.FormatUint(uint64(cm), 10)})
+	}
+
+	// validateAlias: arg = JSON map old->new ; out = sorted valid map "old=new;"
+	mock := fs.MockFS(map[string]string{}, fs.MockUnix, "/")
+	for _, s := range []string{
+		`{"foo":"bar","@scope/pkg":"x"}`,
+		`{"./relative":"x","foo/../bar":"y","/abs":"z"}`,
+		`{"foo":""}`,
+		`{"has\\backslash":"x"}`,
+	} {
+		var alias map[string]string
+		json.Unmarshal([]byte(s), &alias)
+		valid := validateAlias(mkLog(), mock, alias)
+		keys := make([]string, 0, len(valid))
+		for k := range valid { keys = append(keys, k) }
+		sort.Strings(keys)
+		dump := ""
+		for _, k := range keys { dump += k + "=" + valid[k] + ";" }
+		out = append(out, row{"validateAlias", s, dump})
+	}
+
+	// validateJSXExpr: arg = text|name ; out = ok|parts|constantKind (compact)
+	for _, c := range [][2]string{{"React.createElement", "factory"}, {"", "factory"}, {"foo", "factory"}, {"Fragment", "fragment"}, {"null", "fragment"}} {
+		expr := validateJSXExpr(mkLog(), c[0], c[1])
+		kind := "none"
+		if expr.Constant != nil { kind = "const" }
+		if len(expr.Parts) > 0 { kind = "parts" }
+		out = append(out, row{"validateJSXExpr", c[0] + "|" + c[1], kind})
+	}
+
+	_ = config.DefineExpr{}
+	b, err := json.MarshalIndent(out, "", "  ")
+	if err != nil { t.Fatal(err) }
+	if err := os.WriteFile("/root/port/testdata/api-cluster-go.json", b, 0644); err != nil { t.Fatal(err) }
+	t.Logf("wrote %d rows", len(out))
+}

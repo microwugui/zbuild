@@ -1,0 +1,49 @@
+[
+ {
+  "input": "import.meta",
+  "ok": true,
+  "result": [
+   "import",
+   "meta"
+  ]
+ },
+ {
+  "input": "a.b",
+  "ok": true,
+  "result": [
+   "a",
+   "b"
+  ]
+ },
+ {
+  "input": "a[\"b\"]",
+  "ok": true,
+  "result": [
+   "a",
+   "b"
+  ]
+ },
+ {
+  "input": "this",
+  "ok": true,
+  "result": [
+   "this"
+  ]
+ },
+ {
+  "input": "a.b.c",
+  "ok": true,
+  "result": [
+   "a",
+   "b",
+   "c"
+  ]
+ },
+ {
+  "input": "a.?",
+  "ok": false,
+  "result": [
+   "a"
+  ]
+ }
+]

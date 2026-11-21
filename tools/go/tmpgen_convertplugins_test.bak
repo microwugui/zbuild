@@ -1,0 +1,25 @@
+package main
+// 第 101 轮 Go 探针：convertPlugins 确定性可观测（plugin 数 / hasOnEnd / 错误文案）。
+import ("encoding/json";"os";"testing";"github.com/evanw/esbuild/internal/helpers")
+type cpRow struct { Name string `json:"name"`; Plugins int `json:"plugins"`; HasOnEnd bool `json:"hasOnEnd"`; Err string `json:"err"` }
+func TestTmpConvertPlugins101(t *testing.T){
+  rows:=[]cpRow{}
+  mk:=func()*serviceType{return &serviceType{callbacks:make(map[uint32]responseCallback),activeBuilds:make(map[int]*activeBuild),outgoingPackets:make(chan []byte,64),keepAliveWaitGroup:helpers.MakeThreadSafeWaitGroup()}}
+  probe:=func(name string, plugins interface{}){
+    s:=mk(); ab:=&activeBuild{}
+    ps,hasEnd,err:=s.convertPlugins(0,plugins,ab)
+    rows=append(rows,cpRow{name,len(ps),hasEnd,func()string{if err!=nil{return err.Error()};return ""}()})
+  }
+  // 空 plugins
+  probe("empty", []interface{}{})
+  // 一个插件，onEnd=true，无回调
+  probe("onend", []interface{}{map[string]interface{}{"name":"p","onEnd":true,"onResolve":[]interface{}{},"onLoad":[]interface{}{}}})
+  // 一个插件，无 onEnd
+  probe("plain", []interface{}{map[string]interface{}{"name":"p","onEnd":false,"onResolve":[]interface{}{},"onLoad":[]interface{}{}}})
+  // 非法 filter
+  probe("bad-filter", []interface{}{map[string]interface{}{"name":"p","onEnd":false,
+    "onResolve":[]interface{}{map[string]interface{}{"id":1,"filter":"[","namespace":""}},"onLoad":[]interface{}{}}})
+  out,_:=json.MarshalIndent(rows,"","  ")
+  if err:=os.WriteFile("/root/port/testdata/convert-plugins-go.json",out,0644);err!=nil{t.Fatal(err)}
+  t.Logf("wrote %d rows",len(rows))
+}

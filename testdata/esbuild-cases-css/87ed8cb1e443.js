@@ -1,0 +1,1 @@
+@media screen { @media not print { @media screen { a { color: red } } } }

@@ -1,0 +1,1 @@
+.orange { color: hsl(30deg, 100%, 50%) }

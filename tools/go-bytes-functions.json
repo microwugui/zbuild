@@ -1,0 +1,3999 @@
+{
+  "schema": "go-bytes-functions-v1",
+  "note": "逐函数 Go 实测等价登记：一条=一个 Go 非测试函数，期望值由 Go 参考实现当场产出并与 TS 逐字节比对（fixture 钉 SHA）。progress.ts 校验 fixture SHA + inventory 存在 + TS 已移植 + 被测试执行后计为 equivGoBytes。互斥优先级 oracle>unit>go-bytes；unit 通道（临时等价，M4 回 oracle 重跑）不受影响。1-ULP known-deviation 项 evidence 已标注。新增 fixture：追加 tools/go-bytes-fixtures.json 后重跑本脚本。",
+  "count": 499,
+  "entries": [
+    {
+      "pkg": "cmd/esbuild",
+      "recv": "serviceType",
+      "fn": "createActiveBuild",
+      "fixture": "service-state-go.json",
+      "sha": "61f1ecf2beeca6f9e7e1cab51329015606225fb9333969aa830611dd0311ddf3",
+      "evidence": "第85批 serviceType channel 状态机+dispatch 错误分支 6 方法，共享 harness 18 行逐字节（format/analyze throw-shell 已按诚信口径剔除）"
+    },
+    {
+      "pkg": "cmd/esbuild",
+      "recv": "serviceType",
+      "fn": "destroyActiveBuild",
+      "fixture": "service-state-go.json",
+      "sha": "61f1ecf2beeca6f9e7e1cab51329015606225fb9333969aa830611dd0311ddf3",
+      "evidence": "第85批 serviceType channel 状态机+dispatch 错误分支 6 方法，共享 harness 18 行逐字节（format/analyze throw-shell 已按诚信口径剔除）"
+    },
+    {
+      "pkg": "cmd/esbuild",
+      "recv": "serviceType",
+      "fn": "getActiveBuild",
+      "fixture": "service-state-go.json",
+      "sha": "61f1ecf2beeca6f9e7e1cab51329015606225fb9333969aa830611dd0311ddf3",
+      "evidence": "第85批 serviceType channel 状态机+dispatch 错误分支 6 方法，共享 harness 18 行逐字节（format/analyze throw-shell 已按诚信口径剔除）"
+    },
+    {
+      "pkg": "cmd/esbuild",
+      "recv": "serviceType",
+      "fn": "handleAnalyzeMetafileRequest",
+      "fixture": "api-chain-go.json",
+      "sha": "c91d40a3db72a4469d80aac5428ff2052e30c5b3cd706a482055602d30b63ea8",
+      "evidence": "第86批 api→service 链 handleFormatMessagesRequest/handleAnalyzeMetafileRequest 真接通（api.FormatMessages/AnalyzeMetafile 已移植），9 例逐字节"
+    },
+    {
+      "pkg": "cmd/esbuild",
+      "recv": "serviceType",
+      "fn": "handleFormatMessagesRequest",
+      "fixture": "api-chain-go.json",
+      "sha": "c91d40a3db72a4469d80aac5428ff2052e30c5b3cd706a482055602d30b63ea8",
+      "evidence": "第86批 api→service 链 handleFormatMessagesRequest/handleAnalyzeMetafileRequest 真接通（api.FormatMessages/AnalyzeMetafile 已移植），9 例逐字节"
+    },
+    {
+      "pkg": "cmd/esbuild",
+      "recv": "serviceType",
+      "fn": "handleIncomingPacket",
+      "fixture": "service-state-go.json",
+      "sha": "61f1ecf2beeca6f9e7e1cab51329015606225fb9333969aa830611dd0311ddf3",
+      "evidence": "第85批 serviceType channel 状态机+dispatch 错误分支 6 方法，共享 harness 18 行逐字节（format/analyze throw-shell 已按诚信口径剔除）"
+    },
+    {
+      "pkg": "cmd/esbuild",
+      "recv": "serviceType",
+      "fn": "sendPacket",
+      "fixture": "service-state-go.json",
+      "sha": "61f1ecf2beeca6f9e7e1cab51329015606225fb9333969aa830611dd0311ddf3",
+      "evidence": "第85批 serviceType channel 状态机+dispatch 错误分支 6 方法，共享 harness 18 行逐字节（format/analyze throw-shell 已按诚信口径剔除）"
+    },
+    {
+      "pkg": "cmd/esbuild",
+      "recv": "serviceType",
+      "fn": "sendRequest",
+      "fixture": "service-state-go.json",
+      "sha": "61f1ecf2beeca6f9e7e1cab51329015606225fb9333969aa830611dd0311ddf3",
+      "evidence": "第85批 serviceType channel 状态机+dispatch 错误分支 6 方法，共享 harness 18 行逐字节（format/analyze throw-shell 已按诚信口径剔除）"
+    },
+    {
+      "pkg": "internal/bundler",
+      "recv": "",
+      "fn": "applyOptionDefaults",
+      "fixture": "bundler-opt-go.json",
+      "sha": "36f08b503bb063125a8215f6ffd0b9b8a8aabb71a299368a454a0fb3a5161916",
+      "evidence": "第88批 applyOptionDefaults + fixInvalidUnsupportedJSFeatureOverrides 共享探针 7 行逐字节（config.Options duck-typed，JSFeature bigint）"
+    },
+    {
+      "pkg": "internal/bundler",
+      "recv": "",
+      "fn": "extractSourceMapFromComment",
+      "fixture": "bundle-diag-go.json",
+      "sha": "6d18307ad6fcd95e17b0c2a39f1d06ef3bbd0029cd2cec6e6e75a9164294bea5",
+      "evidence": "第90批 resolve 失败提示 + plugin 消息日志 + source map 注释提取共享探针 22 行逐字节"
+    },
+    {
+      "pkg": "internal/bundler",
+      "recv": "",
+      "fn": "findReachableFiles",
+      "fixture": "bundler-chain-go.json",
+      "sha": "4d5eff2ea76036d09942884f6578e89a6c43a7330202873dd10eb9257fa5aa11",
+      "evidence": "第89批 reportExplicitPhaseImport/findReachableFiles/generateMetadataJSON 整链探针 16 行逐字节"
+    },
+    {
+      "pkg": "internal/bundler",
+      "recv": "",
+      "fn": "fixInvalidUnsupportedJSFeatureOverrides",
+      "fixture": "bundler-opt-go.json",
+      "sha": "36f08b503bb063125a8215f6ffd0b9b8a8aabb71a299368a454a0fb3a5161916",
+      "evidence": "第88批 applyOptionDefaults + fixInvalidUnsupportedJSFeatureOverrides 共享探针 7 行逐字节（config.Options duck-typed，JSFeature bigint）"
+    },
+    {
+      "pkg": "internal/bundler",
+      "recv": "",
+      "fn": "logPluginMessages",
+      "fixture": "bundle-diag-go.json",
+      "sha": "6d18307ad6fcd95e17b0c2a39f1d06ef3bbd0029cd2cec6e6e75a9164294bea5",
+      "evidence": "第90批 resolve 失败提示 + plugin 消息日志 + source map 注释提取共享探针 22 行逐字节"
+    },
+    {
+      "pkg": "internal/bundler",
+      "recv": "",
+      "fn": "lowestCommonAncestorDirectory",
+      "fixture": "bundler-light-go.json",
+      "sha": "2c728085f9053e6eba286dc4ac6cf5a499089277c449d578b3751312dd48f451",
+      "evidence": "第87批 sanitizeLocation/lowestCommonAncestorDirectory 共享探针 11 例逐字节"
+    },
+    {
+      "pkg": "internal/bundler",
+      "recv": "",
+      "fn": "PathRelativeToOutbase",
+      "fixture": "chunk-compute-go.json",
+      "sha": "9c052721cdf85bcdefa513710d2d6daf7947f1efe91283c77fda3a22b62ee57f",
+      "evidence": "第147批 PathRelativeToOutbase（chunk 输出路径底座），同一 Go 探针 5 例经 computeChunks 间接逐字节覆盖"
+    },
+    {
+      "pkg": "internal/bundler",
+      "recv": "",
+      "fn": "reportExplicitPhaseImport",
+      "fixture": "bundler-chain-go.json",
+      "sha": "4d5eff2ea76036d09942884f6578e89a6c43a7330202873dd10eb9257fa5aa11",
+      "evidence": "第89批 reportExplicitPhaseImport/findReachableFiles/generateMetadataJSON 整链探针 16 行逐字节"
+    },
+    {
+      "pkg": "internal/bundler",
+      "recv": "",
+      "fn": "ResolveFailureErrorTextSuggestionNotes",
+      "fixture": "bundle-diag-go.json",
+      "sha": "6d18307ad6fcd95e17b0c2a39f1d06ef3bbd0029cd2cec6e6e75a9164294bea5",
+      "evidence": "第90批 resolve 失败提示 + plugin 消息日志 + source map 注释提取共享探针 22 行逐字节"
+    },
+    {
+      "pkg": "internal/bundler",
+      "recv": "",
+      "fn": "runOnLoadPlugins",
+      "fixture": "bundler-plugin-driver-go.json",
+      "sha": "207d2992d65cbd881ce508a8ddf86b8842bafbc0da379adcd44f162f87b20aa8",
+      "evidence": "第106轮 RunOnResolvePlugins/runOnLoadPlugins 插件驱动整族，一探针8场景逐字节"
+    },
+    {
+      "pkg": "internal/bundler",
+      "recv": "",
+      "fn": "RunOnResolvePlugins",
+      "fixture": "bundler-plugin-driver-go.json",
+      "sha": "207d2992d65cbd881ce508a8ddf86b8842bafbc0da379adcd44f162f87b20aa8",
+      "evidence": "第106轮 RunOnResolvePlugins/runOnLoadPlugins 插件驱动整族，一探针8场景逐字节"
+    },
+    {
+      "pkg": "internal/bundler",
+      "recv": "",
+      "fn": "sanitizeLocation",
+      "fixture": "bundler-light-go.json",
+      "sha": "2c728085f9053e6eba286dc4ac6cf5a499089277c449d578b3751312dd48f451",
+      "evidence": "第87批 sanitizeLocation/lowestCommonAncestorDirectory 共享探针 11 例逐字节"
+    },
+    {
+      "pkg": "internal/bundler",
+      "recv": "Bundle",
+      "fn": "computeDataForSourceMapsInParallel",
+      "fixture": "srcmap-go.json",
+      "sha": "f36e0e5f5e7a40ec49f15a8519223659f761469048c6defc7435e2df2abd3677",
+      "evidence": "第112轮 computeDataForSourceMapsInParallel（SourceMapNone+sourcesContent子集），一探针5场景逐字节"
+    },
+    {
+      "pkg": "internal/bundler",
+      "recv": "Bundle",
+      "fn": "generateMetadataJSON",
+      "fixture": "bundler-chain-go.json",
+      "sha": "4d5eff2ea76036d09942884f6578e89a6c43a7330202873dd10eb9257fa5aa11",
+      "evidence": "第89批 reportExplicitPhaseImport/findReachableFiles/generateMetadataJSON 整链探针 16 行逐字节"
+    },
+    {
+      "pkg": "internal/bundler",
+      "recv": "scanner",
+      "fn": "allocateGlobSourceIndex",
+      "fixture": "bundle-scan-go.json",
+      "sha": "bcd92c2b3b3b751e2886280904338e4df08a9d9bc0b93670832fddc280658cfd",
+      "evidence": "第90批 TLA 校验链 + source-index 分配共享探针 11 行逐字节（10 例 TLA 图 + alloc）"
+    },
+    {
+      "pkg": "internal/bundler",
+      "recv": "scanner",
+      "fn": "allocateSourceIndex",
+      "fixture": "bundle-scan-go.json",
+      "sha": "bcd92c2b3b3b751e2886280904338e4df08a9d9bc0b93670832fddc280658cfd",
+      "evidence": "第90批 TLA 校验链 + source-index 分配共享探针 11 行逐字节（10 例 TLA 图 + alloc）"
+    },
+    {
+      "pkg": "internal/bundler",
+      "recv": "scanner",
+      "fn": "generateResultForGlobResolve",
+      "fixture": "globresult-go.json",
+      "sha": "6ab66465fac9bcd8add412aa598b6ab72f49c94571740d2aba4243d129d36473",
+      "evidence": "第112轮 generateResultForGlobResolve（外部resolveResults子集，依赖GlobResolveAST底座），一探针4场景规范AST逐字节"
+    },
+    {
+      "pkg": "internal/bundler",
+      "recv": "scanner",
+      "fn": "iterativelyValidateTLA",
+      "fixture": "bundle-scan-go.json",
+      "sha": "bcd92c2b3b3b751e2886280904338e4df08a9d9bc0b93670832fddc280658cfd",
+      "evidence": "第90批 TLA 校验链 + source-index 分配共享探针 11 行逐字节（10 例 TLA 图 + alloc）"
+    },
+    {
+      "pkg": "internal/bundler",
+      "recv": "scanner",
+      "fn": "recursivelyValidateTLA",
+      "fixture": "bundle-scan-go.json",
+      "sha": "bcd92c2b3b3b751e2886280904338e4df08a9d9bc0b93670832fddc280658cfd",
+      "evidence": "第90批 TLA 校验链 + source-index 分配共享探针 11 行逐字节（10 例 TLA 图 + alloc）"
+    },
+    {
+      "pkg": "internal/bundler",
+      "recv": "scanner",
+      "fn": "reportInvalidTLA",
+      "fixture": "bundle-scan-go.json",
+      "sha": "bcd92c2b3b3b751e2886280904338e4df08a9d9bc0b93670832fddc280658cfd",
+      "evidence": "第90批 TLA 校验链 + source-index 分配共享探针 11 行逐字节（10 例 TLA 图 + alloc）"
+    },
+    {
+      "pkg": "internal/config",
+      "recv": "",
+      "fn": "mergeDefineData",
+      "fixture": "config-trio-go.json",
+      "sha": "233e391f4ff5bead55aa749f285b175ebfa0487f9a7cd4125c1c15af71012db6",
+      "evidence": "第139批 Format.String/DefineFlags.Has/mergeDefineData，Go 探针 14 例逐字节"
+    },
+    {
+      "pkg": "internal/config",
+      "recv": "",
+      "fn": "ProcessDefines",
+      "fixture": "process-defines-go.json",
+      "sha": "c7df0a45d7917358505778f1e48ece5b1b108bf57dcc9bd9204c5da939062b44",
+      "evidence": "第84批 knownGlobals 全表(807项)+ProcessDefines（8例 user defines 覆盖/合并/常量），Go 探针逐字节"
+    },
+    {
+      "pkg": "internal/config",
+      "recv": "DefineFlags",
+      "fn": "Has",
+      "fixture": "config-trio-go.json",
+      "sha": "233e391f4ff5bead55aa749f285b175ebfa0487f9a7cd4125c1c15af71012db6",
+      "evidence": "第139批 Format.String/DefineFlags.Has/mergeDefineData，Go 探针 14 例逐字节"
+    },
+    {
+      "pkg": "internal/config",
+      "recv": "Format",
+      "fn": "String",
+      "fixture": "config-trio-go.json",
+      "sha": "233e391f4ff5bead55aa749f285b175ebfa0487f9a7cd4125c1c15af71012db6",
+      "evidence": "第139批 Format.String/DefineFlags.Has/mergeDefineData，Go 探针 14 例逐字节"
+    },
+    {
+      "pkg": "internal/config",
+      "recv": "TSConfigJSX",
+      "fn": "ApplyTo",
+      "fixture": "respublic-go.json",
+      "sha": "c828880d098de69546c55a8d7311f8bf2a3c75dedd1997dd7af2e402287191e9",
+      "evidence": "第175批 TSConfigJSX.ApplyTo（NewResolver JSX 应用），Go 探针 6 例逐字节"
+    },
+    {
+      "pkg": "internal/css_ast",
+      "recv": "",
+      "fn": "CloneMediaQueriesWithImportRecords",
+      "fixture": "css-ast-clone-go.json",
+      "sha": "2517fa9836147545052d8c1d4c494522c82a9738dc431d57dfa37574ac63e1ea",
+      "evidence": "第103批 Clone 整链，Go 包内探针 dump 逐字节"
+    },
+    {
+      "pkg": "internal/css_ast",
+      "recv": "",
+      "fn": "CloneTokensWithImportRecords",
+      "fixture": "css-ast-clone-go.json",
+      "sha": "2517fa9836147545052d8c1d4c494522c82a9738dc431d57dfa37574ac63e1ea",
+      "evidence": "第103批 Clone 整链，Go 包内探针 dump 逐字节"
+    },
+    {
+      "pkg": "internal/css_ast",
+      "recv": "",
+      "fn": "CloneTokensWithoutImportRecords",
+      "fixture": "css-ast-clone-go.json",
+      "sha": "2517fa9836147545052d8c1d4c494522c82a9738dc431d57dfa37574ac63e1ea",
+      "evidence": "第103批 Clone 整链，Go 包内探针 dump 逐字节"
+    },
+    {
+      "pkg": "internal/css_ast",
+      "recv": "",
+      "fn": "ComplexSelectorsEqual",
+      "fixture": "css-ast-equal-go.json",
+      "sha": "d365da98ef2c95bf8d01f20c1d4571367254e9662445d4dfb30f513f5da814b3",
+      "evidence": "第102批 Equal 整链，Go 包内探针 IR 逐字节（含跨文件 check）"
+    },
+    {
+      "pkg": "internal/css_ast",
+      "recv": "",
+      "fn": "HashComplexSelectors",
+      "fixture": "css-ast-hash-go.json",
+      "sha": "9e62cdf9adebb84a2376579b54742e37f9af4ea013b046b32d55a42f54d0113b",
+      "evidence": "第101批 Hash 整链，Go 包内探针 IR 逐字节"
+    },
+    {
+      "pkg": "internal/css_ast",
+      "recv": "",
+      "fn": "HashMediaQueries",
+      "fixture": "css-ast-hash-go.json",
+      "sha": "9e62cdf9adebb84a2376579b54742e37f9af4ea013b046b32d55a42f54d0113b",
+      "evidence": "第101批 Hash 整链，Go 包内探针 IR 逐字节"
+    },
+    {
+      "pkg": "internal/css_ast",
+      "recv": "",
+      "fn": "HashRules",
+      "fixture": "css-ast-hash-go.json",
+      "sha": "9e62cdf9adebb84a2376579b54742e37f9af4ea013b046b32d55a42f54d0113b",
+      "evidence": "第101批 Hash 整链，Go 包内探针 IR 逐字节"
+    },
+    {
+      "pkg": "internal/css_ast",
+      "recv": "",
+      "fn": "HashTokens",
+      "fixture": "css-ast-hash-go.json",
+      "sha": "9e62cdf9adebb84a2376579b54742e37f9af4ea013b046b32d55a42f54d0113b",
+      "evidence": "第101批 Hash 整链，Go 包内探针 IR 逐字节"
+    },
+    {
+      "pkg": "internal/css_ast",
+      "recv": "",
+      "fn": "MediaQueriesEqual",
+      "fixture": "css-ast-equal-go.json",
+      "sha": "d365da98ef2c95bf8d01f20c1d4571367254e9662445d4dfb30f513f5da814b3",
+      "evidence": "第102批 Equal 整链，Go 包内探针 IR 逐字节（含跨文件 check）"
+    },
+    {
+      "pkg": "internal/css_ast",
+      "recv": "",
+      "fn": "MediaQueriesEqualIgnoringWhitespace",
+      "fixture": "css-ast-equal-go.json",
+      "sha": "d365da98ef2c95bf8d01f20c1d4571367254e9662445d4dfb30f513f5da814b3",
+      "evidence": "第102批 Equal 整链，Go 包内探针 IR 逐字节（含跨文件 check）"
+    },
+    {
+      "pkg": "internal/css_ast",
+      "recv": "",
+      "fn": "RulesEqual",
+      "fixture": "css-ast-equal-go.json",
+      "sha": "d365da98ef2c95bf8d01f20c1d4571367254e9662445d4dfb30f513f5da814b3",
+      "evidence": "第102批 Equal 整链，Go 包内探针 IR 逐字节（含跨文件 check）"
+    },
+    {
+      "pkg": "internal/css_ast",
+      "recv": "",
+      "fn": "TokensEqual",
+      "fixture": "css-ast-equal-go.json",
+      "sha": "d365da98ef2c95bf8d01f20c1d4571367254e9662445d4dfb30f513f5da814b3",
+      "evidence": "第102批 Equal 整链，Go 包内探针 IR 逐字节（含跨文件 check）"
+    },
+    {
+      "pkg": "internal/css_ast",
+      "recv": "",
+      "fn": "TokensEqualIgnoringWhitespace",
+      "fixture": "css-ast-equal-go.json",
+      "sha": "d365da98ef2c95bf8d01f20c1d4571367254e9662445d4dfb30f513f5da814b3",
+      "evidence": "第102批 Equal 整链，Go 包内探针 IR 逐字节（含跨文件 check）"
+    },
+    {
+      "pkg": "internal/css_ast",
+      "recv": "ComplexSelector",
+      "fn": "Clone",
+      "fixture": "css-ast-clone-go.json",
+      "sha": "2517fa9836147545052d8c1d4c494522c82a9738dc431d57dfa37574ac63e1ea",
+      "evidence": "第103批 Clone 整链，Go 包内探针 dump 逐字节"
+    },
+    {
+      "pkg": "internal/css_ast",
+      "recv": "ComplexSelector",
+      "fn": "ContainsNestingCombinator",
+      "fixture": "css-ast-equal-go.json",
+      "sha": "d365da98ef2c95bf8d01f20c1d4571367254e9662445d4dfb30f513f5da814b3",
+      "evidence": "第102批 Equal 整链，Go 包内探针 IR 逐字节（含跨文件 check）"
+    },
+    {
+      "pkg": "internal/css_ast",
+      "recv": "ComplexSelector",
+      "fn": "Equal",
+      "fixture": "css-ast-equal-go.json",
+      "sha": "d365da98ef2c95bf8d01f20c1d4571367254e9662445d4dfb30f513f5da814b3",
+      "evidence": "第102批 Equal 整链，Go 包内探针 IR 逐字节（含跨文件 check）"
+    },
+    {
+      "pkg": "internal/css_ast",
+      "recv": "ComplexSelector",
+      "fn": "IsRelative",
+      "fixture": "css-ast-equal-go.json",
+      "sha": "d365da98ef2c95bf8d01f20c1d4571367254e9662445d4dfb30f513f5da814b3",
+      "evidence": "第102批 Equal 整链，Go 包内探针 IR 逐字节（含跨文件 check）"
+    },
+    {
+      "pkg": "internal/css_ast",
+      "recv": "CompoundSelector",
+      "fn": "Clone",
+      "fixture": "css-ast-clone-go.json",
+      "sha": "2517fa9836147545052d8c1d4c494522c82a9738dc431d57dfa37574ac63e1ea",
+      "evidence": "第103批 Clone 整链，Go 包内探针 dump 逐字节"
+    },
+    {
+      "pkg": "internal/css_ast",
+      "recv": "CrossFileEqualityCheck",
+      "fn": "RefsAreEquivalent",
+      "fixture": "css-ast-equal-go.json",
+      "sha": "d365da98ef2c95bf8d01f20c1d4571367254e9662445d4dfb30f513f5da814b3",
+      "evidence": "第102批 Equal 整链，Go 包内探针 IR 逐字节（含跨文件 check）"
+    },
+    {
+      "pkg": "internal/css_ast",
+      "recv": "MQArbitraryTokens",
+      "fn": "CloneWithImportRecords",
+      "fixture": "css-ast-clone-go.json",
+      "sha": "2517fa9836147545052d8c1d4c494522c82a9738dc431d57dfa37574ac63e1ea",
+      "evidence": "第103批 Clone 整链，Go 包内探针 dump 逐字节"
+    },
+    {
+      "pkg": "internal/css_ast",
+      "recv": "MQArbitraryTokens",
+      "fn": "Equal",
+      "fixture": "css-ast-equal-go.json",
+      "sha": "d365da98ef2c95bf8d01f20c1d4571367254e9662445d4dfb30f513f5da814b3",
+      "evidence": "第102批 Equal 整链，Go 包内探针 IR 逐字节（含跨文件 check）"
+    },
+    {
+      "pkg": "internal/css_ast",
+      "recv": "MQArbitraryTokens",
+      "fn": "EqualIgnoringWhitespace",
+      "fixture": "css-ast-equal-go.json",
+      "sha": "d365da98ef2c95bf8d01f20c1d4571367254e9662445d4dfb30f513f5da814b3",
+      "evidence": "第102批 Equal 整链，Go 包内探针 IR 逐字节（含跨文件 check）"
+    },
+    {
+      "pkg": "internal/css_ast",
+      "recv": "MQArbitraryTokens",
+      "fn": "Hash",
+      "fixture": "css-ast-hash-go.json",
+      "sha": "9e62cdf9adebb84a2376579b54742e37f9af4ea013b046b32d55a42f54d0113b",
+      "evidence": "第101批 Hash 整链，Go 包内探针 IR 逐字节"
+    },
+    {
+      "pkg": "internal/css_ast",
+      "recv": "MQBinary",
+      "fn": "CloneWithImportRecords",
+      "fixture": "css-ast-clone-go.json",
+      "sha": "2517fa9836147545052d8c1d4c494522c82a9738dc431d57dfa37574ac63e1ea",
+      "evidence": "第103批 Clone 整链，Go 包内探针 dump 逐字节"
+    },
+    {
+      "pkg": "internal/css_ast",
+      "recv": "MQBinary",
+      "fn": "Equal",
+      "fixture": "css-ast-equal-go.json",
+      "sha": "d365da98ef2c95bf8d01f20c1d4571367254e9662445d4dfb30f513f5da814b3",
+      "evidence": "第102批 Equal 整链，Go 包内探针 IR 逐字节（含跨文件 check）"
+    },
+    {
+      "pkg": "internal/css_ast",
+      "recv": "MQBinary",
+      "fn": "EqualIgnoringWhitespace",
+      "fixture": "css-ast-equal-go.json",
+      "sha": "d365da98ef2c95bf8d01f20c1d4571367254e9662445d4dfb30f513f5da814b3",
+      "evidence": "第102批 Equal 整链，Go 包内探针 IR 逐字节（含跨文件 check）"
+    },
+    {
+      "pkg": "internal/css_ast",
+      "recv": "MQBinary",
+      "fn": "Hash",
+      "fixture": "css-ast-hash-go.json",
+      "sha": "9e62cdf9adebb84a2376579b54742e37f9af4ea013b046b32d55a42f54d0113b",
+      "evidence": "第101批 Hash 整链，Go 包内探针 IR 逐字节"
+    },
+    {
+      "pkg": "internal/css_ast",
+      "recv": "MQNot",
+      "fn": "CloneWithImportRecords",
+      "fixture": "css-ast-clone-go.json",
+      "sha": "2517fa9836147545052d8c1d4c494522c82a9738dc431d57dfa37574ac63e1ea",
+      "evidence": "第103批 Clone 整链，Go 包内探针 dump 逐字节"
+    },
+    {
+      "pkg": "internal/css_ast",
+      "recv": "MQNot",
+      "fn": "Equal",
+      "fixture": "css-ast-equal-go.json",
+      "sha": "d365da98ef2c95bf8d01f20c1d4571367254e9662445d4dfb30f513f5da814b3",
+      "evidence": "第102批 Equal 整链，Go 包内探针 IR 逐字节（含跨文件 check）"
+    },
+    {
+      "pkg": "internal/css_ast",
+      "recv": "MQNot",
+      "fn": "EqualIgnoringWhitespace",
+      "fixture": "css-ast-equal-go.json",
+      "sha": "d365da98ef2c95bf8d01f20c1d4571367254e9662445d4dfb30f513f5da814b3",
+      "evidence": "第102批 Equal 整链，Go 包内探针 IR 逐字节（含跨文件 check）"
+    },
+    {
+      "pkg": "internal/css_ast",
+      "recv": "MQNot",
+      "fn": "Hash",
+      "fixture": "css-ast-hash-go.json",
+      "sha": "9e62cdf9adebb84a2376579b54742e37f9af4ea013b046b32d55a42f54d0113b",
+      "evidence": "第101批 Hash 整链，Go 包内探针 IR 逐字节"
+    },
+    {
+      "pkg": "internal/css_ast",
+      "recv": "MQPlainOrBoolean",
+      "fn": "CloneWithImportRecords",
+      "fixture": "css-ast-clone-go.json",
+      "sha": "2517fa9836147545052d8c1d4c494522c82a9738dc431d57dfa37574ac63e1ea",
+      "evidence": "第103批 Clone 整链，Go 包内探针 dump 逐字节"
+    },
+    {
+      "pkg": "internal/css_ast",
+      "recv": "MQPlainOrBoolean",
+      "fn": "Equal",
+      "fixture": "css-ast-equal-go.json",
+      "sha": "d365da98ef2c95bf8d01f20c1d4571367254e9662445d4dfb30f513f5da814b3",
+      "evidence": "第102批 Equal 整链，Go 包内探针 IR 逐字节（含跨文件 check）"
+    },
+    {
+      "pkg": "internal/css_ast",
+      "recv": "MQPlainOrBoolean",
+      "fn": "EqualIgnoringWhitespace",
+      "fixture": "css-ast-equal-go.json",
+      "sha": "d365da98ef2c95bf8d01f20c1d4571367254e9662445d4dfb30f513f5da814b3",
+      "evidence": "第102批 Equal 整链，Go 包内探针 IR 逐字节（含跨文件 check）"
+    },
+    {
+      "pkg": "internal/css_ast",
+      "recv": "MQPlainOrBoolean",
+      "fn": "Hash",
+      "fixture": "css-ast-hash-go.json",
+      "sha": "9e62cdf9adebb84a2376579b54742e37f9af4ea013b046b32d55a42f54d0113b",
+      "evidence": "第101批 Hash 整链，Go 包内探针 IR 逐字节"
+    },
+    {
+      "pkg": "internal/css_ast",
+      "recv": "MQRange",
+      "fn": "CloneWithImportRecords",
+      "fixture": "css-ast-clone-go.json",
+      "sha": "2517fa9836147545052d8c1d4c494522c82a9738dc431d57dfa37574ac63e1ea",
+      "evidence": "第103批 Clone 整链，Go 包内探针 dump 逐字节"
+    },
+    {
+      "pkg": "internal/css_ast",
+      "recv": "MQRange",
+      "fn": "Equal",
+      "fixture": "css-ast-equal-go.json",
+      "sha": "d365da98ef2c95bf8d01f20c1d4571367254e9662445d4dfb30f513f5da814b3",
+      "evidence": "第102批 Equal 整链，Go 包内探针 IR 逐字节（含跨文件 check）"
+    },
+    {
+      "pkg": "internal/css_ast",
+      "recv": "MQRange",
+      "fn": "EqualIgnoringWhitespace",
+      "fixture": "css-ast-equal-go.json",
+      "sha": "d365da98ef2c95bf8d01f20c1d4571367254e9662445d4dfb30f513f5da814b3",
+      "evidence": "第102批 Equal 整链，Go 包内探针 IR 逐字节（含跨文件 check）"
+    },
+    {
+      "pkg": "internal/css_ast",
+      "recv": "MQRange",
+      "fn": "Hash",
+      "fixture": "css-ast-hash-go.json",
+      "sha": "9e62cdf9adebb84a2376579b54742e37f9af4ea013b046b32d55a42f54d0113b",
+      "evidence": "第101批 Hash 整链，Go 包内探针 IR 逐字节"
+    },
+    {
+      "pkg": "internal/css_ast",
+      "recv": "MQType",
+      "fn": "CloneWithImportRecords",
+      "fixture": "css-ast-clone-go.json",
+      "sha": "2517fa9836147545052d8c1d4c494522c82a9738dc431d57dfa37574ac63e1ea",
+      "evidence": "第103批 Clone 整链，Go 包内探针 dump 逐字节"
+    },
+    {
+      "pkg": "internal/css_ast",
+      "recv": "MQType",
+      "fn": "Equal",
+      "fixture": "css-ast-equal-go.json",
+      "sha": "d365da98ef2c95bf8d01f20c1d4571367254e9662445d4dfb30f513f5da814b3",
+      "evidence": "第102批 Equal 整链，Go 包内探针 IR 逐字节（含跨文件 check）"
+    },
+    {
+      "pkg": "internal/css_ast",
+      "recv": "MQType",
+      "fn": "EqualIgnoringWhitespace",
+      "fixture": "css-ast-equal-go.json",
+      "sha": "d365da98ef2c95bf8d01f20c1d4571367254e9662445d4dfb30f513f5da814b3",
+      "evidence": "第102批 Equal 整链，Go 包内探针 IR 逐字节（含跨文件 check）"
+    },
+    {
+      "pkg": "internal/css_ast",
+      "recv": "MQType",
+      "fn": "Hash",
+      "fixture": "css-ast-hash-go.json",
+      "sha": "9e62cdf9adebb84a2376579b54742e37f9af4ea013b046b32d55a42f54d0113b",
+      "evidence": "第101批 Hash 整链，Go 包内探针 IR 逐字节"
+    },
+    {
+      "pkg": "internal/css_ast",
+      "recv": "NamespacedName",
+      "fn": "Clone",
+      "fixture": "css-ast-clone-go.json",
+      "sha": "2517fa9836147545052d8c1d4c494522c82a9738dc431d57dfa37574ac63e1ea",
+      "evidence": "第103批 Clone 整链，Go 包内探针 dump 逐字节"
+    },
+    {
+      "pkg": "internal/css_ast",
+      "recv": "NamespacedName",
+      "fn": "Equal",
+      "fixture": "css-ast-equal-go.json",
+      "sha": "d365da98ef2c95bf8d01f20c1d4571367254e9662445d4dfb30f513f5da814b3",
+      "evidence": "第102批 Equal 整链，Go 包内探针 IR 逐字节（含跨文件 check）"
+    },
+    {
+      "pkg": "internal/css_ast",
+      "recv": "NameToken",
+      "fn": "Equal",
+      "fixture": "css-ast-equal-go.json",
+      "sha": "d365da98ef2c95bf8d01f20c1d4571367254e9662445d4dfb30f513f5da814b3",
+      "evidence": "第102批 Equal 整链，Go 包内探针 IR 逐字节（含跨文件 check）"
+    },
+    {
+      "pkg": "internal/css_ast",
+      "recv": "RAtCharset",
+      "fn": "Equal",
+      "fixture": "css-ast-equal-go.json",
+      "sha": "d365da98ef2c95bf8d01f20c1d4571367254e9662445d4dfb30f513f5da814b3",
+      "evidence": "第102批 Equal 整链，Go 包内探针 IR 逐字节（含跨文件 check）"
+    },
+    {
+      "pkg": "internal/css_ast",
+      "recv": "RAtCharset",
+      "fn": "Hash",
+      "fixture": "css-ast-hash-go.json",
+      "sha": "9e62cdf9adebb84a2376579b54742e37f9af4ea013b046b32d55a42f54d0113b",
+      "evidence": "第101批 Hash 整链，Go 包内探针 IR 逐字节"
+    },
+    {
+      "pkg": "internal/css_ast",
+      "recv": "RAtImport",
+      "fn": "Equal",
+      "fixture": "css-ast-equal-go.json",
+      "sha": "d365da98ef2c95bf8d01f20c1d4571367254e9662445d4dfb30f513f5da814b3",
+      "evidence": "第102批 Equal 整链，Go 包内探针 IR 逐字节（含跨文件 check）"
+    },
+    {
+      "pkg": "internal/css_ast",
+      "recv": "RAtImport",
+      "fn": "Hash",
+      "fixture": "css-ast-hash-go.json",
+      "sha": "9e62cdf9adebb84a2376579b54742e37f9af4ea013b046b32d55a42f54d0113b",
+      "evidence": "第101批 Hash 整链，Go 包内探针 IR 逐字节"
+    },
+    {
+      "pkg": "internal/css_ast",
+      "recv": "RAtKeyframes",
+      "fn": "Equal",
+      "fixture": "css-ast-equal-go.json",
+      "sha": "d365da98ef2c95bf8d01f20c1d4571367254e9662445d4dfb30f513f5da814b3",
+      "evidence": "第102批 Equal 整链，Go 包内探针 IR 逐字节（含跨文件 check）"
+    },
+    {
+      "pkg": "internal/css_ast",
+      "recv": "RAtKeyframes",
+      "fn": "Hash",
+      "fixture": "css-ast-hash-go.json",
+      "sha": "9e62cdf9adebb84a2376579b54742e37f9af4ea013b046b32d55a42f54d0113b",
+      "evidence": "第101批 Hash 整链，Go 包内探针 IR 逐字节"
+    },
+    {
+      "pkg": "internal/css_ast",
+      "recv": "RAtLayer",
+      "fn": "Equal",
+      "fixture": "css-ast-equal-go.json",
+      "sha": "d365da98ef2c95bf8d01f20c1d4571367254e9662445d4dfb30f513f5da814b3",
+      "evidence": "第102批 Equal 整链，Go 包内探针 IR 逐字节（含跨文件 check）"
+    },
+    {
+      "pkg": "internal/css_ast",
+      "recv": "RAtLayer",
+      "fn": "Hash",
+      "fixture": "css-ast-hash-go.json",
+      "sha": "9e62cdf9adebb84a2376579b54742e37f9af4ea013b046b32d55a42f54d0113b",
+      "evidence": "第101批 Hash 整链，Go 包内探针 IR 逐字节"
+    },
+    {
+      "pkg": "internal/css_ast",
+      "recv": "RAtMedia",
+      "fn": "Equal",
+      "fixture": "css-ast-equal-go.json",
+      "sha": "d365da98ef2c95bf8d01f20c1d4571367254e9662445d4dfb30f513f5da814b3",
+      "evidence": "第102批 Equal 整链，Go 包内探针 IR 逐字节（含跨文件 check）"
+    },
+    {
+      "pkg": "internal/css_ast",
+      "recv": "RAtMedia",
+      "fn": "Hash",
+      "fixture": "css-ast-hash-go.json",
+      "sha": "9e62cdf9adebb84a2376579b54742e37f9af4ea013b046b32d55a42f54d0113b",
+      "evidence": "第101批 Hash 整链，Go 包内探针 IR 逐字节"
+    },
+    {
+      "pkg": "internal/css_ast",
+      "recv": "RAtScope",
+      "fn": "Equal",
+      "fixture": "css-ast-equal-go.json",
+      "sha": "d365da98ef2c95bf8d01f20c1d4571367254e9662445d4dfb30f513f5da814b3",
+      "evidence": "第102批 Equal 整链，Go 包内探针 IR 逐字节（含跨文件 check）"
+    },
+    {
+      "pkg": "internal/css_ast",
+      "recv": "RAtScope",
+      "fn": "Hash",
+      "fixture": "css-ast-hash-go.json",
+      "sha": "9e62cdf9adebb84a2376579b54742e37f9af4ea013b046b32d55a42f54d0113b",
+      "evidence": "第101批 Hash 整链，Go 包内探针 IR 逐字节"
+    },
+    {
+      "pkg": "internal/css_ast",
+      "recv": "RBadDeclaration",
+      "fn": "Equal",
+      "fixture": "css-ast-equal-go.json",
+      "sha": "d365da98ef2c95bf8d01f20c1d4571367254e9662445d4dfb30f513f5da814b3",
+      "evidence": "第102批 Equal 整链，Go 包内探针 IR 逐字节（含跨文件 check）"
+    },
+    {
+      "pkg": "internal/css_ast",
+      "recv": "RBadDeclaration",
+      "fn": "Hash",
+      "fixture": "css-ast-hash-go.json",
+      "sha": "9e62cdf9adebb84a2376579b54742e37f9af4ea013b046b32d55a42f54d0113b",
+      "evidence": "第101批 Hash 整链，Go 包内探针 IR 逐字节"
+    },
+    {
+      "pkg": "internal/css_ast",
+      "recv": "RComment",
+      "fn": "Equal",
+      "fixture": "css-ast-equal-go.json",
+      "sha": "d365da98ef2c95bf8d01f20c1d4571367254e9662445d4dfb30f513f5da814b3",
+      "evidence": "第102批 Equal 整链，Go 包内探针 IR 逐字节（含跨文件 check）"
+    },
+    {
+      "pkg": "internal/css_ast",
+      "recv": "RComment",
+      "fn": "Hash",
+      "fixture": "css-ast-hash-go.json",
+      "sha": "9e62cdf9adebb84a2376579b54742e37f9af4ea013b046b32d55a42f54d0113b",
+      "evidence": "第101批 Hash 整链，Go 包内探针 IR 逐字节"
+    },
+    {
+      "pkg": "internal/css_ast",
+      "recv": "RDeclaration",
+      "fn": "Equal",
+      "fixture": "css-ast-equal-go.json",
+      "sha": "d365da98ef2c95bf8d01f20c1d4571367254e9662445d4dfb30f513f5da814b3",
+      "evidence": "第102批 Equal 整链，Go 包内探针 IR 逐字节（含跨文件 check）"
+    },
+    {
+      "pkg": "internal/css_ast",
+      "recv": "RDeclaration",
+      "fn": "Hash",
+      "fixture": "css-ast-hash-go.json",
+      "sha": "9e62cdf9adebb84a2376579b54742e37f9af4ea013b046b32d55a42f54d0113b",
+      "evidence": "第101批 Hash 整链，Go 包内探针 IR 逐字节"
+    },
+    {
+      "pkg": "internal/css_ast",
+      "recv": "RKnownAt",
+      "fn": "Equal",
+      "fixture": "css-ast-equal-go.json",
+      "sha": "d365da98ef2c95bf8d01f20c1d4571367254e9662445d4dfb30f513f5da814b3",
+      "evidence": "第102批 Equal 整链，Go 包内探针 IR 逐字节（含跨文件 check）"
+    },
+    {
+      "pkg": "internal/css_ast",
+      "recv": "RKnownAt",
+      "fn": "Hash",
+      "fixture": "css-ast-hash-go.json",
+      "sha": "9e62cdf9adebb84a2376579b54742e37f9af4ea013b046b32d55a42f54d0113b",
+      "evidence": "第101批 Hash 整链，Go 包内探针 IR 逐字节"
+    },
+    {
+      "pkg": "internal/css_ast",
+      "recv": "RQualified",
+      "fn": "Equal",
+      "fixture": "css-ast-equal-go.json",
+      "sha": "d365da98ef2c95bf8d01f20c1d4571367254e9662445d4dfb30f513f5da814b3",
+      "evidence": "第102批 Equal 整链，Go 包内探针 IR 逐字节（含跨文件 check）"
+    },
+    {
+      "pkg": "internal/css_ast",
+      "recv": "RQualified",
+      "fn": "Hash",
+      "fixture": "css-ast-hash-go.json",
+      "sha": "9e62cdf9adebb84a2376579b54742e37f9af4ea013b046b32d55a42f54d0113b",
+      "evidence": "第101批 Hash 整链，Go 包内探针 IR 逐字节"
+    },
+    {
+      "pkg": "internal/css_ast",
+      "recv": "RSelector",
+      "fn": "Equal",
+      "fixture": "css-ast-equal-go.json",
+      "sha": "d365da98ef2c95bf8d01f20c1d4571367254e9662445d4dfb30f513f5da814b3",
+      "evidence": "第102批 Equal 整链，Go 包内探针 IR 逐字节（含跨文件 check）"
+    },
+    {
+      "pkg": "internal/css_ast",
+      "recv": "RSelector",
+      "fn": "Hash",
+      "fixture": "css-ast-hash-go.json",
+      "sha": "9e62cdf9adebb84a2376579b54742e37f9af4ea013b046b32d55a42f54d0113b",
+      "evidence": "第101批 Hash 整链，Go 包内探针 IR 逐字节"
+    },
+    {
+      "pkg": "internal/css_ast",
+      "recv": "RUnknownAt",
+      "fn": "Equal",
+      "fixture": "css-ast-equal-go.json",
+      "sha": "d365da98ef2c95bf8d01f20c1d4571367254e9662445d4dfb30f513f5da814b3",
+      "evidence": "第102批 Equal 整链，Go 包内探针 IR 逐字节（含跨文件 check）"
+    },
+    {
+      "pkg": "internal/css_ast",
+      "recv": "RUnknownAt",
+      "fn": "Hash",
+      "fixture": "css-ast-hash-go.json",
+      "sha": "9e62cdf9adebb84a2376579b54742e37f9af4ea013b046b32d55a42f54d0113b",
+      "evidence": "第101批 Hash 整链，Go 包内探针 IR 逐字节"
+    },
+    {
+      "pkg": "internal/css_ast",
+      "recv": "SSAttribute",
+      "fn": "Clone",
+      "fixture": "css-ast-clone-go.json",
+      "sha": "2517fa9836147545052d8c1d4c494522c82a9738dc431d57dfa37574ac63e1ea",
+      "evidence": "第103批 Clone 整链，Go 包内探针 dump 逐字节"
+    },
+    {
+      "pkg": "internal/css_ast",
+      "recv": "SSAttribute",
+      "fn": "Equal",
+      "fixture": "css-ast-equal-go.json",
+      "sha": "d365da98ef2c95bf8d01f20c1d4571367254e9662445d4dfb30f513f5da814b3",
+      "evidence": "第102批 Equal 整链，Go 包内探针 IR 逐字节（含跨文件 check）"
+    },
+    {
+      "pkg": "internal/css_ast",
+      "recv": "SSAttribute",
+      "fn": "Hash",
+      "fixture": "css-ast-hash-go.json",
+      "sha": "9e62cdf9adebb84a2376579b54742e37f9af4ea013b046b32d55a42f54d0113b",
+      "evidence": "第101批 Hash 整链，Go 包内探针 IR 逐字节"
+    },
+    {
+      "pkg": "internal/css_ast",
+      "recv": "SSClass",
+      "fn": "Clone",
+      "fixture": "css-ast-clone-go.json",
+      "sha": "2517fa9836147545052d8c1d4c494522c82a9738dc431d57dfa37574ac63e1ea",
+      "evidence": "第103批 Clone 整链，Go 包内探针 dump 逐字节"
+    },
+    {
+      "pkg": "internal/css_ast",
+      "recv": "SSClass",
+      "fn": "Equal",
+      "fixture": "css-ast-equal-go.json",
+      "sha": "d365da98ef2c95bf8d01f20c1d4571367254e9662445d4dfb30f513f5da814b3",
+      "evidence": "第102批 Equal 整链，Go 包内探针 IR 逐字节（含跨文件 check）"
+    },
+    {
+      "pkg": "internal/css_ast",
+      "recv": "SSClass",
+      "fn": "Hash",
+      "fixture": "css-ast-hash-go.json",
+      "sha": "9e62cdf9adebb84a2376579b54742e37f9af4ea013b046b32d55a42f54d0113b",
+      "evidence": "第101批 Hash 整链，Go 包内探针 IR 逐字节"
+    },
+    {
+      "pkg": "internal/css_ast",
+      "recv": "SSHash",
+      "fn": "Clone",
+      "fixture": "css-ast-clone-go.json",
+      "sha": "2517fa9836147545052d8c1d4c494522c82a9738dc431d57dfa37574ac63e1ea",
+      "evidence": "第103批 Clone 整链，Go 包内探针 dump 逐字节"
+    },
+    {
+      "pkg": "internal/css_ast",
+      "recv": "SSHash",
+      "fn": "Equal",
+      "fixture": "css-ast-equal-go.json",
+      "sha": "d365da98ef2c95bf8d01f20c1d4571367254e9662445d4dfb30f513f5da814b3",
+      "evidence": "第102批 Equal 整链，Go 包内探针 IR 逐字节（含跨文件 check）"
+    },
+    {
+      "pkg": "internal/css_ast",
+      "recv": "SSHash",
+      "fn": "Hash",
+      "fixture": "css-ast-hash-go.json",
+      "sha": "9e62cdf9adebb84a2376579b54742e37f9af4ea013b046b32d55a42f54d0113b",
+      "evidence": "第101批 Hash 整链，Go 包内探针 IR 逐字节"
+    },
+    {
+      "pkg": "internal/css_ast",
+      "recv": "SSPseudoClass",
+      "fn": "Clone",
+      "fixture": "css-ast-clone-go.json",
+      "sha": "2517fa9836147545052d8c1d4c494522c82a9738dc431d57dfa37574ac63e1ea",
+      "evidence": "第103批 Clone 整链，Go 包内探针 dump 逐字节"
+    },
+    {
+      "pkg": "internal/css_ast",
+      "recv": "SSPseudoClass",
+      "fn": "Equal",
+      "fixture": "css-ast-equal-go.json",
+      "sha": "d365da98ef2c95bf8d01f20c1d4571367254e9662445d4dfb30f513f5da814b3",
+      "evidence": "第102批 Equal 整链，Go 包内探针 IR 逐字节（含跨文件 check）"
+    },
+    {
+      "pkg": "internal/css_ast",
+      "recv": "SSPseudoClass",
+      "fn": "Hash",
+      "fixture": "css-ast-hash-go.json",
+      "sha": "9e62cdf9adebb84a2376579b54742e37f9af4ea013b046b32d55a42f54d0113b",
+      "evidence": "第101批 Hash 整链，Go 包内探针 IR 逐字节"
+    },
+    {
+      "pkg": "internal/css_ast",
+      "recv": "SSPseudoClassWithSelectorList",
+      "fn": "Clone",
+      "fixture": "css-ast-clone-go.json",
+      "sha": "2517fa9836147545052d8c1d4c494522c82a9738dc431d57dfa37574ac63e1ea",
+      "evidence": "第103批 Clone 整链，Go 包内探针 dump 逐字节"
+    },
+    {
+      "pkg": "internal/css_ast",
+      "recv": "SSPseudoClassWithSelectorList",
+      "fn": "Equal",
+      "fixture": "css-ast-equal-go.json",
+      "sha": "d365da98ef2c95bf8d01f20c1d4571367254e9662445d4dfb30f513f5da814b3",
+      "evidence": "第102批 Equal 整链，Go 包内探针 IR 逐字节（含跨文件 check）"
+    },
+    {
+      "pkg": "internal/css_ast",
+      "recv": "SSPseudoClassWithSelectorList",
+      "fn": "Hash",
+      "fixture": "css-ast-hash-go.json",
+      "sha": "9e62cdf9adebb84a2376579b54742e37f9af4ea013b046b32d55a42f54d0113b",
+      "evidence": "第101批 Hash 整链，Go 包内探针 IR 逐字节"
+    },
+    {
+      "pkg": "internal/css_ast",
+      "recv": "Token",
+      "fn": "Equal",
+      "fixture": "css-ast-equal-go.json",
+      "sha": "d365da98ef2c95bf8d01f20c1d4571367254e9662445d4dfb30f513f5da814b3",
+      "evidence": "第102批 Equal 整链，Go 包内探针 IR 逐字节（含跨文件 check）"
+    },
+    {
+      "pkg": "internal/css_ast",
+      "recv": "Token",
+      "fn": "EqualIgnoringWhitespace",
+      "fixture": "css-ast-equal-go.json",
+      "sha": "d365da98ef2c95bf8d01f20c1d4571367254e9662445d4dfb30f513f5da814b3",
+      "evidence": "第102批 Equal 整链，Go 包内探针 IR 逐字节（含跨文件 check）"
+    },
+    {
+      "pkg": "internal/css_parser",
+      "recv": "",
+      "fn": "allSelectorsAreDead",
+      "fixture": "css-safe-go.json",
+      "sha": "200953e36d7bcdf48b214573d46f541ffe4531c27c5b434fd0c01d7482d41ffa",
+      "evidence": "第120批 containsDeadSelectors/allSelectorsAreDead/isSafeSelectors，Go 探针 15 例逐字节"
+    },
+    {
+      "pkg": "internal/css_parser",
+      "recv": "",
+      "fn": "analyzeLeadingAmpersand",
+      "fixture": "css-sel-go.json",
+      "sha": "f14efff202fddd6ac1bb92af350d27a26035858911aa380fb96fc00ba253f9ed",
+      "evidence": "第106批 selector 助手，Go 探针逐字节"
+    },
+    {
+      "pkg": "internal/css_parser",
+      "recv": "",
+      "fn": "colorSpace_to_xyz",
+      "fixture": "css-colorspaces3-go.json",
+      "sha": "08775be84694969104a41801921a0feb37c9c91cf76acc004a4d39d7b11499c6",
+      "evidence": "第107批 色彩空间入口，Go 探针；1-ULP known-deviation 口径(toFixed10)"
+    },
+    {
+      "pkg": "internal/css_parser",
+      "recv": "",
+      "fn": "compactTokenQuad",
+      "fixture": "css-compact-go.json",
+      "sha": "d0388e8301161f37191e99e02279bc8881e27ff467ad62c3337c65de60d1fab3",
+      "evidence": "第108批 compactTokenQuad/commaToken，Go 探针逐字节"
+    },
+    {
+      "pkg": "internal/css_parser",
+      "recv": "",
+      "fn": "complexSelectorTermCount",
+      "fixture": "css-sel-go.json",
+      "sha": "f14efff202fddd6ac1bb92af350d27a26035858911aa380fb96fc00ba253f9ed",
+      "evidence": "第106批 selector 助手，Go 探针逐字节"
+    },
+    {
+      "pkg": "internal/css_parser",
+      "recv": "",
+      "fn": "compoundSelectorTermCount",
+      "fixture": "css-sel-go.json",
+      "sha": "f14efff202fddd6ac1bb92af350d27a26035858911aa380fb96fc00ba253f9ed",
+      "evidence": "第106批 selector 助手，Go 探针逐字节"
+    },
+    {
+      "pkg": "internal/css_parser",
+      "recv": "",
+      "fn": "containsDeadSelectors",
+      "fixture": "css-safe-go.json",
+      "sha": "200953e36d7bcdf48b214573d46f541ffe4531c27c5b434fd0c01d7482d41ffa",
+      "evidence": "第120批 containsDeadSelectors/allSelectorsAreDead/isSafeSelectors，Go 探针 15 例逐字节"
+    },
+    {
+      "pkg": "internal/css_parser",
+      "recv": "",
+      "fn": "containsLocalOrGlobalSelector",
+      "fixture": "css-sel-go.json",
+      "sha": "f14efff202fddd6ac1bb92af350d27a26035858911aa380fb96fc00ba253f9ed",
+      "evidence": "第106批 selector 助手，Go 探针逐字节"
+    },
+    {
+      "pkg": "internal/css_parser",
+      "recv": "",
+      "fn": "floatToStringForCalc",
+      "fixture": "css-calc-go.json",
+      "sha": "ce98274bf6d6933b4c8dd1554af980487872ab1513e2ddb03caf8042b2a08bc0",
+      "evidence": "第104批 calc 归约链，Go 包内探针逐字节"
+    },
+    {
+      "pkg": "internal/css_parser",
+      "recv": "",
+      "fn": "gamut_mapping_xyz_to_srgb",
+      "fixture": "css-colorspaces3-go.json",
+      "sha": "08775be84694969104a41801921a0feb37c9c91cf76acc004a4d39d7b11499c6",
+      "evidence": "第107批 色彩空间入口，Go 探针；1-ULP known-deviation 口径(toFixed10)"
+    },
+    {
+      "pkg": "internal/css_parser",
+      "recv": "",
+      "fn": "isSafeSelectors",
+      "fixture": "css-safe-go.json",
+      "sha": "200953e36d7bcdf48b214573d46f541ffe4531c27c5b434fd0c01d7482d41ffa",
+      "evidence": "第120批 containsDeadSelectors/allSelectorsAreDead/isSafeSelectors，Go 探针 15 例逐字节"
+    },
+    {
+      "pkg": "internal/css_parser",
+      "recv": "",
+      "fn": "looksLikeColor",
+      "fixture": "css-llc-go.json",
+      "sha": "cc8fb8d14370aa3bd724dab410a04206d4f29ca162f5c1a27acd24e01d5518ed",
+      "evidence": "第113批 looksLikeColor，Go 探针逐字节"
+    },
+    {
+      "pkg": "internal/css_parser",
+      "recv": "",
+      "fn": "makeColorToken",
+      "fixture": "css-grad-go.json",
+      "sha": "4a4b67b73ee785988840f461ef3afeb5620d7146c2f0dae7823d97a9ff9adde0",
+      "evidence": "第111批 gradient token 助手，Go 探针逐字节"
+    },
+    {
+      "pkg": "internal/css_parser",
+      "recv": "",
+      "fn": "MakeDeadRuleMangler",
+      "fixture": "rules-batch-go.json",
+      "sha": "b57db24540ae21809186b7c418e0d77f3ccf71b50a4e21c435e374e9b223288f",
+      "evidence": "第127批 scanForEndOfRule/mangleRules/DeadRuleRemover 一次探针（17 例逐字节）"
+    },
+    {
+      "pkg": "internal/css_parser",
+      "recv": "",
+      "fn": "makePositionToken",
+      "fixture": "css-grad-go.json",
+      "sha": "4a4b67b73ee785988840f461ef3afeb5620d7146c2f0dae7823d97a9ff9adde0",
+      "evidence": "第111批 gradient token 助手，Go 探针逐字节"
+    },
+    {
+      "pkg": "internal/css_parser",
+      "recv": "",
+      "fn": "mergeCompoundSelectors",
+      "fixture": "css-sel-go.json",
+      "sha": "f14efff202fddd6ac1bb92af350d27a26035858911aa380fb96fc00ba253f9ed",
+      "evidence": "第106批 selector 助手，Go 探针逐字节"
+    },
+    {
+      "pkg": "internal/css_parser",
+      "recv": "",
+      "fn": "OptionsFromConfig",
+      "fixture": "parse-entry-go.json",
+      "sha": "5767d54e2236fc791e92020513e3a27c7f7adc16958e7e744ba169e753e0f61f",
+      "evidence": "第137批 Parse/computeCharacterFrequency/OptionsFromConfig/Options.Equal 入口四函数，Go 探针 52 例逐字节"
+    },
+    {
+      "pkg": "internal/css_parser",
+      "recv": "",
+      "fn": "Parse",
+      "fixture": "parse-entry-go.json",
+      "sha": "5767d54e2236fc791e92020513e3a27c7f7adc16958e7e744ba169e753e0f61f",
+      "evidence": "第137批 Parse/computeCharacterFrequency/OptionsFromConfig/Options.Equal 入口四函数，Go 探针 52 例逐字节"
+    },
+    {
+      "pkg": "internal/css_parser",
+      "recv": "",
+      "fn": "parseColor",
+      "fixture": "css-pcolor-go.json",
+      "sha": "9b1a57763d479d530f9b1c415409fbee3318312570364a0a63d33066333525ed",
+      "evidence": "第113批 parseColor，Go 探针；xyz 1-ULP toFixed10 口径"
+    },
+    {
+      "pkg": "internal/css_parser",
+      "recv": "",
+      "fn": "parseGradient",
+      "fixture": "css-pg-go.json",
+      "sha": "b70a00af8a604bab01b30d40ac19765102ba707e39a5d79c95ed309a8995c30b",
+      "evidence": "第116批 parseGradient，Go 探针 18 例逐字节"
+    },
+    {
+      "pkg": "internal/css_parser",
+      "recv": "",
+      "fn": "removeImpliedPositions",
+      "fixture": "css-rmip-go.json",
+      "sha": "dc5ca5beca3ee4e5256ec5e23784138ab7122acfc960b103e67bb016418f37a3",
+      "evidence": "第112批 removeImpliedPositions，Go 探针逐字节"
+    },
+    {
+      "pkg": "internal/css_parser",
+      "recv": "",
+      "fn": "switchToDoublePositions",
+      "fixture": "css-grad-go.json",
+      "sha": "4a4b67b73ee785988840f461ef3afeb5620d7146c2f0dae7823d97a9ff9adde0",
+      "evidence": "第111批 gradient token 助手，Go 探针逐字节"
+    },
+    {
+      "pkg": "internal/css_parser",
+      "recv": "",
+      "fn": "switchToSinglePositions",
+      "fixture": "css-grad-go.json",
+      "sha": "4a4b67b73ee785988840f461ef3afeb5620d7146c2f0dae7823d97a9ff9adde0",
+      "evidence": "第111批 gradient token 助手，Go 探针逐字节"
+    },
+    {
+      "pkg": "internal/css_parser",
+      "recv": "",
+      "fn": "tryToExpandGradient",
+      "fixture": "css-cps2-go.json",
+      "sha": "142ee357ea7b66b329dbe190f5ce67fe6521050d4baa993e8b996f12e2411a88",
+      "evidence": "第115批 generateGradient + tryToExpandGradient，Go 探针 12 例；hash 颜色通道 ±1 known-deviation"
+    },
+    {
+      "pkg": "internal/css_parser",
+      "recv": "",
+      "fn": "tryToParseCalcTerm",
+      "fixture": "css-calc-go.json",
+      "sha": "ce98274bf6d6933b4c8dd1554af980487872ab1513e2ddb03caf8042b2a08bc0",
+      "evidence": "第104批 calc 归约链，Go 包内探针逐字节"
+    },
+    {
+      "pkg": "internal/css_parser",
+      "recv": "",
+      "fn": "tryToParseColorStops",
+      "fixture": "css-cps-go.json",
+      "sha": "a275fe3d566f496f33ce298de324212b6841495473f51afa5f80b9c7bf80366d",
+      "evidence": "第114批 tryToParseColorStops，Go 探针 20 例；xyz/rgb/alpha 1-ULP toFixed10 known-deviation"
+    },
+    {
+      "pkg": "internal/css_parser",
+      "recv": "",
+      "fn": "turnPercentIntoNumberIfShorter",
+      "fixture": "css-font2-go.json",
+      "sha": "1fea9b956e643b54419f23edbc7045651cbbc4ec44b0f58e01d011ecee328cb7",
+      "evidence": "第105批 turnPercent，Go 探针逐字节"
+    },
+    {
+      "pkg": "internal/css_parser",
+      "recv": "",
+      "fn": "xyz_to_colorSpace",
+      "fixture": "css-colorspaces3-go.json",
+      "sha": "08775be84694969104a41801921a0feb37c9c91cf76acc004a4d39d7b11499c6",
+      "evidence": "第107批 色彩空间入口，Go 探针；1-ULP known-deviation 口径(toFixed10)"
+    },
+    {
+      "pkg": "internal/css_parser",
+      "recv": "borderRadiusTracker",
+      "fn": "compactRules",
+      "fixture": "css-box2-go.json",
+      "sha": "55565ecc975ba7fc74fbd627eaf7f72c58086dc9ee92d1f3b184ad30832b6df5",
+      "evidence": "第109批 boxTracker，Go 探针 dump 逐字节"
+    },
+    {
+      "pkg": "internal/css_parser",
+      "recv": "borderRadiusTracker",
+      "fn": "mangleCorner",
+      "fixture": "css-br-go.json",
+      "sha": "fb88ccc9da7011d6e764af2756e0f7ba61f7de0d7a17aa7acb76a2b5cec27119",
+      "evidence": "第110批 borderRadiusTracker，Go 探针 dump 逐字节"
+    },
+    {
+      "pkg": "internal/css_parser",
+      "recv": "borderRadiusTracker",
+      "fn": "mangleCorners",
+      "fixture": "css-br-go.json",
+      "sha": "fb88ccc9da7011d6e764af2756e0f7ba61f7de0d7a17aa7acb76a2b5cec27119",
+      "evidence": "第110批 borderRadiusTracker，Go 探针 dump 逐字节"
+    },
+    {
+      "pkg": "internal/css_parser",
+      "recv": "borderRadiusTracker",
+      "fn": "updateCorner",
+      "fixture": "css-br-go.json",
+      "sha": "fb88ccc9da7011d6e764af2756e0f7ba61f7de0d7a17aa7acb76a2b5cec27119",
+      "evidence": "第110批 borderRadiusTracker，Go 探针 dump 逐字节"
+    },
+    {
+      "pkg": "internal/css_parser",
+      "recv": "boxTracker",
+      "fn": "mangleSide",
+      "fixture": "css-box2-go.json",
+      "sha": "55565ecc975ba7fc74fbd627eaf7f72c58086dc9ee92d1f3b184ad30832b6df5",
+      "evidence": "第109批 boxTracker，Go 探针 dump 逐字节"
+    },
+    {
+      "pkg": "internal/css_parser",
+      "recv": "boxTracker",
+      "fn": "mangleSides",
+      "fixture": "css-box2-go.json",
+      "sha": "55565ecc975ba7fc74fbd627eaf7f72c58086dc9ee92d1f3b184ad30832b6df5",
+      "evidence": "第109批 boxTracker，Go 探针 dump 逐字节"
+    },
+    {
+      "pkg": "internal/css_parser",
+      "recv": "boxTracker",
+      "fn": "updateSide",
+      "fixture": "css-box2-go.json",
+      "sha": "55565ecc975ba7fc74fbd627eaf7f72c58086dc9ee92d1f3b184ad30832b6df5",
+      "evidence": "第109批 boxTracker，Go 探针 dump 逐字节"
+    },
+    {
+      "pkg": "internal/css_parser",
+      "recv": "calcSum",
+      "fn": "convertToToken",
+      "fixture": "css-calc-go.json",
+      "sha": "ce98274bf6d6933b4c8dd1554af980487872ab1513e2ddb03caf8042b2a08bc0",
+      "evidence": "第104批 calc 归约链，Go 包内探针逐字节"
+    },
+    {
+      "pkg": "internal/css_parser",
+      "recv": "calcSum",
+      "fn": "partiallySimplify",
+      "fixture": "css-calc-go.json",
+      "sha": "ce98274bf6d6933b4c8dd1554af980487872ab1513e2ddb03caf8042b2a08bc0",
+      "evidence": "第104批 calc 归约链，Go 包内探针逐字节"
+    },
+    {
+      "pkg": "internal/css_parser",
+      "recv": "DeadRuleRemover",
+      "fn": "RemoveDeadRulesInPlace",
+      "fixture": "rules-batch-go.json",
+      "sha": "b57db24540ae21809186b7c418e0d77f3ccf71b50a4e21c435e374e9b223288f",
+      "evidence": "第127批 scanForEndOfRule/mangleRules/DeadRuleRemover 一次探针（17 例逐字节）"
+    },
+    {
+      "pkg": "internal/css_parser",
+      "recv": "Options",
+      "fn": "Equal",
+      "fixture": "parse-entry-go.json",
+      "sha": "5767d54e2236fc791e92020513e3a27c7f7adc16958e7e744ba169e753e0f61f",
+      "evidence": "第137批 Parse/computeCharacterFrequency/OptionsFromConfig/Options.Equal 入口四函数，Go 探针 52 例逐字节"
+    },
+    {
+      "pkg": "internal/css_parser",
+      "recv": "parser",
+      "fn": "addExpansionError",
+      "fixture": "nest-helpers-go.json",
+      "sha": "73d913db3a97a105bb5959a89b72b9c6b5b41745a1c0716a93f2ebf82400b36d",
+      "evidence": "第129批 nesting 纯助手 4 函数一次探针（8 例逐字节）"
+    },
+    {
+      "pkg": "internal/css_parser",
+      "recv": "parser",
+      "fn": "appendMediaTerm",
+      "fixture": "css-media-go.json",
+      "sha": "71d011f1863dd5de0e42ba485b61bbb1f86de6632df395e7cc0cf133832e2f7a",
+      "evidence": "第118批 media 解析链 7 函数，Go 探针 29 例逐字节"
+    },
+    {
+      "pkg": "internal/css_parser",
+      "recv": "parser",
+      "fn": "commaToken",
+      "fixture": "css-compact-go.json",
+      "sha": "d0388e8301161f37191e99e02279bc8881e27ff467ad62c3337c65de60d1fab3",
+      "evidence": "第108批 compactTokenQuad/commaToken，Go 探针逐字节"
+    },
+    {
+      "pkg": "internal/css_parser",
+      "recv": "parser",
+      "fn": "computeCharacterFrequency",
+      "fixture": "parse-entry-go.json",
+      "sha": "5767d54e2236fc791e92020513e3a27c7f7adc16958e7e744ba169e753e0f61f",
+      "evidence": "第137批 Parse/computeCharacterFrequency/OptionsFromConfig/Options.Equal 入口四函数，Go 探针 52 例逐字节"
+    },
+    {
+      "pkg": "internal/css_parser",
+      "recv": "parser",
+      "fn": "expect",
+      "fixture": "css-pe-go.json",
+      "sha": "e0773fdac9cc6e5ce23c755a6c5f4b0493184bfcea343a870a393be5ffe61b46",
+      "evidence": "第117批 expect/expectWithMatchingLoc/unexpected/parseComponentValue/parseBlock，Go 探针 16 例逐字节"
+    },
+    {
+      "pkg": "internal/css_parser",
+      "recv": "parser",
+      "fn": "expectURLOrString",
+      "fixture": "css-u-go.json",
+      "sha": "be3792134874f4d359b89aedbf88eba069f97447809d3c5e9797a4df4453a4f4",
+      "evidence": "第119批 parseURLOrString/expectURLOrString/symbolForName/recordAtLayerRule/expectValidLayerNameIdent，Go 探针 15 例逐字节"
+    },
+    {
+      "pkg": "internal/css_parser",
+      "recv": "parser",
+      "fn": "expectValidLayerNameIdent",
+      "fixture": "css-u-go.json",
+      "sha": "be3792134874f4d359b89aedbf88eba069f97447809d3c5e9797a4df4453a4f4",
+      "evidence": "第119批 parseURLOrString/expectURLOrString/symbolForName/recordAtLayerRule/expectValidLayerNameIdent，Go 探针 15 例逐字节"
+    },
+    {
+      "pkg": "internal/css_parser",
+      "recv": "parser",
+      "fn": "expectWithMatchingLoc",
+      "fixture": "css-pe-go.json",
+      "sha": "e0773fdac9cc6e5ce23c755a6c5f4b0493184bfcea343a870a393be5ffe61b46",
+      "evidence": "第117批 expect/expectWithMatchingLoc/unexpected/parseComponentValue/parseBlock，Go 探针 16 例逐字节"
+    },
+    {
+      "pkg": "internal/css_parser",
+      "recv": "parser",
+      "fn": "flattenLocalAndGlobalSelectors",
+      "fixture": "css-chain-go.json",
+      "sha": "b4a4fc10938a31e4dd3e9f69e0bc15872316ab61481951c4eec20dd278a15bdf",
+      "evidence": "第125批 selector 主链 4 函数+flatten，Go 探针 114 例逐字节"
+    },
+    {
+      "pkg": "internal/css_parser",
+      "recv": "parser",
+      "fn": "generateGradient",
+      "fixture": "css-cps2-go.json",
+      "sha": "142ee357ea7b66b329dbe190f5ce67fe6521050d4baa993e8b996f12e2411a88",
+      "evidence": "第115批 generateGradient + tryToExpandGradient，Go 探针 12 例；hash 颜色通道 ±1 known-deviation"
+    },
+    {
+      "pkg": "internal/css_parser",
+      "recv": "parser",
+      "fn": "handleComposesPragma",
+      "fixture": "composes-go.json",
+      "sha": "0795ad423b5565cbe8ad1e5c33d37fe0cb165c228afe0cee223b5531d54a4086",
+      "evidence": "第135批 handleComposesPragma，Go 探针 4 例逐字节"
+    },
+    {
+      "pkg": "internal/css_parser",
+      "recv": "parser",
+      "fn": "handleSingleAnimationName",
+      "fixture": "decl-helpers-go.json",
+      "sha": "9b825f24506ea34fc503aa5928f60058bb877f6055c431de9663f4bd7f5935da",
+      "evidence": "第131批 processDeclarations 的 8 个依赖助手一次探针（28 例逐字节）"
+    },
+    {
+      "pkg": "internal/css_parser",
+      "recv": "parser",
+      "fn": "handleSingleContainerName",
+      "fixture": "decl-helpers-go.json",
+      "sha": "9b825f24506ea34fc503aa5928f60058bb877f6055c431de9663f4bd7f5935da",
+      "evidence": "第131批 processDeclarations 的 8 个依赖助手一次探针（28 例逐字节）"
+    },
+    {
+      "pkg": "internal/css_parser",
+      "recv": "parser",
+      "fn": "insertPrefixedDeclaration",
+      "fixture": "decl-ins-go.json",
+      "sha": "c3bee11a04e4e1d566d87d42cca9d4c0e24828b1d133df98841daec962a0c7ef",
+      "evidence": "第132批 insertPrefixedDeclaration/lowerInset，Go 探针 17 例逐字节"
+    },
+    {
+      "pkg": "internal/css_parser",
+      "recv": "parser",
+      "fn": "looksLikeMediaCondition",
+      "fixture": "css-media-go.json",
+      "sha": "71d011f1863dd5de0e42ba485b61bbb1f86de6632df395e7cc0cf133832e2f7a",
+      "evidence": "第118批 media 解析链 7 函数，Go 探针 29 例逐字节"
+    },
+    {
+      "pkg": "internal/css_parser",
+      "recv": "parser",
+      "fn": "lowerAndMangleBoxShadow",
+      "fixture": "main-chain-go.json",
+      "sha": "cd642598d8509e57704f42cd89d5a876d6a002a43d227abacb09cc201c8995d3",
+      "evidence": "第135批 processDeclarations 本体+4 依赖，Go 探针 120 例逐字节"
+    },
+    {
+      "pkg": "internal/css_parser",
+      "recv": "parser",
+      "fn": "lowerAndMangleBoxShadows",
+      "fixture": "main-chain-go.json",
+      "sha": "cd642598d8509e57704f42cd89d5a876d6a002a43d227abacb09cc201c8995d3",
+      "evidence": "第135批 processDeclarations 本体+4 依赖，Go 探针 120 例逐字节"
+    },
+    {
+      "pkg": "internal/css_parser",
+      "recv": "parser",
+      "fn": "lowerAndMinifyColor",
+      "fixture": "color-lower-go.json",
+      "sha": "720ea68c098b808d10bb29a6fa5eb0767313212c8a79ab2076a4fd283f0f5b31",
+      "evidence": "第133批 tryToGenerateColor/lowerAndMinifyColor，Go 探针 44 例逐字节"
+    },
+    {
+      "pkg": "internal/css_parser",
+      "recv": "parser",
+      "fn": "lowerAndMinifyGradient",
+      "fixture": "grad-lower-go.json",
+      "sha": "4b7f8ec704d09801f4fc54444db81730edc8b707a080c8c40634a6442e595835",
+      "evidence": "第134批 lowerAndMinifyGradient，Go 探针 60 例逐字节"
+    },
+    {
+      "pkg": "internal/css_parser",
+      "recv": "parser",
+      "fn": "lowerInset",
+      "fixture": "decl-ins-go.json",
+      "sha": "c3bee11a04e4e1d566d87d42cca9d4c0e24828b1d133df98841daec962a0c7ef",
+      "evidence": "第132批 insertPrefixedDeclaration/lowerInset，Go 探针 17 例逐字节"
+    },
+    {
+      "pkg": "internal/css_parser",
+      "recv": "parser",
+      "fn": "lowerNestingInRule",
+      "fixture": "nest-lower-go.json",
+      "sha": "e8a9166de68b8e417ba9dac348355f9e0e1f8c35dc6957b1c4c7d37d4be57901",
+      "evidence": "第130批 lowerNesting 三函数一次探针（7 例逐字节）"
+    },
+    {
+      "pkg": "internal/css_parser",
+      "recv": "parser",
+      "fn": "lowerNestingInRulesAndReturnRemaining",
+      "fixture": "nest-lower-go.json",
+      "sha": "e8a9166de68b8e417ba9dac348355f9e0e1f8c35dc6957b1c4c7d37d4be57901",
+      "evidence": "第130批 lowerNesting 三函数一次探针（7 例逐字节）"
+    },
+    {
+      "pkg": "internal/css_parser",
+      "recv": "parser",
+      "fn": "lowerNestingInRuleWithContext",
+      "fixture": "nest-lower-go.json",
+      "sha": "e8a9166de68b8e417ba9dac348355f9e0e1f8c35dc6957b1c4c7d37d4be57901",
+      "evidence": "第130批 lowerNesting 三函数一次探针（7 例逐字节）"
+    },
+    {
+      "pkg": "internal/css_parser",
+      "recv": "parser",
+      "fn": "mangleFont",
+      "fixture": "main-chain-go.json",
+      "sha": "cd642598d8509e57704f42cd89d5a876d6a002a43d227abacb09cc201c8995d3",
+      "evidence": "第135批 processDeclarations 本体+4 依赖，Go 探针 120 例逐字节"
+    },
+    {
+      "pkg": "internal/css_parser",
+      "recv": "parser",
+      "fn": "mangleFontFamily",
+      "fixture": "css-font-go.json",
+      "sha": "2f649cb81fc60286527753bbb5ef489178b32a0f882f5ed23adcf2d473a4e5bf",
+      "evidence": "第105批 font-family mangle，Go 探针逐字节"
+    },
+    {
+      "pkg": "internal/css_parser",
+      "recv": "parser",
+      "fn": "mangleRules",
+      "fixture": "rules-batch-go.json",
+      "sha": "b57db24540ae21809186b7c418e0d77f3ccf71b50a4e21c435e374e9b223288f",
+      "evidence": "第127批 scanForEndOfRule/mangleRules/DeadRuleRemover 一次探针（17 例逐字节）"
+    },
+    {
+      "pkg": "internal/css_parser",
+      "recv": "parser",
+      "fn": "mangleTransforms",
+      "fixture": "main-chain-go.json",
+      "sha": "cd642598d8509e57704f42cd89d5a876d6a002a43d227abacb09cc201c8995d3",
+      "evidence": "第135批 processDeclarations 本体+4 依赖，Go 探针 120 例逐字节"
+    },
+    {
+      "pkg": "internal/css_parser",
+      "recv": "parser",
+      "fn": "maybeSimplifyMediaNot",
+      "fixture": "css-media-go.json",
+      "sha": "71d011f1863dd5de0e42ba485b61bbb1f86de6632df395e7cc0cf133832e2f7a",
+      "evidence": "第118批 media 解析链 7 函数，Go 探针 29 例逐字节"
+    },
+    {
+      "pkg": "internal/css_parser",
+      "recv": "parser",
+      "fn": "multipleComplexSelectorsToSingleComplexSelector",
+      "fixture": "nest-helpers-go.json",
+      "sha": "73d913db3a97a105bb5959a89b72b9c6b5b41745a1c0716a93f2ebf82400b36d",
+      "evidence": "第129批 nesting 纯助手 4 函数一次探针（8 例逐字节）"
+    },
+    {
+      "pkg": "internal/css_parser",
+      "recv": "parser",
+      "fn": "nameToken",
+      "fixture": "css-sel-leaf-go.json",
+      "sha": "93a4633146c9fd4343f28af2068f1ee7b2c4dba4844f080302497f1ca4d2aaba",
+      "evidence": "第124批 selector 叶子 5 函数一次探针（23 例逐字节）"
+    },
+    {
+      "pkg": "internal/css_parser",
+      "recv": "parser",
+      "fn": "parseAnyValue",
+      "fixture": "css-sel-leaf-go.json",
+      "sha": "93a4633146c9fd4343f28af2068f1ee7b2c4dba4844f080302497f1ca4d2aaba",
+      "evidence": "第124批 selector 叶子 5 函数一次探针（23 例逐字节）"
+    },
+    {
+      "pkg": "internal/css_parser",
+      "recv": "parser",
+      "fn": "parseAtRule",
+      "fixture": "main-chain2-go.json",
+      "sha": "42127dd468520f43ef62b454c000a56311facb564f85aa1920225281cda15a6c",
+      "evidence": "第136批 parseListOfDeclarations/parseAtRule/parseQualifiedRule/parseSelectorRule/parseListOfRules 五函数主链本体，Go 探针 236 例逐字节"
+    },
+    {
+      "pkg": "internal/css_parser",
+      "recv": "parser",
+      "fn": "parseAttributeSelector",
+      "fixture": "css-sel-leaf-go.json",
+      "sha": "93a4633146c9fd4343f28af2068f1ee7b2c4dba4844f080302497f1ca4d2aaba",
+      "evidence": "第124批 selector 叶子 5 函数一次探针（23 例逐字节）"
+    },
+    {
+      "pkg": "internal/css_parser",
+      "recv": "parser",
+      "fn": "parseBlock",
+      "fixture": "css-pe-go.json",
+      "sha": "e0773fdac9cc6e5ce23c755a6c5f4b0493184bfcea343a870a393be5ffe61b46",
+      "evidence": "第117批 expect/expectWithMatchingLoc/unexpected/parseComponentValue/parseBlock，Go 探针 16 例逐字节"
+    },
+    {
+      "pkg": "internal/css_parser",
+      "recv": "parser",
+      "fn": "parseCombinator",
+      "fixture": "css-sel-leaf-go.json",
+      "sha": "93a4633146c9fd4343f28af2068f1ee7b2c4dba4844f080302497f1ca4d2aaba",
+      "evidence": "第124批 selector 叶子 5 函数一次探针（23 例逐字节）"
+    },
+    {
+      "pkg": "internal/css_parser",
+      "recv": "parser",
+      "fn": "parseComplexSelector",
+      "fixture": "css-chain-go.json",
+      "sha": "b4a4fc10938a31e4dd3e9f69e0bc15872316ab61481951c4eec20dd278a15bdf",
+      "evidence": "第125批 selector 主链 4 函数+flatten，Go 探针 114 例逐字节"
+    },
+    {
+      "pkg": "internal/css_parser",
+      "recv": "parser",
+      "fn": "parseComponentValue",
+      "fixture": "css-pe-go.json",
+      "sha": "e0773fdac9cc6e5ce23c755a6c5f4b0493184bfcea343a870a393be5ffe61b46",
+      "evidence": "第117批 expect/expectWithMatchingLoc/unexpected/parseComponentValue/parseBlock，Go 探针 16 例逐字节"
+    },
+    {
+      "pkg": "internal/css_parser",
+      "recv": "parser",
+      "fn": "parseCompoundSelector",
+      "fixture": "css-chain-go.json",
+      "sha": "b4a4fc10938a31e4dd3e9f69e0bc15872316ab61481951c4eec20dd278a15bdf",
+      "evidence": "第125批 selector 主链 4 函数+flatten，Go 探针 114 例逐字节"
+    },
+    {
+      "pkg": "internal/css_parser",
+      "recv": "parser",
+      "fn": "parseDeclaration",
+      "fixture": "decl-batch-go.json",
+      "sha": "399a8abb718804506d1a27e078c92fb2e8fc2db7383c88ba2a0f82866d0dd699",
+      "evidence": "第128批 parseDeclaration，Go 探针 26 例逐字节"
+    },
+    {
+      "pkg": "internal/css_parser",
+      "recv": "parser",
+      "fn": "parseListOfDeclarations",
+      "fixture": "main-chain2-go.json",
+      "sha": "42127dd468520f43ef62b454c000a56311facb564f85aa1920225281cda15a6c",
+      "evidence": "第136批 parseListOfDeclarations/parseAtRule/parseQualifiedRule/parseSelectorRule/parseListOfRules 五函数主链本体，Go 探针 236 例逐字节"
+    },
+    {
+      "pkg": "internal/css_parser",
+      "recv": "parser",
+      "fn": "parseListOfRules",
+      "fixture": "main-chain2-go.json",
+      "sha": "42127dd468520f43ef62b454c000a56311facb564f85aa1920225281cda15a6c",
+      "evidence": "第136批 parseListOfDeclarations/parseAtRule/parseQualifiedRule/parseSelectorRule/parseListOfRules 五函数主链本体，Go 探针 236 例逐字节"
+    },
+    {
+      "pkg": "internal/css_parser",
+      "recv": "parser",
+      "fn": "parseMediaCondition",
+      "fixture": "css-media-go.json",
+      "sha": "71d011f1863dd5de0e42ba485b61bbb1f86de6632df395e7cc0cf133832e2f7a",
+      "evidence": "第118批 media 解析链 7 函数，Go 探针 29 例逐字节"
+    },
+    {
+      "pkg": "internal/css_parser",
+      "recv": "parser",
+      "fn": "parseMediaInParens",
+      "fixture": "css-media-go.json",
+      "sha": "71d011f1863dd5de0e42ba485b61bbb1f86de6632df395e7cc0cf133832e2f7a",
+      "evidence": "第118批 media 解析链 7 函数，Go 探针 29 例逐字节"
+    },
+    {
+      "pkg": "internal/css_parser",
+      "recv": "parser",
+      "fn": "parseMediaQuery",
+      "fixture": "css-media-go.json",
+      "sha": "71d011f1863dd5de0e42ba485b61bbb1f86de6632df395e7cc0cf133832e2f7a",
+      "evidence": "第118批 media 解析链 7 函数，Go 探针 29 例逐字节"
+    },
+    {
+      "pkg": "internal/css_parser",
+      "recv": "parser",
+      "fn": "parseMediaQueryListUntil",
+      "fixture": "css-media-go.json",
+      "sha": "71d011f1863dd5de0e42ba485b61bbb1f86de6632df395e7cc0cf133832e2f7a",
+      "evidence": "第118批 media 解析链 7 函数，Go 探针 29 例逐字节"
+    },
+    {
+      "pkg": "internal/css_parser",
+      "recv": "parser",
+      "fn": "parseNthIndex",
+      "fixture": "css-sel-leaf-go.json",
+      "sha": "93a4633146c9fd4343f28af2068f1ee7b2c4dba4844f080302497f1ca4d2aaba",
+      "evidence": "第124批 selector 叶子 5 函数一次探针（23 例逐字节）"
+    },
+    {
+      "pkg": "internal/css_parser",
+      "recv": "parser",
+      "fn": "parsePseudoClassSelector",
+      "fixture": "css-chain-go.json",
+      "sha": "b4a4fc10938a31e4dd3e9f69e0bc15872316ab61481951c4eec20dd278a15bdf",
+      "evidence": "第125批 selector 主链 4 函数+flatten，Go 探针 114 例逐字节"
+    },
+    {
+      "pkg": "internal/css_parser",
+      "recv": "parser",
+      "fn": "parseQualifiedRule",
+      "fixture": "main-chain2-go.json",
+      "sha": "42127dd468520f43ef62b454c000a56311facb564f85aa1920225281cda15a6c",
+      "evidence": "第136批 parseListOfDeclarations/parseAtRule/parseQualifiedRule/parseSelectorRule/parseListOfRules 五函数主链本体，Go 探针 236 例逐字节"
+    },
+    {
+      "pkg": "internal/css_parser",
+      "recv": "parser",
+      "fn": "parseSelectorList",
+      "fixture": "css-chain-go.json",
+      "sha": "b4a4fc10938a31e4dd3e9f69e0bc15872316ab61481951c4eec20dd278a15bdf",
+      "evidence": "第125批 selector 主链 4 函数+flatten，Go 探针 114 例逐字节"
+    },
+    {
+      "pkg": "internal/css_parser",
+      "recv": "parser",
+      "fn": "parseSelectorRule",
+      "fixture": "main-chain2-go.json",
+      "sha": "42127dd468520f43ef62b454c000a56311facb564f85aa1920225281cda15a6c",
+      "evidence": "第136批 parseListOfDeclarations/parseAtRule/parseQualifiedRule/parseSelectorRule/parseListOfRules 五函数主链本体，Go 探针 236 例逐字节"
+    },
+    {
+      "pkg": "internal/css_parser",
+      "recv": "parser",
+      "fn": "parseURLOrString",
+      "fixture": "css-u-go.json",
+      "sha": "be3792134874f4d359b89aedbf88eba069f97447809d3c5e9797a4df4453a4f4",
+      "evidence": "第119批 parseURLOrString/expectURLOrString/symbolForName/recordAtLayerRule/expectValidLayerNameIdent，Go 探针 15 例逐字节"
+    },
+    {
+      "pkg": "internal/css_parser",
+      "recv": "parser",
+      "fn": "processAnimationName",
+      "fixture": "decl-helpers-go.json",
+      "sha": "9b825f24506ea34fc503aa5928f60058bb877f6055c431de9663f4bd7f5935da",
+      "evidence": "第131批 processDeclarations 的 8 个依赖助手一次探针（28 例逐字节）"
+    },
+    {
+      "pkg": "internal/css_parser",
+      "recv": "parser",
+      "fn": "processAnimationShorthand",
+      "fixture": "decl-helpers-go.json",
+      "sha": "9b825f24506ea34fc503aa5928f60058bb877f6055c431de9663f4bd7f5935da",
+      "evidence": "第131批 processDeclarations 的 8 个依赖助手一次探针（28 例逐字节）"
+    },
+    {
+      "pkg": "internal/css_parser",
+      "recv": "parser",
+      "fn": "processContainerName",
+      "fixture": "decl-helpers-go.json",
+      "sha": "9b825f24506ea34fc503aa5928f60058bb877f6055c431de9663f4bd7f5935da",
+      "evidence": "第131批 processDeclarations 的 8 个依赖助手一次探针（28 例逐字节）"
+    },
+    {
+      "pkg": "internal/css_parser",
+      "recv": "parser",
+      "fn": "processContainerShorthand",
+      "fixture": "decl-helpers-go.json",
+      "sha": "9b825f24506ea34fc503aa5928f60058bb877f6055c431de9663f4bd7f5935da",
+      "evidence": "第131批 processDeclarations 的 8 个依赖助手一次探针（28 例逐字节）"
+    },
+    {
+      "pkg": "internal/css_parser",
+      "recv": "parser",
+      "fn": "processDeclarations",
+      "fixture": "main-chain-go.json",
+      "sha": "cd642598d8509e57704f42cd89d5a876d6a002a43d227abacb09cc201c8995d3",
+      "evidence": "第135批 processDeclarations 本体+4 依赖，Go 探针 120 例逐字节"
+    },
+    {
+      "pkg": "internal/css_parser",
+      "recv": "parser",
+      "fn": "processListStyleShorthand",
+      "fixture": "decl-helpers-go.json",
+      "sha": "9b825f24506ea34fc503aa5928f60058bb877f6055c431de9663f4bd7f5935da",
+      "evidence": "第131批 processDeclarations 的 8 个依赖助手一次探针（28 例逐字节）"
+    },
+    {
+      "pkg": "internal/css_parser",
+      "recv": "parser",
+      "fn": "processListStyleType",
+      "fixture": "decl-helpers-go.json",
+      "sha": "9b825f24506ea34fc503aa5928f60058bb877f6055c431de9663f4bd7f5935da",
+      "evidence": "第131批 processDeclarations 的 8 个依赖助手一次探针（28 例逐字节）"
+    },
+    {
+      "pkg": "internal/css_parser",
+      "recv": "parser",
+      "fn": "recordAtLayerRule",
+      "fixture": "css-u-go.json",
+      "sha": "be3792134874f4d359b89aedbf88eba069f97447809d3c5e9797a4df4453a4f4",
+      "evidence": "第119批 parseURLOrString/expectURLOrString/symbolForName/recordAtLayerRule/expectValidLayerNameIdent，Go 探针 15 例逐字节"
+    },
+    {
+      "pkg": "internal/css_parser",
+      "recv": "parser",
+      "fn": "reportNestingWithGeneratedPseudoClassIs",
+      "fixture": "nest-helpers-go.json",
+      "sha": "73d913db3a97a105bb5959a89b72b9c6b5b41745a1c0716a93f2ebf82400b36d",
+      "evidence": "第129批 nesting 纯助手 4 函数一次探针（8 例逐字节）"
+    },
+    {
+      "pkg": "internal/css_parser",
+      "recv": "parser",
+      "fn": "scanForEndOfRule",
+      "fixture": "rules-batch-go.json",
+      "sha": "b57db24540ae21809186b7c418e0d77f3ccf71b50a4e21c435e374e9b223288f",
+      "evidence": "第127批 scanForEndOfRule/mangleRules/DeadRuleRemover 一次探针（17 例逐字节）"
+    },
+    {
+      "pkg": "internal/css_parser",
+      "recv": "parser",
+      "fn": "substituteAmpersandsInCompoundSelector",
+      "fixture": "nest-helpers-go.json",
+      "sha": "73d913db3a97a105bb5959a89b72b9c6b5b41745a1c0716a93f2ebf82400b36d",
+      "evidence": "第129批 nesting 纯助手 4 函数一次探针（8 例逐字节）"
+    },
+    {
+      "pkg": "internal/css_parser",
+      "recv": "parser",
+      "fn": "symbolForName",
+      "fixture": "css-u-go.json",
+      "sha": "be3792134874f4d359b89aedbf88eba069f97447809d3c5e9797a4df4453a4f4",
+      "evidence": "第119批 parseURLOrString/expectURLOrString/symbolForName/recordAtLayerRule/expectValidLayerNameIdent，Go 探针 15 例逐字节"
+    },
+    {
+      "pkg": "internal/css_parser",
+      "recv": "parser",
+      "fn": "tryToGenerateColor",
+      "fixture": "color-lower-go.json",
+      "sha": "720ea68c098b808d10bb29a6fa5eb0767313212c8a79ab2076a4fd283f0f5b31",
+      "evidence": "第133批 tryToGenerateColor/lowerAndMinifyColor，Go 探针 44 例逐字节"
+    },
+    {
+      "pkg": "internal/css_parser",
+      "recv": "parser",
+      "fn": "tryToReduceCalcExpression",
+      "fixture": "css-calc-go.json",
+      "sha": "ce98274bf6d6933b4c8dd1554af980487872ab1513e2ddb03caf8042b2a08bc0",
+      "evidence": "第104批 calc 归约链，Go 包内探针逐字节"
+    },
+    {
+      "pkg": "internal/css_parser",
+      "recv": "parser",
+      "fn": "unexpected",
+      "fixture": "css-pe-go.json",
+      "sha": "e0773fdac9cc6e5ce23c755a6c5f4b0493184bfcea343a870a393be5ffe61b46",
+      "evidence": "第117批 expect/expectWithMatchingLoc/unexpected/parseComponentValue/parseBlock，Go 探针 16 例逐字节"
+    },
+    {
+      "pkg": "internal/fs",
+      "recv": "",
+      "fn": "MockFS",
+      "fixture": "fs-batch-go.json",
+      "sha": "c707911bc059d7321ac3576fc0d9485be10d03d29e096fb54d51d969e6135c46",
+      "evidence": "第126批 MockFS 构造+6 方法一次探针（42 例逐字节）"
+    },
+    {
+      "pkg": "internal/fs",
+      "recv": "goFilepath",
+      "fn": "evalSymlinks",
+      "fixture": "eval-symlinks-go.json",
+      "sha": "7e64bb5e714fe4e5b879157744f40a281cc1fe1d7e23b724d89a104c2c4365c0",
+      "evidence": "第106轮 goFilepath.evalSymlinks 真实OS symlink解析，一探针5场景逐字节"
+    },
+    {
+      "pkg": "internal/fs",
+      "recv": "mockFS",
+      "fn": "EvalSymlinks",
+      "fixture": "fs-batch-go.json",
+      "sha": "c707911bc059d7321ac3576fc0d9485be10d03d29e096fb54d51d969e6135c46",
+      "evidence": "第126批 MockFS 构造+6 方法一次探针（42 例逐字节）"
+    },
+    {
+      "pkg": "internal/fs",
+      "recv": "mockFS",
+      "fn": "ModKey",
+      "fixture": "fs-batch-go.json",
+      "sha": "c707911bc059d7321ac3576fc0d9485be10d03d29e096fb54d51d969e6135c46",
+      "evidence": "第126批 MockFS 构造+6 方法一次探针（42 例逐字节）"
+    },
+    {
+      "pkg": "internal/fs",
+      "recv": "mockFS",
+      "fn": "OpenFile",
+      "fixture": "fs-batch-go.json",
+      "sha": "c707911bc059d7321ac3576fc0d9485be10d03d29e096fb54d51d969e6135c46",
+      "evidence": "第126批 MockFS 构造+6 方法一次探针（42 例逐字节）"
+    },
+    {
+      "pkg": "internal/fs",
+      "recv": "mockFS",
+      "fn": "ReadDirectory",
+      "fixture": "fs-batch-go.json",
+      "sha": "c707911bc059d7321ac3576fc0d9485be10d03d29e096fb54d51d969e6135c46",
+      "evidence": "第126批 MockFS 构造+6 方法一次探针（42 例逐字节）"
+    },
+    {
+      "pkg": "internal/fs",
+      "recv": "mockFS",
+      "fn": "ReadFile",
+      "fixture": "fs-batch-go.json",
+      "sha": "c707911bc059d7321ac3576fc0d9485be10d03d29e096fb54d51d969e6135c46",
+      "evidence": "第126批 MockFS 构造+6 方法一次探针（42 例逐字节）"
+    },
+    {
+      "pkg": "internal/graph",
+      "recv": "",
+      "fn": "CloneLinkerGraph",
+      "fixture": "graph-base-go.json",
+      "sha": "aed1e7b29b36f0ae5134f8e18316c81048ef823c88d158dd009f843065237bd4",
+      "evidence": "第143批 LinkerGraph 底座（symbol/全局分配+part→symbol+chunk 图）11函数，Go 包内构造探针 14 例逐字节"
+    },
+    {
+      "pkg": "internal/graph",
+      "recv": "JSRepr",
+      "fn": "ImportRecords",
+      "fixture": "graph-base-go.json",
+      "sha": "aed1e7b29b36f0ae5134f8e18316c81048ef823c88d158dd009f843065237bd4",
+      "evidence": "第143批 LinkerGraph 底座（symbol/全局分配+part→symbol+chunk 图）11函数，Go 包内构造探针 14 例逐字节"
+    },
+    {
+      "pkg": "internal/graph",
+      "recv": "JSRepr",
+      "fn": "TopLevelSymbolToParts",
+      "fixture": "graph-base-go.json",
+      "sha": "aed1e7b29b36f0ae5134f8e18316c81048ef823c88d158dd009f843065237bd4",
+      "evidence": "第143批 LinkerGraph 底座（symbol/全局分配+part→symbol+chunk 图）11函数，Go 包内构造探针 14 例逐字节"
+    },
+    {
+      "pkg": "internal/graph",
+      "recv": "LinkerFile",
+      "fn": "LineColumnTracker",
+      "fixture": "graph-base-go.json",
+      "sha": "aed1e7b29b36f0ae5134f8e18316c81048ef823c88d158dd009f843065237bd4",
+      "evidence": "第143批 LinkerGraph 底座（symbol/全局分配+part→symbol+chunk 图）11函数，Go 包内构造探针 14 例逐字节"
+    },
+    {
+      "pkg": "internal/graph",
+      "recv": "LinkerGraph",
+      "fn": "AddPartToFile",
+      "fixture": "graph-base-go.json",
+      "sha": "aed1e7b29b36f0ae5134f8e18316c81048ef823c88d158dd009f843065237bd4",
+      "evidence": "第143批 LinkerGraph 底座（symbol/全局分配+part→symbol+chunk 图）11函数，Go 包内构造探针 14 例逐字节"
+    },
+    {
+      "pkg": "internal/graph",
+      "recv": "LinkerGraph",
+      "fn": "EntryPoints",
+      "fixture": "graph-base-go.json",
+      "sha": "aed1e7b29b36f0ae5134f8e18316c81048ef823c88d158dd009f843065237bd4",
+      "evidence": "第143批 LinkerGraph 底座（symbol/全局分配+part→symbol+chunk 图）11函数，Go 包内构造探针 14 例逐字节"
+    },
+    {
+      "pkg": "internal/graph",
+      "recv": "LinkerGraph",
+      "fn": "GenerateNewSymbol",
+      "fixture": "graph-base-go.json",
+      "sha": "aed1e7b29b36f0ae5134f8e18316c81048ef823c88d158dd009f843065237bd4",
+      "evidence": "第143批 LinkerGraph 底座（symbol/全局分配+part→symbol+chunk 图）11函数，Go 包内构造探针 14 例逐字节"
+    },
+    {
+      "pkg": "internal/graph",
+      "recv": "LinkerGraph",
+      "fn": "GenerateRuntimeSymbolImportAndUse",
+      "fixture": "graph-base-go.json",
+      "sha": "aed1e7b29b36f0ae5134f8e18316c81048ef823c88d158dd009f843065237bd4",
+      "evidence": "第143批 LinkerGraph 底座（symbol/全局分配+part→symbol+chunk 图）11函数，Go 包内构造探针 14 例逐字节"
+    },
+    {
+      "pkg": "internal/graph",
+      "recv": "LinkerGraph",
+      "fn": "GenerateSymbolImportAndUse",
+      "fixture": "graph-base-go.json",
+      "sha": "aed1e7b29b36f0ae5134f8e18316c81048ef823c88d158dd009f843065237bd4",
+      "evidence": "第143批 LinkerGraph 底座（symbol/全局分配+part→symbol+chunk 图）11函数，Go 包内构造探针 14 例逐字节"
+    },
+    {
+      "pkg": "internal/js_parser",
+      "recv": "",
+      "fn": "GlobResolveAST",
+      "fixture": "astbuilders-go.json",
+      "sha": "5ef63b6dc6305b850161c6291716f140075b413d8e14c552ec5570003ec1ec0e",
+      "evidence": "第112轮 visit-pass底座 AST构建器（prepareForVisitPass/LazyExportAST/GlobResolveAST），一探针5场景规范AST逐字节"
+    },
+    {
+      "pkg": "internal/js_parser",
+      "recv": "",
+      "fn": "LazyExportAST",
+      "fixture": "astbuilders-go.json",
+      "sha": "5ef63b6dc6305b850161c6291716f140075b413d8e14c552ec5570003ec1ec0e",
+      "evidence": "第112轮 visit-pass底座 AST构建器（prepareForVisitPass/LazyExportAST/GlobResolveAST），一探针5场景规范AST逐字节"
+    },
+    {
+      "pkg": "internal/js_parser",
+      "recv": "",
+      "fn": "OptionsForYarnPnP",
+      "fixture": "pnpjs-go.json",
+      "sha": "803592767b3a55dc770ea8fc277e2b7b6e01a90eff1f34bda25583d2e841d8fd",
+      "evidence": "第172批 OptionsForYarnPnP+remapExprLocsInJSON（PnP 拦截底座），Go 探针 11 例逐字节"
+    },
+    {
+      "pkg": "internal/js_parser",
+      "recv": "",
+      "fn": "OptionsFromConfig",
+      "fixture": "options-from-config-go.json",
+      "sha": "1c6dbe53603a9aac4bf4f5193e728e4774044a291e80a9180b4941c67920708a",
+      "evidence": "第91批 OptionsFromConfig + Equal（parseRuntime/parseFile 桥）13 行逐字节"
+    },
+    {
+      "pkg": "internal/js_parser",
+      "recv": "",
+      "fn": "ParseSourceMap",
+      "fixture": "sourcemap-parse-go.json",
+      "sha": "f63b6f6c8aae9910fc13df24aed165e4feac3f3f723e8659a2e756d4dc6f821a",
+      "evidence": "第104轮 ParseSourceMap 逐字节 Go 探针 17 例（合法/非法/sections/sourceRoot/file-url）"
+    },
+    {
+      "pkg": "internal/js_parser",
+      "recv": "",
+      "fn": "remapExprLocsInJSON",
+      "fixture": "pnpjs-go.json",
+      "sha": "803592767b3a55dc770ea8fc277e2b7b6e01a90eff1f34bda25583d2e841d8fd",
+      "evidence": "第172批 OptionsForYarnPnP+remapExprLocsInJSON（PnP 拦截底座），Go 探针 11 例逐字节"
+    },
+    {
+      "pkg": "internal/js_parser",
+      "recv": "lowerUsingDeclarationContext",
+      "fn": "finalize",
+      "fixture": "using-lower-go.json",
+      "sha": "417e200ee8dedfc2767b1cfc1ba9bca6a2404313960769b122d903ad10b2991d",
+      "evidence": "第109轮 parser using 声明降级整族（shouldLowerUsingDeclarations/lowerUsingDeclarationContext/scanStmts/finalize/lowerUsingDeclarationInForOf），一探针5场景 Parse+Print target=es2015 逐字节"
+    },
+    {
+      "pkg": "internal/js_parser",
+      "recv": "lowerUsingDeclarationContext",
+      "fn": "scanStmts",
+      "fixture": "using-lower-go.json",
+      "sha": "417e200ee8dedfc2767b1cfc1ba9bca6a2404313960769b122d903ad10b2991d",
+      "evidence": "第109轮 parser using 声明降级整族（shouldLowerUsingDeclarations/lowerUsingDeclarationContext/scanStmts/finalize/lowerUsingDeclarationInForOf），一探针5场景 Parse+Print target=es2015 逐字节"
+    },
+    {
+      "pkg": "internal/js_parser",
+      "recv": "Options",
+      "fn": "Equal",
+      "fixture": "options-from-config-go.json",
+      "sha": "1c6dbe53603a9aac4bf4f5193e728e4774044a291e80a9180b4941c67920708a",
+      "evidence": "第91批 OptionsFromConfig + Equal（parseRuntime/parseFile 桥）13 行逐字节"
+    },
+    {
+      "pkg": "internal/js_parser",
+      "recv": "parser",
+      "fn": "convertSymbolUseToCall",
+      "fixture": "sym-use-go.json",
+      "sha": "c6a185069006752806d3f426d986d03477a0170548f38be76f9c44991ecc9932",
+      "evidence": "第107轮 parser.convertSymbolUseToCall 符号使用转换状态机（含uint32下溢），一探针5场景逐字节"
+    },
+    {
+      "pkg": "internal/js_parser",
+      "recv": "parser",
+      "fn": "declareCommonJSSymbol",
+      "fixture": "decl-cj-go.json",
+      "sha": "0f6dc36a6b36695eba7f7e86ecf4e7a76d3271e76c4164aae597811fb56d1800",
+      "evidence": "第107轮 parser.declareCommonJSSymbol（CJS符号声明/hoisted合并/shadow），一探针5场景逐字节"
+    },
+    {
+      "pkg": "internal/js_parser",
+      "recv": "parser",
+      "fn": "handleGlobPattern",
+      "fixture": "glob-handle-go.json",
+      "sha": "1fc3a621a1a837b3572c702d360d85900121852487c27fe04ded9fdeffc502a3",
+      "evidence": "第108轮 parser.handleGlobPattern（glob→符号名生成/去重），一探针3场景逐字节"
+    },
+    {
+      "pkg": "internal/js_parser",
+      "recv": "parser",
+      "fn": "instantiateInjectDotName",
+      "fixture": "inject-dot-go.json",
+      "sha": "0b70766dbc124e59b9a0f8a89dbc9c0034ef88aa9d9197a14723f2f5cf027eb5",
+      "evidence": "第107轮 parser.instantiateInjectDotName（注入符号实例化+赋值误用报错+note），一探针4场景逐字节"
+    },
+    {
+      "pkg": "internal/js_parser",
+      "recv": "parser",
+      "fn": "logExprErrors",
+      "fixture": "log-expr-go.json",
+      "sha": "5d97d6555237be3dd2d0b6b8a2773d6550a16c30dcd984e7d53ae398bab8966a",
+      "evidence": "第107轮 parser.logExprErrors 三分支（default值/?后/array spread feature），一探针6场景逐字节"
+    },
+    {
+      "pkg": "internal/js_parser",
+      "recv": "parser",
+      "fn": "lowerUsingDeclarationContext",
+      "fixture": "using-lower-go.json",
+      "sha": "417e200ee8dedfc2767b1cfc1ba9bca6a2404313960769b122d903ad10b2991d",
+      "evidence": "第109轮 parser using 声明降级整族（shouldLowerUsingDeclarations/lowerUsingDeclarationContext/scanStmts/finalize/lowerUsingDeclarationInForOf），一探针5场景 Parse+Print target=es2015 逐字节"
+    },
+    {
+      "pkg": "internal/js_parser",
+      "recv": "parser",
+      "fn": "lowerUsingDeclarationInForOf",
+      "fixture": "using-lower-go.json",
+      "sha": "417e200ee8dedfc2767b1cfc1ba9bca6a2404313960769b122d903ad10b2991d",
+      "evidence": "第109轮 parser using 声明降级整族（shouldLowerUsingDeclarations/lowerUsingDeclarationContext/scanStmts/finalize/lowerUsingDeclarationInForOf），一探针5场景 Parse+Print target=es2015 逐字节"
+    },
+    {
+      "pkg": "internal/js_parser",
+      "recv": "parser",
+      "fn": "maybeRelocateVarsToTopLevel",
+      "fixture": "relocate-go.json",
+      "sha": "acce0fae5d65878a3015ed5d34f9e8a49c8d10a5616e3e3de049a3996e0820f2",
+      "evidence": "第107轮 parser.maybeRelocateVarsToTopLevel（bundle变量提升为赋值），一探针6场景逐字节"
+    },
+    {
+      "pkg": "internal/js_parser",
+      "recv": "parser",
+      "fn": "prepareForVisitPass",
+      "fixture": "astbuilders-go.json",
+      "sha": "5ef63b6dc6305b850161c6291716f140075b413d8e14c552ec5570003ec1ec0e",
+      "evidence": "第112轮 visit-pass底座 AST构建器（prepareForVisitPass/LazyExportAST/GlobResolveAST），一探针5场景规范AST逐字节"
+    },
+    {
+      "pkg": "internal/js_parser",
+      "recv": "parser",
+      "fn": "shouldLowerUsingDeclarations",
+      "fixture": "using-lower-go.json",
+      "sha": "417e200ee8dedfc2767b1cfc1ba9bca6a2404313960769b122d903ad10b2991d",
+      "evidence": "第109轮 parser using 声明降级整族（shouldLowerUsingDeclarations/lowerUsingDeclarationContext/scanStmts/finalize/lowerUsingDeclarationInForOf），一探针5场景 Parse+Print target=es2015 逐字节"
+    },
+    {
+      "pkg": "internal/js_parser",
+      "recv": "parser",
+      "fn": "warnAboutImportNamespaceCall",
+      "fixture": "warn-ns-go.json",
+      "sha": "8be2a46cf61c3527bc734cb9c15abd041b1a1ce47b732312afa6cd9e26d3e88e",
+      "evidence": "第107轮 parser.warnAboutImportNamespaceCall（命名空间导入调用警告状态机），一探针5场景逐字节"
+    },
+    {
+      "pkg": "internal/js_parser",
+      "recv": "scopeMemberArray",
+      "fn": "Len",
+      "fixture": "mapping-array-go.json",
+      "sha": "89a3f5cd0fb229b11eb2fe061f52cd4839772d5ebb13704d7aaa6e0985fd2aec",
+      "evidence": "第138批 mappingArray.Len/Swap/Less 排序三函数，Go 探针 18 例逐字节"
+    },
+    {
+      "pkg": "internal/js_parser",
+      "recv": "scopeMemberArray",
+      "fn": "Less",
+      "fixture": "mapping-array-go.json",
+      "sha": "89a3f5cd0fb229b11eb2fe061f52cd4839772d5ebb13704d7aaa6e0985fd2aec",
+      "evidence": "第138批 mappingArray.Len/Swap/Less 排序三函数，Go 探针 18 例逐字节"
+    },
+    {
+      "pkg": "internal/js_parser",
+      "recv": "scopeMemberArray",
+      "fn": "Swap",
+      "fixture": "mapping-array-go.json",
+      "sha": "89a3f5cd0fb229b11eb2fe061f52cd4839772d5ebb13704d7aaa6e0985fd2aec",
+      "evidence": "第138批 mappingArray.Len/Swap/Less 排序三函数，Go 探针 18 例逐字节"
+    },
+    {
+      "pkg": "internal/js_printer",
+      "recv": "printer",
+      "fn": "lateConstantFoldUnaryOrBinaryOrIfExpr",
+      "fixture": "min-fold-go.json",
+      "sha": "e64462d1d80ee9931dad1a34c20dadb60d9db7a37cf09cf8b7c2ba72ace8a49e",
+      "evidence": "第109轮 printer minify 折叠族（simplifyUnusedExpr/lateConstantFoldUnaryOrBinaryOrIfExpr），一探针8场景 AST→AST 逐字节"
+    },
+    {
+      "pkg": "internal/js_printer",
+      "recv": "printer",
+      "fn": "printImportCallAssertOrWith",
+      "fixture": "import-print-go.json",
+      "sha": "c4b83e999c45492f59dcfe3e9e1063d2668b293bf661b53b570cdf0dee796b47",
+      "evidence": "第111轮 printer import-record 底座（printRequireOrImportExpr/printImportCallAssertOrWith），一探针6场景 Print 字节逐字节"
+    },
+    {
+      "pkg": "internal/js_printer",
+      "recv": "printer",
+      "fn": "printRequireOrImportExpr",
+      "fixture": "import-print-go.json",
+      "sha": "c4b83e999c45492f59dcfe3e9e1063d2668b293bf661b53b570cdf0dee796b47",
+      "evidence": "第111轮 printer import-record 底座（printRequireOrImportExpr/printImportCallAssertOrWith），一探针6场景 Print 字节逐字节"
+    },
+    {
+      "pkg": "internal/js_printer",
+      "recv": "printer",
+      "fn": "simplifyUnusedExpr",
+      "fixture": "min-fold-go.json",
+      "sha": "e64462d1d80ee9931dad1a34c20dadb60d9db7a37cf09cf8b7c2ba72ace8a49e",
+      "evidence": "第109轮 printer minify 折叠族（simplifyUnusedExpr/lateConstantFoldUnaryOrBinaryOrIfExpr），一探针8场景 AST→AST 逐字节"
+    },
+    {
+      "pkg": "internal/linker",
+      "recv": "",
+      "fn": "hashWriteLengthPrefixed",
+      "fixture": "linker-batch-go.json",
+      "sha": "eb4c3c10ccdc07492178c988179a9e96ba29d093eeefb58fdb5d6ff1da0426be",
+      "evidence": "第122批 linker 16 个可观测纯函数一次探针（25 例逐字节）；两个 isChunk 是无输出标记方法，只移植不计等价"
+    },
+    {
+      "pkg": "internal/linker",
+      "recv": "",
+      "fn": "importConditionsAreEqual",
+      "fixture": "linker-batch-go.json",
+      "sha": "eb4c3c10ccdc07492178c988179a9e96ba29d093eeefb58fdb5d6ff1da0426be",
+      "evidence": "第122批 linker 16 个可观测纯函数一次探针（25 例逐字节）；两个 isChunk 是无输出标记方法，只移植不计等价"
+    },
+    {
+      "pkg": "internal/linker",
+      "recv": "",
+      "fn": "isConditionalImportRedundant",
+      "fixture": "linker-batch-go.json",
+      "sha": "eb4c3c10ccdc07492178c988179a9e96ba29d093eeefb58fdb5d6ff1da0426be",
+      "evidence": "第122批 linker 16 个可观测纯函数一次探针（25 例逐字节）；两个 isChunk 是无输出标记方法，只移植不计等价"
+    },
+    {
+      "pkg": "internal/linker",
+      "recv": "",
+      "fn": "mergeAdjacentLocalStmts",
+      "fixture": "merge-stmts-go.json",
+      "sha": "990fcf21bbf4e452ac5593f205cb5d13c4068513773531a0692b258a9c7fc765",
+      "evidence": "第146批 mergeAdjacentLocalStmts（chunk stmt 合并），Go 探针 8 例逐字节"
+    },
+    {
+      "pkg": "internal/linker",
+      "recv": "",
+      "fn": "wrappedLog",
+      "fixture": "linker-batch-go.json",
+      "sha": "eb4c3c10ccdc07492178c988179a9e96ba29d093eeefb58fdb5d6ff1da0426be",
+      "evidence": "第122批 linker 16 个可观测纯函数一次探针（25 例逐字节）；两个 isChunk 是无输出标记方法，只移植不计等价"
+    },
+    {
+      "pkg": "internal/linker",
+      "recv": "",
+      "fn": "wrapRulesWithConditions",
+      "fixture": "gen-helpers-go.json",
+      "sha": "a0e0bf3320c86ffeaced7f0fc5dd5368556575c75010fbe17e15cf2f54059395",
+      "evidence": "第151批 chunk 生成链纯助手（requireOrImportMetaForSource/maybeAppendLegalComments/wrapRulesWithConditions/generateExtraDataForFileJS/maybeForbidArbitraryModuleNamespaceIdentifier），Go 探针 13 例逐字节，sha256 a0e0bf33…"
+    },
+    {
+      "pkg": "internal/linker",
+      "recv": "chunkOrderArray",
+      "fn": "Len",
+      "fixture": "linker-batch-go.json",
+      "sha": "eb4c3c10ccdc07492178c988179a9e96ba29d093eeefb58fdb5d6ff1da0426be",
+      "evidence": "第122批 linker 16 个可观测纯函数一次探针（25 例逐字节）；两个 isChunk 是无输出标记方法，只移植不计等价"
+    },
+    {
+      "pkg": "internal/linker",
+      "recv": "chunkOrderArray",
+      "fn": "Less",
+      "fixture": "linker-batch-go.json",
+      "sha": "eb4c3c10ccdc07492178c988179a9e96ba29d093eeefb58fdb5d6ff1da0426be",
+      "evidence": "第122批 linker 16 个可观测纯函数一次探针（25 例逐字节）；两个 isChunk 是无输出标记方法，只移植不计等价"
+    },
+    {
+      "pkg": "internal/linker",
+      "recv": "chunkOrderArray",
+      "fn": "Swap",
+      "fixture": "linker-batch-go.json",
+      "sha": "eb4c3c10ccdc07492178c988179a9e96ba29d093eeefb58fdb5d6ff1da0426be",
+      "evidence": "第122批 linker 16 个可观测纯函数一次探针（25 例逐字节）；两个 isChunk 是无输出标记方法，只移植不计等价"
+    },
+    {
+      "pkg": "internal/linker",
+      "recv": "crossChunkImportArray",
+      "fn": "Len",
+      "fixture": "linker-batch-go.json",
+      "sha": "eb4c3c10ccdc07492178c988179a9e96ba29d093eeefb58fdb5d6ff1da0426be",
+      "evidence": "第122批 linker 16 个可观测纯函数一次探针（25 例逐字节）；两个 isChunk 是无输出标记方法，只移植不计等价"
+    },
+    {
+      "pkg": "internal/linker",
+      "recv": "crossChunkImportArray",
+      "fn": "Less",
+      "fixture": "linker-batch-go.json",
+      "sha": "eb4c3c10ccdc07492178c988179a9e96ba29d093eeefb58fdb5d6ff1da0426be",
+      "evidence": "第122批 linker 16 个可观测纯函数一次探针（25 例逐字节）；两个 isChunk 是无输出标记方法，只移植不计等价"
+    },
+    {
+      "pkg": "internal/linker",
+      "recv": "crossChunkImportArray",
+      "fn": "Swap",
+      "fixture": "linker-batch-go.json",
+      "sha": "eb4c3c10ccdc07492178c988179a9e96ba29d093eeefb58fdb5d6ff1da0426be",
+      "evidence": "第122批 linker 16 个可观测纯函数一次探针（25 例逐字节）；两个 isChunk 是无输出标记方法，只移植不计等价"
+    },
+    {
+      "pkg": "internal/linker",
+      "recv": "crossChunkImportItemArray",
+      "fn": "Len",
+      "fixture": "linker-batch-go.json",
+      "sha": "eb4c3c10ccdc07492178c988179a9e96ba29d093eeefb58fdb5d6ff1da0426be",
+      "evidence": "第122批 linker 16 个可观测纯函数一次探针（25 例逐字节）；两个 isChunk 是无输出标记方法，只移植不计等价"
+    },
+    {
+      "pkg": "internal/linker",
+      "recv": "crossChunkImportItemArray",
+      "fn": "Less",
+      "fixture": "linker-batch-go.json",
+      "sha": "eb4c3c10ccdc07492178c988179a9e96ba29d093eeefb58fdb5d6ff1da0426be",
+      "evidence": "第122批 linker 16 个可观测纯函数一次探针（25 例逐字节）；两个 isChunk 是无输出标记方法，只移植不计等价"
+    },
+    {
+      "pkg": "internal/linker",
+      "recv": "crossChunkImportItemArray",
+      "fn": "Swap",
+      "fixture": "linker-batch-go.json",
+      "sha": "eb4c3c10ccdc07492178c988179a9e96ba29d093eeefb58fdb5d6ff1da0426be",
+      "evidence": "第122批 linker 16 个可观测纯函数一次探针（25 例逐字节）；两个 isChunk 是无输出标记方法，只移植不计等价"
+    },
+    {
+      "pkg": "internal/linker",
+      "recv": "linkerContext",
+      "fn": "accurateFinalByteCount",
+      "fixture": "output-pieces-go.json",
+      "sha": "4ac8d0729ddd06ec837857cf4d265c17beb8810792f575f4b864ed9b24d66259",
+      "evidence": "第149批 输出装配底座（breakOutputIntoPieces/breakJoinerIntoPieces/substituteFinalPaths/accurateFinalByteCount），Go 探针 8 例逐字节，sha256 4ac8d072…"
+    },
+    {
+      "pkg": "internal/linker",
+      "recv": "linkerContext",
+      "fn": "addExportsForExportStar",
+      "fixture": "lnkexport-go.json",
+      "sha": "ca2d80ecab55a559b80654c4b410157ba77939be7e881fbed34243362dd935f4",
+      "evidence": "第177批 linker export/wrap 图遍历簇（recursivelyWrapDependencies/hasDynamicExportsDueToExportStar/addExportsForExportStar），Go 探针 8 例逐字节"
+    },
+    {
+      "pkg": "internal/linker",
+      "recv": "linkerContext",
+      "fn": "advanceImportTracker",
+      "fixture": "linker-helpers-go.json",
+      "sha": "c2e214684e5e31a30a084bfa322a32d11630093dbf614a5a6d4bee4cf45d2732",
+      "evidence": "第154批 linker 助手簇（enforceNoCyclicChunkImports/preventExportsFromBeingRenamed/maybeCorrectObviousTypo/advanceImportTracker/recoverInternalError），Go 探针 10 例逐字节，sha256 3113cca1…"
+    },
+    {
+      "pkg": "internal/linker",
+      "recv": "linkerContext",
+      "fn": "appendIsolatedHashesForImportedChunks",
+      "fixture": "isolated-hash-go.json",
+      "sha": "ad9d0a9403b718cf00175dd3c4a5339274e79551f5baa9d6e9a5412309c779da",
+      "evidence": "第150批 isolated hash 簇（generateIsolatedHash/generateIsolatedHashInParallel/appendIsolatedHashesForImportedChunks），Go 探针 5 例 xxhash 摘要逐字节，sha256 ad9d0a94…"
+    },
+    {
+      "pkg": "internal/linker",
+      "recv": "linkerContext",
+      "fn": "breakJoinerIntoPieces",
+      "fixture": "output-pieces-go.json",
+      "sha": "4ac8d0729ddd06ec837857cf4d265c17beb8810792f575f4b864ed9b24d66259",
+      "evidence": "第149批 输出装配底座（breakOutputIntoPieces/breakJoinerIntoPieces/substituteFinalPaths/accurateFinalByteCount），Go 探针 8 例逐字节，sha256 4ac8d072…"
+    },
+    {
+      "pkg": "internal/linker",
+      "recv": "linkerContext",
+      "fn": "breakOutputIntoPieces",
+      "fixture": "output-pieces-go.json",
+      "sha": "4ac8d0729ddd06ec837857cf4d265c17beb8810792f575f4b864ed9b24d66259",
+      "evidence": "第149批 输出装配底座（breakOutputIntoPieces/breakJoinerIntoPieces/substituteFinalPaths/accurateFinalByteCount），Go 探针 8 例逐字节，sha256 4ac8d072…"
+    },
+    {
+      "pkg": "internal/linker",
+      "recv": "linkerContext",
+      "fn": "computeChunks",
+      "fixture": "chunk-compute-go.json",
+      "sha": "9c052721cdf85bcdefa513710d2d6daf7947f1efe91283c77fda3a22b62ee57f",
+      "evidence": "第147批 chunk 计算底座（computeChunks/findImportedPartsInJSOrder/findImportedFilesInCSSOrder），Go 包内构造图探针 5 例逐字节，sha256 9c052721…"
+    },
+    {
+      "pkg": "internal/linker",
+      "recv": "linkerContext",
+      "fn": "computeCrossChunkDependencies",
+      "fixture": "cross-chunk-deps-go.json",
+      "sha": "0353a26bdbaa1c4d0da6247830fddb91af97f1d9e41796f1073659c84abdd06e",
+      "evidence": "第148批 computeCrossChunkDependencies + sortedCrossChunkImports/Exports，Go 包内构造图探针 3 例逐字节，sha256 0353a26b…"
+    },
+    {
+      "pkg": "internal/linker",
+      "recv": "linkerContext",
+      "fn": "convertStmtsForChunk",
+      "fixture": "stmt-convert-go.json",
+      "sha": "3c87665d560ec3bc9ed18f3b7496b78e64ab9684432e5f6ceae058993ebbd462",
+      "evidence": "第152批 statement 转换底座（shouldRemoveImportExportStmt/convertStmtsForChunk），Go 探针 9 例逐字节，sha256 3c87665d…"
+    },
+    {
+      "pkg": "internal/linker",
+      "recv": "linkerContext",
+      "fn": "createExportsForFile",
+      "fixture": "lnkexport2-go.json",
+      "sha": "1afae15d8bd2008b20426a151121977f315664ef61f4471ca213cdd0e83a953d",
+      "evidence": "第180批（第75轮）linker 出口簇 createExportsForFile/matchImportWithExport/matchImportsWithExportsForFile/generateEntryPointTailJS/generateCodeForFileInChunkJS（逐字节 Go 探针 12 例）"
+    },
+    {
+      "pkg": "internal/linker",
+      "recv": "linkerContext",
+      "fn": "createWrapperForFile",
+      "fixture": "lnkcodegen-go.json",
+      "sha": "32ee904d9451348f320614cc75ca2be26a8db9b1af68bd0f0f6eef23f4667c55",
+      "evidence": "第179批 createWrapperForFile/generateCodeForLazyExport（wrapper + lazy export 代码生成），Go 探针 6 例逐字节"
+    },
+    {
+      "pkg": "internal/linker",
+      "recv": "linkerContext",
+      "fn": "enforceNoCyclicChunkImports",
+      "fixture": "linker-helpers-go.json",
+      "sha": "c2e214684e5e31a30a084bfa322a32d11630093dbf614a5a6d4bee4cf45d2732",
+      "evidence": "第154批 linker 助手簇（enforceNoCyclicChunkImports/preventExportsFromBeingRenamed/maybeCorrectObviousTypo/advanceImportTracker/recoverInternalError），Go 探针 10 例逐字节，sha256 3113cca1…"
+    },
+    {
+      "pkg": "internal/linker",
+      "recv": "linkerContext",
+      "fn": "findImportedCSSFilesInJSOrder",
+      "fixture": "chunk-helpers-go.json",
+      "sha": "e21ce7dedec4f3f8f3faaa6c56558ec5662ed5570bb057acb7a02cf20c33fe44",
+      "evidence": "第145批 chunk 助手（findImportedCSSFilesInJSOrder/shouldIncludePart/pathBetweenChunks），Go 探针 7 例逐字节"
+    },
+    {
+      "pkg": "internal/linker",
+      "recv": "linkerContext",
+      "fn": "findImportedFilesInCSSOrder",
+      "fixture": "chunk-compute-go.json",
+      "sha": "9c052721cdf85bcdefa513710d2d6daf7947f1efe91283c77fda3a22b62ee57f",
+      "evidence": "第147批 chunk 计算底座（computeChunks/findImportedPartsInJSOrder/findImportedFilesInCSSOrder），Go 包内构造图探针 5 例逐字节，sha256 9c052721…"
+    },
+    {
+      "pkg": "internal/linker",
+      "recv": "linkerContext",
+      "fn": "findImportedPartsInJSOrder",
+      "fixture": "chunk-compute-go.json",
+      "sha": "9c052721cdf85bcdefa513710d2d6daf7947f1efe91283c77fda3a22b62ee57f",
+      "evidence": "第147批 chunk 计算底座（computeChunks/findImportedPartsInJSOrder/findImportedFilesInCSSOrder），Go 包内构造图探针 5 例逐字节，sha256 9c052721…"
+    },
+    {
+      "pkg": "internal/linker",
+      "recv": "linkerContext",
+      "fn": "generateChunkCSS",
+      "fixture": "chunkcss-go.json",
+      "sha": "3296bdd814172571e8bfe553f98b77bf51aaf725de041a8eba4c96c39a471be5",
+      "evidence": "第157批 generateChunkCSS 本体（assembly 路径），Go 探针 2 例逐字节，sha256 3296bdd8…"
+    },
+    {
+      "pkg": "internal/linker",
+      "recv": "linkerContext",
+      "fn": "generateChunkJS",
+      "fixture": "chunkjs-go.json",
+      "sha": "5541f8cd20603d6e28f2a3f499332e78f92043da112ea5987eaf54748d01d362",
+      "evidence": "第156批 generateChunkJS 本体，Go 探针 5 例最终 intermediateOutput 逐字节，sha256 5541f8cd…"
+    },
+    {
+      "pkg": "internal/linker",
+      "recv": "linkerContext",
+      "fn": "generateChunksInParallel",
+      "fixture": "gcip-go.json",
+      "sha": "36883163e7f5461105d27fe1af9588d6c8eeab582027d9192135cb8e37873c04",
+      "evidence": "第158批 generateChunksInParallel（并发生成+最终输出），Go 探针 2 例 OutputFiles 逐字节，sha256 36883163…"
+    },
+    {
+      "pkg": "internal/linker",
+      "recv": "linkerContext",
+      "fn": "generateCodeForFileInChunkJS",
+      "fixture": "lnkexport2-go.json",
+      "sha": "1afae15d8bd2008b20426a151121977f315664ef61f4471ca213cdd0e83a953d",
+      "evidence": "第180批（第75轮）linker 出口簇 createExportsForFile/matchImportWithExport/matchImportsWithExportsForFile/generateEntryPointTailJS/generateCodeForFileInChunkJS（逐字节 Go 探针 12 例）"
+    },
+    {
+      "pkg": "internal/linker",
+      "recv": "linkerContext",
+      "fn": "generateCodeForLazyExport",
+      "fixture": "lnkcodegen-go.json",
+      "sha": "32ee904d9451348f320614cc75ca2be26a8db9b1af68bd0f0f6eef23f4667c55",
+      "evidence": "第179批 createWrapperForFile/generateCodeForLazyExport（wrapper + lazy export 代码生成），Go 探针 6 例逐字节"
+    },
+    {
+      "pkg": "internal/linker",
+      "recv": "linkerContext",
+      "fn": "generateEntryPointTailJS",
+      "fixture": "lnkexport2-go.json",
+      "sha": "1afae15d8bd2008b20426a151121977f315664ef61f4471ca213cdd0e83a953d",
+      "evidence": "第180批（第75轮）linker 出口簇 createExportsForFile/matchImportWithExport/matchImportsWithExportsForFile/generateEntryPointTailJS/generateCodeForFileInChunkJS（逐字节 Go 探针 12 例）"
+    },
+    {
+      "pkg": "internal/linker",
+      "recv": "linkerContext",
+      "fn": "generateExtraDataForFileJS",
+      "fixture": "gen-helpers-go.json",
+      "sha": "a0e0bf3320c86ffeaced7f0fc5dd5368556575c75010fbe17e15cf2f54059395",
+      "evidence": "第151批 chunk 生成链纯助手（requireOrImportMetaForSource/maybeAppendLegalComments/wrapRulesWithConditions/generateExtraDataForFileJS/maybeForbidArbitraryModuleNamespaceIdentifier），Go 探针 13 例逐字节，sha256 a0e0bf33…"
+    },
+    {
+      "pkg": "internal/linker",
+      "recv": "linkerContext",
+      "fn": "generateIsolatedHash",
+      "fixture": "isolated-hash-go.json",
+      "sha": "ad9d0a9403b718cf00175dd3c4a5339274e79551f5baa9d6e9a5412309c779da",
+      "evidence": "第150批 isolated hash 簇（generateIsolatedHash/generateIsolatedHashInParallel/appendIsolatedHashesForImportedChunks），Go 探针 5 例 xxhash 摘要逐字节，sha256 ad9d0a94…"
+    },
+    {
+      "pkg": "internal/linker",
+      "recv": "linkerContext",
+      "fn": "generateIsolatedHashInParallel",
+      "fixture": "isolated-hash-go.json",
+      "sha": "ad9d0a9403b718cf00175dd3c4a5339274e79551f5baa9d6e9a5412309c779da",
+      "evidence": "第150批 isolated hash 簇（generateIsolatedHash/generateIsolatedHashInParallel/appendIsolatedHashesForImportedChunks），Go 探针 5 例 xxhash 摘要逐字节，sha256 ad9d0a94…"
+    },
+    {
+      "pkg": "internal/linker",
+      "recv": "linkerContext",
+      "fn": "generateSourceMapForChunk",
+      "fixture": "sourcemap-chunk-go.json",
+      "sha": "7b80333d29b843db0d0b6d2d464116f9fb5f583c7a3c3cf62c319c2bc8f3724d",
+      "evidence": "第155批 generateSourceMapForChunk（chunk sourcemap 生成），Go 探针 4 例 Prefix/Mappings/Suffix 逐字节，sha256 7b80333d…"
+    },
+    {
+      "pkg": "internal/linker",
+      "recv": "linkerContext",
+      "fn": "hasDynamicExportsDueToExportStar",
+      "fixture": "lnkexport-go.json",
+      "sha": "ca2d80ecab55a559b80654c4b410157ba77939be7e881fbed34243362dd935f4",
+      "evidence": "第177批 linker export/wrap 图遍历簇（recursivelyWrapDependencies/hasDynamicExportsDueToExportStar/addExportsForExportStar），Go 探针 8 例逐字节"
+    },
+    {
+      "pkg": "internal/linker",
+      "recv": "linkerContext",
+      "fn": "isExternalDynamicImport",
+      "fixture": "treeshake-go.json",
+      "sha": "ad58cb6416d45a331b8511d949d65530cbbd1a0daf3658fc8ad909ab903b54df",
+      "evidence": "第144批 tree-shaking/code-splitting 簇（part 图遍历+entry bit 传播）5函数，Go 包内构造探针 5 例逐字节"
+    },
+    {
+      "pkg": "internal/linker",
+      "recv": "linkerContext",
+      "fn": "mangleLocalCSS",
+      "fixture": "lngmangle-go.json",
+      "sha": "173b4fd6a2d035063d517483a3ca2b60d9ea3436d2547b1e67338c86e3eb0c36",
+      "evidence": "第178批 mangleProps/mangleLocalCSS（属性/本地 CSS 名混淆），Go 探针 5 例逐字节"
+    },
+    {
+      "pkg": "internal/linker",
+      "recv": "linkerContext",
+      "fn": "mangleProps",
+      "fixture": "lngmangle-go.json",
+      "sha": "173b4fd6a2d035063d517483a3ca2b60d9ea3436d2547b1e67338c86e3eb0c36",
+      "evidence": "第178批 mangleProps/mangleLocalCSS（属性/本地 CSS 名混淆），Go 探针 5 例逐字节"
+    },
+    {
+      "pkg": "internal/linker",
+      "recv": "linkerContext",
+      "fn": "markFileLiveForTreeShaking",
+      "fixture": "treeshake-go.json",
+      "sha": "ad58cb6416d45a331b8511d949d65530cbbd1a0daf3658fc8ad909ab903b54df",
+      "evidence": "第144批 tree-shaking/code-splitting 簇（part 图遍历+entry bit 传播）5函数，Go 包内构造探针 5 例逐字节"
+    },
+    {
+      "pkg": "internal/linker",
+      "recv": "linkerContext",
+      "fn": "markFileReachableForCodeSplitting",
+      "fixture": "treeshake-go.json",
+      "sha": "ad58cb6416d45a331b8511d949d65530cbbd1a0daf3658fc8ad909ab903b54df",
+      "evidence": "第144批 tree-shaking/code-splitting 簇（part 图遍历+entry bit 传播）5函数，Go 包内构造探针 5 例逐字节"
+    },
+    {
+      "pkg": "internal/linker",
+      "recv": "linkerContext",
+      "fn": "markPartLiveForTreeShaking",
+      "fixture": "treeshake-go.json",
+      "sha": "ad58cb6416d45a331b8511d949d65530cbbd1a0daf3658fc8ad909ab903b54df",
+      "evidence": "第144批 tree-shaking/code-splitting 簇（part 图遍历+entry bit 传播）5函数，Go 包内构造探针 5 例逐字节"
+    },
+    {
+      "pkg": "internal/linker",
+      "recv": "linkerContext",
+      "fn": "matchImportsWithExportsForFile",
+      "fixture": "lnkexport2-go.json",
+      "sha": "1afae15d8bd2008b20426a151121977f315664ef61f4471ca213cdd0e83a953d",
+      "evidence": "第180批（第75轮）linker 出口簇 createExportsForFile/matchImportWithExport/matchImportsWithExportsForFile/generateEntryPointTailJS/generateCodeForFileInChunkJS（逐字节 Go 探针 12 例）"
+    },
+    {
+      "pkg": "internal/linker",
+      "recv": "linkerContext",
+      "fn": "matchImportWithExport",
+      "fixture": "lnkexport2-go.json",
+      "sha": "1afae15d8bd2008b20426a151121977f315664ef61f4471ca213cdd0e83a953d",
+      "evidence": "第180批（第75轮）linker 出口簇 createExportsForFile/matchImportWithExport/matchImportsWithExportsForFile/generateEntryPointTailJS/generateCodeForFileInChunkJS（逐字节 Go 探针 12 例）"
+    },
+    {
+      "pkg": "internal/linker",
+      "recv": "linkerContext",
+      "fn": "maybeAppendLegalComments",
+      "fixture": "gen-helpers-go.json",
+      "sha": "a0e0bf3320c86ffeaced7f0fc5dd5368556575c75010fbe17e15cf2f54059395",
+      "evidence": "第151批 chunk 生成链纯助手（requireOrImportMetaForSource/maybeAppendLegalComments/wrapRulesWithConditions/generateExtraDataForFileJS/maybeForbidArbitraryModuleNamespaceIdentifier），Go 探针 13 例逐字节，sha256 a0e0bf33…"
+    },
+    {
+      "pkg": "internal/linker",
+      "recv": "linkerContext",
+      "fn": "maybeCorrectObviousTypo",
+      "fixture": "linker-helpers-go.json",
+      "sha": "c2e214684e5e31a30a084bfa322a32d11630093dbf614a5a6d4bee4cf45d2732",
+      "evidence": "第154批 linker 助手簇（enforceNoCyclicChunkImports/preventExportsFromBeingRenamed/maybeCorrectObviousTypo/advanceImportTracker/recoverInternalError），Go 探针 10 例逐字节，sha256 3113cca1…"
+    },
+    {
+      "pkg": "internal/linker",
+      "recv": "linkerContext",
+      "fn": "maybeForbidArbitraryModuleNamespaceIdentifier",
+      "fixture": "gen-helpers-go.json",
+      "sha": "a0e0bf3320c86ffeaced7f0fc5dd5368556575c75010fbe17e15cf2f54059395",
+      "evidence": "第151批 chunk 生成链纯助手（requireOrImportMetaForSource/maybeAppendLegalComments/wrapRulesWithConditions/generateExtraDataForFileJS/maybeForbidArbitraryModuleNamespaceIdentifier），Go 探针 13 例逐字节，sha256 a0e0bf33…"
+    },
+    {
+      "pkg": "internal/linker",
+      "recv": "linkerContext",
+      "fn": "pathBetweenChunks",
+      "fixture": "chunk-helpers-go.json",
+      "sha": "e21ce7dedec4f3f8f3faaa6c56558ec5662ed5570bb057acb7a02cf20c33fe44",
+      "evidence": "第145批 chunk 助手（findImportedCSSFilesInJSOrder/shouldIncludePart/pathBetweenChunks），Go 探针 7 例逐字节"
+    },
+    {
+      "pkg": "internal/linker",
+      "recv": "linkerContext",
+      "fn": "preventExportsFromBeingRenamed",
+      "fixture": "linker-helpers-go.json",
+      "sha": "c2e214684e5e31a30a084bfa322a32d11630093dbf614a5a6d4bee4cf45d2732",
+      "evidence": "第154批 linker 助手簇（enforceNoCyclicChunkImports/preventExportsFromBeingRenamed/maybeCorrectObviousTypo/advanceImportTracker/recoverInternalError），Go 探针 10 例逐字节，sha256 3113cca1…"
+    },
+    {
+      "pkg": "internal/linker",
+      "recv": "linkerContext",
+      "fn": "recoverInternalError",
+      "fixture": "linker-helpers-go.json",
+      "sha": "c2e214684e5e31a30a084bfa322a32d11630093dbf614a5a6d4bee4cf45d2732",
+      "evidence": "第154批 linker 助手簇（enforceNoCyclicChunkImports/preventExportsFromBeingRenamed/maybeCorrectObviousTypo/advanceImportTracker/recoverInternalError），Go 探针 10 例逐字节，sha256 3113cca1…"
+    },
+    {
+      "pkg": "internal/linker",
+      "recv": "linkerContext",
+      "fn": "recursivelyWrapDependencies",
+      "fixture": "lnkexport-go.json",
+      "sha": "ca2d80ecab55a559b80654c4b410157ba77939be7e881fbed34243362dd935f4",
+      "evidence": "第177批 linker export/wrap 图遍历簇（recursivelyWrapDependencies/hasDynamicExportsDueToExportStar/addExportsForExportStar），Go 探针 8 例逐字节"
+    },
+    {
+      "pkg": "internal/linker",
+      "recv": "linkerContext",
+      "fn": "renameSymbolsInChunk",
+      "fixture": "rename-chunk-go.json",
+      "sha": "288cf9d1ff15b03faf96894c56a83e122135b8540eeb5caf09e798354e7a3fac",
+      "evidence": "第153批 renameSymbolsInChunk（chunk 符号重命名核心），Go 探针 3 例 NameForSymbol 逐字节，sha256 288cf9d1…（含多源 collision，修复 MinifyRenamer.RefSourceIndex 潜在 bug）"
+    },
+    {
+      "pkg": "internal/linker",
+      "recv": "linkerContext",
+      "fn": "requireOrImportMetaForSource",
+      "fixture": "gen-helpers-go.json",
+      "sha": "a0e0bf3320c86ffeaced7f0fc5dd5368556575c75010fbe17e15cf2f54059395",
+      "evidence": "第151批 chunk 生成链纯助手（requireOrImportMetaForSource/maybeAppendLegalComments/wrapRulesWithConditions/generateExtraDataForFileJS/maybeForbidArbitraryModuleNamespaceIdentifier），Go 探针 13 例逐字节，sha256 a0e0bf33…"
+    },
+    {
+      "pkg": "internal/linker",
+      "recv": "linkerContext",
+      "fn": "shouldIncludePart",
+      "fixture": "chunk-helpers-go.json",
+      "sha": "e21ce7dedec4f3f8f3faaa6c56558ec5662ed5570bb057acb7a02cf20c33fe44",
+      "evidence": "第145批 chunk 助手（findImportedCSSFilesInJSOrder/shouldIncludePart/pathBetweenChunks），Go 探针 7 例逐字节"
+    },
+    {
+      "pkg": "internal/linker",
+      "recv": "linkerContext",
+      "fn": "shouldRemoveImportExportStmt",
+      "fixture": "stmt-convert-go.json",
+      "sha": "3c87665d560ec3bc9ed18f3b7496b78e64ab9684432e5f6ceae058993ebbd462",
+      "evidence": "第152批 statement 转换底座（shouldRemoveImportExportStmt/convertStmtsForChunk），Go 探针 9 例逐字节，sha256 3c87665d…"
+    },
+    {
+      "pkg": "internal/linker",
+      "recv": "linkerContext",
+      "fn": "sortedCrossChunkExportItems",
+      "fixture": "cross-chunk-deps-go.json",
+      "sha": "0353a26bdbaa1c4d0da6247830fddb91af97f1d9e41796f1073659c84abdd06e",
+      "evidence": "第148批 computeCrossChunkDependencies + sortedCrossChunkImports/Exports，Go 包内构造图探针 3 例逐字节，sha256 0353a26b…"
+    },
+    {
+      "pkg": "internal/linker",
+      "recv": "linkerContext",
+      "fn": "sortedCrossChunkImports",
+      "fixture": "cross-chunk-deps-go.json",
+      "sha": "0353a26bdbaa1c4d0da6247830fddb91af97f1d9e41796f1073659c84abdd06e",
+      "evidence": "第148批 computeCrossChunkDependencies + sortedCrossChunkImports/Exports，Go 包内构造图探针 3 例逐字节，sha256 0353a26b…"
+    },
+    {
+      "pkg": "internal/linker",
+      "recv": "linkerContext",
+      "fn": "substituteFinalPaths",
+      "fixture": "output-pieces-go.json",
+      "sha": "4ac8d0729ddd06ec837857cf4d265c17beb8810792f575f4b864ed9b24d66259",
+      "evidence": "第149批 输出装配底座（breakOutputIntoPieces/breakJoinerIntoPieces/substituteFinalPaths/accurateFinalByteCount），Go 探针 8 例逐字节，sha256 4ac8d072…"
+    },
+    {
+      "pkg": "internal/linker",
+      "recv": "linkerContext",
+      "fn": "treeShakingAndCodeSplitting",
+      "fixture": "treeshake-go.json",
+      "sha": "ad58cb6416d45a331b8511d949d65530cbbd1a0daf3658fc8ad909ab903b54df",
+      "evidence": "第144批 tree-shaking/code-splitting 簇（part 图遍历+entry bit 传播）5函数，Go 包内构造探针 5 例逐字节"
+    },
+    {
+      "pkg": "internal/linker",
+      "recv": "linkerContext",
+      "fn": "validateComposesFromProperties",
+      "fixture": "compwarn-go.json",
+      "sha": "d4f70ceb2cf21db2eac4cd2325eab385566cb0000aa931a047567732dc8fbd57",
+      "evidence": "第111轮 linker validateComposesFromProperties 跨文件 composes 属性冲突警告，一探针2场景 graph fixture 逐字节"
+    },
+    {
+      "pkg": "internal/linker",
+      "recv": "stableRefArray",
+      "fn": "Len",
+      "fixture": "linker-batch-go.json",
+      "sha": "eb4c3c10ccdc07492178c988179a9e96ba29d093eeefb58fdb5d6ff1da0426be",
+      "evidence": "第122批 linker 16 个可观测纯函数一次探针（25 例逐字节）；两个 isChunk 是无输出标记方法，只移植不计等价"
+    },
+    {
+      "pkg": "internal/linker",
+      "recv": "stableRefArray",
+      "fn": "Less",
+      "fixture": "linker-batch-go.json",
+      "sha": "eb4c3c10ccdc07492178c988179a9e96ba29d093eeefb58fdb5d6ff1da0426be",
+      "evidence": "第122批 linker 16 个可观测纯函数一次探针（25 例逐字节）；两个 isChunk 是无输出标记方法，只移植不计等价"
+    },
+    {
+      "pkg": "internal/linker",
+      "recv": "stableRefArray",
+      "fn": "Swap",
+      "fixture": "linker-batch-go.json",
+      "sha": "eb4c3c10ccdc07492178c988179a9e96ba29d093eeefb58fdb5d6ff1da0426be",
+      "evidence": "第122批 linker 16 个可观测纯函数一次探针（25 例逐字节）；两个 isChunk 是无输出标记方法，只移植不计等价"
+    },
+    {
+      "pkg": "internal/logger",
+      "recv": "",
+      "fn": "GenerateStringInJSTable",
+      "fixture": "pnpjs-go.json",
+      "sha": "803592767b3a55dc770ea8fc277e2b7b6e01a90eff1f34bda25583d2e841d8fd",
+      "evidence": "第172批 StringInJSTable 三件套（PnP 内嵌 JSON 位置重映射），Go 探针 11 例逐字节"
+    },
+    {
+      "pkg": "internal/logger",
+      "recv": "",
+      "fn": "msgToStringClang",
+      "fixture": "logger/style-extra-go.json",
+      "sha": "157252d6d8f37d4eaba5f72593242d7ec5443d6edbedb5240a87f9c718b07625",
+      "evidence": "第84批 msgToStringClang/writeMsgDataClang/msgToStringVisualStudio（含VSID表72项），Go 探针8例逐字节"
+    },
+    {
+      "pkg": "internal/logger",
+      "recv": "",
+      "fn": "msgToStringVisualStudio",
+      "fixture": "logger/style-extra-go.json",
+      "sha": "157252d6d8f37d4eaba5f72593242d7ec5443d6edbedb5240a87f9c718b07625",
+      "evidence": "第84批 msgToStringClang/writeMsgDataClang/msgToStringVisualStudio（含VSID表72项），Go 探针8例逐字节"
+    },
+    {
+      "pkg": "internal/logger",
+      "recv": "",
+      "fn": "NewStringInJSLog",
+      "fixture": "pnpjs-go.json",
+      "sha": "803592767b3a55dc770ea8fc277e2b7b6e01a90eff1f34bda25583d2e841d8fd",
+      "evidence": "第172批 StringInJSTable 三件套（PnP 内嵌 JSON 位置重映射），Go 探针 11 例逐字节"
+    },
+    {
+      "pkg": "internal/logger",
+      "recv": "",
+      "fn": "RemapStringInJSLoc",
+      "fixture": "pnpjs-go.json",
+      "sha": "803592767b3a55dc770ea8fc277e2b7b6e01a90eff1f34bda25583d2e841d8fd",
+      "evidence": "第172批 StringInJSTable 三件套（PnP 内嵌 JSON 位置重映射），Go 探针 11 例逐字节"
+    },
+    {
+      "pkg": "internal/logger",
+      "recv": "",
+      "fn": "writeMsgDataClang",
+      "fixture": "logger/style-extra-go.json",
+      "sha": "157252d6d8f37d4eaba5f72593242d7ec5443d6edbedb5240a87f9c718b07625",
+      "evidence": "第84批 msgToStringClang/writeMsgDataClang/msgToStringVisualStudio（含VSID表72项），Go 探针8例逐字节"
+    },
+    {
+      "pkg": "internal/resolver",
+      "recv": "",
+      "fn": "compileYarnPnPData",
+      "fixture": "pnp-go.json",
+      "sha": "2cf05669f8e2507295bbc98e761ce5fbf9e6ff6113525bd513c077c196287613",
+      "evidence": "第162批 compileYarnPnPData+resolveToUnqualified（Resolve 链 Yarn PnP 路径解析核心+pnpData 底座），Go 探针 11 例逐字节"
+    },
+    {
+      "pkg": "internal/resolver",
+      "recv": "",
+      "fn": "findInvalidSegment",
+      "fixture": "esm-resolve-go.json",
+      "sha": "d025beb42231a6a1e89dbd00e35a9b409f1c0397fc92251f682bf2f645612028",
+      "evidence": "第140批 ESM resolution 族+resolver小助手（bundler import 路径核心），Go 探针 232 例逐字节"
+    },
+    {
+      "pkg": "internal/resolver",
+      "recv": "",
+      "fn": "getDependencyTarget",
+      "fixture": "resolver-leaves-go.json",
+      "sha": "cd3cad9a5b6ac74536ccf89e19da865e16ddaa146c80a5107490373748396cf2",
+      "evidence": "第141批 resolver 剩余叶子8函数（parseImportsExportsMap/builtin/TSConfig/yarnpnp），Go 探针 37 例逐字节"
+    },
+    {
+      "pkg": "internal/resolver",
+      "recv": "",
+      "fn": "getSubstitutedPathWithConfigDirTemplate",
+      "fixture": "resolver-batch-go.json",
+      "sha": "77c5bc65cac7f1bf5c8f327dd295ecde23a3385f2a8f2dbcac0ee5d3fb27ae16",
+      "evidence": "第123批 tsconfig 纯助手（同一 fixture 分片）"
+    },
+    {
+      "pkg": "internal/resolver",
+      "recv": "",
+      "fn": "isSlash",
+      "fixture": "resolver-batch-go.json",
+      "sha": "77c5bc65cac7f1bf5c8f327dd295ecde23a3385f2a8f2dbcac0ee5d3fb27ae16",
+      "evidence": "第123批 tsconfig 纯助手（同一 fixture 分片）"
+    },
+    {
+      "pkg": "internal/resolver",
+      "recv": "",
+      "fn": "isValidTSConfigPathNoBaseURLPattern",
+      "fixture": "resolver-batch-go.json",
+      "sha": "77c5bc65cac7f1bf5c8f327dd295ecde23a3385f2a8f2dbcac0ee5d3fb27ae16",
+      "evidence": "第123批 tsconfig 纯助手（同一 fixture 分片）"
+    },
+    {
+      "pkg": "internal/resolver",
+      "recv": "",
+      "fn": "isValidTSConfigPathPattern",
+      "fixture": "resolver-batch-go.json",
+      "sha": "77c5bc65cac7f1bf5c8f327dd295ecde23a3385f2a8f2dbcac0ee5d3fb27ae16",
+      "evidence": "第123批 tsconfig 纯助手（同一 fixture 分片）"
+    },
+    {
+      "pkg": "internal/resolver",
+      "recv": "",
+      "fn": "MakePrettyPaths",
+      "fixture": "esm-resolve-go.json",
+      "sha": "d025beb42231a6a1e89dbd00e35a9b409f1c0397fc92251f682bf2f645612028",
+      "evidence": "第140批 ESM resolution 族+resolver小助手（bundler import 路径核心），Go 探针 232 例逐字节"
+    },
+    {
+      "pkg": "internal/resolver",
+      "recv": "",
+      "fn": "NewResolver",
+      "fixture": "newresolver-go.json",
+      "sha": "4ec6a2f5f1b00e918a1c1c31882767616eec8fba7db1404447a70299cd7a462a",
+      "evidence": "第176批 NewResolver（Resolver 构造器底座），Go 探针 5 例逐字节"
+    },
+    {
+      "pkg": "internal/resolver",
+      "recv": "",
+      "fn": "parseBareIdentifier",
+      "fixture": "resolver-batch-go.json",
+      "sha": "77c5bc65cac7f1bf5c8f327dd295ecde23a3385f2a8f2dbcac0ee5d3fb27ae16",
+      "evidence": "第123批 yarnpnp 纯助手（同一 fixture 分片）"
+    },
+    {
+      "pkg": "internal/resolver",
+      "recv": "",
+      "fn": "parseImportsExportsMap",
+      "fixture": "resolver-leaves-go.json",
+      "sha": "cd3cad9a5b6ac74536ccf89e19da865e16ddaa146c80a5107490373748396cf2",
+      "evidence": "第141批 resolver 剩余叶子8函数（parseImportsExportsMap/builtin/TSConfig/yarnpnp），Go 探针 37 例逐字节"
+    },
+    {
+      "pkg": "internal/resolver",
+      "recv": "",
+      "fn": "parseMemberExpressionForJSX",
+      "fixture": "resolver-batch-go.json",
+      "sha": "77c5bc65cac7f1bf5c8f327dd295ecde23a3385f2a8f2dbcac0ee5d3fb27ae16",
+      "evidence": "第123批 tsconfig 纯助手（同一 fixture 分片）"
+    },
+    {
+      "pkg": "internal/resolver",
+      "recv": "",
+      "fn": "ParseTSConfigJSON",
+      "fixture": "tsconfig-json-go.json",
+      "sha": "153e872f0b59f5e38bae88764e2dcec69cf196bdfee7234262c926fd91206534",
+      "evidence": "第159批 ParseTSConfigJSON（Resolve 链 tsconfig 解析核心），Go 探针 32 例逐字节"
+    },
+    {
+      "pkg": "internal/resolver",
+      "recv": "DebugMeta",
+      "fn": "LogErrorMsg",
+      "fixture": "remap-go.json",
+      "sha": "5ed51c2817ef4b7c087788593a3f1faf1399ac891859fc3816cd52c383499719",
+      "evidence": "第166批 loadAsIndexWithBrowserRemapping+DebugMeta.LogErrorMsg，Go 探针 9 例逐字节"
+    },
+    {
+      "pkg": "internal/resolver",
+      "recv": "expansionKeysArray",
+      "fn": "Len",
+      "fixture": "resolver-batch-go.json",
+      "sha": "77c5bc65cac7f1bf5c8f327dd295ecde23a3385f2a8f2dbcac0ee5d3fb27ae16",
+      "evidence": "第123批 package_json sort 助手（同一 fixture 分片）"
+    },
+    {
+      "pkg": "internal/resolver",
+      "recv": "expansionKeysArray",
+      "fn": "Less",
+      "fixture": "resolver-batch-go.json",
+      "sha": "77c5bc65cac7f1bf5c8f327dd295ecde23a3385f2a8f2dbcac0ee5d3fb27ae16",
+      "evidence": "第123批 package_json sort 助手（同一 fixture 分片）"
+    },
+    {
+      "pkg": "internal/resolver",
+      "recv": "expansionKeysArray",
+      "fn": "Swap",
+      "fixture": "resolver-batch-go.json",
+      "sha": "77c5bc65cac7f1bf5c8f327dd295ecde23a3385f2a8f2dbcac0ee5d3fb27ae16",
+      "evidence": "第123批 package_json sort 助手（同一 fixture 分片）"
+    },
+    {
+      "pkg": "internal/resolver",
+      "recv": "Resolver",
+      "fn": "ProbeResolvePackageAsRelative",
+      "fixture": "respublic-go.json",
+      "sha": "c828880d098de69546c55a8d7311f8bf2a3c75dedd1997dd7af2e402287191e9",
+      "evidence": "第175批 resolver 顶层入口三函数（Resolve/ResolveGlob/ProbeResolvePackageAsRelative），Go 探针 18 例逐字节"
+    },
+    {
+      "pkg": "internal/resolver",
+      "recv": "Resolver",
+      "fn": "Resolve",
+      "fixture": "respublic-go.json",
+      "sha": "c828880d098de69546c55a8d7311f8bf2a3c75dedd1997dd7af2e402287191e9",
+      "evidence": "第175批 resolver 顶层入口三函数（Resolve/ResolveGlob/ProbeResolvePackageAsRelative），Go 探针 18 例逐字节"
+    },
+    {
+      "pkg": "internal/resolver",
+      "recv": "Resolver",
+      "fn": "ResolveGlob",
+      "fixture": "respublic-go.json",
+      "sha": "c828880d098de69546c55a8d7311f8bf2a3c75dedd1997dd7af2e402287191e9",
+      "evidence": "第175批 resolver 顶层入口三函数（Resolve/ResolveGlob/ProbeResolvePackageAsRelative），Go 探针 18 例逐字节"
+    },
+    {
+      "pkg": "internal/resolver",
+      "recv": "resolverQuery",
+      "fn": "checkBrowserMap",
+      "fixture": "browser-map-go.json",
+      "sha": "9f6a0a9a509a5a67f52d66aeb801c0ea84b92e63fa88df33f9e3a4ce9dcf4f7b",
+      "evidence": "第161批 checkBrowserMap（Resolve 链 browser 字段 remapping + dirInfo 底座），Go 探针 11 例逐字节"
+    },
+    {
+      "pkg": "internal/resolver",
+      "recv": "resolverQuery",
+      "fn": "checkForBuiltInNodeModules",
+      "fixture": "resolver-leaves-go.json",
+      "sha": "cd3cad9a5b6ac74536ccf89e19da865e16ddaa146c80a5107490373748396cf2",
+      "evidence": "第141批 resolver 剩余叶子8函数（parseImportsExportsMap/builtin/TSConfig/yarnpnp），Go 探针 37 例逐字节"
+    },
+    {
+      "pkg": "internal/resolver",
+      "recv": "resolverQuery",
+      "fn": "dirInfoCached",
+      "fixture": "dirinfo-go.json",
+      "sha": "3068606c0db76539ff2d914c68f5af0bf616793b3c6376cd51e7822a94d04329",
+      "evidence": "第165批 dirInfoCached+dirInfoUncached（dirInfo 深簇底座），Go 探针 11 例逐字节"
+    },
+    {
+      "pkg": "internal/resolver",
+      "recv": "resolverQuery",
+      "fn": "dirInfoUncached",
+      "fixture": "dirinfo-go.json",
+      "sha": "3068606c0db76539ff2d914c68f5af0bf616793b3c6376cd51e7822a94d04329",
+      "evidence": "第165批 dirInfoCached+dirInfoUncached（dirInfo 深簇底座），Go 探针 11 例逐字节"
+    },
+    {
+      "pkg": "internal/resolver",
+      "recv": "resolverQuery",
+      "fn": "esmHandlePostConditions",
+      "fixture": "esm-resolve-go.json",
+      "sha": "d025beb42231a6a1e89dbd00e35a9b409f1c0397fc92251f682bf2f645612028",
+      "evidence": "第140批 ESM resolution 族+resolver小助手（bundler import 路径核心），Go 探针 232 例逐字节"
+    },
+    {
+      "pkg": "internal/resolver",
+      "recv": "resolverQuery",
+      "fn": "esmPackageExportsResolve",
+      "fixture": "esm-resolve-go.json",
+      "sha": "d025beb42231a6a1e89dbd00e35a9b409f1c0397fc92251f682bf2f645612028",
+      "evidence": "第140批 ESM resolution 族+resolver小助手（bundler import 路径核心），Go 探针 232 例逐字节"
+    },
+    {
+      "pkg": "internal/resolver",
+      "recv": "resolverQuery",
+      "fn": "esmPackageExportsReverseResolve",
+      "fixture": "esm-resolve-go.json",
+      "sha": "d025beb42231a6a1e89dbd00e35a9b409f1c0397fc92251f682bf2f645612028",
+      "evidence": "第140批 ESM resolution 族+resolver小助手（bundler import 路径核心），Go 探针 232 例逐字节"
+    },
+    {
+      "pkg": "internal/resolver",
+      "recv": "resolverQuery",
+      "fn": "esmPackageImportsExportsResolve",
+      "fixture": "esm-resolve-go.json",
+      "sha": "d025beb42231a6a1e89dbd00e35a9b409f1c0397fc92251f682bf2f645612028",
+      "evidence": "第140批 ESM resolution 族+resolver小助手（bundler import 路径核心），Go 探针 232 例逐字节"
+    },
+    {
+      "pkg": "internal/resolver",
+      "recv": "resolverQuery",
+      "fn": "esmPackageImportsExportsReverseResolve",
+      "fixture": "esm-resolve-go.json",
+      "sha": "d025beb42231a6a1e89dbd00e35a9b409f1c0397fc92251f682bf2f645612028",
+      "evidence": "第140批 ESM resolution 族+resolver小助手（bundler import 路径核心），Go 探针 232 例逐字节"
+    },
+    {
+      "pkg": "internal/resolver",
+      "recv": "resolverQuery",
+      "fn": "esmPackageImportsResolve",
+      "fixture": "esm-resolve-go.json",
+      "sha": "d025beb42231a6a1e89dbd00e35a9b409f1c0397fc92251f682bf2f645612028",
+      "evidence": "第140批 ESM resolution 族+resolver小助手（bundler import 路径核心），Go 探针 232 例逐字节"
+    },
+    {
+      "pkg": "internal/resolver",
+      "recv": "resolverQuery",
+      "fn": "esmPackageTargetResolve",
+      "fixture": "esm-resolve-go.json",
+      "sha": "d025beb42231a6a1e89dbd00e35a9b409f1c0397fc92251f682bf2f645612028",
+      "evidence": "第140批 ESM resolution 族+resolver小助手（bundler import 路径核心），Go 探针 232 例逐字节"
+    },
+    {
+      "pkg": "internal/resolver",
+      "recv": "resolverQuery",
+      "fn": "esmPackageTargetReverseResolve",
+      "fixture": "esm-resolve-go.json",
+      "sha": "d025beb42231a6a1e89dbd00e35a9b409f1c0397fc92251f682bf2f645612028",
+      "evidence": "第140批 ESM resolution 族+resolver小助手（bundler import 路径核心），Go 探针 232 例逐字节"
+    },
+    {
+      "pkg": "internal/resolver",
+      "recv": "resolverQuery",
+      "fn": "esmResolveAlgorithm",
+      "fixture": "esmalgo-go.json",
+      "sha": "4321fff872241bfe826feb8b1b0972d91be50f88645575f5f666b70d230a7afa",
+      "evidence": "第171批 esmResolveAlgorithm（ESM 解析算法协调层，深簇最后一函数），Go 探针 6 例逐字节"
+    },
+    {
+      "pkg": "internal/resolver",
+      "recv": "resolverQuery",
+      "fn": "extractYarnPnPDataFromJSON",
+      "fixture": "extract-pnp-go.json",
+      "sha": "ef4f4a830fc56f9207160378c22b9bfe5855dc8893281dbe299bedc7fc44e362",
+      "evidence": "第164批 extractYarnPnPDataFromJSON（PnP manifest 加载，resolveToUnqualified 搭档），Go 探针 5 例逐字节"
+    },
+    {
+      "pkg": "internal/resolver",
+      "recv": "resolverQuery",
+      "fn": "finalizeImportsExportsResult",
+      "fixture": "finalize-go.json",
+      "sha": "8a4a698df80b81c854958dedd62f91aa9781cc9951d4537529911cfb5478400c",
+      "evidence": "第170批 finalizeImportsExportsResult（ESM exports 解析核心深簇），Go 探针 9 例逐字节"
+    },
+    {
+      "pkg": "internal/resolver",
+      "recv": "resolverQuery",
+      "fn": "finalizeResolve",
+      "fixture": "finalize2-go.json",
+      "sha": "3458ea0e5f3bfaf8816b897d6bde4f9e0fd5fb2e8ca71275307b471f48cf7289",
+      "evidence": "第173批 finalizeResolve（ResolveResult 底座 + symlink/sideEffects/tsconfig/external），Go 探针 12 例逐字节"
+    },
+    {
+      "pkg": "internal/resolver",
+      "recv": "resolverQuery",
+      "fn": "findLocator",
+      "fixture": "resolver-leaves-go.json",
+      "sha": "cd3cad9a5b6ac74536ccf89e19da865e16ddaa146c80a5107490373748396cf2",
+      "evidence": "第141批 resolver 剩余叶子8函数（parseImportsExportsMap/builtin/TSConfig/yarnpnp），Go 探针 37 例逐字节"
+    },
+    {
+      "pkg": "internal/resolver",
+      "recv": "resolverQuery",
+      "fn": "flushDebugLogs",
+      "fixture": "esm-resolve-go.json",
+      "sha": "d025beb42231a6a1e89dbd00e35a9b409f1c0397fc92251f682bf2f645612028",
+      "evidence": "第140批 ESM resolution 族+resolver小助手（bundler import 路径核心），Go 探针 232 例逐字节"
+    },
+    {
+      "pkg": "internal/resolver",
+      "recv": "resolverQuery",
+      "fn": "getPackage",
+      "fixture": "resolver-leaves-go.json",
+      "sha": "cd3cad9a5b6ac74536ccf89e19da865e16ddaa146c80a5107490373748396cf2",
+      "evidence": "第141批 resolver 剩余叶子8函数（parseImportsExportsMap/builtin/TSConfig/yarnpnp），Go 探针 37 例逐字节"
+    },
+    {
+      "pkg": "internal/resolver",
+      "recv": "resolverQuery",
+      "fn": "isExternal",
+      "fixture": "esm-resolve-go.json",
+      "sha": "d025beb42231a6a1e89dbd00e35a9b409f1c0397fc92251f682bf2f645612028",
+      "evidence": "第140批 ESM resolution 族+resolver小助手（bundler import 路径核心），Go 探针 232 例逐字节"
+    },
+    {
+      "pkg": "internal/resolver",
+      "recv": "resolverQuery",
+      "fn": "loadAsDirectory",
+      "fixture": "load-dir-go.json",
+      "sha": "c58b9d44bcb6f20fb07143b14f053dfce2225175d95288b38585a51773d45c17",
+      "evidence": "第167批 loadAsMainField+loadAsDirectory+loadAsFileOrDirectory（Resolve 链目录加载三连），Go 探针 12 例逐字节"
+    },
+    {
+      "pkg": "internal/resolver",
+      "recv": "resolverQuery",
+      "fn": "loadAsFile",
+      "fixture": "load-file-go.json",
+      "sha": "24d72a0282964dd6304e3b5f1804652a57b1fbf003464e0ce882baf19c65ef63",
+      "evidence": "第163批 loadAsFile+loadAsIndex（Resolve 链文件/索引加载器+fs.Entry.Kind 底座），Go 探针 13 例逐字节"
+    },
+    {
+      "pkg": "internal/resolver",
+      "recv": "resolverQuery",
+      "fn": "loadAsFileOrDirectory",
+      "fixture": "load-dir-go.json",
+      "sha": "c58b9d44bcb6f20fb07143b14f053dfce2225175d95288b38585a51773d45c17",
+      "evidence": "第167批 loadAsMainField+loadAsDirectory+loadAsFileOrDirectory（Resolve 链目录加载三连），Go 探针 12 例逐字节"
+    },
+    {
+      "pkg": "internal/resolver",
+      "recv": "resolverQuery",
+      "fn": "loadAsIndex",
+      "fixture": "load-file-go.json",
+      "sha": "24d72a0282964dd6304e3b5f1804652a57b1fbf003464e0ce882baf19c65ef63",
+      "evidence": "第163批 loadAsFile+loadAsIndex（Resolve 链文件/索引加载器+fs.Entry.Kind 底座），Go 探针 13 例逐字节"
+    },
+    {
+      "pkg": "internal/resolver",
+      "recv": "resolverQuery",
+      "fn": "loadAsIndexWithBrowserRemapping",
+      "fixture": "remap-go.json",
+      "sha": "5ed51c2817ef4b7c087788593a3f1faf1399ac891859fc3816cd52c383499719",
+      "evidence": "第166批 loadAsIndexWithBrowserRemapping+DebugMeta.LogErrorMsg，Go 探针 9 例逐字节"
+    },
+    {
+      "pkg": "internal/resolver",
+      "recv": "resolverQuery",
+      "fn": "loadAsMainField",
+      "fixture": "load-dir-go.json",
+      "sha": "c58b9d44bcb6f20fb07143b14f053dfce2225175d95288b38585a51773d45c17",
+      "evidence": "第167批 loadAsMainField+loadAsDirectory+loadAsFileOrDirectory（Resolve 链目录加载三连），Go 探针 12 例逐字节"
+    },
+    {
+      "pkg": "internal/resolver",
+      "recv": "resolverQuery",
+      "fn": "loadNodeModules",
+      "fixture": "rescore-go.json",
+      "sha": "ba255c0ac6801a5fd0d823c62e7928c3fc93d4404e50547c5f17b352f356877d",
+      "evidence": "第174批 resolver 递归核心四函数（resolveWithoutRemapping/loadNodeModules/loadPackageImports/resolveWithoutSymlinks），Go 探针 20 例逐字节"
+    },
+    {
+      "pkg": "internal/resolver",
+      "recv": "resolverQuery",
+      "fn": "loadPackageImports",
+      "fixture": "rescore-go.json",
+      "sha": "ba255c0ac6801a5fd0d823c62e7928c3fc93d4404e50547c5f17b352f356877d",
+      "evidence": "第174批 resolver 递归核心四函数（resolveWithoutRemapping/loadNodeModules/loadPackageImports/resolveWithoutSymlinks），Go 探针 20 例逐字节"
+    },
+    {
+      "pkg": "internal/resolver",
+      "recv": "resolverQuery",
+      "fn": "matchTSConfigPaths",
+      "fixture": "tspath-go.json",
+      "sha": "8cc4006fd22475b6f4e683e503f203f699bc5ef35b3cdcb3edeb00048f3cdd46",
+      "evidence": "第169批 matchTSConfigPaths（tsconfig paths 映射），Go 探针 8 例逐字节"
+    },
+    {
+      "pkg": "internal/resolver",
+      "recv": "resolverQuery",
+      "fn": "parsePackageJSON",
+      "fixture": "pkgjson-go.json",
+      "sha": "5658a78926eaca6e03536365022f91907653a9768be3cde61fc59dffa0dc17ff",
+      "evidence": "第160批 parsePackageJSON（Resolve 链核心构造器，产出 packageJSON/mainFields/moduleTypeData/browserMap/sideEffects 底座），Go 探针 24 例逐字节"
+    },
+    {
+      "pkg": "internal/resolver",
+      "recv": "resolverQuery",
+      "fn": "parseTSConfig",
+      "fixture": "tsconfig-full-go.json",
+      "sha": "cde2d6b6919561b099284a1e62735431341876e41f9cdf91ccde06f662ece2c7",
+      "evidence": "第168批 parseTSConfig+parseTSConfigFromSource（Resolve 链 tsconfig 加载深簇，transform 模式逐字节），Go 探针 8 例"
+    },
+    {
+      "pkg": "internal/resolver",
+      "recv": "resolverQuery",
+      "fn": "parseTSConfigFromSource",
+      "fixture": "tsconfig-full-go.json",
+      "sha": "cde2d6b6919561b099284a1e62735431341876e41f9cdf91ccde06f662ece2c7",
+      "evidence": "第168批 parseTSConfig+parseTSConfigFromSource（Resolve 链 tsconfig 加载深簇，transform 模式逐字节），Go 探针 8 例"
+    },
+    {
+      "pkg": "internal/resolver",
+      "recv": "resolverQuery",
+      "fn": "resolveToUnqualified",
+      "fixture": "pnp-go.json",
+      "sha": "2cf05669f8e2507295bbc98e761ce5fbf9e6ff6113525bd513c077c196287613",
+      "evidence": "第162批 compileYarnPnPData+resolveToUnqualified（Resolve 链 Yarn PnP 路径解析核心+pnpData 底座），Go 探针 11 例逐字节"
+    },
+    {
+      "pkg": "internal/resolver",
+      "recv": "resolverQuery",
+      "fn": "resolveViaFallback",
+      "fixture": "resolver-leaves-go.json",
+      "sha": "cd3cad9a5b6ac74536ccf89e19da865e16ddaa146c80a5107490373748396cf2",
+      "evidence": "第141批 resolver 剩余叶子8函数（parseImportsExportsMap/builtin/TSConfig/yarnpnp），Go 探针 37 例逐字节"
+    },
+    {
+      "pkg": "internal/resolver",
+      "recv": "resolverQuery",
+      "fn": "resolveWithoutRemapping",
+      "fixture": "rescore-go.json",
+      "sha": "ba255c0ac6801a5fd0d823c62e7928c3fc93d4404e50547c5f17b352f356877d",
+      "evidence": "第174批 resolver 递归核心四函数（resolveWithoutRemapping/loadNodeModules/loadPackageImports/resolveWithoutSymlinks），Go 探针 20 例逐字节"
+    },
+    {
+      "pkg": "internal/resolver",
+      "recv": "resolverQuery",
+      "fn": "resolveWithoutSymlinks",
+      "fixture": "rescore-go.json",
+      "sha": "ba255c0ac6801a5fd0d823c62e7928c3fc93d4404e50547c5f17b352f356877d",
+      "evidence": "第174批 resolver 递归核心四函数（resolveWithoutRemapping/loadNodeModules/loadPackageImports/resolveWithoutSymlinks），Go 探针 20 例逐字节"
+    },
+    {
+      "pkg": "internal/resolver",
+      "recv": "resolverQuery",
+      "fn": "tryToExtractYarnPnPDataFromJS",
+      "fixture": "pnpjs-go.json",
+      "sha": "803592767b3a55dc770ea8fc277e2b7b6e01a90eff1f34bda25583d2e841d8fd",
+      "evidence": "第172批 tryToExtractYarnPnPDataFromJS（PnP JS 拦截主入口，底座全链），Go 探针 11 例逐字节"
+    },
+    {
+      "pkg": "internal/resolver",
+      "recv": "resolverQuery",
+      "fn": "tsConfigForDir",
+      "fixture": "esm-resolve-go.json",
+      "sha": "d025beb42231a6a1e89dbd00e35a9b409f1c0397fc92251f682bf2f645612028",
+      "evidence": "第140批 ESM resolution 族+resolver小助手（bundler import 路径核心），Go 探针 232 例逐字节"
+    },
+    {
+      "pkg": "internal/resolver",
+      "recv": "TSConfigJSON",
+      "fn": "applyExtendedConfig",
+      "fixture": "resolver-leaves-go.json",
+      "sha": "cd3cad9a5b6ac74536ccf89e19da865e16ddaa146c80a5107490373748396cf2",
+      "evidence": "第141批 resolver 剩余叶子8函数（parseImportsExportsMap/builtin/TSConfig/yarnpnp），Go 探针 37 例逐字节"
+    },
+    {
+      "pkg": "internal/resolver",
+      "recv": "TSConfigJSON",
+      "fn": "TSAlwaysStrictOrStrict",
+      "fixture": "resolver-leaves-go.json",
+      "sha": "cd3cad9a5b6ac74536ccf89e19da865e16ddaa146c80a5107490373748396cf2",
+      "evidence": "第141批 resolver 剩余叶子8函数（parseImportsExportsMap/builtin/TSConfig/yarnpnp），Go 探针 37 例逐字节"
+    },
+    {
+      "pkg": "internal/runtime",
+      "recv": "",
+      "fn": "Source",
+      "fixture": "runtime-source-go.json",
+      "sha": "4505f868907fbf6f9b92773beee6d30e821b6ad39952696eb3336f283a3a6c94",
+      "evidence": "第91批 runtime.Source 底座：8 组 feature mask 全 Contents SHA 逐字节（含 three.js esnext mask=0）"
+    },
+    {
+      "pkg": "pkg/api",
+      "recv": "",
+      "fn": "analyzeMetafileImpl",
+      "fixture": "api-format-go.json",
+      "sha": "9a82ae2d7d761825d7776bf8e8c8cba1488c3ad573397ce65be58941e84add89",
+      "evidence": "第142批 analyzeMetafileImpl/formatMsgsImpl/prettyPrintPath（build API 输出链），Go 探针 25 例逐字节"
+    },
+    {
+      "pkg": "pkg/api",
+      "recv": "",
+      "fn": "convertEngineName",
+      "fixture": "api-batch-go.json",
+      "sha": "89eed0b9db6a5461fc92a0b02b0117588a32ef19b6d08d2a41d4c217393e73dd",
+      "evidence": "第121批 api 纯助手 11 函数一次探针（Go 27 例逐字节）"
+    },
+    {
+      "pkg": "pkg/api",
+      "recv": "",
+      "fn": "convertErrorsAndWarningsToInternal",
+      "fixture": "api-batch-go.json",
+      "sha": "89eed0b9db6a5461fc92a0b02b0117588a32ef19b6d08d2a41d4c217393e73dd",
+      "evidence": "第121批 api 纯助手 11 函数一次探针（Go 27 例逐字节）"
+    },
+    {
+      "pkg": "pkg/api",
+      "recv": "",
+      "fn": "convertMessagesToInternal",
+      "fixture": "api-batch-go.json",
+      "sha": "89eed0b9db6a5461fc92a0b02b0117588a32ef19b6d08d2a41d4c217393e73dd",
+      "evidence": "第121批 api 纯助手 11 函数一次探针（Go 27 例逐字节）"
+    },
+    {
+      "pkg": "pkg/api",
+      "recv": "",
+      "fn": "convertMessagesToPublic",
+      "fixture": "api-batch-go.json",
+      "sha": "89eed0b9db6a5461fc92a0b02b0117588a32ef19b6d08d2a41d4c217393e73dd",
+      "evidence": "第121批 api 纯助手 11 函数一次探针（Go 27 例逐字节）"
+    },
+    {
+      "pkg": "pkg/api",
+      "recv": "",
+      "fn": "errorsToString",
+      "fixture": "api-batch-go.json",
+      "sha": "89eed0b9db6a5461fc92a0b02b0117588a32ef19b6d08d2a41d4c217393e73dd",
+      "evidence": "第121批 api 纯助手 11 函数一次探针（Go 27 例逐字节）"
+    },
+    {
+      "pkg": "pkg/api",
+      "recv": "",
+      "fn": "escapeForHTML",
+      "fixture": "api-validate-chain-go.json",
+      "sha": "743e31d8590efd1df73bd97367eb7f49580758cf4aab0263e406147f584fde04",
+      "evidence": "第88批 22 个已移植 validate 助手整链大探针 93 行逐字节（单函数正常路径真实现，非 throw-shell）"
+    },
+    {
+      "pkg": "pkg/api",
+      "recv": "",
+      "fn": "extractPathStyle",
+      "fixture": "api-validate-chain-go.json",
+      "sha": "743e31d8590efd1df73bd97367eb7f49580758cf4aab0263e406147f584fde04",
+      "evidence": "第88批 22 个已移植 validate 助手整链大探针 93 行逐字节（单函数正常路径真实现，非 throw-shell）"
+    },
+    {
+      "pkg": "pkg/api",
+      "recv": "",
+      "fn": "formatMsgsImpl",
+      "fixture": "api-format-go.json",
+      "sha": "9a82ae2d7d761825d7776bf8e8c8cba1488c3ad573397ce65be58941e84add89",
+      "evidence": "第142批 analyzeMetafileImpl/formatMsgsImpl/prettyPrintPath（build API 输出链），Go 探针 25 例逐字节"
+    },
+    {
+      "pkg": "pkg/api",
+      "recv": "",
+      "fn": "importKindToResolveKind",
+      "fixture": "api-validate-chain-go.json",
+      "sha": "743e31d8590efd1df73bd97367eb7f49580758cf4aab0263e406147f584fde04",
+      "evidence": "第88批 22 个已移植 validate 助手整链大探针 93 行逐字节（单函数正常路径真实现，非 throw-shell）"
+    },
+    {
+      "pkg": "pkg/api",
+      "recv": "",
+      "fn": "isValidExtension",
+      "fixture": "api-validate-chain-go.json",
+      "sha": "743e31d8590efd1df73bd97367eb7f49580758cf4aab0263e406147f584fde04",
+      "evidence": "第88批 22 个已移植 validate 助手整链大探针 93 行逐字节（单函数正常路径真实现，非 throw-shell）"
+    },
+    {
+      "pkg": "pkg/api",
+      "recv": "",
+      "fn": "loadPlugins",
+      "fixture": "load-plugins-go.json",
+      "sha": "72570b3a042bb6822fbf788edff25646fe74ec0b08c75d7655984c6b8d582547",
+      "evidence": "第105轮 loadPlugins 整链 Setup 注册状态机，一探针 4 场景逐字节"
+    },
+    {
+      "pkg": "pkg/api",
+      "recv": "",
+      "fn": "prettyPrintByteCount",
+      "fixture": "api-validate-chain-go.json",
+      "sha": "743e31d8590efd1df73bd97367eb7f49580758cf4aab0263e406147f584fde04",
+      "evidence": "第88批 22 个已移植 validate 助手整链大探针 93 行逐字节（单函数正常路径真实现，非 throw-shell）"
+    },
+    {
+      "pkg": "pkg/api",
+      "recv": "",
+      "fn": "prettyPrintPath",
+      "fixture": "api-format-go.json",
+      "sha": "9a82ae2d7d761825d7776bf8e8c8cba1488c3ad573397ce65be58941e84add89",
+      "evidence": "第142批 analyzeMetafileImpl/formatMsgsImpl/prettyPrintPath（build API 输出链），Go 探针 25 例逐字节"
+    },
+    {
+      "pkg": "pkg/api",
+      "recv": "",
+      "fn": "printSummary",
+      "fixture": "print-summary-go.json",
+      "sha": "961cbe83fcfe815a32a25ecb76a52ec77639849552e4e3c549feef8f2b2646d7",
+      "evidence": "第106轮 printSummary yarn/1 去耗时确定性路径，一探针3场景逐字节"
+    },
+    {
+      "pkg": "pkg/api",
+      "recv": "",
+      "fn": "rebuildImpl",
+      "fixture": "rebuild-impl-go.json",
+      "sha": "740256c767a07c1d3920b3c050b9a1f0b5d4dceaf82f09a09b87023d2dcdc13b",
+      "evidence": "第106轮 rebuildImpl 确定性早退路径（warning 重复+mangle 校验+空入口），一探针4场景逐字节"
+    },
+    {
+      "pkg": "pkg/api",
+      "recv": "",
+      "fn": "resolveKindToImportKind",
+      "fixture": "api-validate-chain-go.json",
+      "sha": "743e31d8590efd1df73bd97367eb7f49580758cf4aab0263e406147f584fde04",
+      "evidence": "第88批 22 个已移植 validate 助手整链大探针 93 行逐字节（单函数正常路径真实现，非 throw-shell）"
+    },
+    {
+      "pkg": "pkg/api",
+      "recv": "",
+      "fn": "respondWithDirList",
+      "fixture": "api-serve-go.json",
+      "sha": "7e213bfa3edb4b7c9a97d209eb7e12637d8da2f9fa9f6cc8e07738d8c13c761e",
+      "evidence": "第86批 respondWithDirList 目录列表 HTML，共享探针 5 例逐字节"
+    },
+    {
+      "pkg": "pkg/api",
+      "recv": "",
+      "fn": "stripDirPrefix",
+      "fixture": "api-validate-chain-go.json",
+      "sha": "743e31d8590efd1df73bd97367eb7f49580758cf4aab0263e406147f584fde04",
+      "evidence": "第88批 22 个已移植 validate 助手整链大探针 93 行逐字节（单函数正常路径真实现，非 throw-shell）"
+    },
+    {
+      "pkg": "pkg/api",
+      "recv": "",
+      "fn": "validateAlias",
+      "fixture": "api-validate-chain-go.json",
+      "sha": "743e31d8590efd1df73bd97367eb7f49580758cf4aab0263e406147f584fde04",
+      "evidence": "第88批 22 个已移植 validate 助手整链大探针 93 行逐字节（单函数正常路径真实现，非 throw-shell）"
+    },
+    {
+      "pkg": "pkg/api",
+      "recv": "",
+      "fn": "validateASCIIOnly",
+      "fixture": "api-validate-chain-go.json",
+      "sha": "743e31d8590efd1df73bd97367eb7f49580758cf4aab0263e406147f584fde04",
+      "evidence": "第88批 22 个已移植 validate 助手整链大探针 93 行逐字节（单函数正常路径真实现，非 throw-shell）"
+    },
+    {
+      "pkg": "pkg/api",
+      "recv": "",
+      "fn": "validateBannerOrFooter",
+      "fixture": "api-validate-chain-go.json",
+      "sha": "743e31d8590efd1df73bd97367eb7f49580758cf4aab0263e406147f584fde04",
+      "evidence": "第88批 22 个已移植 validate 助手整链大探针 93 行逐字节（单函数正常路径真实现，非 throw-shell）"
+    },
+    {
+      "pkg": "pkg/api",
+      "recv": "",
+      "fn": "validateBuildOptions",
+      "fixture": "vbo-go.json",
+      "sha": "2a5f65149ab4d6e1433813163160b98b3fc760a1f6e775edc09f3e81e67dd9b5",
+      "evidence": "第89批 validateBuildOptions 本体整函数逐字节（7 行 config.Options 全字段，128K 夹具含 ProcessDefines 全局表）"
+    },
+    {
+      "pkg": "pkg/api",
+      "recv": "",
+      "fn": "validateColor",
+      "fixture": "api-validate-chain-go.json",
+      "sha": "743e31d8590efd1df73bd97367eb7f49580758cf4aab0263e406147f584fde04",
+      "evidence": "第88批 22 个已移植 validate 助手整链大探针 93 行逐字节（单函数正常路径真实现，非 throw-shell）"
+    },
+    {
+      "pkg": "pkg/api",
+      "recv": "",
+      "fn": "validateDefines",
+      "fixture": "api-big-go.json",
+      "sha": "fb83e3f01edeef022b62f436656b278495303b9f25e118208e488ac90099fc75",
+      "evidence": "第87批 validateDefines(9)+validateFeatures(8) 共享大探针逐字节，含 CSSPrefixData 底座表"
+    },
+    {
+      "pkg": "pkg/api",
+      "recv": "",
+      "fn": "validateExternalPackages",
+      "fixture": "api-validate-chain-go.json",
+      "sha": "743e31d8590efd1df73bd97367eb7f49580758cf4aab0263e406147f584fde04",
+      "evidence": "第88批 22 个已移植 validate 助手整链大探针 93 行逐字节（单函数正常路径真实现，非 throw-shell）"
+    },
+    {
+      "pkg": "pkg/api",
+      "recv": "",
+      "fn": "validateExternals",
+      "fixture": "api-validate2-go.json",
+      "sha": "e6939624f932a7020875e20c1b693dbf0836020b34ff5d5135a50c2bf7ea3d6d",
+      "evidence": "第86批 validatePath/validateExternals/validatePathsArray 共享 harness 16 行逐字节"
+    },
+    {
+      "pkg": "pkg/api",
+      "recv": "",
+      "fn": "validateFeatures",
+      "fixture": "api-big-go.json",
+      "sha": "fb83e3f01edeef022b62f436656b278495303b9f25e118208e488ac90099fc75",
+      "evidence": "第87批 validateDefines(9)+validateFeatures(8) 共享大探针逐字节，含 CSSPrefixData 底座表"
+    },
+    {
+      "pkg": "pkg/api",
+      "recv": "",
+      "fn": "validateFormat",
+      "fixture": "api-validate-chain-go.json",
+      "sha": "743e31d8590efd1df73bd97367eb7f49580758cf4aab0263e406147f584fde04",
+      "evidence": "第88批 22 个已移植 validate 助手整链大探针 93 行逐字节（单函数正常路径真实现，非 throw-shell）"
+    },
+    {
+      "pkg": "pkg/api",
+      "recv": "",
+      "fn": "validateGlobalName",
+      "fixture": "api-validate-chain-go.json",
+      "sha": "743e31d8590efd1df73bd97367eb7f49580758cf4aab0263e406147f584fde04",
+      "evidence": "第88批 22 个已移植 validate 助手整链大探针 93 行逐字节（单函数正常路径真实现，非 throw-shell）"
+    },
+    {
+      "pkg": "pkg/api",
+      "recv": "",
+      "fn": "validateJSXExpr",
+      "fixture": "api-validate-chain-go.json",
+      "sha": "743e31d8590efd1df73bd97367eb7f49580758cf4aab0263e406147f584fde04",
+      "evidence": "第88批 22 个已移植 validate 助手整链大探针 93 行逐字节（单函数正常路径真实现，非 throw-shell）"
+    },
+    {
+      "pkg": "pkg/api",
+      "recv": "",
+      "fn": "validateKeepNames",
+      "fixture": "api-batch-go.json",
+      "sha": "89eed0b9db6a5461fc92a0b02b0117588a32ef19b6d08d2a41d4c217393e73dd",
+      "evidence": "第121批 api 纯助手 11 函数一次探针（Go 27 例逐字节）"
+    },
+    {
+      "pkg": "pkg/api",
+      "recv": "",
+      "fn": "validateLegalComments",
+      "fixture": "api-validate-chain-go.json",
+      "sha": "743e31d8590efd1df73bd97367eb7f49580758cf4aab0263e406147f584fde04",
+      "evidence": "第88批 22 个已移植 validate 助手整链大探针 93 行逐字节（单函数正常路径真实现，非 throw-shell）"
+    },
+    {
+      "pkg": "pkg/api",
+      "recv": "",
+      "fn": "validateLoader",
+      "fixture": "api-validate-chain-go.json",
+      "sha": "743e31d8590efd1df73bd97367eb7f49580758cf4aab0263e406147f584fde04",
+      "evidence": "第88批 22 个已移植 validate 助手整链大探针 93 行逐字节（单函数正常路径真实现，非 throw-shell）"
+    },
+    {
+      "pkg": "pkg/api",
+      "recv": "",
+      "fn": "validateLoaders",
+      "fixture": "api-validate-chain-go.json",
+      "sha": "743e31d8590efd1df73bd97367eb7f49580758cf4aab0263e406147f584fde04",
+      "evidence": "第88批 22 个已移植 validate 助手整链大探针 93 行逐字节（单函数正常路径真实现，非 throw-shell）"
+    },
+    {
+      "pkg": "pkg/api",
+      "recv": "",
+      "fn": "validateLogLevel",
+      "fixture": "api-validate-chain-go.json",
+      "sha": "743e31d8590efd1df73bd97367eb7f49580758cf4aab0263e406147f584fde04",
+      "evidence": "第88批 22 个已移植 validate 助手整链大探针 93 行逐字节（单函数正常路径真实现，非 throw-shell）"
+    },
+    {
+      "pkg": "pkg/api",
+      "recv": "",
+      "fn": "validateLogOverrides",
+      "fixture": "api-validate-chain-go.json",
+      "sha": "743e31d8590efd1df73bd97367eb7f49580758cf4aab0263e406147f584fde04",
+      "evidence": "第88批 22 个已移植 validate 助手整链大探针 93 行逐字节（单函数正常路径真实现，非 throw-shell）"
+    },
+    {
+      "pkg": "pkg/api",
+      "recv": "",
+      "fn": "validateLogStyle",
+      "fixture": "api-validate-chain-go.json",
+      "sha": "743e31d8590efd1df73bd97367eb7f49580758cf4aab0263e406147f584fde04",
+      "evidence": "第88批 22 个已移植 validate 助手整链大探针 93 行逐字节（单函数正常路径真实现，非 throw-shell）"
+    },
+    {
+      "pkg": "pkg/api",
+      "recv": "",
+      "fn": "validateOutputExtensions",
+      "fixture": "api-validate-chain-go.json",
+      "sha": "743e31d8590efd1df73bd97367eb7f49580758cf4aab0263e406147f584fde04",
+      "evidence": "第88批 22 个已移植 validate 助手整链大探针 93 行逐字节（单函数正常路径真实现，非 throw-shell）"
+    },
+    {
+      "pkg": "pkg/api",
+      "recv": "",
+      "fn": "validatePath",
+      "fixture": "api-validate2-go.json",
+      "sha": "e6939624f932a7020875e20c1b693dbf0836020b34ff5d5135a50c2bf7ea3d6d",
+      "evidence": "第86批 validatePath/validateExternals/validatePathsArray 共享 harness 16 行逐字节"
+    },
+    {
+      "pkg": "pkg/api",
+      "recv": "",
+      "fn": "validatePathTemplate",
+      "fixture": "api-validate-chain-go.json",
+      "sha": "743e31d8590efd1df73bd97367eb7f49580758cf4aab0263e406147f584fde04",
+      "evidence": "第88批 22 个已移植 validate 助手整链大探针 93 行逐字节（单函数正常路径真实现，非 throw-shell）"
+    },
+    {
+      "pkg": "pkg/api",
+      "recv": "",
+      "fn": "validatePlatform",
+      "fixture": "api-validate-chain-go.json",
+      "sha": "743e31d8590efd1df73bd97367eb7f49580758cf4aab0263e406147f584fde04",
+      "evidence": "第88批 22 个已移植 validate 助手整链大探针 93 行逐字节（单函数正常路径真实现，非 throw-shell）"
+    },
+    {
+      "pkg": "pkg/api",
+      "recv": "",
+      "fn": "validateRegex",
+      "fixture": "api-batch-go.json",
+      "sha": "89eed0b9db6a5461fc92a0b02b0117588a32ef19b6d08d2a41d4c217393e73dd",
+      "evidence": "第121批 api 纯助手 11 函数一次探针（Go 27 例逐字节）"
+    },
+    {
+      "pkg": "pkg/api",
+      "recv": "",
+      "fn": "validateResolveExtensions",
+      "fixture": "api-validate-chain-go.json",
+      "sha": "743e31d8590efd1df73bd97367eb7f49580758cf4aab0263e406147f584fde04",
+      "evidence": "第88批 22 个已移植 validate 助手整链大探针 93 行逐字节（单函数正常路径真实现，非 throw-shell）"
+    },
+    {
+      "pkg": "pkg/api",
+      "recv": "",
+      "fn": "validateSourceMap",
+      "fixture": "api-validate-chain-go.json",
+      "sha": "743e31d8590efd1df73bd97367eb7f49580758cf4aab0263e406147f584fde04",
+      "evidence": "第88批 22 个已移植 validate 助手整链大探针 93 行逐字节（单函数正常路径真实现，非 throw-shell）"
+    },
+    {
+      "pkg": "pkg/api",
+      "recv": "",
+      "fn": "validateSupported",
+      "fixture": "api-validate-chain-go.json",
+      "sha": "743e31d8590efd1df73bd97367eb7f49580758cf4aab0263e406147f584fde04",
+      "evidence": "第88批 22 个已移植 validate 助手整链大探针 93 行逐字节（单函数正常路径真实现，非 throw-shell）"
+    },
+    {
+      "pkg": "pkg/api",
+      "recv": "",
+      "fn": "validateTreeShaking",
+      "fixture": "api-validate-chain-go.json",
+      "sha": "743e31d8590efd1df73bd97367eb7f49580758cf4aab0263e406147f584fde04",
+      "evidence": "第88批 22 个已移植 validate 助手整链大探针 93 行逐字节（单函数正常路径真实现，非 throw-shell）"
+    },
+    {
+      "pkg": "pkg/api",
+      "recv": "apiHandler",
+      "fn": "broadcastBuildResult",
+      "fixture": "broadcast-go.json",
+      "sha": "4e69b114eb411711a28ab51b9c309577fb466532d84b55adc4919a618d5a0f94",
+      "evidence": "第112轮 apiHandler.broadcastBuildResult（hash差异→SSE change事件），一探针6场景逐字节"
+    },
+    {
+      "pkg": "pkg/api",
+      "recv": "ContextError",
+      "fn": "Error",
+      "fixture": "api-batch-go.json",
+      "sha": "89eed0b9db6a5461fc92a0b02b0117588a32ef19b6d08d2a41d4c217393e73dd",
+      "evidence": "第121批 api 纯助手 11 函数一次探针（Go 27 例逐字节）"
+    },
+    {
+      "pkg": "pkg/api",
+      "recv": "internalContext",
+      "fn": "activeBuildOrRecentBuildOrRebuild",
+      "fixture": "ctx-state-go.json",
+      "sha": "22f8bc8de62cf35ab05a664a9279d3e1d8dd68c515aabf0909d34d6acc1f3cad",
+      "evidence": "第105轮 internalContext 生命周期状态机 Cancel/activeBuildOrRecentBuildOrRebuild/rebuild，一探针 4 场景逐字节"
+    },
+    {
+      "pkg": "pkg/api",
+      "recv": "internalContext",
+      "fn": "Cancel",
+      "fixture": "ctx-state-go.json",
+      "sha": "22f8bc8de62cf35ab05a664a9279d3e1d8dd68c515aabf0909d34d6acc1f3cad",
+      "evidence": "第105轮 internalContext 生命周期状态机 Cancel/activeBuildOrRecentBuildOrRebuild/rebuild，一探针 4 场景逐字节"
+    },
+    {
+      "pkg": "pkg/api",
+      "recv": "internalContext",
+      "fn": "rebuild",
+      "fixture": "ctx-state-go.json",
+      "sha": "22f8bc8de62cf35ab05a664a9279d3e1d8dd68c515aabf0909d34d6acc1f3cad",
+      "evidence": "第105轮 internalContext 生命周期状态机 Cancel/activeBuildOrRecentBuildOrRebuild/rebuild，一探针 4 场景逐字节"
+    },
+    {
+      "pkg": "pkg/api",
+      "recv": "metafileArray",
+      "fn": "Len",
+      "fixture": "api-batch-go.json",
+      "sha": "89eed0b9db6a5461fc92a0b02b0117588a32ef19b6d08d2a41d4c217393e73dd",
+      "evidence": "第121批 api 纯助手 11 函数一次探针（Go 27 例逐字节）"
+    },
+    {
+      "pkg": "pkg/api",
+      "recv": "metafileArray",
+      "fn": "Less",
+      "fixture": "api-batch-go.json",
+      "sha": "89eed0b9db6a5461fc92a0b02b0117588a32ef19b6d08d2a41d4c217393e73dd",
+      "evidence": "第121批 api 纯助手 11 函数一次探针（Go 27 例逐字节）"
+    },
+    {
+      "pkg": "pkg/api",
+      "recv": "metafileArray",
+      "fn": "Swap",
+      "fixture": "api-batch-go.json",
+      "sha": "89eed0b9db6a5461fc92a0b02b0117588a32ef19b6d08d2a41d4c217393e73dd",
+      "evidence": "第121批 api 纯助手 11 函数一次探针（Go 27 例逐字节）"
+    },
+    {
+      "pkg": "pkg/api",
+      "recv": "pluginImpl",
+      "fn": "onLoad",
+      "fixture": "plugin-reg-go.json",
+      "sha": "a85e150bb16c0111592062b049f26d30a3c71cd8768b40e15248d69ce2a2bec6",
+      "evidence": "第105轮 pluginImpl.onStart/onResolve/onLoad 注册状态机，一探针 4 场景×3 方法逐字节"
+    },
+    {
+      "pkg": "pkg/api",
+      "recv": "pluginImpl",
+      "fn": "onResolve",
+      "fixture": "plugin-reg-go.json",
+      "sha": "a85e150bb16c0111592062b049f26d30a3c71cd8768b40e15248d69ce2a2bec6",
+      "evidence": "第105轮 pluginImpl.onStart/onResolve/onLoad 注册状态机，一探针 4 场景×3 方法逐字节"
+    },
+    {
+      "pkg": "pkg/api",
+      "recv": "pluginImpl",
+      "fn": "onStart",
+      "fixture": "plugin-reg-go.json",
+      "sha": "a85e150bb16c0111592062b049f26d30a3c71cd8768b40e15248d69ce2a2bec6",
+      "evidence": "第105轮 pluginImpl.onStart/onResolve/onLoad 注册状态机，一探针 4 场景×3 方法逐字节"
+    },
+    {
+      "pkg": "pkg/api",
+      "recv": "pluginImpl",
+      "fn": "validatePathsArray",
+      "fixture": "api-validate2-go.json",
+      "sha": "e6939624f932a7020875e20c1b693dbf0836020b34ff5d5135a50c2bf7ea3d6d",
+      "evidence": "第86批 validatePath/validateExternals/validatePathsArray 共享 harness 16 行逐字节"
+    },
+    {
+      "pkg": "pkg/api",
+      "recv": "watcher",
+      "fn": "setWatchData",
+      "fixture": "watcher-state-go.json",
+      "sha": "7617d3d23ab2dd0cd47d343270addc3ce0d453b33c01d86ce5e0f4fea2021c15",
+      "evidence": "第106轮 watcher.setWatchData 确定性状态（shouldLog=false），一探针4场景逐字节"
+    },
+    {
+      "pkg": "pkg/api",
+      "recv": "watcher",
+      "fn": "tryToFindDirtyPath",
+      "fixture": "watch-dirty-go.json",
+      "sha": "87db84eb7e30ce373d02221220191c22dd959463be876e50272eb53393060488",
+      "evidence": "第107轮 tryToFindDirtyPath 预置itemsToScan绕开rand的确定性路径，一探针6场景逐字节"
+    },
+    {
+      "pkg": "pkg/cli",
+      "recv": "",
+      "fn": "addAnalyzePlugin",
+      "fixture": "analyze-plugin-go.json",
+      "sha": "bc631783c57c8b23e1ce20aa3e56982b305b9cb7b8f95ecd48d23805f8ba29a5",
+      "evidence": "第105轮 addAnalyzePlugin append PrintAnalysis + Metafile + OnEnd 输出 AnalyzeMetafile，一探针 4 场景逐字节"
+    },
+    {
+      "pkg": "pkg/cli",
+      "recv": "",
+      "fn": "filterAnalyzeFlags",
+      "fixture": "cli-pure-go.json",
+      "sha": "e591082561876e9982db840dd81e63afaaac8090abd6db0ce34ab9ce8b7d8c8e",
+      "evidence": "第89批 newBuildOptions/newTransformOptions/filterAnalyzeFlags 整链探针 7 例逐字节"
+    },
+    {
+      "pkg": "pkg/cli",
+      "recv": "",
+      "fn": "newBuildOptions",
+      "fixture": "cli-pure-go.json",
+      "sha": "e591082561876e9982db840dd81e63afaaac8090abd6db0ce34ab9ce8b7d8c8e",
+      "evidence": "第89批 newBuildOptions/newTransformOptions/filterAnalyzeFlags 整链探针 7 例逐字节"
+    },
+    {
+      "pkg": "pkg/cli",
+      "recv": "",
+      "fn": "newTransformOptions",
+      "fixture": "cli-pure-go.json",
+      "sha": "e591082561876e9982db840dd81e63afaaac8090abd6db0ce34ab9ce8b7d8c8e",
+      "evidence": "第89批 newBuildOptions/newTransformOptions/filterAnalyzeFlags 整链探针 7 例逐字节"
+    },
+    {
+      "pkg": "pkg/cli",
+      "recv": "",
+      "fn": "parseTargets",
+      "fixture": "targets-go.json",
+      "sha": "4942db84b4472a37104de6f239744f06b21cc2b7f7c7d4d875c25784a0f03552",
+      "evidence": "第89批 parseTargets 逐字节 7 例（target 别名/引擎/错误注记）"
+    },
+    {
+      "pkg": "pkg/cli",
+      "recv": "",
+      "fn": "printMangleCache",
+      "fixture": "mangle-go.json",
+      "sha": "fde18157b2ebe8bdbcbb613cb99d440e35d141d8c93f8af1a5c15ad51e39a7ac",
+      "evidence": "第89批 printMangleCache 纯打印器 7 例逐字节"
+    },
+    {
+      "pkg": "internal/js_parser",
+      "recv": "parser",
+      "fn": "handleIdentifier",
+      "fixture": "visit-family-go.json",
+      "sha": "a631d6f27ea4e1d2093d31b661bdea20b84d52358b14663c6602e6a52f95c70d",
+      "evidence": "第113轮 visit-family 族 Parse→Print 一探针14场景逐字节（parser handleIdentifier/maybeRewritePropertyAccess/parseExprOrLetOrUsingStmt/binaryExprVisitor.checkAndPrepare/visitRightAndFinish + printer binaryExprVisitor.checkAndPrepare/visitRightAndFinish）"
+    },
+    {
+      "pkg": "internal/js_parser",
+      "recv": "binaryExprVisitor",
+      "fn": "checkAndPrepare",
+      "fixture": "visit-family-go.json",
+      "sha": "a631d6f27ea4e1d2093d31b661bdea20b84d52358b14663c6602e6a52f95c70d",
+      "evidence": "第113轮 visit-family 族 Parse→Print 一探针14场景逐字节（parser handleIdentifier/maybeRewritePropertyAccess/parseExprOrLetOrUsingStmt/binaryExprVisitor.checkAndPrepare/visitRightAndFinish + printer binaryExprVisitor.checkAndPrepare/visitRightAndFinish）"
+    },
+    {
+      "pkg": "internal/js_parser",
+      "recv": "binaryExprVisitor",
+      "fn": "visitRightAndFinish",
+      "fixture": "visit-family-go.json",
+      "sha": "a631d6f27ea4e1d2093d31b661bdea20b84d52358b14663c6602e6a52f95c70d",
+      "evidence": "第113轮 visit-family 族 Parse→Print 一探针14场景逐字节（parser handleIdentifier/maybeRewritePropertyAccess/parseExprOrLetOrUsingStmt/binaryExprVisitor.checkAndPrepare/visitRightAndFinish + printer binaryExprVisitor.checkAndPrepare/visitRightAndFinish）"
+    },
+    {
+      "pkg": "internal/js_printer",
+      "recv": "binaryExprVisitor",
+      "fn": "checkAndPrepare",
+      "fixture": "visit-family-go.json",
+      "sha": "a631d6f27ea4e1d2093d31b661bdea20b84d52358b14663c6602e6a52f95c70d",
+      "evidence": "第113轮 visit-family 族 Parse→Print 一探针14场景逐字节（parser handleIdentifier/maybeRewritePropertyAccess/parseExprOrLetOrUsingStmt/binaryExprVisitor.checkAndPrepare/visitRightAndFinish + printer binaryExprVisitor.checkAndPrepare/visitRightAndFinish）"
+    },
+    {
+      "pkg": "internal/js_printer",
+      "recv": "binaryExprVisitor",
+      "fn": "visitRightAndFinish",
+      "fixture": "visit-family-go.json",
+      "sha": "a631d6f27ea4e1d2093d31b661bdea20b84d52358b14663c6602e6a52f95c70d",
+      "evidence": "第113轮 visit-family 族 Parse→Print 一探针14场景逐字节（parser handleIdentifier/maybeRewritePropertyAccess/parseExprOrLetOrUsingStmt/binaryExprVisitor.checkAndPrepare/visitRightAndFinish + printer binaryExprVisitor.checkAndPrepare/visitRightAndFinish）"
+    },
+    {
+      "pkg": "internal/js_parser",
+      "recv": "parser",
+      "fn": "maybeRewritePropertyAccess",
+      "fixture": "visit-family-go.json",
+      "sha": "a631d6f27ea4e1d2093d31b661bdea20b84d52358b14663c6602e6a52f95c70d",
+      "evidence": "第113轮 visit-family 族 Parse→Print 一探针14场景逐字节（parser handleIdentifier/maybeRewritePropertyAccess/parseExprOrLetOrUsingStmt/binaryExprVisitor.checkAndPrepare/visitRightAndFinish + printer binaryExprVisitor.checkAndPrepare/visitRightAndFinish）"
+    },
+    {
+      "pkg": "internal/js_parser",
+      "recv": "parser",
+      "fn": "parseExprOrLetOrUsingStmt",
+      "fixture": "visit-family-go.json",
+      "sha": "a631d6f27ea4e1d2093d31b661bdea20b84d52358b14663c6602e6a52f95c70d",
+      "evidence": "第113轮 visit-family 族 Parse→Print 一探针14场景逐字节（parser handleIdentifier/maybeRewritePropertyAccess/parseExprOrLetOrUsingStmt/binaryExprVisitor.checkAndPrepare/visitRightAndFinish + printer binaryExprVisitor.checkAndPrepare/visitRightAndFinish）"
+    },
+    {
+      "pkg": "pkg/api",
+      "recv": "hackListener",
+      "fn": "Accept",
+      "fixture": "serve-api-go.json",
+      "sha": "14e2effaea297344ac12eb02bae06a45daf3331f45f23f2294ef61280bde72d3",
+      "evidence": "第114轮 api-serve 族状态/SSE harness 逐字节（Accept 首/次 Accept；watcher stop-before-start/start-rebuild-stop；Watch disposed/already；serveEventStream success/error）"
+    },
+    {
+      "pkg": "pkg/api",
+      "recv": "watcher",
+      "fn": "start",
+      "fixture": "serve-api-go.json",
+      "sha": "14e2effaea297344ac12eb02bae06a45daf3331f45f23f2294ef61280bde72d3",
+      "evidence": "第114轮 api-serve 族状态/SSE harness 逐字节（Accept 首/次 Accept；watcher stop-before-start/start-rebuild-stop；Watch disposed/already；serveEventStream success/error）"
+    },
+    {
+      "pkg": "pkg/api",
+      "recv": "watcher",
+      "fn": "stop",
+      "fixture": "serve-api-go.json",
+      "sha": "14e2effaea297344ac12eb02bae06a45daf3331f45f23f2294ef61280bde72d3",
+      "evidence": "第114轮 api-serve 族状态/SSE harness 逐字节（Accept 首/次 Accept；watcher stop-before-start/start-rebuild-stop；Watch disposed/already；serveEventStream success/error）"
+    },
+    {
+      "pkg": "pkg/api",
+      "recv": "internalContext",
+      "fn": "Watch",
+      "fixture": "serve-api-go.json",
+      "sha": "14e2effaea297344ac12eb02bae06a45daf3331f45f23f2294ef61280bde72d3",
+      "evidence": "第114轮 api-serve 族状态/SSE harness 逐字节（Accept 首/次 Accept；watcher stop-before-start/start-rebuild-stop；Watch disposed/already；serveEventStream success/error）"
+    },
+    {
+      "pkg": "pkg/api",
+      "recv": "apiHandler",
+      "fn": "serveEventStream",
+      "fixture": "serve-api-go.json",
+      "sha": "14e2effaea297344ac12eb02bae06a45daf3331f45f23f2294ef61280bde72d3",
+      "evidence": "第114轮 api-serve 族状态/SSE harness 逐字节（Accept 首/次 Accept；watcher stop-before-start/start-rebuild-stop；Watch disposed/already；serveEventStream success/error）"
+    },
+    {
+      "pkg": "pkg/api",
+      "recv": "apiHandler",
+      "fn": "ServeHTTP",
+      "fixture": "serve-http-go.json",
+      "sha": "a79989e58336b251a73f17479d6066206265f47dfdfeb853d62944c78d287e07",
+      "evidence": "第115轮 ServeHTTP 15场景逐字节（servedir空子集：CORS/Host/反斜杠/构建错误/输出文件+Range+MIME/目录列表/重定向/favicon/404）"
+    },
+    {
+      "pkg": "pkg/api",
+      "recv": "internalContext",
+      "fn": "Serve",
+      "fixture": "serve-validate-go.json",
+      "sha": "413919e0c1421c47ac5b008c7e8466a691e1a31d888bdcc9c7396d64aa9fb7bb",
+      "evidence": "第115轮 Serve net.Listen前10校验分支逐字节（disposed/already/key-cert/servedir/fallback/CORS/stdout/outdir containment）；成功路径需真实端口，禁止端口不端口"
+    },
+    {
+      "pkg": "internal/bundler",
+      "recv": "Bundle",
+      "fn": "Compile",
+      "fixture": "compile-go.json",
+      "sha": "f9235a351bbf0a3715f77ae455e7b00104300e1efed4c7a8ff973003c6680740",
+      "evidence": "第116轮 Bundle.Compile 真1:1（注入link回调：输出分组拼接/覆盖输入检测+API hint/CanBeMerged去重/metafile），5场景逐字节"
+    },
+    {
+      "pkg": "internal/bundler",
+      "recv": "scanner",
+      "fn": "preprocessInjectedFiles",
+      "fixture": "injected-go.json",
+      "sha": "192d9fad2b49856d827204e54d75981d44134a697fc34a51178bcf30205c415d",
+      "evidence": "第116轮 scanner.preprocessInjectedFiles InjectedDefines缝真1:1（虚拟key/sourceIndex/visited/Source/LazyExportAST/JSON loader/PureData side-effects），3场景逐字节（require_* wrapper按既有约定双侧过滤）；InjectPaths需resolver goroutine，注入缝未覆盖如实标注"
+    },
+    {
+      "pkg": "internal/bundler",
+      "recv": "scanner",
+      "fn": "addEntryPoints",
+      "fixture": "entrypoints-go.json",
+      "sha": "726b9398032192fab22f662ffd0a66898e0dd492f274c063e01c8e480435c709",
+      "evidence": "第116轮 scanner.addEntryPoints phase-2 真1:1（注入resolve/parse；Go探针交叉验证helper与真实addEntryPoints输出一致）：自动outputPath生成+sanitize+卷标、outbase计算、parse取SourceIndex、相对转换+扩展剥离，4场景逐字节"
+    },
+    {
+      "pkg": "internal/bundler",
+      "recv": "scanner",
+      "fn": "scanAllDependencies",
+      "fixture": "scan-drain-go.json",
+      "sha": "954ec59c0a16f92a9a3ac784aff0545d559c93d0e3c655c842b72ec66121ab1f",
+      "evidence": "第116轮 scanner.scanAllDependencies 非bundle drain 真1:1：消费resultChannel按Source.Index写回、!ok跳过、乱序放置，2场景逐字节；bundle模式import解析为深耦合未覆盖如实标注"
+    },
+    {
+      "pkg": "internal/bundler",
+      "recv": "scanner",
+      "fn": "processScannedFiles",
+      "fixture": "process-scanned-go.json",
+      "sha": "0ee5b9f56a6aaae9da07dbaed1813b2061e43636a06b94b17f5a3af5e5a5e075",
+      "evidence": "第116轮 scanner.processScannedFiles 部分切片真1:1：pretty-path碰撞的import属性消歧(with后缀)+metafile jsonMetadataChunk(bytes/imports[]/with属性)+大包MinifiedMetafile，4场景逐字节；bundle模式import record解析/format分支未覆盖如实标注"
+    },
+    {
+      "pkg": "internal/bundler",
+      "recv": "",
+      "fn": "ScanBundle",
+      "fixture": "scanbundle-go.json",
+      "sha": "656ad6db0ec38e3ca886a20daf4b361899e5bd533332953f32fb321ce0edb7a3",
+      "evidence": "第116轮 ScanBundle 确定性graph-scan编排真1:1（注入parse/resolve/keyPrefix；Go helper与真实ScanBundle交叉验证）：runtime固定idx0/入口顺序分配idx/import解析到新idx/文件按idx排序，3场景逐字节；outputPath自动basename生成由addEntryPoints单独验，onStart插件/random key未覆盖如实标注"
+    },
+    {
+      "pkg": "internal/linker",
+      "recv": "linkerContext",
+      "fn": "scanImportsAndExports",
+      "fixture": "scanimports-go.json",
+      "sha": "cdbcd0085a2ebb9af1e366d0bde2be71ec81920310cd6ceb81edaf68b07cf4a4",
+      "evidence": "第117轮 scanImportsAndExports CSS URL inlining缝真1:1（底座URLForCSS已1:1移植于js_ast.ts:1384）：CSS import record指向JSRepr/CopyRepr时改写Path/清Namespace/清SourceIndex/按loader+uniqueKey置Flags/拷additionalFiles，4场景逐字节；CommonJS判定/composes校验/JSRepr符号图未覆盖如实标注"
+    },
+    {
+      "pkg": "internal/linker",
+      "recv": "",
+      "fn": "Link",
+      "fixture": "link-go.json",
+      "sha": "b4daf25712a7fbbae91a96b21d2e9c5db34d548614ce268aaaa53ff9a550d5c6",
+      "evidence": "第118轮 Link 顶层编排真1:1（组合已端口CloneLinkerGraph/treeShaking/computeChunks/computeCrossChunk/mangle/generateChunks；注入真实Parse AST+dataForSourceMaps+FS），3端到端场景逐字节（esm-var/side-effect/multi-stmt）；profiler names/export内联重写差异/复杂chunk未覆盖如实标注"
+    },
+    {
+      "pkg": "cmd/esbuild",
+      "recv": "",
+      "fn": "main",
+      "fixture": "main-scan-go.json",
+      "sha": "38eec37820a5678f0f200905f3c5575fb0d9a7d1f6cf1b431ca3de4c09d2a9e8",
+      "evidence": "第119轮 main.go os.Args预扫描确定性核心真1:1（help/version/版本不匹配/service/ping/watch变体/serve/profile flags，副作用以earlyAction返回由调用方执行），9参数集逐字节；trace/heap/profile文件写入与cli.Run主循环为平台边界/深耦合未覆盖如实标注"
+    },
+    {
+      "pkg": "cmd/esbuild",
+      "recv": "",
+      "fn": "runService",
+      "fixture": "service-loop-go.json",
+      "sha": "958344658fb83c7bb5556f184237792050f86c36faf8baea6d8432760c748859",
+      "evidence": "第119轮 runService stdin帧循环确定性核心真1:1（注入stdin+dispatch；version handshake+readLengthPrefixedSlice分帧循环，sendPings=false），4场景逐字节（空/1包/2包/半包）；os.Stdin/os.Stdout全局IO/计时器ping goroutine/真实命令dispatch为平台边界未覆盖如实标注"
+    },
+    {
+      "pkg": "internal/bundler",
+      "recv": "scanner",
+      "fn": "maybeParseFile",
+      "fixture": "maybeparse-go.json",
+      "sha": "f5a8f4e74c1f6b9caf9ad53ebd8dc5ac94eeb41cfdb3fbe570a81cd172cd5de5",
+      "evidence": "第120轮 scanner.maybeParseFile 确定性状态缝真1:1（file命名空间规范化/visited去重命中/未命中allocateSourceIndex分配+remaining++），4场景逐字节（visited-hit/new-path/dedup/namespace-canonical）；parseFile goroutine的module-type/define/loader AST结果为深耦合，onParse注入no-op仅观察状态、未覆盖如实标注"
+    },
+    {
+      "pkg": "internal/bundler",
+      "recv": "runtimeCache",
+      "fn": "parseRuntime",
+      "fixture": "runtime-parse-go.json",
+      "sha": "1431fef748a3b93ecf9a87f4280df9524676ca162fef2f950280ceac17c16297",
+      "evidence": "第120轮 parseRuntime 真1:1投影（组合runtime.Source+js_parser.Parse，source bytes sha + AST parts/stmt结构），3 feature配置逐字节；full AST符号表Go344/TS233（unbound全局，TS parser骨架限制）为known-deviation不在此投影覆盖、如实标注"
+    },
+    {
+      "pkg": "internal/bundler",
+      "recv": "",
+      "fn": "parseFile",
+      "fixture": "parsefile-go.json",
+      "sha": "992e3844152d0d07d36ebde8e811abb60ea611908227606aae6bce87d46fd9ec",
+      "evidence": "第120轮 parseFile stdin缝真1:1投影（loader选择+js_parser.Parse/JSON ParseJSON+LazyExportAST+sideEffects判定+AST parts/stmt结构），3场景(js-var/js-fn/json)逐字节；符号表隐式全局(arguments/React/require_*)TS parser骨架限制为known-deviation不在投影覆盖、插件/resolver非stdin路径未覆盖如实标注"
+    }
+  ]
+}

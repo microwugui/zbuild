@@ -1,0 +1,1 @@
+.card { @supports (selector(&)) { &:hover { color: red } } }

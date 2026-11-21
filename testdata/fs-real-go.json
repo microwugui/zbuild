@@ -1,0 +1,314 @@
+[
+  {
+    "fn": "IsAbs",
+    "win": 0,
+    "arg": "/a",
+    "out": "true"
+  },
+  {
+    "fn": "IsAbs",
+    "win": 0,
+    "arg": "a/b",
+    "out": "false"
+  },
+  {
+    "fn": "IsAbs",
+    "win": 0,
+    "arg": "",
+    "out": "false"
+  },
+  {
+    "fn": "IsAbs",
+    "win": 0,
+    "arg": "../x",
+    "out": "false"
+  },
+  {
+    "fn": "Abs",
+    "win": 0,
+    "arg": "/a",
+    "out": "/a"
+  },
+  {
+    "fn": "Abs",
+    "win": 0,
+    "arg": "a/b",
+    "out": "/home/user/a/b"
+  },
+  {
+    "fn": "Abs",
+    "win": 0,
+    "arg": "",
+    "out": "/home/user"
+  },
+  {
+    "fn": "Abs",
+    "win": 0,
+    "arg": "../x",
+    "out": "/home/x"
+  },
+  {
+    "fn": "Dir",
+    "win": 0,
+    "arg": "a/b",
+    "out": "a"
+  },
+  {
+    "fn": "Dir",
+    "win": 0,
+    "arg": "/a/b",
+    "out": "/a"
+  },
+  {
+    "fn": "Dir",
+    "win": 0,
+    "arg": "foo",
+    "out": "."
+  },
+  {
+    "fn": "Dir",
+    "win": 0,
+    "arg": "",
+    "out": "."
+  },
+  {
+    "fn": "Base",
+    "win": 0,
+    "arg": "a/b",
+    "out": "b"
+  },
+  {
+    "fn": "Base",
+    "win": 0,
+    "arg": "/",
+    "out": "/"
+  },
+  {
+    "fn": "Base",
+    "win": 0,
+    "arg": "foo",
+    "out": "foo"
+  },
+  {
+    "fn": "Base",
+    "win": 0,
+    "arg": "a/b/",
+    "out": "b"
+  },
+  {
+    "fn": "Ext",
+    "win": 0,
+    "arg": "foo.txt",
+    "out": ".txt"
+  },
+  {
+    "fn": "Ext",
+    "win": 0,
+    "arg": "a.b.c",
+    "out": ".c"
+  },
+  {
+    "fn": "Ext",
+    "win": 0,
+    "arg": ".hidden",
+    "out": ".hidden"
+  },
+  {
+    "fn": "Join",
+    "win": 0,
+    "arg": "[\"a\",\"b\"]",
+    "out": "a/b"
+  },
+  {
+    "fn": "Join",
+    "win": 0,
+    "arg": "[]",
+    "out": "."
+  },
+  {
+    "fn": "Join",
+    "win": 0,
+    "arg": "[\"/a\",\"b\",\"../c\"]",
+    "out": "/a/c"
+  },
+  {
+    "fn": "Cwd",
+    "win": 0,
+    "arg": "",
+    "out": "/home/user"
+  },
+  {
+    "fn": "Rel",
+    "win": 0,
+    "arg": "a|b",
+    "out": "../b|true"
+  },
+  {
+    "fn": "Rel",
+    "win": 0,
+    "arg": "/a/b|/a/c",
+    "out": "../c|true"
+  },
+  {
+    "fn": "Rel",
+    "win": 0,
+    "arg": "x|x",
+    "out": ".|true"
+  },
+  {
+    "fn": "IsAbs",
+    "win": 1,
+    "arg": "/a",
+    "out": "false"
+  },
+  {
+    "fn": "IsAbs",
+    "win": 1,
+    "arg": "a/b",
+    "out": "false"
+  },
+  {
+    "fn": "IsAbs",
+    "win": 1,
+    "arg": "",
+    "out": "false"
+  },
+  {
+    "fn": "IsAbs",
+    "win": 1,
+    "arg": "../x",
+    "out": "false"
+  },
+  {
+    "fn": "Abs",
+    "win": 1,
+    "arg": "/a",
+    "out": "\\home\\user\\a"
+  },
+  {
+    "fn": "Abs",
+    "win": 1,
+    "arg": "a/b",
+    "out": "\\home\\user\\a\\b"
+  },
+  {
+    "fn": "Abs",
+    "win": 1,
+    "arg": "",
+    "out": "\\home\\user"
+  },
+  {
+    "fn": "Abs",
+    "win": 1,
+    "arg": "../x",
+    "out": "\\home\\x"
+  },
+  {
+    "fn": "Dir",
+    "win": 1,
+    "arg": "a/b",
+    "out": "a"
+  },
+  {
+    "fn": "Dir",
+    "win": 1,
+    "arg": "/a/b",
+    "out": "\\a"
+  },
+  {
+    "fn": "Dir",
+    "win": 1,
+    "arg": "foo",
+    "out": "."
+  },
+  {
+    "fn": "Dir",
+    "win": 1,
+    "arg": "",
+    "out": "."
+  },
+  {
+    "fn": "Base",
+    "win": 1,
+    "arg": "a/b",
+    "out": "b"
+  },
+  {
+    "fn": "Base",
+    "win": 1,
+    "arg": "/",
+    "out": "\\"
+  },
+  {
+    "fn": "Base",
+    "win": 1,
+    "arg": "foo",
+    "out": "foo"
+  },
+  {
+    "fn": "Base",
+    "win": 1,
+    "arg": "a/b/",
+    "out": "b"
+  },
+  {
+    "fn": "Ext",
+    "win": 1,
+    "arg": "foo.txt",
+    "out": ".txt"
+  },
+  {
+    "fn": "Ext",
+    "win": 1,
+    "arg": "a.b.c",
+    "out": ".c"
+  },
+  {
+    "fn": "Ext",
+    "win": 1,
+    "arg": ".hidden",
+    "out": ".hidden"
+  },
+  {
+    "fn": "Join",
+    "win": 1,
+    "arg": "[\"a\",\"b\"]",
+    "out": "a\\b"
+  },
+  {
+    "fn": "Join",
+    "win": 1,
+    "arg": "[]",
+    "out": "."
+  },
+  {
+    "fn": "Join",
+    "win": 1,
+    "arg": "[\"/a\",\"b\",\"../c\"]",
+    "out": "\\a\\c"
+  },
+  {
+    "fn": "Cwd",
+    "win": 1,
+    "arg": "",
+    "out": "/home/user"
+  },
+  {
+    "fn": "Rel",
+    "win": 1,
+    "arg": "a|b",
+    "out": "..\\b|true"
+  },
+  {
+    "fn": "Rel",
+    "win": 1,
+    "arg": "/a/b|/a/c",
+    "out": "..\\c|true"
+  },
+  {
+    "fn": "Rel",
+    "win": 1,
+    "arg": "x|x",
+    "out": ".|true"
+  }
+]

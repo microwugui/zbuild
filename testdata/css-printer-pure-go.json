@@ -1,0 +1,77 @@
+[
+  {
+    "fn": "bestQuoteCharForString",
+    "arg": "0|plain",
+    "out": "34"
+  },
+  {
+    "fn": "bestQuoteCharForString",
+    "arg": "0|a'b",
+    "out": "34"
+  },
+  {
+    "fn": "bestQuoteCharForString",
+    "arg": "0|a\"b",
+    "out": "39"
+  },
+  {
+    "fn": "bestQuoteCharForString",
+    "arg": "0|a'b\"c",
+    "out": "34"
+  },
+  {
+    "fn": "bestQuoteCharForString",
+    "arg": "1|url",
+    "out": "0"
+  },
+  {
+    "fn": "bestQuoteCharForString",
+    "arg": "1|a b",
+    "out": "0"
+  },
+  {
+    "fn": "bestQuoteCharForString",
+    "arg": "1|a'b",
+    "out": "0"
+  },
+  {
+    "fn": "bestQuoteCharForString",
+    "arg": "1|a(b)",
+    "out": "34"
+  },
+  {
+    "fn": "bestQuoteCharForString",
+    "arg": "1|a\\b",
+    "out": "0"
+  },
+  {
+    "fn": "functionMultiLineCommaPeriod",
+    "arg": "{\"kind\":27,\"text\":\"linear-gradient\",\"children\":[10,10]}",
+    "out": "1"
+  },
+  {
+    "fn": "functionMultiLineCommaPeriod",
+    "arg": "{\"kind\":27,\"text\":\"linear-gradient\",\"children\":[10]}",
+    "out": "0"
+  },
+  {
+    "fn": "functionMultiLineCommaPeriod",
+    "arg": "{\"kind\":27,\"text\":\"matrix\",\"children\":[10,10,10,10,10]}",
+    "out": "2"
+  },
+  {
+    "fn": "functionMultiLineCommaPeriod",
+    "arg": "{\"kind\":27,\"text\":\"matrix3d\",\"children\":[10,10,10,10,10,10,10,10,10,10,10,10,10,10,10]}",
+    "out": "4"
+  },
+  {
+    "fn": "functionMultiLineCommaPeriod",
+    "arg": "{\"kind\":27,\"text\":\"foo\",\"children\":[10,10]}",
+    "out": "0"
+  },
+  {
+    "fn": "functionMultiLineCommaPeriod",
+    "arg": "{\"kind\":29,\"text\":\"linear-gradient\",\"children\":[10,10]}",
+    "out": "0"
+  }
+]

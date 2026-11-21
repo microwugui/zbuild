@@ -1,0 +1,90 @@
+[
+  {
+    "name": "two-plugins",
+    "numPlugins": 2,
+    "pluginNames": [
+      "alpha",
+      "beta"
+    ],
+    "onStartCounts": [
+      1,
+      0
+    ],
+    "onResolveCounts": [
+      1,
+      0
+    ],
+    "onLoadCounts": [
+      1,
+      0
+    ],
+    "onEndCallbacks": 2,
+    "onEndNames": [
+      "alpha",
+      "beta"
+    ],
+    "onDisposeCallbacks": 1,
+    "finalMinifyWS": true,
+    "msgs": []
+  },
+  {
+    "name": "empty-name",
+    "numPlugins": 1,
+    "pluginNames": [
+      "ok"
+    ],
+    "onStartCounts": [
+      1
+    ],
+    "onResolveCounts": [
+      0
+    ],
+    "onLoadCounts": [
+      0
+    ],
+    "onEndCallbacks": 0,
+    "onEndNames": [],
+    "onDisposeCallbacks": 0,
+    "finalMinifyWS": false,
+    "msgs": [
+      {
+        "text": "Plugin at index 0 is missing a name",
+        "kind": 0
+      }
+    ]
+  },
+  {
+    "name": "none",
+    "numPlugins": 0,
+    "pluginNames": [],
+    "onStartCounts": [],
+    "onResolveCounts": [],
+    "onLoadCounts": [],
+    "onEndCallbacks": 0,
+    "onEndNames": [],
+    "onDisposeCallbacks": 0,
+    "finalMinifyWS": false,
+    "msgs": []
+  },
+  {
+    "name": "multi-reg",
+    "numPlugins": 1,
+    "pluginNames": [
+      "p"
+    ],
+    "onStartCounts": [
+      0
+    ],
+    "onResolveCounts": [
+      2
+    ],
+    "onLoadCounts": [
+      0
+    ],
+    "onEndCallbacks": 0,
+    "onEndNames": [],
+    "onDisposeCallbacks": 1,
+    "finalMinifyWS": false,
+    "msgs": []
+  }
+]

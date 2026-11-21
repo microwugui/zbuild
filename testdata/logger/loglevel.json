@@ -1,0 +1,81 @@
+{
+ "note": "NewStderrLog 的 message limit / deferred warnings / log level 行为，由 Go 探针 tmpmsgfmt loglimit 打出",
+ "cases": [
+  {
+   "name": "limit2-3errors",
+   "messageLimit": 2,
+   "logLevel": 0,
+   "msgs": [
+    {
+     "kind": 0,
+     "text": "e1"
+    },
+    {
+     "kind": 0,
+     "text": "e2"
+    },
+    {
+     "kind": 0,
+     "text": "e3"
+    }
+   ],
+   "outputHex": "4552524f523a2065310a4552524f523a2065320a32206f662033206572726f72732073686f776e202864697361626c6520746865206d657373616765206c696d69742077697468202d2d6c6f672d6c696d69743d30290a"
+  },
+  {
+   "name": "limit2-warn-warn-err",
+   "messageLimit": 2,
+   "logLevel": 0,
+   "msgs": [
+    {
+     "kind": 1,
+     "text": "w1"
+    },
+    {
+     "kind": 1,
+     "text": "w2"
+    },
+    {
+     "kind": 0,
+     "text": "e1"
+    }
+   ],
+   "outputHex": "5741524e494e473a2077310a4552524f523a2065310a31206f662032207761726e696e677320616e642031206572726f722073686f776e202864697361626c6520746865206d657373616765206c696d69742077697468202d2d6c6f672d6c696d69743d30290a"
+  },
+  {
+   "name": "limit4-warn3",
+   "messageLimit": 4,
+   "logLevel": 0,
+   "msgs": [
+    {
+     "kind": 1,
+     "text": "w1"
+    },
+    {
+     "kind": 1,
+     "text": "w2"
+    },
+    {
+     "kind": 1,
+     "text": "w3"
+    }
+   ],
+   "outputHex": "5741524e494e473a2077310a5741524e494e473a2077320a5741524e494e473a2077330a33207761726e696e67730a"
+  },
+  {
+   "name": "loglevel-warning-hides-info",
+   "messageLimit": 0,
+   "logLevel": 4,
+   "msgs": [
+    {
+     "kind": 2,
+     "text": "i1"
+    },
+    {
+     "kind": 1,
+     "text": "w1"
+    }
+   ],
+   "outputHex": "5741524e494e473a2077310a"
+  }
+ ]
+}

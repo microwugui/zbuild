@@ -1,0 +1,9 @@
+✘ [ERROR] The JSX syntax extension is not currently enabled
+
+    <stdin>:1:11:
+      1 │ let 𐀀 = <x>🍕🍕🍕<y/></x>
+        ╵         ^
+
+  The esbuild loader for this file is currently set to "js" but it must be set to "jsx" to be able to parse JSX syntax. You can use "--loader:.js=jsx" to do that.
+
+1 error

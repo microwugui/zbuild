@@ -1,0 +1,124 @@
+{
+ "cases": [
+  {
+   "name": "num",
+   "input": "const x = 1;",
+   "jsHex": "636f6e73742078203d20313b0a",
+   "minJsHex": "636f6e737420783d313b"
+  },
+  {
+   "name": "decls",
+   "input": "let x = 1, y = \"s\";",
+   "jsHex": "6c65742078203d20312c2079203d202273223b0a",
+   "minJsHex": "6c657420783d312c793d2273223b"
+  },
+  {
+   "name": "var",
+   "input": "var x;",
+   "jsHex": "76617220783b0a",
+   "minJsHex": "76617220783b"
+  },
+  {
+   "name": "binary",
+   "input": "x = 1 + 2 * 3;",
+   "jsHex": "78203d2031202b2032202a20333b0a",
+   "minJsHex": "783d312b322a333b"
+  },
+  {
+   "name": "call",
+   "input": "f(a, b);",
+   "jsHex": "6628612c2062293b0a",
+   "minJsHex": "6628612c62293b"
+  },
+  {
+   "name": "member",
+   "input": "a.b[c];",
+   "jsHex": "612e625b635d3b0a",
+   "minJsHex": "612e625b635d3b"
+  },
+  {
+   "name": "if",
+   "input": "if (a) b(); else c();",
+   "jsHex": "696620286129206228293b0a656c7365206328293b0a",
+   "minJsHex": "69662861296228293b656c7365206328293b"
+  },
+  {
+   "name": "fn",
+   "input": "function f(a, b) { return a + b; }",
+   "jsHex": "66756e6374696f6e206628612c206229207b0a202072657475726e2061202b20623b0a7d0a",
+   "minJsHex": "66756e6374696f6e206628612c62297b72657475726e20612b627d"
+  },
+  {
+   "name": "array",
+   "input": "x = [1, 2, 3];",
+   "jsHex": "78203d205b312c20322c20335d3b0a",
+   "minJsHex": "783d5b312c322c335d3b"
+  },
+  {
+   "name": "object",
+   "input": "x = { a: 1, b: \"s\" };",
+   "jsHex": "78203d207b20613a20312c20623a20227322207d3b0a",
+   "minJsHex": "783d7b613a312c623a2273227d3b"
+  },
+  {
+   "name": "neg",
+   "input": "x = -1;",
+   "jsHex": "78203d202d313b0a",
+   "minJsHex": "783d2d313b"
+  },
+  {
+   "name": "not",
+   "input": "x = !a;",
+   "jsHex": "78203d2021613b0a",
+   "minJsHex": "783d21613b"
+  },
+  {
+   "name": "concat",
+   "input": "x = \"a\" + b;",
+   "jsHex": "78203d20226122202b20623b0a",
+   "minJsHex": "783d2261222b623b"
+  },
+  {
+   "name": "comma",
+   "input": "x = (1, 2);",
+   "jsHex": "78203d2028312c2032293b0a",
+   "minJsHex": "783d28312c32293b"
+  },
+  {
+   "name": "debugger",
+   "input": "debugger;",
+   "jsHex": "64656275676765723b0a",
+   "minJsHex": "64656275676765723b"
+  },
+  {
+   "name": "block",
+   "input": "{ }",
+   "jsHex": "7b0a7d0a",
+   "minJsHex": "7b7d"
+  },
+  {
+   "name": "template",
+   "input": "x = `a${b}c`;",
+   "jsHex": "78203d206061247b627d63603b0a",
+   "minJsHex": "783d6061247b627d63603b"
+  },
+  {
+   "name": "regexp",
+   "input": "x = /a/g;",
+   "jsHex": "78203d202f612f673b0a",
+   "minJsHex": "783d2f612f673b"
+  },
+  {
+   "name": "compare",
+   "input": "x = 1 \u003c 2;",
+   "jsHex": "78203d2031203c20323b0a",
+   "minJsHex": "783d313c323b"
+  },
+  {
+   "name": "empty",
+   "input": "",
+   "jsHex": "",
+   "minJsHex": ""
+  }
+ ]
+}

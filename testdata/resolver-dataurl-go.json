@@ -1,0 +1,65 @@
+[
+  {
+    "url": "data:text/javascript,console.log(1)",
+    "mime": "text/javascript",
+    "data": "console.log(1)",
+    "isB64": false,
+    "kind": 2,
+    "decoded": "console.log(1)",
+    "ok": true
+  },
+  {
+    "url": "data:text/css;base64,Ym9keXt9",
+    "mime": "text/css",
+    "data": "Ym9keXt9",
+    "isB64": true,
+    "kind": 1,
+    "decoded": "body{}",
+    "ok": true
+  },
+  {
+    "url": "data:application/json,%7B%22a%22%3A1%7D",
+    "mime": "application/json",
+    "data": "%7B%22a%22%3A1%7D",
+    "isB64": false,
+    "kind": 3,
+    "decoded": "{\"a\":1}",
+    "ok": true
+  },
+  {
+    "url": "data:text/plain;charset=utf-8,hello%20world",
+    "mime": "text/plain;charset=utf-8",
+    "data": "hello%20world",
+    "isB64": false,
+    "kind": 0,
+    "decoded": "hello world",
+    "ok": true
+  },
+  {
+    "url": "data:;base64,SGVsbG8=",
+    "mime": "",
+    "data": "SGVsbG8=",
+    "isB64": true,
+    "kind": 0,
+    "decoded": "Hello",
+    "ok": true
+  },
+  {
+    "url": "not-a-data-url",
+    "mime": "",
+    "data": "",
+    "isB64": false,
+    "kind": 0,
+    "decoded": "",
+    "ok": false
+  },
+  {
+    "url": "data:application/json,invalid%ZZ",
+    "mime": "application/json",
+    "data": "invalid%ZZ",
+    "isB64": false,
+    "kind": 3,
+    "decoded": "ERR:could not decode percent-escaped data: invalid URL escape \"%ZZ\"",
+    "ok": true
+  }
+]

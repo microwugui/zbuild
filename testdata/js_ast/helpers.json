@@ -1,0 +1,9670 @@
+{
+ "bindings": [
+  {
+   "name": "b-ident",
+   "dump": {
+    "kind": "BIdentifier",
+    "loc": 2,
+    "name": "c"
+   },
+   "asExpr": {
+    "callCanBeUnwrappedIfUnused": false,
+    "canBeRemovedIfUnused": true,
+    "kind": "EIdentifier",
+    "loc": 2,
+    "mustKeepDueToWithStmt": false,
+    "name": "c"
+   },
+   "idents": [
+    [
+     2,
+     "c"
+    ]
+   ]
+  },
+  {
+   "name": "b-missing",
+   "dump": {
+    "kind": "BMissing",
+    "loc": 2
+   },
+   "asExpr": {
+    "kind": "EMissing",
+    "loc": 2
+   },
+   "idents": []
+  },
+  {
+   "name": "b-array",
+   "dump": {
+    "hasSpread": false,
+    "isSingleLine": false,
+    "items": [
+     {
+      "binding": {
+       "kind": "BIdentifier",
+       "loc": 2,
+       "name": "c"
+      },
+      "loc": 2
+     },
+     {
+      "binding": {
+       "kind": "BIdentifier",
+       "loc": 2,
+       "name": "x"
+      },
+      "default": {
+       "bits": "4607182418800017408",
+       "kind": "ENumber",
+       "loc": 1
+      },
+      "loc": 2
+     }
+    ],
+    "kind": "BArray",
+    "loc": 2
+   },
+   "asExpr": {
+    "isSingleLine": false,
+    "items": [
+     {
+      "callCanBeUnwrappedIfUnused": false,
+      "canBeRemovedIfUnused": true,
+      "kind": "EIdentifier",
+      "loc": 2,
+      "mustKeepDueToWithStmt": false,
+      "name": "c"
+     },
+     {
+      "kind": "EBinary",
+      "left": {
+       "callCanBeUnwrappedIfUnused": false,
+       "canBeRemovedIfUnused": true,
+       "kind": "EIdentifier",
+       "loc": 2,
+       "mustKeepDueToWithStmt": false,
+       "name": "x"
+      },
+      "loc": 2,
+      "op": 37,
+      "right": {
+       "bits": "4607182418800017408",
+       "kind": "ENumber",
+       "loc": 1
+      }
+     }
+    ],
+    "kind": "EArray",
+    "loc": 2
+   },
+   "idents": [
+    [
+     2,
+     "c"
+    ],
+    [
+     2,
+     "x"
+    ]
+   ]
+  },
+  {
+   "name": "b-array-spread",
+   "dump": {
+    "hasSpread": true,
+    "isSingleLine": false,
+    "items": [
+     {
+      "binding": {
+       "kind": "BIdentifier",
+       "loc": 2,
+       "name": "c"
+      },
+      "loc": 2
+     }
+    ],
+    "kind": "BArray",
+    "loc": 2
+   },
+   "asExpr": {
+    "isSingleLine": false,
+    "items": [
+     {
+      "kind": "ESpread",
+      "loc": 2,
+      "value": {
+       "callCanBeUnwrappedIfUnused": false,
+       "canBeRemovedIfUnused": true,
+       "kind": "EIdentifier",
+       "loc": 2,
+       "mustKeepDueToWithStmt": false,
+       "name": "c"
+      }
+     }
+    ],
+    "kind": "EArray",
+    "loc": 2
+   },
+   "idents": [
+    [
+     2,
+     "c"
+    ]
+   ]
+  },
+  {
+   "name": "b-object",
+   "dump": {
+    "isSingleLine": false,
+    "kind": "BObject",
+    "loc": 2,
+    "properties": [
+     {
+      "default": {
+       "bits": "4607182418800017408",
+       "kind": "ENumber",
+       "loc": 1
+      },
+      "isComputed": true,
+      "isSpread": false,
+      "key": {
+       "kind": "EString",
+       "loc": 1,
+       "preferTemplate": false,
+       "value": [
+        107
+       ]
+      },
+      "loc": 2,
+      "preferQuotedKey": true,
+      "value": {
+       "kind": "BIdentifier",
+       "loc": 2,
+       "name": "c"
+      }
+     }
+    ]
+   },
+   "asExpr": {
+    "isSingleLine": false,
+    "kind": "EObject",
+    "loc": 2,
+    "properties": [
+     {
+      "flags": 1,
+      "initializer": {
+       "bits": "4607182418800017408",
+       "kind": "ENumber",
+       "loc": 1
+      },
+      "key": {
+       "kind": "EString",
+       "loc": 1,
+       "preferTemplate": false,
+       "value": [
+        107
+       ]
+      },
+      "kind": 0,
+      "loc": 0,
+      "value": {
+       "callCanBeUnwrappedIfUnused": false,
+       "canBeRemovedIfUnused": true,
+       "kind": "EIdentifier",
+       "loc": 2,
+       "mustKeepDueToWithStmt": false,
+       "name": "c"
+      }
+     }
+    ]
+   },
+   "idents": [
+    [
+     2,
+     "c"
+    ]
+   ]
+  }
+ ],
+ "classes": [
+  {
+   "canRemove": true,
+   "dump": {
+    "extends": null,
+    "properties": [],
+    "useDefineForClassFields": false
+   },
+   "name": "class-empty"
+  },
+  {
+   "canRemove": true,
+   "dump": {
+    "extends": null,
+    "properties": [
+     {
+      "flags": 0,
+      "initializer": null,
+      "key": {
+       "kind": "EString",
+       "loc": 1,
+       "preferTemplate": false,
+       "value": [
+        120
+       ]
+      },
+      "kind": 0,
+      "loc": 0,
+      "value": {
+       "bits": "4607182418800017408",
+       "kind": "ENumber",
+       "loc": 1
+      }
+     }
+    ],
+    "useDefineForClassFields": false
+   },
+   "name": "class-field"
+  },
+  {
+   "canRemove": false,
+   "dump": {
+    "extends": null,
+    "properties": [
+     {
+      "flags": 2,
+      "initializer": null,
+      "key": {
+       "kind": "EString",
+       "loc": 1,
+       "preferTemplate": false,
+       "value": [
+        120
+       ]
+      },
+      "kind": 0,
+      "loc": 0,
+      "value": {
+       "bits": "4607182418800017408",
+       "kind": "ENumber",
+       "loc": 1
+      }
+     }
+    ],
+    "useDefineForClassFields": false
+   },
+   "name": "class-static-field"
+  },
+  {
+   "canRemove": true,
+   "dump": {
+    "extends": null,
+    "properties": [
+     {
+      "flags": 2,
+      "initializer": null,
+      "key": {
+       "kind": "EString",
+       "loc": 1,
+       "preferTemplate": false,
+       "value": [
+        120
+       ]
+      },
+      "kind": 0,
+      "loc": 0,
+      "value": {
+       "bits": "4607182418800017408",
+       "kind": "ENumber",
+       "loc": 1
+      }
+     }
+    ],
+    "useDefineForClassFields": true
+   },
+   "name": "class-static-field-define"
+  },
+  {
+   "canRemove": true,
+   "dump": {
+    "extends": null,
+    "properties": [
+     {
+      "flags": 0,
+      "initializer": null,
+      "key": {
+       "kind": "EString",
+       "loc": 1,
+       "preferTemplate": false,
+       "value": [
+        109
+       ]
+      },
+      "kind": 1,
+      "loc": 0,
+      "value": {
+       "fn": {
+        "args": [],
+        "body": [
+         {
+          "fromClassOrFn": false,
+          "kind": "SExpr",
+          "loc": 10,
+          "value": {
+           "bits": "4607182418800017408",
+           "kind": "ENumber",
+           "loc": 1
+          }
+         }
+        ],
+        "isAsync": false,
+        "isGenerator": false,
+        "name": null
+       },
+       "kind": "EFunction",
+       "loc": 9
+      }
+     }
+    ],
+    "useDefineForClassFields": false
+   },
+   "name": "class-method"
+  },
+  {
+   "canRemove": true,
+   "dump": {
+    "extends": null,
+    "properties": [
+     {
+      "flags": 0,
+      "initializer": null,
+      "key": {
+       "kind": "EString",
+       "loc": 1,
+       "preferTemplate": false,
+       "value": [
+        109
+       ]
+      },
+      "kind": 2,
+      "loc": 0,
+      "value": {
+       "fn": {
+        "args": [],
+        "body": [
+         {
+          "fromClassOrFn": false,
+          "kind": "SExpr",
+          "loc": 10,
+          "value": {
+           "bits": "4607182418800017408",
+           "kind": "ENumber",
+           "loc": 1
+          }
+         }
+        ],
+        "isAsync": false,
+        "isGenerator": false,
+        "name": null
+       },
+       "kind": "EFunction",
+       "loc": 9
+      }
+     }
+    ],
+    "useDefineForClassFields": false
+   },
+   "name": "class-getter"
+  },
+  {
+   "canRemove": false,
+   "dump": {
+    "extends": null,
+    "properties": [
+     {
+      "flags": 1,
+      "initializer": null,
+      "key": {
+       "callCanBeUnwrappedIfUnused": false,
+       "canBeRemovedIfUnused": false,
+       "kind": "EIdentifier",
+       "loc": 2,
+       "mustKeepDueToWithStmt": false,
+       "name": "c"
+      },
+      "kind": 0,
+      "loc": 0,
+      "value": {
+       "bits": "4607182418800017408",
+       "kind": "ENumber",
+       "loc": 1
+      }
+     }
+    ],
+    "useDefineForClassFields": false
+   },
+   "name": "class-computed"
+  },
+  {
+   "canRemove": true,
+   "dump": {
+    "extends": {
+     "bits": "4607182418800017408",
+     "kind": "ENumber",
+     "loc": 1
+    },
+    "properties": [],
+    "useDefineForClassFields": false
+   },
+   "name": "class-extends"
+  }
+ ],
+ "cmps": [
+  {
+   "name": "null-null-strict",
+   "l": {
+    "kind": "ENull",
+    "loc": 1
+   },
+   "r": {
+    "kind": "ENull",
+    "loc": 1
+   },
+   "lookSame": true,
+   "equality": [
+    true,
+    true
+   ],
+   "canStrictToLoose": true
+  },
+  {
+   "name": "null-undefined-loose",
+   "l": {
+    "kind": "ENull",
+    "loc": 1
+   },
+   "r": {
+    "kind": "EUndefined",
+    "loc": 1
+   },
+   "lookSame": false,
+   "equality": [
+    true,
+    true
+   ],
+   "canStrictToLoose": false
+  },
+  {
+   "name": "null-undefined-strict",
+   "l": {
+    "kind": "ENull",
+    "loc": 1
+   },
+   "r": {
+    "kind": "EUndefined",
+    "loc": 1
+   },
+   "lookSame": false,
+   "equality": [
+    false,
+    true
+   ],
+   "canStrictToLoose": false
+  },
+  {
+   "name": "num-eq",
+   "l": {
+    "bits": "4607182418800017408",
+    "kind": "ENumber",
+    "loc": 1
+   },
+   "r": {
+    "bits": "4607182418800017408",
+    "kind": "ENumber",
+    "loc": 1
+   },
+   "lookSame": true,
+   "equality": [
+    true,
+    true
+   ],
+   "canStrictToLoose": true
+  },
+  {
+   "name": "num-ne",
+   "l": {
+    "bits": "4607182418800017408",
+    "kind": "ENumber",
+    "loc": 1
+   },
+   "r": {
+    "bits": "4611686018427387904",
+    "kind": "ENumber",
+    "loc": 1
+   },
+   "lookSame": false,
+   "equality": [
+    false,
+    true
+   ],
+   "canStrictToLoose": true
+  },
+  {
+   "name": "str-eq",
+   "l": {
+    "kind": "EString",
+    "loc": 1,
+    "preferTemplate": false,
+    "value": [
+     97
+    ]
+   },
+   "r": {
+    "kind": "EString",
+    "loc": 1,
+    "preferTemplate": false,
+    "value": [
+     97
+    ]
+   },
+   "lookSame": true,
+   "equality": [
+    true,
+    true
+   ],
+   "canStrictToLoose": true
+  },
+  {
+   "name": "bool-num-loose",
+   "l": {
+    "kind": "EBoolean",
+    "loc": 1,
+    "value": true
+   },
+   "r": {
+    "bits": "4607182418800017408",
+    "kind": "ENumber",
+    "loc": 1
+   },
+   "lookSame": false,
+   "equality": [
+    true,
+    true
+   ],
+   "canStrictToLoose": false
+  },
+  {
+   "name": "bool-num-strict",
+   "l": {
+    "kind": "EBoolean",
+    "loc": 1,
+    "value": true
+   },
+   "r": {
+    "bits": "4607182418800017408",
+    "kind": "ENumber",
+    "loc": 1
+   },
+   "lookSame": false,
+   "equality": [
+    false,
+    true
+   ],
+   "canStrictToLoose": false
+  },
+  {
+   "name": "bigint-eq",
+   "l": {
+    "kind": "EBigInt",
+    "loc": 1,
+    "value": "1"
+   },
+   "r": {
+    "kind": "EBigInt",
+    "loc": 1,
+    "value": "1"
+   },
+   "lookSame": true,
+   "equality": [
+    true,
+    true
+   ],
+   "canStrictToLoose": true
+  },
+  {
+   "name": "bigint-ne",
+   "l": {
+    "kind": "EBigInt",
+    "loc": 1,
+    "value": "1"
+   },
+   "r": {
+    "kind": "EBigInt",
+    "loc": 1,
+    "value": "2"
+   },
+   "lookSame": false,
+   "equality": [
+    false,
+    true
+   ],
+   "canStrictToLoose": true
+  },
+  {
+   "name": "ident-ident",
+   "l": {
+    "callCanBeUnwrappedIfUnused": false,
+    "canBeRemovedIfUnused": false,
+    "kind": "EIdentifier",
+    "loc": 2,
+    "mustKeepDueToWithStmt": false,
+    "name": "c"
+   },
+   "r": {
+    "callCanBeUnwrappedIfUnused": false,
+    "canBeRemovedIfUnused": false,
+    "kind": "EIdentifier",
+    "loc": 2,
+    "mustKeepDueToWithStmt": false,
+    "name": "c"
+   },
+   "lookSame": true,
+   "equality": [
+    false,
+    false
+   ],
+   "canStrictToLoose": false
+  },
+  {
+   "name": "dot-dot",
+   "l": {
+    "callCanBeUnwrappedIfUnused": false,
+    "canBeRemovedIfUnused": false,
+    "isSymbolInstance": false,
+    "kind": "EDot",
+    "loc": 5,
+    "name": "b",
+    "optionalChain": 0,
+    "target": {
+     "callCanBeUnwrappedIfUnused": false,
+     "canBeRemovedIfUnused": false,
+     "kind": "EIdentifier",
+     "loc": 2,
+     "mustKeepDueToWithStmt": false,
+     "name": "c"
+    }
+   },
+   "r": {
+    "callCanBeUnwrappedIfUnused": false,
+    "canBeRemovedIfUnused": false,
+    "isSymbolInstance": false,
+    "kind": "EDot",
+    "loc": 5,
+    "name": "b",
+    "optionalChain": 0,
+    "target": {
+     "callCanBeUnwrappedIfUnused": false,
+     "canBeRemovedIfUnused": false,
+     "kind": "EIdentifier",
+     "loc": 2,
+     "mustKeepDueToWithStmt": false,
+     "name": "c"
+    }
+   },
+   "lookSame": true,
+   "equality": [
+    false,
+    false
+   ],
+   "canStrictToLoose": false
+  },
+  {
+   "name": "num-neg0",
+   "l": {
+    "bits": "0",
+    "kind": "ENumber",
+    "loc": 1
+   },
+   "r": {
+    "bits": "9223372036854775808",
+    "kind": "ENumber",
+    "loc": 1
+   },
+   "lookSame": false,
+   "equality": [
+    true,
+    true
+   ],
+   "canStrictToLoose": true
+  }
+ ],
+ "codepoints": [
+  {
+   "cp": 95,
+   "start": true,
+   "startES5": true,
+   "continue": true,
+   "continueES5": true
+  },
+  {
+   "cp": 36,
+   "start": true,
+   "startES5": true,
+   "continue": true,
+   "continueES5": true
+  },
+  {
+   "cp": 97,
+   "start": true,
+   "startES5": true,
+   "continue": true,
+   "continueES5": true
+  },
+  {
+   "cp": 48,
+   "start": false,
+   "startES5": false,
+   "continue": true,
+   "continueES5": true
+  },
+  {
+   "cp": 8204,
+   "start": false,
+   "startES5": false,
+   "continue": true,
+   "continueES5": true
+  },
+  {
+   "cp": 8205,
+   "start": false,
+   "startES5": false,
+   "continue": true,
+   "continueES5": true
+  },
+  {
+   "cp": 960,
+   "start": true,
+   "startES5": true,
+   "continue": true,
+   "continueES5": true
+  },
+  {
+   "cp": 120138,
+   "start": true,
+   "startES5": false,
+   "continue": true,
+   "continueES5": false
+  },
+  {
+   "cp": 8472,
+   "start": true,
+   "startES5": false,
+   "continue": true,
+   "continueES5": false
+  },
+  {
+   "cp": 769,
+   "start": false,
+   "startES5": false,
+   "continue": true,
+   "continueES5": true
+  },
+  {
+   "cp": 45,
+   "start": false,
+   "startES5": false,
+   "continue": false,
+   "continueES5": false
+  }
+ ],
+ "exprs": [
+  {
+   "name": "num-0",
+   "dump": {
+    "bits": "0",
+    "kind": "ENumber",
+    "loc": 1
+   },
+   "knownPrimitiveType": 5,
+   "isPrimitiveLiteral": true,
+   "isSymbolInstance": false,
+   "isPropertyAccess": false,
+   "isOptionalChain": false,
+   "typeof": [
+    "number",
+    true
+   ],
+   "toNumber": [
+    "0",
+    true
+   ],
+   "toString": [
+    "0",
+    true
+   ],
+   "toBoolean": [
+    false,
+    1,
+    true
+   ],
+   "toNullOrUndefined": [
+    false,
+    1,
+    true
+   ],
+   "canBeRemoved": true,
+   "simplifyUnused": null,
+   "simplifyBoolean": {
+    "kind": "EBoolean",
+    "loc": 1,
+    "value": false
+   },
+   "not": {
+    "kind": "EBoolean",
+    "loc": 1,
+    "value": true
+   }
+  },
+  {
+   "name": "num-neg0",
+   "dump": {
+    "bits": "9223372036854775808",
+    "kind": "ENumber",
+    "loc": 1
+   },
+   "knownPrimitiveType": 5,
+   "isPrimitiveLiteral": true,
+   "isSymbolInstance": false,
+   "isPropertyAccess": false,
+   "isOptionalChain": false,
+   "typeof": [
+    "number",
+    true
+   ],
+   "toNumber": [
+    "9223372036854775808",
+    true
+   ],
+   "toString": [
+    "0",
+    true
+   ],
+   "toBoolean": [
+    false,
+    1,
+    true
+   ],
+   "toNullOrUndefined": [
+    false,
+    1,
+    true
+   ],
+   "canBeRemoved": true,
+   "simplifyUnused": null,
+   "simplifyBoolean": {
+    "kind": "EBoolean",
+    "loc": 1,
+    "value": false
+   },
+   "not": {
+    "kind": "EBoolean",
+    "loc": 1,
+    "value": true
+   }
+  },
+  {
+   "name": "num-1",
+   "dump": {
+    "bits": "4607182418800017408",
+    "kind": "ENumber",
+    "loc": 1
+   },
+   "knownPrimitiveType": 5,
+   "isPrimitiveLiteral": true,
+   "isSymbolInstance": false,
+   "isPropertyAccess": false,
+   "isOptionalChain": false,
+   "typeof": [
+    "number",
+    true
+   ],
+   "toNumber": [
+    "4607182418800017408",
+    true
+   ],
+   "toString": [
+    "1",
+    true
+   ],
+   "toBoolean": [
+    true,
+    1,
+    true
+   ],
+   "toNullOrUndefined": [
+    false,
+    1,
+    true
+   ],
+   "canBeRemoved": true,
+   "simplifyUnused": null,
+   "simplifyBoolean": {
+    "kind": "EBoolean",
+    "loc": 1,
+    "value": true
+   },
+   "not": {
+    "kind": "EBoolean",
+    "loc": 1,
+    "value": false
+   }
+  },
+  {
+   "name": "num-neg1",
+   "dump": {
+    "bits": "13830554455654793216",
+    "kind": "ENumber",
+    "loc": 1
+   },
+   "knownPrimitiveType": 5,
+   "isPrimitiveLiteral": true,
+   "isSymbolInstance": false,
+   "isPropertyAccess": false,
+   "isOptionalChain": false,
+   "typeof": [
+    "number",
+    true
+   ],
+   "toNumber": [
+    "13830554455654793216",
+    true
+   ],
+   "toString": [
+    "-1",
+    true
+   ],
+   "toBoolean": [
+    true,
+    1,
+    true
+   ],
+   "toNullOrUndefined": [
+    false,
+    1,
+    true
+   ],
+   "canBeRemoved": true,
+   "simplifyUnused": null,
+   "simplifyBoolean": {
+    "kind": "EBoolean",
+    "loc": 1,
+    "value": true
+   },
+   "not": {
+    "kind": "EBoolean",
+    "loc": 1,
+    "value": false
+   }
+  },
+  {
+   "name": "num-half",
+   "dump": {
+    "bits": "4602678819172646912",
+    "kind": "ENumber",
+    "loc": 1
+   },
+   "knownPrimitiveType": 5,
+   "isPrimitiveLiteral": true,
+   "isSymbolInstance": false,
+   "isPropertyAccess": false,
+   "isOptionalChain": false,
+   "typeof": [
+    "number",
+    true
+   ],
+   "toNumber": [
+    "4602678819172646912",
+    true
+   ],
+   "toString": [
+    "",
+    false
+   ],
+   "toBoolean": [
+    true,
+    1,
+    true
+   ],
+   "toNullOrUndefined": [
+    false,
+    1,
+    true
+   ],
+   "canBeRemoved": true,
+   "simplifyUnused": null,
+   "simplifyBoolean": {
+    "kind": "EBoolean",
+    "loc": 1,
+    "value": true
+   },
+   "not": {
+    "kind": "EBoolean",
+    "loc": 1,
+    "value": false
+   }
+  },
+  {
+   "name": "num-nan",
+   "dump": {
+    "bits": "9221120237041090560",
+    "kind": "ENumber",
+    "loc": 1
+   },
+   "knownPrimitiveType": 5,
+   "isPrimitiveLiteral": true,
+   "isSymbolInstance": false,
+   "isPropertyAccess": false,
+   "isOptionalChain": false,
+   "typeof": [
+    "number",
+    true
+   ],
+   "toNumber": [
+    "9221120237041090560",
+    true
+   ],
+   "toString": [
+    "NaN",
+    true
+   ],
+   "toBoolean": [
+    false,
+    1,
+    true
+   ],
+   "toNullOrUndefined": [
+    false,
+    1,
+    true
+   ],
+   "canBeRemoved": true,
+   "simplifyUnused": null,
+   "simplifyBoolean": {
+    "kind": "EBoolean",
+    "loc": 1,
+    "value": false
+   },
+   "not": {
+    "kind": "EBoolean",
+    "loc": 1,
+    "value": true
+   }
+  },
+  {
+   "name": "num-inf",
+   "dump": {
+    "bits": "9218868437227405312",
+    "kind": "ENumber",
+    "loc": 1
+   },
+   "knownPrimitiveType": 5,
+   "isPrimitiveLiteral": true,
+   "isSymbolInstance": false,
+   "isPropertyAccess": false,
+   "isOptionalChain": false,
+   "typeof": [
+    "number",
+    true
+   ],
+   "toNumber": [
+    "9218868437227405312",
+    true
+   ],
+   "toString": [
+    "Infinity",
+    true
+   ],
+   "toBoolean": [
+    true,
+    1,
+    true
+   ],
+   "toNullOrUndefined": [
+    false,
+    1,
+    true
+   ],
+   "canBeRemoved": true,
+   "simplifyUnused": null,
+   "simplifyBoolean": {
+    "kind": "EBoolean",
+    "loc": 1,
+    "value": true
+   },
+   "not": {
+    "kind": "EBoolean",
+    "loc": 1,
+    "value": false
+   }
+  },
+  {
+   "name": "num-1e20",
+   "dump": {
+    "bits": "4906019910204099648",
+    "kind": "ENumber",
+    "loc": 1
+   },
+   "knownPrimitiveType": 5,
+   "isPrimitiveLiteral": true,
+   "isSymbolInstance": false,
+   "isPropertyAccess": false,
+   "isOptionalChain": false,
+   "typeof": [
+    "number",
+    true
+   ],
+   "toNumber": [
+    "4906019910204099648",
+    true
+   ],
+   "toString": [
+    "",
+    false
+   ],
+   "toBoolean": [
+    true,
+    1,
+    true
+   ],
+   "toNullOrUndefined": [
+    false,
+    1,
+    true
+   ],
+   "canBeRemoved": true,
+   "simplifyUnused": null,
+   "simplifyBoolean": {
+    "kind": "EBoolean",
+    "loc": 1,
+    "value": true
+   },
+   "not": {
+    "kind": "EBoolean",
+    "loc": 1,
+    "value": false
+   }
+  },
+  {
+   "name": "str-empty",
+   "dump": {
+    "kind": "EString",
+    "loc": 1,
+    "preferTemplate": false,
+    "value": []
+   },
+   "knownPrimitiveType": 6,
+   "isPrimitiveLiteral": true,
+   "isSymbolInstance": false,
+   "isPropertyAccess": false,
+   "isOptionalChain": false,
+   "typeof": [
+    "string",
+    true
+   ],
+   "toNumber": [
+    "0",
+    true
+   ],
+   "toString": [
+    "",
+    false
+   ],
+   "toBoolean": [
+    false,
+    1,
+    true
+   ],
+   "toNullOrUndefined": [
+    false,
+    1,
+    true
+   ],
+   "canBeRemoved": true,
+   "simplifyUnused": null,
+   "simplifyBoolean": {
+    "kind": "EBoolean",
+    "loc": 1,
+    "value": false
+   },
+   "not": {
+    "kind": "EBoolean",
+    "loc": 1,
+    "value": true
+   }
+  },
+  {
+   "name": "str-x",
+   "dump": {
+    "kind": "EString",
+    "loc": 1,
+    "preferTemplate": false,
+    "value": [
+     120
+    ]
+   },
+   "knownPrimitiveType": 6,
+   "isPrimitiveLiteral": true,
+   "isSymbolInstance": false,
+   "isPropertyAccess": false,
+   "isOptionalChain": false,
+   "typeof": [
+    "string",
+    true
+   ],
+   "toNumber": [
+    "0",
+    false
+   ],
+   "toString": [
+    "",
+    false
+   ],
+   "toBoolean": [
+    true,
+    1,
+    true
+   ],
+   "toNullOrUndefined": [
+    false,
+    1,
+    true
+   ],
+   "canBeRemoved": true,
+   "simplifyUnused": null,
+   "simplifyBoolean": {
+    "kind": "EBoolean",
+    "loc": 1,
+    "value": true
+   },
+   "not": {
+    "kind": "EBoolean",
+    "loc": 1,
+    "value": false
+   }
+  },
+  {
+   "name": "str-1",
+   "dump": {
+    "kind": "EString",
+    "loc": 1,
+    "preferTemplate": false,
+    "value": [
+     49
+    ]
+   },
+   "knownPrimitiveType": 6,
+   "isPrimitiveLiteral": true,
+   "isSymbolInstance": false,
+   "isPropertyAccess": false,
+   "isOptionalChain": false,
+   "typeof": [
+    "string",
+    true
+   ],
+   "toNumber": [
+    "4607182418800017408",
+    true
+   ],
+   "toString": [
+    "",
+    false
+   ],
+   "toBoolean": [
+    true,
+    1,
+    true
+   ],
+   "toNullOrUndefined": [
+    false,
+    1,
+    true
+   ],
+   "canBeRemoved": true,
+   "simplifyUnused": null,
+   "simplifyBoolean": {
+    "kind": "EBoolean",
+    "loc": 1,
+    "value": true
+   },
+   "not": {
+    "kind": "EBoolean",
+    "loc": 1,
+    "value": false
+   }
+  },
+  {
+   "name": "str-123",
+   "dump": {
+    "kind": "EString",
+    "loc": 1,
+    "preferTemplate": false,
+    "value": [
+     49,
+     50,
+     51
+    ]
+   },
+   "knownPrimitiveType": 6,
+   "isPrimitiveLiteral": true,
+   "isSymbolInstance": false,
+   "isPropertyAccess": false,
+   "isOptionalChain": false,
+   "typeof": [
+    "string",
+    true
+   ],
+   "toNumber": [
+    "4638355772470722560",
+    true
+   ],
+   "toString": [
+    "",
+    false
+   ],
+   "toBoolean": [
+    true,
+    1,
+    true
+   ],
+   "toNullOrUndefined": [
+    false,
+    1,
+    true
+   ],
+   "canBeRemoved": true,
+   "simplifyUnused": null,
+   "simplifyBoolean": {
+    "kind": "EBoolean",
+    "loc": 1,
+    "value": true
+   },
+   "not": {
+    "kind": "EBoolean",
+    "loc": 1,
+    "value": false
+   }
+  },
+  {
+   "name": "str-neg5",
+   "dump": {
+    "kind": "EString",
+    "loc": 1,
+    "preferTemplate": false,
+    "value": [
+     45,
+     53
+    ]
+   },
+   "knownPrimitiveType": 6,
+   "isPrimitiveLiteral": true,
+   "isSymbolInstance": false,
+   "isPropertyAccess": false,
+   "isOptionalChain": false,
+   "typeof": [
+    "string",
+    true
+   ],
+   "toNumber": [
+    "13840687554816376832",
+    true
+   ],
+   "toString": [
+    "",
+    false
+   ],
+   "toBoolean": [
+    true,
+    1,
+    true
+   ],
+   "toNullOrUndefined": [
+    false,
+    1,
+    true
+   ],
+   "canBeRemoved": true,
+   "simplifyUnused": null,
+   "simplifyBoolean": {
+    "kind": "EBoolean",
+    "loc": 1,
+    "value": true
+   },
+   "not": {
+    "kind": "EBoolean",
+    "loc": 1,
+    "value": false
+   }
+  },
+  {
+   "name": "str-u",
+   "dump": {
+    "kind": "EString",
+    "loc": 1,
+    "preferTemplate": false,
+    "value": [
+     117
+    ]
+   },
+   "knownPrimitiveType": 6,
+   "isPrimitiveLiteral": true,
+   "isSymbolInstance": false,
+   "isPropertyAccess": false,
+   "isOptionalChain": false,
+   "typeof": [
+    "string",
+    true
+   ],
+   "toNumber": [
+    "0",
+    false
+   ],
+   "toString": [
+    "",
+    false
+   ],
+   "toBoolean": [
+    true,
+    1,
+    true
+   ],
+   "toNullOrUndefined": [
+    false,
+    1,
+    true
+   ],
+   "canBeRemoved": true,
+   "simplifyUnused": null,
+   "simplifyBoolean": {
+    "kind": "EBoolean",
+    "loc": 1,
+    "value": true
+   },
+   "not": {
+    "kind": "EBoolean",
+    "loc": 1,
+    "value": false
+   }
+  },
+  {
+   "name": "str-undefined",
+   "dump": {
+    "kind": "EString",
+    "loc": 1,
+    "preferTemplate": false,
+    "value": [
+     117,
+     110,
+     100,
+     101,
+     102,
+     105,
+     110,
+     101,
+     100
+    ]
+   },
+   "knownPrimitiveType": 6,
+   "isPrimitiveLiteral": true,
+   "isSymbolInstance": false,
+   "isPropertyAccess": false,
+   "isOptionalChain": false,
+   "typeof": [
+    "string",
+    true
+   ],
+   "toNumber": [
+    "0",
+    false
+   ],
+   "toString": [
+    "",
+    false
+   ],
+   "toBoolean": [
+    true,
+    1,
+    true
+   ],
+   "toNullOrUndefined": [
+    false,
+    1,
+    true
+   ],
+   "canBeRemoved": true,
+   "simplifyUnused": null,
+   "simplifyBoolean": {
+    "kind": "EBoolean",
+    "loc": 1,
+    "value": true
+   },
+   "not": {
+    "kind": "EBoolean",
+    "loc": 1,
+    "value": false
+   }
+  },
+  {
+   "name": "str-proto",
+   "dump": {
+    "kind": "EString",
+    "loc": 1,
+    "preferTemplate": false,
+    "value": [
+     95,
+     95,
+     112,
+     114,
+     111,
+     116,
+     111,
+     95,
+     95
+    ]
+   },
+   "knownPrimitiveType": 6,
+   "isPrimitiveLiteral": true,
+   "isSymbolInstance": false,
+   "isPropertyAccess": false,
+   "isOptionalChain": false,
+   "typeof": [
+    "string",
+    true
+   ],
+   "toNumber": [
+    "0",
+    false
+   ],
+   "toString": [
+    "",
+    false
+   ],
+   "toBoolean": [
+    true,
+    1,
+    true
+   ],
+   "toNullOrUndefined": [
+    false,
+    1,
+    true
+   ],
+   "canBeRemoved": true,
+   "simplifyUnused": null,
+   "simplifyBoolean": {
+    "kind": "EBoolean",
+    "loc": 1,
+    "value": true
+   },
+   "not": {
+    "kind": "EBoolean",
+    "loc": 1,
+    "value": false
+   }
+  },
+  {
+   "name": "bigint-0",
+   "dump": {
+    "kind": "EBigInt",
+    "loc": 1,
+    "value": "0"
+   },
+   "knownPrimitiveType": 7,
+   "isPrimitiveLiteral": true,
+   "isSymbolInstance": false,
+   "isPropertyAccess": false,
+   "isOptionalChain": false,
+   "typeof": [
+    "bigint",
+    true
+   ],
+   "toNumber": [
+    "0",
+    false
+   ],
+   "toString": [
+    "0",
+    true
+   ],
+   "toBoolean": [
+    false,
+    1,
+    true
+   ],
+   "toNullOrUndefined": [
+    false,
+    1,
+    true
+   ],
+   "canBeRemoved": true,
+   "simplifyUnused": null,
+   "simplifyBoolean": {
+    "kind": "EBoolean",
+    "loc": 1,
+    "value": false
+   },
+   "not": {
+    "kind": "EBoolean",
+    "loc": 1,
+    "value": true
+   }
+  },
+  {
+   "name": "bigint-1",
+   "dump": {
+    "kind": "EBigInt",
+    "loc": 1,
+    "value": "1"
+   },
+   "knownPrimitiveType": 7,
+   "isPrimitiveLiteral": true,
+   "isSymbolInstance": false,
+   "isPropertyAccess": false,
+   "isOptionalChain": false,
+   "typeof": [
+    "bigint",
+    true
+   ],
+   "toNumber": [
+    "0",
+    false
+   ],
+   "toString": [
+    "1",
+    true
+   ],
+   "toBoolean": [
+    true,
+    1,
+    true
+   ],
+   "toNullOrUndefined": [
+    false,
+    1,
+    true
+   ],
+   "canBeRemoved": true,
+   "simplifyUnused": null,
+   "simplifyBoolean": {
+    "kind": "EBoolean",
+    "loc": 1,
+    "value": true
+   },
+   "not": {
+    "kind": "EBoolean",
+    "loc": 1,
+    "value": false
+   }
+  },
+  {
+   "name": "bigint-00",
+   "dump": {
+    "kind": "EBigInt",
+    "loc": 1,
+    "value": "00"
+   },
+   "knownPrimitiveType": 7,
+   "isPrimitiveLiteral": true,
+   "isSymbolInstance": false,
+   "isPropertyAccess": false,
+   "isOptionalChain": false,
+   "typeof": [
+    "bigint",
+    true
+   ],
+   "toNumber": [
+    "0",
+    false
+   ],
+   "toString": [
+    "",
+    false
+   ],
+   "toBoolean": [
+    true,
+    1,
+    false
+   ],
+   "toNullOrUndefined": [
+    false,
+    1,
+    true
+   ],
+   "canBeRemoved": true,
+   "simplifyUnused": null,
+   "simplifyBoolean": {
+    "kind": "EBigInt",
+    "loc": 1,
+    "value": "00"
+   },
+   "not": {
+    "kind": "EUnary",
+    "loc": 1,
+    "op": 3,
+    "value": {
+     "kind": "EBigInt",
+     "loc": 1,
+     "value": "00"
+    },
+    "wasTypeof": false
+   }
+  },
+  {
+   "name": "bigint-hex",
+   "dump": {
+    "kind": "EBigInt",
+    "loc": 1,
+    "value": "0x10"
+   },
+   "knownPrimitiveType": 7,
+   "isPrimitiveLiteral": true,
+   "isSymbolInstance": false,
+   "isPropertyAccess": false,
+   "isOptionalChain": false,
+   "typeof": [
+    "bigint",
+    true
+   ],
+   "toNumber": [
+    "0",
+    false
+   ],
+   "toString": [
+    "",
+    false
+   ],
+   "toBoolean": [
+    true,
+    1,
+    false
+   ],
+   "toNullOrUndefined": [
+    false,
+    1,
+    true
+   ],
+   "canBeRemoved": true,
+   "simplifyUnused": null,
+   "simplifyBoolean": {
+    "kind": "EBigInt",
+    "loc": 1,
+    "value": "0x10"
+   },
+   "not": {
+    "kind": "EUnary",
+    "loc": 1,
+    "op": 3,
+    "value": {
+     "kind": "EBigInt",
+     "loc": 1,
+     "value": "0x10"
+    },
+    "wasTypeof": false
+   }
+  },
+  {
+   "name": "bool-true",
+   "dump": {
+    "kind": "EBoolean",
+    "loc": 1,
+    "value": true
+   },
+   "knownPrimitiveType": 4,
+   "isPrimitiveLiteral": true,
+   "isSymbolInstance": false,
+   "isPropertyAccess": false,
+   "isOptionalChain": false,
+   "typeof": [
+    "boolean",
+    true
+   ],
+   "toNumber": [
+    "4607182418800017408",
+    true
+   ],
+   "toString": [
+    "true",
+    true
+   ],
+   "toBoolean": [
+    true,
+    1,
+    true
+   ],
+   "toNullOrUndefined": [
+    false,
+    1,
+    true
+   ],
+   "canBeRemoved": true,
+   "simplifyUnused": null,
+   "simplifyBoolean": {
+    "kind": "EBoolean",
+    "loc": 1,
+    "value": true
+   },
+   "not": {
+    "kind": "EBoolean",
+    "loc": 1,
+    "value": false
+   }
+  },
+  {
+   "name": "bool-false",
+   "dump": {
+    "kind": "EBoolean",
+    "loc": 1,
+    "value": false
+   },
+   "knownPrimitiveType": 4,
+   "isPrimitiveLiteral": true,
+   "isSymbolInstance": false,
+   "isPropertyAccess": false,
+   "isOptionalChain": false,
+   "typeof": [
+    "boolean",
+    true
+   ],
+   "toNumber": [
+    "0",
+    true
+   ],
+   "toString": [
+    "false",
+    true
+   ],
+   "toBoolean": [
+    false,
+    1,
+    true
+   ],
+   "toNullOrUndefined": [
+    false,
+    1,
+    true
+   ],
+   "canBeRemoved": true,
+   "simplifyUnused": null,
+   "simplifyBoolean": {
+    "kind": "EBoolean",
+    "loc": 1,
+    "value": false
+   },
+   "not": {
+    "kind": "EBoolean",
+    "loc": 1,
+    "value": true
+   }
+  },
+  {
+   "name": "null",
+   "dump": {
+    "kind": "ENull",
+    "loc": 1
+   },
+   "knownPrimitiveType": 2,
+   "isPrimitiveLiteral": true,
+   "isSymbolInstance": false,
+   "isPropertyAccess": false,
+   "isOptionalChain": false,
+   "typeof": [
+    "object",
+    true
+   ],
+   "toNumber": [
+    "0",
+    true
+   ],
+   "toString": [
+    "null",
+    true
+   ],
+   "toBoolean": [
+    false,
+    1,
+    true
+   ],
+   "toNullOrUndefined": [
+    true,
+    1,
+    true
+   ],
+   "canBeRemoved": true,
+   "simplifyUnused": null,
+   "simplifyBoolean": {
+    "kind": "EBoolean",
+    "loc": 1,
+    "value": false
+   },
+   "not": {
+    "kind": "EBoolean",
+    "loc": 1,
+    "value": true
+   }
+  },
+  {
+   "name": "undefined",
+   "dump": {
+    "kind": "EUndefined",
+    "loc": 1
+   },
+   "knownPrimitiveType": 3,
+   "isPrimitiveLiteral": true,
+   "isSymbolInstance": false,
+   "isPropertyAccess": false,
+   "isOptionalChain": false,
+   "typeof": [
+    "undefined",
+    true
+   ],
+   "toNumber": [
+    "9221120237041090561",
+    true
+   ],
+   "toString": [
+    "undefined",
+    true
+   ],
+   "toBoolean": [
+    false,
+    1,
+    true
+   ],
+   "toNullOrUndefined": [
+    true,
+    1,
+    true
+   ],
+   "canBeRemoved": true,
+   "simplifyUnused": null,
+   "simplifyBoolean": {
+    "kind": "EBoolean",
+    "loc": 1,
+    "value": false
+   },
+   "not": {
+    "kind": "EBoolean",
+    "loc": 1,
+    "value": true
+   }
+  },
+  {
+   "name": "this",
+   "dump": {
+    "kind": "EThis",
+    "loc": 1
+   },
+   "knownPrimitiveType": 0,
+   "isPrimitiveLiteral": false,
+   "isSymbolInstance": false,
+   "isPropertyAccess": false,
+   "isOptionalChain": false,
+   "typeof": [
+    "",
+    false
+   ],
+   "toNumber": [
+    "0",
+    false
+   ],
+   "toString": [
+    "",
+    false
+   ],
+   "toBoolean": [
+    false,
+    0,
+    false
+   ],
+   "toNullOrUndefined": [
+    false,
+    1,
+    false
+   ],
+   "canBeRemoved": true,
+   "simplifyUnused": null,
+   "simplifyBoolean": {
+    "kind": "EThis",
+    "loc": 1
+   },
+   "not": {
+    "kind": "EUnary",
+    "loc": 1,
+    "op": 3,
+    "value": {
+     "kind": "EThis",
+     "loc": 1
+    },
+    "wasTypeof": false
+   }
+  },
+  {
+   "name": "missing",
+   "dump": {
+    "kind": "EMissing",
+    "loc": 1
+   },
+   "knownPrimitiveType": 0,
+   "isPrimitiveLiteral": false,
+   "isSymbolInstance": false,
+   "isPropertyAccess": false,
+   "isOptionalChain": false,
+   "typeof": [
+    "",
+    false
+   ],
+   "toNumber": [
+    "0",
+    false
+   ],
+   "toString": [
+    "",
+    false
+   ],
+   "toBoolean": [
+    false,
+    0,
+    false
+   ],
+   "toNullOrUndefined": [
+    false,
+    1,
+    false
+   ],
+   "canBeRemoved": true,
+   "simplifyUnused": null,
+   "simplifyBoolean": {
+    "kind": "EMissing",
+    "loc": 1
+   },
+   "not": {
+    "kind": "EUnary",
+    "loc": 1,
+    "op": 3,
+    "value": {
+     "kind": "EMissing",
+     "loc": 1
+    },
+    "wasTypeof": false
+   }
+  },
+  {
+   "name": "regexp",
+   "dump": {
+    "kind": "ERegExp",
+    "loc": 1,
+    "value": "x"
+   },
+   "knownPrimitiveType": 0,
+   "isPrimitiveLiteral": false,
+   "isSymbolInstance": false,
+   "isPropertyAccess": false,
+   "isOptionalChain": false,
+   "typeof": [
+    "",
+    false
+   ],
+   "toNumber": [
+    "9221120237041090561",
+    true
+   ],
+   "toString": [
+    "x",
+    true
+   ],
+   "toBoolean": [
+    true,
+    1,
+    true
+   ],
+   "toNullOrUndefined": [
+    false,
+    1,
+    true
+   ],
+   "canBeRemoved": true,
+   "simplifyUnused": null,
+   "simplifyBoolean": {
+    "kind": "EBoolean",
+    "loc": 1,
+    "value": true
+   },
+   "not": {
+    "kind": "EBoolean",
+    "loc": 1,
+    "value": false
+   }
+  },
+  {
+   "name": "ident-bound",
+   "dump": {
+    "callCanBeUnwrappedIfUnused": false,
+    "canBeRemovedIfUnused": false,
+    "kind": "EIdentifier",
+    "loc": 2,
+    "mustKeepDueToWithStmt": false,
+    "name": "c"
+   },
+   "knownPrimitiveType": 0,
+   "isPrimitiveLiteral": false,
+   "isSymbolInstance": false,
+   "isPropertyAccess": false,
+   "isOptionalChain": false,
+   "typeof": [
+    "",
+    false
+   ],
+   "toNumber": [
+    "0",
+    false
+   ],
+   "toString": [
+    "",
+    false
+   ],
+   "toBoolean": [
+    false,
+    0,
+    false
+   ],
+   "toNullOrUndefined": [
+    false,
+    1,
+    false
+   ],
+   "canBeRemoved": true,
+   "simplifyUnused": null,
+   "simplifyBoolean": {
+    "callCanBeUnwrappedIfUnused": false,
+    "canBeRemovedIfUnused": false,
+    "kind": "EIdentifier",
+    "loc": 2,
+    "mustKeepDueToWithStmt": false,
+    "name": "c"
+   },
+   "not": {
+    "kind": "EUnary",
+    "loc": 2,
+    "op": 3,
+    "value": {
+     "callCanBeUnwrappedIfUnused": false,
+     "canBeRemovedIfUnused": false,
+     "kind": "EIdentifier",
+     "loc": 2,
+     "mustKeepDueToWithStmt": false,
+     "name": "c"
+    },
+    "wasTypeof": false
+   }
+  },
+  {
+   "name": "ident-unbound",
+   "dump": {
+    "callCanBeUnwrappedIfUnused": false,
+    "canBeRemovedIfUnused": false,
+    "kind": "EIdentifier",
+    "loc": 2,
+    "mustKeepDueToWithStmt": false,
+    "name": "a"
+   },
+   "knownPrimitiveType": 0,
+   "isPrimitiveLiteral": false,
+   "isSymbolInstance": false,
+   "isPropertyAccess": false,
+   "isOptionalChain": false,
+   "typeof": [
+    "",
+    false
+   ],
+   "toNumber": [
+    "0",
+    false
+   ],
+   "toString": [
+    "",
+    false
+   ],
+   "toBoolean": [
+    false,
+    0,
+    false
+   ],
+   "toNullOrUndefined": [
+    false,
+    1,
+    false
+   ],
+   "canBeRemoved": false,
+   "simplifyUnused": {
+    "callCanBeUnwrappedIfUnused": false,
+    "canBeRemovedIfUnused": false,
+    "kind": "EIdentifier",
+    "loc": 2,
+    "mustKeepDueToWithStmt": false,
+    "name": "a"
+   },
+   "simplifyBoolean": {
+    "callCanBeUnwrappedIfUnused": false,
+    "canBeRemovedIfUnused": false,
+    "kind": "EIdentifier",
+    "loc": 2,
+    "mustKeepDueToWithStmt": false,
+    "name": "a"
+   },
+   "not": {
+    "kind": "EUnary",
+    "loc": 2,
+    "op": 3,
+    "value": {
+     "callCanBeUnwrappedIfUnused": false,
+     "canBeRemovedIfUnused": false,
+     "kind": "EIdentifier",
+     "loc": 2,
+     "mustKeepDueToWithStmt": false,
+     "name": "a"
+    },
+    "wasTypeof": false
+   }
+  },
+  {
+   "name": "ident-bound-canremove",
+   "dump": {
+    "callCanBeUnwrappedIfUnused": false,
+    "canBeRemovedIfUnused": true,
+    "kind": "EIdentifier",
+    "loc": 2,
+    "mustKeepDueToWithStmt": false,
+    "name": "c"
+   },
+   "knownPrimitiveType": 0,
+   "isPrimitiveLiteral": false,
+   "isSymbolInstance": false,
+   "isPropertyAccess": false,
+   "isOptionalChain": false,
+   "typeof": [
+    "",
+    false
+   ],
+   "toNumber": [
+    "0",
+    false
+   ],
+   "toString": [
+    "",
+    false
+   ],
+   "toBoolean": [
+    false,
+    0,
+    false
+   ],
+   "toNullOrUndefined": [
+    false,
+    1,
+    false
+   ],
+   "canBeRemoved": true,
+   "simplifyUnused": null,
+   "simplifyBoolean": {
+    "callCanBeUnwrappedIfUnused": false,
+    "canBeRemovedIfUnused": true,
+    "kind": "EIdentifier",
+    "loc": 2,
+    "mustKeepDueToWithStmt": false,
+    "name": "c"
+   },
+   "not": {
+    "kind": "EUnary",
+    "loc": 2,
+    "op": 3,
+    "value": {
+     "callCanBeUnwrappedIfUnused": false,
+     "canBeRemovedIfUnused": true,
+     "kind": "EIdentifier",
+     "loc": 2,
+     "mustKeepDueToWithStmt": false,
+     "name": "c"
+    },
+    "wasTypeof": false
+   }
+  },
+  {
+   "name": "ident-with",
+   "dump": {
+    "callCanBeUnwrappedIfUnused": false,
+    "canBeRemovedIfUnused": false,
+    "kind": "EIdentifier",
+    "loc": 2,
+    "mustKeepDueToWithStmt": true,
+    "name": "c"
+   },
+   "knownPrimitiveType": 0,
+   "isPrimitiveLiteral": false,
+   "isSymbolInstance": false,
+   "isPropertyAccess": false,
+   "isOptionalChain": false,
+   "typeof": [
+    "",
+    false
+   ],
+   "toNumber": [
+    "0",
+    false
+   ],
+   "toString": [
+    "",
+    false
+   ],
+   "toBoolean": [
+    false,
+    0,
+    false
+   ],
+   "toNullOrUndefined": [
+    false,
+    1,
+    false
+   ],
+   "canBeRemoved": false,
+   "simplifyUnused": {
+    "callCanBeUnwrappedIfUnused": false,
+    "canBeRemovedIfUnused": false,
+    "kind": "EIdentifier",
+    "loc": 2,
+    "mustKeepDueToWithStmt": true,
+    "name": "c"
+   },
+   "simplifyBoolean": {
+    "callCanBeUnwrappedIfUnused": false,
+    "canBeRemovedIfUnused": false,
+    "kind": "EIdentifier",
+    "loc": 2,
+    "mustKeepDueToWithStmt": true,
+    "name": "c"
+   },
+   "not": {
+    "kind": "EUnary",
+    "loc": 2,
+    "op": 3,
+    "value": {
+     "callCanBeUnwrappedIfUnused": false,
+     "canBeRemovedIfUnused": false,
+     "kind": "EIdentifier",
+     "loc": 2,
+     "mustKeepDueToWithStmt": true,
+     "name": "c"
+    },
+    "wasTypeof": false
+   }
+  },
+  {
+   "name": "unary-not",
+   "dump": {
+    "kind": "EUnary",
+    "loc": 3,
+    "op": 3,
+    "value": {
+     "bits": "4607182418800017408",
+     "kind": "ENumber",
+     "loc": 1
+    },
+    "wasTypeof": false
+   },
+   "knownPrimitiveType": 4,
+   "isPrimitiveLiteral": false,
+   "isSymbolInstance": false,
+   "isPropertyAccess": false,
+   "isOptionalChain": false,
+   "typeof": [
+    "",
+    false
+   ],
+   "toNumber": [
+    "0",
+    false
+   ],
+   "toString": [
+    "",
+    false
+   ],
+   "toBoolean": [
+    false,
+    1,
+    true
+   ],
+   "toNullOrUndefined": [
+    false,
+    0,
+    true
+   ],
+   "canBeRemoved": true,
+   "simplifyUnused": null,
+   "simplifyBoolean": {
+    "kind": "EUnary",
+    "loc": 3,
+    "op": 3,
+    "value": {
+     "kind": "EBoolean",
+     "loc": 1,
+     "value": true
+    },
+    "wasTypeof": false
+   },
+   "not": {
+    "kind": "EUnary",
+    "loc": 3,
+    "op": 3,
+    "value": {
+     "kind": "EUnary",
+     "loc": 3,
+     "op": 3,
+     "value": {
+      "bits": "4607182418800017408",
+      "kind": "ENumber",
+      "loc": 1
+     },
+     "wasTypeof": false
+    },
+    "wasTypeof": false
+   }
+  },
+  {
+   "name": "unary-notnot",
+   "dump": {
+    "kind": "EUnary",
+    "loc": 3,
+    "op": 3,
+    "value": {
+     "kind": "EUnary",
+     "loc": 3,
+     "op": 3,
+     "value": {
+      "callCanBeUnwrappedIfUnused": false,
+      "canBeRemovedIfUnused": false,
+      "kind": "EIdentifier",
+      "loc": 2,
+      "mustKeepDueToWithStmt": false,
+      "name": "c"
+     },
+     "wasTypeof": false
+    },
+    "wasTypeof": false
+   },
+   "knownPrimitiveType": 4,
+   "isPrimitiveLiteral": false,
+   "isSymbolInstance": false,
+   "isPropertyAccess": false,
+   "isOptionalChain": false,
+   "typeof": [
+    "",
+    false
+   ],
+   "toNumber": [
+    "0",
+    false
+   ],
+   "toString": [
+    "",
+    false
+   ],
+   "toBoolean": [
+    false,
+    0,
+    false
+   ],
+   "toNullOrUndefined": [
+    false,
+    0,
+    true
+   ],
+   "canBeRemoved": true,
+   "simplifyUnused": null,
+   "simplifyBoolean": {
+    "callCanBeUnwrappedIfUnused": false,
+    "canBeRemovedIfUnused": false,
+    "kind": "EIdentifier",
+    "loc": 2,
+    "mustKeepDueToWithStmt": false,
+    "name": "c"
+   },
+   "not": {
+    "kind": "EUnary",
+    "loc": 3,
+    "op": 3,
+    "value": {
+     "callCanBeUnwrappedIfUnused": false,
+     "canBeRemovedIfUnused": false,
+     "kind": "EIdentifier",
+     "loc": 2,
+     "mustKeepDueToWithStmt": false,
+     "name": "c"
+    },
+    "wasTypeof": false
+   }
+  },
+  {
+   "name": "unary-typeof-ident",
+   "dump": {
+    "kind": "EUnary",
+    "loc": 3,
+    "op": 5,
+    "value": {
+     "callCanBeUnwrappedIfUnused": false,
+     "canBeRemovedIfUnused": false,
+     "kind": "EIdentifier",
+     "loc": 2,
+     "mustKeepDueToWithStmt": false,
+     "name": "c"
+    },
+    "wasTypeof": true
+   },
+   "knownPrimitiveType": 6,
+   "isPrimitiveLiteral": false,
+   "isSymbolInstance": false,
+   "isPropertyAccess": false,
+   "isOptionalChain": false,
+   "typeof": [
+    "",
+    false
+   ],
+   "toNumber": [
+    "0",
+    false
+   ],
+   "toString": [
+    "",
+    false
+   ],
+   "toBoolean": [
+    true,
+    1,
+    true
+   ],
+   "toNullOrUndefined": [
+    false,
+    1,
+    true
+   ],
+   "canBeRemoved": true,
+   "simplifyUnused": null,
+   "simplifyBoolean": {
+    "kind": "EUnary",
+    "loc": 3,
+    "op": 5,
+    "value": {
+     "callCanBeUnwrappedIfUnused": false,
+     "canBeRemovedIfUnused": false,
+     "kind": "EIdentifier",
+     "loc": 2,
+     "mustKeepDueToWithStmt": false,
+     "name": "c"
+    },
+    "wasTypeof": true
+   },
+   "not": {
+    "kind": "EUnary",
+    "loc": 3,
+    "op": 3,
+    "value": {
+     "kind": "EUnary",
+     "loc": 3,
+     "op": 5,
+     "value": {
+      "callCanBeUnwrappedIfUnused": false,
+      "canBeRemovedIfUnused": false,
+      "kind": "EIdentifier",
+      "loc": 2,
+      "mustKeepDueToWithStmt": false,
+      "name": "c"
+     },
+     "wasTypeof": true
+    },
+    "wasTypeof": false
+   }
+  },
+  {
+   "name": "unary-typeof-num",
+   "dump": {
+    "kind": "EUnary",
+    "loc": 3,
+    "op": 5,
+    "value": {
+     "bits": "4607182418800017408",
+     "kind": "ENumber",
+     "loc": 1
+    },
+    "wasTypeof": false
+   },
+   "knownPrimitiveType": 6,
+   "isPrimitiveLiteral": false,
+   "isSymbolInstance": false,
+   "isPropertyAccess": false,
+   "isOptionalChain": false,
+   "typeof": [
+    "",
+    false
+   ],
+   "toNumber": [
+    "0",
+    false
+   ],
+   "toString": [
+    "",
+    false
+   ],
+   "toBoolean": [
+    true,
+    0,
+    true
+   ],
+   "toNullOrUndefined": [
+    false,
+    0,
+    true
+   ],
+   "canBeRemoved": true,
+   "simplifyUnused": null,
+   "simplifyBoolean": {
+    "kind": "EUnary",
+    "loc": 3,
+    "op": 5,
+    "value": {
+     "bits": "4607182418800017408",
+     "kind": "ENumber",
+     "loc": 1
+    },
+    "wasTypeof": false
+   },
+   "not": {
+    "kind": "EUnary",
+    "loc": 3,
+    "op": 3,
+    "value": {
+     "kind": "EUnary",
+     "loc": 3,
+     "op": 5,
+     "value": {
+      "bits": "4607182418800017408",
+      "kind": "ENumber",
+      "loc": 1
+     },
+     "wasTypeof": false
+    },
+    "wasTypeof": false
+   }
+  },
+  {
+   "name": "unary-void",
+   "dump": {
+    "kind": "EUnary",
+    "loc": 3,
+    "op": 4,
+    "value": {
+     "bits": "4607182418800017408",
+     "kind": "ENumber",
+     "loc": 1
+    },
+    "wasTypeof": false
+   },
+   "knownPrimitiveType": 3,
+   "isPrimitiveLiteral": false,
+   "isSymbolInstance": false,
+   "isPropertyAccess": false,
+   "isOptionalChain": false,
+   "typeof": [
+    "",
+    false
+   ],
+   "toNumber": [
+    "0",
+    false
+   ],
+   "toString": [
+    "",
+    false
+   ],
+   "toBoolean": [
+    false,
+    0,
+    true
+   ],
+   "toNullOrUndefined": [
+    true,
+    0,
+    true
+   ],
+   "canBeRemoved": true,
+   "simplifyUnused": null,
+   "simplifyBoolean": {
+    "kind": "EUnary",
+    "loc": 3,
+    "op": 4,
+    "value": {
+     "bits": "4607182418800017408",
+     "kind": "ENumber",
+     "loc": 1
+    },
+    "wasTypeof": false
+   },
+   "not": {
+    "kind": "EUnary",
+    "loc": 3,
+    "op": 3,
+    "value": {
+     "kind": "EUnary",
+     "loc": 3,
+     "op": 4,
+     "value": {
+      "bits": "4607182418800017408",
+      "kind": "ENumber",
+      "loc": 1
+     },
+     "wasTypeof": false
+    },
+    "wasTypeof": false
+   }
+  },
+  {
+   "name": "unary-neg-bigint",
+   "dump": {
+    "kind": "EUnary",
+    "loc": 3,
+    "op": 1,
+    "value": {
+     "kind": "EBigInt",
+     "loc": 1,
+     "value": "1"
+    },
+    "wasTypeof": false
+   },
+   "knownPrimitiveType": 7,
+   "isPrimitiveLiteral": false,
+   "isSymbolInstance": false,
+   "isPropertyAccess": false,
+   "isOptionalChain": false,
+   "typeof": [
+    "",
+    false
+   ],
+   "toNumber": [
+    "0",
+    false
+   ],
+   "toString": [
+    "",
+    false
+   ],
+   "toBoolean": [
+    false,
+    0,
+    false
+   ],
+   "toNullOrUndefined": [
+    false,
+    0,
+    true
+   ],
+   "canBeRemoved": true,
+   "simplifyUnused": null,
+   "simplifyBoolean": {
+    "kind": "EUnary",
+    "loc": 3,
+    "op": 1,
+    "value": {
+     "kind": "EBigInt",
+     "loc": 1,
+     "value": "1"
+    },
+    "wasTypeof": false
+   },
+   "not": {
+    "kind": "EUnary",
+    "loc": 3,
+    "op": 3,
+    "value": {
+     "kind": "EUnary",
+     "loc": 3,
+     "op": 1,
+     "value": {
+      "kind": "EBigInt",
+      "loc": 1,
+      "value": "1"
+     },
+     "wasTypeof": false
+    },
+    "wasTypeof": false
+   }
+  },
+  {
+   "name": "unary-pos",
+   "dump": {
+    "kind": "EUnary",
+    "loc": 3,
+    "op": 0,
+    "value": {
+     "bits": "4607182418800017408",
+     "kind": "ENumber",
+     "loc": 1
+    },
+    "wasTypeof": false
+   },
+   "knownPrimitiveType": 5,
+   "isPrimitiveLiteral": false,
+   "isSymbolInstance": false,
+   "isPropertyAccess": false,
+   "isOptionalChain": false,
+   "typeof": [
+    "",
+    false
+   ],
+   "toNumber": [
+    "0",
+    false
+   ],
+   "toString": [
+    "",
+    false
+   ],
+   "toBoolean": [
+    false,
+    0,
+    false
+   ],
+   "toNullOrUndefined": [
+    false,
+    0,
+    true
+   ],
+   "canBeRemoved": false,
+   "simplifyUnused": {
+    "kind": "EUnary",
+    "loc": 3,
+    "op": 0,
+    "value": {
+     "bits": "4607182418800017408",
+     "kind": "ENumber",
+     "loc": 1
+    },
+    "wasTypeof": false
+   },
+   "simplifyBoolean": {
+    "kind": "EUnary",
+    "loc": 3,
+    "op": 0,
+    "value": {
+     "bits": "4607182418800017408",
+     "kind": "ENumber",
+     "loc": 1
+    },
+    "wasTypeof": false
+   },
+   "not": {
+    "kind": "EUnary",
+    "loc": 3,
+    "op": 3,
+    "value": {
+     "kind": "EUnary",
+     "loc": 3,
+     "op": 0,
+     "value": {
+      "bits": "4607182418800017408",
+      "kind": "ENumber",
+      "loc": 1
+     },
+     "wasTypeof": false
+    },
+    "wasTypeof": false
+   }
+  },
+  {
+   "name": "binary-add-num",
+   "dump": {
+    "kind": "EBinary",
+    "left": {
+     "bits": "4607182418800017408",
+     "kind": "ENumber",
+     "loc": 1
+    },
+    "loc": 4,
+    "op": 11,
+    "right": {
+     "bits": "4611686018427387904",
+     "kind": "ENumber",
+     "loc": 1
+    }
+   },
+   "knownPrimitiveType": 5,
+   "isPrimitiveLiteral": false,
+   "isSymbolInstance": false,
+   "isPropertyAccess": false,
+   "isOptionalChain": false,
+   "typeof": [
+    "",
+    false
+   ],
+   "toNumber": [
+    "0",
+    false
+   ],
+   "toString": [
+    "",
+    false
+   ],
+   "toBoolean": [
+    false,
+    0,
+    false
+   ],
+   "toNullOrUndefined": [
+    false,
+    0,
+    true
+   ],
+   "canBeRemoved": false,
+   "simplifyUnused": {
+    "kind": "EBinary",
+    "left": {
+     "bits": "4607182418800017408",
+     "kind": "ENumber",
+     "loc": 1
+    },
+    "loc": 4,
+    "op": 11,
+    "right": {
+     "bits": "4611686018427387904",
+     "kind": "ENumber",
+     "loc": 1
+    }
+   },
+   "simplifyBoolean": {
+    "kind": "EBinary",
+    "left": {
+     "bits": "4607182418800017408",
+     "kind": "ENumber",
+     "loc": 1
+    },
+    "loc": 4,
+    "op": 11,
+    "right": {
+     "bits": "4611686018427387904",
+     "kind": "ENumber",
+     "loc": 1
+    }
+   },
+   "not": {
+    "kind": "EUnary",
+    "loc": 4,
+    "op": 3,
+    "value": {
+     "kind": "EBinary",
+     "left": {
+      "bits": "4607182418800017408",
+      "kind": "ENumber",
+      "loc": 1
+     },
+     "loc": 4,
+     "op": 11,
+     "right": {
+      "bits": "4611686018427387904",
+      "kind": "ENumber",
+      "loc": 1
+     }
+    },
+    "wasTypeof": false
+   }
+  },
+  {
+   "name": "binary-add-str",
+   "dump": {
+    "kind": "EBinary",
+    "left": {
+     "kind": "EString",
+     "loc": 1,
+     "preferTemplate": false,
+     "value": [
+      97
+     ]
+    },
+    "loc": 4,
+    "op": 11,
+    "right": {
+     "kind": "EString",
+     "loc": 1,
+     "preferTemplate": false,
+     "value": [
+      98
+     ]
+    }
+   },
+   "knownPrimitiveType": 6,
+   "isPrimitiveLiteral": false,
+   "isSymbolInstance": false,
+   "isPropertyAccess": false,
+   "isOptionalChain": false,
+   "typeof": [
+    "",
+    false
+   ],
+   "toNumber": [
+    "0",
+    false
+   ],
+   "toString": [
+    "",
+    false
+   ],
+   "toBoolean": [
+    false,
+    0,
+    false
+   ],
+   "toNullOrUndefined": [
+    false,
+    0,
+    true
+   ],
+   "canBeRemoved": false,
+   "simplifyUnused": {
+    "kind": "EString",
+    "loc": 1,
+    "preferTemplate": false,
+    "value": []
+   },
+   "simplifyBoolean": {
+    "kind": "EBinary",
+    "left": {
+     "kind": "EString",
+     "loc": 1,
+     "preferTemplate": false,
+     "value": [
+      97
+     ]
+    },
+    "loc": 4,
+    "op": 11,
+    "right": {
+     "kind": "EString",
+     "loc": 1,
+     "preferTemplate": false,
+     "value": [
+      98
+     ]
+    }
+   },
+   "not": {
+    "kind": "EUnary",
+    "loc": 4,
+    "op": 3,
+    "value": {
+     "kind": "EBinary",
+     "left": {
+      "kind": "EString",
+      "loc": 1,
+      "preferTemplate": false,
+      "value": [
+       97
+      ]
+     },
+     "loc": 4,
+     "op": 11,
+     "right": {
+      "kind": "EString",
+      "loc": 1,
+      "preferTemplate": false,
+      "value": [
+       98
+      ]
+     }
+    },
+    "wasTypeof": false
+   }
+  },
+  {
+   "name": "binary-add-mixed",
+   "dump": {
+    "kind": "EBinary",
+    "left": {
+     "bits": "4607182418800017408",
+     "kind": "ENumber",
+     "loc": 1
+    },
+    "loc": 4,
+    "op": 11,
+    "right": {
+     "kind": "EString",
+     "loc": 1,
+     "preferTemplate": false,
+     "value": [
+      98
+     ]
+    }
+   },
+   "knownPrimitiveType": 6,
+   "isPrimitiveLiteral": false,
+   "isSymbolInstance": false,
+   "isPropertyAccess": false,
+   "isOptionalChain": false,
+   "typeof": [
+    "",
+    false
+   ],
+   "toNumber": [
+    "0",
+    false
+   ],
+   "toString": [
+    "",
+    false
+   ],
+   "toBoolean": [
+    false,
+    0,
+    false
+   ],
+   "toNullOrUndefined": [
+    false,
+    0,
+    true
+   ],
+   "canBeRemoved": false,
+   "simplifyUnused": {
+    "kind": "EBinary",
+    "left": {
+     "bits": "4607182418800017408",
+     "kind": "ENumber",
+     "loc": 1
+    },
+    "loc": 4,
+    "op": 11,
+    "right": {
+     "kind": "EString",
+     "loc": 1,
+     "preferTemplate": false,
+     "value": []
+    }
+   },
+   "simplifyBoolean": {
+    "kind": "EBinary",
+    "left": {
+     "bits": "4607182418800017408",
+     "kind": "ENumber",
+     "loc": 1
+    },
+    "loc": 4,
+    "op": 11,
+    "right": {
+     "kind": "EString",
+     "loc": 1,
+     "preferTemplate": false,
+     "value": [
+      98
+     ]
+    }
+   },
+   "not": {
+    "kind": "EUnary",
+    "loc": 4,
+    "op": 3,
+    "value": {
+     "kind": "EBinary",
+     "left": {
+      "bits": "4607182418800017408",
+      "kind": "ENumber",
+      "loc": 1
+     },
+     "loc": 4,
+     "op": 11,
+     "right": {
+      "kind": "EString",
+      "loc": 1,
+      "preferTemplate": false,
+      "value": [
+       98
+      ]
+     }
+    },
+    "wasTypeof": false
+   }
+  },
+  {
+   "name": "binary-lt-num",
+   "dump": {
+    "kind": "EBinary",
+    "left": {
+     "bits": "4607182418800017408",
+     "kind": "ENumber",
+     "loc": 1
+    },
+    "loc": 4,
+    "op": 17,
+    "right": {
+     "bits": "4611686018427387904",
+     "kind": "ENumber",
+     "loc": 1
+    }
+   },
+   "knownPrimitiveType": 4,
+   "isPrimitiveLiteral": false,
+   "isSymbolInstance": false,
+   "isPropertyAccess": false,
+   "isOptionalChain": false,
+   "typeof": [
+    "",
+    false
+   ],
+   "toNumber": [
+    "0",
+    false
+   ],
+   "toString": [
+    "",
+    false
+   ],
+   "toBoolean": [
+    false,
+    0,
+    false
+   ],
+   "toNullOrUndefined": [
+    false,
+    0,
+    true
+   ],
+   "canBeRemoved": true,
+   "simplifyUnused": {
+    "kind": "EBinary",
+    "left": {
+     "bits": "4607182418800017408",
+     "kind": "ENumber",
+     "loc": 1
+    },
+    "loc": 4,
+    "op": 17,
+    "right": {
+     "bits": "4611686018427387904",
+     "kind": "ENumber",
+     "loc": 1
+    }
+   },
+   "simplifyBoolean": {
+    "kind": "EBinary",
+    "left": {
+     "bits": "4607182418800017408",
+     "kind": "ENumber",
+     "loc": 1
+    },
+    "loc": 4,
+    "op": 17,
+    "right": {
+     "bits": "4611686018427387904",
+     "kind": "ENumber",
+     "loc": 1
+    }
+   },
+   "not": {
+    "kind": "EUnary",
+    "loc": 4,
+    "op": 3,
+    "value": {
+     "kind": "EBinary",
+     "left": {
+      "bits": "4607182418800017408",
+      "kind": "ENumber",
+      "loc": 1
+     },
+     "loc": 4,
+     "op": 17,
+     "right": {
+      "bits": "4611686018427387904",
+      "kind": "ENumber",
+      "loc": 1
+     }
+    },
+    "wasTypeof": false
+   }
+  },
+  {
+   "name": "binary-lt-str",
+   "dump": {
+    "kind": "EBinary",
+    "left": {
+     "kind": "EString",
+     "loc": 1,
+     "preferTemplate": false,
+     "value": [
+      97
+     ]
+    },
+    "loc": 4,
+    "op": 17,
+    "right": {
+     "kind": "EString",
+     "loc": 1,
+     "preferTemplate": false,
+     "value": [
+      98
+     ]
+    }
+   },
+   "knownPrimitiveType": 4,
+   "isPrimitiveLiteral": false,
+   "isSymbolInstance": false,
+   "isPropertyAccess": false,
+   "isOptionalChain": false,
+   "typeof": [
+    "",
+    false
+   ],
+   "toNumber": [
+    "0",
+    false
+   ],
+   "toString": [
+    "",
+    false
+   ],
+   "toBoolean": [
+    false,
+    0,
+    false
+   ],
+   "toNullOrUndefined": [
+    false,
+    0,
+    true
+   ],
+   "canBeRemoved": true,
+   "simplifyUnused": {
+    "kind": "EBinary",
+    "left": {
+     "kind": "EString",
+     "loc": 1,
+     "preferTemplate": false,
+     "value": [
+      97
+     ]
+    },
+    "loc": 4,
+    "op": 17,
+    "right": {
+     "kind": "EString",
+     "loc": 1,
+     "preferTemplate": false,
+     "value": [
+      98
+     ]
+    }
+   },
+   "simplifyBoolean": {
+    "kind": "EBinary",
+    "left": {
+     "kind": "EString",
+     "loc": 1,
+     "preferTemplate": false,
+     "value": [
+      97
+     ]
+    },
+    "loc": 4,
+    "op": 17,
+    "right": {
+     "kind": "EString",
+     "loc": 1,
+     "preferTemplate": false,
+     "value": [
+      98
+     ]
+    }
+   },
+   "not": {
+    "kind": "EUnary",
+    "loc": 4,
+    "op": 3,
+    "value": {
+     "kind": "EBinary",
+     "left": {
+      "kind": "EString",
+      "loc": 1,
+      "preferTemplate": false,
+      "value": [
+       97
+      ]
+     },
+     "loc": 4,
+     "op": 17,
+     "right": {
+      "kind": "EString",
+      "loc": 1,
+      "preferTemplate": false,
+      "value": [
+       98
+      ]
+     }
+    },
+    "wasTypeof": false
+   }
+  },
+  {
+   "name": "binary-eq-str",
+   "dump": {
+    "kind": "EBinary",
+    "left": {
+     "kind": "EString",
+     "loc": 1,
+     "preferTemplate": false,
+     "value": [
+      97
+     ]
+    },
+    "loc": 4,
+    "op": 28,
+    "right": {
+     "kind": "EString",
+     "loc": 1,
+     "preferTemplate": false,
+     "value": [
+      97
+     ]
+    }
+   },
+   "knownPrimitiveType": 4,
+   "isPrimitiveLiteral": false,
+   "isSymbolInstance": false,
+   "isPropertyAccess": false,
+   "isOptionalChain": false,
+   "typeof": [
+    "",
+    false
+   ],
+   "toNumber": [
+    "0",
+    false
+   ],
+   "toString": [
+    "",
+    false
+   ],
+   "toBoolean": [
+    false,
+    0,
+    false
+   ],
+   "toNullOrUndefined": [
+    false,
+    0,
+    true
+   ],
+   "canBeRemoved": true,
+   "simplifyUnused": null,
+   "simplifyBoolean": {
+    "kind": "EBinary",
+    "left": {
+     "kind": "EString",
+     "loc": 1,
+     "preferTemplate": false,
+     "value": [
+      97
+     ]
+    },
+    "loc": 4,
+    "op": 28,
+    "right": {
+     "kind": "EString",
+     "loc": 1,
+     "preferTemplate": false,
+     "value": [
+      97
+     ]
+    }
+   },
+   "not": {
+    "kind": "EBinary",
+    "left": {
+     "kind": "EString",
+     "loc": 1,
+     "preferTemplate": false,
+     "value": [
+      97
+     ]
+    },
+    "loc": 4,
+    "op": 29,
+    "right": {
+     "kind": "EString",
+     "loc": 1,
+     "preferTemplate": false,
+     "value": [
+      97
+     ]
+    }
+   }
+  },
+  {
+   "name": "binary-loose-eq",
+   "dump": {
+    "kind": "EBinary",
+    "left": {
+     "bits": "4607182418800017408",
+     "kind": "ENumber",
+     "loc": 1
+    },
+    "loc": 4,
+    "op": 26,
+    "right": {
+     "bits": "4607182418800017408",
+     "kind": "ENumber",
+     "loc": 1
+    }
+   },
+   "knownPrimitiveType": 4,
+   "isPrimitiveLiteral": false,
+   "isSymbolInstance": false,
+   "isPropertyAccess": false,
+   "isOptionalChain": false,
+   "typeof": [
+    "",
+    false
+   ],
+   "toNumber": [
+    "0",
+    false
+   ],
+   "toString": [
+    "",
+    false
+   ],
+   "toBoolean": [
+    false,
+    0,
+    false
+   ],
+   "toNullOrUndefined": [
+    false,
+    0,
+    true
+   ],
+   "canBeRemoved": true,
+   "simplifyUnused": null,
+   "simplifyBoolean": {
+    "kind": "EBinary",
+    "left": {
+     "bits": "4607182418800017408",
+     "kind": "ENumber",
+     "loc": 1
+    },
+    "loc": 4,
+    "op": 26,
+    "right": {
+     "bits": "4607182418800017408",
+     "kind": "ENumber",
+     "loc": 1
+    }
+   },
+   "not": {
+    "kind": "EBinary",
+    "left": {
+     "bits": "4607182418800017408",
+     "kind": "ENumber",
+     "loc": 1
+    },
+    "loc": 4,
+    "op": 27,
+    "right": {
+     "bits": "4607182418800017408",
+     "kind": "ENumber",
+     "loc": 1
+    }
+   }
+  },
+  {
+   "name": "binary-comma",
+   "dump": {
+    "kind": "EBinary",
+    "left": {
+     "bits": "4607182418800017408",
+     "kind": "ENumber",
+     "loc": 1
+    },
+    "loc": 4,
+    "op": 36,
+    "right": {
+     "bits": "4611686018427387904",
+     "kind": "ENumber",
+     "loc": 1
+    }
+   },
+   "knownPrimitiveType": 5,
+   "isPrimitiveLiteral": false,
+   "isSymbolInstance": false,
+   "isPropertyAccess": false,
+   "isOptionalChain": false,
+   "typeof": [
+    "",
+    false
+   ],
+   "toNumber": [
+    "0",
+    false
+   ],
+   "toString": [
+    "",
+    false
+   ],
+   "toBoolean": [
+    true,
+    0,
+    true
+   ],
+   "toNullOrUndefined": [
+    false,
+    0,
+    true
+   ],
+   "canBeRemoved": true,
+   "simplifyUnused": null,
+   "simplifyBoolean": {
+    "kind": "EBinary",
+    "left": {
+     "bits": "4607182418800017408",
+     "kind": "ENumber",
+     "loc": 1
+    },
+    "loc": 4,
+    "op": 36,
+    "right": {
+     "bits": "4611686018427387904",
+     "kind": "ENumber",
+     "loc": 1
+    }
+   },
+   "not": {
+    "kind": "EBinary",
+    "left": {
+     "bits": "4607182418800017408",
+     "kind": "ENumber",
+     "loc": 1
+    },
+    "loc": 4,
+    "op": 36,
+    "right": {
+     "kind": "EBoolean",
+     "loc": 1,
+     "value": false
+    }
+   }
+  },
+  {
+   "name": "binary-logical-and",
+   "dump": {
+    "kind": "EBinary",
+    "left": {
+     "kind": "EBoolean",
+     "loc": 1,
+     "value": true
+    },
+    "loc": 4,
+    "op": 32,
+    "right": {
+     "callCanBeUnwrappedIfUnused": false,
+     "canBeRemovedIfUnused": false,
+     "kind": "EIdentifier",
+     "loc": 2,
+     "mustKeepDueToWithStmt": false,
+     "name": "c"
+    }
+   },
+   "knownPrimitiveType": 0,
+   "isPrimitiveLiteral": false,
+   "isSymbolInstance": false,
+   "isPropertyAccess": false,
+   "isOptionalChain": false,
+   "typeof": [
+    "",
+    false
+   ],
+   "toNumber": [
+    "0",
+    false
+   ],
+   "toString": [
+    "",
+    false
+   ],
+   "toBoolean": [
+    false,
+    0,
+    false
+   ],
+   "toNullOrUndefined": [
+    false,
+    1,
+    false
+   ],
+   "canBeRemoved": true,
+   "simplifyUnused": null,
+   "simplifyBoolean": {
+    "kind": "EBinary",
+    "left": {
+     "kind": "EBoolean",
+     "loc": 1,
+     "value": true
+    },
+    "loc": 4,
+    "op": 32,
+    "right": {
+     "callCanBeUnwrappedIfUnused": false,
+     "canBeRemovedIfUnused": false,
+     "kind": "EIdentifier",
+     "loc": 2,
+     "mustKeepDueToWithStmt": false,
+     "name": "c"
+    }
+   },
+   "not": {
+    "kind": "EUnary",
+    "loc": 4,
+    "op": 3,
+    "value": {
+     "kind": "EBinary",
+     "left": {
+      "kind": "EBoolean",
+      "loc": 1,
+      "value": true
+     },
+     "loc": 4,
+     "op": 32,
+     "right": {
+      "callCanBeUnwrappedIfUnused": false,
+      "canBeRemovedIfUnused": false,
+      "kind": "EIdentifier",
+      "loc": 2,
+      "mustKeepDueToWithStmt": false,
+      "name": "c"
+     }
+    },
+    "wasTypeof": false
+   }
+  },
+  {
+   "name": "binary-logical-or",
+   "dump": {
+    "kind": "EBinary",
+    "left": {
+     "kind": "EBoolean",
+     "loc": 1,
+     "value": false
+    },
+    "loc": 4,
+    "op": 31,
+    "right": {
+     "callCanBeUnwrappedIfUnused": false,
+     "canBeRemovedIfUnused": false,
+     "kind": "EIdentifier",
+     "loc": 2,
+     "mustKeepDueToWithStmt": false,
+     "name": "c"
+    }
+   },
+   "knownPrimitiveType": 0,
+   "isPrimitiveLiteral": false,
+   "isSymbolInstance": false,
+   "isPropertyAccess": false,
+   "isOptionalChain": false,
+   "typeof": [
+    "",
+    false
+   ],
+   "toNumber": [
+    "0",
+    false
+   ],
+   "toString": [
+    "",
+    false
+   ],
+   "toBoolean": [
+    false,
+    0,
+    false
+   ],
+   "toNullOrUndefined": [
+    false,
+    1,
+    false
+   ],
+   "canBeRemoved": true,
+   "simplifyUnused": null,
+   "simplifyBoolean": {
+    "kind": "EBinary",
+    "left": {
+     "kind": "EBoolean",
+     "loc": 1,
+     "value": false
+    },
+    "loc": 4,
+    "op": 31,
+    "right": {
+     "callCanBeUnwrappedIfUnused": false,
+     "canBeRemovedIfUnused": false,
+     "kind": "EIdentifier",
+     "loc": 2,
+     "mustKeepDueToWithStmt": false,
+     "name": "c"
+    }
+   },
+   "not": {
+    "kind": "EUnary",
+    "loc": 4,
+    "op": 3,
+    "value": {
+     "kind": "EBinary",
+     "left": {
+      "kind": "EBoolean",
+      "loc": 1,
+      "value": false
+     },
+     "loc": 4,
+     "op": 31,
+     "right": {
+      "callCanBeUnwrappedIfUnused": false,
+      "canBeRemovedIfUnused": false,
+      "kind": "EIdentifier",
+      "loc": 2,
+      "mustKeepDueToWithStmt": false,
+      "name": "c"
+     }
+    },
+    "wasTypeof": false
+   }
+  },
+  {
+   "name": "binary-nullish",
+   "dump": {
+    "kind": "EBinary",
+    "left": {
+     "kind": "ENull",
+     "loc": 1
+    },
+    "loc": 4,
+    "op": 30,
+    "right": {
+     "callCanBeUnwrappedIfUnused": false,
+     "canBeRemovedIfUnused": false,
+     "kind": "EIdentifier",
+     "loc": 2,
+     "mustKeepDueToWithStmt": false,
+     "name": "c"
+    }
+   },
+   "knownPrimitiveType": 0,
+   "isPrimitiveLiteral": false,
+   "isSymbolInstance": false,
+   "isPropertyAccess": false,
+   "isOptionalChain": false,
+   "typeof": [
+    "",
+    false
+   ],
+   "toNumber": [
+    "0",
+    false
+   ],
+   "toString": [
+    "",
+    false
+   ],
+   "toBoolean": [
+    false,
+    0,
+    false
+   ],
+   "toNullOrUndefined": [
+    false,
+    1,
+    false
+   ],
+   "canBeRemoved": true,
+   "simplifyUnused": null,
+   "simplifyBoolean": {
+    "kind": "EBinary",
+    "left": {
+     "kind": "ENull",
+     "loc": 1
+    },
+    "loc": 4,
+    "op": 30,
+    "right": {
+     "callCanBeUnwrappedIfUnused": false,
+     "canBeRemovedIfUnused": false,
+     "kind": "EIdentifier",
+     "loc": 2,
+     "mustKeepDueToWithStmt": false,
+     "name": "c"
+    }
+   },
+   "not": {
+    "kind": "EUnary",
+    "loc": 4,
+    "op": 3,
+    "value": {
+     "kind": "EBinary",
+     "left": {
+      "kind": "ENull",
+      "loc": 1
+     },
+     "loc": 4,
+     "op": 30,
+     "right": {
+      "callCanBeUnwrappedIfUnused": false,
+      "canBeRemovedIfUnused": false,
+      "kind": "EIdentifier",
+      "loc": 2,
+      "mustKeepDueToWithStmt": false,
+      "name": "c"
+     }
+    },
+    "wasTypeof": false
+   }
+  },
+  {
+   "name": "binary-ushr",
+   "dump": {
+    "kind": "EBinary",
+    "left": {
+     "bits": "4621819117588971520",
+     "kind": "ENumber",
+     "loc": 1
+    },
+    "loc": 4,
+    "op": 25,
+    "right": {
+     "bits": "4607182418800017408",
+     "kind": "ENumber",
+     "loc": 1
+    }
+   },
+   "knownPrimitiveType": 1,
+   "isPrimitiveLiteral": false,
+   "isSymbolInstance": false,
+   "isPropertyAccess": false,
+   "isOptionalChain": false,
+   "typeof": [
+    "",
+    false
+   ],
+   "toNumber": [
+    "0",
+    false
+   ],
+   "toString": [
+    "",
+    false
+   ],
+   "toBoolean": [
+    false,
+    0,
+    false
+   ],
+   "toNullOrUndefined": [
+    false,
+    0,
+    true
+   ],
+   "canBeRemoved": false,
+   "simplifyUnused": {
+    "kind": "EBinary",
+    "left": {
+     "bits": "4621819117588971520",
+     "kind": "ENumber",
+     "loc": 1
+    },
+    "loc": 4,
+    "op": 25,
+    "right": {
+     "bits": "4607182418800017408",
+     "kind": "ENumber",
+     "loc": 1
+    }
+   },
+   "simplifyBoolean": {
+    "kind": "EBinary",
+    "left": {
+     "bits": "4621819117588971520",
+     "kind": "ENumber",
+     "loc": 1
+    },
+    "loc": 4,
+    "op": 25,
+    "right": {
+     "bits": "4607182418800017408",
+     "kind": "ENumber",
+     "loc": 1
+    }
+   },
+   "not": {
+    "kind": "EUnary",
+    "loc": 4,
+    "op": 3,
+    "value": {
+     "kind": "EBinary",
+     "left": {
+      "bits": "4621819117588971520",
+      "kind": "ENumber",
+      "loc": 1
+     },
+     "loc": 4,
+     "op": 25,
+     "right": {
+      "bits": "4607182418800017408",
+      "kind": "ENumber",
+      "loc": 1
+     }
+    },
+    "wasTypeof": false
+   }
+  },
+  {
+   "name": "binary-shr",
+   "dump": {
+    "kind": "EBinary",
+    "left": {
+     "bits": "4621819117588971520",
+     "kind": "ENumber",
+     "loc": 1
+    },
+    "loc": 4,
+    "op": 24,
+    "right": {
+     "bits": "4607182418800017408",
+     "kind": "ENumber",
+     "loc": 1
+    }
+   },
+   "knownPrimitiveType": 1,
+   "isPrimitiveLiteral": false,
+   "isSymbolInstance": false,
+   "isPropertyAccess": false,
+   "isOptionalChain": false,
+   "typeof": [
+    "",
+    false
+   ],
+   "toNumber": [
+    "0",
+    false
+   ],
+   "toString": [
+    "",
+    false
+   ],
+   "toBoolean": [
+    false,
+    0,
+    false
+   ],
+   "toNullOrUndefined": [
+    false,
+    0,
+    true
+   ],
+   "canBeRemoved": false,
+   "simplifyUnused": {
+    "kind": "EBinary",
+    "left": {
+     "bits": "4621819117588971520",
+     "kind": "ENumber",
+     "loc": 1
+    },
+    "loc": 4,
+    "op": 24,
+    "right": {
+     "bits": "4607182418800017408",
+     "kind": "ENumber",
+     "loc": 1
+    }
+   },
+   "simplifyBoolean": {
+    "kind": "EBinary",
+    "left": {
+     "bits": "4621819117588971520",
+     "kind": "ENumber",
+     "loc": 1
+    },
+    "loc": 4,
+    "op": 24,
+    "right": {
+     "bits": "4607182418800017408",
+     "kind": "ENumber",
+     "loc": 1
+    }
+   },
+   "not": {
+    "kind": "EUnary",
+    "loc": 4,
+    "op": 3,
+    "value": {
+     "kind": "EBinary",
+     "left": {
+      "bits": "4621819117588971520",
+      "kind": "ENumber",
+      "loc": 1
+     },
+     "loc": 4,
+     "op": 24,
+     "right": {
+      "bits": "4607182418800017408",
+      "kind": "ENumber",
+      "loc": 1
+     }
+    },
+    "wasTypeof": false
+   }
+  },
+  {
+   "name": "binary-shl",
+   "dump": {
+    "kind": "EBinary",
+    "left": {
+     "bits": "4607182418800017408",
+     "kind": "ENumber",
+     "loc": 1
+    },
+    "loc": 4,
+    "op": 23,
+    "right": {
+     "bits": "4613937818241073152",
+     "kind": "ENumber",
+     "loc": 1
+    }
+   },
+   "knownPrimitiveType": 1,
+   "isPrimitiveLiteral": false,
+   "isSymbolInstance": false,
+   "isPropertyAccess": false,
+   "isOptionalChain": false,
+   "typeof": [
+    "",
+    false
+   ],
+   "toNumber": [
+    "0",
+    false
+   ],
+   "toString": [
+    "",
+    false
+   ],
+   "toBoolean": [
+    false,
+    0,
+    false
+   ],
+   "toNullOrUndefined": [
+    false,
+    0,
+    true
+   ],
+   "canBeRemoved": false,
+   "simplifyUnused": {
+    "kind": "EBinary",
+    "left": {
+     "bits": "4607182418800017408",
+     "kind": "ENumber",
+     "loc": 1
+    },
+    "loc": 4,
+    "op": 23,
+    "right": {
+     "bits": "4613937818241073152",
+     "kind": "ENumber",
+     "loc": 1
+    }
+   },
+   "simplifyBoolean": {
+    "kind": "EBinary",
+    "left": {
+     "bits": "4607182418800017408",
+     "kind": "ENumber",
+     "loc": 1
+    },
+    "loc": 4,
+    "op": 23,
+    "right": {
+     "bits": "4613937818241073152",
+     "kind": "ENumber",
+     "loc": 1
+    }
+   },
+   "not": {
+    "kind": "EUnary",
+    "loc": 4,
+    "op": 3,
+    "value": {
+     "kind": "EBinary",
+     "left": {
+      "bits": "4607182418800017408",
+      "kind": "ENumber",
+      "loc": 1
+     },
+     "loc": 4,
+     "op": 23,
+     "right": {
+      "bits": "4613937818241073152",
+      "kind": "ENumber",
+      "loc": 1
+     }
+    },
+    "wasTypeof": false
+   }
+  },
+  {
+   "name": "binary-mod",
+   "dump": {
+    "kind": "EBinary",
+    "left": {
+     "bits": "4617315517961601024",
+     "kind": "ENumber",
+     "loc": 1
+    },
+    "loc": 4,
+    "op": 15,
+    "right": {
+     "bits": "4611686018427387904",
+     "kind": "ENumber",
+     "loc": 1
+    }
+   },
+   "knownPrimitiveType": 1,
+   "isPrimitiveLiteral": false,
+   "isSymbolInstance": false,
+   "isPropertyAccess": false,
+   "isOptionalChain": false,
+   "typeof": [
+    "",
+    false
+   ],
+   "toNumber": [
+    "0",
+    false
+   ],
+   "toString": [
+    "",
+    false
+   ],
+   "toBoolean": [
+    false,
+    0,
+    false
+   ],
+   "toNullOrUndefined": [
+    false,
+    0,
+    true
+   ],
+   "canBeRemoved": false,
+   "simplifyUnused": {
+    "kind": "EBinary",
+    "left": {
+     "bits": "4617315517961601024",
+     "kind": "ENumber",
+     "loc": 1
+    },
+    "loc": 4,
+    "op": 15,
+    "right": {
+     "bits": "4611686018427387904",
+     "kind": "ENumber",
+     "loc": 1
+    }
+   },
+   "simplifyBoolean": {
+    "kind": "EBinary",
+    "left": {
+     "bits": "4617315517961601024",
+     "kind": "ENumber",
+     "loc": 1
+    },
+    "loc": 4,
+    "op": 15,
+    "right": {
+     "bits": "4611686018427387904",
+     "kind": "ENumber",
+     "loc": 1
+    }
+   },
+   "not": {
+    "kind": "EUnary",
+    "loc": 4,
+    "op": 3,
+    "value": {
+     "kind": "EBinary",
+     "left": {
+      "bits": "4617315517961601024",
+      "kind": "ENumber",
+      "loc": 1
+     },
+     "loc": 4,
+     "op": 15,
+     "right": {
+      "bits": "4611686018427387904",
+      "kind": "ENumber",
+      "loc": 1
+     }
+    },
+    "wasTypeof": false
+   }
+  },
+  {
+   "name": "binary-pow",
+   "dump": {
+    "kind": "EBinary",
+    "left": {
+     "bits": "4611686018427387904",
+     "kind": "ENumber",
+     "loc": 1
+    },
+    "loc": 4,
+    "op": 16,
+    "right": {
+     "bits": "4621819117588971520",
+     "kind": "ENumber",
+     "loc": 1
+    }
+   },
+   "knownPrimitiveType": 1,
+   "isPrimitiveLiteral": false,
+   "isSymbolInstance": false,
+   "isPropertyAccess": false,
+   "isOptionalChain": false,
+   "typeof": [
+    "",
+    false
+   ],
+   "toNumber": [
+    "0",
+    false
+   ],
+   "toString": [
+    "",
+    false
+   ],
+   "toBoolean": [
+    false,
+    0,
+    false
+   ],
+   "toNullOrUndefined": [
+    false,
+    0,
+    true
+   ],
+   "canBeRemoved": false,
+   "simplifyUnused": {
+    "kind": "EBinary",
+    "left": {
+     "bits": "4611686018427387904",
+     "kind": "ENumber",
+     "loc": 1
+    },
+    "loc": 4,
+    "op": 16,
+    "right": {
+     "bits": "4621819117588971520",
+     "kind": "ENumber",
+     "loc": 1
+    }
+   },
+   "simplifyBoolean": {
+    "kind": "EBinary",
+    "left": {
+     "bits": "4611686018427387904",
+     "kind": "ENumber",
+     "loc": 1
+    },
+    "loc": 4,
+    "op": 16,
+    "right": {
+     "bits": "4621819117588971520",
+     "kind": "ENumber",
+     "loc": 1
+    }
+   },
+   "not": {
+    "kind": "EUnary",
+    "loc": 4,
+    "op": 3,
+    "value": {
+     "kind": "EBinary",
+     "left": {
+      "bits": "4611686018427387904",
+      "kind": "ENumber",
+      "loc": 1
+     },
+     "loc": 4,
+     "op": 16,
+     "right": {
+      "bits": "4621819117588971520",
+      "kind": "ENumber",
+      "loc": 1
+     }
+    },
+    "wasTypeof": false
+   }
+  },
+  {
+   "name": "call",
+   "dump": {
+    "args": [
+     {
+      "bits": "4607182418800017408",
+      "kind": "ENumber",
+      "loc": 1
+     },
+     {
+      "kind": "EString",
+      "loc": 1,
+      "preferTemplate": false,
+      "value": [
+       120
+      ]
+     }
+    ],
+    "callKind": 0,
+    "canBeUnwrappedIfUnused": false,
+    "kind": "ECall",
+    "loc": 5,
+    "optionalChain": 0,
+    "target": {
+     "callCanBeUnwrappedIfUnused": false,
+     "canBeRemovedIfUnused": false,
+     "kind": "EIdentifier",
+     "loc": 2,
+     "mustKeepDueToWithStmt": false,
+     "name": "c"
+    }
+   },
+   "knownPrimitiveType": 0,
+   "isPrimitiveLiteral": false,
+   "isSymbolInstance": false,
+   "isPropertyAccess": false,
+   "isOptionalChain": false,
+   "typeof": [
+    "",
+    false
+   ],
+   "toNumber": [
+    "0",
+    false
+   ],
+   "toString": [
+    "",
+    false
+   ],
+   "toBoolean": [
+    false,
+    0,
+    false
+   ],
+   "toNullOrUndefined": [
+    false,
+    1,
+    false
+   ],
+   "canBeRemoved": false,
+   "simplifyUnused": {
+    "args": [
+     {
+      "bits": "4607182418800017408",
+      "kind": "ENumber",
+      "loc": 1
+     },
+     {
+      "kind": "EString",
+      "loc": 1,
+      "preferTemplate": false,
+      "value": [
+       120
+      ]
+     }
+    ],
+    "callKind": 0,
+    "canBeUnwrappedIfUnused": false,
+    "kind": "ECall",
+    "loc": 5,
+    "optionalChain": 0,
+    "target": {
+     "callCanBeUnwrappedIfUnused": false,
+     "canBeRemovedIfUnused": false,
+     "kind": "EIdentifier",
+     "loc": 2,
+     "mustKeepDueToWithStmt": false,
+     "name": "c"
+    }
+   },
+   "simplifyBoolean": {
+    "args": [
+     {
+      "bits": "4607182418800017408",
+      "kind": "ENumber",
+      "loc": 1
+     },
+     {
+      "kind": "EString",
+      "loc": 1,
+      "preferTemplate": false,
+      "value": [
+       120
+      ]
+     }
+    ],
+    "callKind": 0,
+    "canBeUnwrappedIfUnused": false,
+    "kind": "ECall",
+    "loc": 5,
+    "optionalChain": 0,
+    "target": {
+     "callCanBeUnwrappedIfUnused": false,
+     "canBeRemovedIfUnused": false,
+     "kind": "EIdentifier",
+     "loc": 2,
+     "mustKeepDueToWithStmt": false,
+     "name": "c"
+    }
+   },
+   "not": {
+    "kind": "EUnary",
+    "loc": 5,
+    "op": 3,
+    "value": {
+     "args": [
+      {
+       "bits": "4607182418800017408",
+       "kind": "ENumber",
+       "loc": 1
+      },
+      {
+       "kind": "EString",
+       "loc": 1,
+       "preferTemplate": false,
+       "value": [
+        120
+       ]
+      }
+     ],
+     "callKind": 0,
+     "canBeUnwrappedIfUnused": false,
+     "kind": "ECall",
+     "loc": 5,
+     "optionalChain": 0,
+     "target": {
+      "callCanBeUnwrappedIfUnused": false,
+      "canBeRemovedIfUnused": false,
+      "kind": "EIdentifier",
+      "loc": 2,
+      "mustKeepDueToWithStmt": false,
+      "name": "c"
+     }
+    },
+    "wasTypeof": false
+   }
+  },
+  {
+   "name": "call-zero",
+   "dump": {
+    "args": [],
+    "callKind": 0,
+    "canBeUnwrappedIfUnused": false,
+    "kind": "ECall",
+    "loc": 5,
+    "optionalChain": 0,
+    "target": {
+     "callCanBeUnwrappedIfUnused": false,
+     "canBeRemovedIfUnused": false,
+     "kind": "EIdentifier",
+     "loc": 2,
+     "mustKeepDueToWithStmt": false,
+     "name": "c"
+    }
+   },
+   "knownPrimitiveType": 0,
+   "isPrimitiveLiteral": false,
+   "isSymbolInstance": false,
+   "isPropertyAccess": false,
+   "isOptionalChain": false,
+   "typeof": [
+    "",
+    false
+   ],
+   "toNumber": [
+    "0",
+    false
+   ],
+   "toString": [
+    "",
+    false
+   ],
+   "toBoolean": [
+    false,
+    0,
+    false
+   ],
+   "toNullOrUndefined": [
+    false,
+    1,
+    false
+   ],
+   "canBeRemoved": false,
+   "simplifyUnused": {
+    "args": [],
+    "callKind": 0,
+    "canBeUnwrappedIfUnused": false,
+    "kind": "ECall",
+    "loc": 5,
+    "optionalChain": 0,
+    "target": {
+     "callCanBeUnwrappedIfUnused": false,
+     "canBeRemovedIfUnused": false,
+     "kind": "EIdentifier",
+     "loc": 2,
+     "mustKeepDueToWithStmt": false,
+     "name": "c"
+    }
+   },
+   "simplifyBoolean": {
+    "args": [],
+    "callKind": 0,
+    "canBeUnwrappedIfUnused": false,
+    "kind": "ECall",
+    "loc": 5,
+    "optionalChain": 0,
+    "target": {
+     "callCanBeUnwrappedIfUnused": false,
+     "canBeRemovedIfUnused": false,
+     "kind": "EIdentifier",
+     "loc": 2,
+     "mustKeepDueToWithStmt": false,
+     "name": "c"
+    }
+   },
+   "not": {
+    "kind": "EUnary",
+    "loc": 5,
+    "op": 3,
+    "value": {
+     "args": [],
+     "callKind": 0,
+     "canBeUnwrappedIfUnused": false,
+     "kind": "ECall",
+     "loc": 5,
+     "optionalChain": 0,
+     "target": {
+      "callCanBeUnwrappedIfUnused": false,
+      "canBeRemovedIfUnused": false,
+      "kind": "EIdentifier",
+      "loc": 2,
+      "mustKeepDueToWithStmt": false,
+      "name": "c"
+     }
+    },
+    "wasTypeof": false
+   }
+  },
+  {
+   "name": "call-spread",
+   "dump": {
+    "args": [
+     {
+      "kind": "ESpread",
+      "loc": 6,
+      "value": {
+       "isSingleLine": false,
+       "items": [
+        {
+         "bits": "4607182418800017408",
+         "kind": "ENumber",
+         "loc": 1
+        }
+       ],
+       "kind": "EArray",
+       "loc": 6
+      }
+     }
+    ],
+    "callKind": 0,
+    "canBeUnwrappedIfUnused": false,
+    "kind": "ECall",
+    "loc": 5,
+    "optionalChain": 0,
+    "target": {
+     "callCanBeUnwrappedIfUnused": false,
+     "canBeRemovedIfUnused": false,
+     "kind": "EIdentifier",
+     "loc": 2,
+     "mustKeepDueToWithStmt": false,
+     "name": "c"
+    }
+   },
+   "knownPrimitiveType": 0,
+   "isPrimitiveLiteral": false,
+   "isSymbolInstance": false,
+   "isPropertyAccess": false,
+   "isOptionalChain": false,
+   "typeof": [
+    "",
+    false
+   ],
+   "toNumber": [
+    "0",
+    false
+   ],
+   "toString": [
+    "",
+    false
+   ],
+   "toBoolean": [
+    false,
+    0,
+    false
+   ],
+   "toNullOrUndefined": [
+    false,
+    1,
+    false
+   ],
+   "canBeRemoved": false,
+   "simplifyUnused": {
+    "args": [
+     {
+      "kind": "ESpread",
+      "loc": 6,
+      "value": {
+       "isSingleLine": false,
+       "items": [
+        {
+         "bits": "4607182418800017408",
+         "kind": "ENumber",
+         "loc": 1
+        }
+       ],
+       "kind": "EArray",
+       "loc": 6
+      }
+     }
+    ],
+    "callKind": 0,
+    "canBeUnwrappedIfUnused": false,
+    "kind": "ECall",
+    "loc": 5,
+    "optionalChain": 0,
+    "target": {
+     "callCanBeUnwrappedIfUnused": false,
+     "canBeRemovedIfUnused": false,
+     "kind": "EIdentifier",
+     "loc": 2,
+     "mustKeepDueToWithStmt": false,
+     "name": "c"
+    }
+   },
+   "simplifyBoolean": {
+    "args": [
+     {
+      "kind": "ESpread",
+      "loc": 6,
+      "value": {
+       "isSingleLine": false,
+       "items": [
+        {
+         "bits": "4607182418800017408",
+         "kind": "ENumber",
+         "loc": 1
+        }
+       ],
+       "kind": "EArray",
+       "loc": 6
+      }
+     }
+    ],
+    "callKind": 0,
+    "canBeUnwrappedIfUnused": false,
+    "kind": "ECall",
+    "loc": 5,
+    "optionalChain": 0,
+    "target": {
+     "callCanBeUnwrappedIfUnused": false,
+     "canBeRemovedIfUnused": false,
+     "kind": "EIdentifier",
+     "loc": 2,
+     "mustKeepDueToWithStmt": false,
+     "name": "c"
+    }
+   },
+   "not": {
+    "kind": "EUnary",
+    "loc": 5,
+    "op": 3,
+    "value": {
+     "args": [
+      {
+       "kind": "ESpread",
+       "loc": 6,
+       "value": {
+        "isSingleLine": false,
+        "items": [
+         {
+          "bits": "4607182418800017408",
+          "kind": "ENumber",
+          "loc": 1
+         }
+        ],
+        "kind": "EArray",
+        "loc": 6
+       }
+      }
+     ],
+     "callKind": 0,
+     "canBeUnwrappedIfUnused": false,
+     "kind": "ECall",
+     "loc": 5,
+     "optionalChain": 0,
+     "target": {
+      "callCanBeUnwrappedIfUnused": false,
+      "canBeRemovedIfUnused": false,
+      "kind": "EIdentifier",
+      "loc": 2,
+      "mustKeepDueToWithStmt": false,
+      "name": "c"
+     }
+    },
+    "wasTypeof": false
+   }
+  },
+  {
+   "name": "call-pure",
+   "dump": {
+    "args": [
+     {
+      "bits": "4607182418800017408",
+      "kind": "ENumber",
+      "loc": 1
+     }
+    ],
+    "callKind": 0,
+    "canBeUnwrappedIfUnused": true,
+    "kind": "ECall",
+    "loc": 5,
+    "optionalChain": 0,
+    "target": {
+     "callCanBeUnwrappedIfUnused": false,
+     "canBeRemovedIfUnused": false,
+     "kind": "EIdentifier",
+     "loc": 2,
+     "mustKeepDueToWithStmt": false,
+     "name": "c"
+    }
+   },
+   "knownPrimitiveType": 0,
+   "isPrimitiveLiteral": false,
+   "isSymbolInstance": false,
+   "isPropertyAccess": false,
+   "isOptionalChain": false,
+   "typeof": [
+    "",
+    false
+   ],
+   "toNumber": [
+    "0",
+    false
+   ],
+   "toString": [
+    "",
+    false
+   ],
+   "toBoolean": [
+    false,
+    0,
+    false
+   ],
+   "toNullOrUndefined": [
+    false,
+    1,
+    false
+   ],
+   "canBeRemoved": true,
+   "simplifyUnused": null,
+   "simplifyBoolean": {
+    "args": [
+     {
+      "bits": "4607182418800017408",
+      "kind": "ENumber",
+      "loc": 1
+     }
+    ],
+    "callKind": 0,
+    "canBeUnwrappedIfUnused": true,
+    "kind": "ECall",
+    "loc": 5,
+    "optionalChain": 0,
+    "target": {
+     "callCanBeUnwrappedIfUnused": false,
+     "canBeRemovedIfUnused": false,
+     "kind": "EIdentifier",
+     "loc": 2,
+     "mustKeepDueToWithStmt": false,
+     "name": "c"
+    }
+   },
+   "not": {
+    "kind": "EUnary",
+    "loc": 5,
+    "op": 3,
+    "value": {
+     "args": [
+      {
+       "bits": "4607182418800017408",
+       "kind": "ENumber",
+       "loc": 1
+      }
+     ],
+     "callKind": 0,
+     "canBeUnwrappedIfUnused": true,
+     "kind": "ECall",
+     "loc": 5,
+     "optionalChain": 0,
+     "target": {
+      "callCanBeUnwrappedIfUnused": false,
+      "canBeRemovedIfUnused": false,
+      "kind": "EIdentifier",
+      "loc": 2,
+      "mustKeepDueToWithStmt": false,
+      "name": "c"
+     }
+    },
+    "wasTypeof": false
+   }
+  },
+  {
+   "name": "call-iife-fn",
+   "dump": {
+    "args": [],
+    "callKind": 0,
+    "canBeUnwrappedIfUnused": false,
+    "kind": "ECall",
+    "loc": 5,
+    "optionalChain": 0,
+    "target": {
+     "fn": {
+      "args": [],
+      "body": [],
+      "isAsync": false,
+      "isGenerator": false,
+      "name": null
+     },
+     "kind": "EFunction",
+     "loc": 9
+    }
+   },
+   "knownPrimitiveType": 0,
+   "isPrimitiveLiteral": false,
+   "isSymbolInstance": false,
+   "isPropertyAccess": false,
+   "isOptionalChain": false,
+   "typeof": [
+    "",
+    false
+   ],
+   "toNumber": [
+    "0",
+    false
+   ],
+   "toString": [
+    "",
+    false
+   ],
+   "toBoolean": [
+    false,
+    0,
+    false
+   ],
+   "toNullOrUndefined": [
+    false,
+    1,
+    false
+   ],
+   "canBeRemoved": false,
+   "simplifyUnused": null,
+   "simplifyBoolean": {
+    "args": [],
+    "callKind": 0,
+    "canBeUnwrappedIfUnused": false,
+    "kind": "ECall",
+    "loc": 5,
+    "optionalChain": 0,
+    "target": {
+     "fn": {
+      "args": [],
+      "body": [],
+      "isAsync": false,
+      "isGenerator": false,
+      "name": null
+     },
+     "kind": "EFunction",
+     "loc": 9
+    }
+   },
+   "not": {
+    "kind": "EUnary",
+    "loc": 5,
+    "op": 3,
+    "value": {
+     "args": [],
+     "callKind": 0,
+     "canBeUnwrappedIfUnused": false,
+     "kind": "ECall",
+     "loc": 5,
+     "optionalChain": 0,
+     "target": {
+      "fn": {
+       "args": [],
+       "body": [],
+       "isAsync": false,
+       "isGenerator": false,
+       "name": null
+      },
+      "kind": "EFunction",
+      "loc": 9
+     }
+    },
+    "wasTypeof": false
+   }
+  },
+  {
+   "name": "call-iife-fn-body",
+   "dump": {
+    "args": [],
+    "callKind": 0,
+    "canBeUnwrappedIfUnused": false,
+    "kind": "ECall",
+    "loc": 5,
+    "optionalChain": 0,
+    "target": {
+     "fn": {
+      "args": [],
+      "body": [
+       {
+        "fromClassOrFn": false,
+        "kind": "SExpr",
+        "loc": 10,
+        "value": {
+         "bits": "4607182418800017408",
+         "kind": "ENumber",
+         "loc": 1
+        }
+       }
+      ],
+      "isAsync": false,
+      "isGenerator": false,
+      "name": null
+     },
+     "kind": "EFunction",
+     "loc": 9
+    }
+   },
+   "knownPrimitiveType": 0,
+   "isPrimitiveLiteral": false,
+   "isSymbolInstance": false,
+   "isPropertyAccess": false,
+   "isOptionalChain": false,
+   "typeof": [
+    "",
+    false
+   ],
+   "toNumber": [
+    "0",
+    false
+   ],
+   "toString": [
+    "",
+    false
+   ],
+   "toBoolean": [
+    false,
+    0,
+    false
+   ],
+   "toNullOrUndefined": [
+    false,
+    1,
+    false
+   ],
+   "canBeRemoved": false,
+   "simplifyUnused": {
+    "args": [],
+    "callKind": 0,
+    "canBeUnwrappedIfUnused": false,
+    "kind": "ECall",
+    "loc": 5,
+    "optionalChain": 0,
+    "target": {
+     "fn": {
+      "args": [],
+      "body": [
+       {
+        "fromClassOrFn": false,
+        "kind": "SExpr",
+        "loc": 10,
+        "value": {
+         "bits": "4607182418800017408",
+         "kind": "ENumber",
+         "loc": 1
+        }
+       }
+      ],
+      "isAsync": false,
+      "isGenerator": false,
+      "name": null
+     },
+     "kind": "EFunction",
+     "loc": 9
+    }
+   },
+   "simplifyBoolean": {
+    "args": [],
+    "callKind": 0,
+    "canBeUnwrappedIfUnused": false,
+    "kind": "ECall",
+    "loc": 5,
+    "optionalChain": 0,
+    "target": {
+     "fn": {
+      "args": [],
+      "body": [
+       {
+        "fromClassOrFn": false,
+        "kind": "SExpr",
+        "loc": 10,
+        "value": {
+         "bits": "4607182418800017408",
+         "kind": "ENumber",
+         "loc": 1
+        }
+       }
+      ],
+      "isAsync": false,
+      "isGenerator": false,
+      "name": null
+     },
+     "kind": "EFunction",
+     "loc": 9
+    }
+   },
+   "not": {
+    "kind": "EUnary",
+    "loc": 5,
+    "op": 3,
+    "value": {
+     "args": [],
+     "callKind": 0,
+     "canBeUnwrappedIfUnused": false,
+     "kind": "ECall",
+     "loc": 5,
+     "optionalChain": 0,
+     "target": {
+      "fn": {
+       "args": [],
+       "body": [
+        {
+         "fromClassOrFn": false,
+         "kind": "SExpr",
+         "loc": 10,
+         "value": {
+          "bits": "4607182418800017408",
+          "kind": "ENumber",
+          "loc": 1
+         }
+        }
+       ],
+       "isAsync": false,
+       "isGenerator": false,
+       "name": null
+      },
+      "kind": "EFunction",
+      "loc": 9
+     }
+    },
+    "wasTypeof": false
+   }
+  },
+  {
+   "name": "call-iife-arrow",
+   "dump": {
+    "args": [],
+    "callKind": 0,
+    "canBeUnwrappedIfUnused": false,
+    "kind": "ECall",
+    "loc": 5,
+    "optionalChain": 0,
+    "target": {
+     "fn": {
+      "args": [],
+      "body": [],
+      "isAsync": false,
+      "isGenerator": false,
+      "name": null
+     },
+     "hasRestArg": false,
+     "kind": "EArrow",
+     "loc": 9,
+     "preferExpr": false
+    }
+   },
+   "knownPrimitiveType": 0,
+   "isPrimitiveLiteral": false,
+   "isSymbolInstance": false,
+   "isPropertyAccess": false,
+   "isOptionalChain": false,
+   "typeof": [
+    "",
+    false
+   ],
+   "toNumber": [
+    "0",
+    false
+   ],
+   "toString": [
+    "",
+    false
+   ],
+   "toBoolean": [
+    false,
+    0,
+    false
+   ],
+   "toNullOrUndefined": [
+    false,
+    1,
+    false
+   ],
+   "canBeRemoved": false,
+   "simplifyUnused": null,
+   "simplifyBoolean": {
+    "args": [],
+    "callKind": 0,
+    "canBeUnwrappedIfUnused": false,
+    "kind": "ECall",
+    "loc": 5,
+    "optionalChain": 0,
+    "target": {
+     "fn": {
+      "args": [],
+      "body": [],
+      "isAsync": false,
+      "isGenerator": false,
+      "name": null
+     },
+     "hasRestArg": false,
+     "kind": "EArrow",
+     "loc": 9,
+     "preferExpr": false
+    }
+   },
+   "not": {
+    "kind": "EUnary",
+    "loc": 5,
+    "op": 3,
+    "value": {
+     "args": [],
+     "callKind": 0,
+     "canBeUnwrappedIfUnused": false,
+     "kind": "ECall",
+     "loc": 5,
+     "optionalChain": 0,
+     "target": {
+      "fn": {
+       "args": [],
+       "body": [],
+       "isAsync": false,
+       "isGenerator": false,
+       "name": null
+      },
+      "hasRestArg": false,
+      "kind": "EArrow",
+      "loc": 9,
+      "preferExpr": false
+     }
+    },
+    "wasTypeof": false
+   }
+  },
+  {
+   "name": "call-iife-arrow-expr",
+   "dump": {
+    "args": [],
+    "callKind": 0,
+    "canBeUnwrappedIfUnused": false,
+    "kind": "ECall",
+    "loc": 5,
+    "optionalChain": 0,
+    "target": {
+     "fn": {
+      "args": [],
+      "body": [
+       {
+        "fromClassOrFn": false,
+        "kind": "SExpr",
+        "loc": 10,
+        "value": {
+         "bits": "4607182418800017408",
+         "kind": "ENumber",
+         "loc": 1
+        }
+       }
+      ],
+      "isAsync": false,
+      "isGenerator": false,
+      "name": null
+     },
+     "hasRestArg": false,
+     "kind": "EArrow",
+     "loc": 9,
+     "preferExpr": false
+    }
+   },
+   "knownPrimitiveType": 0,
+   "isPrimitiveLiteral": false,
+   "isSymbolInstance": false,
+   "isPropertyAccess": false,
+   "isOptionalChain": false,
+   "typeof": [
+    "",
+    false
+   ],
+   "toNumber": [
+    "0",
+    false
+   ],
+   "toString": [
+    "",
+    false
+   ],
+   "toBoolean": [
+    false,
+    0,
+    false
+   ],
+   "toNullOrUndefined": [
+    false,
+    1,
+    false
+   ],
+   "canBeRemoved": false,
+   "simplifyUnused": {
+    "bits": "4607182418800017408",
+    "kind": "ENumber",
+    "loc": 1
+   },
+   "simplifyBoolean": {
+    "args": [],
+    "callKind": 0,
+    "canBeUnwrappedIfUnused": false,
+    "kind": "ECall",
+    "loc": 5,
+    "optionalChain": 0,
+    "target": {
+     "fn": {
+      "args": [],
+      "body": [
+       {
+        "fromClassOrFn": false,
+        "kind": "SExpr",
+        "loc": 10,
+        "value": {
+         "bits": "4607182418800017408",
+         "kind": "ENumber",
+         "loc": 1
+        }
+       }
+      ],
+      "isAsync": false,
+      "isGenerator": false,
+      "name": null
+     },
+     "hasRestArg": false,
+     "kind": "EArrow",
+     "loc": 9,
+     "preferExpr": false
+    }
+   },
+   "not": {
+    "kind": "EUnary",
+    "loc": 5,
+    "op": 3,
+    "value": {
+     "args": [],
+     "callKind": 0,
+     "canBeUnwrappedIfUnused": false,
+     "kind": "ECall",
+     "loc": 5,
+     "optionalChain": 0,
+     "target": {
+      "fn": {
+       "args": [],
+       "body": [
+        {
+         "fromClassOrFn": false,
+         "kind": "SExpr",
+         "loc": 10,
+         "value": {
+          "bits": "4607182418800017408",
+          "kind": "ENumber",
+          "loc": 1
+         }
+        }
+       ],
+       "isAsync": false,
+       "isGenerator": false,
+       "name": null
+      },
+      "hasRestArg": false,
+      "kind": "EArrow",
+      "loc": 9,
+      "preferExpr": false
+     }
+    },
+    "wasTypeof": false
+   }
+  },
+  {
+   "name": "call-iife-arrow-return",
+   "dump": {
+    "args": [],
+    "callKind": 0,
+    "canBeUnwrappedIfUnused": false,
+    "kind": "ECall",
+    "loc": 5,
+    "optionalChain": 0,
+    "target": {
+     "fn": {
+      "args": [],
+      "body": [
+       {
+        "kind": "SReturn",
+        "loc": 10,
+        "value": {
+         "bits": "4607182418800017408",
+         "kind": "ENumber",
+         "loc": 1
+        }
+       }
+      ],
+      "isAsync": false,
+      "isGenerator": false,
+      "name": null
+     },
+     "hasRestArg": false,
+     "kind": "EArrow",
+     "loc": 9,
+     "preferExpr": false
+    }
+   },
+   "knownPrimitiveType": 0,
+   "isPrimitiveLiteral": false,
+   "isSymbolInstance": false,
+   "isPropertyAccess": false,
+   "isOptionalChain": false,
+   "typeof": [
+    "",
+    false
+   ],
+   "toNumber": [
+    "0",
+    false
+   ],
+   "toString": [
+    "",
+    false
+   ],
+   "toBoolean": [
+    false,
+    0,
+    false
+   ],
+   "toNullOrUndefined": [
+    false,
+    1,
+    false
+   ],
+   "canBeRemoved": false,
+   "simplifyUnused": {
+    "bits": "4607182418800017408",
+    "kind": "ENumber",
+    "loc": 1
+   },
+   "simplifyBoolean": {
+    "args": [],
+    "callKind": 0,
+    "canBeUnwrappedIfUnused": false,
+    "kind": "ECall",
+    "loc": 5,
+    "optionalChain": 0,
+    "target": {
+     "fn": {
+      "args": [],
+      "body": [
+       {
+        "kind": "SReturn",
+        "loc": 10,
+        "value": {
+         "bits": "4607182418800017408",
+         "kind": "ENumber",
+         "loc": 1
+        }
+       }
+      ],
+      "isAsync": false,
+      "isGenerator": false,
+      "name": null
+     },
+     "hasRestArg": false,
+     "kind": "EArrow",
+     "loc": 9,
+     "preferExpr": false
+    }
+   },
+   "not": {
+    "kind": "EUnary",
+    "loc": 5,
+    "op": 3,
+    "value": {
+     "args": [],
+     "callKind": 0,
+     "canBeUnwrappedIfUnused": false,
+     "kind": "ECall",
+     "loc": 5,
+     "optionalChain": 0,
+     "target": {
+      "fn": {
+       "args": [],
+       "body": [
+        {
+         "kind": "SReturn",
+         "loc": 10,
+         "value": {
+          "bits": "4607182418800017408",
+          "kind": "ENumber",
+          "loc": 1
+         }
+        }
+       ],
+       "isAsync": false,
+       "isGenerator": false,
+       "name": null
+      },
+      "hasRestArg": false,
+      "kind": "EArrow",
+      "loc": 9,
+      "preferExpr": false
+     }
+    },
+    "wasTypeof": false
+   }
+  },
+  {
+   "name": "dot",
+   "dump": {
+    "callCanBeUnwrappedIfUnused": false,
+    "canBeRemovedIfUnused": false,
+    "isSymbolInstance": false,
+    "kind": "EDot",
+    "loc": 5,
+    "name": "b",
+    "optionalChain": 0,
+    "target": {
+     "callCanBeUnwrappedIfUnused": false,
+     "canBeRemovedIfUnused": false,
+     "kind": "EIdentifier",
+     "loc": 2,
+     "mustKeepDueToWithStmt": false,
+     "name": "c"
+    }
+   },
+   "knownPrimitiveType": 0,
+   "isPrimitiveLiteral": false,
+   "isSymbolInstance": false,
+   "isPropertyAccess": true,
+   "isOptionalChain": false,
+   "typeof": [
+    "",
+    false
+   ],
+   "toNumber": [
+    "0",
+    false
+   ],
+   "toString": [
+    "",
+    false
+   ],
+   "toBoolean": [
+    false,
+    0,
+    false
+   ],
+   "toNullOrUndefined": [
+    false,
+    1,
+    false
+   ],
+   "canBeRemoved": false,
+   "simplifyUnused": {
+    "callCanBeUnwrappedIfUnused": false,
+    "canBeRemovedIfUnused": false,
+    "isSymbolInstance": false,
+    "kind": "EDot",
+    "loc": 5,
+    "name": "b",
+    "optionalChain": 0,
+    "target": {
+     "callCanBeUnwrappedIfUnused": false,
+     "canBeRemovedIfUnused": false,
+     "kind": "EIdentifier",
+     "loc": 2,
+     "mustKeepDueToWithStmt": false,
+     "name": "c"
+    }
+   },
+   "simplifyBoolean": {
+    "callCanBeUnwrappedIfUnused": false,
+    "canBeRemovedIfUnused": false,
+    "isSymbolInstance": false,
+    "kind": "EDot",
+    "loc": 5,
+    "name": "b",
+    "optionalChain": 0,
+    "target": {
+     "callCanBeUnwrappedIfUnused": false,
+     "canBeRemovedIfUnused": false,
+     "kind": "EIdentifier",
+     "loc": 2,
+     "mustKeepDueToWithStmt": false,
+     "name": "c"
+    }
+   },
+   "not": {
+    "kind": "EUnary",
+    "loc": 5,
+    "op": 3,
+    "value": {
+     "callCanBeUnwrappedIfUnused": false,
+     "canBeRemovedIfUnused": false,
+     "isSymbolInstance": false,
+     "kind": "EDot",
+     "loc": 5,
+     "name": "b",
+     "optionalChain": 0,
+     "target": {
+      "callCanBeUnwrappedIfUnused": false,
+      "canBeRemovedIfUnused": false,
+      "kind": "EIdentifier",
+      "loc": 2,
+      "mustKeepDueToWithStmt": false,
+      "name": "c"
+     }
+    },
+    "wasTypeof": false
+   }
+  },
+  {
+   "name": "dot-removable",
+   "dump": {
+    "callCanBeUnwrappedIfUnused": false,
+    "canBeRemovedIfUnused": true,
+    "isSymbolInstance": false,
+    "kind": "EDot",
+    "loc": 5,
+    "name": "b",
+    "optionalChain": 0,
+    "target": {
+     "callCanBeUnwrappedIfUnused": false,
+     "canBeRemovedIfUnused": false,
+     "kind": "EIdentifier",
+     "loc": 2,
+     "mustKeepDueToWithStmt": false,
+     "name": "c"
+    }
+   },
+   "knownPrimitiveType": 0,
+   "isPrimitiveLiteral": false,
+   "isSymbolInstance": false,
+   "isPropertyAccess": true,
+   "isOptionalChain": false,
+   "typeof": [
+    "",
+    false
+   ],
+   "toNumber": [
+    "0",
+    false
+   ],
+   "toString": [
+    "",
+    false
+   ],
+   "toBoolean": [
+    false,
+    0,
+    false
+   ],
+   "toNullOrUndefined": [
+    false,
+    1,
+    false
+   ],
+   "canBeRemoved": true,
+   "simplifyUnused": null,
+   "simplifyBoolean": {
+    "callCanBeUnwrappedIfUnused": false,
+    "canBeRemovedIfUnused": true,
+    "isSymbolInstance": false,
+    "kind": "EDot",
+    "loc": 5,
+    "name": "b",
+    "optionalChain": 0,
+    "target": {
+     "callCanBeUnwrappedIfUnused": false,
+     "canBeRemovedIfUnused": false,
+     "kind": "EIdentifier",
+     "loc": 2,
+     "mustKeepDueToWithStmt": false,
+     "name": "c"
+    }
+   },
+   "not": {
+    "kind": "EUnary",
+    "loc": 5,
+    "op": 3,
+    "value": {
+     "callCanBeUnwrappedIfUnused": false,
+     "canBeRemovedIfUnused": true,
+     "isSymbolInstance": false,
+     "kind": "EDot",
+     "loc": 5,
+     "name": "b",
+     "optionalChain": 0,
+     "target": {
+      "callCanBeUnwrappedIfUnused": false,
+      "canBeRemovedIfUnused": false,
+      "kind": "EIdentifier",
+      "loc": 2,
+      "mustKeepDueToWithStmt": false,
+      "name": "c"
+     }
+    },
+    "wasTypeof": false
+   }
+  },
+  {
+   "name": "dot-constructor-str",
+   "dump": {
+    "callCanBeUnwrappedIfUnused": false,
+    "canBeRemovedIfUnused": false,
+    "isSymbolInstance": false,
+    "kind": "EDot",
+    "loc": 5,
+    "name": "constructor",
+    "optionalChain": 0,
+    "target": {
+     "kind": "EString",
+     "loc": 1,
+     "preferTemplate": false,
+     "value": [
+      120
+     ]
+    }
+   },
+   "knownPrimitiveType": 0,
+   "isPrimitiveLiteral": false,
+   "isSymbolInstance": false,
+   "isPropertyAccess": true,
+   "isOptionalChain": false,
+   "typeof": [
+    "",
+    false
+   ],
+   "toNumber": [
+    "0",
+    false
+   ],
+   "toString": [
+    "function String() { [native code] }",
+    true
+   ],
+   "toBoolean": [
+    false,
+    0,
+    false
+   ],
+   "toNullOrUndefined": [
+    false,
+    1,
+    false
+   ],
+   "canBeRemoved": false,
+   "simplifyUnused": {
+    "callCanBeUnwrappedIfUnused": false,
+    "canBeRemovedIfUnused": false,
+    "isSymbolInstance": false,
+    "kind": "EDot",
+    "loc": 5,
+    "name": "constructor",
+    "optionalChain": 0,
+    "target": {
+     "kind": "EString",
+     "loc": 1,
+     "preferTemplate": false,
+     "value": [
+      120
+     ]
+    }
+   },
+   "simplifyBoolean": {
+    "callCanBeUnwrappedIfUnused": false,
+    "canBeRemovedIfUnused": false,
+    "isSymbolInstance": false,
+    "kind": "EDot",
+    "loc": 5,
+    "name": "constructor",
+    "optionalChain": 0,
+    "target": {
+     "kind": "EString",
+     "loc": 1,
+     "preferTemplate": false,
+     "value": [
+      120
+     ]
+    }
+   },
+   "not": {
+    "kind": "EUnary",
+    "loc": 5,
+    "op": 3,
+    "value": {
+     "callCanBeUnwrappedIfUnused": false,
+     "canBeRemovedIfUnused": false,
+     "isSymbolInstance": false,
+     "kind": "EDot",
+     "loc": 5,
+     "name": "constructor",
+     "optionalChain": 0,
+     "target": {
+      "kind": "EString",
+      "loc": 1,
+      "preferTemplate": false,
+      "value": [
+       120
+      ]
+     }
+    },
+    "wasTypeof": false
+   }
+  },
+  {
+   "name": "index",
+   "dump": {
+    "callCanBeUnwrappedIfUnused": false,
+    "canBeRemovedIfUnused": false,
+    "index": {
+     "kind": "EString",
+     "loc": 1,
+     "preferTemplate": false,
+     "value": [
+      98
+     ]
+    },
+    "isSymbolInstance": false,
+    "kind": "EIndex",
+    "loc": 5,
+    "optionalChain": 0,
+    "target": {
+     "callCanBeUnwrappedIfUnused": false,
+     "canBeRemovedIfUnused": false,
+     "kind": "EIdentifier",
+     "loc": 2,
+     "mustKeepDueToWithStmt": false,
+     "name": "c"
+    }
+   },
+   "knownPrimitiveType": 0,
+   "isPrimitiveLiteral": false,
+   "isSymbolInstance": false,
+   "isPropertyAccess": true,
+   "isOptionalChain": false,
+   "typeof": [
+    "",
+    false
+   ],
+   "toNumber": [
+    "0",
+    false
+   ],
+   "toString": [
+    "",
+    false
+   ],
+   "toBoolean": [
+    false,
+    0,
+    false
+   ],
+   "toNullOrUndefined": [
+    false,
+    1,
+    false
+   ],
+   "canBeRemoved": false,
+   "simplifyUnused": {
+    "callCanBeUnwrappedIfUnused": false,
+    "canBeRemovedIfUnused": false,
+    "index": {
+     "kind": "EString",
+     "loc": 1,
+     "preferTemplate": false,
+     "value": [
+      98
+     ]
+    },
+    "isSymbolInstance": false,
+    "kind": "EIndex",
+    "loc": 5,
+    "optionalChain": 0,
+    "target": {
+     "callCanBeUnwrappedIfUnused": false,
+     "canBeRemovedIfUnused": false,
+     "kind": "EIdentifier",
+     "loc": 2,
+     "mustKeepDueToWithStmt": false,
+     "name": "c"
+    }
+   },
+   "simplifyBoolean": {
+    "callCanBeUnwrappedIfUnused": false,
+    "canBeRemovedIfUnused": false,
+    "index": {
+     "kind": "EString",
+     "loc": 1,
+     "preferTemplate": false,
+     "value": [
+      98
+     ]
+    },
+    "isSymbolInstance": false,
+    "kind": "EIndex",
+    "loc": 5,
+    "optionalChain": 0,
+    "target": {
+     "callCanBeUnwrappedIfUnused": false,
+     "canBeRemovedIfUnused": false,
+     "kind": "EIdentifier",
+     "loc": 2,
+     "mustKeepDueToWithStmt": false,
+     "name": "c"
+    }
+   },
+   "not": {
+    "kind": "EUnary",
+    "loc": 5,
+    "op": 3,
+    "value": {
+     "callCanBeUnwrappedIfUnused": false,
+     "canBeRemovedIfUnused": false,
+     "index": {
+      "kind": "EString",
+      "loc": 1,
+      "preferTemplate": false,
+      "value": [
+       98
+      ]
+     },
+     "isSymbolInstance": false,
+     "kind": "EIndex",
+     "loc": 5,
+     "optionalChain": 0,
+     "target": {
+      "callCanBeUnwrappedIfUnused": false,
+      "canBeRemovedIfUnused": false,
+      "kind": "EIdentifier",
+      "loc": 2,
+      "mustKeepDueToWithStmt": false,
+      "name": "c"
+     }
+    },
+    "wasTypeof": false
+   }
+  },
+  {
+   "name": "array-empty",
+   "dump": {
+    "isSingleLine": false,
+    "items": [],
+    "kind": "EArray",
+    "loc": 6
+   },
+   "knownPrimitiveType": 0,
+   "isPrimitiveLiteral": false,
+   "isSymbolInstance": false,
+   "isPropertyAccess": false,
+   "isOptionalChain": false,
+   "typeof": [
+    "",
+    false
+   ],
+   "toNumber": [
+    "0",
+    true
+   ],
+   "toString": [
+    "",
+    false
+   ],
+   "toBoolean": [
+    true,
+    0,
+    true
+   ],
+   "toNullOrUndefined": [
+    false,
+    0,
+    true
+   ],
+   "canBeRemoved": true,
+   "simplifyUnused": null,
+   "simplifyBoolean": {
+    "kind": "EBoolean",
+    "loc": 6,
+    "value": true
+   },
+   "not": {
+    "kind": "EUnary",
+    "loc": 6,
+    "op": 3,
+    "value": {
+     "isSingleLine": false,
+     "items": [],
+     "kind": "EArray",
+     "loc": 6
+    },
+    "wasTypeof": false
+   }
+  },
+  {
+   "name": "array-items",
+   "dump": {
+    "isSingleLine": false,
+    "items": [
+     {
+      "bits": "4607182418800017408",
+      "kind": "ENumber",
+      "loc": 1
+     },
+     {
+      "kind": "EString",
+      "loc": 1,
+      "preferTemplate": false,
+      "value": [
+       120
+      ]
+     }
+    ],
+    "kind": "EArray",
+    "loc": 6
+   },
+   "knownPrimitiveType": 0,
+   "isPrimitiveLiteral": false,
+   "isSymbolInstance": false,
+   "isPropertyAccess": false,
+   "isOptionalChain": false,
+   "typeof": [
+    "",
+    false
+   ],
+   "toNumber": [
+    "0",
+    false
+   ],
+   "toString": [
+    "",
+    false
+   ],
+   "toBoolean": [
+    true,
+    0,
+    true
+   ],
+   "toNullOrUndefined": [
+    false,
+    0,
+    true
+   ],
+   "canBeRemoved": true,
+   "simplifyUnused": null,
+   "simplifyBoolean": {
+    "kind": "EBoolean",
+    "loc": 6,
+    "value": true
+   },
+   "not": {
+    "kind": "EUnary",
+    "loc": 6,
+    "op": 3,
+    "value": {
+     "isSingleLine": false,
+     "items": [
+      {
+       "bits": "4607182418800017408",
+       "kind": "ENumber",
+       "loc": 1
+      },
+      {
+       "kind": "EString",
+       "loc": 1,
+       "preferTemplate": false,
+       "value": [
+        120
+       ]
+      }
+     ],
+     "kind": "EArray",
+     "loc": 6
+    },
+    "wasTypeof": false
+   }
+  },
+  {
+   "name": "array-spread",
+   "dump": {
+    "isSingleLine": false,
+    "items": [
+     {
+      "kind": "ESpread",
+      "loc": 6,
+      "value": {
+       "isSingleLine": false,
+       "items": [
+        {
+         "bits": "4607182418800017408",
+         "kind": "ENumber",
+         "loc": 1
+        }
+       ],
+       "kind": "EArray",
+       "loc": 6
+      }
+     }
+    ],
+    "kind": "EArray",
+    "loc": 6
+   },
+   "knownPrimitiveType": 0,
+   "isPrimitiveLiteral": false,
+   "isSymbolInstance": false,
+   "isPropertyAccess": false,
+   "isOptionalChain": false,
+   "typeof": [
+    "",
+    false
+   ],
+   "toNumber": [
+    "0",
+    false
+   ],
+   "toString": [
+    "",
+    false
+   ],
+   "toBoolean": [
+    true,
+    0,
+    true
+   ],
+   "toNullOrUndefined": [
+    false,
+    0,
+    true
+   ],
+   "canBeRemoved": true,
+   "simplifyUnused": {
+    "isSingleLine": false,
+    "items": [
+     {
+      "kind": "ESpread",
+      "loc": 6,
+      "value": {
+       "isSingleLine": false,
+       "items": [
+        {
+         "bits": "4607182418800017408",
+         "kind": "ENumber",
+         "loc": 1
+        }
+       ],
+       "kind": "EArray",
+       "loc": 6
+      }
+     }
+    ],
+    "kind": "EArray",
+    "loc": 6
+   },
+   "simplifyBoolean": {
+    "kind": "EBoolean",
+    "loc": 6,
+    "value": true
+   },
+   "not": {
+    "kind": "EUnary",
+    "loc": 6,
+    "op": 3,
+    "value": {
+     "isSingleLine": false,
+     "items": [
+      {
+       "kind": "ESpread",
+       "loc": 6,
+       "value": {
+        "isSingleLine": false,
+        "items": [
+         {
+          "bits": "4607182418800017408",
+          "kind": "ENumber",
+          "loc": 1
+         }
+        ],
+        "kind": "EArray",
+        "loc": 6
+       }
+      }
+     ],
+     "kind": "EArray",
+     "loc": 6
+    },
+    "wasTypeof": false
+   }
+  },
+  {
+   "name": "array-spread-missing",
+   "dump": {
+    "isSingleLine": false,
+    "items": [
+     {
+      "kind": "ESpread",
+      "loc": 6,
+      "value": {
+       "isSingleLine": false,
+       "items": [
+        {
+         "kind": "EMissing",
+         "loc": 1
+        }
+       ],
+       "kind": "EArray",
+       "loc": 6
+      }
+     }
+    ],
+    "kind": "EArray",
+    "loc": 6
+   },
+   "knownPrimitiveType": 0,
+   "isPrimitiveLiteral": false,
+   "isSymbolInstance": false,
+   "isPropertyAccess": false,
+   "isOptionalChain": false,
+   "typeof": [
+    "",
+    false
+   ],
+   "toNumber": [
+    "0",
+    false
+   ],
+   "toString": [
+    "",
+    false
+   ],
+   "toBoolean": [
+    true,
+    0,
+    true
+   ],
+   "toNullOrUndefined": [
+    false,
+    0,
+    true
+   ],
+   "canBeRemoved": true,
+   "simplifyUnused": {
+    "isSingleLine": false,
+    "items": [
+     {
+      "kind": "ESpread",
+      "loc": 6,
+      "value": {
+       "isSingleLine": false,
+       "items": [
+        {
+         "kind": "EMissing",
+         "loc": 1
+        }
+       ],
+       "kind": "EArray",
+       "loc": 6
+      }
+     }
+    ],
+    "kind": "EArray",
+    "loc": 6
+   },
+   "simplifyBoolean": {
+    "kind": "EBoolean",
+    "loc": 6,
+    "value": true
+   },
+   "not": {
+    "kind": "EUnary",
+    "loc": 6,
+    "op": 3,
+    "value": {
+     "isSingleLine": false,
+     "items": [
+      {
+       "kind": "ESpread",
+       "loc": 6,
+       "value": {
+        "isSingleLine": false,
+        "items": [
+         {
+          "kind": "EMissing",
+          "loc": 1
+         }
+        ],
+        "kind": "EArray",
+        "loc": 6
+       }
+      }
+     ],
+     "kind": "EArray",
+     "loc": 6
+    },
+    "wasTypeof": false
+   }
+  },
+  {
+   "name": "object-empty",
+   "dump": {
+    "isSingleLine": false,
+    "kind": "EObject",
+    "loc": 6,
+    "properties": []
+   },
+   "knownPrimitiveType": 0,
+   "isPrimitiveLiteral": false,
+   "isSymbolInstance": false,
+   "isPropertyAccess": false,
+   "isOptionalChain": false,
+   "typeof": [
+    "",
+    false
+   ],
+   "toNumber": [
+    "9221120237041090561",
+    true
+   ],
+   "toString": [
+    "",
+    false
+   ],
+   "toBoolean": [
+    true,
+    0,
+    true
+   ],
+   "toNullOrUndefined": [
+    false,
+    0,
+    true
+   ],
+   "canBeRemoved": true,
+   "simplifyUnused": null,
+   "simplifyBoolean": {
+    "kind": "EBoolean",
+    "loc": 6,
+    "value": true
+   },
+   "not": {
+    "kind": "EUnary",
+    "loc": 6,
+    "op": 3,
+    "value": {
+     "isSingleLine": false,
+     "kind": "EObject",
+     "loc": 6,
+     "properties": []
+    },
+    "wasTypeof": false
+   }
+  },
+  {
+   "name": "object-prop",
+   "dump": {
+    "isSingleLine": false,
+    "kind": "EObject",
+    "loc": 6,
+    "properties": [
+     {
+      "flags": 0,
+      "initializer": null,
+      "key": {
+       "kind": "EString",
+       "loc": 1,
+       "preferTemplate": false,
+       "value": [
+        107
+       ]
+      },
+      "kind": 0,
+      "loc": 0,
+      "value": {
+       "bits": "4607182418800017408",
+       "kind": "ENumber",
+       "loc": 1
+      }
+     }
+    ]
+   },
+   "knownPrimitiveType": 0,
+   "isPrimitiveLiteral": false,
+   "isSymbolInstance": false,
+   "isPropertyAccess": false,
+   "isOptionalChain": false,
+   "typeof": [
+    "",
+    false
+   ],
+   "toNumber": [
+    "0",
+    false
+   ],
+   "toString": [
+    "",
+    false
+   ],
+   "toBoolean": [
+    true,
+    0,
+    true
+   ],
+   "toNullOrUndefined": [
+    false,
+    0,
+    true
+   ],
+   "canBeRemoved": true,
+   "simplifyUnused": null,
+   "simplifyBoolean": {
+    "kind": "EBoolean",
+    "loc": 6,
+    "value": true
+   },
+   "not": {
+    "kind": "EUnary",
+    "loc": 6,
+    "op": 3,
+    "value": {
+     "isSingleLine": false,
+     "kind": "EObject",
+     "loc": 6,
+     "properties": [
+      {
+       "flags": 0,
+       "initializer": null,
+       "key": {
+        "kind": "EString",
+        "loc": 1,
+        "preferTemplate": false,
+        "value": [
+         107
+        ]
+       },
+       "kind": 0,
+       "loc": 0,
+       "value": {
+        "bits": "4607182418800017408",
+        "kind": "ENumber",
+        "loc": 1
+       }
+      }
+     ]
+    },
+    "wasTypeof": false
+   }
+  },
+  {
+   "name": "object-computed",
+   "dump": {
+    "isSingleLine": false,
+    "kind": "EObject",
+    "loc": 6,
+    "properties": [
+     {
+      "flags": 1,
+      "initializer": null,
+      "key": {
+       "callCanBeUnwrappedIfUnused": false,
+       "canBeRemovedIfUnused": false,
+       "kind": "EIdentifier",
+       "loc": 2,
+       "mustKeepDueToWithStmt": false,
+       "name": "c"
+      },
+      "kind": 0,
+      "loc": 0,
+      "value": {
+       "bits": "4607182418800017408",
+       "kind": "ENumber",
+       "loc": 1
+      }
+     }
+    ]
+   },
+   "knownPrimitiveType": 0,
+   "isPrimitiveLiteral": false,
+   "isSymbolInstance": false,
+   "isPropertyAccess": false,
+   "isOptionalChain": false,
+   "typeof": [
+    "",
+    false
+   ],
+   "toNumber": [
+    "0",
+    false
+   ],
+   "toString": [
+    "",
+    false
+   ],
+   "toBoolean": [
+    true,
+    0,
+    true
+   ],
+   "toNullOrUndefined": [
+    false,
+    0,
+    true
+   ],
+   "canBeRemoved": false,
+   "simplifyUnused": {
+    "kind": "EBinary",
+    "left": {
+     "callCanBeUnwrappedIfUnused": false,
+     "canBeRemovedIfUnused": false,
+     "kind": "EIdentifier",
+     "loc": 2,
+     "mustKeepDueToWithStmt": false,
+     "name": "c"
+    },
+    "loc": 2,
+    "op": 11,
+    "right": {
+     "kind": "EString",
+     "loc": 2,
+     "preferTemplate": false,
+     "value": []
+    }
+   },
+   "simplifyBoolean": {
+    "isSingleLine": false,
+    "kind": "EObject",
+    "loc": 6,
+    "properties": [
+     {
+      "flags": 1,
+      "initializer": null,
+      "key": {
+       "callCanBeUnwrappedIfUnused": false,
+       "canBeRemovedIfUnused": false,
+       "kind": "EIdentifier",
+       "loc": 2,
+       "mustKeepDueToWithStmt": false,
+       "name": "c"
+      },
+      "kind": 0,
+      "loc": 0,
+      "value": {
+       "bits": "4607182418800017408",
+       "kind": "ENumber",
+       "loc": 1
+      }
+     }
+    ]
+   },
+   "not": {
+    "kind": "EUnary",
+    "loc": 6,
+    "op": 3,
+    "value": {
+     "isSingleLine": false,
+     "kind": "EObject",
+     "loc": 6,
+     "properties": [
+      {
+       "flags": 1,
+       "initializer": null,
+       "key": {
+        "callCanBeUnwrappedIfUnused": false,
+        "canBeRemovedIfUnused": false,
+        "kind": "EIdentifier",
+        "loc": 2,
+        "mustKeepDueToWithStmt": false,
+        "name": "c"
+       },
+       "kind": 0,
+       "loc": 0,
+       "value": {
+        "bits": "4607182418800017408",
+        "kind": "ENumber",
+        "loc": 1
+       }
+      }
+     ]
+    },
+    "wasTypeof": false
+   }
+  },
+  {
+   "name": "object-spread",
+   "dump": {
+    "isSingleLine": false,
+    "kind": "EObject",
+    "loc": 6,
+    "properties": [
+     {
+      "flags": 0,
+      "initializer": null,
+      "key": null,
+      "kind": 5,
+      "loc": 0,
+      "value": {
+       "isSingleLine": false,
+       "kind": "EObject",
+       "loc": 6,
+       "properties": [
+        {
+         "flags": 0,
+         "initializer": null,
+         "key": {
+          "kind": "EString",
+          "loc": 1,
+          "preferTemplate": false,
+          "value": [
+           107
+          ]
+         },
+         "kind": 0,
+         "loc": 0,
+         "value": {
+          "bits": "4607182418800017408",
+          "kind": "ENumber",
+          "loc": 1
+         }
+        }
+       ]
+      }
+     }
+    ]
+   },
+   "knownPrimitiveType": 0,
+   "isPrimitiveLiteral": false,
+   "isSymbolInstance": false,
+   "isPropertyAccess": false,
+   "isOptionalChain": false,
+   "typeof": [
+    "",
+    false
+   ],
+   "toNumber": [
+    "0",
+    false
+   ],
+   "toString": [
+    "",
+    false
+   ],
+   "toBoolean": [
+    true,
+    0,
+    true
+   ],
+   "toNullOrUndefined": [
+    false,
+    0,
+    true
+   ],
+   "canBeRemoved": false,
+   "simplifyUnused": {
+    "isSingleLine": false,
+    "kind": "EObject",
+    "loc": 6,
+    "properties": [
+     {
+      "flags": 0,
+      "initializer": null,
+      "key": null,
+      "kind": 5,
+      "loc": 0,
+      "value": {
+       "isSingleLine": false,
+       "kind": "EObject",
+       "loc": 6,
+       "properties": [
+        {
+         "flags": 0,
+         "initializer": null,
+         "key": {
+          "kind": "EString",
+          "loc": 1,
+          "preferTemplate": false,
+          "value": [
+           107
+          ]
+         },
+         "kind": 0,
+         "loc": 0,
+         "value": {
+          "bits": "4607182418800017408",
+          "kind": "ENumber",
+          "loc": 1
+         }
+        }
+       ]
+      }
+     }
+    ]
+   },
+   "simplifyBoolean": {
+    "isSingleLine": false,
+    "kind": "EObject",
+    "loc": 6,
+    "properties": [
+     {
+      "flags": 0,
+      "initializer": null,
+      "key": null,
+      "kind": 5,
+      "loc": 0,
+      "value": {
+       "isSingleLine": false,
+       "kind": "EObject",
+       "loc": 6,
+       "properties": [
+        {
+         "flags": 0,
+         "initializer": null,
+         "key": {
+          "kind": "EString",
+          "loc": 1,
+          "preferTemplate": false,
+          "value": [
+           107
+          ]
+         },
+         "kind": 0,
+         "loc": 0,
+         "value": {
+          "bits": "4607182418800017408",
+          "kind": "ENumber",
+          "loc": 1
+         }
+        }
+       ]
+      }
+     }
+    ]
+   },
+   "not": {
+    "kind": "EUnary",
+    "loc": 6,
+    "op": 3,
+    "value": {
+     "isSingleLine": false,
+     "kind": "EObject",
+     "loc": 6,
+     "properties": [
+      {
+       "flags": 0,
+       "initializer": null,
+       "key": null,
+       "kind": 5,
+       "loc": 0,
+       "value": {
+        "isSingleLine": false,
+        "kind": "EObject",
+        "loc": 6,
+        "properties": [
+         {
+          "flags": 0,
+          "initializer": null,
+          "key": {
+           "kind": "EString",
+           "loc": 1,
+           "preferTemplate": false,
+           "value": [
+            107
+           ]
+          },
+          "kind": 0,
+          "loc": 0,
+          "value": {
+           "bits": "4607182418800017408",
+           "kind": "ENumber",
+           "loc": 1
+          }
+         }
+        ]
+       }
+      }
+     ]
+    },
+    "wasTypeof": false
+   }
+  },
+  {
+   "name": "if",
+   "dump": {
+    "kind": "EIf",
+    "loc": 7,
+    "no": {
+     "kind": "EString",
+     "loc": 1,
+     "preferTemplate": false,
+     "value": [
+      120
+     ]
+    },
+    "test": {
+     "kind": "EBoolean",
+     "loc": 1,
+     "value": true
+    },
+    "yes": {
+     "bits": "4607182418800017408",
+     "kind": "ENumber",
+     "loc": 1
+    }
+   },
+   "knownPrimitiveType": 1,
+   "isPrimitiveLiteral": false,
+   "isSymbolInstance": false,
+   "isPropertyAccess": false,
+   "isOptionalChain": false,
+   "typeof": [
+    "",
+    false
+   ],
+   "toNumber": [
+    "0",
+    false
+   ],
+   "toString": [
+    "",
+    false
+   ],
+   "toBoolean": [
+    false,
+    0,
+    false
+   ],
+   "toNullOrUndefined": [
+    false,
+    1,
+    false
+   ],
+   "canBeRemoved": true,
+   "simplifyUnused": null,
+   "simplifyBoolean": {
+    "kind": "EBinary",
+    "left": {
+     "kind": "EBoolean",
+     "loc": 1,
+     "value": true
+    },
+    "loc": 1,
+    "op": 31,
+    "right": {
+     "kind": "EBoolean",
+     "loc": 1,
+     "value": true
+    }
+   },
+   "not": {
+    "kind": "EUnary",
+    "loc": 7,
+    "op": 3,
+    "value": {
+     "kind": "EIf",
+     "loc": 7,
+     "no": {
+      "kind": "EString",
+      "loc": 1,
+      "preferTemplate": false,
+      "value": [
+       120
+      ]
+     },
+     "test": {
+      "kind": "EBoolean",
+      "loc": 1,
+      "value": true
+     },
+     "yes": {
+      "bits": "4607182418800017408",
+      "kind": "ENumber",
+      "loc": 1
+     }
+    },
+    "wasTypeof": false
+   }
+  },
+  {
+   "name": "if-same",
+   "dump": {
+    "kind": "EIf",
+    "loc": 7,
+    "no": {
+     "bits": "4607182418800017408",
+     "kind": "ENumber",
+     "loc": 1
+    },
+    "test": {
+     "callCanBeUnwrappedIfUnused": false,
+     "canBeRemovedIfUnused": false,
+     "kind": "EIdentifier",
+     "loc": 2,
+     "mustKeepDueToWithStmt": false,
+     "name": "c"
+    },
+    "yes": {
+     "bits": "4607182418800017408",
+     "kind": "ENumber",
+     "loc": 1
+    }
+   },
+   "knownPrimitiveType": 5,
+   "isPrimitiveLiteral": false,
+   "isSymbolInstance": false,
+   "isPropertyAccess": false,
+   "isOptionalChain": false,
+   "typeof": [
+    "",
+    false
+   ],
+   "toNumber": [
+    "0",
+    false
+   ],
+   "toString": [
+    "",
+    false
+   ],
+   "toBoolean": [
+    false,
+    0,
+    false
+   ],
+   "toNullOrUndefined": [
+    false,
+    1,
+    false
+   ],
+   "canBeRemoved": true,
+   "simplifyUnused": null,
+   "simplifyBoolean": {
+    "kind": "EBinary",
+    "left": {
+     "callCanBeUnwrappedIfUnused": false,
+     "canBeRemovedIfUnused": false,
+     "kind": "EIdentifier",
+     "loc": 2,
+     "mustKeepDueToWithStmt": false,
+     "name": "c"
+    },
+    "loc": 2,
+    "op": 31,
+    "right": {
+     "kind": "EBoolean",
+     "loc": 1,
+     "value": true
+    }
+   },
+   "not": {
+    "kind": "EUnary",
+    "loc": 7,
+    "op": 3,
+    "value": {
+     "kind": "EIf",
+     "loc": 7,
+     "no": {
+      "bits": "4607182418800017408",
+      "kind": "ENumber",
+      "loc": 1
+     },
+     "test": {
+      "callCanBeUnwrappedIfUnused": false,
+      "canBeRemovedIfUnused": false,
+      "kind": "EIdentifier",
+      "loc": 2,
+      "mustKeepDueToWithStmt": false,
+      "name": "c"
+     },
+     "yes": {
+      "bits": "4607182418800017408",
+      "kind": "ENumber",
+      "loc": 1
+     }
+    },
+    "wasTypeof": false
+   }
+  },
+  {
+   "name": "if-true-false",
+   "dump": {
+    "kind": "EIf",
+    "loc": 7,
+    "no": {
+     "kind": "EBoolean",
+     "loc": 1,
+     "value": false
+    },
+    "test": {
+     "callCanBeUnwrappedIfUnused": false,
+     "canBeRemovedIfUnused": false,
+     "kind": "EIdentifier",
+     "loc": 2,
+     "mustKeepDueToWithStmt": false,
+     "name": "c"
+    },
+    "yes": {
+     "kind": "EBoolean",
+     "loc": 1,
+     "value": true
+    }
+   },
+   "knownPrimitiveType": 4,
+   "isPrimitiveLiteral": false,
+   "isSymbolInstance": false,
+   "isPropertyAccess": false,
+   "isOptionalChain": false,
+   "typeof": [
+    "",
+    false
+   ],
+   "toNumber": [
+    "0",
+    false
+   ],
+   "toString": [
+    "",
+    false
+   ],
+   "toBoolean": [
+    false,
+    0,
+    false
+   ],
+   "toNullOrUndefined": [
+    false,
+    1,
+    false
+   ],
+   "canBeRemoved": true,
+   "simplifyUnused": null,
+   "simplifyBoolean": {
+    "kind": "EBinary",
+    "left": {
+     "callCanBeUnwrappedIfUnused": false,
+     "canBeRemovedIfUnused": false,
+     "kind": "EIdentifier",
+     "loc": 2,
+     "mustKeepDueToWithStmt": false,
+     "name": "c"
+    },
+    "loc": 2,
+    "op": 31,
+    "right": {
+     "kind": "EBoolean",
+     "loc": 1,
+     "value": false
+    }
+   },
+   "not": {
+    "kind": "EUnary",
+    "loc": 7,
+    "op": 3,
+    "value": {
+     "kind": "EIf",
+     "loc": 7,
+     "no": {
+      "kind": "EBoolean",
+      "loc": 1,
+      "value": false
+     },
+     "test": {
+      "callCanBeUnwrappedIfUnused": false,
+      "canBeRemovedIfUnused": false,
+      "kind": "EIdentifier",
+      "loc": 2,
+      "mustKeepDueToWithStmt": false,
+      "name": "c"
+     },
+     "yes": {
+      "kind": "EBoolean",
+      "loc": 1,
+      "value": true
+     }
+    },
+    "wasTypeof": false
+   }
+  },
+  {
+   "name": "if-false-true",
+   "dump": {
+    "kind": "EIf",
+    "loc": 7,
+    "no": {
+     "kind": "EBoolean",
+     "loc": 1,
+     "value": true
+    },
+    "test": {
+     "callCanBeUnwrappedIfUnused": false,
+     "canBeRemovedIfUnused": false,
+     "kind": "EIdentifier",
+     "loc": 2,
+     "mustKeepDueToWithStmt": false,
+     "name": "c"
+    },
+    "yes": {
+     "kind": "EBoolean",
+     "loc": 1,
+     "value": false
+    }
+   },
+   "knownPrimitiveType": 4,
+   "isPrimitiveLiteral": false,
+   "isSymbolInstance": false,
+   "isPropertyAccess": false,
+   "isOptionalChain": false,
+   "typeof": [
+    "",
+    false
+   ],
+   "toNumber": [
+    "0",
+    false
+   ],
+   "toString": [
+    "",
+    false
+   ],
+   "toBoolean": [
+    false,
+    0,
+    false
+   ],
+   "toNullOrUndefined": [
+    false,
+    1,
+    false
+   ],
+   "canBeRemoved": true,
+   "simplifyUnused": null,
+   "simplifyBoolean": {
+    "kind": "EBinary",
+    "left": {
+     "kind": "EUnary",
+     "loc": 2,
+     "op": 3,
+     "value": {
+      "callCanBeUnwrappedIfUnused": false,
+      "canBeRemovedIfUnused": false,
+      "kind": "EIdentifier",
+      "loc": 2,
+      "mustKeepDueToWithStmt": false,
+      "name": "c"
+     },
+     "wasTypeof": false
+    },
+    "loc": 2,
+    "op": 32,
+    "right": {
+     "kind": "EBoolean",
+     "loc": 1,
+     "value": true
+    }
+   },
+   "not": {
+    "kind": "EUnary",
+    "loc": 7,
+    "op": 3,
+    "value": {
+     "kind": "EIf",
+     "loc": 7,
+     "no": {
+      "kind": "EBoolean",
+      "loc": 1,
+      "value": true
+     },
+     "test": {
+      "callCanBeUnwrappedIfUnused": false,
+      "canBeRemovedIfUnused": false,
+      "kind": "EIdentifier",
+      "loc": 2,
+      "mustKeepDueToWithStmt": false,
+      "name": "c"
+     },
+     "yes": {
+      "kind": "EBoolean",
+      "loc": 1,
+      "value": false
+     }
+    },
+    "wasTypeof": false
+   }
+  },
+  {
+   "name": "if-null-eq",
+   "dump": {
+    "kind": "EIf",
+    "loc": 7,
+    "no": {
+     "kind": "EUndefined",
+     "loc": 1
+    },
+    "test": {
+     "kind": "EBinary",
+     "left": {
+      "callCanBeUnwrappedIfUnused": false,
+      "canBeRemovedIfUnused": false,
+      "kind": "EIdentifier",
+      "loc": 2,
+      "mustKeepDueToWithStmt": false,
+      "name": "c"
+     },
+     "loc": 4,
+     "op": 26,
+     "right": {
+      "kind": "ENull",
+      "loc": 1
+     }
+    },
+    "yes": {
+     "callCanBeUnwrappedIfUnused": false,
+     "canBeRemovedIfUnused": false,
+     "kind": "EIdentifier",
+     "loc": 2,
+     "mustKeepDueToWithStmt": false,
+     "name": "c"
+    }
+   },
+   "knownPrimitiveType": 0,
+   "isPrimitiveLiteral": false,
+   "isSymbolInstance": false,
+   "isPropertyAccess": false,
+   "isOptionalChain": false,
+   "typeof": [
+    "",
+    false
+   ],
+   "toNumber": [
+    "0",
+    false
+   ],
+   "toString": [
+    "",
+    false
+   ],
+   "toBoolean": [
+    false,
+    0,
+    false
+   ],
+   "toNullOrUndefined": [
+    false,
+    1,
+    false
+   ],
+   "canBeRemoved": false,
+   "simplifyUnused": {
+    "kind": "EBinary",
+    "left": {
+     "callCanBeUnwrappedIfUnused": false,
+     "canBeRemovedIfUnused": false,
+     "kind": "EIdentifier",
+     "loc": 2,
+     "mustKeepDueToWithStmt": false,
+     "name": "c"
+    },
+    "loc": 4,
+    "op": 26,
+    "right": {
+     "kind": "ENull",
+     "loc": 1
+    }
+   },
+   "simplifyBoolean": {
+    "kind": "EBinary",
+    "left": {
+     "kind": "EBinary",
+     "left": {
+      "callCanBeUnwrappedIfUnused": false,
+      "canBeRemovedIfUnused": false,
+      "kind": "EIdentifier",
+      "loc": 2,
+      "mustKeepDueToWithStmt": false,
+      "name": "c"
+     },
+     "loc": 4,
+     "op": 26,
+     "right": {
+      "kind": "ENull",
+      "loc": 1
+     }
+    },
+    "loc": 4,
+    "op": 32,
+    "right": {
+     "callCanBeUnwrappedIfUnused": false,
+     "canBeRemovedIfUnused": false,
+     "kind": "EIdentifier",
+     "loc": 2,
+     "mustKeepDueToWithStmt": false,
+     "name": "c"
+    }
+   },
+   "not": {
+    "kind": "EUnary",
+    "loc": 7,
+    "op": 3,
+    "value": {
+     "kind": "EIf",
+     "loc": 7,
+     "no": {
+      "kind": "EUndefined",
+      "loc": 1
+     },
+     "test": {
+      "kind": "EBinary",
+      "left": {
+       "callCanBeUnwrappedIfUnused": false,
+       "canBeRemovedIfUnused": false,
+       "kind": "EIdentifier",
+       "loc": 2,
+       "mustKeepDueToWithStmt": false,
+       "name": "c"
+      },
+      "loc": 4,
+      "op": 26,
+      "right": {
+       "kind": "ENull",
+       "loc": 1
+      }
+     },
+     "yes": {
+      "callCanBeUnwrappedIfUnused": false,
+      "canBeRemovedIfUnused": false,
+      "kind": "EIdentifier",
+      "loc": 2,
+      "mustKeepDueToWithStmt": false,
+      "name": "c"
+     }
+    },
+    "wasTypeof": false
+   }
+  },
+  {
+   "name": "annotation-removable",
+   "dump": {
+    "flags": 1,
+    "kind": "EAnnotation",
+    "loc": 8,
+    "value": {
+     "bits": "4607182418800017408",
+     "kind": "ENumber",
+     "loc": 1
+    }
+   },
+   "knownPrimitiveType": 5,
+   "isPrimitiveLiteral": true,
+   "isSymbolInstance": false,
+   "isPropertyAccess": false,
+   "isOptionalChain": false,
+   "typeof": [
+    "number",
+    true
+   ],
+   "toNumber": [
+    "4607182418800017408",
+    true
+   ],
+   "toString": [
+    "",
+    false
+   ],
+   "toBoolean": [
+    true,
+    1,
+    true
+   ],
+   "toNullOrUndefined": [
+    false,
+    1,
+    true
+   ],
+   "canBeRemoved": true,
+   "simplifyUnused": null,
+   "simplifyBoolean": {
+    "kind": "EBoolean",
+    "loc": 8,
+    "value": true
+   },
+   "not": {
+    "kind": "EBoolean",
+    "loc": 1,
+    "value": false
+   }
+  },
+  {
+   "name": "annotation-keep",
+   "dump": {
+    "flags": 0,
+    "kind": "EAnnotation",
+    "loc": 8,
+    "value": {
+     "bits": "4607182418800017408",
+     "kind": "ENumber",
+     "loc": 1
+    }
+   },
+   "knownPrimitiveType": 5,
+   "isPrimitiveLiteral": true,
+   "isSymbolInstance": false,
+   "isPropertyAccess": false,
+   "isOptionalChain": false,
+   "typeof": [
+    "",
+    false
+   ],
+   "toNumber": [
+    "4607182418800017408",
+    true
+   ],
+   "toString": [
+    "",
+    false
+   ],
+   "toBoolean": [
+    true,
+    1,
+    true
+   ],
+   "toNullOrUndefined": [
+    false,
+    1,
+    true
+   ],
+   "canBeRemoved": false,
+   "simplifyUnused": {
+    "flags": 0,
+    "kind": "EAnnotation",
+    "loc": 8,
+    "value": {
+     "bits": "4607182418800017408",
+     "kind": "ENumber",
+     "loc": 1
+    }
+   },
+   "simplifyBoolean": {
+    "kind": "EBoolean",
+    "loc": 8,
+    "value": true
+   },
+   "not": {
+    "kind": "EBoolean",
+    "loc": 1,
+    "value": false
+   }
+  },
+  {
+   "name": "inlined",
+   "dump": {
+    "comment": "",
+    "kind": "EInlinedEnum",
+    "loc": 8,
+    "value": {
+     "bits": "4607182418800017408",
+     "kind": "ENumber",
+     "loc": 1
+    }
+   },
+   "knownPrimitiveType": 5,
+   "isPrimitiveLiteral": true,
+   "isSymbolInstance": false,
+   "isPropertyAccess": false,
+   "isOptionalChain": false,
+   "typeof": [
+    "number",
+    true
+   ],
+   "toNumber": [
+    "4607182418800017408",
+    true
+   ],
+   "toString": [
+    "",
+    false
+   ],
+   "toBoolean": [
+    true,
+    1,
+    true
+   ],
+   "toNullOrUndefined": [
+    false,
+    1,
+    true
+   ],
+   "canBeRemoved": true,
+   "simplifyUnused": null,
+   "simplifyBoolean": {
+    "kind": "EBoolean",
+    "loc": 8,
+    "value": true
+   },
+   "not": {
+    "kind": "EBoolean",
+    "loc": 1,
+    "value": false
+   }
+  },
+  {
+   "name": "template",
+   "dump": {
+    "canBeUnwrappedIfUnused": false,
+    "headCooked": [
+     97
+    ],
+    "kind": "ETemplate",
+    "loc": 11,
+    "parts": [
+     {
+      "tailCooked": [
+       99
+      ],
+      "value": {
+       "kind": "EString",
+       "loc": 1,
+       "preferTemplate": false,
+       "value": [
+        98
+       ]
+      }
+     }
+    ],
+    "tag": null
+   },
+   "knownPrimitiveType": 6,
+   "isPrimitiveLiteral": false,
+   "isSymbolInstance": false,
+   "isPropertyAccess": false,
+   "isOptionalChain": false,
+   "typeof": [
+    "",
+    false
+   ],
+   "toNumber": [
+    "0",
+    false
+   ],
+   "toString": [
+    "",
+    false
+   ],
+   "toBoolean": [
+    false,
+    0,
+    false
+   ],
+   "toNullOrUndefined": [
+    false,
+    1,
+    false
+   ],
+   "canBeRemoved": true,
+   "simplifyUnused": null,
+   "simplifyBoolean": {
+    "canBeUnwrappedIfUnused": false,
+    "headCooked": [
+     97
+    ],
+    "kind": "ETemplate",
+    "loc": 11,
+    "parts": [
+     {
+      "tailCooked": [
+       99
+      ],
+      "value": {
+       "kind": "EString",
+       "loc": 1,
+       "preferTemplate": false,
+       "value": [
+        98
+       ]
+      }
+     }
+    ],
+    "tag": null
+   },
+   "not": {
+    "kind": "EUnary",
+    "loc": 11,
+    "op": 3,
+    "value": {
+     "canBeUnwrappedIfUnused": false,
+     "headCooked": [
+      97
+     ],
+     "kind": "ETemplate",
+     "loc": 11,
+     "parts": [
+      {
+       "tailCooked": [
+        99
+       ],
+       "value": {
+        "kind": "EString",
+        "loc": 1,
+        "preferTemplate": false,
+        "value": [
+         98
+        ]
+       }
+      }
+     ],
+     "tag": null
+    },
+    "wasTypeof": false
+   }
+  },
+  {
+   "name": "template-tagged",
+   "dump": {
+    "canBeUnwrappedIfUnused": false,
+    "headCooked": null,
+    "kind": "ETemplate",
+    "loc": 11,
+    "parts": [
+     {
+      "tailCooked": null,
+      "value": {
+       "kind": "EString",
+       "loc": 1,
+       "preferTemplate": false,
+       "value": [
+        98
+       ]
+      }
+     }
+    ],
+    "tag": {
+     "callCanBeUnwrappedIfUnused": false,
+     "canBeRemovedIfUnused": false,
+     "kind": "EIdentifier",
+     "loc": 2,
+     "mustKeepDueToWithStmt": false,
+     "name": "c"
+    }
+   },
+   "knownPrimitiveType": 0,
+   "isPrimitiveLiteral": false,
+   "isSymbolInstance": false,
+   "isPropertyAccess": false,
+   "isOptionalChain": false,
+   "typeof": [
+    "",
+    false
+   ],
+   "toNumber": [
+    "0",
+    false
+   ],
+   "toString": [
+    "",
+    false
+   ],
+   "toBoolean": [
+    false,
+    0,
+    false
+   ],
+   "toNullOrUndefined": [
+    false,
+    1,
+    false
+   ],
+   "canBeRemoved": false,
+   "simplifyUnused": {
+    "canBeUnwrappedIfUnused": false,
+    "headCooked": null,
+    "kind": "ETemplate",
+    "loc": 11,
+    "parts": [
+     {
+      "tailCooked": null,
+      "value": {
+       "kind": "EString",
+       "loc": 1,
+       "preferTemplate": false,
+       "value": [
+        98
+       ]
+      }
+     }
+    ],
+    "tag": {
+     "callCanBeUnwrappedIfUnused": false,
+     "canBeRemovedIfUnused": false,
+     "kind": "EIdentifier",
+     "loc": 2,
+     "mustKeepDueToWithStmt": false,
+     "name": "c"
+    }
+   },
+   "simplifyBoolean": {
+    "canBeUnwrappedIfUnused": false,
+    "headCooked": null,
+    "kind": "ETemplate",
+    "loc": 11,
+    "parts": [
+     {
+      "tailCooked": null,
+      "value": {
+       "kind": "EString",
+       "loc": 1,
+       "preferTemplate": false,
+       "value": [
+        98
+       ]
+      }
+     }
+    ],
+    "tag": {
+     "callCanBeUnwrappedIfUnused": false,
+     "canBeRemovedIfUnused": false,
+     "kind": "EIdentifier",
+     "loc": 2,
+     "mustKeepDueToWithStmt": false,
+     "name": "c"
+    }
+   },
+   "not": {
+    "kind": "EUnary",
+    "loc": 11,
+    "op": 3,
+    "value": {
+     "canBeUnwrappedIfUnused": false,
+     "headCooked": null,
+     "kind": "ETemplate",
+     "loc": 11,
+     "parts": [
+      {
+       "tailCooked": null,
+       "value": {
+        "kind": "EString",
+        "loc": 1,
+        "preferTemplate": false,
+        "value": [
+         98
+        ]
+       }
+      }
+     ],
+     "tag": {
+      "callCanBeUnwrappedIfUnused": false,
+      "canBeRemovedIfUnused": false,
+      "kind": "EIdentifier",
+      "loc": 2,
+      "mustKeepDueToWithStmt": false,
+      "name": "c"
+     }
+    },
+    "wasTypeof": false
+   }
+  },
+  {
+   "name": "template-unwrappable",
+   "dump": {
+    "canBeUnwrappedIfUnused": true,
+    "headCooked": null,
+    "kind": "ETemplate",
+    "loc": 11,
+    "parts": [
+     {
+      "tailCooked": null,
+      "value": {
+       "kind": "EString",
+       "loc": 1,
+       "preferTemplate": false,
+       "value": [
+        98
+       ]
+      }
+     }
+    ],
+    "tag": {
+     "callCanBeUnwrappedIfUnused": false,
+     "canBeRemovedIfUnused": false,
+     "kind": "EIdentifier",
+     "loc": 2,
+     "mustKeepDueToWithStmt": false,
+     "name": "c"
+    }
+   },
+   "knownPrimitiveType": 0,
+   "isPrimitiveLiteral": false,
+   "isSymbolInstance": false,
+   "isPropertyAccess": false,
+   "isOptionalChain": false,
+   "typeof": [
+    "",
+    false
+   ],
+   "toNumber": [
+    "0",
+    false
+   ],
+   "toString": [
+    "",
+    false
+   ],
+   "toBoolean": [
+    false,
+    0,
+    false
+   ],
+   "toNullOrUndefined": [
+    false,
+    1,
+    false
+   ],
+   "canBeRemoved": true,
+   "simplifyUnused": null,
+   "simplifyBoolean": {
+    "canBeUnwrappedIfUnused": true,
+    "headCooked": null,
+    "kind": "ETemplate",
+    "loc": 11,
+    "parts": [
+     {
+      "tailCooked": null,
+      "value": {
+       "kind": "EString",
+       "loc": 1,
+       "preferTemplate": false,
+       "value": [
+        98
+       ]
+      }
+     }
+    ],
+    "tag": {
+     "callCanBeUnwrappedIfUnused": false,
+     "canBeRemovedIfUnused": false,
+     "kind": "EIdentifier",
+     "loc": 2,
+     "mustKeepDueToWithStmt": false,
+     "name": "c"
+    }
+   },
+   "not": {
+    "kind": "EUnary",
+    "loc": 11,
+    "op": 3,
+    "value": {
+     "canBeUnwrappedIfUnused": true,
+     "headCooked": null,
+     "kind": "ETemplate",
+     "loc": 11,
+     "parts": [
+      {
+       "tailCooked": null,
+       "value": {
+        "kind": "EString",
+        "loc": 1,
+        "preferTemplate": false,
+        "value": [
+         98
+        ]
+       }
+      }
+     ],
+     "tag": {
+      "callCanBeUnwrappedIfUnused": false,
+      "canBeRemovedIfUnused": false,
+      "kind": "EIdentifier",
+      "loc": 2,
+      "mustKeepDueToWithStmt": false,
+      "name": "c"
+     }
+    },
+    "wasTypeof": false
+   }
+  }
+ ],
+ "extras": [
+  {
+   "dump": {
+    "fromClassOrFn": false,
+    "kind": "SExpr",
+    "loc": 2,
+    "value": {
+     "kind": "EBinary",
+     "left": {
+      "callCanBeUnwrappedIfUnused": false,
+      "canBeRemovedIfUnused": false,
+      "kind": "EIdentifier",
+      "loc": 2,
+      "mustKeepDueToWithStmt": false,
+      "name": "c"
+     },
+     "loc": 2,
+     "op": 37,
+     "right": {
+      "bits": "4607182418800017408",
+      "kind": "ENumber",
+      "loc": 1
+     }
+    }
+   },
+   "name": "assign-stmt"
+  },
+  {
+   "dump": {
+    "kind": "EUnary",
+    "loc": 3,
+    "op": 3,
+    "value": {
+     "callCanBeUnwrappedIfUnused": false,
+     "canBeRemovedIfUnused": false,
+     "kind": "EIdentifier",
+     "loc": 2,
+     "mustKeepDueToWithStmt": false,
+     "name": "c"
+    },
+    "wasTypeof": false
+   },
+   "name": "eqsimplify-eq-bool",
+   "ok": true
+  },
+  {
+   "dump": {
+    "kind": "EBinary",
+    "left": {
+     "kind": "EUnary",
+     "loc": 3,
+     "op": 5,
+     "value": {
+      "callCanBeUnwrappedIfUnused": false,
+      "canBeRemovedIfUnused": false,
+      "kind": "EIdentifier",
+      "loc": 2,
+      "mustKeepDueToWithStmt": false,
+      "name": "c"
+     },
+     "wasTypeof": false
+    },
+    "loc": 4,
+    "op": 19,
+    "right": {
+     "kind": "EString",
+     "loc": 1,
+     "preferTemplate": false,
+     "value": [
+      117
+     ]
+    }
+   },
+   "name": "eqsimplify-eq-typeof-undefined",
+   "ok": true
+  },
+  {
+   "b": true,
+   "name": "isint32-ushr"
+  },
+  {
+   "b": true,
+   "name": "isint32-logical-or-ushr"
+  },
+  {
+   "b": false,
+   "name": "isint32-add"
+  },
+  {
+   "idents": [
+    [
+     2,
+     "c"
+    ],
+    [
+     2,
+     "x"
+    ]
+   ],
+   "name": "foreach-decls"
+  }
+ ],
+ "folds": [
+  {
+   "name": "add-num",
+   "dump": {
+    "kind": "EBinary",
+    "left": {
+     "bits": "4607182418800017408",
+     "kind": "ENumber",
+     "loc": 1
+    },
+    "loc": 4,
+    "op": 11,
+    "right": {
+     "bits": "4611686018427387904",
+     "kind": "ENumber",
+     "loc": 1
+    }
+   },
+   "shouldFold": true,
+   "folded": {
+    "bits": "4613937818241073152",
+    "kind": "ENumber",
+    "loc": 4
+   }
+  },
+  {
+   "name": "add-str",
+   "dump": {
+    "kind": "EBinary",
+    "left": {
+     "kind": "EString",
+     "loc": 1,
+     "preferTemplate": false,
+     "value": [
+      97
+     ]
+    },
+    "loc": 4,
+    "op": 11,
+    "right": {
+     "kind": "EString",
+     "loc": 1,
+     "preferTemplate": false,
+     "value": [
+      98
+     ]
+    }
+   },
+   "shouldFold": true,
+   "folded": {
+    "kind": "EString",
+    "loc": 4,
+    "preferTemplate": false,
+    "value": [
+     97,
+     98
+    ]
+   }
+  },
+  {
+   "name": "sub",
+   "dump": {
+    "kind": "EBinary",
+    "left": {
+     "bits": "4617315517961601024",
+     "kind": "ENumber",
+     "loc": 1
+    },
+    "loc": 4,
+    "op": 12,
+    "right": {
+     "bits": "4611686018427387904",
+     "kind": "ENumber",
+     "loc": 1
+    }
+   },
+   "shouldFold": true,
+   "folded": {
+    "bits": "4613937818241073152",
+    "kind": "ENumber",
+    "loc": 4
+   }
+  },
+  {
+   "name": "mul",
+   "dump": {
+    "kind": "EBinary",
+    "left": {
+     "bits": "4617315517961601024",
+     "kind": "ENumber",
+     "loc": 1
+    },
+    "loc": 4,
+    "op": 13,
+    "right": {
+     "bits": "4611686018427387904",
+     "kind": "ENumber",
+     "loc": 1
+    }
+   },
+   "shouldFold": true,
+   "folded": {
+    "bits": "4621819117588971520",
+    "kind": "ENumber",
+    "loc": 4
+   }
+  },
+  {
+   "name": "div",
+   "dump": {
+    "kind": "EBinary",
+    "left": {
+     "bits": "4607182418800017408",
+     "kind": "ENumber",
+     "loc": 1
+    },
+    "loc": 4,
+    "op": 14,
+    "right": {
+     "bits": "0",
+     "kind": "ENumber",
+     "loc": 1
+    }
+   },
+   "shouldFold": true,
+   "folded": {
+    "bits": "9218868437227405312",
+    "kind": "ENumber",
+    "loc": 4
+   }
+  },
+  {
+   "name": "rem",
+   "dump": {
+    "kind": "EBinary",
+    "left": {
+     "bits": "4617315517961601024",
+     "kind": "ENumber",
+     "loc": 1
+    },
+    "loc": 4,
+    "op": 15,
+    "right": {
+     "bits": "4611686018427387904",
+     "kind": "ENumber",
+     "loc": 1
+    }
+   },
+   "shouldFold": false,
+   "folded": {
+    "bits": "4607182418800017408",
+    "kind": "ENumber",
+    "loc": 4
+   }
+  },
+  {
+   "name": "pow",
+   "dump": {
+    "kind": "EBinary",
+    "left": {
+     "bits": "4611686018427387904",
+     "kind": "ENumber",
+     "loc": 1
+    },
+    "loc": 4,
+    "op": 16,
+    "right": {
+     "bits": "4621819117588971520",
+     "kind": "ENumber",
+     "loc": 1
+    }
+   },
+   "shouldFold": false,
+   "folded": {
+    "bits": "4652218415073722368",
+    "kind": "ENumber",
+    "loc": 4
+   }
+  },
+  {
+   "name": "shl",
+   "dump": {
+    "kind": "EBinary",
+    "left": {
+     "bits": "4607182418800017408",
+     "kind": "ENumber",
+     "loc": 1
+    },
+    "loc": 4,
+    "op": 23,
+    "right": {
+     "bits": "4613937818241073152",
+     "kind": "ENumber",
+     "loc": 1
+    }
+   },
+   "shouldFold": true,
+   "folded": {
+    "bits": "4620693217682128896",
+    "kind": "ENumber",
+    "loc": 4
+   }
+  },
+  {
+   "name": "shr",
+   "dump": {
+    "kind": "EBinary",
+    "left": {
+     "bits": "13844065254536904704",
+     "kind": "ENumber",
+     "loc": 1
+    },
+    "loc": 4,
+    "op": 24,
+    "right": {
+     "bits": "4607182418800017408",
+     "kind": "ENumber",
+     "loc": 1
+    }
+   },
+   "shouldFold": true,
+   "folded": {
+    "bits": "13839561654909534208",
+    "kind": "ENumber",
+    "loc": 4
+   }
+  },
+  {
+   "name": "ushr",
+   "dump": {
+    "kind": "EBinary",
+    "left": {
+     "bits": "13830554455654793216",
+     "kind": "ENumber",
+     "loc": 1
+    },
+    "loc": 4,
+    "op": 25,
+    "right": {
+     "bits": "0",
+     "kind": "ENumber",
+     "loc": 1
+    }
+   },
+   "shouldFold": false,
+   "folded": {
+    "bits": "4751297606873776128",
+    "kind": "ENumber",
+    "loc": 4
+   }
+  },
+  {
+   "name": "and",
+   "dump": {
+    "kind": "EBinary",
+    "left": {
+     "bits": "4618441417868443648",
+     "kind": "ENumber",
+     "loc": 1
+    },
+    "loc": 4,
+    "op": 34,
+    "right": {
+     "bits": "4613937818241073152",
+     "kind": "ENumber",
+     "loc": 1
+    }
+   },
+   "shouldFold": true,
+   "folded": {
+    "bits": "4611686018427387904",
+    "kind": "ENumber",
+    "loc": 4
+   }
+  },
+  {
+   "name": "or",
+   "dump": {
+    "kind": "EBinary",
+    "left": {
+     "bits": "4618441417868443648",
+     "kind": "ENumber",
+     "loc": 1
+    },
+    "loc": 4,
+    "op": 33,
+    "right": {
+     "bits": "4613937818241073152",
+     "kind": "ENumber",
+     "loc": 1
+    }
+   },
+   "shouldFold": true,
+   "folded": {
+    "bits": "4619567317775286272",
+    "kind": "ENumber",
+    "loc": 4
+   }
+  },
+  {
+   "name": "xor",
+   "dump": {
+    "kind": "EBinary",
+    "left": {
+     "bits": "4618441417868443648",
+     "kind": "ENumber",
+     "loc": 1
+    },
+    "loc": 4,
+    "op": 35,
+    "right": {
+     "bits": "4613937818241073152",
+     "kind": "ENumber",
+     "loc": 1
+    }
+   },
+   "shouldFold": true,
+   "folded": {
+    "bits": "4617315517961601024",
+    "kind": "ENumber",
+    "loc": 4
+   }
+  },
+  {
+   "name": "lt-num",
+   "dump": {
+    "kind": "EBinary",
+    "left": {
+     "bits": "4607182418800017408",
+     "kind": "ENumber",
+     "loc": 1
+    },
+    "loc": 4,
+    "op": 17,
+    "right": {
+     "bits": "4611686018427387904",
+     "kind": "ENumber",
+     "loc": 1
+    }
+   },
+   "shouldFold": true,
+   "folded": {
+    "kind": "EBoolean",
+    "loc": 4,
+    "value": true
+   }
+  },
+  {
+   "name": "lt-str",
+   "dump": {
+    "kind": "EBinary",
+    "left": {
+     "kind": "EString",
+     "loc": 1,
+     "preferTemplate": false,
+     "value": [
+      97
+     ]
+    },
+    "loc": 4,
+    "op": 17,
+    "right": {
+     "kind": "EString",
+     "loc": 1,
+     "preferTemplate": false,
+     "value": [
+      98
+     ]
+    }
+   },
+   "shouldFold": true,
+   "folded": {
+    "kind": "EBoolean",
+    "loc": 4,
+    "value": true
+   }
+  },
+  {
+   "name": "gt-str",
+   "dump": {
+    "kind": "EBinary",
+    "left": {
+     "kind": "EString",
+     "loc": 1,
+     "preferTemplate": false,
+     "value": [
+      98
+     ]
+    },
+    "loc": 4,
+    "op": 19,
+    "right": {
+     "kind": "EString",
+     "loc": 1,
+     "preferTemplate": false,
+     "value": [
+      97
+     ]
+    }
+   },
+   "shouldFold": true,
+   "folded": {
+    "kind": "EBoolean",
+    "loc": 4,
+    "value": true
+   }
+  },
+  {
+   "name": "le",
+   "dump": {
+    "kind": "EBinary",
+    "left": {
+     "bits": "4611686018427387904",
+     "kind": "ENumber",
+     "loc": 1
+    },
+    "loc": 4,
+    "op": 18,
+    "right": {
+     "bits": "4611686018427387904",
+     "kind": "ENumber",
+     "loc": 1
+    }
+   },
+   "shouldFold": true,
+   "folded": {
+    "kind": "EBoolean",
+    "loc": 4,
+    "value": true
+   }
+  },
+  {
+   "name": "ge",
+   "dump": {
+    "kind": "EBinary",
+    "left": {
+     "bits": "4611686018427387904",
+     "kind": "ENumber",
+     "loc": 1
+    },
+    "loc": 4,
+    "op": 20,
+    "right": {
+     "bits": "4611686018427387904",
+     "kind": "ENumber",
+     "loc": 1
+    }
+   },
+   "shouldFold": true,
+   "folded": {
+    "kind": "EBoolean",
+    "loc": 4,
+    "value": true
+   }
+  },
+  {
+   "name": "eq-num",
+   "dump": {
+    "kind": "EBinary",
+    "left": {
+     "bits": "4611686018427387904",
+     "kind": "ENumber",
+     "loc": 1
+    },
+    "loc": 4,
+    "op": 28,
+    "right": {
+     "bits": "4611686018427387904",
+     "kind": "ENumber",
+     "loc": 1
+    }
+   },
+   "shouldFold": true,
+   "folded": {
+    "kind": "EBoolean",
+    "loc": 4,
+    "value": true
+   }
+  },
+  {
+   "name": "eq-str",
+   "dump": {
+    "kind": "EBinary",
+    "left": {
+     "kind": "EString",
+     "loc": 1,
+     "preferTemplate": false,
+     "value": [
+      97
+     ]
+    },
+    "loc": 4,
+    "op": 26,
+    "right": {
+     "kind": "EString",
+     "loc": 1,
+     "preferTemplate": false,
+     "value": [
+      97
+     ]
+    }
+   },
+   "shouldFold": true,
+   "folded": {
+    "kind": "EBoolean",
+    "loc": 4,
+    "value": true
+   }
+  },
+  {
+   "name": "ne",
+   "dump": {
+    "kind": "EBinary",
+    "left": {
+     "bits": "4611686018427387904",
+     "kind": "ENumber",
+     "loc": 1
+    },
+    "loc": 4,
+    "op": 29,
+    "right": {
+     "bits": "4613937818241073152",
+     "kind": "ENumber",
+     "loc": 1
+    }
+   },
+   "shouldFold": true,
+   "folded": {
+    "kind": "EBoolean",
+    "loc": 4,
+    "value": true
+   }
+  },
+  {
+   "name": "logical-and-lhs-false",
+   "dump": {
+    "kind": "EBinary",
+    "left": {
+     "kind": "EBoolean",
+     "loc": 1,
+     "value": false
+    },
+    "loc": 4,
+    "op": 32,
+    "right": {
+     "bits": "4611686018427387904",
+     "kind": "ENumber",
+     "loc": 1
+    }
+   },
+   "shouldFold": true,
+   "folded": {
+    "kind": "EBoolean",
+    "loc": 1,
+    "value": false
+   }
+  },
+  {
+   "name": "logical-or-lhs-true",
+   "dump": {
+    "kind": "EBinary",
+    "left": {
+     "kind": "EBoolean",
+     "loc": 1,
+     "value": true
+    },
+    "loc": 4,
+    "op": 31,
+    "right": {
+     "bits": "4611686018427387904",
+     "kind": "ENumber",
+     "loc": 1
+    }
+   },
+   "shouldFold": true,
+   "folded": {
+    "kind": "EBoolean",
+    "loc": 1,
+    "value": true
+   }
+  },
+  {
+   "name": "nullish-lhs-nonnull",
+   "dump": {
+    "kind": "EBinary",
+    "left": {
+     "bits": "4607182418800017408",
+     "kind": "ENumber",
+     "loc": 1
+    },
+    "loc": 4,
+    "op": 30,
+    "right": {
+     "bits": "4611686018427387904",
+     "kind": "ENumber",
+     "loc": 1
+    }
+   },
+   "shouldFold": true,
+   "folded": {
+    "bits": "4607182418800017408",
+    "kind": "ENumber",
+    "loc": 1
+   }
+  },
+  {
+   "name": "no-fold",
+   "dump": {
+    "kind": "EBinary",
+    "left": {
+     "callCanBeUnwrappedIfUnused": false,
+     "canBeRemovedIfUnused": false,
+     "kind": "EIdentifier",
+     "loc": 2,
+     "mustKeepDueToWithStmt": false,
+     "name": "c"
+    },
+    "loc": 4,
+    "op": 11,
+    "right": {
+     "callCanBeUnwrappedIfUnused": false,
+     "canBeRemovedIfUnused": false,
+     "kind": "EIdentifier",
+     "loc": 2,
+     "mustKeepDueToWithStmt": false,
+     "name": "x"
+    }
+   },
+   "shouldFold": false,
+   "folded": null
+  }
+ ],
+ "idents": [
+  {
+   "name": "",
+   "utf16": [],
+   "isIdentifier": false,
+   "isES5": false,
+   "isIdentifierUTF16": false,
+   "isES5UTF16": false,
+   "forcedHex": "235f",
+   "forcedNoPrefixHex": "5f"
+  },
+  {
+   "name": "a",
+   "utf16": [
+    97
+   ],
+   "isIdentifier": true,
+   "isES5": true,
+   "isIdentifierUTF16": true,
+   "isES5UTF16": true,
+   "forcedHex": "2361",
+   "forcedNoPrefixHex": "61"
+  },
+  {
+   "name": "_",
+   "utf16": [
+    95
+   ],
+   "isIdentifier": true,
+   "isES5": true,
+   "isIdentifierUTF16": true,
+   "isES5UTF16": true,
+   "forcedHex": "235f",
+   "forcedNoPrefixHex": "5f"
+  },
+  {
+   "name": "$",
+   "utf16": [
+    36
+   ],
+   "isIdentifier": true,
+   "isES5": true,
+   "isIdentifierUTF16": true,
+   "isES5UTF16": true,
+   "forcedHex": "2324",
+   "forcedNoPrefixHex": "24"
+  },
+  {
+   "name": "0",
+   "utf16": [
+    48
+   ],
+   "isIdentifier": false,
+   "isES5": false,
+   "isIdentifierUTF16": false,
+   "isES5UTF16": false,
+   "forcedHex": "235f",
+   "forcedNoPrefixHex": "5f"
+  },
+  {
+   "name": "1a",
+   "utf16": [
+    49,
+    97
+   ],
+   "isIdentifier": false,
+   "isES5": false,
+   "isIdentifierUTF16": false,
+   "isES5UTF16": false,
+   "forcedHex": "235f61",
+   "forcedNoPrefixHex": "5f61"
+  },
+  {
+   "name": "a-b",
+   "utf16": [
+    97,
+    45,
+    98
+   ],
+   "isIdentifier": false,
+   "isES5": false,
+   "isIdentifierUTF16": false,
+   "isES5UTF16": false,
+   "forcedHex": "23615f62",
+   "forcedNoPrefixHex": "615f62"
+  },
+  {
+   "name": "π",
+   "utf16": [
+    960
+   ],
+   "isIdentifier": true,
+   "isES5": true,
+   "isIdentifierUTF16": true,
+   "isES5UTF16": true,
+   "forcedHex": "23cf80",
+   "forcedNoPrefixHex": "cf80"
+  },
+  {
+   "name": "日本語",
+   "utf16": [
+    26085,
+    26412,
+    35486
+   ],
+   "isIdentifier": true,
+   "isES5": true,
+   "isIdentifierUTF16": true,
+   "isES5UTF16": true,
+   "forcedHex": "23e697a5e69cace8aa9e",
+   "forcedNoPrefixHex": "e697a5e69cace8aa9e"
+  },
+  {
+   "name": "a‌",
+   "utf16": [
+    97,
+    8204
+   ],
+   "isIdentifier": true,
+   "isES5": true,
+   "isIdentifierUTF16": true,
+   "isES5UTF16": true,
+   "forcedHex": "2361e2808c",
+   "forcedNoPrefixHex": "61e2808c"
+  },
+  {
+   "name": "‌",
+   "utf16": [
+    8204
+   ],
+   "isIdentifier": false,
+   "isES5": false,
+   "isIdentifierUTF16": false,
+   "isES5UTF16": false,
+   "forcedHex": "235f",
+   "forcedNoPrefixHex": "5f"
+  },
+  {
+   "name": "a‍",
+   "utf16": [
+    97,
+    8205
+   ],
+   "isIdentifier": true,
+   "isES5": true,
+   "isIdentifierUTF16": true,
+   "isES5UTF16": true,
+   "forcedHex": "2361e2808d",
+   "forcedNoPrefixHex": "61e2808d"
+  },
+  {
+   "name": "𝕒",
+   "utf16": [
+    55349,
+    56658
+   ],
+   "isIdentifier": true,
+   "isES5": false,
+   "isIdentifierUTF16": true,
+   "isES5UTF16": false,
+   "forcedHex": "23f09d9592",
+   "forcedNoPrefixHex": "f09d9592"
+  },
+  {
+   "name": "℘",
+   "utf16": [
+    8472
+   ],
+   "isIdentifier": true,
+   "isES5": false,
+   "isIdentifierUTF16": true,
+   "isES5UTF16": false,
+   "forcedHex": "23e28498",
+   "forcedNoPrefixHex": "e28498"
+  },
+  {
+   "name": "á",
+   "utf16": [
+    97,
+    769
+   ],
+   "isIdentifier": true,
+   "isES5": true,
+   "isIdentifierUTF16": true,
+   "isES5UTF16": true,
+   "forcedHex": "2361cc81",
+   "forcedNoPrefixHex": "61cc81"
+  },
+  {
+   "name": "é",
+   "utf16": [
+    233
+   ],
+   "isIdentifier": true,
+   "isES5": true,
+   "isIdentifierUTF16": true,
+   "isES5UTF16": true,
+   "forcedHex": "23c3a9",
+   "forcedNoPrefixHex": "c3a9"
+  },
+  {
+   "name": "z9",
+   "utf16": [
+    122,
+    57
+   ],
+   "isIdentifier": true,
+   "isES5": true,
+   "isIdentifierUTF16": true,
+   "isES5UTF16": true,
+   "forcedHex": "237a39",
+   "forcedNoPrefixHex": "7a39"
+  },
+  {
+   "name": "Z_",
+   "utf16": [
+    90,
+    95
+   ],
+   "isIdentifier": true,
+   "isES5": true,
+   "isIdentifierUTF16": true,
+   "isES5UTF16": true,
+   "forcedHex": "235a5f",
+   "forcedNoPrefixHex": "5a5f"
+  },
+  {
+   "name": "with space",
+   "utf16": [
+    119,
+    105,
+    116,
+    104,
+    32,
+    115,
+    112,
+    97,
+    99,
+    101
+   ],
+   "isIdentifier": false,
+   "isES5": false,
+   "isIdentifierUTF16": false,
+   "isES5UTF16": false,
+   "forcedHex": "23776974685f7370616365",
+   "forcedNoPrefixHex": "776974685f7370616365"
+  },
+  {
+   "name": "await",
+   "utf16": [
+    97,
+    119,
+    97,
+    105,
+    116
+   ],
+   "isIdentifier": true,
+   "isES5": true,
+   "isIdentifierUTF16": true,
+   "isES5UTF16": true,
+   "forcedHex": "236177616974",
+   "forcedNoPrefixHex": "6177616974"
+  }
+ ],
+ "joins": [
+  {
+   "name": "join-comma",
+   "dump": {
+    "kind": "EBinary",
+    "left": {
+     "bits": "4607182418800017408",
+     "kind": "ENumber",
+     "loc": 1
+    },
+    "loc": 1,
+    "op": 36,
+    "right": {
+     "bits": "4611686018427387904",
+     "kind": "ENumber",
+     "loc": 1
+    }
+   }
+  },
+  {
+   "name": "join-comma-nil-left",
+   "dump": {
+    "bits": "4611686018427387904",
+    "kind": "ENumber",
+    "loc": 1
+   }
+  },
+  {
+   "name": "join-comma-nil-right",
+   "dump": {
+    "bits": "4607182418800017408",
+    "kind": "ENumber",
+    "loc": 1
+   }
+  },
+  {
+   "name": "join-all",
+   "dump": {
+    "kind": "EBinary",
+    "left": {
+     "kind": "EBinary",
+     "left": {
+      "bits": "4607182418800017408",
+      "kind": "ENumber",
+      "loc": 1
+     },
+     "loc": 1,
+     "op": 36,
+     "right": {
+      "bits": "4611686018427387904",
+      "kind": "ENumber",
+      "loc": 1
+     }
+    },
+    "loc": 1,
+    "op": 36,
+    "right": {
+     "bits": "4613937818241073152",
+     "kind": "ENumber",
+     "loc": 1
+    }
+   }
+  },
+  {
+   "name": "join-left-assoc",
+   "dump": {
+    "kind": "EBinary",
+    "left": {
+     "kind": "EBinary",
+     "left": {
+      "bits": "4607182418800017408",
+      "kind": "ENumber",
+      "loc": 1
+     },
+     "loc": 1,
+     "op": 11,
+     "right": {
+      "bits": "4611686018427387904",
+      "kind": "ENumber",
+      "loc": 1
+     }
+    },
+    "loc": 1,
+    "op": 11,
+    "right": {
+     "bits": "4613937818241073152",
+     "kind": "ENumber",
+     "loc": 1
+    }
+   }
+  },
+  {
+   "name": "join-left-assoc-comma",
+   "dump": {
+    "kind": "EBinary",
+    "left": {
+     "bits": "4607182418800017408",
+     "kind": "ENumber",
+     "loc": 1
+    },
+    "loc": 4,
+    "op": 36,
+    "right": {
+     "kind": "EBinary",
+     "left": {
+      "bits": "4611686018427387904",
+      "kind": "ENumber",
+      "loc": 1
+     },
+     "loc": 1,
+     "op": 11,
+     "right": {
+      "bits": "4613937818241073152",
+      "kind": "ENumber",
+      "loc": 1
+     }
+    }
+   }
+  },
+  {
+   "name": "assign",
+   "dump": {
+    "kind": "EBinary",
+    "left": {
+     "callCanBeUnwrappedIfUnused": false,
+     "canBeRemovedIfUnused": false,
+     "kind": "EIdentifier",
+     "loc": 2,
+     "mustKeepDueToWithStmt": false,
+     "name": "c"
+    },
+    "loc": 2,
+    "op": 37,
+    "right": {
+     "bits": "4607182418800017408",
+     "kind": "ENumber",
+     "loc": 1
+    }
+   }
+  },
+  {
+   "name": "fold-string-add",
+   "dump": {
+    "kind": "EString",
+    "loc": 1,
+    "preferTemplate": false,
+    "value": [
+     97,
+     49
+    ]
+   }
+  },
+  {
+   "name": "fold-string-add-template",
+   "dump": {
+    "canBeUnwrappedIfUnused": false,
+    "headCooked": [
+     97,
+     98
+    ],
+    "kind": "ETemplate",
+    "loc": 1,
+    "parts": [
+     {
+      "tailCooked": null,
+      "value": {
+       "callCanBeUnwrappedIfUnused": false,
+       "canBeRemovedIfUnused": false,
+       "kind": "EIdentifier",
+       "loc": 2,
+       "mustKeepDueToWithStmt": false,
+       "name": "c"
+      }
+     }
+    ],
+    "tag": null
+   }
+  },
+  {
+   "name": "inline-template",
+   "dump": {
+    "kind": "EString",
+    "loc": 11,
+    "preferTemplate": true,
+    "value": [
+     97,
+     98,
+     99
+    ]
+   }
+  },
+  {
+   "name": "mangle-object-spread",
+   "dump": {
+    "isSingleLine": false,
+    "kind": "EObject",
+    "loc": 6,
+    "properties": [
+     {
+      "flags": 0,
+      "initializer": null,
+      "key": {
+       "kind": "EString",
+       "loc": 1,
+       "preferTemplate": false,
+       "value": [
+        107
+       ]
+      },
+      "kind": 0,
+      "loc": 0,
+      "value": {
+       "bits": "4607182418800017408",
+       "kind": "ENumber",
+       "loc": 1
+      }
+     }
+    ]
+   }
+  },
+  {
+   "name": "mangle-if-call",
+   "dump": {
+    "args": [
+     {
+      "kind": "EIf",
+      "loc": 7,
+      "no": {
+       "bits": "4613937818241073152",
+       "kind": "ENumber",
+       "loc": 1
+      },
+      "test": {
+       "callCanBeUnwrappedIfUnused": false,
+       "canBeRemovedIfUnused": false,
+       "kind": "EIdentifier",
+       "loc": 2,
+       "mustKeepDueToWithStmt": false,
+       "name": "c"
+      },
+      "yes": {
+       "bits": "4607182418800017408",
+       "kind": "ENumber",
+       "loc": 1
+      }
+     },
+     {
+      "bits": "4611686018427387904",
+      "kind": "ENumber",
+      "loc": 1
+     }
+    ],
+    "callKind": 0,
+    "canBeUnwrappedIfUnused": false,
+    "kind": "ECall",
+    "loc": 7,
+    "optionalChain": 0,
+    "target": {
+     "callCanBeUnwrappedIfUnused": false,
+     "canBeRemovedIfUnused": false,
+     "kind": "EIdentifier",
+     "loc": 2,
+     "mustKeepDueToWithStmt": false,
+     "name": "x"
+    }
+   }
+  },
+  {
+   "name": "mangle-if-nullish",
+   "dump": {
+    "kind": "EBinary",
+    "left": {
+     "callCanBeUnwrappedIfUnused": false,
+     "canBeRemovedIfUnused": false,
+     "kind": "EIdentifier",
+     "loc": 2,
+     "mustKeepDueToWithStmt": false,
+     "name": "c"
+    },
+    "loc": 2,
+    "op": 30,
+    "right": {
+     "kind": "EUndefined",
+     "loc": 1
+    }
+   }
+  },
+  {
+   "name": "mangle-if-same",
+   "dump": {
+    "bits": "4607182418800017408",
+    "kind": "ENumber",
+    "loc": 1
+   }
+  }
+ ],
+ "misc": [
+  {
+   "name": "is-binary-null-undefined",
+   "dump": [
+    null,
+    null,
+    false
+   ]
+  },
+  {
+   "name": "try-insert-optional-chain",
+   "dump": [
+    true,
+    {
+     "callCanBeUnwrappedIfUnused": false,
+     "canBeRemovedIfUnused": false,
+     "isSymbolInstance": false,
+     "kind": "EDot",
+     "loc": 5,
+     "name": "b",
+     "optionalChain": 1,
+     "target": {
+      "callCanBeUnwrappedIfUnused": false,
+      "canBeRemovedIfUnused": false,
+      "kind": "EIdentifier",
+      "loc": 2,
+      "mustKeepDueToWithStmt": false,
+      "name": "c"
+     }
+    }
+   ]
+  },
+  {
+   "name": "inline-spreads",
+   "dump": {
+    "isSingleLine": false,
+    "items": [
+     {
+      "bits": "4607182418800017408",
+      "kind": "ENumber",
+      "loc": 1
+     },
+     {
+      "kind": "EUndefined",
+      "loc": 1
+     },
+     {
+      "callCanBeUnwrappedIfUnused": false,
+      "canBeRemovedIfUnused": false,
+      "kind": "EIdentifier",
+      "loc": 2,
+      "mustKeepDueToWithStmt": false,
+      "name": "c"
+     }
+    ],
+    "kind": "EArray",
+    "loc": 6
+   }
+  }
+ ],
+ "scalars": {
+  "int32": [
+   0,
+   0,
+   1,
+   -1,
+   0,
+   2147483647,
+   -2147483648,
+   -2147483648,
+   -1,
+   0,
+   1661992960,
+   -1661992960,
+   0,
+   0,
+   0,
+   3,
+   -3
+  ],
+  "uint32": [
+   0,
+   0,
+   1,
+   4294967295,
+   0,
+   2147483647,
+   2147483648,
+   2147483648,
+   4294967295,
+   0,
+   1661992960,
+   2632974336,
+   0,
+   0,
+   0,
+   3,
+   4294967293
+  ],
+  "approx": [
+   1,
+   1,
+   1,
+   2,
+   1,
+   10,
+   10,
+   11,
+   10,
+   10,
+   21,
+   22,
+   null,
+   null,
+   null,
+   1,
+   2
+  ],
+  "numFromStr": [
+   [
+    "0",
+    false
+   ],
+   [
+    "0",
+    true
+   ],
+   [
+    "4607182418800017408",
+    true
+   ],
+   [
+    "13840687554816376832",
+    true
+   ],
+   [
+    "4638355772470722560",
+    true
+   ],
+   [
+    "0",
+    false
+   ],
+   [
+    "0",
+    false
+   ],
+   [
+    "0",
+    false
+   ],
+   [
+    "0",
+    false
+   ]
+  ],
+  "toString": [
+   [
+    "0",
+    true
+   ],
+   [
+    "0",
+    true
+   ],
+   [
+    "1",
+    true
+   ],
+   [
+    "-1",
+    true
+   ],
+   [
+    "",
+    false
+   ],
+   [
+    "2147483647",
+    true
+   ],
+   [
+    "",
+    false
+   ],
+   [
+    "-2147483648",
+    true
+   ],
+   [
+    "",
+    false
+   ],
+   [
+    "",
+    false
+   ],
+   [
+    "",
+    false
+   ],
+   [
+    "",
+    false
+   ],
+   [
+    "NaN",
+    true
+   ],
+   [
+    "Infinity",
+    true
+   ],
+   [
+    "-Infinity",
+    true
+   ],
+   [
+    "",
+    false
+   ],
+   [
+    "",
+    false
+   ]
+  ]
+ },
+ "stmts": [
+  {
+   "canRemove": true,
+   "dump": [],
+   "name": "stmts-empty"
+  },
+  {
+   "canRemove": true,
+   "dump": [
+    {
+     "kind": "SEmpty",
+     "loc": 10
+    }
+   ],
+   "name": "stmts-empty-stmt"
+  },
+  {
+   "canRemove": true,
+   "dump": [
+    {
+     "fromClassOrFn": false,
+     "kind": "SExpr",
+     "loc": 10,
+     "value": {
+      "bits": "4607182418800017408",
+      "kind": "ENumber",
+      "loc": 1
+     }
+    }
+   ],
+   "name": "stmts-expr-pure"
+  },
+  {
+   "canRemove": false,
+   "dump": [
+    {
+     "fromClassOrFn": false,
+     "kind": "SExpr",
+     "loc": 10,
+     "value": {
+      "args": [],
+      "callKind": 0,
+      "canBeUnwrappedIfUnused": false,
+      "kind": "ECall",
+      "loc": 5,
+      "optionalChain": 0,
+      "target": {
+       "callCanBeUnwrappedIfUnused": false,
+       "canBeRemovedIfUnused": false,
+       "kind": "EIdentifier",
+       "loc": 2,
+       "mustKeepDueToWithStmt": false,
+       "name": "c"
+      }
+     }
+    }
+   ],
+   "name": "stmts-expr-call"
+  },
+  {
+   "canRemove": false,
+   "dump": [
+    {
+     "kind": "SReturn",
+     "loc": 10,
+     "value": {
+      "bits": "4607182418800017408",
+      "kind": "ENumber",
+      "loc": 1
+     }
+    }
+   ],
+   "name": "stmts-return"
+  },
+  {
+   "canRemove": true,
+   "dump": [
+    {
+     "decls": [
+      {
+       "binding": {
+        "kind": "BIdentifier",
+        "loc": 2,
+        "name": "c"
+       },
+       "value": {
+        "bits": "4607182418800017408",
+        "kind": "ENumber",
+        "loc": 1
+       }
+      }
+     ],
+     "kind": "SLocal",
+     "loc": 10,
+     "localKind": 0
+    }
+   ],
+   "name": "stmts-local"
+  },
+  {
+   "canRemove": false,
+   "dump": [
+    {
+     "decls": [
+      {
+       "binding": {
+        "kind": "BIdentifier",
+        "loc": 2,
+        "name": "c"
+       },
+       "value": {
+        "bits": "4607182418800017408",
+        "kind": "ENumber",
+        "loc": 1
+       }
+      }
+     ],
+     "kind": "SLocal",
+     "loc": 10,
+     "localKind": 3
+    }
+   ],
+   "name": "stmts-local-using"
+  },
+  {
+   "canRemove": true,
+   "dump": [
+    {
+     "decls": [
+      {
+       "binding": {
+        "kind": "BIdentifier",
+        "loc": 2,
+        "name": "c"
+       },
+       "value": {
+        "kind": "ENull",
+        "loc": 1
+       }
+      }
+     ],
+     "kind": "SLocal",
+     "loc": 10,
+     "localKind": 3
+    }
+   ],
+   "name": "stmts-local-using-null"
+  },
+  {
+   "canRemove": true,
+   "dump": [
+    {
+     "block": [
+      {
+       "kind": "SEmpty",
+       "loc": 10
+      }
+     ],
+     "finally": null,
+     "kind": "STry",
+     "loc": 10
+    }
+   ],
+   "name": "stmts-try"
+  }
+ ]
+}

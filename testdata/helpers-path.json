@@ -1,0 +1,78 @@
+[
+ {
+  "in": "",
+  "out": false
+ },
+ {
+  "in": "a",
+  "out": false
+ },
+ {
+  "in": "a.js",
+  "out": false
+ },
+ {
+  "in": "node_modules",
+  "out": false
+ },
+ {
+  "in": "/node_modules",
+  "out": true
+ },
+ {
+  "in": "a/node_modules",
+  "out": true
+ },
+ {
+  "in": "a/node_modules/b",
+  "out": true
+ },
+ {
+  "in": "a/node_modules/b/c",
+  "out": true
+ },
+ {
+  "in": "node_modules/a/node_modules/b",
+  "out": true
+ },
+ {
+  "in": "a\\node_modules\\b",
+  "out": true
+ },
+ {
+  "in": "C:\\x\\node_modules\\y",
+  "out": true
+ },
+ {
+  "in": "C:\\node_modules",
+  "out": true
+ },
+ {
+  "in": "a/node_modulesx/b",
+  "out": false
+ },
+ {
+  "in": "node_modules_foo/bar",
+  "out": false
+ },
+ {
+  "in": "foo/node_modules/",
+  "out": true
+ },
+ {
+  "in": "foo/node_modules//bar",
+  "out": true
+ },
+ {
+  "in": "./node_modules/a.js",
+  "out": true
+ },
+ {
+  "in": "/a/b/node_modules/c/d/e.js",
+  "out": true
+ },
+ {
+  "in": "http://example.com/node_modules/a.js",
+  "out": true
+ }
+]

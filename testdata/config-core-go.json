@@ -1,0 +1,42 @@
+[
+  {
+    "fn": "PrettyPrintTargetEnvironment",
+    "arg": "|0",
+    "out": "the configured target environment"
+  },
+  {
+    "fn": "PrettyPrintTargetEnvironment",
+    "arg": "es2015|0",
+    "out": "the configured target environment (es2015)"
+  },
+  {
+    "fn": "PrettyPrintTargetEnvironment",
+    "arg": "|1",
+    "out": "the configured target environment"
+  },
+  {
+    "fn": "PrettyPrintTargetEnvironment",
+    "arg": "|3",
+    "out": "the configured target environment"
+  },
+  {
+    "fn": "PrettyPrintTargetEnvironment",
+    "arg": "es2020|2",
+    "out": "the configured target environment (es2020 + 1 override)"
+  },
+  {
+    "fn": "SubstituteTemplate",
+    "arg": "with-placeholders",
+    "out": "outDir/foo.js|4;"
+  },
+  {
+    "fn": "SubstituteTemplate",
+    "arg": "static",
+    "out": "static.js|0;"
+  },
+  {
+    "fn": "ApplyExtendedConfig",
+    "arg": "jsx",
+    "out": "[React.createElement]|3"
+  }
+]

@@ -1,0 +1,28 @@
+[
+  {
+    "name": "a-star",
+    "src": "import(`./a/${x}.js`)",
+    "parts": [
+      "*",
+      "*",
+      ".js"
+    ],
+    "call": "globImport_a_js"
+  },
+  {
+    "name": "globstar",
+    "src": "import(`./src/${d}/y.js`)",
+    "parts": [
+      "*",
+      "*",
+      "/y.js"
+    ],
+    "call": "globImport_src_y_js"
+  },
+  {
+    "name": "multi",
+    "src": "import(`x/${a}/y/${b}/z`)",
+    "parts": [],
+    "call": "NIL"
+  }
+]

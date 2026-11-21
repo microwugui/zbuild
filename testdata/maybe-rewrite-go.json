@@ -1,0 +1,14 @@
+[
+  {
+    "name": "obj-prop",
+    "out": "dmFyIHggPSAxOwo="
+  },
+  {
+    "name": "obj-prop-miss",
+    "out": "dmFyIHggPSB7IGE6IDEgfS56Owo="
+  },
+  {
+    "name": "obj-method",
+    "out": "dmFyIHggPSB7IGEoKSB7Cn0gfS5hOwo="
+  }
+]

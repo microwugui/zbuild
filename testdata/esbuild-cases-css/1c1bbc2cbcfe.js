@@ -1,0 +1,1 @@
+a { & + .b:is(& .c) { color: red } }

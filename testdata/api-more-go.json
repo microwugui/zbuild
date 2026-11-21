@@ -1,0 +1,67 @@
+[
+  {
+    "fn": "isValidExtension",
+    "arg": ".js",
+    "out": "true"
+  },
+  {
+    "fn": "isValidExtension",
+    "arg": ".css",
+    "out": "true"
+  },
+  {
+    "fn": "isValidExtension",
+    "arg": "x",
+    "out": "false"
+  },
+  {
+    "fn": "isValidExtension",
+    "arg": "",
+    "out": "false"
+  },
+  {
+    "fn": "isValidExtension",
+    "arg": ".",
+    "out": "false"
+  },
+  {
+    "fn": "isValidExtension",
+    "arg": "a.b",
+    "out": "false"
+  },
+  {
+    "fn": "isValidExtension",
+    "arg": ".a",
+    "out": "true"
+  },
+  {
+    "fn": "extractPathStyle",
+    "arg": "0",
+    "out": "0"
+  },
+  {
+    "fn": "extractPathStyle",
+    "arg": "1",
+    "out": "0"
+  },
+  {
+    "fn": "extractPathStyle",
+    "arg": "2",
+    "out": "1"
+  },
+  {
+    "fn": "extractPathStyle",
+    "arg": "3",
+    "out": "1"
+  },
+  {
+    "fn": "getObjectProperty",
+    "arg": "foo",
+    "out": "*js_ast.ENumber"
+  },
+  {
+    "fn": "getObjectProperty",
+    "arg": "bar",
+    "out": "nil"
+  }
+]

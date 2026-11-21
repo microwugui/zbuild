@@ -1,0 +1,1 @@
+@media screen and ((a) and ((b) or (c))) { a { color: red } }

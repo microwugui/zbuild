@@ -1,0 +1,82 @@
+[
+  {
+    "fn": "compareVersions",
+    "arg": "1.2.3|0",
+    "out": "0"
+  },
+  {
+    "fn": "compareVersions",
+    "arg": "1.2.3|1",
+    "out": "3"
+  },
+  {
+    "fn": "compareVersions",
+    "arg": "1.2.3|2",
+    "out": "1"
+  },
+  {
+    "fn": "compareVersions",
+    "arg": "1.2.3|3",
+    "out": "-1"
+  },
+  {
+    "fn": "compareVersions",
+    "arg": "1.2.0|0",
+    "out": "-3"
+  },
+  {
+    "fn": "compareVersions",
+    "arg": "1.2.0|1",
+    "out": "0"
+  },
+  {
+    "fn": "compareVersions",
+    "arg": "1.2.0|2",
+    "out": "-3"
+  },
+  {
+    "fn": "compareVersions",
+    "arg": "1.2.0|3",
+    "out": "-1"
+  },
+  {
+    "fn": "compareVersions",
+    "arg": "2.0.0|0",
+    "out": "1"
+  },
+  {
+    "fn": "compareVersions",
+    "arg": "2.0.0|1",
+    "out": "1"
+  },
+  {
+    "fn": "compareVersions",
+    "arg": "2.0.0|2",
+    "out": "1"
+  },
+  {
+    "fn": "compareVersions",
+    "arg": "2.0.0|3",
+    "out": "0"
+  },
+  {
+    "fn": "isVersionSupported",
+    "arg": "0",
+    "out": "true"
+  },
+  {
+    "fn": "isVersionSupported",
+    "arg": "1",
+    "out": "true"
+  },
+  {
+    "fn": "isVersionSupported",
+    "arg": "2",
+    "out": "true"
+  },
+  {
+    "fn": "isVersionSupported",
+    "arg": "3",
+    "out": "true"
+  }
+]

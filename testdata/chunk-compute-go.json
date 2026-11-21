@@ -1,0 +1,500 @@
+[
+  {
+    "fn": "computeChunks",
+    "arg": {
+      "scenario": "A",
+      "split": false
+    },
+    "out": [
+      {
+        "key": "TESTC00000000",
+        "bits": [
+          0
+        ],
+        "isEntry": true,
+        "sourceIndex": 0,
+        "entryBit": 0,
+        "files": [
+          0
+        ],
+        "repr": "js",
+        "filesInOrder": [
+          0
+        ],
+        "partsInOrder": [
+          {
+            "s": 0,
+            "b": 0,
+            "e": 1
+          }
+        ],
+        "importsInOrder": [],
+        "hasCSS": false,
+        "cssChunkIndex": 0,
+        "tpl": [
+          {
+            "data": ".///a.js.js",
+            "ph": 0
+          }
+        ],
+        "epChunk": 0
+      },
+      {
+        "key": "TESTC00000001",
+        "bits": [
+          1
+        ],
+        "isEntry": true,
+        "sourceIndex": 1,
+        "entryBit": 1,
+        "files": [
+          1
+        ],
+        "repr": "js",
+        "filesInOrder": [
+          1
+        ],
+        "partsInOrder": [
+          {
+            "s": 1,
+            "b": 0,
+            "e": 1
+          }
+        ],
+        "importsInOrder": [],
+        "hasCSS": false,
+        "cssChunkIndex": 0,
+        "tpl": [
+          {
+            "data": ".///b.js.js",
+            "ph": 0
+          }
+        ],
+        "epChunk": 1
+      },
+      {
+        "key": "TESTC00000002",
+        "bits": [
+          0,
+          1
+        ],
+        "isEntry": false,
+        "sourceIndex": 0,
+        "entryBit": 0,
+        "files": [
+          2
+        ],
+        "repr": "js",
+        "filesInOrder": [
+          2
+        ],
+        "partsInOrder": [
+          {
+            "s": 2,
+            "b": 0,
+            "e": 1
+          }
+        ],
+        "importsInOrder": [],
+        "hasCSS": false,
+        "cssChunkIndex": 0,
+        "tpl": [
+          {
+            "data": "./chunk-",
+            "ph": 3
+          },
+          {
+            "data": ".js",
+            "ph": 0
+          }
+        ],
+        "epChunk": 0
+      }
+    ]
+  },
+  {
+    "fn": "computeChunks",
+    "arg": {
+      "scenario": "A",
+      "split": true
+    },
+    "out": [
+      {
+        "key": "TESTC00000000",
+        "bits": [
+          0
+        ],
+        "isEntry": true,
+        "sourceIndex": 0,
+        "entryBit": 0,
+        "files": [
+          0
+        ],
+        "repr": "js",
+        "filesInOrder": [
+          0
+        ],
+        "partsInOrder": [
+          {
+            "s": 0,
+            "b": 0,
+            "e": 1
+          }
+        ],
+        "importsInOrder": [],
+        "hasCSS": false,
+        "cssChunkIndex": 0,
+        "tpl": [
+          {
+            "data": ".///a.js.js",
+            "ph": 0
+          }
+        ],
+        "epChunk": 0
+      },
+      {
+        "key": "TESTC00000001",
+        "bits": [
+          1
+        ],
+        "isEntry": true,
+        "sourceIndex": 1,
+        "entryBit": 1,
+        "files": [
+          1
+        ],
+        "repr": "js",
+        "filesInOrder": [
+          1
+        ],
+        "partsInOrder": [
+          {
+            "s": 1,
+            "b": 0,
+            "e": 1
+          }
+        ],
+        "importsInOrder": [],
+        "hasCSS": false,
+        "cssChunkIndex": 0,
+        "tpl": [
+          {
+            "data": ".///b.js.js",
+            "ph": 0
+          }
+        ],
+        "epChunk": 1
+      },
+      {
+        "key": "TESTC00000002",
+        "bits": [
+          0,
+          1
+        ],
+        "isEntry": false,
+        "sourceIndex": 0,
+        "entryBit": 0,
+        "files": [
+          2
+        ],
+        "repr": "js",
+        "filesInOrder": [
+          2
+        ],
+        "partsInOrder": [
+          {
+            "s": 2,
+            "b": 0,
+            "e": 1
+          }
+        ],
+        "importsInOrder": [],
+        "hasCSS": false,
+        "cssChunkIndex": 0,
+        "tpl": [
+          {
+            "data": "./chunk-",
+            "ph": 3
+          },
+          {
+            "data": ".js",
+            "ph": 0
+          }
+        ],
+        "epChunk": 0
+      }
+    ]
+  },
+  {
+    "fn": "computeChunks",
+    "arg": {
+      "scenario": "B"
+    },
+    "out": [
+      {
+        "key": "TESTC00000000",
+        "bits": [
+          0
+        ],
+        "isEntry": true,
+        "sourceIndex": 0,
+        "entryBit": 0,
+        "files": [
+          0,
+          1
+        ],
+        "repr": "js",
+        "filesInOrder": [
+          1,
+          0
+        ],
+        "partsInOrder": [
+          {
+            "s": 0,
+            "b": 0,
+            "e": 1
+          },
+          {
+            "s": 1,
+            "b": 0,
+            "e": 1
+          }
+        ],
+        "importsInOrder": [],
+        "hasCSS": true,
+        "cssChunkIndex": 1,
+        "tpl": [
+          {
+            "data": ".///main.js.js",
+            "ph": 0
+          }
+        ],
+        "epChunk": 0
+      },
+      {
+        "key": "TESTC00000001",
+        "bits": [
+          0
+        ],
+        "isEntry": true,
+        "sourceIndex": 0,
+        "entryBit": 0,
+        "files": [
+          2
+        ],
+        "repr": "css",
+        "filesInOrder": [],
+        "partsInOrder": [],
+        "importsInOrder": [
+          {
+            "kind": 3,
+            "sourceIndex": 0,
+            "externalPath": "",
+            "layers": [
+              [
+                "base"
+              ]
+            ],
+            "conditions": [],
+            "condRecCount": 0
+          },
+          {
+            "kind": 2,
+            "sourceIndex": 0,
+            "externalPath": "ext.css",
+            "layers": [],
+            "conditions": [],
+            "condRecCount": 0
+          },
+          {
+            "kind": 1,
+            "sourceIndex": 2,
+            "externalPath": "",
+            "layers": [],
+            "conditions": [],
+            "condRecCount": 0
+          }
+        ],
+        "hasCSS": false,
+        "cssChunkIndex": 0,
+        "tpl": [
+          {
+            "data": ".///main.js.css",
+            "ph": 0
+          }
+        ],
+        "epChunk": 0
+      }
+    ]
+  },
+  {
+    "fn": "computeChunks",
+    "arg": {
+      "scenario": "C"
+    },
+    "out": [
+      {
+        "key": "TESTC00000000",
+        "bits": [
+          0
+        ],
+        "isEntry": true,
+        "sourceIndex": 1,
+        "entryBit": 0,
+        "files": [
+          1,
+          2,
+          3
+        ],
+        "repr": "css",
+        "filesInOrder": [],
+        "partsInOrder": [],
+        "importsInOrder": [
+          {
+            "kind": 3,
+            "sourceIndex": 0,
+            "externalPath": "",
+            "layers": [
+              [
+                "first"
+              ]
+            ],
+            "conditions": [],
+            "condRecCount": 0
+          },
+          {
+            "kind": 2,
+            "sourceIndex": 0,
+            "externalPath": "remote.css",
+            "layers": [],
+            "conditions": [],
+            "condRecCount": 0
+          },
+          {
+            "kind": 1,
+            "sourceIndex": 3,
+            "externalPath": "",
+            "layers": [],
+            "conditions": [],
+            "condRecCount": 0
+          },
+          {
+            "kind": 1,
+            "sourceIndex": 2,
+            "externalPath": "",
+            "layers": [],
+            "conditions": [],
+            "condRecCount": 0
+          },
+          {
+            "kind": 1,
+            "sourceIndex": 3,
+            "externalPath": "",
+            "layers": [],
+            "conditions": [
+              {
+                "layers": [
+                  "layerA"
+                ],
+                "supports": [],
+                "queries": 0
+              }
+            ],
+            "condRecCount": 0
+          },
+          {
+            "kind": 1,
+            "sourceIndex": 1,
+            "externalPath": "",
+            "layers": [],
+            "conditions": [],
+            "condRecCount": 0
+          }
+        ],
+        "hasCSS": false,
+        "cssChunkIndex": 0,
+        "tpl": [
+          {
+            "data": ".///e.css.css",
+            "ph": 0
+          }
+        ],
+        "epChunk": 0
+      }
+    ]
+  },
+  {
+    "fn": "computeChunks",
+    "arg": {
+      "scenario": "D"
+    },
+    "out": [
+      {
+        "key": "TESTC00000000",
+        "bits": [
+          0
+        ],
+        "isEntry": true,
+        "sourceIndex": 0,
+        "entryBit": 0,
+        "files": [
+          0
+        ],
+        "repr": "js",
+        "filesInOrder": [
+          0
+        ],
+        "partsInOrder": [
+          {
+            "s": 0,
+            "b": 0,
+            "e": 1
+          }
+        ],
+        "importsInOrder": [],
+        "hasCSS": false,
+        "cssChunkIndex": 0,
+        "tpl": [
+          {
+            "data": ".///index.js.js",
+            "ph": 0
+          }
+        ],
+        "epChunk": 0
+      },
+      {
+        "key": "TESTC00000001",
+        "bits": [
+          1
+        ],
+        "isEntry": true,
+        "sourceIndex": 1,
+        "entryBit": 1,
+        "files": [
+          1
+        ],
+        "repr": "js",
+        "filesInOrder": [
+          1
+        ],
+        "partsInOrder": [
+          {
+            "s": 1,
+            "b": 0,
+            "e": 1
+          }
+        ],
+        "importsInOrder": [],
+        "hasCSS": false,
+        "cssChunkIndex": 0,
+        "tpl": [
+          {
+            "data": ".///chunk.js",
+            "ph": 0
+          }
+        ],
+        "epChunk": 1
+      }
+    ]
+  }
+]

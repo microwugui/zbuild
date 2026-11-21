@@ -1,0 +1,500 @@
+[
+  {
+    "fn": "CloneTokensWithoutImportRecords",
+    "in": [
+      {
+        "k": 29,
+        "t": "foo"
+      },
+      {
+        "k": 27,
+        "t": "f",
+        "c": [
+          {
+            "k": 30,
+            "t": "1"
+          },
+          {
+            "k": 10,
+            "t": ","
+          }
+        ]
+      },
+      {
+        "k": 37,
+        "t": "url",
+        "pi": 2,
+        "loc": 99
+      }
+    ],
+    "records": [],
+    "out": "[[29,\"foo\",0,0,null],[27,\"f\",0,0,[[30,\"1\",0,0,null],[10,\",\",0,0,null]]],[37,\"url\",2,99,null]]"
+  },
+  {
+    "fn": "CloneTokensWithoutImportRecords.deep",
+    "in": [
+      {
+        "k": 29,
+        "t": "foo"
+      },
+      {
+        "k": 27,
+        "t": "f",
+        "c": [
+          {
+            "k": 30,
+            "t": "1"
+          },
+          {
+            "k": 10,
+            "t": ","
+          }
+        ]
+      },
+      {
+        "k": 37,
+        "t": "url",
+        "pi": 2,
+        "loc": 99
+      }
+    ],
+    "records": [],
+    "out": "[[29,\"foo\",0,0,null],[27,\"f\",0,0,[[30,\"1\",0,0,null],[10,\",\",0,0,null]]],[37,\"url\",2,99,null]]"
+  },
+  {
+    "fn": "CloneTokensWithImportRecords",
+    "in": [
+      {
+        "k": 29,
+        "t": "x",
+        "loc": 50
+      },
+      {
+        "k": 37,
+        "t": "u",
+        "pi": 1,
+        "loc": 80
+      },
+      {
+        "k": 27,
+        "t": "f",
+        "loc": 70,
+        "c": [
+          {
+            "k": 37,
+            "t": "u",
+            "loc": 60
+          }
+        ]
+      }
+    ],
+    "records": [
+      "a.css",
+      "b.css"
+    ],
+    "out": "[[[29,\"x\",0,0,null],[37,\"u\",0,0,null],[27,\"f\",0,0,[[37,\"u\",1,0,null]]]],[\"b.css\",\"a.css\"]]"
+  },
+  {
+    "fn": "CloneMediaQueriesWithImportRecords",
+    "in": [
+      {
+        "ty": "plain",
+        "text": "screen",
+        "toks": [
+          {
+            "k": 37,
+            "t": "u"
+          }
+        ]
+      },
+      {
+        "ty": "not",
+        "inner": {
+          "ty": "arb",
+          "toks": [
+            {
+              "k": 37,
+              "t": "v",
+              "pi": 1
+            }
+          ]
+        }
+      },
+      {
+        "ty": "binary",
+        "op": 1,
+        "terms": [
+          {
+            "ty": "plain",
+            "text": "x",
+            "toks": [
+              {
+                "k": 37,
+                "t": "w"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "records": [
+      "a.css",
+      "b.css"
+    ],
+    "out": "[[[\"plain\",\"screen\",[[37,\"u\",0,0,null]]],[\"not\",[\"arb\",[[37,\"v\",1,0,null]]]],[\"binary\",1,[[\"plain\",\"x\",[[37,\"w\",2,0,null]]]]]],[\"a.css\",\"b.css\",\"a.css\"]]"
+  },
+  {
+    "fn": "MQ.MQType.CloneWithImportRecords",
+    "in": {
+      "ty": "type",
+      "op": 2,
+      "text": "screen",
+      "and": {
+        "ty": "plain",
+        "text": "min-width",
+        "toks": [
+          {
+            "k": 37,
+            "t": "u"
+          }
+        ]
+      }
+    },
+    "records": [
+      "a.css",
+      "b.css"
+    ],
+    "out": "[[\"type\",2,\"screen\",[\"plain\",\"min-width\",[[37,\"u\",0,0,null]]]],[\"a.css\"]]"
+  },
+  {
+    "fn": "MQ.MQNot.CloneWithImportRecords",
+    "in": {
+      "ty": "not",
+      "inner": {
+        "ty": "arb",
+        "toks": [
+          {
+            "k": 37,
+            "t": "u",
+            "pi": 1
+          }
+        ]
+      }
+    },
+    "records": [
+      "a.css",
+      "b.css"
+    ],
+    "out": "[[\"not\",[\"arb\",[[37,\"u\",0,0,null]]]],[\"b.css\"]]"
+  },
+  {
+    "fn": "MQ.MQBinary.CloneWithImportRecords",
+    "in": {
+      "ty": "binary",
+      "op": 1,
+      "terms": [
+        {
+          "ty": "arb",
+          "toks": [
+            {
+              "k": 37,
+              "t": "u"
+            }
+          ]
+        },
+        {
+          "ty": "arb",
+          "toks": [
+            {
+              "k": 37,
+              "t": "v",
+              "pi": 1
+            }
+          ]
+        }
+      ]
+    },
+    "records": [
+      "a.css",
+      "b.css"
+    ],
+    "out": "[[\"binary\",1,[[\"arb\",[[37,\"u\",0,0,null]]],[\"arb\",[[37,\"v\",1,0,null]]]]],[\"a.css\",\"b.css\"]]"
+  },
+  {
+    "fn": "MQ.MQArbitraryTokens.CloneWithImportRecords",
+    "in": {
+      "ty": "arb",
+      "toks": [
+        {
+          "k": 37,
+          "t": "u",
+          "pi": 1
+        },
+        {
+          "k": 29,
+          "t": "x"
+        }
+      ]
+    },
+    "records": [
+      "a.css",
+      "b.css"
+    ],
+    "out": "[[\"arb\",[[37,\"u\",0,0,null],[29,\"x\",0,0,null]]],[\"b.css\"]]"
+  },
+  {
+    "fn": "MQ.MQPlainOrBoolean.CloneWithImportRecords",
+    "in": {
+      "ty": "plain",
+      "text": "color",
+      "toks": [
+        {
+          "k": 37,
+          "t": "u"
+        },
+        {
+          "k": 29,
+          "t": "red"
+        }
+      ]
+    },
+    "records": [
+      "a.css",
+      "b.css"
+    ],
+    "out": "[[\"plain\",\"color\",[[37,\"u\",0,0,null],[29,\"red\",0,0,null]]],[\"a.css\"]]"
+  },
+  {
+    "fn": "MQ.MQRange.CloneWithImportRecords",
+    "in": {
+      "ty": "range",
+      "text": "w",
+      "before": [
+        {
+          "k": 37,
+          "t": "u"
+        }
+      ],
+      "after": [
+        {
+          "k": 37,
+          "t": "v",
+          "pi": 1
+        }
+      ],
+      "bc": 2,
+      "ac": 5
+    },
+    "records": [
+      "a.css",
+      "b.css"
+    ],
+    "out": "[[\"range\",[[37,\"u\",0,0,null]],\"w\",2,5,[[37,\"v\",1,0,null]]],[\"a.css\",\"b.css\"]]"
+  },
+  {
+    "fn": "MQ.MQPlainOrBoolean.CloneWithImportRecords.nil",
+    "in": {
+      "ty": "plain",
+      "text": "hover"
+    },
+    "records": [
+      "a.css",
+      "b.css"
+    ],
+    "out": "[\"plain\",\"hover\",[]]"
+  },
+  {
+    "fn": "SS.SSHash.Clone",
+    "in": {
+      "ty": "hash",
+      "ref": 3
+    },
+    "records": [],
+    "out": "[\"hash\",0,3]"
+  },
+  {
+    "fn": "SS.SSClass.Clone",
+    "in": {
+      "ty": "class",
+      "ref": 4
+    },
+    "records": [],
+    "out": "[\"class\",0,4]"
+  },
+  {
+    "fn": "SS.SSAttribute.Clone",
+    "in": {
+      "ty": "attr",
+      "nn": {
+        "n": {
+          "t": "color",
+          "k": 29
+        }
+      },
+      "op": "~=",
+      "val": "a b",
+      "mod": 115
+    },
+    "records": [],
+    "out": "[\"attr\",\"color\",\"~=\",\"a b\",115]"
+  },
+  {
+    "fn": "SS.SSPseudoClass.Clone",
+    "in": {
+      "ty": "pseudo",
+      "name": "nth-child",
+      "args": [
+        {
+          "k": 30,
+          "t": "2"
+        },
+        {
+          "k": 29,
+          "t": "n"
+        }
+      ]
+    },
+    "records": [],
+    "out": "[\"pseudo\",\"nth-child\",[[30,\"2\",0,0,null],[29,\"n\",0,0,null]],false]"
+  },
+  {
+    "fn": "SS.SSPseudoClass.Clone.nil",
+    "in": {
+      "ty": "pseudo",
+      "name": "hover"
+    },
+    "records": [],
+    "out": "[\"pseudo\",\"hover\",[],false]"
+  },
+  {
+    "fn": "SS.SSPseudoClassWithSelectorList.Clone",
+    "in": {
+      "ty": "pseudolist",
+      "sels": [
+        {
+          "sels": [
+            {
+              "ts": {
+                "n": {
+                  "t": "div",
+                  "k": 29
+                }
+              }
+            },
+            {
+              "sub": [
+                {
+                  "ty": "class"
+                }
+              ],
+              "cb": 32
+            }
+          ]
+        }
+      ],
+      "kind": 5,
+      "a": "2",
+      "b": "1"
+    },
+    "records": [],
+    "out": "[\"pseudolist\",5,\"2\",\"1\",[[[[\"div\",29],[],0,0],[null,[[\"class\",0,0]],0,32]]]]"
+  },
+  {
+    "fn": "NamespacedName.Clone",
+    "in": {
+      "p": {
+        "t": "svg",
+        "k": 29
+      },
+      "n": {
+        "t": "path",
+        "k": 29
+      }
+    },
+    "records": [],
+    "out": "[[\"svg\",29],\"path\",29]"
+  },
+  {
+    "fn": "NamespacedName.Clone.noPrefix",
+    "in": {
+      "n": {
+        "t": "div",
+        "k": 29
+      }
+    },
+    "records": [],
+    "out": "[null,\"div\",29]"
+  },
+  {
+    "fn": "CompoundSelector.Clone",
+    "in": {
+      "ts": {
+        "n": {
+          "t": "div",
+          "k": 29
+        }
+      },
+      "sub": [
+        {
+          "ty": "class",
+          "ref": 1
+        },
+        {
+          "ty": "attr",
+          "nn": {
+            "n": {
+              "t": "id",
+              "k": 29
+            }
+          },
+          "op": "=",
+          "val": "x"
+        }
+      ],
+      "cb": 62,
+      "nest": 1
+    },
+    "records": [],
+    "out": "[[[\"div\",29],[[\"class\",0,1],[\"attr\",\"id\",\"=\",\"x\",0]],1,62]]"
+  },
+  {
+    "fn": "ComplexSelector.Clone",
+    "in": {
+      "sels": [
+        {
+          "ts": {
+            "n": {
+              "t": "a",
+              "k": 29
+            }
+          }
+        },
+        {
+          "sub": [
+            {
+              "ty": "pseudolist",
+              "sels": [
+                {
+                  "sels": [
+                    {
+                      "ts": {
+                        "n": {
+                          "t": "b",
+                          "k": 29
+                        }
+                      }
+                    }
+                  ]
+                }
+              ],
+              "kind": 2
+            }
+          ],
+          "cb": 32
+        }
+      ]
+    },
+    "records": [],
+    "out": "[[[\"a\",29],[],0,0],[null,[[\"pseudolist\",2,\"\",\"\",[[[[\"b\",29],[],0,0]]]]],0,32]]"
+  }
+]

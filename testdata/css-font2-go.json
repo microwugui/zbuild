@@ -1,0 +1,68 @@
+[
+  {
+    "fn": "turnPercentIntoNumberIfShorter",
+    "tok": {
+      "k": 34,
+      "t": "50%"
+    },
+    "out": [
+      30,
+      ".5"
+    ]
+  },
+  {
+    "fn": "turnPercentIntoNumberIfShorter",
+    "tok": {
+      "k": 34,
+      "t": "25.00%"
+    },
+    "out": [
+      30,
+      ".25"
+    ]
+  },
+  {
+    "fn": "turnPercentIntoNumberIfShorter",
+    "tok": {
+      "k": 34,
+      "t": "0%"
+    },
+    "out": [
+      34,
+      "0%"
+    ]
+  },
+  {
+    "fn": "turnPercentIntoNumberIfShorter",
+    "tok": {
+      "k": 34,
+      "t": "33.3%"
+    },
+    "out": [
+      30,
+      ".333"
+    ]
+  },
+  {
+    "fn": "turnPercentIntoNumberIfShorter",
+    "tok": {
+      "k": 30,
+      "t": "42"
+    },
+    "out": [
+      30,
+      "42"
+    ]
+  },
+  {
+    "fn": "turnPercentIntoNumberIfShorter",
+    "tok": {
+      "k": 26,
+      "t": "10px"
+    },
+    "out": [
+      26,
+      "10px"
+    ]
+  }
+]

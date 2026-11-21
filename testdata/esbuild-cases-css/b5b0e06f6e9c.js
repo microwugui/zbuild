@@ -1,0 +1,1 @@
+div, span::pseudo { @media screen { & { color: red } } }

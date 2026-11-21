@@ -1,0 +1,1 @@
+label: while (x) while (y) { z(); continue label }

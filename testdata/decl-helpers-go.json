@@ -1,0 +1,532 @@
+[
+  {
+    "fn": "animation:shorthand",
+    "arg": false,
+    "out": [
+      [
+        29,
+        "ease",
+        0
+      ],
+      [
+        39,
+        "1s",
+        0
+      ],
+      [
+        30,
+        "2",
+        0
+      ],
+      [
+        29,
+        "infinite",
+        0
+      ],
+      [
+        29,
+        "alternate",
+        0
+      ],
+      [
+        29,
+        "forwards",
+        0
+      ],
+      [
+        29,
+        "running",
+        0
+      ],
+      [
+        29,
+        "foo",
+        0
+      ],
+      [
+        29,
+        "bar",
+        0
+      ]
+    ]
+  },
+  {
+    "fn": "animation:shorthand",
+    "arg": true,
+    "out": [
+      [
+        29,
+        "ease",
+        0
+      ],
+      [
+        39,
+        "1s",
+        0
+      ],
+      [
+        30,
+        "2",
+        0
+      ],
+      [
+        29,
+        "infinite",
+        0
+      ],
+      [
+        29,
+        "alternate",
+        0
+      ],
+      [
+        29,
+        "forwards",
+        0
+      ],
+      [
+        29,
+        "running",
+        0
+      ],
+      [
+        29,
+        "foo",
+        0
+      ],
+      [
+        29,
+        "bar",
+        0
+      ]
+    ]
+  },
+  {
+    "fn": "animation:shorthand-comma",
+    "arg": false,
+    "out": [
+      [
+        29,
+        "linear",
+        0
+      ],
+      [
+        29,
+        "paused",
+        0
+      ],
+      [
+        39,
+        "a",
+        0
+      ],
+      [
+        29,
+        "b",
+        0
+      ]
+    ]
+  },
+  {
+    "fn": "animation:shorthand-comma",
+    "arg": true,
+    "out": [
+      [
+        29,
+        "linear",
+        0
+      ],
+      [
+        29,
+        "paused",
+        0
+      ],
+      [
+        39,
+        "a",
+        0
+      ],
+      [
+        29,
+        "b",
+        0
+      ]
+    ]
+  },
+  {
+    "fn": "animation:name",
+    "arg": false,
+    "out": [
+      [
+        29,
+        "none",
+        0
+      ],
+      [
+        39,
+        "foo",
+        0
+      ],
+      [
+        39,
+        "bar",
+        1
+      ]
+    ]
+  },
+  {
+    "fn": "animation:name",
+    "arg": true,
+    "out": [
+      [
+        29,
+        "none",
+        0
+      ],
+      [
+        39,
+        "foo",
+        0
+      ],
+      [
+        39,
+        "bar",
+        1
+      ]
+    ]
+  },
+  {
+    "fn": "handleSingleAnimationName",
+    "arg": [
+      "none",
+      false
+    ],
+    "out": [
+      [
+        29,
+        "none",
+        0
+      ]
+    ]
+  },
+  {
+    "fn": "handleSingleAnimationName",
+    "arg": [
+      "none",
+      true
+    ],
+    "out": [
+      [
+        29,
+        "none",
+        0
+      ]
+    ]
+  },
+  {
+    "fn": "handleSingleAnimationName",
+    "arg": [
+      "foo",
+      false
+    ],
+    "out": [
+      [
+        39,
+        "foo",
+        0
+      ]
+    ]
+  },
+  {
+    "fn": "handleSingleAnimationName",
+    "arg": [
+      "foo",
+      true
+    ],
+    "out": [
+      [
+        39,
+        "foo",
+        0
+      ]
+    ]
+  },
+  {
+    "fn": "handleSingleAnimationName",
+    "arg": [
+      "none",
+      false
+    ],
+    "out": [
+      [
+        36,
+        "none",
+        0
+      ]
+    ]
+  },
+  {
+    "fn": "handleSingleAnimationName",
+    "arg": [
+      "none",
+      true
+    ],
+    "out": [
+      [
+        39,
+        "none",
+        0
+      ]
+    ]
+  },
+  {
+    "fn": "handleSingleAnimationName",
+    "arg": [
+      "foo",
+      false
+    ],
+    "out": [
+      [
+        39,
+        "foo",
+        0
+      ]
+    ]
+  },
+  {
+    "fn": "handleSingleAnimationName",
+    "arg": [
+      "foo",
+      true
+    ],
+    "out": [
+      [
+        39,
+        "foo",
+        0
+      ]
+    ]
+  },
+  {
+    "fn": "container:shorthand",
+    "arg": null,
+    "out": [
+      [
+        39,
+        "foo",
+        0
+      ],
+      [
+        39,
+        "bar",
+        1
+      ],
+      [
+        24,
+        "/",
+        0
+      ],
+      [
+        29,
+        "baz",
+        0
+      ]
+    ]
+  },
+  {
+    "fn": "container:shorthand-bad",
+    "arg": null,
+    "out": [
+      [
+        29,
+        "foo",
+        0
+      ],
+      [
+        25,
+        "(",
+        0
+      ]
+    ]
+  },
+  {
+    "fn": "container:name",
+    "arg": null,
+    "out": [
+      [
+        39,
+        "foo",
+        0
+      ],
+      [
+        29,
+        "none",
+        0
+      ]
+    ]
+  },
+  {
+    "fn": "container:name-bad",
+    "arg": null,
+    "out": [
+      [
+        29,
+        "foo",
+        0
+      ],
+      [
+        25,
+        "(",
+        0
+      ]
+    ]
+  },
+  {
+    "fn": "handleSingleContainerName",
+    "arg": "none",
+    "out": [
+      [
+        29,
+        "none",
+        0
+      ]
+    ]
+  },
+  {
+    "fn": "handleSingleContainerName",
+    "arg": "foo",
+    "out": [
+      [
+        39,
+        "foo",
+        0
+      ]
+    ]
+  },
+  {
+    "fn": "handleSingleContainerName",
+    "arg": "initial",
+    "out": [
+      [
+        29,
+        "initial",
+        0
+      ]
+    ]
+  },
+  {
+    "fn": "processListStyleShorthand",
+    "arg": [
+      "url(x)",
+      "square",
+      "inside"
+    ],
+    "out": [
+      [
+        27,
+        "url(x)",
+        0
+      ],
+      [
+        29,
+        "square",
+        0
+      ],
+      [
+        29,
+        "inside",
+        0
+      ]
+    ]
+  },
+  {
+    "fn": "processListStyleShorthand",
+    "arg": [
+      "none"
+    ],
+    "out": [
+      [
+        29,
+        "none",
+        0
+      ]
+    ]
+  },
+  {
+    "fn": "processListStyleShorthand",
+    "arg": [
+      "disc",
+      "outside"
+    ],
+    "out": [
+      [
+        29,
+        "disc",
+        0
+      ],
+      [
+        29,
+        "outside",
+        0
+      ]
+    ]
+  },
+  {
+    "fn": "processListStyleShorthand",
+    "arg": [
+      "none",
+      "inside",
+      "custom"
+    ],
+    "out": [
+      [
+        29,
+        "none",
+        0
+      ],
+      [
+        29,
+        "inside",
+        0
+      ],
+      [
+        39,
+        "custom",
+        0
+      ]
+    ]
+  },
+  {
+    "fn": "processListStyleType",
+    "arg": "disc",
+    "out": [
+      [
+        29,
+        "disc",
+        0
+      ]
+    ]
+  },
+  {
+    "fn": "processListStyleType",
+    "arg": "custom",
+    "out": [
+      [
+        39,
+        "custom",
+        0
+      ]
+    ]
+  },
+  {
+    "fn": "processListStyleType",
+    "arg": "none",
+    "out": [
+      [
+        29,
+        "none",
+        0
+      ]
+    ]
+  }
+]

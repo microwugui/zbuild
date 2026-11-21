@@ -1,0 +1,93 @@
+package resolver
+
+// 第 161 批 Go 探针：checkBrowserMap 逐字节固化（dirInfo + packageJSON.browserMap 底座）。
+import (
+	"encoding/json"
+	"os"
+	"testing"
+
+	"github.com/evanw/esbuild/internal/config"
+	"github.com/evanw/esbuild/internal/fs"
+	"github.com/evanw/esbuild/internal/logger"
+)
+
+type brRow struct {
+	Arg map[string]interface{} `json:"arg"`
+	Out interface{}            `json:"out"`
+}
+
+func strPtr(s string) *string { return &s }
+
+func TestTmpGenBrowser(t *testing.T) {
+	var out []brRow
+	fsObj := fs.MockFS(nil, fs.MockUnix, "/")
+
+	// browser map helper
+	bm := func(pairs ...interface{}) map[string]*string {
+		m := map[string]*string{}
+		for i := 0; i < len(pairs); i += 2 {
+			k := pairs[i].(string)
+			if pairs[i+1] == nil { m[k] = nil } else { m[k] = strPtr(pairs[i+1].(string)) }
+		}
+		return m
+	}
+
+	type tc struct {
+		name string
+		platform config.Platform
+		inputPath string
+		kind browserPathKind
+		scopeAbs string      // enclosingBrowserScope.absPath; "" = no scope
+		dirAbs string        // resolveDirInfo.absPath
+		browserMap map[string]*string
+		extOrder []string
+		parentNodeModules bool
+		relFromScope string // override: what Rel(scopeAbs, inputPath) returns; used for absolutePathKind
+		relDirFromScope string // override: Rel(scopeAbs, dirAbs)
+	}
+	cases := []tc{
+		{"not-browser", config.PlatformNode, "pkg", packagePathKind, "/pkg", "/pkg", bm("./a", "./b"), nil, false, "", ""},
+		{"no-scope", config.PlatformBrowser, "pkg", packagePathKind, "", "/pkg", nil, nil, false, "", ""},
+		{"dot", config.PlatformBrowser, ".", packagePathKind, "/pkg", "/pkg", bm(".", "./x"), nil, false, "", ""},
+		{"exact-pkg", config.PlatformBrowser, "pkg", packagePathKind, "/pkg", "/pkg", bm("pkg", "browser-pkg"), nil, false, "", ""},
+		{"exact-miss", config.PlatformBrowser, "pkg", packagePathKind, "/pkg", "/pkg", bm("./pkg", "browser-pkg"), nil, false, "", ""},
+		{"implicit-ext", config.PlatformBrowser, "./a", packagePathKind, "/pkg", "/pkg", bm("./a.js", "A.js"), []string{".js", ".ts"}, false, "", ""},
+		{"index", config.PlatformBrowser, "./dir", packagePathKind, "/pkg", "/pkg", bm("./dir/index.js", "IDX"), []string{".js"}, false, "", ""},
+		{"disabled", config.PlatformBrowser, "pkg", packagePathKind, "/pkg", "/pkg", bm("pkg", nil), nil, false, "", ""},
+		{"same-pkg-relative", config.PlatformBrowser, "pkg", packagePathKind, "/pkg", "/pkg/src", bm("./pkg", "RP"), nil, false, "", ""},
+		{"node-modules-block", config.PlatformBrowser, "pkg", packagePathKind, "/pkg", "/pkg/src", bm("./pkg", "RP"), nil, true, "", ""},
+		{"abs-rel", config.PlatformBrowser, "/pkg/src/a.js", absolutePathKind, "/pkg", "/pkg/src", bm("./src/a.js", "REL"), nil, false, "", ""},
+	}
+
+	for _, c := range cases {
+		log := logger.NewDeferLog(logger.DeferLogNoVerboseOrDebug, nil)
+		var scope *dirInfo
+		if c.scopeAbs != "" {
+			pj := &packageJSON{browserMap: c.browserMap}
+			pj.source.KeyPath.Text = "/pkg/package.json"
+			scope = &dirInfo{absPath: c.scopeAbs, packageJSON: pj}
+		}
+		dir := &dirInfo{absPath: c.dirAbs, enclosingBrowserScope: scope, isNodeModules: c.parentNodeModules}
+		if scope != nil { dir.parent = scope }
+		dl := &debugLogs{}
+		r := resolverQuery{Resolver: &Resolver{log: log}, debugLogs: dl}
+		r.options = config.Options{Platform: c.platform, ExtensionOrder: c.extOrder}
+		r.fs = fsObj
+		remapped, ok := r.checkBrowserMap(dir, c.inputPath, c.kind)
+		var rem interface{}
+		if remapped != nil { rem = *remapped }
+		notes := []string{}
+		for _, n := range dl.notes { notes = append(notes, n.Text) }
+		out = append(out, brRow{
+			Arg: map[string]interface{}{"name": c.name, "platform": int(c.platform), "inputPath": c.inputPath, "kind": int(c.kind),
+				"hasScope": scope != nil, "scopeAbs": c.scopeAbs, "dirAbs": c.dirAbs, "extOrder": c.extOrder, "parentNodeModules": c.parentNodeModules,
+				"browserMap": c.browserMap},
+			Out: []interface{}{rem, ok, notes},
+		})
+	}
+
+	b, err := json.Marshal(out)
+	if err != nil { t.Fatal(err) }
+	if err := os.WriteFile("/root/port/testdata/browser-map-go.json", b, 0644); err != nil { t.Fatal(err) }
+	t.Logf("wrote %d cases", len(out))
+}

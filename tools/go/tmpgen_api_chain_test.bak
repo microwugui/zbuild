@@ -1,0 +1,64 @@
+package main
+
+import (
+	"encoding/hex"
+	"encoding/json"
+	"os"
+	"testing"
+
+	"github.com/evanw/esbuild/pkg/api"
+)
+
+type chainRow struct {
+	Name string `json:"name"`
+	Out  string `json:"out"`
+}
+type chainFixture struct { Rows []chainRow `json:"rows"` }
+
+func TestTmpGenApiChain(t *testing.T) {
+	fx := chainFixture{}
+	svc := &serviceType{}
+	add := func(name string, b []byte) { fx.Rows = append(fx.Rows, chainRow{name, hex.EncodeToString(b)}) }
+
+	// api.AnalyzeMetafile -> service.handleAnalyzeMetafileRequest 链
+	metafiles := []struct{ name, mf string; color, verbose bool }{
+		{"analyze-empty", "", false, false},
+		{"analyze-bad", "{", false, false},
+		{"analyze-simple", `{"outputs":{"out.js":{"entryPoint":"src/index.js","bytes":100,"inputs":{"src/index.js":{"bytesInOutput":100}}}}}`, false, false},
+		{"analyze-simple-verbose", `{"outputs":{"out.js":{"entryPoint":"src/index.js","bytes":100,"inputs":{"src/index.js":{"bytesInOutput":100}}}}}`, false, true},
+	}
+	for _, c := range metafiles {
+		add(c.name, svc.handleAnalyzeMetafileRequest(9, map[string]interface{}{
+			"metafile": c.mf, "color": c.color, "verbose": c.verbose,
+		}))
+	}
+
+	// api.FormatMessages -> service.handleFormatMessagesRequest 链
+	// decodeMessages 期望 []interface{} of map[string]interface{}
+	msg := func(text string) interface{} {
+		return map[string]interface{}{
+			"id": "", "pluginName": "", "text": text, "location": nil,
+			"notes": []interface{}{}, "detail": -1,
+		}
+	}
+	styles := []struct{ name, style string }{
+		{"format-default", "default"},
+		{"format-clang", "clang"},
+		{"format-visualstudio", "visualstudio"},
+		{"format-invalid", "xyz"},
+	}
+	for _, s := range styles {
+		add(s.name, svc.handleFormatMessagesRequest(7, map[string]interface{}{
+			"messages": []interface{}{msg("simple error")},
+			"isWarning": false, "color": false, "terminalWidth": 80, "logStyle": s.style,
+		}))
+	}
+	add("format-empty", svc.handleFormatMessagesRequest(8, map[string]interface{}{
+		"messages": []interface{}{}, "isWarning": false, "color": false, "terminalWidth": 80,
+	}))
+	_ = api.ErrorMessage // ensure import used
+
+	bts, _ := json.MarshalIndent(fx, "", "  ")
+	if err := os.WriteFile("/root/port/testdata/api-chain-go.json", bts, 0644); err != nil { t.Fatal(err) }
+	t.Logf("wrote %d rows bytes=%d", len(fx.Rows), len(bts))
+}

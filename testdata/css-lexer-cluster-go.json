@@ -1,0 +1,232 @@
+[
+  {
+    "fn": "T.String",
+    "arg": "0",
+    "out": "end of file"
+  },
+  {
+    "fn": "T.String",
+    "arg": "1",
+    "out": "@-keyword"
+  },
+  {
+    "fn": "T.String",
+    "arg": "9",
+    "out": "\":\""
+  },
+  {
+    "fn": "T.String",
+    "arg": "10",
+    "out": "\",\""
+  },
+  {
+    "fn": "T.String",
+    "arg": "18",
+    "out": "\"=\""
+  },
+  {
+    "fn": "T.String",
+    "arg": "25",
+    "out": "\"~\""
+  },
+  {
+    "fn": "T.String",
+    "arg": "26",
+    "out": "dimension"
+  },
+  {
+    "fn": "T.String",
+    "arg": "29",
+    "out": "identifier"
+  },
+  {
+    "fn": "T.String",
+    "arg": "30",
+    "out": "number"
+  },
+  {
+    "fn": "T.String",
+    "arg": "34",
+    "out": "percentage"
+  },
+  {
+    "fn": "T.String",
+    "arg": "37",
+    "out": "URL token"
+  },
+  {
+    "fn": "T.String",
+    "arg": "38",
+    "out": "whitespace"
+  },
+  {
+    "fn": "T.String",
+    "arg": "39",
+    "out": "identifier"
+  },
+  {
+    "fn": "containsAtPreserveOrAtLicense",
+    "arg": "",
+    "out": "false"
+  },
+  {
+    "fn": "containsAtPreserveOrAtLicense",
+    "arg": "foo",
+    "out": "false"
+  },
+  {
+    "fn": "containsAtPreserveOrAtLicense",
+    "arg": "@preserve",
+    "out": "true"
+  },
+  {
+    "fn": "containsAtPreserveOrAtLicense",
+    "arg": "@license",
+    "out": "true"
+  },
+  {
+    "fn": "containsAtPreserveOrAtLicense",
+    "arg": "a@b",
+    "out": "false"
+  },
+  {
+    "fn": "containsAtPreserveOrAtLicense",
+    "arg": "x @preserve y",
+    "out": "true"
+  },
+  {
+    "fn": "containsAtPreserveOrAtLicense",
+    "arg": "@preserv",
+    "out": "false"
+  },
+  {
+    "fn": "containsAtPreserveOrAtLicense",
+    "arg": "@licensed",
+    "out": "true"
+  },
+  {
+    "fn": "containsAtPreserveOrAtLicense",
+    "arg": "@@license",
+    "out": "true"
+  },
+  {
+    "fn": "IsNameContinue",
+    "arg": "97",
+    "out": "true"
+  },
+  {
+    "fn": "IsNameContinue",
+    "arg": "122",
+    "out": "true"
+  },
+  {
+    "fn": "IsNameContinue",
+    "arg": "48",
+    "out": "true"
+  },
+  {
+    "fn": "IsNameContinue",
+    "arg": "57",
+    "out": "true"
+  },
+  {
+    "fn": "IsNameContinue",
+    "arg": "45",
+    "out": "true"
+  },
+  {
+    "fn": "IsNameContinue",
+    "arg": "95",
+    "out": "true"
+  },
+  {
+    "fn": "IsNameContinue",
+    "arg": "65",
+    "out": "true"
+  },
+  {
+    "fn": "IsNameContinue",
+    "arg": "128",
+    "out": "true"
+  },
+  {
+    "fn": "IsNameContinue",
+    "arg": "32",
+    "out": "false"
+  },
+  {
+    "fn": "IsNameContinue",
+    "arg": "10",
+    "out": "false"
+  },
+  {
+    "fn": "IsNameContinue",
+    "arg": "0",
+    "out": "true"
+  },
+  {
+    "fn": "decodeEscapesInToken",
+    "arg": "plain",
+    "out": "cGxhaW4="
+  },
+  {
+    "fn": "decodeEscapesInToken",
+    "arg": "a\\62 c",
+    "out": "YWJj"
+  },
+  {
+    "fn": "decodeEscapesInToken",
+    "arg": "\\41\\42",
+    "out": "QUI="
+  },
+  {
+    "fn": "decodeEscapesInToken",
+    "arg": "a\u0000b",
+    "out": "Ye+/vWI="
+  },
+  {
+    "fn": "decodeEscapesInToken",
+    "arg": "a\\n b",
+    "out": "YW4gYg=="
+  },
+  {
+    "fn": "decodeEscapesInToken",
+    "arg": "\\",
+    "out": "77+9"
+  },
+  {
+    "fn": "decodeEscapesInToken",
+    "arg": "x\\000041y",
+    "out": "eEF5"
+  },
+  {
+    "fn": "decodeEscapesInToken",
+    "arg": "e\\6",
+    "out": "ZQY="
+  },
+  {
+    "fn": "RangeOfIdentifier",
+    "arg": "0|foo-bar{}",
+    "out": "0:7"
+  },
+  {
+    "fn": "RangeOfIdentifier",
+    "arg": "0|a\\62 c;",
+    "out": "0:6"
+  },
+  {
+    "fn": "RangeOfIdentifier",
+    "arg": "2|xxfoo()",
+    "out": "2:3"
+  },
+  {
+    "fn": "RangeOfIdentifier",
+    "arg": "0|",
+    "out": "0:0"
+  },
+  {
+    "fn": "RangeOfIdentifier",
+    "arg": "1|aébc;",
+    "out": "1:4"
+  }
+]

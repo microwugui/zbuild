@@ -1,0 +1,61 @@
+package linker
+
+// 第 146 批 Go 探针：mergeAdjacentLocalStmts（chunk stmt 合并）。
+import (
+	"encoding/json"
+	"os"
+	"testing"
+
+	"github.com/evanw/esbuild/internal/js_ast"
+	"github.com/evanw/esbuild/internal/logger"
+)
+
+type msRow struct { Fn string `json:"fn"`; Arg map[string]interface{} `json:"arg"`; Out interface{} `json:"out"` }
+
+// dump a stmt as a compact tag: local(kind,export,ndecls) / expr / other
+func msDump(stmts []js_ast.Stmt) []interface{} {
+	out := []interface{}{}
+	for _, s := range stmts {
+		if d, ok := s.Data.(*js_ast.SLocal); ok {
+			out = append(out, []interface{}{"local", int(d.Kind), d.IsExport, len(d.Decls), s.Loc.Start})
+		} else if _, ok := s.Data.(*js_ast.SExpr); ok {
+			out = append(out, []interface{}{"expr", s.Loc.Start})
+		} else {
+			out = append(out, []interface{}{"other", s.Loc.Start})
+		}
+	}
+	return out
+}
+
+func TestTmpGenMergeStmts(t *testing.T) {
+	var out []msRow
+	// each case: list of stmts described by kind
+	expr := func(loc int) js_ast.Stmt { return js_ast.Stmt{Loc: logger.Loc{Start: int32(loc)}, Data: &js_ast.SExpr{}} }
+	local := func(loc int, kind js_ast.LocalKind, exp bool, n int) js_ast.Stmt {
+		decls := make([]js_ast.Decl, n)
+		return js_ast.Stmt{Loc: logger.Loc{Start: int32(loc)}, Data: &js_ast.SLocal{Decls: decls, Kind: kind, IsExport: exp}}
+	}
+	cases := []struct {
+		name string
+		stmts []js_ast.Stmt
+	}{
+		{"empty", []js_ast.Stmt{}},
+		{"single", []js_ast.Stmt{local(1, js_ast.LocalVar, false, 1)}},
+		{"two-var", []js_ast.Stmt{local(1, js_ast.LocalVar, false, 1), local(5, js_ast.LocalVar, false, 2)}},
+		{"three-var", []js_ast.Stmt{local(1, js_ast.LocalVar, false, 1), local(5, js_ast.LocalVar, false, 2), local(9, js_ast.LocalVar, false, 3)}},
+		{"diff-kind", []js_ast.Stmt{local(1, js_ast.LocalVar, false, 1), local(5, js_ast.LocalConst, false, 1)}},
+		{"diff-export", []js_ast.Stmt{local(1, js_ast.LocalVar, false, 1), local(5, js_ast.LocalVar, true, 1)}},
+		{"separated", []js_ast.Stmt{local(1, js_ast.LocalVar, false, 1), expr(5), local(9, js_ast.LocalVar, false, 1)}},
+		{"mixed", []js_ast.Stmt{expr(0), local(1, js_ast.LocalLet, false, 1), local(5, js_ast.LocalLet, false, 1), expr(9), local(11, js_ast.LocalVar, false, 1), local(15, js_ast.LocalVar, false, 1), local(19, js_ast.LocalVar, false, 1)}},
+	}
+	for _, c := range cases {
+		cp := append([]js_ast.Stmt{}, c.stmts...)
+		res := mergeAdjacentLocalStmts(cp)
+		out = append(out, msRow{"mergeAdjacentLocalStmts", map[string]interface{}{"case": c.name}, msDump(res)})
+	}
+
+	b, err := json.MarshalIndent(out, "", "  ")
+	if err != nil { t.Fatal(err) }
+	if err := os.WriteFile("/root/port/testdata/merge-stmts-go.json", b, 0644); err != nil { t.Fatal(err) }
+	t.Logf("wrote %d rows", len(out))
+}

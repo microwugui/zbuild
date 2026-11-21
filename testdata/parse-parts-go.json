@@ -1,0 +1,328 @@
+{
+  "rows": [
+    {
+      "name": "single-expr",
+      "data": {
+        "ast": {
+          "numParts": 2,
+          "partKinds": [
+            [],
+            [
+              "local:1"
+            ]
+          ]
+        },
+        "ok": true
+      }
+    },
+    {
+      "name": "multi-decl",
+      "data": {
+        "ast": {
+          "numParts": 4,
+          "partKinds": [
+            [],
+            [
+              "local:1"
+            ],
+            [
+              "local:1"
+            ],
+            [
+              "local:1"
+            ]
+          ]
+        },
+        "ok": true
+      }
+    },
+    {
+      "name": "three-stmts",
+      "data": {
+        "ast": {
+          "numParts": 4,
+          "partKinds": [
+            [],
+            [
+              "local:1"
+            ],
+            [
+              "local:1"
+            ],
+            [
+              "local:1"
+            ]
+          ]
+        },
+        "ok": true
+      }
+    },
+    {
+      "name": "import-export",
+      "data": {
+        "ast": {
+          "numParts": 3,
+          "partKinds": [
+            [],
+            [
+              "import"
+            ],
+            [
+              "local:1"
+            ]
+          ]
+        },
+        "ok": true
+      }
+    },
+    {
+      "name": "functions",
+      "data": {
+        "ast": {
+          "numParts": 4,
+          "partKinds": [
+            [],
+            [
+              "function"
+            ],
+            [
+              "function"
+            ],
+            [
+              "local:1"
+            ]
+          ]
+        },
+        "ok": true
+      }
+    },
+    {
+      "name": "mixed",
+      "data": {
+        "ast": {
+          "numParts": 5,
+          "partKinds": [
+            [],
+            [
+              "local:1"
+            ],
+            [
+              "if"
+            ],
+            [
+              "for"
+            ],
+            [
+              "debugger"
+            ]
+          ]
+        },
+        "ok": true
+      }
+    },
+    {
+      "name": "runtime-esnext",
+      "data": {
+        "ast": {
+          "numParts": 65,
+          "partKinds": [
+            [],
+            [
+              "local:1"
+            ],
+            [
+              "local:1"
+            ],
+            [
+              "local:1"
+            ],
+            [
+              "local:1"
+            ],
+            [
+              "local:1"
+            ],
+            [
+              "local:1"
+            ],
+            [
+              "local:1"
+            ],
+            [
+              "local:1"
+            ],
+            [
+              "local:1"
+            ],
+            [
+              "local:1"
+            ],
+            [
+              "local:1"
+            ],
+            [
+              "local:1"
+            ],
+            [
+              "local:1"
+            ],
+            [
+              "local:1"
+            ],
+            [
+              "local:1"
+            ],
+            [
+              "local:1"
+            ],
+            [
+              "local:1"
+            ],
+            [
+              "local:1"
+            ],
+            [
+              "local:1"
+            ],
+            [
+              "local:1"
+            ],
+            [
+              "local:1"
+            ],
+            [
+              "local:1"
+            ],
+            [
+              "local:1"
+            ],
+            [
+              "local:1"
+            ],
+            [
+              "local:1"
+            ],
+            [
+              "local:1"
+            ],
+            [
+              "local:1"
+            ],
+            [
+              "local:1"
+            ],
+            [
+              "local:1"
+            ],
+            [
+              "local:1"
+            ],
+            [
+              "local:1"
+            ],
+            [
+              "local:1"
+            ],
+            [
+              "local:1"
+            ],
+            [
+              "local:1"
+            ],
+            [
+              "local:1"
+            ],
+            [
+              "local:1"
+            ],
+            [
+              "local:1"
+            ],
+            [
+              "local:1"
+            ],
+            [
+              "local:1"
+            ],
+            [
+              "local:1"
+            ],
+            [
+              "local:1"
+            ],
+            [
+              "local:1"
+            ],
+            [
+              "local:1"
+            ],
+            [
+              "local:1"
+            ],
+            [
+              "local:1"
+            ],
+            [
+              "local:1"
+            ],
+            [
+              "local:1"
+            ],
+            [
+              "local:1"
+            ],
+            [
+              "local:1"
+            ],
+            [
+              "local:1"
+            ],
+            [
+              "local:1"
+            ],
+            [
+              "local:1"
+            ],
+            [
+              "local:1"
+            ],
+            [
+              "local:1"
+            ],
+            [
+              "local:1"
+            ],
+            [
+              "local:1"
+            ],
+            [
+              "local:1"
+            ],
+            [
+              "local:1"
+            ],
+            [
+              "local:1"
+            ],
+            [
+              "local:1"
+            ],
+            [
+              "local:1"
+            ],
+            [
+              "local:1"
+            ],
+            [
+              "local:1"
+            ],
+            [
+              "local:1"
+            ]
+          ]
+        },
+        "ok": true
+      }
+    }
+  ]
+}

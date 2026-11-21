@@ -1,0 +1,27 @@
+package main
+// 第 101 轮 Go 探针：service 链补齐 entries / metafile / mangleCache 三条编码路径。
+import ("encoding/hex";"encoding/json";"os";"testing";"github.com/evanw/esbuild/internal/helpers")
+type s101Row struct { Name string `json:"name"`; Out string `json:"out"` }
+func TestTmpGenServiceChain2_101(t *testing.T){
+  rows:=[]s101Row{}
+  newSvc:=func()*serviceType{return &serviceType{callbacks:make(map[uint32]responseCallback),activeBuilds:make(map[int]*activeBuild),outgoingPackets:make(chan []byte,64),keepAliveWaitGroup:helpers.MakeThreadSafeWaitGroup()}}
+  add:=func(name string,b []byte){rows=append(rows,s101Row{name,hex.EncodeToString(b)})}
+  fl:=func(a ...string)[]interface{}{r:=make([]interface{},len(a));for i,f:=range a{r[i]=f};return r}
+  // entries: named output，小文件（无 license 头）→ 仅验证 EntryPointsAdvanced → outputFiles 编码
+  add("bd-entries", newSvc().handleBuildRequest(21,map[string]interface{}{
+    "context":false,"key":0,"write":false,
+    "entries":[]interface{}{[]interface{}{"my-out","testdata/svc_entry.js"}},
+    "flags":fl("--format=esm","--platform=node"),"absWorkingDir":"/root/port","nodePaths":[]interface{}{}}))
+  // mangleCache round-trip
+  add("tx-mangle-cache", newSvc().handleTransformRequest(22,map[string]interface{}{
+    "inputFS":false,"input":[]byte("const obj = { fooBar: 1 }; export {obj};"),
+    "flags":fl("--mangle-props=_"),"mangleCache":map[string]interface{}{"fooBar":"a"}}))
+  // metafile
+  add("bd-metafile", newSvc().handleBuildRequest(23,map[string]interface{}{
+    "context":false,"key":0,"write":false,"entries":[]interface{}{},
+    "flags":fl("--bundle","--format=esm","--metafile"),"absWorkingDir":"/root/port","nodePaths":[]interface{}{},
+    "stdinContents":[]byte("const x = 1; console.log(x);\n"),"stdinResolveDir":"/root/port"}))
+  out,_:=json.MarshalIndent(rows,"","  ")
+  if err:=os.WriteFile("/root/port/testdata/service-chain2-go.json",out,0644);err!=nil{t.Fatal(err)}
+  t.Logf("wrote %d rows bytes=%d",len(rows),len(out))
+}

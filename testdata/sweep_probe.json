@@ -1,0 +1,21 @@
+{
+ "enumA": {
+  "num": 1,
+  "ok": true,
+  "str": ""
+ },
+ "enumA_utf16": {
+  "num": 1,
+  "ok": true,
+  "str": "A"
+ },
+ "enumB": {
+  "num": 0,
+  "ok": true,
+  "str": "hi"
+ },
+ "enumC_ok": false,
+ "mangled_hit": "mangled",
+ "mangled_miss": "renamed1",
+ "wrapInlinedEnum": " 1 /* A */"
+}

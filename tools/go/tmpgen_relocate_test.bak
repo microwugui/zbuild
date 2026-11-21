@@ -1,0 +1,46 @@
+package js_parser
+
+// 第 107 轮 Go 探针：parser.maybeRelocateVarsToTopLevel（bundle 模式变量提升为赋值）—— 受控状态全确定。
+import ("encoding/json";"os";"testing"
+ "github.com/evanw/esbuild/internal/ast"
+ "github.com/evanw/esbuild/internal/config"
+ "github.com/evanw/esbuild/internal/js_ast"
+ "github.com/evanw/esbuild/internal/logger"
+)
+
+type rlRow struct { Name string `json:"name"`; OK bool `json:"ok"`; IsExpr bool `json:"isExpr"`; Loc int `json:"loc"`; Relocated int `json:"relocated"`; UseCount int `json:"useCount"`; ValueKind string `json:"valueKind"` }
+
+func TestTmpGenRelocate107(t *testing.T){
+  rows:=[]rlRow{}
+  run:=func(name string, mode config.Mode, topLevel bool, depth int, withInit bool, rmode relocateVarsMode) rlRow {
+    ref:=ast.Ref{SourceIndex:1,InnerIndex:0}
+    syms:=[]ast.Symbol{{Kind:ast.SymbolConst,OriginalName:"x"}}
+    moduleScope:=&js_ast.Scope{Kind:js_ast.ScopeEntry}
+    cur:=moduleScope
+    if !topLevel { cur=&js_ast.Scope{Kind:js_ast.ScopeBlock,Parent:moduleScope} }
+    decl:=js_ast.Decl{Binding:js_ast.Binding{Data:&js_ast.BIdentifier{Ref:ref},Loc:logger.Loc{Start:0}}}
+    if withInit { decl.ValueOrNil=js_ast.Expr{Loc:logger.Loc{Start:5},Data:&js_ast.ENumber{Value:42}} }
+    p:=&parser{
+      symbols:syms,moduleScope:moduleScope,currentScope:cur,singleStmtDepth:depth,
+      options:Options{optionsThatSupportStructuralEquality:optionsThatSupportStructuralEquality{mode:mode}},
+      relocatedTopLevelVars:[]ast.LocRef{},
+    }
+    stmt,ok:=p.maybeRelocateVarsToTopLevel([]js_ast.Decl{decl},rmode)
+    r:=rlRow{Name:name,OK:ok,Relocated:len(p.relocatedTopLevelVars),UseCount:int(syms[0].UseCountEstimate),ValueKind:"none"}
+    if ok {
+      if se,s:=stmt.Data.(*js_ast.SExpr);s{ r.IsExpr=true;r.Loc=int(stmt.Loc.Start)
+        switch se.Value.Data.(type){case *js_ast.EBinary:r.ValueKind="binary";case *js_ast.EIdentifier:r.ValueKind="identifier"}
+      }
+    }
+    return r
+  }
+  rows=append(rows,run("non-bundle",config.ModePassThrough,false,0,true,relocateVarsNormal))
+  rows=append(rows,run("top-level-depth0",config.ModeBundle,true,0,true,relocateVarsNormal))
+  rows=append(rows,run("nested-with-init",config.ModeBundle,false,0,true,relocateVarsNormal))
+  rows=append(rows,run("nested-no-init-normal",config.ModeBundle,false,0,false,relocateVarsNormal))
+  rows=append(rows,run("nested-no-init-forof",config.ModeBundle,false,0,false,relocateVarsForInOrForOf))
+  rows=append(rows,run("top-level-depth1",config.ModeBundle,true,1,true,relocateVarsNormal))
+  b,_:=json.MarshalIndent(rows,"","  ")
+  if err:=os.WriteFile("/root/port/testdata/relocate-go.json",b,0644);err!=nil{t.Fatal(err)}
+  t.Logf("wrote %d rows bytes=%d",len(rows),len(b))
+}

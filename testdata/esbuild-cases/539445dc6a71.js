@@ -1,0 +1,1 @@
+import * as x from 'x' assert {x: 'y'}

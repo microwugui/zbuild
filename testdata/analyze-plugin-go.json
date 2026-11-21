@@ -1,0 +1,30 @@
+[
+  {
+    "name": "enabled",
+    "numPlugins": 1,
+    "pluginName": "PrintAnalysis",
+    "metafile": true,
+    "stderr": "\n  out.js   10b   100.0%\n   └ a.js  10b   100.0%\n\n"
+  },
+  {
+    "name": "verbose",
+    "numPlugins": 1,
+    "pluginName": "PrintAnalysis",
+    "metafile": true,
+    "stderr": "\n  out.js ── 10b ── 100.0%\n   └ a.js ─ 10b ── 100.0%\n\n"
+  },
+  {
+    "name": "disabled-empty",
+    "numPlugins": 1,
+    "pluginName": "PrintAnalysis",
+    "metafile": true,
+    "stderr": ""
+  },
+  {
+    "name": "enabled-cf",
+    "numPlugins": 1,
+    "pluginName": "PrintAnalysis",
+    "metafile": true,
+    "stderr": "\n  out.js   10b   100.0%\n   └ a.js  10b   100.0%\n\n"
+  }
+]

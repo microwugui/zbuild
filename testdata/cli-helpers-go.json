@@ -1,0 +1,102 @@
+[
+  {
+    "fn": "ParseLoader",
+    "arg": "base64",
+    "out": "1|nil"
+  },
+  {
+    "fn": "ParseLoader",
+    "arg": "binary",
+    "out": "2|nil"
+  },
+  {
+    "fn": "ParseLoader",
+    "arg": "copy",
+    "out": "3|nil"
+  },
+  {
+    "fn": "ParseLoader",
+    "arg": "css",
+    "out": "4|nil"
+  },
+  {
+    "fn": "ParseLoader",
+    "arg": "dataurl",
+    "out": "5|nil"
+  },
+  {
+    "fn": "ParseLoader",
+    "arg": "default",
+    "out": "6|nil"
+  },
+  {
+    "fn": "ParseLoader",
+    "arg": "empty",
+    "out": "7|nil"
+  },
+  {
+    "fn": "ParseLoader",
+    "arg": "file",
+    "out": "8|nil"
+  },
+  {
+    "fn": "ParseLoader",
+    "arg": "global-css",
+    "out": "9|nil"
+  },
+  {
+    "fn": "ParseLoader",
+    "arg": "js",
+    "out": "10|nil"
+  },
+  {
+    "fn": "ParseLoader",
+    "arg": "json",
+    "out": "11|nil"
+  },
+  {
+    "fn": "ParseLoader",
+    "arg": "jsx",
+    "out": "12|nil"
+  },
+  {
+    "fn": "ParseLoader",
+    "arg": "local-css",
+    "out": "13|nil"
+  },
+  {
+    "fn": "ParseLoader",
+    "arg": "text",
+    "out": "14|nil"
+  },
+  {
+    "fn": "ParseLoader",
+    "arg": "ts",
+    "out": "15|nil"
+  },
+  {
+    "fn": "ParseLoader",
+    "arg": "tsx",
+    "out": "16|nil"
+  },
+  {
+    "fn": "ParseLoader",
+    "arg": "none",
+    "out": "0|Invalid loader value: \"none\""
+  },
+  {
+    "fn": "ParseLoader",
+    "arg": "bad",
+    "out": "0|Invalid loader value: \"bad\""
+  },
+  {
+    "fn": "ParseLoader",
+    "arg": "",
+    "out": "0|Invalid loader value: \"\""
+  },
+  {
+    "fn": "MakeErrorWithNote",
+    "arg": "msg|note",
+    "out": "msg|note"
+  }
+]

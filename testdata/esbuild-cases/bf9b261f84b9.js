@@ -1,0 +1,1 @@
+switch ((x => x + 1)(0)) { case 1: var y } y = 2

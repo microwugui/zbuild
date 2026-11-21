@@ -1,0 +1,38 @@
+[
+  {
+    "fn": "renameSymbolsInChunk",
+    "arg": {
+      "minify": false
+    },
+    "out": [
+      "alpha",
+      "beta",
+      "if",
+      "helper"
+    ]
+  },
+  {
+    "fn": "renameSymbolsInChunk",
+    "arg": {
+      "minify": true
+    },
+    "out": [
+      "a",
+      "b",
+      "if",
+      "helper"
+    ]
+  },
+  {
+    "fn": "renameSymbolsInChunk",
+    "arg": {
+      "scenario": "collision"
+    },
+    "out": [
+      "value",
+      "default",
+      "value2",
+      "default"
+    ]
+  }
+]

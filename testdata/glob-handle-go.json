@@ -1,0 +1,23 @@
+[
+  {
+    "name": "template-glob",
+    "isCall": true,
+    "refName": "./_glob_a_js",
+    "numSyms": 2,
+    "numImports": 1
+  },
+  {
+    "name": "string-const",
+    "isCall": false,
+    "refName": "",
+    "numSyms": 1,
+    "numImports": 0
+  },
+  {
+    "name": "duplicate",
+    "isCall": true,
+    "refName": "./_glob_a_js",
+    "numSyms": 2,
+    "numImports": 1
+  }
+]

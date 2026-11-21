@@ -1,0 +1,1 @@
+a = Number(b ? !c : !d)

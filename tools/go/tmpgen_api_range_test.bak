@@ -1,0 +1,31 @@
+package api
+
+// Batch 68 Go probe: parseRangeHeader pure helper.
+import (
+	"encoding/json"
+	"os"
+	"strconv"
+	"strings"
+	"testing"
+)
+
+func TestTmpGenApiRange(t *testing.T) {
+	type row struct { R string `json:"r"`; Len int `json:"len"`; Out string `json:"out"` }
+	inputs := [][2]string{
+		{"bytes=0-1", "10"}, {"bytes=2-5", "10"}, {"bytes=0-", "10"},
+		{"bytes=-5", "10"}, {"bytes=5-3", "10"}, {"bytes=0-9", "10"},
+		{"bytes=0-10", "10"}, {"bytes=11-12", "10"}, {"bytes=abc-def", "10"},
+		{"foo=0-1", "10"}, {"bytes=", "10"}, {"bytes=00-01", "10"},
+		{"bytes=0-1", "0"}, {"bytes=0-0", "1"},
+	}
+	var out []row
+	for _, c := range inputs {
+		length, _ := strconv.Atoi(c[1])
+		begin, end, ok := parseRangeHeader(c[0], length)
+		out = append(out, row{c[0], length, strings.Join([]string{strconv.Itoa(begin), strconv.Itoa(end), strconv.FormatBool(ok)}, "|")})
+	}
+	b, err := json.MarshalIndent(out, "", "  ")
+	if err != nil { t.Fatal(err) }
+	if err := os.WriteFile("/root/port/testdata/api-range-go.json", b, 0644); err != nil { t.Fatal(err) }
+	t.Logf("wrote %d rows", len(out))
+}

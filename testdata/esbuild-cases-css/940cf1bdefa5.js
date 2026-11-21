@@ -1,0 +1,1 @@
+::placeholder { color: red; body & { color: green } }

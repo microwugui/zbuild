@@ -1,0 +1,170 @@
+[
+  {
+    "fn": "breakOutputIntoPieces",
+    "arg": {
+      "data": "abcTESTA00000001MIDTESTC00000000END"
+    },
+    "out": {
+      "pieces": [
+        {
+          "data": "abc",
+          "index": 1,
+          "kind": 1
+        },
+        {
+          "data": "MID",
+          "index": 0,
+          "kind": 2
+        },
+        {
+          "data": "END",
+          "index": 0,
+          "kind": 0
+        }
+      ],
+      "hasJoiner": false
+    }
+  },
+  {
+    "fn": "breakOutputIntoPieces.bad",
+    "arg": {
+      "data": "xTESTA00000099yTESTCzzzzzzzzz"
+    },
+    "out": {
+      "pieces": [
+        {
+          "data": "xTESTA00000099yTESTCzzzzzzzzz",
+          "index": 0,
+          "kind": 0
+        }
+      ],
+      "hasJoiner": false
+    }
+  },
+  {
+    "fn": "breakOutputIntoPieces.none",
+    "arg": {
+      "data": "plain output"
+    },
+    "out": {
+      "pieces": [
+        {
+          "data": "plain output",
+          "index": 0,
+          "kind": 0
+        }
+      ],
+      "hasJoiner": false
+    }
+  },
+  {
+    "fn": "breakJoinerIntoPieces.with",
+    "arg": {
+      "data": "abcTESTA00000001MIDTESTC00000000END"
+    },
+    "out": {
+      "pieces": [
+        {
+          "data": "abc",
+          "index": 1,
+          "kind": 1
+        },
+        {
+          "data": "MID",
+          "index": 0,
+          "kind": 2
+        },
+        {
+          "data": "END",
+          "index": 0,
+          "kind": 0
+        }
+      ],
+      "hasJoiner": false
+    }
+  },
+  {
+    "fn": "breakJoinerIntoPieces.without",
+    "arg": {
+      "data": "no boundary here"
+    },
+    "out": {
+      "pieces": [],
+      "hasJoiner": true
+    }
+  },
+  {
+    "fn": "substituteFinalPaths",
+    "arg": {
+      "data": "abcTESTA00000001MIDTESTC00000000END"
+    },
+    "out": {
+      "pieces": [
+        {
+          "data": "abc",
+          "index": 1,
+          "kind": 1
+        },
+        {
+          "data": "MID",
+          "index": 0,
+          "kind": 2
+        },
+        {
+          "data": "END",
+          "index": 0,
+          "kind": 0
+        }
+      ],
+      "hasJoiner": false,
+      "bytes": "abcFINAL_assets/img.pngMIDFINAL_sub/final.jsEND",
+      "shifts": [
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          16,
+          0,
+          23
+        ],
+        [
+          0,
+          32,
+          0,
+          44
+        ]
+      ]
+    }
+  },
+  {
+    "fn": "substituteFinalPaths.fast",
+    "arg": {},
+    "out": {
+      "pieces": [],
+      "hasJoiner": true,
+      "bytes": "plain",
+      "shifts": [
+        [
+          0,
+          0,
+          0,
+          0
+        ]
+      ]
+    }
+  },
+  {
+    "fn": "accurateFinalByteCount",
+    "arg": {
+      "data": "abcTESTA00000001MIDTESTC00000000END",
+      "dir": "/p/out/sub"
+    },
+    "out": {
+      "count": 51
+    }
+  }
+]

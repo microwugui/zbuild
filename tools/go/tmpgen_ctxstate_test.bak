@@ -1,0 +1,28 @@
+package api
+
+// 第 105 轮 Go 探针：internalContext 生命周期状态机（activeBuildOrRecentBuildOrRebuild / Cancel / Dispose 受控状态）。
+import ("encoding/json";"os";"testing")
+
+type csFile struct { Path string `json:"path"`; Contents string `json:"contents"`; Hash string `json:"hash"` }
+type csRow struct {
+  Name string `json:"name"`
+  DidDispose bool `json:"didDispose"`
+  ActiveNil bool `json:"activeNil"`
+  RecentNil bool `json:"recentNil"`
+  ResultFiles []csFile `json:"resultFiles"`
+}
+
+func mkResult() BuildResult { return BuildResult{OutputFiles: []OutputFile{{Path:"<stdout>", Contents:[]byte("var x = 1;\n"), Hash:"abc123"}}} }
+func dumpFiles(r BuildResult) []csFile { out:=[]csFile{}; for _,f:=range r.OutputFiles { out=append(out,csFile{f.Path,string(f.Contents),f.Hash}) }; return out }
+
+func TestTmpGenCtxState105(t *testing.T) {
+  rows:=[]csRow{}
+  { ctx:=&internalContext{}; ctx.Cancel(); rows=append(rows,csRow{"fresh-cancel",ctx.didDispose,ctx.activeBuild==nil,ctx.recentBuild==nil,[]csFile{}}) }
+  { ctx:=&internalContext{didDispose:true}; ctx.Cancel(); ctx.Dispose(); rows=append(rows,csRow{"disposed",ctx.didDispose,ctx.activeBuild==nil,ctx.recentBuild==nil,[]csFile{}}) }
+  { rb:=mkResult(); ctx:=&internalContext{recentBuild:&rb}; res:=ctx.activeBuildOrRecentBuildOrRebuild(); rows=append(rows,csRow{"recent-build",ctx.didDispose,ctx.activeBuild==nil,ctx.recentBuild==nil,dumpFiles(res)}) }
+  { rb:=mkResult(); ctx:=&internalContext{recentBuild:&rb}; ctx.Dispose(); rows=append(rows,csRow{"dispose-clears-recent",ctx.didDispose,ctx.activeBuild==nil,ctx.recentBuild==nil,[]csFile{}}) }
+  { ctx:=&internalContext{didDispose:true}; st:=ctx.rebuild(); rows=append(rows,csRow{"rebuild-disposed",ctx.didDispose,ctx.activeBuild==nil,ctx.recentBuild==nil,dumpFiles(st.result)}) }
+  b,err:=json.MarshalIndent(rows,"","  "); if err!=nil{t.Fatal(err)}
+  if err:=os.WriteFile("/root/port/testdata/ctx-state-go.json",b,0644);err!=nil{t.Fatal(err)}
+  t.Logf("wrote %d rows",len(rows))
+}

@@ -1,0 +1,148 @@
+package linker
+
+// 第 156 批 Go 探针：generateChunkJS / generateChunkCSS 本体，dump 最终 intermediateOutput 字节。
+import (
+  "encoding/hex"
+  "encoding/json"
+  "os"
+  "sync"
+  "testing"
+
+  "github.com/evanw/esbuild/internal/ast"
+  "github.com/evanw/esbuild/internal/bundler"
+  "github.com/evanw/esbuild/internal/fs"
+  "github.com/evanw/esbuild/internal/config"
+  "github.com/evanw/esbuild/internal/graph"
+  "github.com/evanw/esbuild/internal/helpers"
+  "github.com/evanw/esbuild/internal/js_ast"
+  "github.com/evanw/esbuild/internal/logger"
+  "github.com/evanw/esbuild/internal/runtime"
+)
+
+func cjRef(s, i uint32) ast.Ref { return ast.Ref{SourceIndex: s, InnerIndex: i} }
+type cjRow struct { Fn string `json:"fn"`; Arg map[string]interface{} `json:"arg"`; Out interface{} `json:"out"` }
+
+func ioDump(io intermediateOutput) interface{} {
+  out := map[string]interface{}{"hasJoiner": io.pieces == nil, "bytes": "", "pieces": []interface{}{}}
+  if io.pieces == nil {
+    out["bytes"] = hex.EncodeToString(io.joiner.Done())
+  } else {
+    ps := []interface{}{}
+    for _, p := range io.pieces { ps = append(ps, []interface{}{hex.EncodeToString(p.data), int(p.kind), p.index}) }
+    out["pieces"] = ps
+  }
+  return out
+}
+
+// minimal graph: runtime(0) + user file(1) with symbols in source 1 but InnerIndex distinct
+func cjBuild(withJS bool, minify bool, banner string, footer string, minWS bool, format config.Format) *linkerContext {
+  c := &linkerContext{}
+  c.graph.Files = make([]graph.LinkerFile, 2)
+  c.graph.Symbols = ast.NewSymbolMap(2)
+  // runtime source 0: module scope with runtime members
+  rtScope := &js_ast.Scope{Members: map[string]js_ast.ScopeMember{}}
+  rtScope.Members["__toCommonJS"] = js_ast.ScopeMember{Ref: cjRef(0, 0)}
+  rtScope.Members["__esm"] = js_ast.ScopeMember{Ref: cjRef(0, 1)}
+  rtScope.Members["__require"] = js_ast.ScopeMember{Ref: cjRef(0, 2)}
+  c.graph.Symbols.SymbolsForSource[0] = []ast.Symbol{
+    {OriginalName:"__toCommonJS",Link:ast.InvalidRef}, {OriginalName:"__esm",Link:ast.InvalidRef}, {OriginalName:"__require",Link:ast.InvalidRef},
+  }
+  rt := &graph.JSRepr{AST: js_ast.AST{ModuleScope: rtScope}}
+  c.graph.Files[0].InputFile.Repr = rt
+  // user source 1
+  sm := &js_ast.Scope{Members: map[string]js_ast.ScopeMember{}}
+  syms := []ast.Symbol{}
+  var parts []js_ast.Part
+  if withJS {
+    syms = []ast.Symbol{{OriginalName:"foo",Link:ast.InvalidRef}, {OriginalName:"bar",Link:ast.InvalidRef}}
+    sm.Members["foo"] = js_ast.ScopeMember{Ref: cjRef(1, 0)}
+    sm.Members["bar"] = js_ast.ScopeMember{Ref: cjRef(1, 1)}
+    c.graph.Symbols.SymbolsForSource[1] = syms
+    // a local stmt: var foo = 1;
+    local := &js_ast.SLocal{Kind: js_ast.LocalVar, Decls: []js_ast.Decl{{
+      Binding: js_ast.Binding{Data: &js_ast.BIdentifier{Ref: cjRef(1,0)}},
+      ValueOrNil: js_ast.Expr{Data: &js_ast.ENumber{Value: 1}},
+    }}}
+    p0 := js_ast.Part{IsLive: true, Stmts: []js_ast.Stmt{{Data: local}}, DeclaredSymbols: []js_ast.DeclaredSymbol{{Ref: cjRef(1,0), IsTopLevel:true}}}
+    // NSExport part (index 0) must exist; use it as the live part
+    parts = []js_ast.Part{p0}
+  }
+  repr := &graph.JSRepr{AST: js_ast.AST{Symbols: syms, Parts: parts, ModuleScope: sm, ExportsRef: cjRef(1,0)}}
+  c.graph.Files[1].InputFile.Repr = repr
+  src := logger.Source{KeyPath: logger.Path{Text: "/p/src/main.js", Namespace: "file"}, Contents: "var foo = 1;"}
+  src.PrettyPaths.Rel = "main.js"; src.PrettyPaths.Abs = "/p/src/main.js"
+  c.graph.Files[1].InputFile.Source = src
+
+  c.fs = fs.MockFS(map[string]string{}, fs.MockUnix, "/")
+  c.options = &config.Options{
+    MinifyIdentifiers: minify, OutputFormat: format, MinifyWhitespace: minWS,
+    JSBanner: banner, JSFooter: footer, Mode: config.ModeBundle,
+  }
+  c.uniqueKeyPrefix = "TEST"; c.uniqueKeyPrefixBytes = []byte("TEST")
+  log := logger.NewDeferLog(logger.DeferLogNoVerboseOrDebug, nil); c.log = log
+  c.dataForSourceMaps = func() []bundler.DataForSourceMap { return make([]bundler.DataForSourceMap, 2) }
+  return c
+}
+
+func TestTmpGenChunkJS(t *testing.T) {
+  var out []cjRow
+  add := func(fn string, arg map[string]interface{}, o interface{}) { out = append(out, cjRow{fn,arg,o}) }
+  runChunk := func(c *linkerContext, chunkIdx int) interface{} {
+    var wg sync.WaitGroup; wg.Add(1)
+    c.generateChunkJS(chunkIdx, &wg)
+    return ioDump(c.chunks[chunkIdx].intermediateOutput)
+  }
+  // Case A: non-entry chunk, no JS parts (compileResults empty), banner/footer
+  {
+    c := cjBuild(false, false, "/* banner */", "/* footer */", false, config.FormatESModule)
+    ch := chunkInfo{chunkRepr: &chunkReprJS{}, isEntryPoint: false, finalTemplate: []config.PathTemplate{{Data:"chunk.js"}}}
+    c.chunks = []chunkInfo{ch}
+    add("generateChunkJS", map[string]interface{}{"case":"empty-banner"}, runChunk(c,0))
+  }
+  // Case B: with JS parts, single source
+  {
+    c := cjBuild(true, false, "", "", false, config.FormatESModule)
+    ci := &chunkReprJS{filesInChunkInOrder: []uint32{1}, partsInChunkInOrder: []partRange{{sourceIndex:1,partIndexBegin:0,partIndexEnd:1}}}
+    ch := chunkInfo{chunkRepr: ci, isEntryPoint: false, finalTemplate: []config.PathTemplate{{Data:"chunk.js"}}}
+    c.chunks = []chunkInfo{ch}
+    add("generateChunkJS", map[string]interface{}{"case":"js-parts"}, runChunk(c,0))
+  }
+
+  // Case C: JS parts with minify whitespace
+  {
+    c := cjBuild(true, false, "", "", true, config.FormatESModule)
+    ci := &chunkReprJS{filesInChunkInOrder: []uint32{1}, partsInChunkInOrder: []partRange{{sourceIndex:1,partIndexBegin:0,partIndexEnd:1}}}
+    ch := chunkInfo{chunkRepr: ci, isEntryPoint: false, finalTemplate: []config.PathTemplate{{Data:"chunk.js"}}}
+    c.chunks = []chunkInfo{ch}
+    add("generateChunkJS", map[string]interface{}{"case":"js-parts-minws"}, runChunk(c,0))
+  }
+  // Case D: IIFE format (non-entry, no parts)
+  {
+    c := cjBuild(false, false, "", "", false, config.FormatIIFE)
+    ch := chunkInfo{chunkRepr: &chunkReprJS{}, isEntryPoint: false, finalTemplate: []config.PathTemplate{{Data:"chunk.js"}}}
+    c.chunks = []chunkInfo{ch}
+    add("generateChunkJS", map[string]interface{}{"case":"iife"}, runChunk(c,0))
+  }
+  // Case E: cross-chunk prefix/suffix (static import stmts printed)
+  {
+    c := cjBuild(false, false, "", "", false, config.FormatESModule)
+    // import record for other chunk
+    rec := ast.ImportRecord{Kind: ast.ImportStmt, Path: logger.Path{Text: "TESTC00000001"}}
+    repr := c.graph.Files[0].InputFile.Repr.(*graph.JSRepr)
+    repr.AST.ImportRecords = []ast.ImportRecord{rec}
+    imp := &js_ast.SImport{NamespaceRef: cjRef(0,3), ImportRecordIndex: 0}
+    c.graph.Symbols.SymbolsForSource[0] = append(c.graph.Symbols.SymbolsForSource[0], ast.Symbol{OriginalName:"ns",Link:ast.InvalidRef})
+    ci := &chunkReprJS{crossChunkPrefixStmts: []js_ast.Stmt{{Data: imp}}}
+    ch := chunkInfo{chunkRepr: ci, isEntryPoint: false, finalTemplate: []config.PathTemplate{{Data:"chunk.js"}},
+      crossChunkImports: []chunkImport{{chunkIndex:1, importKind: ast.ImportStmt}}}
+    c.chunks = []chunkInfo{ch, {chunkRepr: &chunkReprJS{}, uniqueKey: "TESTC00000001"}}
+    add("generateChunkJS", map[string]interface{}{"case":"crosschunk-prefix"}, runChunk(c,0))
+  }
+
+  b, err := json.MarshalIndent(out, "", "  ")
+  if err != nil { t.Fatal(err) }
+  if err := os.WriteFile("/root/port/testdata/chunkjs-go.json", b, 0644); err != nil { t.Fatal(err) }
+  t.Logf("wrote %d rows", len(out))
+  _ = helpers.Joiner{}
+  _ = runtime.SourceIndex
+}

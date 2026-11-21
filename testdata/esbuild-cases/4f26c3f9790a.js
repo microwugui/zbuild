@@ -1,0 +1,1 @@
+foo: while (a) while (x) { if (1) continue foo; z(); }

@@ -1,0 +1,48 @@
+[
+  {
+    "name": "fresh",
+    "ref": "1:0",
+    "numSymbols": 1,
+    "lastKind": 27,
+    "memberExists": true,
+    "generated": []
+  },
+  {
+    "name": "hoisted-merge",
+    "ref": "1:0",
+    "numSymbols": 1,
+    "lastKind": 1,
+    "memberExists": true,
+    "generated": []
+  },
+  {
+    "name": "hoisted-no-merge-esm",
+    "ref": "1:1",
+    "numSymbols": 2,
+    "lastKind": 1,
+    "memberExists": true,
+    "generated": [
+      "1:1"
+    ]
+  },
+  {
+    "name": "shadow-other-kind",
+    "ref": "1:1",
+    "numSymbols": 2,
+    "lastKind": 27,
+    "memberExists": true,
+    "generated": [
+      "1:1"
+    ]
+  },
+  {
+    "name": "shadow-hoisted-existing-other",
+    "ref": "1:1",
+    "numSymbols": 2,
+    "lastKind": 1,
+    "memberExists": true,
+    "generated": [
+      "1:1"
+    ]
+  }
+]

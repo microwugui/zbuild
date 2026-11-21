@@ -1,0 +1,116 @@
+package api
+
+import (
+	"encoding/json"
+	"fmt"
+	"math"
+	"os"
+	"sort"
+	"strconv"
+	"strings"
+	"testing"
+
+	"github.com/evanw/esbuild/internal/config"
+	"github.com/evanw/esbuild/internal/js_ast"
+	"github.com/evanw/esbuild/internal/helpers"
+	"github.com/evanw/esbuild/internal/logger"
+	"github.com/evanw/esbuild/internal/compat"
+)
+
+type bigRow struct { Name string `json:"name"`; Data json.RawMessage `json:"data"` }
+type bigFixture struct { Rows []bigRow `json:"rows"` }
+
+func bigDescExpr(e *config.DefineExpr) string {
+	if e == nil { return "nil" }
+	if e.Constant != nil {
+		switch c := e.Constant.(type) {
+		case *js_ast.EUndefined: return "const:undefined"
+		case *js_ast.ENumber:
+			if math.IsNaN(c.Value) { return "const:NaN" }
+			if math.IsInf(c.Value,1) { return "const:Infinity" }
+			return "const:num:" + strconv.FormatFloat(c.Value,'g',-1,64)
+		case *js_ast.EString: return "const:str:" + helpers.UTF16ToString(c.Value)
+		}
+	}
+	if len(e.Parts) > 0 { return "parts:" + strings.Join(e.Parts,".") }
+	if e.InjectedDefineIndex.IsValid() { return "injected:" + fmt.Sprint(e.InjectedDefineIndex.GetIndex()) }
+	return "expr"
+}
+
+func TestTmpGenApiBig(t *testing.T) {
+	fx := bigFixture{}
+	// validateDefines cases
+	vdcases := []struct{
+		name string
+		defines map[string]string
+		pureFns []string
+		platform config.Platform
+		build bool
+		minify bool
+		drop Drop
+	}{
+		{"empty", map[string]string{}, nil, config.PlatformBrowser, true, false, 0},
+		{"simple", map[string]string{"FOO":"1", "process.env.NODE_ENV":"\"dev\""}, nil, config.PlatformBrowser, true, false, 0},
+		{"nodeenv-minify", map[string]string{}, nil, config.PlatformBrowser, true, true, 0},
+		{"nodeenv-node", map[string]string{}, nil, config.PlatformNode, true, false, 0},
+		{"pure", map[string]string{}, []string{"Object.assign"}, config.PlatformBrowser, true, false, 0},
+		{"drop-console", map[string]string{}, nil, config.PlatformBrowser, true, false, DropConsole},
+		{"identifier-value", map[string]string{"X":"some.identifier"}, nil, config.PlatformNeutral, false, false, 0},
+		{"invalid-value", map[string]string{"Y":"a + b"}, nil, config.PlatformBrowser, true, false, 0},
+		{"bad-name", map[string]string{"bad-name!":"1"}, nil, config.PlatformBrowser, true, false, 0},
+	}
+	for _, c := range vdcases {
+		log := logger.NewDeferLog(logger.DeferLogNoVerboseOrDebug, nil)
+		processed, injected := validateDefines(log, c.defines, c.pureFns, c.platform, c.build, c.minify, c.drop)
+		ids := map[string]string{}
+		for k, d := range processed.IdentifierDefines {
+			ids[k] = strings.Join(d.KeyParts,".") + "|" + strconv.Itoa(int(d.Flags)) + "|" + bigDescExpr(d.DefineExpr)
+		}
+		dots := map[string][]string{}
+		for tail, arr := range processed.DotDefines {
+			for _, d := range arr { dots[tail] = append(dots[tail], strings.Join(d.KeyParts,".")+"|"+strconv.Itoa(int(d.Flags))+"|"+bigDescExpr(d.DefineExpr)) }
+			sort.Strings(dots[tail])
+		}
+		injNames := []string{}
+		for _, in := range injected { injNames = append(injNames, in.Name+":"+in.Source.Contents) }
+		data, _ := json.Marshal(map[string]interface{}{
+			"ids": ids, "dots": dots, "injected": injNames, "errors": func() []string { e:=[]string{}; for _,m:=range log.Peek() { e=append(e,m.Data.Text) }; return e }(),
+		})
+		fx.Rows = append(fx.Rows, bigRow{"validateDefines:"+c.name, data})
+	}
+
+
+	// validateFeatures cases
+	vfcases := []struct{
+		name string
+		target Target
+		engines []Engine
+	}{
+		{"default", DefaultTarget, nil},
+		{"esnext", ESNext, nil},
+		{"es2015", ES2015, nil},
+		{"chrome90", DefaultTarget, []Engine{{Name: EngineChrome, Version: "90"}}},
+		{"safari14", DefaultTarget, []Engine{{Name: EngineSafari, Version: "14"}}},
+		{"firefox88", DefaultTarget, []Engine{{Name: EngineFirefox, Version: "88"}}},
+		{"badversion", DefaultTarget, []Engine{{Name: EngineChrome, Version: "abc"}}},
+		{"mixed", ES2020, []Engine{{Name: EngineChrome, Version: "90"}, {Name: EngineSafari, Version: "14"}}},
+	}
+	for _, c := range vfcases {
+		log := logger.NewDeferLog(logger.DeferLogNoVerboseOrDebug, nil)
+		js, css, prefixes, targetEnv := validateFeatures(log, c.target, c.engines)
+		pkeys := []string{}
+		for d, pfx := range prefixes { pkeys = append(pkeys, fmt.Sprint(d)+":"+fmt.Sprint(pfx)) }
+		sort.Strings(pkeys)
+		errs := []string{}
+		for _, m := range log.Peek() { errs = append(errs, m.Data.Text) }
+		data, _ := json.Marshal(map[string]interface{}{
+			"js": fmt.Sprint(js), "css": fmt.Sprint(css), "prefixes": pkeys, "targetEnv": targetEnv, "errors": errs,
+		})
+		fx.Rows = append(fx.Rows, bigRow{"validateFeatures:"+c.name, data})
+	}
+	_ = compat.NoPrefix // ensure import used
+
+	bts, _ := json.MarshalIndent(fx, "", "  ")
+	if err := os.WriteFile("/root/port/testdata/api-big-go.json", bts, 0644); err != nil { t.Fatal(err) }
+	t.Logf("wrote %d rows bytes=%d", len(fx.Rows), len(bts))
+}

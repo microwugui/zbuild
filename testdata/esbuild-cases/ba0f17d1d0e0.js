@@ -1,0 +1,4 @@
+x
+    /*!
+     * Re-indent test
+     */

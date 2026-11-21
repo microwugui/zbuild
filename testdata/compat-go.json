@@ -1,0 +1,237 @@
+[
+  {
+    "fn": "splitOffNextPreReleasePart",
+    "arg": "alpha",
+    "out": "alpha|"
+  },
+  {
+    "fn": "splitOffNextPreReleasePart",
+    "arg": "alpha.1",
+    "out": "alpha|1"
+  },
+  {
+    "fn": "splitOffNextPreReleasePart",
+    "arg": "1.2.3",
+    "out": "1|2.3"
+  },
+  {
+    "fn": "splitOffNextPreReleasePart",
+    "arg": "",
+    "out": "|"
+  },
+  {
+    "fn": "splitOffNextPreReleasePart",
+    "arg": ".beta",
+    "out": "|beta"
+  },
+  {
+    "fn": "preReleasePartToNumber",
+    "arg": "123",
+    "out": "123|true"
+  },
+  {
+    "fn": "preReleasePartToNumber",
+    "arg": "0",
+    "out": "0|true"
+  },
+  {
+    "fn": "preReleasePartToNumber",
+    "arg": "01",
+    "out": "1|true"
+  },
+  {
+    "fn": "preReleasePartToNumber",
+    "arg": "abc",
+    "out": "0|false"
+  },
+  {
+    "fn": "preReleasePartToNumber",
+    "arg": "1a",
+    "out": "0|false"
+  },
+  {
+    "fn": "preReleasePartToNumber",
+    "arg": "",
+    "out": "0|false"
+  },
+  {
+    "fn": "CompareSemver",
+    "arg": "0,0",
+    "out": "0"
+  },
+  {
+    "fn": "CompareSemver",
+    "arg": "0,1",
+    "out": "3"
+  },
+  {
+    "fn": "CompareSemver",
+    "arg": "0,2",
+    "out": "6"
+  },
+  {
+    "fn": "CompareSemver",
+    "arg": "0,3",
+    "out": "-1"
+  },
+  {
+    "fn": "CompareSemver",
+    "arg": "0,4",
+    "out": "-1"
+  },
+  {
+    "fn": "CompareSemver",
+    "arg": "0,5",
+    "out": "5"
+  },
+  {
+    "fn": "CompareSemver",
+    "arg": "1,0",
+    "out": "-3"
+  },
+  {
+    "fn": "CompareSemver",
+    "arg": "1,1",
+    "out": "0"
+  },
+  {
+    "fn": "CompareSemver",
+    "arg": "1,2",
+    "out": "-3"
+  },
+  {
+    "fn": "CompareSemver",
+    "arg": "1,3",
+    "out": "-4"
+  },
+  {
+    "fn": "CompareSemver",
+    "arg": "1,4",
+    "out": "-1"
+  },
+  {
+    "fn": "CompareSemver",
+    "arg": "1,5",
+    "out": "-3"
+  },
+  {
+    "fn": "CompareSemver",
+    "arg": "2,0",
+    "out": "-6"
+  },
+  {
+    "fn": "CompareSemver",
+    "arg": "2,1",
+    "out": "3"
+  },
+  {
+    "fn": "CompareSemver",
+    "arg": "2,2",
+    "out": "0"
+  },
+  {
+    "fn": "CompareSemver",
+    "arg": "2,3",
+    "out": "-1"
+  },
+  {
+    "fn": "CompareSemver",
+    "arg": "2,4",
+    "out": "-1"
+  },
+  {
+    "fn": "CompareSemver",
+    "arg": "2,5",
+    "out": "-1"
+  },
+  {
+    "fn": "CompareSemver",
+    "arg": "3,0",
+    "out": "1"
+  },
+  {
+    "fn": "CompareSemver",
+    "arg": "3,1",
+    "out": "4"
+  },
+  {
+    "fn": "CompareSemver",
+    "arg": "3,2",
+    "out": "1"
+  },
+  {
+    "fn": "CompareSemver",
+    "arg": "3,3",
+    "out": "0"
+  },
+  {
+    "fn": "CompareSemver",
+    "arg": "3,4",
+    "out": "-1"
+  },
+  {
+    "fn": "CompareSemver",
+    "arg": "3,5",
+    "out": "1"
+  },
+  {
+    "fn": "CompareSemver",
+    "arg": "4,0",
+    "out": "1"
+  },
+  {
+    "fn": "CompareSemver",
+    "arg": "4,1",
+    "out": "1"
+  },
+  {
+    "fn": "CompareSemver",
+    "arg": "4,2",
+    "out": "1"
+  },
+  {
+    "fn": "CompareSemver",
+    "arg": "4,3",
+    "out": "1"
+  },
+  {
+    "fn": "CompareSemver",
+    "arg": "4,4",
+    "out": "0"
+  },
+  {
+    "fn": "CompareSemver",
+    "arg": "4,5",
+    "out": "1"
+  },
+  {
+    "fn": "CompareSemver",
+    "arg": "5,0",
+    "out": "-5"
+  },
+  {
+    "fn": "CompareSemver",
+    "arg": "5,1",
+    "out": "3"
+  },
+  {
+    "fn": "CompareSemver",
+    "arg": "5,2",
+    "out": "1"
+  },
+  {
+    "fn": "CompareSemver",
+    "arg": "5,3",
+    "out": "-1"
+  },
+  {
+    "fn": "CompareSemver",
+    "arg": "5,4",
+    "out": "-1"
+  },
+  {
+    "fn": "CompareSemver",
+    "arg": "5,5",
+    "out": "0"
+  }
+]

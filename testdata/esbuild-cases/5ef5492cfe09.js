@@ -1,0 +1,1 @@
+switch (1) { case 0: x(); default: y(); case 2: z() }

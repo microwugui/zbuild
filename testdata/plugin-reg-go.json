@@ -1,0 +1,271 @@
+[
+  {
+    "name": "demo",
+    "onStart": [
+      "demo"
+    ],
+    "onResolve": [
+      {
+        "name": "demo",
+        "ns": "file",
+        "filter": ".*\\.js$"
+      }
+    ],
+    "onLoad": [
+      {
+        "name": "",
+        "ns": "",
+        "filter": ".*\\.ts$"
+      }
+    ],
+    "msgs": [],
+    "startResult": {
+      "pluginName": "",
+      "path": "",
+      "pathNS": "",
+      "external": false,
+      "sef": false,
+      "absResolveDir": "",
+      "loader": 0,
+      "contents": "",
+      "msgs": [
+        {
+          "text": "start-warn",
+          "kind": 1
+        }
+      ]
+    },
+    "resolveResults": [
+      {
+        "pluginName": "rp",
+        "path": "a.js",
+        "pathNS": "outns",
+        "external": false,
+        "sef": true,
+        "absResolveDir": "",
+        "loader": 0,
+        "contents": "",
+        "msgs": [
+          {
+            "text": "resolve-warn:a.js",
+            "kind": 1
+          }
+        ]
+      }
+    ],
+    "loadResults": [
+      {
+        "pluginName": "lp",
+        "path": "",
+        "pathNS": "",
+        "external": false,
+        "sef": false,
+        "absResolveDir": "/r",
+        "loader": 16,
+        "contents": "loaded:a.js",
+        "msgs": [
+          {
+            "text": "load-err:a.js",
+            "kind": 0
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "multi",
+    "onStart": [
+      "multi",
+      "multi"
+    ],
+    "onResolve": [
+      {
+        "name": "multi",
+        "ns": "ns1",
+        "filter": "a"
+      },
+      {
+        "name": "multi",
+        "ns": "",
+        "filter": "b"
+      }
+    ],
+    "onLoad": [
+      {
+        "name": "",
+        "ns": "ns2",
+        "filter": "c"
+      }
+    ],
+    "msgs": [],
+    "startResult": {
+      "pluginName": "",
+      "path": "",
+      "pathNS": "",
+      "external": false,
+      "sef": false,
+      "absResolveDir": "",
+      "loader": 0,
+      "contents": "",
+      "msgs": [
+        {
+          "text": "start-warn",
+          "kind": 1
+        }
+      ]
+    },
+    "resolveResults": [
+      {
+        "pluginName": "rp",
+        "path": "a.js",
+        "pathNS": "outns",
+        "external": false,
+        "sef": true,
+        "absResolveDir": "",
+        "loader": 0,
+        "contents": "",
+        "msgs": [
+          {
+            "text": "resolve-warn:a.js",
+            "kind": 1
+          }
+        ]
+      },
+      {
+        "pluginName": "rp",
+        "path": "a.js",
+        "pathNS": "outns",
+        "external": false,
+        "sef": true,
+        "absResolveDir": "",
+        "loader": 0,
+        "contents": "",
+        "msgs": [
+          {
+            "text": "resolve-warn:a.js",
+            "kind": 1
+          }
+        ]
+      }
+    ],
+    "loadResults": [
+      {
+        "pluginName": "lp",
+        "path": "",
+        "pathNS": "",
+        "external": false,
+        "sef": false,
+        "absResolveDir": "/r",
+        "loader": 16,
+        "contents": "loaded:a.js",
+        "msgs": [
+          {
+            "text": "load-err:a.js",
+            "kind": 0
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "bad",
+    "onStart": [
+      "bad"
+    ],
+    "onResolve": [],
+    "onLoad": [],
+    "msgs": [
+      {
+        "text": "[bad] \"OnResolve\" is missing a filter",
+        "kind": 0
+      },
+      {
+        "text": "[bad] \"OnResolve\" filter is not a valid Go regular expression: \"(\"",
+        "kind": 0
+      },
+      {
+        "text": "[bad] \"OnLoad\" is missing a filter",
+        "kind": 0
+      }
+    ],
+    "startResult": {
+      "pluginName": "",
+      "path": "",
+      "pathNS": "",
+      "external": false,
+      "sef": false,
+      "absResolveDir": "",
+      "loader": 0,
+      "contents": "",
+      "msgs": [
+        {
+          "text": "start-warn",
+          "kind": 1
+        }
+      ]
+    },
+    "resolveResults": null,
+    "loadResults": null
+  },
+  {
+    "name": "flags",
+    "onStart": [],
+    "onResolve": [
+      {
+        "name": "flags",
+        "ns": "",
+        "filter": "(?i)\\.JS$"
+      }
+    ],
+    "onLoad": [
+      {
+        "name": "",
+        "ns": "n",
+        "filter": "(?s)^x.*y$"
+      }
+    ],
+    "msgs": [],
+    "startResult": {
+      "pluginName": "",
+      "path": "",
+      "pathNS": "",
+      "external": false,
+      "sef": false,
+      "absResolveDir": "",
+      "loader": 0,
+      "contents": "",
+      "msgs": null
+    },
+    "resolveResults": [
+      {
+        "pluginName": "",
+        "path": "",
+        "pathNS": "",
+        "external": false,
+        "sef": false,
+        "absResolveDir": "",
+        "loader": 0,
+        "contents": "",
+        "msgs": []
+      }
+    ],
+    "loadResults": [
+      {
+        "pluginName": "lp",
+        "path": "",
+        "pathNS": "",
+        "external": false,
+        "sef": false,
+        "absResolveDir": "/r",
+        "loader": 16,
+        "contents": "loaded:a.js",
+        "msgs": [
+          {
+            "text": "load-err:a.js",
+            "kind": 0
+          }
+        ]
+      }
+    ]
+  }
+]

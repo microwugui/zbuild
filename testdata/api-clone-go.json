@@ -1,0 +1,27 @@
+[
+  {
+    "fn": "cloneMangleCache",
+    "arg": "[[\"foo\",\"s:a\"],[\"bar\",\"false\"],[\"baz\",\"s:b\"]]",
+    "out": "bar=false;baz=s:b;foo=s:a;"
+  },
+  {
+    "fn": "cloneMangleCache",
+    "arg": "[[\"__proto__\",\"s:x\"]]",
+    "out": "__proto__=s:x;"
+  },
+  {
+    "fn": "cloneMangleCache",
+    "arg": "[[\"foo\",\"num\"]]",
+    "out": ""
+  },
+  {
+    "fn": "cloneMangleCache",
+    "arg": "[]",
+    "out": ""
+  },
+  {
+    "fn": "cloneMangleCache",
+    "arg": "nil",
+    "out": "nil"
+  }
+]

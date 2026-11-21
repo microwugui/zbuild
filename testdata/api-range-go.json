@@ -1,0 +1,72 @@
+[
+  {
+    "r": "bytes=0-1",
+    "len": 10,
+    "out": "0|2|true"
+  },
+  {
+    "r": "bytes=2-5",
+    "len": 10,
+    "out": "2|6|true"
+  },
+  {
+    "r": "bytes=0-",
+    "len": 10,
+    "out": "0|0|false"
+  },
+  {
+    "r": "bytes=-5",
+    "len": 10,
+    "out": "0|0|false"
+  },
+  {
+    "r": "bytes=5-3",
+    "len": 10,
+    "out": "5|4|true"
+  },
+  {
+    "r": "bytes=0-9",
+    "len": 10,
+    "out": "0|10|true"
+  },
+  {
+    "r": "bytes=0-10",
+    "len": 10,
+    "out": "0|0|false"
+  },
+  {
+    "r": "bytes=11-12",
+    "len": 10,
+    "out": "0|0|false"
+  },
+  {
+    "r": "bytes=abc-def",
+    "len": 10,
+    "out": "0|0|false"
+  },
+  {
+    "r": "foo=0-1",
+    "len": 10,
+    "out": "0|0|false"
+  },
+  {
+    "r": "bytes=",
+    "len": 10,
+    "out": "0|0|false"
+  },
+  {
+    "r": "bytes=00-01",
+    "len": 10,
+    "out": "0|2|true"
+  },
+  {
+    "r": "bytes=0-1",
+    "len": 0,
+    "out": "0|0|false"
+  },
+  {
+    "r": "bytes=0-0",
+    "len": 1,
+    "out": "0|1|true"
+  }
+]

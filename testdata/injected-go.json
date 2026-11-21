@@ -1,0 +1,53 @@
+[
+  {
+    "name": "one-number",
+    "defineName": "foo",
+    "keyText": "\u003cdefine:foo\u003e",
+    "sourceIdx": 1,
+    "identName": "define_foo",
+    "contents": "42",
+    "loader": 11,
+    "sideKind": 3,
+    "symbols": [
+      "require",
+      "exports",
+      "module"
+    ],
+    "numParts": 2,
+    "hasLazy": true
+  },
+  {
+    "name": "two-defines",
+    "defineName": "a",
+    "keyText": "\u003cdefine:a\u003e",
+    "sourceIdx": 1,
+    "identName": "define_a",
+    "contents": "\"hi\"",
+    "loader": 11,
+    "sideKind": 3,
+    "symbols": [
+      "require",
+      "exports",
+      "module"
+    ],
+    "numParts": 2,
+    "hasLazy": true
+  },
+  {
+    "name": "two-defines",
+    "defineName": "b-c",
+    "keyText": "\u003cdefine:b-c\u003e",
+    "sourceIdx": 2,
+    "identName": "define_b_c",
+    "contents": "true",
+    "loader": 11,
+    "sideKind": 3,
+    "symbols": [
+      "require",
+      "exports",
+      "module"
+    ],
+    "numParts": 2,
+    "hasLazy": true
+  }
+]

@@ -1,0 +1,22 @@
+[
+  {
+    "fn": "AddTopLevelSymbol",
+    "arg": "dedupe",
+    "out": "foo2;bar;foo22"
+  },
+  {
+    "fn": "AddTopLevelSymbol",
+    "arg": "jsx-private",
+    "out": "Foo;#bar"
+  },
+  {
+    "fn": "AssignNamesByScope",
+    "arg": "tree",
+    "out": "a;b;c;d;label"
+  },
+  {
+    "fn": "AssignNamesByScope",
+    "arg": "chain",
+    "out": "x;y"
+  }
+]

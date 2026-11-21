@@ -1,0 +1,57 @@
+package api_test
+
+// 第 99 轮 Go 探针：api.Build 端到端字节 oracle（内部 contextImpl→Rebuild→ScanBundle→Link→Compile）。
+// 用真实 Go API 覆盖 file 入口（core/module，口径同 three_verify）与 stdin 单文件，
+// 供 TS 侧 Build/contextImpl 端口复用作逐字节 harness。
+import (
+	"crypto/sha256"
+	"encoding/hex"
+	"encoding/json"
+	"os"
+	"testing"
+
+	"github.com/evanw/esbuild/pkg/api"
+)
+
+type b99Row struct { Entry string `json:"entry"`; SHA string `json:"sha"`; Bytes int `json:"bytes"`; Log string `json:"log"`; Code string `json:"code,omitempty"` }
+
+func b99Hash(code []byte) (string, int) { h := sha256.Sum256(code); return hex.EncodeToString(h[:]), len(code) }
+
+func TestTmpGenBuildChain99(t *testing.T) {
+	rows := []b99Row{}
+	base := api.BuildOptions{AbsWorkingDir: "/root/port", Bundle: true, Format: api.FormatESModule,
+		Platform: api.PlatformNode, Target: api.ESNext, LogLevel: api.LogLevelWarning, Write: false}
+
+	// file 入口（口径同 three_verify：cwd=/root/port + 相对路径）
+	fileCases := []struct{ name, entry string }{
+		{"cwd-core", "testdata/three/package/build/three.core.js"},
+		{"cwd-module", "testdata/three/package/build/three.module.js"},
+	}
+	for _, c := range fileCases {
+		o := base; o.EntryPoints = []string{c.entry}
+		res := api.Build(o)
+		if len(res.Errors) > 0 || len(res.OutputFiles) == 0 { rows = append(rows, b99Row{c.name, "", 0, "errors/empty", ""}); continue }
+		code := res.OutputFiles[0].Contents; sha, n := b99Hash(code)
+		// 只把短输出的 code 落夹具（stdin 小用例），大文件只钉 sha
+		codeStr := ""; if n < 2048 { codeStr = string(code) }
+		rows = append(rows, b99Row{c.name, sha, n, "ok", codeStr})
+	}
+
+	// stdin 单文件
+	stdinCases := []struct{ name, src string }{
+		{"stdin-simple", "var x = 1; console.log(x);\n"},
+		{"stdin-export", "export const foo = 42;\n"},
+		{"stdin-comment", "// hi\nexport const y = 2;\n"},
+	}
+	for _, c := range stdinCases {
+		o := base; o.Stdin = &api.StdinOptions{Contents: c.src, Sourcefile: "<stdin>", Loader: api.LoaderJS, ResolveDir: "/root/port"}
+		res := api.Build(o)
+		if len(res.Errors) > 0 || len(res.OutputFiles) == 0 { rows = append(rows, b99Row{c.name, "", 0, "errors/empty", ""}); continue }
+		code := res.OutputFiles[0].Contents; sha, n := b99Hash(code)
+		rows = append(rows, b99Row{c.name, sha, n, "ok", string(code)})
+	}
+
+	out, _ := json.MarshalIndent(rows, "", "  ")
+	if err := os.WriteFile("/root/port/testdata/build-chain-go.json", out, 0644); err != nil { t.Fatal(err) }
+	t.Logf("rows=%d bytes=%d", len(rows), len(out))
+}

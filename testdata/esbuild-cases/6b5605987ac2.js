@@ -1,0 +1,1 @@
+x = {a, ...{b, set c(_) { throw _ }, d}, e}

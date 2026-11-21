@@ -1,0 +1,1 @@
+class Foo { #foo; foo() { return #foo in this } }

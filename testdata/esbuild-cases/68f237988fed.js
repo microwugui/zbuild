@@ -1,0 +1,1 @@
+if (1) return a(); else return b()

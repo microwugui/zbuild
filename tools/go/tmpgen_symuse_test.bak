@@ -1,0 +1,41 @@
+package js_parser
+
+// 第 107 轮 Go 探针：parser.convertSymbolUseToCall（currentPart 符号计数转换）—— 纯状态机，全确定。
+import ("encoding/json"
+ "fmt"
+ "os"
+ "testing"
+ "github.com/evanw/esbuild/internal/ast"
+ "github.com/evanw/esbuild/internal/js_ast"
+)
+
+type suRow struct {
+  Name string `json:"name"`
+  Uses map[string]int `json:"uses"`
+  CallUses map[string][2]int `json:"callUses"`
+}
+func key(r ast.Ref) string { return fmt.Sprintf("%d:%d", r.SourceIndex, r.InnerIndex) }
+func dump(p *parser) suRow {
+  r:=suRow{Uses:map[string]int{},CallUses:map[string][2]int{}}
+  for ref,u:=range p.currentPart.SymbolUses{r.Uses[key(ref)]=int(u.CountEstimate)}
+  for ref,c:=range p.currentPart.SymbolCallUses{r.CallUses[key(ref)]=[2]int{int(c.CallCountEstimate),int(c.SingleArgNonSpreadCallCountEstimate)}}
+  return r
+}
+func TestTmpGenSymUse107(t *testing.T){
+  ref:=ast.Ref{SourceIndex:1,InnerIndex:0}
+  other:=ast.Ref{SourceIndex:1,InnerIndex:1}
+  rows:=[]suRow{}
+  run:=func(name string, uses map[ast.Ref]js_ast.SymbolUse, calls map[ast.Ref]js_ast.SymbolCallUse, r ast.Ref, single bool) suRow {
+    p:=&parser{currentPart:&js_ast.Part{SymbolUses:uses,SymbolCallUses:calls}}
+    p.convertSymbolUseToCall(r,single)
+    row:=dump(p);row.Name=name;return row
+  }
+  rows=append(rows,run("count1-delete",map[ast.Ref]js_ast.SymbolUse{ref:{CountEstimate:1}},nil,ref,true))
+  rows=append(rows,run("count3-keep",map[ast.Ref]js_ast.SymbolUse{ref:{CountEstimate:3}},nil,ref,false))
+  rows=append(rows,run("existing-call",map[ast.Ref]js_ast.SymbolUse{ref:{CountEstimate:2}},map[ast.Ref]js_ast.SymbolCallUse{ref:{CallCountEstimate:4,SingleArgNonSpreadCallCountEstimate:2}},ref,true))
+  rows=append(rows,run("other-ref-untouched",map[ast.Ref]js_ast.SymbolUse{ref:{CountEstimate:1},other:{CountEstimate:5}},nil,ref,false))
+  rows=append(rows,run("no-use",map[ast.Ref]js_ast.SymbolUse{},nil,ref,false))
+  b,_:=json.MarshalIndent(rows,"","  ")
+  if err:=os.WriteFile("/root/port/testdata/sym-use-go.json",b,0644);err!=nil{t.Fatal(err)}
+  t.Logf("wrote %d rows bytes=%d",len(rows),len(b))
+}

@@ -1,0 +1,32 @@
+[
+  {
+    "fn": "consumeToEndOfMultiLineComment",
+    "arg": "LyogaGVsbG8gKi94|2|true",
+    "out": "cur=12;all=2:9;;legal=;smu=|0:0"
+  },
+  {
+    "fn": "consumeToEndOfMultiLineComment",
+    "arg": "LyohIGxlZ2FsIGNvbW1lbnQgKi94|2|true",
+    "out": "cur=21;all=2:18;;legal=! legal comment */;;smu=|0:0"
+  },
+  {
+    "fn": "consumeToEndOfMultiLineComment",
+    "arg": "LyojIHNvdXJjZU1hcHBpbmdVUkw9Zm9vLmpzICoveA==|2|true",
+    "out": "cur=31;all=2:28;;legal=;smu=foo.js|21:6"
+  },
+  {
+    "fn": "consumeToEndOfMultiLineComment",
+    "arg": "LypAIHNvdXJjZU1hcHBpbmdVUkw9YmFyLm1hcCAqL3g=|2|false",
+    "out": "cur=32;all=;legal=;smu=bar.map|21:7"
+  },
+  {
+    "fn": "consumeToEndOfMultiLineComment",
+    "arg": "LyogQHByZXNlcnZlIGtlZXAgKi94|2|true",
+    "out": "cur=21;all=2:18;;legal= @preserve keep */;;smu=|0:0"
+  },
+  {
+    "fn": "consumeToEndOfMultiLineComment",
+    "arg": "LyoqL3g=|2|true",
+    "out": "cur=5;all=2:2;;legal=;smu=|0:0"
+  }
+]

@@ -1,0 +1,52 @@
+[
+  {
+    "fn": "IsEntryPoint",
+    "kind": 0,
+    "out": "false"
+  },
+  {
+    "fn": "IsUserSpecifiedEntryPoint",
+    "kind": 0,
+    "out": "false"
+  },
+  {
+    "fn": "IsEntryPoint",
+    "kind": 1,
+    "out": "true"
+  },
+  {
+    "fn": "IsUserSpecifiedEntryPoint",
+    "kind": 1,
+    "out": "true"
+  },
+  {
+    "fn": "IsEntryPoint",
+    "kind": 2,
+    "out": "true"
+  },
+  {
+    "fn": "IsUserSpecifiedEntryPoint",
+    "kind": 2,
+    "out": "false"
+  },
+  {
+    "fn": "IsEntryPoint",
+    "kind": 3,
+    "out": "true"
+  },
+  {
+    "fn": "IsUserSpecifiedEntryPoint",
+    "kind": 3,
+    "out": "false"
+  },
+  {
+    "fn": "IsEntryPoint",
+    "kind": 4,
+    "out": "true"
+  },
+  {
+    "fn": "IsUserSpecifiedEntryPoint",
+    "kind": 4,
+    "out": "false"
+  }
+]

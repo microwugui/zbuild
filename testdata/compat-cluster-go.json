@@ -1,0 +1,207 @@
+[
+  {
+    "fn": "CSSFeature.Has",
+    "arg": "0|0",
+    "out": "false"
+  },
+  {
+    "fn": "CSSFeature.Has",
+    "arg": "1|1",
+    "out": "true"
+  },
+  {
+    "fn": "CSSFeature.Has",
+    "arg": "1|2",
+    "out": "false"
+  },
+  {
+    "fn": "CSSFeature.Has",
+    "arg": "3|1",
+    "out": "true"
+  },
+  {
+    "fn": "CSSFeature.Has",
+    "arg": "65535|256",
+    "out": "true"
+  },
+  {
+    "fn": "CSSFeature.ApplyOverrides",
+    "arg": "255|15|240",
+    "out": "15"
+  },
+  {
+    "fn": "CSSFeature.ApplyOverrides",
+    "arg": "0|1|1",
+    "out": "1"
+  },
+  {
+    "fn": "CSSFeature.ApplyOverrides",
+    "arg": "4660|43981|255",
+    "out": "4813"
+  },
+  {
+    "fn": "CSSFeature.ApplyOverrides",
+    "arg": "5|0|3",
+    "out": "4"
+  },
+  {
+    "fn": "Engine.IsBrowser",
+    "arg": "0",
+    "out": "true"
+  },
+  {
+    "fn": "Engine.String",
+    "arg": "0",
+    "out": "chrome"
+  },
+  {
+    "fn": "Engine.IsBrowser",
+    "arg": "1",
+    "out": "false"
+  },
+  {
+    "fn": "Engine.String",
+    "arg": "1",
+    "out": "deno"
+  },
+  {
+    "fn": "Engine.IsBrowser",
+    "arg": "2",
+    "out": "true"
+  },
+  {
+    "fn": "Engine.String",
+    "arg": "2",
+    "out": "edge"
+  },
+  {
+    "fn": "Engine.IsBrowser",
+    "arg": "3",
+    "out": "false"
+  },
+  {
+    "fn": "Engine.String",
+    "arg": "3",
+    "out": "es"
+  },
+  {
+    "fn": "Engine.IsBrowser",
+    "arg": "4",
+    "out": "true"
+  },
+  {
+    "fn": "Engine.String",
+    "arg": "4",
+    "out": "firefox"
+  },
+  {
+    "fn": "Engine.IsBrowser",
+    "arg": "5",
+    "out": "false"
+  },
+  {
+    "fn": "Engine.String",
+    "arg": "5",
+    "out": "hermes"
+  },
+  {
+    "fn": "Engine.IsBrowser",
+    "arg": "6",
+    "out": "true"
+  },
+  {
+    "fn": "Engine.String",
+    "arg": "6",
+    "out": "ie"
+  },
+  {
+    "fn": "Engine.IsBrowser",
+    "arg": "7",
+    "out": "true"
+  },
+  {
+    "fn": "Engine.String",
+    "arg": "7",
+    "out": "ios"
+  },
+  {
+    "fn": "Engine.IsBrowser",
+    "arg": "8",
+    "out": "false"
+  },
+  {
+    "fn": "Engine.String",
+    "arg": "8",
+    "out": "node"
+  },
+  {
+    "fn": "Engine.IsBrowser",
+    "arg": "9",
+    "out": "true"
+  },
+  {
+    "fn": "Engine.String",
+    "arg": "9",
+    "out": "opera"
+  },
+  {
+    "fn": "Engine.IsBrowser",
+    "arg": "10",
+    "out": "false"
+  },
+  {
+    "fn": "Engine.String",
+    "arg": "10",
+    "out": "rhino"
+  },
+  {
+    "fn": "Engine.IsBrowser",
+    "arg": "11",
+    "out": "true"
+  },
+  {
+    "fn": "Engine.String",
+    "arg": "11",
+    "out": "safari"
+  },
+  {
+    "fn": "JSFeature.Has",
+    "arg": "0|0",
+    "out": "false"
+  },
+  {
+    "fn": "JSFeature.Has",
+    "arg": "1|1",
+    "out": "true"
+  },
+  {
+    "fn": "JSFeature.Has",
+    "arg": "1|2",
+    "out": "false"
+  },
+  {
+    "fn": "JSFeature.Has",
+    "arg": "7|3",
+    "out": "true"
+  },
+  {
+    "fn": "JSFeature.Has",
+    "arg": "1099511627776|1099511627776",
+    "out": "true"
+  },
+  {
+    "fn": "JSFeature.ApplyOverrides",
+    "arg": "255|15|240",
+    "out": "15"
+  },
+  {
+    "fn": "JSFeature.ApplyOverrides",
+    "arg": "0|1|1",
+    "out": "1"
+  },
+  {
+    "fn": "JSFeature.ApplyOverrides",
+    "arg": "1099511627776|549755813888|1099511627776",
+    "out": "0"
+  }
+]

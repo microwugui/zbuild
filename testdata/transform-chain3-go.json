@@ -1,0 +1,308 @@
+[
+  {
+    "name": "export-two",
+    "gear": "default",
+    "src": "const A=1; const B=2; const unused=3; function f(){return A+B} export {f}",
+    "code": "const A = 1;\nconst B = 2;\nconst unused = 3;\nfunction f() {\n  return A + B;\n}\nexport {\n  f\n};\n"
+  },
+  {
+    "name": "let-counter",
+    "gear": "default",
+    "src": "let counter=0; counter++; export {counter}",
+    "code": "let counter = 0;\ncounter++;\nexport {\n  counter\n};\n"
+  },
+  {
+    "name": "tmp-collision",
+    "gear": "default",
+    "src": "const tmp=0; function a(){let tmp=1;return tmp} export {a}",
+    "code": "const tmp = 0;\nfunction a() {\n  let tmp2 = 1;\n  return tmp2;\n}\nexport {\n  a\n};\n"
+  },
+  {
+    "name": "comment",
+    "gear": "default",
+    "src": "// leading comment\nconst y=2; export {y}",
+    "code": "const y = 2;\nexport {\n  y\n};\n"
+  },
+  {
+    "name": "export-fn",
+    "gear": "default",
+    "src": "export function f(){ return 1 }",
+    "code": "function f() {\n  return 1;\n}\nexport {\n  f\n};\n"
+  },
+  {
+    "name": "export-class",
+    "gear": "default",
+    "src": "export class C { m(){} }",
+    "code": "class C {\n  m() {\n  }\n}\nexport {\n  C\n};\n"
+  },
+  {
+    "name": "multi-export",
+    "gear": "default",
+    "src": "const a=1,b=2,c=3; export {a,b,c};",
+    "code": "const a = 1, b = 2, c = 3;\nexport {\n  a,\n  b,\n  c\n};\n"
+  },
+  {
+    "name": "sibling-tmp",
+    "gear": "default",
+    "src": "function foo(){const tmp=1;return tmp} function bar(){const tmp=2;return tmp} export {foo,bar}",
+    "code": "function foo() {\n  const tmp = 1;\n  return tmp;\n}\nfunction bar() {\n  const tmp = 2;\n  return tmp;\n}\nexport {\n  bar,\n  foo\n};\n"
+  },
+  {
+    "name": "use-define",
+    "gear": "default",
+    "src": "if (DEBUG) console.log(VERSION); export const v = VERSION;",
+    "code": "if (DEBUG) console.log(VERSION);\nconst v = VERSION;\nexport {\n  v\n};\n"
+  },
+  {
+    "name": "class-src",
+    "gear": "default",
+    "src": "export class C { constructor(){ this.x = 1 } m(){ return this.x } }",
+    "code": "class C {\n  constructor() {\n    this.x = 1;\n  }\n  m() {\n    return this.x;\n  }\n}\nexport {\n  C\n};\n"
+  },
+  {
+    "name": "export-two",
+    "gear": "minify-ws",
+    "src": "const A=1; const B=2; const unused=3; function f(){return A+B} export {f}",
+    "code": "const A=1;const B=2;const unused=3;function f(){return A+B}export{f};\n"
+  },
+  {
+    "name": "let-counter",
+    "gear": "minify-ws",
+    "src": "let counter=0; counter++; export {counter}",
+    "code": "let counter=0;counter++;export{counter};\n"
+  },
+  {
+    "name": "tmp-collision",
+    "gear": "minify-ws",
+    "src": "const tmp=0; function a(){let tmp=1;return tmp} export {a}",
+    "code": "const tmp=0;function a(){let tmp2=1;return tmp2}export{a};\n"
+  },
+  {
+    "name": "comment",
+    "gear": "minify-ws",
+    "src": "// leading comment\nconst y=2; export {y}",
+    "code": "const y=2;export{y};\n"
+  },
+  {
+    "name": "export-fn",
+    "gear": "minify-ws",
+    "src": "export function f(){ return 1 }",
+    "code": "function f(){return 1}export{f};\n"
+  },
+  {
+    "name": "export-class",
+    "gear": "minify-ws",
+    "src": "export class C { m(){} }",
+    "code": "class C{m(){}}export{C};\n"
+  },
+  {
+    "name": "multi-export",
+    "gear": "minify-ws",
+    "src": "const a=1,b=2,c=3; export {a,b,c};",
+    "code": "const a=1,b=2,c=3;export{a,b,c};\n"
+  },
+  {
+    "name": "sibling-tmp",
+    "gear": "minify-ws",
+    "src": "function foo(){const tmp=1;return tmp} function bar(){const tmp=2;return tmp} export {foo,bar}",
+    "code": "function foo(){const tmp=1;return tmp}function bar(){const tmp=2;return tmp}export{bar,foo};\n"
+  },
+  {
+    "name": "use-define",
+    "gear": "minify-ws",
+    "src": "if (DEBUG) console.log(VERSION); export const v = VERSION;",
+    "code": "if(DEBUG)console.log(VERSION);const v=VERSION;export{v};\n"
+  },
+  {
+    "name": "class-src",
+    "gear": "minify-ws",
+    "src": "export class C { constructor(){ this.x = 1 } m(){ return this.x } }",
+    "code": "class C{constructor(){this.x=1}m(){return this.x}}export{C};\n"
+  },
+  {
+    "name": "export-two",
+    "gear": "line-limit",
+    "src": "const A=1; const B=2; const unused=3; function f(){return A+B} export {f}",
+    "code": "const A = 1;\nconst B = 2;\nconst unused = 3;\nfunction f() {\n  return A + B;\n}\nexport {\n  f\n};\n"
+  },
+  {
+    "name": "let-counter",
+    "gear": "line-limit",
+    "src": "let counter=0; counter++; export {counter}",
+    "code": "let counter = 0;\ncounter++;\nexport {\n  counter\n};\n"
+  },
+  {
+    "name": "tmp-collision",
+    "gear": "line-limit",
+    "src": "const tmp=0; function a(){let tmp=1;return tmp} export {a}",
+    "code": "const tmp = 0;\nfunction a() {\n  let tmp2 = 1;\n  return tmp2;\n}\nexport {\n  a\n};\n"
+  },
+  {
+    "name": "comment",
+    "gear": "line-limit",
+    "src": "// leading comment\nconst y=2; export {y}",
+    "code": "const y = 2;\nexport {\n  y\n};\n"
+  },
+  {
+    "name": "export-fn",
+    "gear": "line-limit",
+    "src": "export function f(){ return 1 }",
+    "code": "function f() {\n  return 1;\n}\nexport {\n  f\n};\n"
+  },
+  {
+    "name": "export-class",
+    "gear": "line-limit",
+    "src": "export class C { m(){} }",
+    "code": "class C {\n  m() {\n  }\n}\nexport {\n  C\n};\n"
+  },
+  {
+    "name": "multi-export",
+    "gear": "line-limit",
+    "src": "const a=1,b=2,c=3; export {a,b,c};",
+    "code": "const a = 1, b = 2, c = 3;\nexport {\n  a,\n  b,\n  c\n};\n"
+  },
+  {
+    "name": "sibling-tmp",
+    "gear": "line-limit",
+    "src": "function foo(){const tmp=1;return tmp} function bar(){const tmp=2;return tmp} export {foo,bar}",
+    "code": "function foo() {\n  const tmp = 1;\n  return tmp;\n}\nfunction bar() {\n  const tmp = 2;\n  return tmp;\n}\nexport {\n  bar,\n  foo\n};\n"
+  },
+  {
+    "name": "use-define",
+    "gear": "line-limit",
+    "src": "if (DEBUG) console.log(VERSION); export const v = VERSION;",
+    "code": "if (DEBUG) console.log(VERSION);\nconst v = VERSION;\nexport {\n  v\n};\n"
+  },
+  {
+    "name": "class-src",
+    "gear": "line-limit",
+    "src": "export class C { constructor(){ this.x = 1 } m(){ return this.x } }",
+    "code": "class C {\n  constructor() {\n    this.x = 1;\n  }\n  m() {\n    return this.x;\n  }\n}\nexport {\n  C\n};\n"
+  },
+  {
+    "name": "export-two",
+    "gear": "ascii",
+    "src": "const A=1; const B=2; const unused=3; function f(){return A+B} export {f}",
+    "code": "const A = 1;\nconst B = 2;\nconst unused = 3;\nfunction f() {\n  return A + B;\n}\nexport {\n  f\n};\n"
+  },
+  {
+    "name": "let-counter",
+    "gear": "ascii",
+    "src": "let counter=0; counter++; export {counter}",
+    "code": "let counter = 0;\ncounter++;\nexport {\n  counter\n};\n"
+  },
+  {
+    "name": "tmp-collision",
+    "gear": "ascii",
+    "src": "const tmp=0; function a(){let tmp=1;return tmp} export {a}",
+    "code": "const tmp = 0;\nfunction a() {\n  let tmp2 = 1;\n  return tmp2;\n}\nexport {\n  a\n};\n"
+  },
+  {
+    "name": "comment",
+    "gear": "ascii",
+    "src": "// leading comment\nconst y=2; export {y}",
+    "code": "const y = 2;\nexport {\n  y\n};\n"
+  },
+  {
+    "name": "export-fn",
+    "gear": "ascii",
+    "src": "export function f(){ return 1 }",
+    "code": "function f() {\n  return 1;\n}\nexport {\n  f\n};\n"
+  },
+  {
+    "name": "export-class",
+    "gear": "ascii",
+    "src": "export class C { m(){} }",
+    "code": "class C {\n  m() {\n  }\n}\nexport {\n  C\n};\n"
+  },
+  {
+    "name": "multi-export",
+    "gear": "ascii",
+    "src": "const a=1,b=2,c=3; export {a,b,c};",
+    "code": "const a = 1, b = 2, c = 3;\nexport {\n  a,\n  b,\n  c\n};\n"
+  },
+  {
+    "name": "sibling-tmp",
+    "gear": "ascii",
+    "src": "function foo(){const tmp=1;return tmp} function bar(){const tmp=2;return tmp} export {foo,bar}",
+    "code": "function foo() {\n  const tmp = 1;\n  return tmp;\n}\nfunction bar() {\n  const tmp = 2;\n  return tmp;\n}\nexport {\n  bar,\n  foo\n};\n"
+  },
+  {
+    "name": "use-define",
+    "gear": "ascii",
+    "src": "if (DEBUG) console.log(VERSION); export const v = VERSION;",
+    "code": "if (DEBUG) console.log(VERSION);\nconst v = VERSION;\nexport {\n  v\n};\n"
+  },
+  {
+    "name": "class-src",
+    "gear": "ascii",
+    "src": "export class C { constructor(){ this.x = 1 } m(){ return this.x } }",
+    "code": "class C {\n  constructor() {\n    this.x = 1;\n  }\n  m() {\n    return this.x;\n  }\n}\nexport {\n  C\n};\n"
+  },
+  {
+    "name": "export-two",
+    "gear": "defines",
+    "src": "const A=1; const B=2; const unused=3; function f(){return A+B} export {f}",
+    "code": "const A = 1;\nconst B = 2;\nconst unused = 3;\nfunction f() {\n  return A + B;\n}\nexport {\n  f\n};\n"
+  },
+  {
+    "name": "let-counter",
+    "gear": "defines",
+    "src": "let counter=0; counter++; export {counter}",
+    "code": "let counter = 0;\ncounter++;\nexport {\n  counter\n};\n"
+  },
+  {
+    "name": "tmp-collision",
+    "gear": "defines",
+    "src": "const tmp=0; function a(){let tmp=1;return tmp} export {a}",
+    "code": "const tmp = 0;\nfunction a() {\n  let tmp2 = 1;\n  return tmp2;\n}\nexport {\n  a\n};\n"
+  },
+  {
+    "name": "comment",
+    "gear": "defines",
+    "src": "// leading comment\nconst y=2; export {y}",
+    "code": "const y = 2;\nexport {\n  y\n};\n"
+  },
+  {
+    "name": "export-fn",
+    "gear": "defines",
+    "src": "export function f(){ return 1 }",
+    "code": "function f() {\n  return 1;\n}\nexport {\n  f\n};\n"
+  },
+  {
+    "name": "export-class",
+    "gear": "defines",
+    "src": "export class C { m(){} }",
+    "code": "class C {\n  m() {\n  }\n}\nexport {\n  C\n};\n"
+  },
+  {
+    "name": "multi-export",
+    "gear": "defines",
+    "src": "const a=1,b=2,c=3; export {a,b,c};",
+    "code": "const a = 1, b = 2, c = 3;\nexport {\n  a,\n  b,\n  c\n};\n"
+  },
+  {
+    "name": "sibling-tmp",
+    "gear": "defines",
+    "src": "function foo(){const tmp=1;return tmp} function bar(){const tmp=2;return tmp} export {foo,bar}",
+    "code": "function foo() {\n  const tmp = 1;\n  return tmp;\n}\nfunction bar() {\n  const tmp = 2;\n  return tmp;\n}\nexport {\n  bar,\n  foo\n};\n"
+  },
+  {
+    "name": "use-define",
+    "gear": "defines",
+    "src": "if (DEBUG) console.log(VERSION); export const v = VERSION;",
+    "code": "if (false) console.log(\"1.2.3\");\nconst v = \"1.2.3\";\nexport {\n  v\n};\n"
+  },
+  {
+    "name": "class-src",
+    "gear": "defines",
+    "src": "export class C { constructor(){ this.x = 1 } m(){ return this.x } }",
+    "code": "class C {\n  constructor() {\n    this.x = 1;\n  }\n  m() {\n    return this.x;\n  }\n}\nexport {\n  C\n};\n"
+  },
+  {
+    "name": "export-fn",
+    "gear": "target-es5",
+    "src": "export function f(){ return 1 }",
+    "code": "function f() {\n  return 1;\n}\nexport {\n  f\n};\n"
+  }
+]

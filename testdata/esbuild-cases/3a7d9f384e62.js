@@ -1,0 +1,1 @@
+x = function y() { if (0) return y }

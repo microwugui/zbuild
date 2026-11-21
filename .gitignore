@@ -1,0 +1,10 @@
+# 依赖与生成物（可从源码/夹具重建，不入库）
+node_modules/
+coverage/
+coverage-m1/
+.up/
+testdata/oracle-diffs/
+# 运行期临时
+*.log
+*.tmp
+.DS_Store

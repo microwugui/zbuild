@@ -1,0 +1,128 @@
+package linker
+
+// 第 178 批 Go 探针：mangleProps / mangleLocalCSS（linker.go:352/450）逐字节固化。
+import (
+	"encoding/json"
+	"fmt"
+	"os"
+	"sort"
+	"testing"
+
+	"github.com/evanw/esbuild/internal/ast"
+	"github.com/evanw/esbuild/internal/config"
+	"github.com/evanw/esbuild/internal/css_ast"
+	"github.com/evanw/esbuild/internal/graph"
+	"github.com/evanw/esbuild/internal/js_ast"
+	"github.com/evanw/esbuild/internal/logger"
+)
+
+type gmRow struct {
+	Fn  string                 `json:"fn"`
+	Arg map[string]interface{} `json:"arg"`
+	Out interface{}            `json:"out"`
+}
+func gmRef(s, i uint32) ast.Ref { return ast.Ref{SourceIndex: s, InnerIndex: i} }
+
+// 建立含 JS/CSS repr 的 linkerContext（sourceIndex 0 是 runtime，跳过）
+func gmBuild(n int) *linkerContext {
+	c := &linkerContext{}
+	inputs := make([]graph.InputFile, n)
+	for si := 0; si < n; si++ { inputs[si] = graph.InputFile{Source: logger.Source{IdentifierName: fmt.Sprintf("f%d", si)}} }
+	reachable := make([]uint32, n); for i := range reachable { reachable[i] = uint32(i) }
+	c.graph = graph.CloneLinkerGraph(inputs, reachable, nil, false)
+	c.graph.Symbols.SymbolsForSource[0] = []ast.Symbol{{OriginalName: "runtime"}}
+	c.options = &config.Options{}
+	return c
+}
+
+func dumpMangled(c *linkerContext) []interface{} {
+	m := map[string]string{}
+	for r, name := range c.mangledProps { m[fmt.Sprintf("%d:%d", r.SourceIndex, r.InnerIndex)] = name }
+	keys := []string{}
+	for k := range m { keys = append(keys, k) }
+	sort.Strings(keys)
+	out := []interface{}{}
+	for _, k := range keys { out = append(out, []interface{}{k, m[k]}) }
+	return out
+}
+
+func TestTmpGenLngMangle(t *testing.T) {
+	var out []gmRow
+	add := func(fn string, arg map[string]interface{}, o interface{}) { out = append(out, gmRow{fn, arg, o}) }
+
+	// ---- mangleProps ----
+	{
+		// file1 has MangledProps {foo: ref(1,1), bar: ref(1,2)}, reserved "baz", cache maps keep "keep"->false
+		c := gmBuild(2)
+		syms := []ast.Symbol{{OriginalName:"runtime", Link: ast.InvalidRef},{OriginalName:"foo", Link: ast.InvalidRef, UseCountEstimate:5},{OriginalName:"bar", Link: ast.InvalidRef, UseCountEstimate:3}}
+		c.graph.Symbols.SymbolsForSource[1] = syms
+		repr := &graph.JSRepr{AST: js_ast.AST{
+			MangledProps: map[string]ast.Ref{"foo": gmRef(1,1), "bar": gmRef(1,2)},
+			ReservedProps: map[string]bool{"baz": true},
+		}}
+		c.graph.Files[1].InputFile.Repr = repr
+		cache := map[string]interface{}{"keep": false}
+		c.mangleProps(cache)
+		add("mangleProps", map[string]interface{}{"name":"basic"}, []interface{}{dumpMangled(c), cache})
+	}
+	{
+		// cache pins "foo" -> "X"
+		c := gmBuild(2)
+		c.graph.Symbols.SymbolsForSource[1] = []ast.Symbol{{OriginalName:"runtime", Link: ast.InvalidRef},{OriginalName:"foo", Link: ast.InvalidRef, UseCountEstimate:9}}
+		repr := &graph.JSRepr{AST: js_ast.AST{MangledProps: map[string]ast.Ref{"foo": gmRef(1,1)}}}
+		c.graph.Files[1].InputFile.Repr = repr
+		cache := map[string]interface{}{"foo": "X"}
+		c.mangleProps(cache)
+		add("mangleProps", map[string]interface{}{"name":"cache-pin"}, []interface{}{dumpMangled(c), cache})
+	}
+	{
+		// reserved keyword: prop named "default" should be skipped in assignment
+		c := gmBuild(2)
+		c.graph.Symbols.SymbolsForSource[1] = []ast.Symbol{{OriginalName:"runtime", Link: ast.InvalidRef},{OriginalName:"default", Link: ast.InvalidRef, UseCountEstimate:2}}
+		repr := &graph.JSRepr{AST: js_ast.AST{MangledProps: map[string]ast.Ref{"default": gmRef(1,1)}}}
+		c.graph.Files[1].InputFile.Repr = repr
+		cache := map[string]interface{}{}
+		c.mangleProps(cache)
+		add("mangleProps", map[string]interface{}{"name":"reserved-keyword"}, []interface{}{dumpMangled(c), cache})
+	}
+
+	// ---- mangleLocalCSS ----
+	{
+		// file1 CSS repr with symbols: one global CSS "g", two local CSS "a","b"
+		c := gmBuild(2)
+		c.mangledProps = map[ast.Ref]string{}
+		c.options.MinifyIdentifiers = false
+		c.graph.Symbols.SymbolsForSource[1] = []ast.Symbol{
+			{OriginalName:"runtime", Link: ast.InvalidRef},
+			{OriginalName:"g", Link: ast.InvalidRef, Kind: ast.SymbolGlobalCSS},
+			{OriginalName:"a", Link: ast.InvalidRef, Kind: ast.SymbolLocalCSS},
+			{OriginalName:"b", Link: ast.InvalidRef, Kind: ast.SymbolLocalCSS},
+		}
+		repr := &graph.CSSRepr{AST: css_ast.AST{}}
+		c.graph.Files[1].InputFile.Repr = repr
+		used := map[string]bool{"a_f0": true} // pre-reserve one
+		c.mangleLocalCSS(used)
+		add("mangleLocalCSS", map[string]interface{}{"name":"nonmin"}, []interface{}{dumpMangled(c), used})
+	}
+	{
+		// minify identifiers variant
+		c := gmBuild(2)
+		c.mangledProps = map[ast.Ref]string{}
+		c.options.MinifyIdentifiers = true
+		c.graph.Symbols.SymbolsForSource[1] = []ast.Symbol{
+			{OriginalName:"runtime", Link: ast.InvalidRef},
+			{OriginalName:"a", Link: ast.InvalidRef, Kind: ast.SymbolLocalCSS},
+			{OriginalName:"b", Link: ast.InvalidRef, Kind: ast.SymbolLocalCSS},
+		}
+		repr := &graph.CSSRepr{AST: css_ast.AST{}}
+		c.graph.Files[1].InputFile.Repr = repr
+		used := map[string]bool{}
+		c.mangleLocalCSS(used)
+		add("mangleLocalCSS", map[string]interface{}{"name":"min"}, []interface{}{dumpMangled(c), used})
+	}
+
+	b, err := json.Marshal(out)
+	if err != nil { t.Fatal(err) }
+	if err := os.WriteFile("/root/port/testdata/lngmangle-go.json", b, 0644); err != nil { t.Fatal(err) }
+	t.Logf("wrote %d cases", len(out))
+}

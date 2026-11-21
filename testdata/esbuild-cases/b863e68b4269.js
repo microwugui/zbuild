@@ -1,0 +1,1 @@
+new async function() { await 0 }

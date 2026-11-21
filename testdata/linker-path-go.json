@@ -1,0 +1,62 @@
+[
+  {
+    "public": "",
+    "rel": "x/y.js",
+    "out": "./x/y.js"
+  },
+  {
+    "public": "/assets",
+    "rel": "x/y.js",
+    "out": "/assets/x/y.js"
+  },
+  {
+    "public": "/assets/",
+    "rel": "x/y.js",
+    "out": "/assets/x/y.js"
+  },
+  {
+    "public": "https://cdn.example.com/",
+    "rel": "./a/b.js",
+    "out": "https://cdn.example.com/a/b.js"
+  },
+  {
+    "public": "https://cdn.example.com",
+    "rel": "./a/b.js",
+    "out": "https://cdn.example.com/a/b.js"
+  },
+  {
+    "public": ".",
+    "rel": ".///././/x/y",
+    "out": "./x/y"
+  },
+  {
+    "public": "",
+    "rel": "./x",
+    "out": "./x"
+  },
+  {
+    "public": "/p",
+    "rel": "./",
+    "out": "/p/"
+  },
+  {
+    "public": "/p",
+    "rel": "",
+    "out": "/p/"
+  },
+  {
+    "public": "",
+    "rel": "./a/../b",
+    "out": "./a/../b"
+  },
+  {
+    "public": "/",
+    "rel": "x",
+    "out": "/x"
+  },
+  {
+    "public": "//host/p/",
+    "rel": "./x",
+    "out": "//host/p/x"
+  }
+]

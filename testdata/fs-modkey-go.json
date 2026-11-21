@@ -1,0 +1,26 @@
+[
+ {
+  "case": "old-file",
+  "errKind": "none",
+  "size": 5,
+  "mtimeSec": 1000000000,
+  "mode": 33188,
+  "inodeOK": true
+ },
+ {
+  "case": "missing",
+  "errKind": "stat-error",
+  "size": 0,
+  "mtimeSec": 0,
+  "mode": 0,
+  "inodeOK": false
+ },
+ {
+  "case": "dir",
+  "errKind": "unusable",
+  "size": 0,
+  "mtimeSec": 0,
+  "mode": 0,
+  "inodeOK": false
+ }
+]

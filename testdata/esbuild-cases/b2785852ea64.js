@@ -1,0 +1,1 @@
+let b; a = b !== undefined && b !== null ? b : c

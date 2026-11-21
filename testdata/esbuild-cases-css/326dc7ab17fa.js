@@ -1,0 +1,1 @@
+a { inset: inherit; left: 1px }

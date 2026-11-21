@@ -1,0 +1,1 @@
+:root { @media screen { a { x: y } x: y; b { x: y } } }

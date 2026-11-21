@@ -1,0 +1,26 @@
+[
+  {
+    "name": "require-external",
+    "out": "cmVxdWlyZSgiZm9vIik7Cg=="
+  },
+  {
+    "name": "require-resolve",
+    "out": "cmVxdWlyZS5yZXNvbHZlKCJmb28iKTsK"
+  },
+  {
+    "name": "import-external",
+    "out": "aW1wb3J0KCJiYXIiKTsK"
+  },
+  {
+    "name": "import-with",
+    "out": "aW1wb3J0KCJiYXIiLCB7IHdpdGg6IHsgdHlwZTogImpzb24iIH0gfSk7Cg=="
+  },
+  {
+    "name": "import-assert",
+    "out": "aW1wb3J0KCJiYXIiLCB7IGFzc2VydDogeyB0eXBlOiAianNvbiIgfSB9KTsK"
+  },
+  {
+    "name": "import-with-unsupported",
+    "out": "aW1wb3J0KCJiYXIiKTsK"
+  }
+]

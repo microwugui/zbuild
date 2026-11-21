@@ -1,0 +1,1 @@
+[{"name":"Serializer","in":"count=3","out":["enter0","leave0","enter1","leave1","enter2","leave2"]},{"name":"WaitGroup","in":"add2-done2-wait","out":"ok"},{"name":"Timer","in":"nested+fork+join","out":[{"notes":["a: 0ms","  b: 0ms","c: 0ms"],"text":"Timing information (times may not nest hierarchically due to parallelism)"}]},{"name":"Timer","in":"nil-safe","out":"ok"}]

@@ -1,0 +1,1 @@
+var a; while (1) ;

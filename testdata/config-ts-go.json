@@ -1,0 +1,52 @@
+[
+  {
+    "fn": "UnusedImportFlags",
+    "case": "default",
+    "out": "0"
+  },
+  {
+    "fn": "UnusedImportFlags",
+    "case": "verbatim",
+    "out": "3"
+  },
+  {
+    "fn": "UnusedImportFlags",
+    "case": "preserveVals",
+    "out": "2"
+  },
+  {
+    "fn": "UnusedImportFlags",
+    "case": "importsPreserve",
+    "out": "1"
+  },
+  {
+    "fn": "UnusedImportFlags",
+    "case": "importsError",
+    "out": "1"
+  },
+  {
+    "fn": "UnusedImportFlags",
+    "case": "both",
+    "out": "3"
+  },
+  {
+    "fn": "mergeDefineData",
+    "case": "0|0",
+    "out": "0|[new]"
+  },
+  {
+    "fn": "mergeDefineData",
+    "case": "1|0",
+    "out": "1|[new]"
+  },
+  {
+    "fn": "mergeDefineData",
+    "case": "0|2",
+    "out": "2|[new]"
+  },
+  {
+    "fn": "mergeDefineData",
+    "case": "1|2",
+    "out": "3|[new]"
+  }
+]

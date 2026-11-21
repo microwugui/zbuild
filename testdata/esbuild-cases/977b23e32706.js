@@ -1,0 +1,1 @@
+if (a) { if (b) throw c; else { let d = e; if (f) throw g } }

@@ -1,0 +1,73 @@
+package main
+
+import (
+	"encoding/json"
+	"os"
+	"testing"
+
+	"github.com/evanw/esbuild/internal/logger"
+	"github.com/evanw/esbuild/pkg/api"
+)
+
+// 第 82 轮：service 消息编解码纯函数 Go 探针。
+func TestTmpGenMsg(t *testing.T) {
+	type row struct { Fn string `json:"fn"`; Arg string `json:"arg"`; Out string `json:"out"` }
+	var out []row
+	canon := func(v interface{}) string { b, _ := json.Marshal(v); return string(b) }
+
+	loc := &api.Location{File: "a.js", Namespace: "file", Line: 3, Column: 7, Length: 5, LineText: "xy", Suggestion: "try"}
+	loc2 := &api.Location{File: "b.css", Namespace: "ns", Line: 1, Column: 0, Length: 0, LineText: "", Suggestion: ""}
+	msgs := []api.Message{
+		{ID: "assign-to-constant", PluginName: "", Text: "cannot assign", Location: loc,
+			Notes: []api.Note{{Text: "note1", Location: loc2}, {Text: "note2", Location: nil}},
+			Detail: 42},
+		{ID: "", PluginName: "my-plugin", Text: "oops", Location: nil, Notes: nil, Detail: "s"},
+		{ID: "bigint", PluginName: "", Text: "big", Location: loc2, Notes: nil, Detail: nil},
+	}
+	// encodeMessages -> canonical JSON of []interface{}
+	out = append(out, row{"encodeMessages", "three-msgs", canon(encodeMessages(msgs))})
+
+	// encodeErrorPacket id=7
+	out = append(out, row{"encodeErrorPacket", "id7", canon(encodeErrorPacket(7, errString("boom")))})
+
+	// decodeMessages: round-trip from encoded public values (order-independent flat dump)
+	encoded := encodeMessages(msgs)
+	dec := decodeMessages(encoded)
+	dj := make([]map[string]interface{}, 0, len(dec))
+	for _, m := range dec {
+		e := map[string]interface{}{"id": m.ID, "plugin": m.PluginName, "text": m.Text,
+			"notes": len(m.Notes), "loc": locFlat(m.Location), "detail": detailInt(m.Detail)}
+		notesFlat := make([]string, 0, len(m.Notes))
+		for _, n := range m.Notes { notesFlat = append(notesFlat, n.Text + "|" + locFlat(n.Location)) }
+		e["notesData"] = notesFlat
+		dj = append(dj, e)
+	}
+	out = append(out, row{"decodeMessages", "roundtrip", canon(dj)})
+
+	// decodeMessageToPrivate: one msg map
+	obj := map[string]interface{}{
+		"id": "assign-to-constant", "pluginName": "p", "text": "txt",
+		"location": map[string]interface{}{"file": "x.js", "namespace": "", "line": 2, "column": 1, "length": 3, "lineText": "z", "suggestion": ""},
+		"detail": 9,
+		"notes": []interface{}{map[string]interface{}{"text": "n1", "location": nil}},
+	}
+	priv := decodeMessageToPrivate(obj)
+	pj := map[string]interface{}{"id": logger.MsgIDToString(priv.ID), "plugin": priv.PluginName,
+		"text": priv.Data.Text, "detail": priv.Data.UserDetail, "notes": len(priv.Notes),
+		"locNil": priv.Data.Location == nil}
+	out = append(out, row{"decodeMessageToPrivate", "one", canon(pj)})
+
+	b, _ := json.MarshalIndent(out, "", "  ")
+	if err := os.WriteFile("/root/port/testdata/service-msg-go.json", b, 0644); err != nil { t.Fatal(err) }
+	t.Logf("wrote %d rows", len(out))
+}
+
+type errString string
+func (e errString) Error() string { return string(e) }
+
+func locFlat(l *api.Location) string {
+	if l == nil { return "nil" }
+	return l.File + "|" + l.Namespace + "|" + itoaMsg(l.Line) + "|" + itoaMsg(l.Column) + "|" + itoaMsg(l.Length) + "|" + l.LineText + "|" + l.Suggestion
+}
+func itoaMsg(n int) string { if n == 0 { return "0" }; neg := n < 0; if neg { n = -n }; var s []byte; for n > 0 { s = append([]byte{byte('0'+n%10)}, s...); n /= 10 }; if neg { s = append([]byte{'-'}, s...) }; return string(s) }
+func detailInt(v interface{}) int { if n, ok := v.(int); ok { return n }; return -999 }

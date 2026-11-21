@@ -1,0 +1,1 @@
+a { box-shadow: 0px 0px 0px var(--foo) black }

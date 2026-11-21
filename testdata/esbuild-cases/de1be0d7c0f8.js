@@ -1,0 +1,1 @@
+const a=0; for (const b = 1;;) ;

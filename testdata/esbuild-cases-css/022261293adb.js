@@ -1,0 +1,1 @@
+a { border-radius: var(--x) var(--y) var(--z) var(--y) }

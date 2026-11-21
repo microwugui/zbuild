@@ -1,0 +1,1 @@
+.foo, .bar, .foo:before, .bar:after { &:hover { color: red } }

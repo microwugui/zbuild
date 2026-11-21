@@ -1,0 +1,73 @@
+package js_parser_test
+
+// 第 113 轮 Go 探针：parser visit 内层整族端到端输出。直调 Parse + Print（M1 口径）。
+import (
+	"encoding/base64"
+	"encoding/json"
+	"os"
+	"testing"
+
+	"github.com/evanw/esbuild/internal/ast"
+	"github.com/evanw/esbuild/internal/config"
+	"github.com/evanw/esbuild/internal/js_parser"
+	"github.com/evanw/esbuild/internal/js_printer"
+	"github.com/evanw/esbuild/internal/logger"
+	"github.com/evanw/esbuild/internal/renamer"
+)
+
+type vfRow struct {
+	Name string `json:"name"`
+	Out  string `json:"out"`
+}
+
+func vfPrint(src string, po *config.Options, minify bool) string {
+	log := logger.NewDeferLog(logger.DeferLogNoVerboseOrDebug, nil)
+	source := logger.Source{Index: 0, KeyPath: logger.Path{Text: "<stdin>"}, Contents: src}
+	cp := *po
+	cp.MinifySyntax = minify
+	topo := js_parser.OptionsFromConfig(&cp)
+	tree, ok := js_parser.Parse(log, source, topo)
+	if !ok { return "PARSE_FAIL" }
+	symbols := ast.NewSymbolMap(1)
+	symbols.SymbolsForSource[0] = tree.Symbols
+	r := renamer.NewNoOpRenamer(symbols)
+	opts := js_printer.Options{OutputFormat: config.FormatESModule}
+	if minify { opts.MinifySyntax = true }
+	return string(js_printer.Print(tree, symbols, r, opts).JS)
+}
+
+func TestTmpGenVisitFamily113(t *testing.T) {
+	rows := []vfRow{}
+	po := &config.Options{}
+	def := []struct{ name, src string }{
+		{"require-stub", "require(\"fs\");\n"},
+		{"let-stmt", "let x = 1;\nuse(x);\n"},
+		{"using-stmt", "using x = foo();\nuse(x);\n"},
+		{"const-ident", "const x = 1;\n"},
+		{"assign-import-err", "import { x } from \"m\";\nx = 1;\n"},
+	}
+	for _, c := range def {
+		rows = append(rows, vfRow{Name: c.name, Out: base64.StdEncoding.EncodeToString([]byte(vfPrint(c.src, po, false)))})
+	}
+	rows = append(rows, vfRow{Name: "module-require", Out: base64.StdEncoding.EncodeToString([]byte(vfPrint("module.require(\"x\");\n", po, false)))})
+	mini := []struct{ name, src string }{
+		{"const-order", "var x = 1 === y;\n"},
+		{"undef-null", "var x = y == void 0;\n"},
+		{"paren-add-mul", "var x = (a + b) * c;\n"},
+		{"pow-assoc", "var x = a ** b ** c;\n"},
+		{"comma", "var x = (a, b);\n"},
+		{"obj-prop", "var x = ({a: 1, b: 2}).a;\n"},
+		{"obj-prop-miss", "var x = ({a: 1}).z;\n"},
+		{"obj-method", "var x = ({a() {}}).a;\n"},
+	}
+	for _, c := range mini {
+		rows = append(rows, vfRow{Name: c.name, Out: base64.StdEncoding.EncodeToString([]byte(vfPrint(c.src, po, true)))})
+	}
+	b, err := json.MarshalIndent(rows, "", "  ")
+	if err != nil { t.Fatal(err) }
+	if err := os.WriteFile("/root/port/testdata/visit-family-go.json", b, 0644); err != nil { t.Fatal(err) }
+	for _, r := range rows {
+		dec, _ := base64.StdEncoding.DecodeString(r.Out)
+		t.Logf("%-18s => %q", r.Name, string(dec))
+	}
+}

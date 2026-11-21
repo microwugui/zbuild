@@ -1,0 +1,1 @@
+if (1) a(); else { const b = c }

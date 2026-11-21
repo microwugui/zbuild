@@ -1,0 +1,102 @@
+[
+  {
+    "fn": "getObjectPropertyNumber",
+    "key": "num",
+    "out": "true"
+  },
+  {
+    "fn": "getObjectPropertyString",
+    "key": "num",
+    "out": "false"
+  },
+  {
+    "fn": "getObjectPropertyObject",
+    "key": "num",
+    "out": "false"
+  },
+  {
+    "fn": "getObjectPropertyArray",
+    "key": "num",
+    "out": "false"
+  },
+  {
+    "fn": "getObjectPropertyNumber",
+    "key": "str",
+    "out": "false"
+  },
+  {
+    "fn": "getObjectPropertyString",
+    "key": "str",
+    "out": "true"
+  },
+  {
+    "fn": "getObjectPropertyObject",
+    "key": "str",
+    "out": "false"
+  },
+  {
+    "fn": "getObjectPropertyArray",
+    "key": "str",
+    "out": "false"
+  },
+  {
+    "fn": "getObjectPropertyNumber",
+    "key": "obj",
+    "out": "false"
+  },
+  {
+    "fn": "getObjectPropertyString",
+    "key": "obj",
+    "out": "false"
+  },
+  {
+    "fn": "getObjectPropertyObject",
+    "key": "obj",
+    "out": "true"
+  },
+  {
+    "fn": "getObjectPropertyArray",
+    "key": "obj",
+    "out": "false"
+  },
+  {
+    "fn": "getObjectPropertyNumber",
+    "key": "arr",
+    "out": "false"
+  },
+  {
+    "fn": "getObjectPropertyString",
+    "key": "arr",
+    "out": "false"
+  },
+  {
+    "fn": "getObjectPropertyObject",
+    "key": "arr",
+    "out": "false"
+  },
+  {
+    "fn": "getObjectPropertyArray",
+    "key": "arr",
+    "out": "true"
+  },
+  {
+    "fn": "getObjectPropertyNumber",
+    "key": "missing",
+    "out": "false"
+  },
+  {
+    "fn": "getObjectPropertyString",
+    "key": "missing",
+    "out": "false"
+  },
+  {
+    "fn": "getObjectPropertyObject",
+    "key": "missing",
+    "out": "false"
+  },
+  {
+    "fn": "getObjectPropertyArray",
+    "key": "missing",
+    "out": "false"
+  }
+]

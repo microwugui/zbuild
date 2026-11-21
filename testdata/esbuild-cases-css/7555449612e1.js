@@ -1,0 +1,1 @@
+.yellow { color: hsl(60 100% 50%) }

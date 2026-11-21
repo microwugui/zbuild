@@ -1,0 +1,159 @@
+package resolver
+
+// 第 160 批 Go 探针：parsePackageJSON 逐字节固化（Resolve 链核心构造器）。
+// mockFS + cache.MakeCacheSet 提供内存 package.json；输出 dump packageJSON 全字段 + msgs。
+import (
+	"encoding/json"
+	"os"
+	"sort"
+	"testing"
+
+	"github.com/evanw/esbuild/internal/cache"
+	"github.com/evanw/esbuild/internal/config"
+	"github.com/evanw/esbuild/internal/fs"
+	"github.com/evanw/esbuild/internal/js_ast"
+	"github.com/evanw/esbuild/internal/logger"
+)
+
+type pjRow struct {
+	Arg map[string]interface{} `json:"arg"`
+	Out interface{}            `json:"out"`
+}
+
+func pjRange(r logger.Range) interface{} { return []interface{}{r.Loc.Start, r.Len} }
+
+// pjEntry full recursive dump (same as resolver-leaves probe)
+func pjDumpEntry(e pjEntry) interface{} {
+	m := map[string]interface{}{"k": int(e.kind), "s": e.strData, "tok": pjRange(e.firstToken)}
+	arr := []interface{}{}
+	for _, x := range e.arrData { arr = append(arr, pjDumpEntry(x)) }
+	m["a"] = arr
+	mp := []interface{}{}
+	for _, p := range e.mapData { mp = append(mp, []interface{}{p.key, pjDumpEntry(p.value), pjRange(p.keyRange)}) }
+	m["m"] = mp
+	ex := []string{}
+	for _, p := range e.expansionKeys { ex = append(ex, p.key) }
+	m["e"] = ex
+	return m
+}
+
+func pjDumpMap(m *pjMap) interface{} {
+	if m == nil { return nil }
+	return map[string]interface{}{"key": m.propertyKey, "loc": m.propertyKeyLoc.Start, "root": pjDumpEntry(m.root)}
+}
+
+func pjDump(pj *packageJSON, msgs []string) interface{} {
+	if pj == nil { return map[string]interface{}{"nil": true, "msgs": msgs} }
+	// mainFields sorted
+	mfkeys := make([]string, 0, len(pj.mainFields))
+	for k := range pj.mainFields { mfkeys = append(mfkeys, k) }
+	sort.Strings(mfkeys)
+	mf := []interface{}{}
+	for _, k := range mfkeys { f := pj.mainFields[k]; mf = append(mf, []interface{}{k, f.relPath, f.keyLoc.Start}) }
+
+	// moduleTypeData
+	mtd := map[string]interface{}{"type": int(pj.moduleTypeData.Type)}
+	if pj.moduleTypeData.Source != nil { mtd["range"] = pjRange(pj.moduleTypeData.Range) }
+
+	// browserMap sorted: nil -> "disabled"
+	var bm interface{}
+	if pj.browserMap != nil {
+		keys := make([]string, 0, len(pj.browserMap))
+		for k := range pj.browserMap { keys = append(keys, k) }
+		sort.Strings(keys)
+		arr := []interface{}{}
+		for _, k := range keys {
+			v := pj.browserMap[k]
+			if v == nil { arr = append(arr, []interface{}{k, nil}) } else { arr = append(arr, []interface{}{k, *v}) }
+		}
+		bm = arr
+	}
+
+	// sideEffectsMap sorted
+	var sem interface{}
+	if pj.sideEffectsMap != nil {
+		keys := make([]string, 0, len(pj.sideEffectsMap))
+		for k := range pj.sideEffectsMap { keys = append(keys, k) }
+		sort.Strings(keys)
+		arr := []interface{}{}
+		for _, k := range keys { arr = append(arr, []interface{}{k, pj.sideEffectsMap[k]}) }
+		sem = arr
+	}
+	// sideEffectsData
+	var sed interface{}
+	if pj.sideEffectsData != nil {
+		sed = []interface{}{pj.sideEffectsData.IsSideEffectsArrayInJSON, pjRange(pj.sideEffectsData.Range)}
+	}
+	// sideEffectsRegexps: pattern strings
+	ser := []string{}
+	for _, re := range pj.sideEffectsRegexps { ser = append(ser, re.String()) }
+
+	return map[string]interface{}{
+		"name": pj.name,
+		"mainFields": mf,
+		"moduleType": mtd,
+		"tsconfig": pj.tsconfig,
+		"browserMap": bm,
+		"sideEffectsMap": sem,
+		"sideEffectsData": sed,
+		"sideEffectsRegexps": ser,
+		"importsMap": pjDumpMap(pj.importsMap),
+		"exportsMap": pjDumpMap(pj.exportsMap),
+		"sourcePath": pj.source.KeyPath.Text,
+		"msgs": msgs,
+	}
+}
+
+func TestTmpGenPackageJSON(t *testing.T) {
+	var out []pjRow
+
+	run := func(name, contents string, platform config.Platform, mainFields []string) pjRow {
+		// fresh mock FS + caches per case so content is picked up and caches don't collide
+		fsObj := fs.MockFS(map[string]string{"/pkg/package.json": contents}, fs.MockUnix, "/")
+		caches := cache.MakeCacheSet()
+		log := logger.NewDeferLog(logger.DeferLogAll, nil)
+		opts := &config.Options{Platform: platform, MainFields: mainFields}
+		r := resolverQuery{Resolver: NewResolver(config.BuildCall, fsObj, log, caches, opts)}
+		pj := r.parsePackageJSON("/pkg")
+		msgs := []string{}
+		for _, m := range log.Done() { msgs = append(msgs, m.Data.Text) }
+		return pjRow{
+			Arg: map[string]interface{}{"name": name, "contents": contents, "platform": int(platform), "mainFields": mainFields},
+			Out: pjDump(pj, msgs),
+		}
+	}
+
+	cases := []struct{ name, contents string; platform config.Platform; mf []string }{
+		{"empty", `{}`, config.PlatformNode, nil},
+		{"name", `{"name":"foo"}`, config.PlatformNode, nil},
+		{"type-cjs", `{"type":"commonjs"}`, config.PlatformNode, nil},
+		{"type-esm", `{"type":"module"}`, config.PlatformNode, nil},
+		{"type-bad", `{"type":"weird"}`, config.PlatformNode, nil},
+		{"type-dts", `{"type":"./index.d.ts"}`, config.PlatformNode, nil},
+		{"type-nonstr", `{"type":123}`, config.PlatformNode, nil},
+		{"tsconfig", `{"tsconfig":"./tsconfig.build.json"}`, config.PlatformNode, nil},
+		{"main-node", `{"main":"dist/main.js","module":"dist/mod.js","browser":"dist/b.js"}`, config.PlatformNode, nil},
+		{"main-browser", `{"main":"dist/main.js","module":"dist/mod.js","browser":"dist/b.js"}`, config.PlatformBrowser, nil},
+		{"main-neutral", `{"main":"dist/main.js","module":"dist/mod.js"}`, config.PlatformNeutral, nil},
+		{"main-custom", `{"main":"a.js","module":"b.js","feature":"c.js"}`, config.PlatformNode, []string{"feature", "module"}},
+		{"browser-map", `{"browser":{"./a.js":"./b.js","./x":false,"pkg":"other"}}`, config.PlatformBrowser, nil},
+		{"browser-ignore-node", `{"browser":{"./a.js":"./b.js"}}`, config.PlatformNode, nil},
+		{"browser-badval", `{"browser":{"./a":123}}`, config.PlatformBrowser, nil},
+		{"sideeffects-false", `{"sideEffects":false}`, config.PlatformNode, nil},
+		{"sideeffects-empty", `{"sideEffects":[]}`, config.PlatformNode, nil},
+		{"sideeffects-array", `{"sideEffects":["./a.js","b","./c/*.js"]}`, config.PlatformNode, nil},
+		{"sideeffects-true", `{"sideEffects":true}`, config.PlatformNode, nil},
+		{"sideeffects-bad", `{"sideEffects":123}`, config.PlatformNode, nil},
+		{"imports", `{"imports":{"#a":"./a.js","#b/*":"./b/*.js"}}`, config.PlatformNode, nil},
+		{"exports", `{"exports":{".":"./index.js","./a":"./a.js"}}`, config.PlatformNode, nil},
+		{"exports-string", `{"exports":"./index.js"}`, config.PlatformNode, nil},
+		{"bad-json", `{ not json`, config.PlatformNode, nil},
+	}
+	for _, c := range cases { out = append(out, run(c.name, c.contents, c.platform, c.mf)) }
+
+	b, err := json.Marshal(out)
+	if err != nil { t.Fatal(err) }
+	if err := os.WriteFile("/root/port/testdata/pkgjson-go.json", b, 0644); err != nil { t.Fatal(err) }
+	t.Logf("wrote %d cases", len(out))
+	_ = js_ast.ModuleCommonJS_PackageJSON
+}

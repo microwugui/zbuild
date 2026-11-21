@@ -1,0 +1,1 @@
+try { thrower() } catch ({ a }) { console.log(0) }

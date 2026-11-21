@@ -1,0 +1,1 @@
+a = String.fromCharCode(0x1_0000_FFFF)

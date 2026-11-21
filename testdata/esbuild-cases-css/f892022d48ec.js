@@ -1,0 +1,1 @@
+b { @media (x) or (y) { a { color: red } } @media (x) and (y) { a { color: red } } }

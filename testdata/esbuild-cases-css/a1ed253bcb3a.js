@@ -1,0 +1,1 @@
+@supports (display: flex) { @supports selector(h2 > p) { a, b { &:hover { color: red } } } }

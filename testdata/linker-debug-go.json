@@ -1,0 +1,32 @@
+[
+  {
+    "s": "export x",
+    "i": 6,
+    "out": 0
+  },
+  {
+    "s": "  export x",
+    "i": 9,
+    "out": 2
+  },
+  {
+    "s": "foo export  ",
+    "i": 12,
+    "out": 4
+  },
+  {
+    "s": "abc",
+    "i": 3,
+    "out": 3
+  },
+  {
+    "s": "export",
+    "i": 6,
+    "out": 0
+  },
+  {
+    "s": "export   ",
+    "i": 9,
+    "out": 0
+  }
+]

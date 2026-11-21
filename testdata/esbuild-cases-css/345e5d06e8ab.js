@@ -1,0 +1,1 @@
+a { color: color(srgb-linear 73% 96% 62%) }

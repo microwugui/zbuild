@@ -1,0 +1,1 @@
+.foo { composes: bar from "file.css"; color: red }

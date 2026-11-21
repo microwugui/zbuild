@@ -1,0 +1,28 @@
+package config
+
+import (
+	"encoding/json"
+	"os"
+	"testing"
+)
+
+func TestTmpGenConfigTrio(t *testing.T) {
+	type row struct { Fn string `json:"fn"`; Arg interface{} `json:"arg"`; Out interface{} `json:"out"` }
+	var out []row
+	for _, f := range []Format{FormatPreserve, FormatIIFE, FormatCommonJS, FormatESModule, Format(99)} {
+		out = append(out, row{"String", int(f), f.String()})
+	}
+	for _, pair := range [][2]int{{0, 1}, {1, 1}, {1, 2}, {2, 2}, {3, 1}} {
+		out = append(out, row{"Has", pair, DefineFlags(pair[0]).Has(DefineFlags(pair[1]))})
+	}
+	for _, pair := range [][2]int{{0, 0}, {1, 0}, {2, 1}, {3, 3}} {
+		old := DefineData{Flags: DefineFlags(pair[0]), KeyParts: []string{"a"}}
+		nw := DefineData{Flags: DefineFlags(pair[1]), KeyParts: []string{"b"}}
+		r := mergeDefineData(old, nw)
+		out = append(out, row{"mergeDefineData", pair, []interface{}{int(r.Flags), r.KeyParts}})
+	}
+	b, err := json.MarshalIndent(out, "", "  ")
+	if err != nil { t.Fatal(err) }
+	if err := os.WriteFile("/root/port/testdata/config-trio-go.json", b, 0644); err != nil { t.Fatal(err) }
+	t.Logf("wrote %d rows", len(out))
+}

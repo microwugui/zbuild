@@ -1,0 +1,127 @@
+[
+  {
+    "fn": "mapKeyForDefine",
+    "arg": "[a]",
+    "out": "AQAAAGE="
+  },
+  {
+    "fn": "mapKeyForDefine",
+    "arg": "[abc de]",
+    "out": "AwAAAGFiYwIAAABkZQ=="
+  },
+  {
+    "fn": "mapKeyForDefine",
+    "arg": "[process env X]",
+    "out": "BwAAAHByb2Nlc3MDAAAAZW52AQAAAFg="
+  },
+  {
+    "fn": "mapKeyForDefine",
+    "arg": "[]",
+    "out": ""
+  },
+  {
+    "fn": "importKindToResolveKind",
+    "arg": "0",
+    "out": "1"
+  },
+  {
+    "fn": "importKindToResolveKind",
+    "arg": "1",
+    "out": "2"
+  },
+  {
+    "fn": "importKindToResolveKind",
+    "arg": "2",
+    "out": "3"
+  },
+  {
+    "fn": "importKindToResolveKind",
+    "arg": "3",
+    "out": "4"
+  },
+  {
+    "fn": "importKindToResolveKind",
+    "arg": "4",
+    "out": "5"
+  },
+  {
+    "fn": "importKindToResolveKind",
+    "arg": "5",
+    "out": "6"
+  },
+  {
+    "fn": "importKindToResolveKind",
+    "arg": "6",
+    "out": "7"
+  },
+  {
+    "fn": "importKindToResolveKind",
+    "arg": "7",
+    "out": "8"
+  },
+  {
+    "fn": "resolveKindToImportKind",
+    "arg": "1",
+    "out": "0"
+  },
+  {
+    "fn": "resolveKindToImportKind",
+    "arg": "2",
+    "out": "1"
+  },
+  {
+    "fn": "resolveKindToImportKind",
+    "arg": "3",
+    "out": "2"
+  },
+  {
+    "fn": "resolveKindToImportKind",
+    "arg": "4",
+    "out": "3"
+  },
+  {
+    "fn": "resolveKindToImportKind",
+    "arg": "5",
+    "out": "4"
+  },
+  {
+    "fn": "resolveKindToImportKind",
+    "arg": "6",
+    "out": "5"
+  },
+  {
+    "fn": "resolveKindToImportKind",
+    "arg": "7",
+    "out": "6"
+  },
+  {
+    "fn": "resolveKindToImportKind",
+    "arg": "8",
+    "out": "7"
+  },
+  {
+    "fn": "stripDirPrefix",
+    "arg": "[/foo/bar /foo /]",
+    "out": "true|bar"
+  },
+  {
+    "fn": "stripDirPrefix",
+    "arg": "[C:\\foo\\bar C:\\ \\/]",
+    "out": "true|foo\\bar"
+  },
+  {
+    "fn": "stripDirPrefix",
+    "arg": "[abc  /]",
+    "out": "true|abc"
+  },
+  {
+    "fn": "stripDirPrefix",
+    "arg": "[foobar foo /]",
+    "out": "false|"
+  },
+  {
+    "fn": "stripDirPrefix",
+    "arg": "[foo foo /]",
+    "out": "true|"
+  }
+]

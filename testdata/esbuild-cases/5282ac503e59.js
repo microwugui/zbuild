@@ -1,0 +1,1 @@
+if (false) for (await using x of y) ;

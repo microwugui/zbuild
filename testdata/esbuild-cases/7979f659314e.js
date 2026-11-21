@@ -1,0 +1,1 @@
+class Foo { #foo = 1 }

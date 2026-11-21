@@ -1,0 +1,17 @@
+[
+  {
+    "name": "empty",
+    "stderr": "",
+    "withFiles": false
+  },
+  {
+    "name": "one-file",
+    "stderr": "\n  out.js  10b \n\n",
+    "withFiles": true
+  },
+  {
+    "name": "two-files",
+    "stderr": "\n  out.js      10b \n  out.js.map   2b \n\n",
+    "withFiles": true
+  }
+]

@@ -1,0 +1,1 @@
+@import noturl("foo.css");

@@ -1,0 +1,1 @@
+import {x as y, z,} from "foo";y;z

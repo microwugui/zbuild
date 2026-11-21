@@ -1,0 +1,1 @@
+if (a) throw c; if (b) throw d;

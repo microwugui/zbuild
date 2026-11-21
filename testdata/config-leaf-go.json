@@ -1,0 +1,470 @@
+[
+  {
+    "fn": "HasExternalFile",
+    "arg": 0,
+    "arg2": 0,
+    "out": "false"
+  },
+  {
+    "fn": "HasExternalFile",
+    "arg": 1,
+    "arg2": 0,
+    "out": "false"
+  },
+  {
+    "fn": "HasExternalFile",
+    "arg": 2,
+    "arg2": 0,
+    "out": "false"
+  },
+  {
+    "fn": "HasExternalFile",
+    "arg": 3,
+    "arg2": 0,
+    "out": "true"
+  },
+  {
+    "fn": "HasExternalFile",
+    "arg": 4,
+    "arg2": 0,
+    "out": "true"
+  },
+  {
+    "fn": "KeepESMImportExportSyntax",
+    "arg": 0,
+    "arg2": 0,
+    "out": "true"
+  },
+  {
+    "fn": "KeepESMImportExportSyntax",
+    "arg": 1,
+    "arg2": 0,
+    "out": "false"
+  },
+  {
+    "fn": "KeepESMImportExportSyntax",
+    "arg": 2,
+    "arg2": 0,
+    "out": "false"
+  },
+  {
+    "fn": "KeepESMImportExportSyntax",
+    "arg": 3,
+    "arg2": 0,
+    "out": "true"
+  },
+  {
+    "fn": "IsTypeScript",
+    "arg": 0,
+    "arg2": 0,
+    "out": "false"
+  },
+  {
+    "fn": "IsCSS",
+    "arg": 0,
+    "arg2": 0,
+    "out": "false"
+  },
+  {
+    "fn": "CanHaveSourceMap",
+    "arg": 0,
+    "arg2": 0,
+    "out": "false"
+  },
+  {
+    "fn": "IsTypeScript",
+    "arg": 1,
+    "arg2": 0,
+    "out": "false"
+  },
+  {
+    "fn": "IsCSS",
+    "arg": 1,
+    "arg2": 0,
+    "out": "false"
+  },
+  {
+    "fn": "CanHaveSourceMap",
+    "arg": 1,
+    "arg2": 0,
+    "out": "false"
+  },
+  {
+    "fn": "IsTypeScript",
+    "arg": 2,
+    "arg2": 0,
+    "out": "false"
+  },
+  {
+    "fn": "IsCSS",
+    "arg": 2,
+    "arg2": 0,
+    "out": "false"
+  },
+  {
+    "fn": "CanHaveSourceMap",
+    "arg": 2,
+    "arg2": 0,
+    "out": "false"
+  },
+  {
+    "fn": "IsTypeScript",
+    "arg": 3,
+    "arg2": 0,
+    "out": "false"
+  },
+  {
+    "fn": "IsCSS",
+    "arg": 3,
+    "arg2": 0,
+    "out": "false"
+  },
+  {
+    "fn": "CanHaveSourceMap",
+    "arg": 3,
+    "arg2": 0,
+    "out": "false"
+  },
+  {
+    "fn": "IsTypeScript",
+    "arg": 4,
+    "arg2": 0,
+    "out": "false"
+  },
+  {
+    "fn": "IsCSS",
+    "arg": 4,
+    "arg2": 0,
+    "out": "true"
+  },
+  {
+    "fn": "CanHaveSourceMap",
+    "arg": 4,
+    "arg2": 0,
+    "out": "true"
+  },
+  {
+    "fn": "IsTypeScript",
+    "arg": 5,
+    "arg2": 0,
+    "out": "false"
+  },
+  {
+    "fn": "IsCSS",
+    "arg": 5,
+    "arg2": 0,
+    "out": "false"
+  },
+  {
+    "fn": "CanHaveSourceMap",
+    "arg": 5,
+    "arg2": 0,
+    "out": "false"
+  },
+  {
+    "fn": "IsTypeScript",
+    "arg": 6,
+    "arg2": 0,
+    "out": "false"
+  },
+  {
+    "fn": "IsCSS",
+    "arg": 6,
+    "arg2": 0,
+    "out": "false"
+  },
+  {
+    "fn": "CanHaveSourceMap",
+    "arg": 6,
+    "arg2": 0,
+    "out": "false"
+  },
+  {
+    "fn": "IsTypeScript",
+    "arg": 7,
+    "arg2": 0,
+    "out": "false"
+  },
+  {
+    "fn": "IsCSS",
+    "arg": 7,
+    "arg2": 0,
+    "out": "false"
+  },
+  {
+    "fn": "CanHaveSourceMap",
+    "arg": 7,
+    "arg2": 0,
+    "out": "false"
+  },
+  {
+    "fn": "IsTypeScript",
+    "arg": 8,
+    "arg2": 0,
+    "out": "false"
+  },
+  {
+    "fn": "IsCSS",
+    "arg": 8,
+    "arg2": 0,
+    "out": "false"
+  },
+  {
+    "fn": "CanHaveSourceMap",
+    "arg": 8,
+    "arg2": 0,
+    "out": "false"
+  },
+  {
+    "fn": "IsTypeScript",
+    "arg": 9,
+    "arg2": 0,
+    "out": "false"
+  },
+  {
+    "fn": "IsCSS",
+    "arg": 9,
+    "arg2": 0,
+    "out": "true"
+  },
+  {
+    "fn": "CanHaveSourceMap",
+    "arg": 9,
+    "arg2": 0,
+    "out": "true"
+  },
+  {
+    "fn": "IsTypeScript",
+    "arg": 10,
+    "arg2": 0,
+    "out": "false"
+  },
+  {
+    "fn": "IsCSS",
+    "arg": 10,
+    "arg2": 0,
+    "out": "false"
+  },
+  {
+    "fn": "CanHaveSourceMap",
+    "arg": 10,
+    "arg2": 0,
+    "out": "true"
+  },
+  {
+    "fn": "IsTypeScript",
+    "arg": 11,
+    "arg2": 0,
+    "out": "false"
+  },
+  {
+    "fn": "IsCSS",
+    "arg": 11,
+    "arg2": 0,
+    "out": "false"
+  },
+  {
+    "fn": "CanHaveSourceMap",
+    "arg": 11,
+    "arg2": 0,
+    "out": "true"
+  },
+  {
+    "fn": "IsTypeScript",
+    "arg": 12,
+    "arg2": 0,
+    "out": "false"
+  },
+  {
+    "fn": "IsCSS",
+    "arg": 12,
+    "arg2": 0,
+    "out": "false"
+  },
+  {
+    "fn": "CanHaveSourceMap",
+    "arg": 12,
+    "arg2": 0,
+    "out": "true"
+  },
+  {
+    "fn": "IsTypeScript",
+    "arg": 13,
+    "arg2": 0,
+    "out": "false"
+  },
+  {
+    "fn": "IsCSS",
+    "arg": 13,
+    "arg2": 0,
+    "out": "false"
+  },
+  {
+    "fn": "CanHaveSourceMap",
+    "arg": 13,
+    "arg2": 0,
+    "out": "true"
+  },
+  {
+    "fn": "IsTypeScript",
+    "arg": 14,
+    "arg2": 0,
+    "out": "false"
+  },
+  {
+    "fn": "IsCSS",
+    "arg": 14,
+    "arg2": 0,
+    "out": "true"
+  },
+  {
+    "fn": "CanHaveSourceMap",
+    "arg": 14,
+    "arg2": 0,
+    "out": "true"
+  },
+  {
+    "fn": "IsTypeScript",
+    "arg": 15,
+    "arg2": 0,
+    "out": "false"
+  },
+  {
+    "fn": "IsCSS",
+    "arg": 15,
+    "arg2": 0,
+    "out": "false"
+  },
+  {
+    "fn": "CanHaveSourceMap",
+    "arg": 15,
+    "arg2": 0,
+    "out": "true"
+  },
+  {
+    "fn": "IsTypeScript",
+    "arg": 16,
+    "arg2": 0,
+    "out": "true"
+  },
+  {
+    "fn": "IsCSS",
+    "arg": 16,
+    "arg2": 0,
+    "out": "false"
+  },
+  {
+    "fn": "CanHaveSourceMap",
+    "arg": 16,
+    "arg2": 0,
+    "out": "true"
+  },
+  {
+    "fn": "IsTypeScript",
+    "arg": 17,
+    "arg2": 0,
+    "out": "true"
+  },
+  {
+    "fn": "IsCSS",
+    "arg": 17,
+    "arg2": 0,
+    "out": "false"
+  },
+  {
+    "fn": "CanHaveSourceMap",
+    "arg": 17,
+    "arg2": 0,
+    "out": "true"
+  },
+  {
+    "fn": "IsTypeScript",
+    "arg": 18,
+    "arg2": 0,
+    "out": "true"
+  },
+  {
+    "fn": "IsCSS",
+    "arg": 18,
+    "arg2": 0,
+    "out": "false"
+  },
+  {
+    "fn": "CanHaveSourceMap",
+    "arg": 18,
+    "arg2": 0,
+    "out": "true"
+  },
+  {
+    "fn": "ShouldCallRuntimeRequire",
+    "arg": 0,
+    "arg2": 0,
+    "out": "false"
+  },
+  {
+    "fn": "ShouldCallRuntimeRequire",
+    "arg": 0,
+    "arg2": 1,
+    "out": "false"
+  },
+  {
+    "fn": "ShouldCallRuntimeRequire",
+    "arg": 0,
+    "arg2": 2,
+    "out": "false"
+  },
+  {
+    "fn": "ShouldCallRuntimeRequire",
+    "arg": 0,
+    "arg2": 3,
+    "out": "false"
+  },
+  {
+    "fn": "ShouldCallRuntimeRequire",
+    "arg": 1,
+    "arg2": 0,
+    "out": "false"
+  },
+  {
+    "fn": "ShouldCallRuntimeRequire",
+    "arg": 1,
+    "arg2": 1,
+    "out": "false"
+  },
+  {
+    "fn": "ShouldCallRuntimeRequire",
+    "arg": 1,
+    "arg2": 2,
+    "out": "false"
+  },
+  {
+    "fn": "ShouldCallRuntimeRequire",
+    "arg": 1,
+    "arg2": 3,
+    "out": "false"
+  },
+  {
+    "fn": "ShouldCallRuntimeRequire",
+    "arg": 2,
+    "arg2": 0,
+    "out": "true"
+  },
+  {
+    "fn": "ShouldCallRuntimeRequire",
+    "arg": 2,
+    "arg2": 1,
+    "out": "true"
+  },
+  {
+    "fn": "ShouldCallRuntimeRequire",
+    "arg": 2,
+    "arg2": 2,
+    "out": "false"
+  },
+  {
+    "fn": "ShouldCallRuntimeRequire",
+    "arg": 2,
+    "arg2": 3,
+    "out": "true"
+  }
+]

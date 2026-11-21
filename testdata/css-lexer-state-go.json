@@ -1,0 +1,87 @@
+[
+  {
+    "fn": "step",
+    "arg": "YeevrWI=|3",
+    "out": "97:1:0;31725:4:1;98:5:4;"
+  },
+  {
+    "fn": "step",
+    "arg": "YWI=|4",
+    "out": "97:1:0;98:2:1;-1:2:2;-1:2:2;"
+  },
+  {
+    "fn": "step",
+    "arg": "Cgp4|2",
+    "out": "10:1:0;10:2:1;"
+  },
+  {
+    "fn": "isValidEscape",
+    "arg": "XGE=|1|92",
+    "out": "true"
+  },
+  {
+    "fn": "isValidEscape",
+    "arg": "YQ==|0|97",
+    "out": "false"
+  },
+  {
+    "fn": "isValidEscape",
+    "arg": "XAo=|1|92",
+    "out": "false"
+  },
+  {
+    "fn": "wouldStartNumber",
+    "arg": "MTIz|0|49",
+    "out": "true"
+  },
+  {
+    "fn": "wouldStartNumber",
+    "arg": "LjU=|0|46",
+    "out": "false"
+  },
+  {
+    "fn": "wouldStartNumber",
+    "arg": "LXg=|0|45",
+    "out": "false"
+  },
+  {
+    "fn": "wouldStartNumber",
+    "arg": "Ky4z|0|43",
+    "out": "false"
+  },
+  {
+    "fn": "wouldStartNumber",
+    "arg": "YQ==|0|97",
+    "out": "false"
+  },
+  {
+    "fn": "consumeEscape",
+    "arg": "\\62 c",
+    "out": "98|5"
+  },
+  {
+    "fn": "consumeEscape",
+    "arg": "\\41\\42",
+    "out": "65|4"
+  },
+  {
+    "fn": "consumeEscape",
+    "arg": "\\000041x",
+    "out": "65|8"
+  },
+  {
+    "fn": "consumeEscape",
+    "arg": "\\",
+    "out": "65533|1"
+  },
+  {
+    "fn": "consumeEscape",
+    "arg": "\\n x",
+    "out": "110|3"
+  },
+  {
+    "fn": "consumeEscape",
+    "arg": "\\1f600",
+    "out": "128512|6"
+  }
+]

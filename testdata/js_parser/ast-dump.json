@@ -1,0 +1,4554 @@
+[
+ {
+  "exprComments": {},
+  "name": "binary",
+  "ok": true,
+  "stmts": [
+   {
+    "kind": "SExpr",
+    "loc": 0,
+    "value": {
+     "isParenthesized": false,
+     "kind": "EBinary",
+     "left": {
+      "kind": "EIdentifier",
+      "loc": 0,
+      "name": "x"
+     },
+     "loc": 0,
+     "op": 37,
+     "right": {
+      "isParenthesized": false,
+      "kind": "EBinary",
+      "left": {
+       "bits": "4607182418800017408",
+       "kind": "ENumber",
+       "loc": 4
+      },
+      "loc": 4,
+      "op": 11,
+      "right": {
+       "isParenthesized": false,
+       "kind": "EBinary",
+       "left": {
+        "bits": "4611686018427387904",
+        "kind": "ENumber",
+        "loc": 8
+       },
+       "loc": 8,
+       "op": 13,
+       "right": {
+        "bits": "4613937818241073152",
+        "kind": "ENumber",
+        "loc": 12
+       }
+      }
+     }
+    }
+   }
+  ]
+ },
+ {
+  "exprComments": {},
+  "name": "decls",
+  "ok": true,
+  "stmts": [
+   {
+    "decls": [
+     {
+      "binding": {
+       "kind": "BIdentifier",
+       "loc": 4,
+       "name": "a"
+      },
+      "value": {
+       "bits": "4607182418800017408",
+       "kind": "ENumber",
+       "loc": 8
+      }
+     },
+     {
+      "binding": {
+       "kind": "BIdentifier",
+       "loc": 11,
+       "name": "b"
+      },
+      "value": null
+     }
+    ],
+    "isExport": false,
+    "kind": "SLocal",
+    "loc": 0,
+    "localKind": 0
+   }
+  ]
+ },
+ {
+  "exprComments": {},
+  "name": "if-else",
+  "ok": true,
+  "stmts": [
+   {
+    "kind": "SIf",
+    "loc": 0,
+    "no": {
+     "kind": "SExpr",
+     "loc": 19,
+     "value": {
+      "kind": "EIdentifier",
+      "loc": 19,
+      "name": "c"
+     }
+    },
+    "test": {
+     "kind": "EIdentifier",
+     "loc": 4,
+     "name": "a"
+    },
+    "yes": {
+     "kind": "SBlock",
+     "loc": 7,
+     "stmts": [
+      {
+       "kind": "SExpr",
+       "loc": 9,
+       "value": {
+        "kind": "EIdentifier",
+        "loc": 9,
+        "name": "b"
+       }
+      }
+     ]
+    }
+   }
+  ]
+ },
+ {
+  "exprComments": {},
+  "name": "fn",
+  "ok": true,
+  "stmts": [
+   {
+    "fn": {
+     "args": [
+      {
+       "kind": "BIdentifier",
+       "loc": 11,
+       "name": "a"
+      },
+      {
+       "kind": "BIdentifier",
+       "loc": 14,
+       "name": "b"
+      }
+     ],
+     "body": [
+      {
+       "kind": "SReturn",
+       "loc": 19,
+       "value": {
+        "isParenthesized": false,
+        "kind": "EBinary",
+        "left": {
+         "kind": "EIdentifier",
+         "loc": 26,
+         "name": "a"
+        },
+        "loc": 26,
+        "op": 11,
+        "right": {
+         "kind": "EIdentifier",
+         "loc": 30,
+         "name": "b"
+        }
+       }
+      }
+     ],
+     "isAsync": false,
+     "isGenerator": false,
+     "name": "f",
+     "nameLoc": 9
+    },
+    "isExport": false,
+    "kind": "SFunction",
+    "loc": 0
+   }
+  ]
+ },
+ {
+  "exprComments": {},
+  "name": "member-call",
+  "ok": true,
+  "stmts": [
+   {
+    "kind": "SExpr",
+    "loc": 0,
+    "value": {
+     "args": [
+      {
+       "kind": "EIdentifier",
+       "loc": 7,
+       "name": "x"
+      },
+      {
+       "kind": "EString",
+       "loc": 10,
+       "preferTemplate": false,
+       "value": [
+        115
+       ]
+      }
+     ],
+     "kind": "ECall",
+     "loc": 0,
+     "optionalChain": 0,
+     "target": {
+      "index": {
+       "bits": "0",
+       "kind": "ENumber",
+       "loc": 4
+      },
+      "kind": "EIndex",
+      "loc": 0,
+      "optionalChain": 0,
+      "target": {
+       "kind": "EDot",
+       "loc": 0,
+       "name": "b",
+       "optionalChain": 0,
+       "target": {
+        "kind": "EIdentifier",
+        "loc": 0,
+        "name": "a"
+       }
+      }
+     }
+    }
+   }
+  ]
+ },
+ {
+  "exprComments": {},
+  "name": "tagged-template",
+  "ok": true,
+  "stmts": [
+   {
+    "kind": "SExpr",
+    "loc": 0,
+    "value": {
+     "headCooked": [
+      97
+     ],
+     "headRaw": "a",
+     "kind": "ETemplate",
+     "loc": 0,
+     "parts": [
+      {
+       "tailCooked": null,
+       "tailLoc": 8,
+       "tailRaw": "c",
+       "value": {
+        "kind": "EIdentifier",
+        "loc": 7,
+        "name": "b"
+       }
+      }
+     ],
+     "tag": {
+      "kind": "EIdentifier",
+      "loc": 0,
+      "name": "tag"
+     }
+    }
+   }
+  ]
+ },
+ {
+  "exprComments": {},
+  "name": "template",
+  "ok": true,
+  "stmts": [
+   {
+    "kind": "SExpr",
+    "loc": 0,
+    "value": {
+     "isParenthesized": false,
+     "kind": "EBinary",
+     "left": {
+      "kind": "EIdentifier",
+      "loc": 0,
+      "name": "x"
+     },
+     "loc": 0,
+     "op": 37,
+     "right": {
+      "headCooked": [
+       97
+      ],
+      "headRaw": null,
+      "kind": "ETemplate",
+      "loc": 4,
+      "parts": [
+       {
+        "tailCooked": [
+         99
+        ],
+        "tailLoc": 9,
+        "tailRaw": null,
+        "value": {
+         "kind": "EIdentifier",
+         "loc": 8,
+         "name": "b"
+        }
+       }
+      ],
+      "tag": null
+     }
+    }
+   }
+  ]
+ },
+ {
+  "exprComments": {},
+  "name": "regexp",
+  "ok": true,
+  "stmts": [
+   {
+    "kind": "SExpr",
+    "loc": 0,
+    "value": {
+     "kind": "ERegExp",
+     "loc": 0,
+     "value": "/(a)\\/b/gi"
+    }
+   }
+  ]
+ },
+ {
+  "exprComments": {},
+  "name": "regexp-class",
+  "ok": true,
+  "stmts": [
+   {
+    "kind": "SExpr",
+    "loc": 0,
+    "value": {
+     "kind": "ERegExp",
+     "loc": 0,
+     "value": "/[a-z/]+x/"
+    }
+   }
+  ]
+ },
+ {
+  "exprComments": {},
+  "name": "jsx-attrs",
+  "ok": true,
+  "stmts": [
+   {
+    "kind": "SExpr",
+    "loc": 0,
+    "value": {
+     "children": [
+      {
+       "kind": "EJSXText",
+       "loc": 15,
+       "raw": "hi &amp; bye"
+      }
+     ],
+     "isTagSingleLine": true,
+     "kind": "EJSXElement",
+     "loc": 0,
+     "properties": [
+      {
+       "flags": 0,
+       "key": {
+        "kind": "EString",
+        "loc": 3,
+        "preferTemplate": false,
+        "value": [
+         98
+        ]
+       },
+       "kind": 0,
+       "loc": 3,
+       "value": {
+        "kind": "EJSXText",
+        "loc": 5,
+        "raw": "\"x\""
+       }
+      },
+      {
+       "flags": 0,
+       "key": {
+        "kind": "EString",
+        "loc": 9,
+        "preferTemplate": false,
+        "value": [
+         99
+        ]
+       },
+       "kind": 0,
+       "loc": 9,
+       "value": {
+        "kind": "EIdentifier",
+        "loc": 12,
+        "name": "y"
+       }
+      }
+     ],
+     "tag": {
+      "kind": "EString",
+      "loc": 1,
+      "preferTemplate": false,
+      "value": [
+       97
+      ]
+     }
+    }
+   }
+  ]
+ },
+ {
+  "exprComments": {},
+  "name": "jsx-nested",
+  "ok": true,
+  "stmts": [
+   {
+    "kind": "SExpr",
+    "loc": 0,
+    "value": {
+     "children": [
+      {
+       "children": [],
+       "isTagSingleLine": true,
+       "kind": "EJSXElement",
+       "loc": 5,
+       "properties": [],
+       "tag": {
+        "kind": "EString",
+        "loc": 6,
+        "preferTemplate": false,
+        "value": [
+         99
+        ]
+       }
+      }
+     ],
+     "isTagSingleLine": true,
+     "kind": "EJSXElement",
+     "loc": 0,
+     "properties": [],
+     "tag": {
+      "kind": "EDot",
+      "loc": 1,
+      "name": "B",
+      "optionalChain": 0,
+      "target": {
+       "kind": "EIdentifier",
+       "loc": 1,
+       "name": "A"
+      }
+     }
+    }
+   }
+  ]
+ },
+ {
+  "exprComments": {},
+  "name": "jsx-fragment",
+  "ok": true,
+  "stmts": [
+   {
+    "kind": "SExpr",
+    "loc": 0,
+    "value": {
+     "children": [],
+     "isTagSingleLine": true,
+     "kind": "EJSXElement",
+     "loc": 0,
+     "properties": [],
+     "tag": null
+    }
+   }
+  ]
+ },
+ {
+  "exprComments": {},
+  "name": "unary",
+  "ok": true,
+  "stmts": [
+   {
+    "kind": "SExpr",
+    "loc": 0,
+    "value": {
+     "isParenthesized": false,
+     "kind": "EBinary",
+     "left": {
+      "kind": "EUnary",
+      "loc": 0,
+      "op": 1,
+      "value": {
+       "kind": "EIdentifier",
+       "loc": 1,
+       "name": "x"
+      }
+     },
+     "loc": 0,
+     "op": 13,
+     "right": {
+      "kind": "EUnary",
+      "loc": 5,
+      "op": 3,
+      "value": {
+       "kind": "EIdentifier",
+       "loc": 6,
+       "name": "y"
+      }
+     }
+    }
+   }
+  ]
+ },
+ {
+  "exprComments": {},
+  "name": "nested-call",
+  "ok": true,
+  "stmts": [
+   {
+    "kind": "SExpr",
+    "loc": 0,
+    "value": {
+     "args": [
+      {
+       "args": [
+        {
+         "bits": "4607182418800017408",
+         "kind": "ENumber",
+         "loc": 4
+        }
+       ],
+       "kind": "ECall",
+       "loc": 2,
+       "optionalChain": 0,
+       "target": {
+        "kind": "EIdentifier",
+        "loc": 2,
+        "name": "g"
+       }
+      },
+      {
+       "closeBracketLoc": 13,
+       "isParenthesized": false,
+       "isSingleLine": true,
+       "items": [
+        {
+         "bits": "4611686018427387904",
+         "kind": "ENumber",
+         "loc": 9
+        },
+        {
+         "bits": "4613937818241073152",
+         "kind": "ENumber",
+         "loc": 12
+        }
+       ],
+       "kind": "EArray",
+       "loc": 8
+      }
+     ],
+     "kind": "ECall",
+     "loc": 0,
+     "optionalChain": 0,
+     "target": {
+      "kind": "EIdentifier",
+      "loc": 0,
+      "name": "f"
+     }
+    }
+   }
+  ]
+ },
+ {
+  "exprComments": {},
+  "name": "string-escape",
+  "ok": true,
+  "stmts": [
+   {
+    "kind": "SExpr",
+    "loc": 0,
+    "value": {
+     "kind": "EIdentifier",
+     "loc": 0,
+     "name": "q"
+    }
+   },
+   {
+    "kind": "SExpr",
+    "loc": 3,
+    "value": {
+     "kind": "EString",
+     "loc": 3,
+     "preferTemplate": false,
+     "value": [
+      97,
+      10,
+      98
+     ]
+    }
+   }
+  ]
+ },
+ {
+  "exprComments": {},
+  "name": "bigint",
+  "ok": true,
+  "stmts": [
+   {
+    "kind": "SExpr",
+    "loc": 0,
+    "value": {
+     "isParenthesized": false,
+     "kind": "EBinary",
+     "left": {
+      "kind": "EBigInt",
+      "loc": 0,
+      "value": "10"
+     },
+     "loc": 0,
+     "op": 11,
+     "right": {
+      "bits": "4607182418800017408",
+      "kind": "ENumber",
+      "loc": 6
+     }
+    }
+   }
+  ]
+ },
+ {
+  "exprComments": {},
+  "name": "let",
+  "ok": true,
+  "stmts": [
+   {
+    "decls": [
+     {
+      "binding": {
+       "kind": "BIdentifier",
+       "loc": 4,
+       "name": "x"
+      },
+      "value": {
+       "bits": "4607182418800017408",
+       "kind": "ENumber",
+       "loc": 8
+      }
+     }
+    ],
+    "isExport": false,
+    "kind": "SLocal",
+    "loc": 0,
+    "localKind": 1
+   }
+  ]
+ },
+ {
+  "exprComments": {},
+  "name": "nullish-assign",
+  "ok": true,
+  "stmts": [
+   {
+    "kind": "SExpr",
+    "loc": 0,
+    "value": {
+     "isParenthesized": false,
+     "kind": "EBinary",
+     "left": {
+      "kind": "EIdentifier",
+      "loc": 0,
+      "name": "x"
+     },
+     "loc": 0,
+     "op": 50,
+     "right": {
+      "kind": "EIdentifier",
+      "loc": 6,
+      "name": "y"
+     }
+    }
+   }
+  ]
+ },
+ {
+  "exprComments": {},
+  "name": "directive",
+  "ok": true,
+  "stmts": [
+   {
+    "kind": "SExpr",
+    "loc": 14,
+    "value": {
+     "kind": "EIdentifier",
+     "loc": 14,
+     "name": "x"
+    }
+   }
+  ]
+ },
+ {
+  "exprComments": {},
+  "name": "template-crlf",
+  "ok": true,
+  "stmts": [
+   {
+    "kind": "SExpr",
+    "loc": 0,
+    "value": {
+     "isParenthesized": false,
+     "kind": "EBinary",
+     "left": {
+      "kind": "EIdentifier",
+      "loc": 0,
+      "name": "x"
+     },
+     "loc": 0,
+     "op": 37,
+     "right": {
+      "headCooked": [
+       97,
+       10,
+       98
+      ],
+      "headRaw": null,
+      "kind": "ETemplate",
+      "loc": 4,
+      "parts": [
+       {
+        "tailCooked": [
+         99
+        ],
+        "tailLoc": 12,
+        "tailRaw": null,
+        "value": {
+         "kind": "EIdentifier",
+         "loc": 11,
+         "name": "y"
+        }
+       }
+      ],
+      "tag": null
+     }
+    }
+   }
+  ]
+ },
+ {
+  "exprComments": {},
+  "name": "jsx-text-unicode",
+  "ok": true,
+  "stmts": [
+   {
+    "kind": "SExpr",
+    "loc": 0,
+    "value": {
+     "children": [
+      {
+       "kind": "EJSXText",
+       "loc": 3,
+       "raw": "héllo 世界"
+      }
+     ],
+     "isTagSingleLine": true,
+     "kind": "EJSXElement",
+     "loc": 0,
+     "properties": [],
+     "tag": {
+      "kind": "EString",
+      "loc": 1,
+      "preferTemplate": false,
+      "value": [
+       97
+      ]
+     }
+    }
+   }
+  ]
+ },
+ {
+  "name": "parse-error",
+  "ok": false
+ },
+ {
+  "exprComments": {},
+  "name": "jsx-mismatch",
+  "ok": true,
+  "stmts": [
+   {
+    "kind": "SExpr",
+    "loc": 0,
+    "value": {
+     "children": [],
+     "isTagSingleLine": true,
+     "kind": "EJSXElement",
+     "loc": 0,
+     "properties": [],
+     "tag": {
+      "kind": "EString",
+      "loc": 1,
+      "preferTemplate": false,
+      "value": [
+       97
+      ]
+     }
+    }
+   }
+  ]
+ },
+ {
+  "name": "jsx-unclosed",
+  "ok": false
+ },
+ {
+  "exprComments": {},
+  "name": "object",
+  "ok": true,
+  "stmts": [
+   {
+    "kind": "SExpr",
+    "loc": 0,
+    "value": {
+     "isParenthesized": false,
+     "kind": "EBinary",
+     "left": {
+      "kind": "EIdentifier",
+      "loc": 0,
+      "name": "x"
+     },
+     "loc": 0,
+     "op": 37,
+     "right": {
+      "closeBraceLoc": 19,
+      "isParenthesized": false,
+      "isSingleLine": true,
+      "kind": "EObject",
+      "loc": 4,
+      "properties": [
+       {
+        "classStaticBlock": null,
+        "closeBracketLoc": 0,
+        "flags": 0,
+        "initializer": null,
+        "key": {
+         "kind": "EString",
+         "loc": 6,
+         "preferTemplate": false,
+         "value": [
+          97
+         ]
+        },
+        "kind": 0,
+        "loc": 6,
+        "value": {
+         "bits": "4607182418800017408",
+         "kind": "ENumber",
+         "loc": 9
+        }
+       },
+       {
+        "classStaticBlock": null,
+        "closeBracketLoc": 0,
+        "flags": 0,
+        "initializer": null,
+        "key": {
+         "kind": "EString",
+         "loc": 12,
+         "preferTemplate": false,
+         "value": [
+          98
+         ]
+        },
+        "kind": 0,
+        "loc": 12,
+        "value": {
+         "kind": "EString",
+         "loc": 15,
+         "preferTemplate": false,
+         "value": [
+          115
+         ]
+        }
+       }
+      ]
+     }
+    }
+   }
+  ]
+ },
+ {
+  "exprComments": {},
+  "name": "object-computed",
+  "ok": true,
+  "stmts": [
+   {
+    "kind": "SExpr",
+    "loc": 0,
+    "value": {
+     "isParenthesized": false,
+     "kind": "EBinary",
+     "left": {
+      "kind": "EIdentifier",
+      "loc": 0,
+      "name": "x"
+     },
+     "loc": 0,
+     "op": 37,
+     "right": {
+      "closeBraceLoc": 27,
+      "isParenthesized": false,
+      "isSingleLine": true,
+      "kind": "EObject",
+      "loc": 4,
+      "properties": [
+       {
+        "classStaticBlock": null,
+        "closeBracketLoc": 8,
+        "flags": 1,
+        "initializer": null,
+        "key": {
+         "kind": "EIdentifier",
+         "loc": 7,
+         "name": "a"
+        },
+        "kind": 0,
+        "loc": 6,
+        "value": {
+         "bits": "4607182418800017408",
+         "kind": "ENumber",
+         "loc": 11
+        }
+       },
+       {
+        "classStaticBlock": null,
+        "closeBracketLoc": 0,
+        "flags": 8,
+        "initializer": null,
+        "key": {
+         "kind": "EString",
+         "loc": 14,
+         "preferTemplate": false,
+         "value": [
+          98
+         ]
+        },
+        "kind": 0,
+        "loc": 14,
+        "value": {
+         "bits": "4611686018427387904",
+         "kind": "ENumber",
+         "loc": 19
+        }
+       },
+       {
+        "classStaticBlock": null,
+        "closeBracketLoc": 0,
+        "flags": 0,
+        "initializer": null,
+        "key": {
+         "bits": "4613937818241073152",
+         "kind": "ENumber",
+         "loc": 22
+        },
+        "kind": 0,
+        "loc": 22,
+        "value": {
+         "bits": "4616189618054758400",
+         "kind": "ENumber",
+         "loc": 25
+        }
+       }
+      ]
+     }
+    }
+   }
+  ]
+ },
+ {
+  "exprComments": {},
+  "name": "object-multiline",
+  "ok": true,
+  "stmts": [
+   {
+    "kind": "SExpr",
+    "loc": 0,
+    "value": {
+     "isParenthesized": false,
+     "kind": "EBinary",
+     "left": {
+      "kind": "EIdentifier",
+      "loc": 0,
+      "name": "x"
+     },
+     "loc": 0,
+     "op": 37,
+     "right": {
+      "closeBraceLoc": 21,
+      "isParenthesized": false,
+      "isSingleLine": false,
+      "kind": "EObject",
+      "loc": 4,
+      "properties": [
+       {
+        "classStaticBlock": null,
+        "closeBracketLoc": 0,
+        "flags": 0,
+        "initializer": null,
+        "key": {
+         "kind": "EString",
+         "loc": 8,
+         "preferTemplate": false,
+         "value": [
+          97
+         ]
+        },
+        "kind": 0,
+        "loc": 8,
+        "value": {
+         "bits": "4607182418800017408",
+         "kind": "ENumber",
+         "loc": 11
+        }
+       },
+       {
+        "classStaticBlock": null,
+        "closeBracketLoc": 0,
+        "flags": 0,
+        "initializer": null,
+        "key": {
+         "kind": "EString",
+         "loc": 16,
+         "preferTemplate": false,
+         "value": [
+          98
+         ]
+        },
+        "kind": 0,
+        "loc": 16,
+        "value": {
+         "bits": "4611686018427387904",
+         "kind": "ENumber",
+         "loc": 19
+        }
+       }
+      ]
+     }
+    }
+   }
+  ]
+ },
+ {
+  "exprComments": {},
+  "name": "object-nested",
+  "ok": true,
+  "stmts": [
+   {
+    "kind": "SExpr",
+    "loc": 0,
+    "value": {
+     "isParenthesized": false,
+     "kind": "EBinary",
+     "left": {
+      "kind": "EIdentifier",
+      "loc": 0,
+      "name": "x"
+     },
+     "loc": 0,
+     "op": 37,
+     "right": {
+      "closeBraceLoc": 29,
+      "isParenthesized": false,
+      "isSingleLine": true,
+      "kind": "EObject",
+      "loc": 4,
+      "properties": [
+       {
+        "classStaticBlock": null,
+        "closeBracketLoc": 0,
+        "flags": 0,
+        "initializer": null,
+        "key": {
+         "kind": "EString",
+         "loc": 6,
+         "preferTemplate": false,
+         "value": [
+          97
+         ]
+        },
+        "kind": 0,
+        "loc": 6,
+        "value": {
+         "closeBraceLoc": 16,
+         "isParenthesized": false,
+         "isSingleLine": true,
+         "kind": "EObject",
+         "loc": 9,
+         "properties": [
+          {
+           "classStaticBlock": null,
+           "closeBracketLoc": 0,
+           "flags": 0,
+           "initializer": null,
+           "key": {
+            "kind": "EString",
+            "loc": 11,
+            "preferTemplate": false,
+            "value": [
+             98
+            ]
+           },
+           "kind": 0,
+           "loc": 11,
+           "value": {
+            "bits": "4607182418800017408",
+            "kind": "ENumber",
+            "loc": 14
+           }
+          }
+         ]
+        }
+       },
+       {
+        "classStaticBlock": null,
+        "closeBracketLoc": 0,
+        "flags": 0,
+        "initializer": null,
+        "key": {
+         "kind": "EString",
+         "loc": 19,
+         "preferTemplate": false,
+         "value": [
+          99
+         ]
+        },
+        "kind": 0,
+        "loc": 19,
+        "value": {
+         "closeBracketLoc": 27,
+         "isParenthesized": false,
+         "isSingleLine": true,
+         "items": [
+          {
+           "bits": "4607182418800017408",
+           "kind": "ENumber",
+           "loc": 23
+          },
+          {
+           "bits": "4611686018427387904",
+           "kind": "ENumber",
+           "loc": 26
+          }
+         ],
+         "kind": "EArray",
+         "loc": 22
+        }
+       }
+      ]
+     }
+    }
+   }
+  ]
+ },
+ {
+  "exprComments": {},
+  "name": "object-empty",
+  "ok": true,
+  "stmts": [
+   {
+    "kind": "SExpr",
+    "loc": 0,
+    "value": {
+     "isParenthesized": false,
+     "kind": "EBinary",
+     "left": {
+      "kind": "EIdentifier",
+      "loc": 0,
+      "name": "x"
+     },
+     "loc": 0,
+     "op": 37,
+     "right": {
+      "closeBraceLoc": 5,
+      "isParenthesized": false,
+      "isSingleLine": true,
+      "kind": "EObject",
+      "loc": 4,
+      "properties": []
+     }
+    }
+   }
+  ]
+ },
+ {
+  "exprComments": {},
+  "name": "array-multiline",
+  "ok": true,
+  "stmts": [
+   {
+    "kind": "SExpr",
+    "loc": 0,
+    "value": {
+     "isParenthesized": false,
+     "kind": "EBinary",
+     "left": {
+      "kind": "EIdentifier",
+      "loc": 0,
+      "name": "x"
+     },
+     "loc": 0,
+     "op": 37,
+     "right": {
+      "closeBracketLoc": 15,
+      "isParenthesized": false,
+      "isSingleLine": false,
+      "items": [
+       {
+        "bits": "4607182418800017408",
+        "kind": "ENumber",
+        "loc": 8
+       },
+       {
+        "bits": "4611686018427387904",
+        "kind": "ENumber",
+        "loc": 13
+       }
+      ],
+      "kind": "EArray",
+      "loc": 4
+     }
+    }
+   }
+  ]
+ },
+ {
+  "exprComments": {},
+  "name": "array-empty",
+  "ok": true,
+  "stmts": [
+   {
+    "kind": "SExpr",
+    "loc": 0,
+    "value": {
+     "isParenthesized": false,
+     "kind": "EBinary",
+     "left": {
+      "kind": "EIdentifier",
+      "loc": 0,
+      "name": "x"
+     },
+     "loc": 0,
+     "op": 37,
+     "right": {
+      "closeBracketLoc": 5,
+      "isParenthesized": false,
+      "isSingleLine": true,
+      "items": [],
+      "kind": "EArray",
+      "loc": 4
+     }
+    }
+   }
+  ]
+ },
+ {
+  "exprComments": {},
+  "name": "export-const",
+  "ok": true,
+  "stmts": [
+   {
+    "decls": [
+     {
+      "binding": {
+       "kind": "BIdentifier",
+       "loc": 13,
+       "name": "x"
+      },
+      "value": {
+       "bits": "4607182418800017408",
+       "kind": "ENumber",
+       "loc": 17
+      }
+     },
+     {
+      "binding": {
+       "kind": "BIdentifier",
+       "loc": 20,
+       "name": "y"
+      },
+      "value": {
+       "kind": "EString",
+       "loc": 24,
+       "preferTemplate": false,
+       "value": [
+        115
+       ]
+      }
+     }
+    ],
+    "isExport": true,
+    "kind": "SLocal",
+    "loc": 7,
+    "localKind": 2
+   }
+  ]
+ },
+ {
+  "exprComments": {},
+  "name": "export-let",
+  "ok": true,
+  "stmts": [
+   {
+    "decls": [
+     {
+      "binding": {
+       "kind": "BIdentifier",
+       "loc": 11,
+       "name": "z"
+      },
+      "value": null
+     }
+    ],
+    "isExport": true,
+    "kind": "SLocal",
+    "loc": 7,
+    "localKind": 1
+   }
+  ]
+ },
+ {
+  "exprComments": {},
+  "name": "export-var",
+  "ok": true,
+  "stmts": [
+   {
+    "decls": [
+     {
+      "binding": {
+       "kind": "BIdentifier",
+       "loc": 11,
+       "name": "v"
+      },
+      "value": {
+       "bits": "4607182418800017408",
+       "kind": "ENumber",
+       "loc": 15
+      }
+     }
+    ],
+    "isExport": true,
+    "kind": "SLocal",
+    "loc": 7,
+    "localKind": 0
+   }
+  ]
+ },
+ {
+  "exprComments": {},
+  "name": "export-function",
+  "ok": true,
+  "stmts": [
+   {
+    "fn": {
+     "args": [
+      {
+       "kind": "BIdentifier",
+       "loc": 18,
+       "name": "a"
+      }
+     ],
+     "body": [
+      {
+       "kind": "SReturn",
+       "loc": 23,
+       "value": {
+        "kind": "EIdentifier",
+        "loc": 30,
+        "name": "a"
+       }
+      }
+     ],
+     "isAsync": false,
+     "isGenerator": false,
+     "name": "f",
+     "nameLoc": 16
+    },
+    "isExport": true,
+    "kind": "SFunction",
+    "loc": 7
+   }
+  ]
+ },
+ {
+  "exprComments": {},
+  "name": "class",
+  "ok": true,
+  "stmts": [
+   {
+    "class": {
+     "bodyLoc": 8,
+     "classKeywordLen": 5,
+     "classKeywordLoc": 0,
+     "closeBraceLoc": 9,
+     "extends": null,
+     "name": "C",
+     "nameLoc": 6,
+     "properties": []
+    },
+    "isExport": false,
+    "kind": "SClass",
+    "loc": 0
+   }
+  ]
+ },
+ {
+  "exprComments": {},
+  "name": "class-methods",
+  "ok": true,
+  "stmts": [
+   {
+    "class": {
+     "bodyLoc": 8,
+     "classKeywordLen": 5,
+     "classKeywordLoc": 0,
+     "closeBraceLoc": 63,
+     "extends": null,
+     "name": "C",
+     "nameLoc": 6,
+     "properties": [
+      {
+       "classStaticBlock": null,
+       "closeBracketLoc": 0,
+       "flags": 0,
+       "initializer": null,
+       "key": {
+        "kind": "EString",
+        "loc": 10,
+        "preferTemplate": false,
+        "value": [
+         109
+        ]
+       },
+       "kind": 1,
+       "loc": 10,
+       "value": {
+        "fn": {
+         "args": [
+          {
+           "kind": "BIdentifier",
+           "loc": 12,
+           "name": "a"
+          }
+         ],
+         "body": [
+          {
+           "kind": "SReturn",
+           "loc": 17,
+           "value": {
+            "kind": "EIdentifier",
+            "loc": 24,
+            "name": "a"
+           }
+          }
+         ],
+         "isAsync": false,
+         "isGenerator": false,
+         "name": null
+        },
+        "isParenthesized": false,
+        "kind": "EFunction",
+        "loc": 11
+       }
+      },
+      {
+       "classStaticBlock": null,
+       "closeBracketLoc": 0,
+       "flags": 0,
+       "initializer": null,
+       "key": {
+        "kind": "EString",
+        "loc": 33,
+        "preferTemplate": false,
+        "value": [
+         103
+        ]
+       },
+       "kind": 2,
+       "loc": 29,
+       "value": {
+        "fn": {
+         "args": [],
+         "body": [
+          {
+           "kind": "SReturn",
+           "loc": 39,
+           "value": {
+            "bits": "4607182418800017408",
+            "kind": "ENumber",
+            "loc": 46
+           }
+          }
+         ],
+         "isAsync": false,
+         "isGenerator": false,
+         "name": null
+        },
+        "isParenthesized": false,
+        "kind": "EFunction",
+        "loc": 34
+       }
+      },
+      {
+       "classStaticBlock": null,
+       "closeBracketLoc": 0,
+       "flags": 0,
+       "initializer": null,
+       "key": {
+        "kind": "EString",
+        "loc": 55,
+        "preferTemplate": false,
+        "value": [
+         115
+        ]
+       },
+       "kind": 3,
+       "loc": 51,
+       "value": {
+        "fn": {
+         "args": [
+          {
+           "kind": "BIdentifier",
+           "loc": 57,
+           "name": "v"
+          }
+         ],
+         "body": [],
+         "isAsync": false,
+         "isGenerator": false,
+         "name": null
+        },
+        "isParenthesized": false,
+        "kind": "EFunction",
+        "loc": 56
+       }
+      }
+     ]
+    },
+    "isExport": false,
+    "kind": "SClass",
+    "loc": 0
+   }
+  ]
+ },
+ {
+  "exprComments": {},
+  "name": "class-extends",
+  "ok": true,
+  "stmts": [
+   {
+    "class": {
+     "bodyLoc": 18,
+     "classKeywordLen": 5,
+     "classKeywordLoc": 0,
+     "closeBraceLoc": 41,
+     "extends": {
+      "kind": "EIdentifier",
+      "loc": 16,
+      "name": "D"
+     },
+     "name": "C",
+     "nameLoc": 6,
+     "properties": [
+      {
+       "classStaticBlock": null,
+       "closeBracketLoc": 0,
+       "flags": 0,
+       "initializer": null,
+       "key": {
+        "kind": "EString",
+        "loc": 20,
+        "preferTemplate": false,
+        "value": [
+         99,
+         111,
+         110,
+         115,
+         116,
+         114,
+         117,
+         99,
+         116,
+         111,
+         114
+        ]
+       },
+       "kind": 1,
+       "loc": 20,
+       "value": {
+        "fn": {
+         "args": [],
+         "body": [
+          {
+           "kind": "SExpr",
+           "loc": 36,
+           "value": {
+            "kind": "EIdentifier",
+            "loc": 36,
+            "name": "x"
+           }
+          }
+         ],
+         "isAsync": false,
+         "isGenerator": false,
+         "name": null
+        },
+        "isParenthesized": false,
+        "kind": "EFunction",
+        "loc": 31
+       }
+      }
+     ]
+    },
+    "isExport": false,
+    "kind": "SClass",
+    "loc": 0
+   }
+  ]
+ },
+ {
+  "exprComments": {},
+  "name": "class-static",
+  "ok": true,
+  "stmts": [
+   {
+    "class": {
+     "bodyLoc": 8,
+     "classKeywordLen": 5,
+     "classKeywordLoc": 0,
+     "closeBraceLoc": 38,
+     "extends": null,
+     "name": "C",
+     "nameLoc": 6,
+     "properties": [
+      {
+       "classStaticBlock": null,
+       "closeBracketLoc": 0,
+       "flags": 2,
+       "initializer": {
+        "bits": "4607182418800017408",
+        "kind": "ENumber",
+        "loc": 21
+       },
+       "key": {
+        "kind": "EString",
+        "loc": 17,
+        "preferTemplate": false,
+        "value": [
+         120
+        ]
+       },
+       "kind": 0,
+       "loc": 10,
+       "value": null
+      },
+      {
+       "classStaticBlock": null,
+       "closeBracketLoc": 0,
+       "flags": 2,
+       "initializer": null,
+       "key": {
+        "kind": "EString",
+        "loc": 31,
+        "preferTemplate": false,
+        "value": [
+         109
+        ]
+       },
+       "kind": 1,
+       "loc": 24,
+       "value": {
+        "fn": {
+         "args": [],
+         "body": [],
+         "isAsync": false,
+         "isGenerator": false,
+         "name": null
+        },
+        "isParenthesized": false,
+        "kind": "EFunction",
+        "loc": 32
+       }
+      }
+     ]
+    },
+    "isExport": false,
+    "kind": "SClass",
+    "loc": 0
+   }
+  ]
+ },
+ {
+  "exprComments": {},
+  "name": "class-expr",
+  "ok": true,
+  "stmts": [
+   {
+    "kind": "SExpr",
+    "loc": 0,
+    "value": {
+     "isParenthesized": false,
+     "kind": "EBinary",
+     "left": {
+      "kind": "EIdentifier",
+      "loc": 0,
+      "name": "x"
+     },
+     "loc": 0,
+     "op": 37,
+     "right": {
+      "class": {
+       "bodyLoc": 20,
+       "classKeywordLen": 5,
+       "classKeywordLoc": 4,
+       "closeBraceLoc": 21,
+       "extends": {
+        "kind": "EIdentifier",
+        "loc": 18,
+        "name": "D"
+       },
+       "name": null,
+       "nameLoc": null,
+       "properties": []
+      },
+      "kind": "EClass",
+      "loc": 4
+     }
+    }
+   }
+  ]
+ },
+ {
+  "exprComments": {},
+  "name": "object-shorthand",
+  "ok": true,
+  "stmts": [
+   {
+    "kind": "SExpr",
+    "loc": 0,
+    "value": {
+     "isParenthesized": false,
+     "kind": "EBinary",
+     "left": {
+      "kind": "EIdentifier",
+      "loc": 0,
+      "name": "x"
+     },
+     "loc": 0,
+     "op": 37,
+     "right": {
+      "closeBraceLoc": 30,
+      "isParenthesized": false,
+      "isSingleLine": true,
+      "kind": "EObject",
+      "loc": 4,
+      "properties": [
+       {
+        "classStaticBlock": null,
+        "closeBracketLoc": 0,
+        "flags": 4,
+        "initializer": null,
+        "key": {
+         "kind": "EString",
+         "loc": 6,
+         "preferTemplate": false,
+         "value": [
+          97
+         ]
+        },
+        "kind": 0,
+        "loc": 6,
+        "value": {
+         "kind": "EIdentifier",
+         "loc": 6,
+         "name": "a"
+        }
+       },
+       {
+        "classStaticBlock": null,
+        "closeBracketLoc": 0,
+        "flags": 0,
+        "initializer": null,
+        "key": {
+         "kind": "EString",
+         "loc": 9,
+         "preferTemplate": false,
+         "value": [
+          98
+         ]
+        },
+        "kind": 0,
+        "loc": 9,
+        "value": {
+         "bits": "4607182418800017408",
+         "kind": "ENumber",
+         "loc": 12
+        }
+       },
+       {
+        "classStaticBlock": null,
+        "closeBracketLoc": 17,
+        "flags": 1,
+        "initializer": null,
+        "key": {
+         "kind": "EIdentifier",
+         "loc": 16,
+         "name": "c"
+        },
+        "kind": 0,
+        "loc": 15,
+        "value": {
+         "bits": "4611686018427387904",
+         "kind": "ENumber",
+         "loc": 20
+        }
+       },
+       {
+        "classStaticBlock": null,
+        "closeBracketLoc": 0,
+        "flags": 8,
+        "initializer": null,
+        "key": {
+         "kind": "EString",
+         "loc": 23,
+         "preferTemplate": false,
+         "value": [
+          100
+         ]
+        },
+        "kind": 0,
+        "loc": 23,
+        "value": {
+         "bits": "4613937818241073152",
+         "kind": "ENumber",
+         "loc": 28
+        }
+       }
+      ]
+     }
+    }
+   }
+  ]
+ },
+ {
+  "exprComments": {},
+  "name": "object-method",
+  "ok": true,
+  "stmts": [
+   {
+    "kind": "SExpr",
+    "loc": 0,
+    "value": {
+     "isParenthesized": false,
+     "kind": "EBinary",
+     "left": {
+      "kind": "EIdentifier",
+      "loc": 0,
+      "name": "x"
+     },
+     "loc": 0,
+     "op": 37,
+     "right": {
+      "closeBraceLoc": 31,
+      "isParenthesized": false,
+      "isSingleLine": true,
+      "kind": "EObject",
+      "loc": 4,
+      "properties": [
+       {
+        "classStaticBlock": null,
+        "closeBracketLoc": 0,
+        "flags": 0,
+        "initializer": null,
+        "key": {
+         "kind": "EString",
+         "loc": 6,
+         "preferTemplate": false,
+         "value": [
+          109
+         ]
+        },
+        "kind": 1,
+        "loc": 6,
+        "value": {
+         "fn": {
+          "args": [
+           {
+            "kind": "BIdentifier",
+            "loc": 8,
+            "name": "a"
+           }
+          ],
+          "body": [
+           {
+            "kind": "SReturn",
+            "loc": 13,
+            "value": {
+             "kind": "EIdentifier",
+             "loc": 20,
+             "name": "a"
+            }
+           }
+          ],
+          "isAsync": false,
+          "isGenerator": false,
+          "name": null
+         },
+         "isParenthesized": false,
+         "kind": "EFunction",
+         "loc": 7
+        }
+       },
+       {
+        "classStaticBlock": null,
+        "closeBracketLoc": 0,
+        "flags": 0,
+        "initializer": null,
+        "key": {
+         "goType": "nil",
+         "kind": "UNSUPPORTED",
+         "loc": 0
+        },
+        "kind": 5,
+        "loc": 26,
+        "value": {
+         "kind": "EIdentifier",
+         "loc": 29,
+         "name": "s"
+        }
+       }
+      ]
+     }
+    }
+   }
+  ]
+ },
+ {
+  "exprComments": {},
+  "name": "export-class",
+  "ok": true,
+  "stmts": [
+   {
+    "class": {
+     "bodyLoc": 15,
+     "classKeywordLen": 5,
+     "classKeywordLoc": 7,
+     "closeBraceLoc": 16,
+     "extends": null,
+     "name": "C",
+     "nameLoc": 13,
+     "properties": []
+    },
+    "isExport": true,
+    "kind": "SClass",
+    "loc": 7
+   }
+  ]
+ },
+ {
+  "exprComments": {},
+  "name": "arrow",
+  "ok": true,
+  "stmts": [
+   {
+    "kind": "SExpr",
+    "loc": 0,
+    "value": {
+     "isParenthesized": false,
+     "kind": "EBinary",
+     "left": {
+      "kind": "EIdentifier",
+      "loc": 0,
+      "name": "x"
+     },
+     "loc": 0,
+     "op": 37,
+     "right": {
+      "args": [
+       {
+        "binding": {
+         "kind": "BIdentifier",
+         "loc": 4,
+         "name": "a"
+        },
+        "default": null
+       }
+      ],
+      "body": [
+       {
+        "kind": "SReturn",
+        "loc": 9,
+        "value": {
+         "kind": "EIdentifier",
+         "loc": 9,
+         "name": "a"
+        }
+       }
+      ],
+      "bodyLoc": 6,
+      "hasRestArg": false,
+      "isAsync": false,
+      "isParenthesized": false,
+      "kind": "EArrow",
+      "loc": 4,
+      "preferExpr": true
+     }
+    }
+   }
+  ]
+ },
+ {
+  "exprComments": {},
+  "name": "arrow-block",
+  "ok": true,
+  "stmts": [
+   {
+    "kind": "SExpr",
+    "loc": 0,
+    "value": {
+     "isParenthesized": false,
+     "kind": "EBinary",
+     "left": {
+      "kind": "EIdentifier",
+      "loc": 0,
+      "name": "x"
+     },
+     "loc": 0,
+     "op": 37,
+     "right": {
+      "args": [
+       {
+        "binding": {
+         "kind": "BIdentifier",
+         "loc": 5,
+         "name": "a"
+        },
+        "default": null
+       },
+       {
+        "binding": {
+         "kind": "BIdentifier",
+         "loc": 8,
+         "name": "b"
+        },
+        "default": null
+       }
+      ],
+      "body": [
+       {
+        "kind": "SReturn",
+        "loc": 16,
+        "value": {
+         "isParenthesized": false,
+         "kind": "EBinary",
+         "left": {
+          "kind": "EIdentifier",
+          "loc": 23,
+          "name": "a"
+         },
+         "loc": 23,
+         "op": 11,
+         "right": {
+          "kind": "EIdentifier",
+          "loc": 27,
+          "name": "b"
+         }
+        }
+       }
+      ],
+      "bodyLoc": 14,
+      "hasRestArg": false,
+      "isAsync": false,
+      "isParenthesized": false,
+      "kind": "EArrow",
+      "loc": 4,
+      "preferExpr": false
+     }
+    }
+   }
+  ]
+ },
+ {
+  "exprComments": {},
+  "name": "arrow-destructure",
+  "ok": true,
+  "stmts": [
+   {
+    "kind": "SExpr",
+    "loc": 0,
+    "value": {
+     "isParenthesized": false,
+     "kind": "EBinary",
+     "left": {
+      "kind": "EIdentifier",
+      "loc": 0,
+      "name": "x"
+     },
+     "loc": 0,
+     "op": 37,
+     "right": {
+      "args": [
+       {
+        "binding": {
+         "closeBraceLoc": 16,
+         "isSingleLine": true,
+         "kind": "BObject",
+         "properties": [
+          {
+           "closeBracketLoc": 0,
+           "default": null,
+           "isComputed": false,
+           "isSpread": false,
+           "key": {
+            "kind": "EString",
+            "loc": 7,
+            "preferTemplate": false,
+            "value": [
+             97
+            ]
+           },
+           "loc": 7,
+           "preferQuotedKey": false,
+           "value": {
+            "kind": "BIdentifier",
+            "loc": 7,
+            "name": "a"
+           }
+          },
+          {
+           "closeBracketLoc": 0,
+           "default": {
+            "bits": "4611686018427387904",
+            "kind": "ENumber",
+            "loc": 14
+           },
+           "isComputed": false,
+           "isSpread": false,
+           "key": {
+            "kind": "EString",
+            "loc": 10,
+            "preferTemplate": false,
+            "value": [
+             98
+            ]
+           },
+           "loc": 10,
+           "preferQuotedKey": false,
+           "value": {
+            "kind": "BIdentifier",
+            "loc": 10,
+            "name": "b"
+           }
+          }
+         ]
+        },
+        "default": null
+       },
+       {
+        "binding": {
+         "closeBracketLoc": 27,
+         "hasSpread": true,
+         "isSingleLine": true,
+         "items": [
+          {
+           "binding": {
+            "kind": "BIdentifier",
+            "loc": 20,
+            "name": "c"
+           },
+           "default": null,
+           "loc": 20
+          },
+          {
+           "binding": {
+            "kind": "BIdentifier",
+            "loc": 26,
+            "name": "d"
+           },
+           "default": null,
+           "loc": 26
+          }
+         ],
+         "kind": "BArray"
+        },
+        "default": null
+       }
+      ],
+      "body": [
+       {
+        "kind": "SReturn",
+        "loc": 33,
+        "value": {
+         "kind": "EIdentifier",
+         "loc": 33,
+         "name": "a"
+        }
+       }
+      ],
+      "bodyLoc": 30,
+      "hasRestArg": false,
+      "isAsync": false,
+      "isParenthesized": false,
+      "kind": "EArrow",
+      "loc": 4,
+      "preferExpr": true
+     }
+    }
+   }
+  ]
+ },
+ {
+  "exprComments": {},
+  "name": "arrow-obj",
+  "ok": true,
+  "stmts": [
+   {
+    "kind": "SExpr",
+    "loc": 0,
+    "value": {
+     "isParenthesized": false,
+     "kind": "EBinary",
+     "left": {
+      "kind": "EIdentifier",
+      "loc": 0,
+      "name": "x"
+     },
+     "loc": 0,
+     "op": 37,
+     "right": {
+      "args": [
+       {
+        "binding": {
+         "kind": "BIdentifier",
+         "loc": 4,
+         "name": "a"
+        },
+        "default": null
+       }
+      ],
+      "body": [
+       {
+        "kind": "SReturn",
+        "loc": 10,
+        "value": {
+         "closeBraceLoc": 17,
+         "isParenthesized": true,
+         "isSingleLine": true,
+         "kind": "EObject",
+         "loc": 10,
+         "properties": [
+          {
+           "classStaticBlock": null,
+           "closeBracketLoc": 0,
+           "flags": 0,
+           "initializer": null,
+           "key": {
+            "kind": "EString",
+            "loc": 12,
+            "preferTemplate": false,
+            "value": [
+             121
+            ]
+           },
+           "kind": 0,
+           "loc": 12,
+           "value": {
+            "bits": "4607182418800017408",
+            "kind": "ENumber",
+            "loc": 15
+           }
+          }
+         ]
+        }
+       }
+      ],
+      "bodyLoc": 6,
+      "hasRestArg": false,
+      "isAsync": false,
+      "isParenthesized": false,
+      "kind": "EArrow",
+      "loc": 4,
+      "preferExpr": true
+     }
+    }
+   }
+  ]
+ },
+ {
+  "exprComments": {},
+  "name": "spread-array",
+  "ok": true,
+  "stmts": [
+   {
+    "kind": "SExpr",
+    "loc": 0,
+    "value": {
+     "isParenthesized": false,
+     "kind": "EBinary",
+     "left": {
+      "kind": "EIdentifier",
+      "loc": 0,
+      "name": "x"
+     },
+     "loc": 0,
+     "op": 37,
+     "right": {
+      "closeBracketLoc": 12,
+      "isParenthesized": false,
+      "isSingleLine": true,
+      "items": [
+       {
+        "kind": "ESpread",
+        "loc": 5,
+        "value": {
+         "kind": "EIdentifier",
+         "loc": 8,
+         "name": "a"
+        }
+       },
+       {
+        "kind": "EIdentifier",
+        "loc": 11,
+        "name": "b"
+       }
+      ],
+      "kind": "EArray",
+      "loc": 4
+     }
+    }
+   }
+  ]
+ },
+ {
+  "exprComments": {},
+  "name": "call-spread",
+  "ok": true,
+  "stmts": [
+   {
+    "kind": "SExpr",
+    "loc": 0,
+    "value": {
+     "args": [
+      {
+       "kind": "ESpread",
+       "loc": 2,
+       "value": {
+        "kind": "EIdentifier",
+        "loc": 5,
+        "name": "a"
+       }
+      },
+      {
+       "kind": "EIdentifier",
+       "loc": 8,
+       "name": "b"
+      }
+     ],
+     "kind": "ECall",
+     "loc": 0,
+     "optionalChain": 0,
+     "target": {
+      "kind": "EIdentifier",
+      "loc": 0,
+      "name": "f"
+     }
+    }
+   }
+  ]
+ },
+ {
+  "exprComments": {},
+  "name": "import-default",
+  "ok": true,
+  "stmts": [
+   {
+    "defaultName": "a",
+    "defaultNameLoc": 7,
+    "flags": 4,
+    "isSingleLine": false,
+    "items": null,
+    "kind": "SImport",
+    "loc": 0,
+    "path": "./a.js",
+    "starName": null,
+    "starNameLoc": null
+   }
+  ]
+ },
+ {
+  "exprComments": {},
+  "name": "import-named",
+  "ok": true,
+  "stmts": [
+   {
+    "defaultName": null,
+    "defaultNameLoc": null,
+    "flags": 0,
+    "isSingleLine": true,
+    "items": [
+     {
+      "alias": "b",
+      "aliasLoc": 9,
+      "name": "b",
+      "nameLoc": 9,
+      "originalName": "b"
+     },
+     {
+      "alias": "c",
+      "aliasLoc": 12,
+      "name": "d",
+      "nameLoc": 17,
+      "originalName": "d"
+     }
+    ],
+    "kind": "SImport",
+    "loc": 0,
+    "path": "./b.js",
+    "starName": null,
+    "starNameLoc": null
+   }
+  ]
+ },
+ {
+  "exprComments": {},
+  "name": "import-namespace",
+  "ok": true,
+  "stmts": [
+   {
+    "defaultName": null,
+    "defaultNameLoc": null,
+    "flags": 2,
+    "isSingleLine": false,
+    "items": null,
+    "kind": "SImport",
+    "loc": 0,
+    "path": "./ns.js",
+    "starName": "ns",
+    "starNameLoc": 12
+   }
+  ]
+ },
+ {
+  "exprComments": {},
+  "name": "import-bare",
+  "ok": true,
+  "stmts": [
+   {
+    "defaultName": null,
+    "defaultNameLoc": null,
+    "flags": 512,
+    "isSingleLine": false,
+    "items": null,
+    "kind": "SImport",
+    "loc": 0,
+    "path": "./side.js",
+    "starName": null,
+    "starNameLoc": null
+   }
+  ]
+ },
+ {
+  "exprComments": {},
+  "name": "import-default-named",
+  "ok": true,
+  "stmts": [
+   {
+    "defaultName": "a",
+    "defaultNameLoc": 7,
+    "flags": 4,
+    "isSingleLine": true,
+    "items": [
+     {
+      "alias": "b",
+      "aliasLoc": 12,
+      "name": "b",
+      "nameLoc": 12,
+      "originalName": "b"
+     }
+    ],
+    "kind": "SImport",
+    "loc": 0,
+    "path": "./ab.js",
+    "starName": null,
+    "starNameLoc": null
+   }
+  ]
+ },
+ {
+  "exprComments": {},
+  "name": "import-default-ns",
+  "ok": true,
+  "stmts": [
+   {
+    "defaultName": "a",
+    "defaultNameLoc": 7,
+    "flags": 6,
+    "isSingleLine": false,
+    "items": null,
+    "kind": "SImport",
+    "loc": 0,
+    "path": "./ans.js",
+    "starName": "ns",
+    "starNameLoc": 15
+   }
+  ]
+ },
+ {
+  "exprComments": {},
+  "name": "export-clause",
+  "ok": true,
+  "stmts": [
+   {
+    "decls": [
+     {
+      "binding": {
+       "kind": "BIdentifier",
+       "loc": 6,
+       "name": "a"
+      },
+      "value": {
+       "bits": "4607182418800017408",
+       "kind": "ENumber",
+       "loc": 10
+      }
+     },
+     {
+      "binding": {
+       "kind": "BIdentifier",
+       "loc": 13,
+       "name": "b"
+      },
+      "value": {
+       "bits": "4611686018427387904",
+       "kind": "ENumber",
+       "loc": 17
+      }
+     }
+    ],
+    "isExport": false,
+    "kind": "SLocal",
+    "loc": 0,
+    "localKind": 2
+   },
+   {
+    "isSingleLine": true,
+    "items": [
+     {
+      "alias": "a",
+      "aliasLoc": 29,
+      "name": "a",
+      "nameLoc": 29,
+      "originalName": "a"
+     },
+     {
+      "alias": "c",
+      "aliasLoc": 37,
+      "name": "b",
+      "nameLoc": 32,
+      "originalName": "b"
+     }
+    ],
+    "kind": "SExportClause",
+    "loc": 20
+   }
+  ]
+ },
+ {
+  "exprComments": {},
+  "name": "export-from",
+  "ok": true,
+  "stmts": [
+   {
+    "isSingleLine": true,
+    "items": [
+     {
+      "alias": "y",
+      "aliasLoc": 14,
+      "name": "x",
+      "nameLoc": 9,
+      "originalName": "x"
+     }
+    ],
+    "kind": "SExportFrom",
+    "loc": 0,
+    "namespaceRef": "import_x",
+    "path": "./x.js"
+   }
+  ]
+ },
+ {
+  "exprComments": {},
+  "name": "export-star",
+  "ok": true,
+  "stmts": [
+   {
+    "alias": null,
+    "kind": "SExportStar",
+    "loc": 0,
+    "namespaceRef": "all_star",
+    "path": "./all.js"
+   }
+  ]
+ },
+ {
+  "exprComments": {},
+  "name": "export-star-as",
+  "ok": true,
+  "stmts": [
+   {
+    "alias": {
+     "loc": 12,
+     "originalName": "ns"
+    },
+    "kind": "SExportStar",
+    "loc": 0,
+    "namespaceRef": "ns",
+    "path": "./ns.js"
+   }
+  ]
+ },
+ {
+  "exprComments": {},
+  "name": "export-default-expr",
+  "ok": true,
+  "stmts": [
+   {
+    "defaultName": "_default",
+    "defaultNameLoc": 7,
+    "kind": "SExportDefault",
+    "loc": 0,
+    "value": {
+     "kind": "SExpr",
+     "loc": 0,
+     "value": {
+      "isParenthesized": false,
+      "kind": "EBinary",
+      "left": {
+       "bits": "4607182418800017408",
+       "kind": "ENumber",
+       "loc": 15
+      },
+      "loc": 15,
+      "op": 11,
+      "right": {
+       "bits": "4611686018427387904",
+       "kind": "ENumber",
+       "loc": 19
+      }
+     }
+    }
+   }
+  ]
+ },
+ {
+  "exprComments": {},
+  "name": "export-default-fn",
+  "ok": true,
+  "stmts": [
+   {
+    "defaultName": "_default",
+    "defaultNameLoc": 7,
+    "kind": "SExportDefault",
+    "loc": 0,
+    "value": {
+     "fn": {
+      "args": [],
+      "body": [],
+      "isAsync": false,
+      "isGenerator": false,
+      "name": null
+     },
+     "isExport": false,
+     "kind": "SFunction",
+     "loc": 15
+    }
+   }
+  ]
+ },
+ {
+  "exprComments": {},
+  "name": "export-default-class",
+  "ok": true,
+  "stmts": [
+   {
+    "defaultName": "_default",
+    "defaultNameLoc": 7,
+    "kind": "SExportDefault",
+    "loc": 0,
+    "value": {
+     "class": {
+      "bodyLoc": 21,
+      "classKeywordLen": 5,
+      "classKeywordLoc": 15,
+      "closeBraceLoc": 22,
+      "extends": null,
+      "name": null,
+      "nameLoc": null,
+      "properties": []
+     },
+     "isExport": false,
+     "kind": "SClass",
+     "loc": 0
+    }
+   }
+  ]
+ },
+ {
+  "exprComments": {},
+  "name": "new-expr",
+  "ok": true,
+  "stmts": [
+   {
+    "kind": "SExpr",
+    "loc": 0,
+    "value": {
+     "isParenthesized": false,
+     "kind": "EBinary",
+     "left": {
+      "kind": "EIdentifier",
+      "loc": 0,
+      "name": "x"
+     },
+     "loc": 0,
+     "op": 37,
+     "right": {
+      "args": [
+       {
+        "bits": "4607182418800017408",
+        "kind": "ENumber",
+        "loc": 12
+       },
+       {
+        "bits": "4611686018427387904",
+        "kind": "ENumber",
+        "loc": 15
+       }
+      ],
+      "closeParenLoc": 16,
+      "isMultiLine": false,
+      "kind": "ENew",
+      "loc": 4,
+      "target": {
+       "kind": "EIdentifier",
+       "loc": 8,
+       "name": "Foo"
+      }
+     }
+    }
+   },
+   {
+    "kind": "SExpr",
+    "loc": 19,
+    "value": {
+     "isParenthesized": false,
+     "kind": "EBinary",
+     "left": {
+      "kind": "EIdentifier",
+      "loc": 19,
+      "name": "y"
+     },
+     "loc": 19,
+     "op": 37,
+     "right": {
+      "args": [],
+      "closeParenLoc": 33,
+      "isMultiLine": false,
+      "kind": "ENew",
+      "loc": 23,
+      "target": {
+       "kind": "EDot",
+       "loc": 27,
+       "name": "C",
+       "optionalChain": 0,
+       "target": {
+        "kind": "EDot",
+        "loc": 27,
+        "name": "b",
+        "optionalChain": 0,
+        "target": {
+         "kind": "EIdentifier",
+         "loc": 27,
+         "name": "a"
+        }
+       }
+      }
+     }
+    }
+   },
+   {
+    "kind": "SExpr",
+    "loc": 36,
+    "value": {
+     "isParenthesized": false,
+     "kind": "EBinary",
+     "left": {
+      "kind": "EIdentifier",
+      "loc": 36,
+      "name": "z"
+     },
+     "loc": 36,
+     "op": 37,
+     "right": {
+      "kind": "ENewTarget",
+      "loc": 40,
+      "rangeLen": 10,
+      "rangeLoc": 40
+     }
+    }
+   }
+  ]
+ },
+ {
+  "exprComments": {},
+  "name": "super-expr",
+  "ok": true,
+  "stmts": [
+   {
+    "class": {
+     "bodyLoc": 18,
+     "classKeywordLen": 5,
+     "classKeywordLoc": 0,
+     "closeBraceLoc": 66,
+     "extends": {
+      "kind": "EIdentifier",
+      "loc": 16,
+      "name": "B"
+     },
+     "name": "A",
+     "nameLoc": 6,
+     "properties": [
+      {
+       "classStaticBlock": null,
+       "closeBracketLoc": 0,
+       "flags": 0,
+       "initializer": null,
+       "key": {
+        "kind": "EString",
+        "loc": 20,
+        "preferTemplate": false,
+        "value": [
+         99,
+         111,
+         110,
+         115,
+         116,
+         114,
+         117,
+         99,
+         116,
+         111,
+         114
+        ]
+       },
+       "kind": 1,
+       "loc": 20,
+       "value": {
+        "fn": {
+         "args": [],
+         "body": [
+          {
+           "kind": "SExpr",
+           "loc": 36,
+           "value": {
+            "args": [
+             {
+              "bits": "4607182418800017408",
+              "kind": "ENumber",
+              "loc": 42
+             }
+            ],
+            "kind": "ECall",
+            "loc": 36,
+            "optionalChain": 0,
+            "target": {
+             "kind": "ESuper",
+             "loc": 36
+            }
+           }
+          },
+          {
+           "kind": "SExpr",
+           "loc": 46,
+           "value": {
+            "isParenthesized": false,
+            "kind": "EBinary",
+            "left": {
+             "kind": "EDot",
+             "loc": 46,
+             "name": "x",
+             "optionalChain": 0,
+             "target": {
+              "kind": "EThis",
+              "loc": 46
+             }
+            },
+            "loc": 46,
+            "op": 37,
+            "right": {
+             "kind": "EDot",
+             "loc": 55,
+             "name": "y",
+             "optionalChain": 0,
+             "target": {
+              "kind": "ESuper",
+              "loc": 55
+             }
+            }
+           }
+          }
+         ],
+         "isAsync": false,
+         "isGenerator": false,
+         "name": null
+        },
+        "isParenthesized": false,
+        "kind": "EFunction",
+        "loc": 31
+       }
+      }
+     ]
+    },
+    "isExport": false,
+    "kind": "SClass",
+    "loc": 0
+   }
+  ]
+ },
+ {
+  "exprComments": {},
+  "name": "conditional",
+  "ok": true,
+  "stmts": [
+   {
+    "kind": "SExpr",
+    "loc": 0,
+    "value": {
+     "isParenthesized": false,
+     "kind": "EBinary",
+     "left": {
+      "kind": "EIdentifier",
+      "loc": 0,
+      "name": "x"
+     },
+     "loc": 0,
+     "op": 37,
+     "right": {
+      "kind": "EIf",
+      "loc": 4,
+      "no": {
+       "kind": "EIf",
+       "loc": 12,
+       "no": {
+        "kind": "EIdentifier",
+        "loc": 20,
+        "name": "e"
+       },
+       "test": {
+        "kind": "EIdentifier",
+        "loc": 12,
+        "name": "c"
+       },
+       "yes": {
+        "kind": "EIdentifier",
+        "loc": 16,
+        "name": "d"
+       }
+      },
+      "test": {
+       "kind": "EIdentifier",
+       "loc": 4,
+       "name": "a"
+      },
+      "yes": {
+       "kind": "EIdentifier",
+       "loc": 8,
+       "name": "b"
+      }
+     }
+    }
+   }
+  ]
+ },
+ {
+  "exprComments": {},
+  "name": "optional-chain",
+  "ok": true,
+  "stmts": [
+   {
+    "kind": "SExpr",
+    "loc": 0,
+    "value": {
+     "isParenthesized": false,
+     "kind": "EBinary",
+     "left": {
+      "kind": "EIdentifier",
+      "loc": 0,
+      "name": "x"
+     },
+     "loc": 0,
+     "op": 37,
+     "right": {
+      "kind": "EDot",
+      "loc": 4,
+      "name": "b",
+      "optionalChain": 1,
+      "target": {
+       "kind": "EIdentifier",
+       "loc": 4,
+       "name": "a"
+      }
+     }
+    }
+   },
+   {
+    "kind": "SExpr",
+    "loc": 10,
+    "value": {
+     "isParenthesized": false,
+     "kind": "EBinary",
+     "left": {
+      "kind": "EIdentifier",
+      "loc": 10,
+      "name": "y"
+     },
+     "loc": 10,
+     "op": 37,
+     "right": {
+      "index": {
+       "kind": "EIdentifier",
+       "loc": 18,
+       "name": "b"
+      },
+      "kind": "EIndex",
+      "loc": 14,
+      "optionalChain": 1,
+      "target": {
+       "kind": "EIdentifier",
+       "loc": 14,
+       "name": "a"
+      }
+     }
+    }
+   },
+   {
+    "kind": "SExpr",
+    "loc": 22,
+    "value": {
+     "isParenthesized": false,
+     "kind": "EBinary",
+     "left": {
+      "kind": "EIdentifier",
+      "loc": 22,
+      "name": "z"
+     },
+     "loc": 22,
+     "op": 37,
+     "right": {
+      "args": [],
+      "kind": "ECall",
+      "loc": 26,
+      "optionalChain": 1,
+      "target": {
+       "kind": "EIdentifier",
+       "loc": 26,
+       "name": "a"
+      }
+     }
+    }
+   },
+   {
+    "kind": "SExpr",
+    "loc": 33,
+    "value": {
+     "isParenthesized": false,
+     "kind": "EBinary",
+     "left": {
+      "kind": "EIdentifier",
+      "loc": 33,
+      "name": "w"
+     },
+     "loc": 33,
+     "op": 37,
+     "right": {
+      "kind": "EDot",
+      "loc": 38,
+      "name": "c",
+      "optionalChain": 0,
+      "target": {
+       "kind": "EDot",
+       "loc": 38,
+       "name": "b",
+       "optionalChain": 1,
+       "target": {
+        "kind": "EIdentifier",
+        "loc": 38,
+        "name": "a"
+       }
+      }
+     }
+    }
+   }
+  ]
+ },
+ {
+  "exprComments": {},
+  "name": "loops",
+  "ok": true,
+  "stmts": [
+   {
+    "body": {
+     "kind": "SBlock",
+     "loc": 28,
+     "stmts": [
+      {
+       "kind": "SExpr",
+       "loc": 32,
+       "value": {
+        "args": [
+         {
+          "kind": "EIdentifier",
+          "loc": 34,
+          "name": "i"
+         }
+        ],
+        "kind": "ECall",
+        "loc": 32,
+        "optionalChain": 0,
+        "target": {
+         "kind": "EIdentifier",
+         "loc": 32,
+         "name": "x"
+        }
+       }
+      }
+     ]
+    },
+    "init": {
+     "decls": [
+      {
+       "binding": {
+        "kind": "BIdentifier",
+        "loc": 9,
+        "name": "i"
+       },
+       "value": {
+        "bits": "0",
+        "kind": "ENumber",
+        "loc": 13
+       }
+      }
+     ],
+     "isExport": false,
+     "kind": "SLocal",
+     "loc": 5,
+     "localKind": 1
+    },
+    "isSingleLineBody": false,
+    "kind": "SFor",
+    "loc": 0,
+    "test": {
+     "isParenthesized": false,
+     "kind": "EBinary",
+     "left": {
+      "kind": "EIdentifier",
+      "loc": 16,
+      "name": "i"
+     },
+     "loc": 16,
+     "op": 17,
+     "right": {
+      "bits": "4613937818241073152",
+      "kind": "ENumber",
+      "loc": 20
+     }
+    },
+    "update": {
+     "kind": "EUnary",
+     "loc": 23,
+     "op": 10,
+     "value": {
+      "kind": "EIdentifier",
+      "loc": 23,
+      "name": "i"
+     }
+    }
+   },
+   {
+    "body": {
+     "kind": "SExpr",
+     "loc": 59,
+     "value": {
+      "args": [
+       {
+        "kind": "EIdentifier",
+        "loc": 61,
+        "name": "k"
+       }
+      ],
+      "kind": "ECall",
+      "loc": 59,
+      "optionalChain": 0,
+      "target": {
+       "kind": "EIdentifier",
+       "loc": 59,
+       "name": "y"
+      }
+     }
+    },
+    "init": {
+     "decls": [
+      {
+       "binding": {
+        "kind": "BIdentifier",
+        "loc": 51,
+        "name": "k"
+       },
+       "value": null
+      }
+     ],
+     "isExport": false,
+     "kind": "SLocal",
+     "loc": 45,
+     "localKind": 2
+    },
+    "isSingleLineBody": true,
+    "kind": "SForIn",
+    "loc": 40,
+    "value": {
+     "kind": "EIdentifier",
+     "loc": 56,
+     "name": "o"
+    }
+   },
+   {
+    "awaitLen": 0,
+    "body": {
+     "kind": "SExpr",
+     "loc": 84,
+     "value": {
+      "args": [
+       {
+        "kind": "EIdentifier",
+        "loc": 86,
+        "name": "v"
+       }
+      ],
+      "kind": "ECall",
+      "loc": 84,
+      "optionalChain": 0,
+      "target": {
+       "kind": "EIdentifier",
+       "loc": 84,
+       "name": "z"
+      }
+     }
+    },
+    "init": {
+     "decls": [
+      {
+       "binding": {
+        "kind": "BIdentifier",
+        "loc": 76,
+        "name": "v"
+       },
+       "value": null
+      }
+     ],
+     "isExport": false,
+     "kind": "SLocal",
+     "loc": 70,
+     "localKind": 2
+    },
+    "isSingleLineBody": true,
+    "kind": "SForOf",
+    "loc": 65,
+    "value": {
+     "kind": "EIdentifier",
+     "loc": 81,
+     "name": "a"
+    }
+   },
+   {
+    "body": {
+     "kind": "SBlock",
+     "loc": 100,
+     "stmts": [
+      {
+       "kind": "SExpr",
+       "loc": 104,
+       "value": {
+        "args": [],
+        "kind": "ECall",
+        "loc": 104,
+        "optionalChain": 0,
+        "target": {
+         "kind": "EIdentifier",
+         "loc": 104,
+         "name": "b"
+        }
+       }
+      }
+     ]
+    },
+    "isSingleLineBody": false,
+    "kind": "SWhile",
+    "loc": 90,
+    "test": {
+     "kind": "EIdentifier",
+     "loc": 97,
+     "name": "a"
+    }
+   },
+   {
+    "body": {
+     "kind": "SBlock",
+     "loc": 114,
+     "stmts": [
+      {
+       "kind": "SExpr",
+       "loc": 118,
+       "value": {
+        "args": [],
+        "kind": "ECall",
+        "loc": 118,
+        "optionalChain": 0,
+        "target": {
+         "kind": "EIdentifier",
+         "loc": 118,
+         "name": "c"
+        }
+       }
+      }
+     ]
+    },
+    "kind": "SDoWhile",
+    "loc": 111,
+    "test": {
+     "kind": "EIdentifier",
+     "loc": 132,
+     "name": "d"
+    }
+   }
+  ]
+ },
+ {
+  "exprComments": {},
+  "name": "try-switch",
+  "ok": true,
+  "stmts": [
+   {
+    "block": [
+     {
+      "kind": "SExpr",
+      "loc": 8,
+      "value": {
+       "args": [],
+       "kind": "ECall",
+       "loc": 8,
+       "optionalChain": 0,
+       "target": {
+        "kind": "EIdentifier",
+        "loc": 8,
+        "name": "a"
+       }
+      }
+     }
+    ],
+    "blockLoc": 4,
+    "catch": {
+     "binding": {
+      "kind": "BIdentifier",
+      "loc": 22,
+      "name": "e"
+     },
+     "block": [
+      {
+       "kind": "SExpr",
+       "loc": 29,
+       "value": {
+        "args": [],
+        "kind": "ECall",
+        "loc": 29,
+        "optionalChain": 0,
+        "target": {
+         "kind": "EIdentifier",
+         "loc": 29,
+         "name": "b"
+        }
+       }
+      }
+     ],
+     "blockLoc": 25,
+     "loc": 15
+    },
+    "closeBraceLoc": 13,
+    "finally": {
+     "block": [
+      {
+       "kind": "SExpr",
+       "loc": 48,
+       "value": {
+        "args": [],
+        "kind": "ECall",
+        "loc": 48,
+        "optionalChain": 0,
+        "target": {
+         "kind": "EIdentifier",
+         "loc": 48,
+         "name": "c"
+        }
+       }
+      }
+     ],
+     "loc": 36
+    },
+    "kind": "STry",
+    "loc": 0
+   },
+   {
+    "bodyLoc": 66,
+    "cases": [
+     {
+      "body": [
+       {
+        "kind": "SExpr",
+        "loc": 82,
+        "value": {
+         "args": [],
+         "kind": "ECall",
+         "loc": 82,
+         "optionalChain": 0,
+         "target": {
+          "kind": "EIdentifier",
+          "loc": 82,
+          "name": "d"
+         }
+        }
+       },
+       {
+        "kind": "SBreak",
+        "label": null,
+        "loc": 91
+       }
+      ],
+      "loc": 70,
+      "value": {
+       "bits": "4607182418800017408",
+       "kind": "ENumber",
+       "loc": 75
+      }
+     },
+     {
+      "body": [
+       {
+        "kind": "SExpr",
+        "loc": 113,
+        "value": {
+         "args": [],
+         "kind": "ECall",
+         "loc": 113,
+         "optionalChain": 0,
+         "target": {
+          "kind": "EIdentifier",
+          "loc": 113,
+          "name": "e"
+         }
+        }
+       }
+      ],
+      "loc": 100,
+      "value": null
+     }
+    ],
+    "closeBraceLoc": 118,
+    "kind": "SSwitch",
+    "loc": 55,
+    "test": {
+     "kind": "EIdentifier",
+     "loc": 63,
+     "name": "x"
+    }
+   },
+   {
+    "kind": "SThrow",
+    "loc": 120,
+    "value": {
+     "args": [
+      {
+       "kind": "EString",
+       "loc": 136,
+       "preferTemplate": false,
+       "value": [
+        120
+       ]
+      }
+     ],
+     "closeParenLoc": 139,
+     "isMultiLine": false,
+     "kind": "ENew",
+     "loc": 126,
+     "target": {
+      "kind": "EIdentifier",
+      "loc": 130,
+      "name": "Error"
+     }
+    }
+   }
+  ]
+ },
+ {
+  "exprComments": {},
+  "name": "label-break",
+  "ok": true,
+  "stmts": [
+   {
+    "isSingleLineStmt": true,
+    "kind": "SLabel",
+    "loc": 0,
+    "name": "outer",
+    "nameLoc": 0,
+    "stmt": {
+     "body": {
+      "kind": "SBlock",
+      "loc": 16,
+      "stmts": [
+       {
+        "kind": "SIf",
+        "loc": 20,
+        "no": null,
+        "test": {
+         "kind": "EIdentifier",
+         "loc": 24,
+         "name": "a"
+        },
+        "yes": {
+         "kind": "SBreak",
+         "label": "outer",
+         "loc": 27
+        }
+       },
+       {
+        "kind": "SContinue",
+        "label": "outer",
+        "loc": 42
+       }
+      ]
+     },
+     "init": null,
+     "isSingleLineBody": false,
+     "kind": "SFor",
+     "loc": 7,
+     "test": null,
+     "update": null
+    }
+   }
+  ]
+ },
+ {
+  "exprComments": {},
+  "name": "binding-patterns",
+  "ok": true,
+  "stmts": [
+   {
+    "decls": [
+     {
+      "binding": {
+       "closeBraceLoc": 32,
+       "isSingleLine": true,
+       "kind": "BObject",
+       "properties": [
+        {
+         "closeBracketLoc": 0,
+         "default": null,
+         "isComputed": false,
+         "isSpread": false,
+         "key": {
+          "kind": "EString",
+          "loc": 8,
+          "preferTemplate": false,
+          "value": [
+           97
+          ]
+         },
+         "loc": 8,
+         "preferQuotedKey": false,
+         "value": {
+          "kind": "BIdentifier",
+          "loc": 8,
+          "name": "a"
+         }
+        },
+        {
+         "closeBracketLoc": 0,
+         "default": null,
+         "isComputed": false,
+         "isSpread": false,
+         "key": {
+          "kind": "EString",
+          "loc": 11,
+          "preferTemplate": false,
+          "value": [
+           98
+          ]
+         },
+         "loc": 11,
+         "preferQuotedKey": false,
+         "value": {
+          "kind": "BIdentifier",
+          "loc": 14,
+          "name": "c"
+         }
+        },
+        {
+         "closeBracketLoc": 0,
+         "default": {
+          "bits": "4607182418800017408",
+          "kind": "ENumber",
+          "loc": 21
+         },
+         "isComputed": false,
+         "isSpread": false,
+         "key": {
+          "kind": "EString",
+          "loc": 17,
+          "preferTemplate": false,
+          "value": [
+           100
+          ]
+         },
+         "loc": 17,
+         "preferQuotedKey": false,
+         "value": {
+          "kind": "BIdentifier",
+          "loc": 17,
+          "name": "d"
+         }
+        },
+        {
+         "closeBracketLoc": 0,
+         "default": null,
+         "isComputed": false,
+         "isSpread": true,
+         "key": {
+          "goType": "nil",
+          "kind": "UNSUPPORTED",
+          "loc": 0
+         },
+         "loc": 24,
+         "preferQuotedKey": false,
+         "value": {
+          "kind": "BIdentifier",
+          "loc": 27,
+          "name": "rest"
+         }
+        }
+       ]
+      },
+      "value": {
+       "kind": "EIdentifier",
+       "loc": 36,
+       "name": "obj"
+      }
+     }
+    ],
+    "isExport": false,
+    "kind": "SLocal",
+    "loc": 0,
+    "localKind": 2
+   },
+   {
+    "decls": [
+     {
+      "binding": {
+       "closeBracketLoc": 65,
+       "hasSpread": true,
+       "isSingleLine": true,
+       "items": [
+        {
+         "binding": {
+          "kind": "BIdentifier",
+          "loc": 48,
+          "name": "x"
+         },
+         "default": null,
+         "loc": 48
+        },
+        {
+         "binding": {
+          "kind": "BMissing"
+         },
+         "default": null,
+         "loc": 51
+        },
+        {
+         "binding": {
+          "kind": "BIdentifier",
+          "loc": 53,
+          "name": "y"
+         },
+         "default": {
+          "bits": "4611686018427387904",
+          "kind": "ENumber",
+          "loc": 57
+         },
+         "loc": 53
+        },
+        {
+         "binding": {
+          "kind": "BIdentifier",
+          "loc": 63,
+          "name": "zs"
+         },
+         "default": null,
+         "loc": 60
+        }
+       ],
+       "kind": "BArray"
+      },
+      "value": {
+       "kind": "EIdentifier",
+       "loc": 69,
+       "name": "arr"
+      }
+     }
+    ],
+    "isExport": false,
+    "kind": "SLocal",
+    "loc": 41,
+    "localKind": 2
+   },
+   {
+    "fn": {
+     "args": [
+      {
+       "closeBraceLoc": 96,
+       "isSingleLine": true,
+       "kind": "BObject",
+       "properties": [
+        {
+         "closeBracketLoc": 0,
+         "default": null,
+         "isComputed": false,
+         "isSpread": false,
+         "key": {
+          "kind": "EString",
+          "loc": 87,
+          "preferTemplate": false,
+          "value": [
+           112
+          ]
+         },
+         "loc": 87,
+         "preferQuotedKey": false,
+         "value": {
+          "kind": "BIdentifier",
+          "loc": 87,
+          "name": "p"
+         }
+        },
+        {
+         "closeBracketLoc": 0,
+         "default": {
+          "bits": "4613937818241073152",
+          "kind": "ENumber",
+          "loc": 94
+         },
+         "isComputed": false,
+         "isSpread": false,
+         "key": {
+          "kind": "EString",
+          "loc": 90,
+          "preferTemplate": false,
+          "value": [
+           113
+          ]
+         },
+         "loc": 90,
+         "preferQuotedKey": false,
+         "value": {
+          "kind": "BIdentifier",
+          "loc": 90,
+          "name": "q"
+         }
+        }
+       ]
+      },
+      {
+       "closeBracketLoc": 101,
+       "hasSpread": false,
+       "isSingleLine": true,
+       "items": [
+        {
+         "binding": {
+          "kind": "BIdentifier",
+          "loc": 100,
+          "name": "r"
+         },
+         "default": null,
+         "loc": 100
+        }
+       ],
+       "kind": "BArray"
+      },
+      {
+       "kind": "BIdentifier",
+       "loc": 107,
+       "name": "more"
+      }
+     ],
+     "body": [],
+     "isAsync": false,
+     "isGenerator": false,
+     "name": "f",
+     "nameLoc": 83
+    },
+    "isExport": false,
+    "kind": "SFunction",
+    "loc": 74
+   }
+  ]
+ },
+ {
+  "exprComments": {},
+  "name": "await-yield",
+  "ok": true,
+  "stmts": [
+   {
+    "fn": {
+     "args": [],
+     "body": [
+      {
+       "kind": "SExpr",
+       "loc": 23,
+       "value": {
+        "kind": "EAwait",
+        "loc": 23,
+        "value": {
+         "args": [],
+         "kind": "ECall",
+         "loc": 29,
+         "optionalChain": 0,
+         "target": {
+          "kind": "EIdentifier",
+          "loc": 29,
+          "name": "g"
+         }
+        }
+       }
+      }
+     ],
+     "isAsync": true,
+     "isGenerator": false,
+     "name": "f",
+     "nameLoc": 15
+    },
+    "isExport": false,
+    "kind": "SFunction",
+    "loc": 0
+   },
+   {
+    "fn": {
+     "args": [],
+     "body": [
+      {
+       "kind": "SExpr",
+       "loc": 54,
+       "value": {
+        "isStar": false,
+        "kind": "EYield",
+        "loc": 54,
+        "value": {
+         "bits": "4607182418800017408",
+         "kind": "ENumber",
+         "loc": 60
+        }
+       }
+      },
+      {
+       "kind": "SExpr",
+       "loc": 65,
+       "value": {
+        "isStar": true,
+        "kind": "EYield",
+        "loc": 65,
+        "value": {
+         "kind": "EIdentifier",
+         "loc": 72,
+         "name": "i"
+        }
+       }
+      }
+     ],
+     "isAsync": false,
+     "isGenerator": true,
+     "name": "h",
+     "nameLoc": 46
+    },
+    "isExport": false,
+    "kind": "SFunction",
+    "loc": 36
+   },
+   {
+    "decls": [
+     {
+      "binding": {
+       "kind": "BIdentifier",
+       "loc": 83,
+       "name": "j"
+      },
+      "value": {
+       "args": [
+        {
+         "binding": {
+          "kind": "BIdentifier",
+          "loc": 94,
+          "name": "a"
+         },
+         "default": null
+        },
+        {
+         "binding": {
+          "kind": "BIdentifier",
+          "loc": 97,
+          "name": "b"
+         },
+         "default": null
+        }
+       ],
+       "body": [
+        {
+         "kind": "SReturn",
+         "loc": 103,
+         "value": {
+          "isParenthesized": false,
+          "kind": "EBinary",
+          "left": {
+           "kind": "EIdentifier",
+           "loc": 103,
+           "name": "a"
+          },
+          "loc": 103,
+          "op": 11,
+          "right": {
+           "kind": "EIdentifier",
+           "loc": 107,
+           "name": "b"
+          }
+         }
+        }
+       ],
+       "bodyLoc": 100,
+       "hasRestArg": false,
+       "isAsync": true,
+       "isParenthesized": false,
+       "kind": "EArrow",
+       "loc": 87,
+       "preferExpr": true
+      }
+     }
+    ],
+    "isExport": false,
+    "kind": "SLocal",
+    "loc": 77,
+    "localKind": 2
+   }
+  ]
+ },
+ {
+  "exprComments": {},
+  "name": "class-super-methods",
+  "ok": true,
+  "stmts": [
+   {
+    "class": {
+     "bodyLoc": 18,
+     "classKeywordLen": 5,
+     "classKeywordLoc": 0,
+     "closeBraceLoc": 100,
+     "extends": {
+      "kind": "EIdentifier",
+      "loc": 16,
+      "name": "B"
+     },
+     "name": "A",
+     "nameLoc": 6,
+     "properties": [
+      {
+       "classStaticBlock": null,
+       "closeBracketLoc": 0,
+       "flags": 0,
+       "initializer": null,
+       "key": {
+        "kind": "EString",
+        "loc": 22,
+        "preferTemplate": false,
+        "value": [
+         109
+        ]
+       },
+       "kind": 1,
+       "loc": 22,
+       "value": {
+        "fn": {
+         "args": [],
+         "body": [
+          {
+           "kind": "SReturn",
+           "loc": 32,
+           "value": {
+            "args": [],
+            "kind": "ECall",
+            "loc": 39,
+            "optionalChain": 0,
+            "target": {
+             "kind": "EDot",
+             "loc": 39,
+             "name": "m",
+             "optionalChain": 0,
+             "target": {
+              "kind": "ESuper",
+              "loc": 39
+             }
+            }
+           }
+          }
+         ],
+         "isAsync": false,
+         "isGenerator": false,
+         "name": null
+        },
+        "isParenthesized": false,
+        "kind": "EFunction",
+        "loc": 23
+       }
+      },
+      {
+       "classStaticBlock": null,
+       "closeBracketLoc": 0,
+       "flags": 2,
+       "initializer": {
+        "bits": "4607182418800017408",
+        "kind": "ENumber",
+        "loc": 67
+       },
+       "key": {
+        "kind": "EString",
+        "loc": 63,
+        "preferTemplate": false,
+        "value": [
+         115
+        ]
+       },
+       "kind": 0,
+       "loc": 56,
+       "value": null
+      },
+      {
+       "classStaticBlock": null,
+       "closeBracketLoc": 0,
+       "flags": 0,
+       "initializer": null,
+       "key": {
+        "kind": "EString",
+        "loc": 76,
+        "preferTemplate": false,
+        "value": [
+         103
+        ]
+       },
+       "kind": 2,
+       "loc": 72,
+       "value": {
+        "fn": {
+         "args": [],
+         "body": [
+          {
+           "kind": "SReturn",
+           "loc": 86,
+           "value": {
+            "bits": "4607182418800017408",
+            "kind": "ENumber",
+            "loc": 93
+           }
+          }
+         ],
+         "isAsync": false,
+         "isGenerator": false,
+         "name": null
+        },
+        "isParenthesized": false,
+        "kind": "EFunction",
+        "loc": 77
+       }
+      }
+     ]
+    },
+    "isExport": false,
+    "kind": "SClass",
+    "loc": 0
+   }
+  ]
+ },
+ {
+  "exprComments": {},
+  "name": "export-default-async",
+  "ok": true,
+  "stmts": [
+   {
+    "defaultName": "_default",
+    "defaultNameLoc": 7,
+    "kind": "SExportDefault",
+    "loc": 0,
+    "value": {
+     "fn": {
+      "args": [],
+      "body": [
+       {
+        "kind": "SExpr",
+        "loc": 37,
+        "value": {
+         "kind": "EAwait",
+         "loc": 37,
+         "value": {
+          "args": [],
+          "kind": "ECall",
+          "loc": 43,
+          "optionalChain": 0,
+          "target": {
+           "kind": "EIdentifier",
+           "loc": 43,
+           "name": "x"
+          }
+         }
+        }
+       }
+      ],
+      "isAsync": true,
+      "isGenerator": false,
+      "name": null
+     },
+     "isExport": false,
+     "kind": "SFunction",
+     "loc": 0
+    }
+   }
+  ]
+ },
+ {
+  "exprComments": {},
+  "name": "compound-assign",
+  "ok": true,
+  "stmts": [
+   {
+    "kind": "SExpr",
+    "loc": 0,
+    "value": {
+     "isParenthesized": false,
+     "kind": "EBinary",
+     "left": {
+      "kind": "EIdentifier",
+      "loc": 0,
+      "name": "a"
+     },
+     "loc": 0,
+     "op": 47,
+     "right": {
+      "bits": "4607182418800017408",
+      "kind": "ENumber",
+      "loc": 5
+     }
+    }
+   },
+   {
+    "kind": "SExpr",
+    "loc": 8,
+    "value": {
+     "isParenthesized": false,
+     "kind": "EBinary",
+     "left": {
+      "kind": "EIdentifier",
+      "loc": 8,
+      "name": "b"
+     },
+     "loc": 8,
+     "op": 45,
+     "right": {
+      "bits": "4611686018427387904",
+      "kind": "ENumber",
+      "loc": 14
+     }
+    }
+   },
+   {
+    "kind": "SExpr",
+    "loc": 17,
+    "value": {
+     "isParenthesized": false,
+     "kind": "EBinary",
+     "left": {
+      "kind": "EIdentifier",
+      "loc": 17,
+      "name": "c"
+     },
+     "loc": 17,
+     "op": 43,
+     "right": {
+      "bits": "4613937818241073152",
+      "kind": "ENumber",
+      "loc": 23
+     }
+    }
+   },
+   {
+    "kind": "SExpr",
+    "loc": 26,
+    "value": {
+     "kind": "EUnary",
+     "loc": 26,
+     "op": 10,
+     "value": {
+      "kind": "EIdentifier",
+      "loc": 26,
+      "name": "d"
+     }
+    }
+   },
+   {
+    "kind": "SExpr",
+    "loc": 31,
+    "value": {
+     "kind": "EUnary",
+     "loc": 31,
+     "op": 7,
+     "value": {
+      "kind": "EIdentifier",
+      "loc": 33,
+      "name": "e"
+     }
+    }
+   }
+  ]
+ },
+ {
+  "exprComments": {
+   "25": [
+    "/** doc */"
+   ]
+  },
+  "name": "comments-class-member",
+  "ok": true,
+  "stmts": [
+   {
+    "class": {
+     "bodyLoc": 8,
+     "classKeywordLen": 5,
+     "classKeywordLoc": 0,
+     "closeBraceLoc": 32,
+     "extends": null,
+     "name": "C",
+     "nameLoc": 6,
+     "properties": [
+      {
+       "classStaticBlock": null,
+       "closeBracketLoc": 0,
+       "flags": 0,
+       "initializer": null,
+       "key": {
+        "kind": "EString",
+        "loc": 25,
+        "preferTemplate": false,
+        "value": [
+         109
+        ]
+       },
+       "kind": 1,
+       "loc": 25,
+       "value": {
+        "fn": {
+         "args": [],
+         "body": [],
+         "isAsync": false,
+         "isGenerator": false,
+         "name": null
+        },
+        "isParenthesized": false,
+        "kind": "EFunction",
+        "loc": 26
+       }
+      }
+     ]
+    },
+    "isExport": false,
+    "kind": "SClass",
+    "loc": 0
+   }
+  ]
+ },
+ {
+  "exprComments": {
+   "17": [
+    "// one"
+   ]
+  },
+  "name": "comments-array",
+  "ok": true,
+  "stmts": [
+   {
+    "kind": "SExpr",
+    "loc": 0,
+    "value": {
+     "isParenthesized": false,
+     "kind": "EBinary",
+     "left": {
+      "kind": "EIdentifier",
+      "loc": 0,
+      "name": "x"
+     },
+     "loc": 0,
+     "op": 37,
+     "right": {
+      "closeBracketLoc": 24,
+      "isParenthesized": false,
+      "isSingleLine": false,
+      "items": [
+       {
+        "kind": "EIdentifier",
+        "loc": 17,
+        "name": "a"
+       },
+       {
+        "kind": "EIdentifier",
+        "loc": 22,
+        "name": "b"
+       }
+      ],
+      "kind": "EArray",
+      "loc": 4
+     }
+    }
+   }
+  ]
+ },
+ {
+  "exprComments": {
+   "19": [
+    "// two"
+   ]
+  },
+  "name": "comments-call-arg",
+  "ok": true,
+  "stmts": [
+   {
+    "kind": "SExpr",
+    "loc": 0,
+    "value": {
+     "args": [
+      {
+       "kind": "EIdentifier",
+       "loc": 5,
+       "name": "a"
+      },
+      {
+       "kind": "EIdentifier",
+       "loc": 19,
+       "name": "b"
+      }
+     ],
+     "kind": "ECall",
+     "loc": 0,
+     "optionalChain": 0,
+     "target": {
+      "kind": "EIdentifier",
+      "loc": 0,
+      "name": "f"
+     }
+    }
+   }
+  ]
+ },
+ {
+  "exprComments": {
+   "25": [
+    "// trailing"
+   ]
+  },
+  "name": "comments-object-close",
+  "ok": true,
+  "stmts": [
+   {
+    "kind": "SExpr",
+    "loc": 0,
+    "value": {
+     "isParenthesized": false,
+     "kind": "EBinary",
+     "left": {
+      "kind": "EIdentifier",
+      "loc": 0,
+      "name": "x"
+     },
+     "loc": 0,
+     "op": 37,
+     "right": {
+      "closeBraceLoc": 25,
+      "isParenthesized": false,
+      "isSingleLine": false,
+      "kind": "EObject",
+      "loc": 4,
+      "properties": [
+       {
+        "classStaticBlock": null,
+        "closeBracketLoc": 0,
+        "flags": 0,
+        "initializer": null,
+        "key": {
+         "kind": "EString",
+         "loc": 8,
+         "preferTemplate": false,
+         "value": [
+          97
+         ]
+        },
+        "kind": 0,
+        "loc": 8,
+        "value": {
+         "bits": "4607182418800017408",
+         "kind": "ENumber",
+         "loc": 11
+        }
+       }
+      ]
+     }
+    }
+   }
+  ]
+ },
+ {
+  "exprComments": {
+   "17": [
+    "// c"
+   ]
+  },
+  "name": "comments-paren",
+  "ok": true,
+  "stmts": [
+   {
+    "kind": "SExpr",
+    "loc": 0,
+    "value": {
+     "isParenthesized": false,
+     "kind": "EBinary",
+     "left": {
+      "kind": "EIdentifier",
+      "loc": 0,
+      "name": "x"
+     },
+     "loc": 0,
+     "op": 37,
+     "right": {
+      "isParenthesized": false,
+      "kind": "EBinary",
+      "left": {
+       "kind": "EIdentifier",
+       "loc": 4,
+       "name": "a"
+      },
+      "loc": 4,
+      "op": 32,
+      "right": {
+       "kind": "EIdentifier",
+       "loc": 17,
+       "name": "b"
+      }
+     }
+    }
+   }
+  ]
+ },
+ {
+  "exprComments": {},
+  "name": "comments-param",
+  "ok": true,
+  "stmts": [
+   {
+    "fn": {
+     "args": [
+      {
+       "kind": "BIdentifier",
+       "loc": 14,
+       "name": "a"
+      },
+      {
+       "kind": "BIdentifier",
+       "loc": 26,
+       "name": "b"
+      }
+     ],
+     "body": [],
+     "isAsync": false,
+     "isGenerator": false,
+     "name": "f",
+     "nameLoc": 9
+    },
+    "isExport": false,
+    "kind": "SFunction",
+    "loc": 0
+   }
+  ]
+ },
+ {
+  "exprComments": {
+   "22": [
+    "// c"
+   ]
+  },
+  "name": "comments-switch-case",
+  "ok": true,
+  "stmts": [
+   {
+    "bodyLoc": 11,
+    "cases": [
+     {
+      "body": [
+       {
+        "kind": "SBreak",
+        "label": null,
+        "loc": 34
+       }
+      ],
+      "loc": 22,
+      "value": {
+       "bits": "4607182418800017408",
+       "kind": "ENumber",
+       "loc": 27
+      }
+     }
+    ],
+    "closeBraceLoc": 41,
+    "kind": "SSwitch",
+    "loc": 0,
+    "test": {
+     "kind": "EIdentifier",
+     "loc": 8,
+     "name": "x"
+    }
+   }
+  ]
+ }
+]

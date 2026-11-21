@@ -1,0 +1,106 @@
+package linker
+
+// 第 155 批 Go 探针：generateSourceMapForChunk（chunk sourcemap 生成），dump Prefix/Mappings/Suffix。
+import (
+  "encoding/json"
+  "os"
+  "testing"
+
+  "github.com/evanw/esbuild/internal/bundler"
+  "github.com/evanw/esbuild/internal/config"
+  "github.com/evanw/esbuild/internal/fs"
+  "github.com/evanw/esbuild/internal/graph"
+  "github.com/evanw/esbuild/internal/helpers"
+  "github.com/evanw/esbuild/internal/logger"
+  "github.com/evanw/esbuild/internal/sourcemap"
+)
+
+type smRow struct { Fn string `json:"fn"`; Arg map[string]interface{} `json:"arg"`; Out interface{} `json:"out"` }
+func smPieces(p sourcemap.SourceMapPieces) interface{} {
+  return map[string]interface{}{
+    "prefix": string(p.Prefix), "mappings": string(p.Mappings), "suffix": string(p.Suffix),
+  }
+}
+func q(s string) []byte { return helpers.QuoteForJSON(s, false) }
+
+func TestTmpGenSourceMap(t *testing.T) {
+  var out []smRow
+  add := func(fn string, arg map[string]interface{}, o interface{}) { out = append(out, smRow{fn, arg, o}) }
+  fsys := fs.MockFS(map[string]string{}, fs.MockUnix, "/")
+
+  // Case A: single file, real chunk with one mapping, canHaveShifts=true
+  {
+    c := &linkerContext{fs: fsys, options: &config.Options{}}
+    c.graph.Files = make([]graph.LinkerFile, 2)
+    src := logger.Source{KeyPath: logger.Path{Text: "/p/src/a.js", Namespace: "file"}, Contents: "hello"}
+    src.PrettyPaths.Rel = "src/a.js"; src.PrettyPaths.Abs = "/p/src/a.js"
+    c.graph.Files[1].InputFile.Source = src
+    builder := sourcemap.MakeChunkBuilder(nil, sourcemap.GenerateLineOffsetTables("hello\n", 2), false)
+    builder.AddSourceMapping(logger.Loc{Start: 0}, "origName", []byte("var x = 1;\n"))
+    chunk := builder.GenerateChunk([]byte("var x = 1;\n"))
+    results := []compileResultForSourceMap{{sourceMapChunk: chunk, sourceIndex: 1}}
+    data := make([]bundler.DataForSourceMap, 2)
+    data[1] = bundler.DataForSourceMap{QuotedContents: [][]byte{q("hello")}}
+    p := c.generateSourceMapForChunk(results, "/p/out", data, true)
+    add("generateSourceMapForChunk", map[string]interface{}{"case": "single", "shifts": true}, smPieces(p))
+  }
+  // Case B: canHaveShifts=false -> all in Prefix
+  {
+    c := &linkerContext{fs: fsys, options: &config.Options{}}
+    c.graph.Files = make([]graph.LinkerFile, 2)
+    src := logger.Source{KeyPath: logger.Path{Text: "/p/src/a.js", Namespace: "file"}, Contents: "hello"}
+    src.PrettyPaths.Rel = "src/a.js"; src.PrettyPaths.Abs = "/p/src/a.js"
+    c.graph.Files[1].InputFile.Source = src
+    builder := sourcemap.MakeChunkBuilder(nil, sourcemap.GenerateLineOffsetTables("x", 1), false)
+    builder.AddSourceMapping(logger.Loc{Start: 0}, "", []byte("x"))
+    chunk := builder.GenerateChunk([]byte("x"))
+    results := []compileResultForSourceMap{{sourceMapChunk: chunk, sourceIndex: 1}}
+    data := make([]bundler.DataForSourceMap, 2)
+    data[1] = bundler.DataForSourceMap{QuotedContents: [][]byte{q("hello")}}
+    p := c.generateSourceMapForChunk(results, "/p/out", data, false)
+    add("generateSourceMapForChunk", map[string]interface{}{"case": "single", "shifts": false}, smPieces(p))
+  }
+  // Case C: two files + null entry + ExcludeSourcesContent + sourceRoot + ASCIIOnly
+  {
+    c := &linkerContext{fs: fsys, options: &config.Options{ExcludeSourcesContent: true, SourceRoot: "webpack:///"}}
+    c.graph.Files = make([]graph.LinkerFile, 3)
+    for si, path := range []string{"/p/src/a.js", "/p/src/b.js"} {
+      src := logger.Source{KeyPath: logger.Path{Text: path, Namespace: "file"}, Contents: "x"}
+      src.PrettyPaths.Rel = path; src.PrettyPaths.Abs = path
+      c.graph.Files[si+1].InputFile.Source = src
+    }
+    b1 := sourcemap.MakeChunkBuilder(nil, sourcemap.GenerateLineOffsetTables("aaa;\nbbb", 2), false); b1.AddSourceMapping(logger.Loc{Start: 0}, "n1", []byte("aaa;"))
+    ch1 := b1.GenerateChunk([]byte("aaa;"))
+    b2 := sourcemap.MakeChunkBuilder(nil, sourcemap.GenerateLineOffsetTables("bbb;", 1), false); b2.AddSourceMapping(logger.Loc{Start: 0}, "n2", []byte("bbb;"))
+    ch2 := b2.GenerateChunk([]byte("bbb;"))
+    results := []compileResultForSourceMap{
+      {sourceMapChunk: ch1, sourceIndex: 1, generatedOffset: sourcemap.LineColumnOffset{Lines: 0, Columns: 0}},
+      {isNullEntry: true, sourceIndex: 2, generatedOffset: sourcemap.LineColumnOffset{Lines: 1, Columns: 0}},
+      {sourceMapChunk: ch2, sourceIndex: 2, generatedOffset: sourcemap.LineColumnOffset{Lines: 2, Columns: 0}},
+    }
+    data := make([]bundler.DataForSourceMap, 3)
+    p := c.generateSourceMapForChunk(results, "/p/out", data, true)
+    add("generateSourceMapForChunk", map[string]interface{}{"case": "multi-null", "shifts": true}, smPieces(p))
+  }
+  // Case D: virtual namespace source
+  {
+    c := &linkerContext{fs: fsys, options: &config.Options{}}
+    c.graph.Files = make([]graph.LinkerFile, 2)
+    src := logger.Source{KeyPath: logger.Path{Text: "plugin:virtual.js", Namespace: "https"}, Contents: "abc"}
+    src.PrettyPaths.Rel = "virtual.js"
+    c.graph.Files[1].InputFile.Source = src
+    builder := sourcemap.MakeChunkBuilder(nil, sourcemap.GenerateLineOffsetTables("x", 1), false)
+    builder.AddSourceMapping(logger.Loc{Start: 0}, "", []byte("z"))
+    chunk := builder.GenerateChunk([]byte("z"))
+    results := []compileResultForSourceMap{{sourceMapChunk: chunk, sourceIndex: 1}}
+    data := make([]bundler.DataForSourceMap, 2)
+    data[1] = bundler.DataForSourceMap{QuotedContents: [][]byte{q("abc")}}
+    p := c.generateSourceMapForChunk(results, "/p/out", data, true)
+    add("generateSourceMapForChunk", map[string]interface{}{"case": "virtual", "shifts": true}, smPieces(p))
+  }
+
+  b, err := json.MarshalIndent(out, "", "  ")
+  if err != nil { t.Fatal(err) }
+  if err := os.WriteFile("/root/port/testdata/sourcemap-chunk-go.json", b, 0644); err != nil { t.Fatal(err) }
+  t.Logf("wrote %d rows", len(out))
+}

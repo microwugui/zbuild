@@ -1,0 +1,102 @@
+{
+  "rows": [
+    {
+      "fn": "validatePath",
+      "arg": "",
+      "out": "",
+      "errors": []
+    },
+    {
+      "fn": "validatePath",
+      "arg": "./foo.js",
+      "out": "/foo.js",
+      "errors": []
+    },
+    {
+      "fn": "validatePath",
+      "arg": "../up.js",
+      "out": "/up.js",
+      "errors": []
+    },
+    {
+      "fn": "validatePath",
+      "arg": "/abs/x.js",
+      "out": "/abs/x.js",
+      "errors": []
+    },
+    {
+      "fn": "validatePath",
+      "arg": "a/b/c.js",
+      "out": "/a/b/c.js",
+      "errors": []
+    },
+    {
+      "fn": "validateExternals",
+      "arg": "empty",
+      "out": "{\"post\":{\"exact\":[],\"patterns\":[]},\"pre\":{\"exact\":[],\"patterns\":[]}}",
+      "errors": []
+    },
+    {
+      "fn": "validateExternals",
+      "arg": "package",
+      "out": "{\"post\":{\"exact\":[],\"patterns\":[]},\"pre\":{\"exact\":[\"lodash/fp\",\"react\"],\"patterns\":[\"react/\\u0000\",\"lodash/fp/\\u0000\"]}}",
+      "errors": []
+    },
+    {
+      "fn": "validateExternals",
+      "arg": "relative",
+      "out": "{\"post\":{\"exact\":[\"/bar\",\"/foo\"],\"patterns\":[]},\"pre\":{\"exact\":[\"../bar\",\"./foo\"],\"patterns\":[]}}",
+      "errors": []
+    },
+    {
+      "fn": "validateExternals",
+      "arg": "wildcard",
+      "out": "{\"post\":{\"exact\":[],\"patterns\":[\"/src/\\u0000.js\"]},\"pre\":{\"exact\":[],\"patterns\":[\"foo/\\u0000\",\"./src/\\u0000.js\"]}}",
+      "errors": []
+    },
+    {
+      "fn": "validateExternals",
+      "arg": "multi-wildcard",
+      "out": "{\"post\":{\"exact\":[],\"patterns\":[]},\"pre\":{\"exact\":[],\"patterns\":[]}}",
+      "errors": [
+        "External path \"a*b*c\" cannot have more than one \"*\" wildcard"
+      ]
+    },
+    {
+      "fn": "validateExternals",
+      "arg": "absolute",
+      "out": "{\"post\":{\"exact\":[\"/tmp/x\"],\"patterns\":[]},\"pre\":{\"exact\":[\"/tmp/x\"],\"patterns\":[]}}",
+      "errors": []
+    },
+    {
+      "fn": "validateExternals",
+      "arg": "mixed",
+      "out": "{\"post\":{\"exact\":[\"/abs/z\",\"/local\"],\"patterns\":[]},\"pre\":{\"exact\":[\"./local\",\"/abs/z\",\"react\"],\"patterns\":[\"react/\\u0000\",\"a/\\u0000\"]}}",
+      "errors": []
+    },
+    {
+      "fn": "validatePathsArray",
+      "arg": "empty",
+      "out": "null",
+      "errors": []
+    },
+    {
+      "fn": "validatePathsArray",
+      "arg": "relative",
+      "out": "[\"/foo\",\"/bar\"]",
+      "errors": []
+    },
+    {
+      "fn": "validatePathsArray",
+      "arg": "package",
+      "out": "[\"/react\"]",
+      "errors": []
+    },
+    {
+      "fn": "validatePathsArray",
+      "arg": "mixed",
+      "out": "[\"/x\",\"/abs/y\"]",
+      "errors": []
+    }
+  ]
+}

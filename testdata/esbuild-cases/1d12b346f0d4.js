@@ -1,0 +1,1 @@
+let a; return a != null ? a[b] : undefined

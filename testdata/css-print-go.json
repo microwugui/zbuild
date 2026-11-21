@@ -1,0 +1,72 @@
+[
+  {
+    "name": "decls",
+    "minify": false,
+    "css": "Y29sb3I6cmVkOwp3aWR0aDoxMHB4ICFpbXBvcnRhbnQ7Cm1hcmdpbjowOwo="
+  },
+  {
+    "name": "decls-min",
+    "minify": true,
+    "css": "Y29sb3I6cmVkO3dpZHRoOjEwcHghaW1wb3J0YW50O21hcmdpbjowOw=="
+  },
+  {
+    "name": "selector",
+    "minify": false,
+    "css": "ZGl2IHNwYW4gewogIGNvbG9yOmJsdWU7Cn0K"
+  },
+  {
+    "name": "selector-min",
+    "minify": true,
+    "css": "ZGl2IHNwYW57Y29sb3I6Ymx1ZX0="
+  },
+  {
+    "name": "charset",
+    "minify": false,
+    "css": "QGNoYXJzZXQgIlVURi04IjsK"
+  },
+  {
+    "name": "function",
+    "minify": false,
+    "css": "Y29sb3I6cmdiXCgoMSwgMik7Cg=="
+  },
+  {
+    "name": "knownat",
+    "minify": false,
+    "css": "QHN1cHBvcnRzIHsKICBkaXNwbGF5OmdyaWQ7Cn0K"
+  },
+  {
+    "name": "unknownat",
+    "minify": false,
+    "css": "QGZvbyBiYXI7Cg=="
+  },
+  {
+    "name": "layer",
+    "minify": false,
+    "css": "QGxheWVyIGEuYjsK"
+  },
+  {
+    "name": "media",
+    "minify": false,
+    "css": "QG1lZGlhIChjb2xvcjogcmVkKSB7CiAgeDp5Owp9Cg=="
+  },
+  {
+    "name": "comment",
+    "minify": false,
+    "css": "aGVsbG8K"
+  },
+  {
+    "name": "pseudo",
+    "minify": false,
+    "css": "LmNsczo6YmVmb3JlIHsKICBjb250ZW50OiJ4IjsKfQo="
+  },
+  {
+    "name": "hashattr",
+    "minify": false,
+    "css": "I2lkW2Zvbz0iIl0gewogIGE6YjsKfQo="
+  },
+  {
+    "name": "import-meta",
+    "minify": false,
+    "css": "QGltcG9ydCAieC5jc3MiOwo="
+  }
+]

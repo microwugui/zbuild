@@ -1,0 +1,1 @@
+div, span::first-letter { & { color: red } }

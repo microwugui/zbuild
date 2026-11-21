@@ -1,0 +1,32 @@
+[
+  {
+    "fn": "printSymbol",
+    "arg": "0|0|0|",
+    "out": "Zm9v"
+  },
+  {
+    "fn": "printSymbol",
+    "arg": "1|0|0|",
+    "out": "Zm9v"
+  },
+  {
+    "fn": "printSymbol",
+    "arg": "2|2|0|",
+    "out": "XDMyeA=="
+  },
+  {
+    "fn": "printSymbol",
+    "arg": "3|0|0|",
+    "out": "5pel5pys"
+  },
+  {
+    "fn": "printSymbol",
+    "arg": "0|0|0|renamed",
+    "out": "cmVuYW1lZA=="
+  },
+  {
+    "fn": "printSymbol",
+    "arg": "1|0|1|x",
+    "out": "Zm9v"
+  }
+]

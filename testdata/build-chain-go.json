@@ -1,0 +1,35 @@
+[
+  {
+    "entry": "cwd-core",
+    "sha": "c0fdbed276f75d0c1e621c3f0a1b26c4306463bc336c84600cc58d46673cdd63",
+    "bytes": 1114554,
+    "log": "ok"
+  },
+  {
+    "entry": "cwd-module",
+    "sha": "2985154b88b53598f62e3801c362c0f9c90f6a4154667fd4cd2754f242cda9b4",
+    "bytes": 1709893,
+    "log": "ok"
+  },
+  {
+    "entry": "stdin-simple",
+    "sha": "1f517ab1928b13cee892cf18b83583bb952cff451a987fec59815c68a5bf9a42",
+    "bytes": 38,
+    "log": "ok",
+    "code": "// \u003cstdin\u003e\nvar x = 1;\nconsole.log(x);\n"
+  },
+  {
+    "entry": "stdin-export",
+    "sha": "3c2224cdd0278561c7b9973dcc14ab0ddac5aea33760041fdc34c9f3ab9123d9",
+    "bytes": 43,
+    "log": "ok",
+    "code": "// \u003cstdin\u003e\nvar foo = 42;\nexport {\n  foo\n};\n"
+  },
+  {
+    "entry": "stdin-comment",
+    "sha": "7ea32148afd0c0d3a5fa955f1e63ecc54fe9bec215f9b18c4190a6a35ae0183d",
+    "bytes": 38,
+    "log": "ok",
+    "code": "// \u003cstdin\u003e\nvar y = 2;\nexport {\n  y\n};\n"
+  }
+]

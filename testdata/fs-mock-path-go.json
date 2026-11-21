@@ -1,0 +1,152 @@
+[
+  {
+    "fn": "IsAbs",
+    "arg": "/a",
+    "out": "true"
+  },
+  {
+    "fn": "IsAbs",
+    "arg": "a/b",
+    "out": "false"
+  },
+  {
+    "fn": "IsAbs",
+    "arg": "",
+    "out": "false"
+  },
+  {
+    "fn": "IsAbs",
+    "arg": "../x",
+    "out": "false"
+  },
+  {
+    "fn": "Abs",
+    "arg": "/a",
+    "out": "/a"
+  },
+  {
+    "fn": "Abs",
+    "arg": "a/b",
+    "out": "/a/b"
+  },
+  {
+    "fn": "Abs",
+    "arg": "",
+    "out": "/"
+  },
+  {
+    "fn": "Abs",
+    "arg": "../x",
+    "out": "/x"
+  },
+  {
+    "fn": "Dir",
+    "arg": "a/b",
+    "out": "a"
+  },
+  {
+    "fn": "Dir",
+    "arg": "/a/b",
+    "out": "/a"
+  },
+  {
+    "fn": "Dir",
+    "arg": "foo",
+    "out": "."
+  },
+  {
+    "fn": "Dir",
+    "arg": "",
+    "out": "."
+  },
+  {
+    "fn": "Base",
+    "arg": "a/b",
+    "out": "b"
+  },
+  {
+    "fn": "Base",
+    "arg": "/",
+    "out": "/"
+  },
+  {
+    "fn": "Base",
+    "arg": "foo",
+    "out": "foo"
+  },
+  {
+    "fn": "Base",
+    "arg": "a/b/",
+    "out": "b"
+  },
+  {
+    "fn": "Ext",
+    "arg": "foo.txt",
+    "out": ".txt"
+  },
+  {
+    "fn": "Ext",
+    "arg": "a.b.c",
+    "out": ".c"
+  },
+  {
+    "fn": "Ext",
+    "arg": "foo",
+    "out": ""
+  },
+  {
+    "fn": "Ext",
+    "arg": ".hidden",
+    "out": ".hidden"
+  },
+  {
+    "fn": "Join",
+    "arg": "[\"a\",\"b\"]",
+    "out": "a/b"
+  },
+  {
+    "fn": "Join",
+    "arg": "[\"a/\",\"b\"]",
+    "out": "a/b"
+  },
+  {
+    "fn": "Join",
+    "arg": "[]",
+    "out": "."
+  },
+  {
+    "fn": "Join",
+    "arg": "[\"/a\",\"b\",\"../c\"]",
+    "out": "/a/c"
+  },
+  {
+    "fn": "Cwd",
+    "arg": "",
+    "out": "/home/user"
+  },
+  {
+    "fn": "Rel",
+    "arg": "a|b",
+    "out": "../b|true"
+  },
+  {
+    "fn": "Rel",
+    "arg": "/a/b|/a/c",
+    "out": "../c|true"
+  },
+  {
+    "fn": "Rel",
+    "arg": "/a|/a/b/c",
+    "out": "b/c|true"
+  },
+  {
+    "fn": "Rel",
+    "arg": "x|x",
+    "out": ".|true"
+  },
+  {
+    "fn": "Rel",
+    "arg": "|x",
+    "out": "x|true"
+  }
+]

@@ -1,0 +1,44 @@
+[
+  {
+    "name": "missing",
+    "cache": {},
+    "order": [],
+    "err": ""
+  },
+  {
+    "name": "valid",
+    "cache": {
+      "bar": "b",
+      "foo": "a"
+    },
+    "order": [
+      "foo",
+      "bar"
+    ],
+    "err": ""
+  },
+  {
+    "name": "false",
+    "cache": {
+      "bar": "x",
+      "foo": false
+    },
+    "order": [
+      "foo",
+      "bar"
+    ],
+    "err": ""
+  },
+  {
+    "name": "badval",
+    "cache": null,
+    "order": null,
+    "err": "✘ [ERROR] Expected \"foo\" in mangle cache file to map to either a string or false\n\n    badval.json:1:7:\n      1 │ {\"foo\":true}\n        ╵        ~~~~\n\n1 error\n"
+  },
+  {
+    "name": "nonobj",
+    "cache": null,
+    "order": null,
+    "err": "✘ [ERROR] Expected a top-level object in mangle cache file\n\n    nonobj.json:1:0:\n      1 │ [1,2,3]\n        ╵ ^\n\n1 error\n"
+  }
+]

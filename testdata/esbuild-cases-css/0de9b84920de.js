@@ -1,0 +1,1 @@
+a { font: normal var(--var) 'aaa bbb' }

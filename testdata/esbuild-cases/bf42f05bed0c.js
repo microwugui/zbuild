@@ -1,0 +1,1 @@
+x = class {get y() {}; set 'z'(z) {}}

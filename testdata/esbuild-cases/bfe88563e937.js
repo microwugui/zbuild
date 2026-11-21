@@ -1,0 +1,1 @@
+new Worker(new URL('path', /* webpackFoo: these can go anywhere */ import.meta.url))

@@ -1,0 +1,112 @@
+[
+  {
+    "fn": "parseRangeInt",
+    "arg": "123|1000",
+    "out": "123|true"
+  },
+  {
+    "fn": "parseRangeInt",
+    "arg": "123|100",
+    "out": "0|false"
+  },
+  {
+    "fn": "parseRangeInt",
+    "arg": "|100",
+    "out": "0|false"
+  },
+  {
+    "fn": "parseRangeInt",
+    "arg": "12a|100",
+    "out": "0|false"
+  },
+  {
+    "fn": "parseRangeInt",
+    "arg": "0007|100",
+    "out": "7|true"
+  },
+  {
+    "fn": "parseRangeInt",
+    "arg": "99999|100000",
+    "out": "99999|true"
+  },
+  {
+    "fn": "parseRangeInt",
+    "arg": "-1|100",
+    "out": "0|false"
+  },
+  {
+    "fn": "parseRangeInt",
+    "arg": "0|100",
+    "out": "0|true"
+  },
+  {
+    "fn": "escapeForAttribute",
+    "arg": "plain",
+    "out": "plain"
+  },
+  {
+    "fn": "escapeForAttribute",
+    "arg": "a\u0026b\u003cc\u003ed",
+    "out": "a\u0026amp;b\u0026lt;c\u0026gt;d"
+  },
+  {
+    "fn": "escapeForAttribute",
+    "arg": "a\"b'c",
+    "out": "a\u0026quot;b\u0026apos;c"
+  },
+  {
+    "fn": "escapeForAttribute",
+    "arg": "\u0026\u003c\u003e\"'",
+    "out": "\u0026amp;\u0026lt;\u0026gt;\u0026quot;\u0026apos;"
+  },
+  {
+    "fn": "escapeForAttribute",
+    "arg": "",
+    "out": ""
+  },
+  {
+    "fn": "escapeForAttribute",
+    "arg": "\u0026amp;",
+    "out": "\u0026amp;amp;"
+  },
+  {
+    "fn": "validatePathTemplate",
+    "arg": "",
+    "out": ""
+  },
+  {
+    "fn": "validatePathTemplate",
+    "arg": "./out.js",
+    "out": "0:././out.js;"
+  },
+  {
+    "fn": "validatePathTemplate",
+    "arg": "[dir]/[name].[ext]",
+    "out": "1:./;2:/;4:.;"
+  },
+  {
+    "fn": "validatePathTemplate",
+    "arg": "[hash]-abc.js",
+    "out": "3:./;0:-abc.js;"
+  },
+  {
+    "fn": "validatePathTemplate",
+    "arg": "a\\b/[name]",
+    "out": "2:./a/b/;"
+  },
+  {
+    "fn": "validatePathTemplate",
+    "arg": "x/y",
+    "out": "0:./x/y;"
+  },
+  {
+    "fn": "validatePathTemplate",
+    "arg": "[bad]/[name]",
+    "out": "2:./[bad]/;"
+  },
+  {
+    "fn": "validatePathTemplate",
+    "arg": "[dir][name][hash][ext]",
+    "out": "1:./;2:;3:;4:;"
+  }
+]

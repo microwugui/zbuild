@@ -1,0 +1,1 @@
+a { color: hwb(none 20% 40%) }

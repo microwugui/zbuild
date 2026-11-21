@@ -1,0 +1,536 @@
+[
+  {
+    "fn": "MockFS",
+    "arg": 0,
+    "out": {
+      "dirs": [],
+      "files": 0
+    }
+  },
+  {
+    "fn": "ReadDirectory",
+    "arg": [
+      0,
+      "/"
+    ],
+    "out": {
+      "dir": "",
+      "e1": "no such file or directory",
+      "e2": "no such file or directory",
+      "keys": null
+    }
+  },
+  {
+    "fn": "ReadDirectory",
+    "arg": [
+      0,
+      "/a/b"
+    ],
+    "out": {
+      "dir": "",
+      "e1": "no such file or directory",
+      "e2": "no such file or directory",
+      "keys": null
+    }
+  },
+  {
+    "fn": "ReadDirectory",
+    "arg": [
+      0,
+      "/dir"
+    ],
+    "out": {
+      "dir": "",
+      "e1": "no such file or directory",
+      "e2": "no such file or directory",
+      "keys": null
+    }
+  },
+  {
+    "fn": "ReadDirectory",
+    "arg": [
+      0,
+      "/dir/sub"
+    ],
+    "out": {
+      "dir": "",
+      "e1": "no such file or directory",
+      "e2": "no such file or directory",
+      "keys": null
+    }
+  },
+  {
+    "fn": "ReadDirectory",
+    "arg": [
+      0,
+      "/missing"
+    ],
+    "out": {
+      "dir": "",
+      "e1": "no such file or directory",
+      "e2": "no such file or directory",
+      "keys": null
+    }
+  },
+  {
+    "fn": "ReadDirectory",
+    "arg": [
+      0,
+      "/a/b/"
+    ],
+    "out": {
+      "dir": "",
+      "e1": "no such file or directory",
+      "e2": "no such file or directory",
+      "keys": null
+    }
+  },
+  {
+    "fn": "ReadFile",
+    "arg": [
+      0,
+      "/a/b/c.txt"
+    ],
+    "out": {
+      "e1": "no such file or directory",
+      "e2": "no such file or directory",
+      "text": ""
+    }
+  },
+  {
+    "fn": "ReadFile",
+    "arg": [
+      0,
+      "/x.js"
+    ],
+    "out": {
+      "e1": "no such file or directory",
+      "e2": "no such file or directory",
+      "text": ""
+    }
+  },
+  {
+    "fn": "ReadFile",
+    "arg": [
+      0,
+      "/missing"
+    ],
+    "out": {
+      "e1": "no such file or directory",
+      "e2": "no such file or directory",
+      "text": ""
+    }
+  },
+  {
+    "fn": "OpenFile",
+    "arg": [
+      0,
+      "/x.js"
+    ],
+    "out": {
+      "e1": "no such file or directory",
+      "e2": "no such file or directory",
+      "nil": true
+    }
+  },
+  {
+    "fn": "OpenFile",
+    "arg": [
+      0,
+      "/missing"
+    ],
+    "out": {
+      "e1": "no such file or directory",
+      "e2": "no such file or directory",
+      "nil": true
+    }
+  },
+  {
+    "fn": "ModKey",
+    "arg": 0,
+    "out": "This is not available during tests"
+  },
+  {
+    "fn": "EvalSymlinks",
+    "arg": 0,
+    "out": {
+      "ok": false,
+      "path": ""
+    }
+  },
+  {
+    "fn": "MockFS",
+    "arg": 1,
+    "out": {
+      "dirs": [
+        [
+          "/",
+          [
+            "a"
+          ]
+        ],
+        [
+          "/a",
+          [
+            "b"
+          ]
+        ],
+        [
+          "/a/b",
+          [
+            "c.txt"
+          ]
+        ]
+      ],
+      "files": 1
+    }
+  },
+  {
+    "fn": "ReadDirectory",
+    "arg": [
+      1,
+      "/"
+    ],
+    "out": {
+      "dir": "/",
+      "e1": "",
+      "e2": "",
+      "keys": [
+        "a"
+      ]
+    }
+  },
+  {
+    "fn": "ReadDirectory",
+    "arg": [
+      1,
+      "/a/b"
+    ],
+    "out": {
+      "dir": "/a/b",
+      "e1": "",
+      "e2": "",
+      "keys": [
+        "c.txt"
+      ]
+    }
+  },
+  {
+    "fn": "ReadDirectory",
+    "arg": [
+      1,
+      "/dir"
+    ],
+    "out": {
+      "dir": "",
+      "e1": "no such file or directory",
+      "e2": "no such file or directory",
+      "keys": null
+    }
+  },
+  {
+    "fn": "ReadDirectory",
+    "arg": [
+      1,
+      "/dir/sub"
+    ],
+    "out": {
+      "dir": "",
+      "e1": "no such file or directory",
+      "e2": "no such file or directory",
+      "keys": null
+    }
+  },
+  {
+    "fn": "ReadDirectory",
+    "arg": [
+      1,
+      "/missing"
+    ],
+    "out": {
+      "dir": "",
+      "e1": "no such file or directory",
+      "e2": "no such file or directory",
+      "keys": null
+    }
+  },
+  {
+    "fn": "ReadDirectory",
+    "arg": [
+      1,
+      "/a/b/"
+    ],
+    "out": {
+      "dir": "/a/b",
+      "e1": "",
+      "e2": "",
+      "keys": [
+        "c.txt"
+      ]
+    }
+  },
+  {
+    "fn": "ReadFile",
+    "arg": [
+      1,
+      "/a/b/c.txt"
+    ],
+    "out": {
+      "e1": "",
+      "e2": "",
+      "text": "hello"
+    }
+  },
+  {
+    "fn": "ReadFile",
+    "arg": [
+      1,
+      "/x.js"
+    ],
+    "out": {
+      "e1": "no such file or directory",
+      "e2": "no such file or directory",
+      "text": ""
+    }
+  },
+  {
+    "fn": "ReadFile",
+    "arg": [
+      1,
+      "/missing"
+    ],
+    "out": {
+      "e1": "no such file or directory",
+      "e2": "no such file or directory",
+      "text": ""
+    }
+  },
+  {
+    "fn": "OpenFile",
+    "arg": [
+      1,
+      "/x.js"
+    ],
+    "out": {
+      "e1": "no such file or directory",
+      "e2": "no such file or directory",
+      "nil": true
+    }
+  },
+  {
+    "fn": "OpenFile",
+    "arg": [
+      1,
+      "/missing"
+    ],
+    "out": {
+      "e1": "no such file or directory",
+      "e2": "no such file or directory",
+      "nil": true
+    }
+  },
+  {
+    "fn": "ModKey",
+    "arg": 1,
+    "out": "This is not available during tests"
+  },
+  {
+    "fn": "EvalSymlinks",
+    "arg": 1,
+    "out": {
+      "ok": false,
+      "path": ""
+    }
+  },
+  {
+    "fn": "MockFS",
+    "arg": 2,
+    "out": {
+      "dirs": [
+        [
+          "/",
+          [
+            "dir",
+            "x.js"
+          ]
+        ],
+        [
+          "/dir",
+          [
+            "sub",
+            "y.css"
+          ]
+        ],
+        [
+          "/dir/sub",
+          [
+            "z.txt"
+          ]
+        ]
+      ],
+      "files": 3
+    }
+  },
+  {
+    "fn": "ReadDirectory",
+    "arg": [
+      2,
+      "/"
+    ],
+    "out": {
+      "dir": "/",
+      "e1": "",
+      "e2": "",
+      "keys": [
+        "dir",
+        "x.js"
+      ]
+    }
+  },
+  {
+    "fn": "ReadDirectory",
+    "arg": [
+      2,
+      "/a/b"
+    ],
+    "out": {
+      "dir": "",
+      "e1": "no such file or directory",
+      "e2": "no such file or directory",
+      "keys": null
+    }
+  },
+  {
+    "fn": "ReadDirectory",
+    "arg": [
+      2,
+      "/dir"
+    ],
+    "out": {
+      "dir": "/dir",
+      "e1": "",
+      "e2": "",
+      "keys": [
+        "sub",
+        "y.css"
+      ]
+    }
+  },
+  {
+    "fn": "ReadDirectory",
+    "arg": [
+      2,
+      "/dir/sub"
+    ],
+    "out": {
+      "dir": "/dir/sub",
+      "e1": "",
+      "e2": "",
+      "keys": [
+        "z.txt"
+      ]
+    }
+  },
+  {
+    "fn": "ReadDirectory",
+    "arg": [
+      2,
+      "/missing"
+    ],
+    "out": {
+      "dir": "",
+      "e1": "no such file or directory",
+      "e2": "no such file or directory",
+      "keys": null
+    }
+  },
+  {
+    "fn": "ReadDirectory",
+    "arg": [
+      2,
+      "/a/b/"
+    ],
+    "out": {
+      "dir": "",
+      "e1": "no such file or directory",
+      "e2": "no such file or directory",
+      "keys": null
+    }
+  },
+  {
+    "fn": "ReadFile",
+    "arg": [
+      2,
+      "/a/b/c.txt"
+    ],
+    "out": {
+      "e1": "no such file or directory",
+      "e2": "no such file or directory",
+      "text": ""
+    }
+  },
+  {
+    "fn": "ReadFile",
+    "arg": [
+      2,
+      "/x.js"
+    ],
+    "out": {
+      "e1": "",
+      "e2": "",
+      "text": "js"
+    }
+  },
+  {
+    "fn": "ReadFile",
+    "arg": [
+      2,
+      "/missing"
+    ],
+    "out": {
+      "e1": "no such file or directory",
+      "e2": "no such file or directory",
+      "text": ""
+    }
+  },
+  {
+    "fn": "OpenFile",
+    "arg": [
+      2,
+      "/x.js"
+    ],
+    "out": {
+      "e1": "",
+      "e2": "",
+      "len": 2,
+      "nil": false,
+      "read": "js",
+      "readErr": ""
+    }
+  },
+  {
+    "fn": "OpenFile",
+    "arg": [
+      2,
+      "/missing"
+    ],
+    "out": {
+      "e1": "no such file or directory",
+      "e2": "no such file or directory",
+      "nil": true
+    }
+  },
+  {
+    "fn": "ModKey",
+    "arg": 2,
+    "out": "This is not available during tests"
+  },
+  {
+    "fn": "EvalSymlinks",
+    "arg": 2,
+    "out": {
+      "ok": false,
+      "path": ""
+    }
+  }
+]

@@ -1,0 +1,32 @@
+package fs
+
+// 第 106 轮 Go 探针：goFilepath.evalSymlinks（真实 OS symlink，dump 结果）。
+import ("encoding/json";"os";"path/filepath";"testing")
+type esRow struct { Name string `json:"name"`; Rel string `json:"rel"`; Err string `json:"err"` }
+func TestTmpGenEvalSymlinks106(t *testing.T){
+  base,err:=os.MkdirTemp("","symtest");if err!=nil{t.Fatal(err)}
+  defer os.RemoveAll(base)
+  // real/a.js ; link -> real ; brokensym -> nope ; chain1->link
+  os.MkdirAll(filepath.Join(base,"real"),0755)
+  os.WriteFile(filepath.Join(base,"real","a.js"),[]byte("x"),0644)
+  os.Symlink(filepath.Join(base,"real"),filepath.Join(base,"link"))
+  os.Symlink(filepath.Join(base,"nope"),filepath.Join(base,"broken"))
+  fp:=goFilepath{cwd:base,isWindows:false,pathSeparator:'/'}
+  cases:=[]struct{name,p string}{
+    {"direct",filepath.Join(base,"real","a.js")},
+    {"symlink-dir",filepath.Join(base,"link","a.js")},
+    {"dot-clean",filepath.Join(base,"real","..","real","a.js")},
+    {"missing",filepath.Join(base,"missing.js")},
+    {"broken",filepath.Join(base,"broken")},
+  }
+  rows:=[]esRow{}
+  for _,c:=range cases{
+    out,e:=fp.evalSymlinks(c.p)
+    rel,_:=filepath.Rel(base,out)
+    errStr:="";if e!=nil{errStr="err"} // 文案含 OS 路径，归一为有/无
+    rows=append(rows,esRow{c.name,filepath.ToSlash(rel),errStr})
+  }
+  b,_:=json.MarshalIndent(rows,"","  ")
+  if err:=os.WriteFile("/root/port/testdata/eval-symlinks-go.json",b,0644);err!=nil{t.Fatal(err)}
+  t.Logf("wrote %d rows bytes=%d",len(rows),len(b))
+}

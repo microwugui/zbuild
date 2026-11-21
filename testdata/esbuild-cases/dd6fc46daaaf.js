@@ -1,0 +1,1 @@
+return foo = true; try {} catch { var foo }

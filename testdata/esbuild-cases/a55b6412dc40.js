@@ -1,0 +1,1 @@
+if (0) throw a(); throw b()

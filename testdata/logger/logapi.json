@@ -1,0 +1,143 @@
+{
+ "note": "Log.AddError/AddID/AddErrorWithNotes/AddIDWithNotes/AddMsgID/allowOverride/NewDeferLog 的期望值，由 Go 探针 tmplogapi 打出；add* 是 stderr 原始字节 hex，defer* 是 Done() 摘要 text 的 hex",
+ "contents": "let é = 1;\nboom;\n",
+ "logLevel": 3,
+ "overrides": {
+  "6": 4,
+  "7": 6
+ },
+ "cases": [
+  {
+   "name": "add-error",
+   "api": "error",
+   "start": 0,
+   "len": 1,
+   "text": "boom",
+   "outputHex": "e29c98205b4552524f525d20626f6f6d0a0a202020203c737464696e3e3a313a303a0a2020202020203120e29482206c657420c3a9203d20313b0a2020202020202020e295b5205e0a0a31206572726f720a"
+  },
+  {
+   "name": "add-error-notes",
+   "api": "error-notes",
+   "start": 15,
+   "len": 4,
+   "text": "boom",
+   "notes": [
+    "note one",
+    "note two"
+   ],
+   "outputHex": "e29c98205b4552524f525d20626f6f6d0a0a202020203c737464696e3e3a323a333a0a2020202020203220e2948220626f6f6d3b0a2020202020202020e295b5202020207e7e0a0a20206e6f7465206f6e650a20206e6f74652074776f0a0a31206572726f720a"
+  },
+  {
+   "name": "add-id-plain",
+   "api": "id",
+   "id": 6,
+   "kind": 0,
+   "start": 0,
+   "len": 1,
+   "text": "bigint here",
+   "outputHex": "e296b2205b5741524e494e475d20626967696e742068657265205b626967696e745d0a0a202020203c737464696e3e3a313a303a0a2020202020203120e29482206c657420c3a9203d20313b0a2020202020202020e295b5205e0a0a31207761726e696e670a"
+  },
+  {
+   "name": "add-id-override-warning",
+   "api": "id",
+   "id": 6,
+   "kind": 0,
+   "start": 0,
+   "len": 1,
+   "text": "downgraded",
+   "outputHex": "e296b2205b5741524e494e475d20646f776e677261646564205b626967696e745d0a0a202020203c737464696e3e3a313a303a0a2020202020203120e29482206c657420c3a9203d20313b0a2020202020202020e295b5205e0a0a31207761726e696e670a"
+  },
+  {
+   "name": "add-id-override-silent",
+   "api": "id",
+   "id": 7,
+   "kind": 0,
+   "start": 0,
+   "len": 1,
+   "text": "silenced",
+   "outputHex": ""
+  },
+  {
+   "name": "add-id-notes",
+   "api": "id-notes",
+   "id": 8,
+   "kind": 1,
+   "start": 0,
+   "len": 1,
+   "text": "with notes",
+   "notes": [
+    "n1"
+   ],
+   "outputHex": "e296b2205b5741524e494e475d2077697468206e6f746573205b636c6173732d6e616d652d77696c6c2d7468726f775d0a0a202020203c737464696e3e3a313a303a0a2020202020203120e29482206c657420c3a9203d20313b0a2020202020202020e295b5205e0a0a20206e310a0a31207761726e696e670a"
+  },
+  {
+   "name": "add-msg-id",
+   "api": "msg-id",
+   "id": 6,
+   "kind": 0,
+   "plugin": "my-plugin",
+   "start": 0,
+   "len": 1,
+   "text": "with plugin",
+   "outputHex": "e296b2205b5741524e494e475d207769746820706c7567696e205b706c7567696e206d792d706c7567696e5d205b626967696e745d0a0a202020203c737464696e3e3a313a303a0a2020202020203120e29482206c657420c3a9203d20313b0a2020202020202020e295b5205e0a0a31207761726e696e670a"
+  }
+ ],
+ "defer": [
+  {
+   "name": "defer-all",
+   "kind": 0,
+   "msgs": [
+    {
+     "kind": 4,
+     "id": 0,
+     "text": "dbg"
+    },
+    {
+     "kind": 0,
+     "id": 6,
+     "text": "err"
+    }
+   ],
+   "outputHex": "6861734572726f72733d74727565207065656b3d3220646f6e653d342f302f6462673b302f362f657272"
+  },
+  {
+   "name": "defer-no-verbose-debug",
+   "kind": 1,
+   "msgs": [
+    {
+     "kind": 5,
+     "id": 0,
+     "text": "vrb"
+    },
+    {
+     "kind": 4,
+     "id": 0,
+     "text": "dbg"
+    },
+    {
+     "kind": 1,
+     "id": 9,
+     "text": "warn"
+    }
+   ],
+   "outputHex": "6861734572726f72733d66616c7365207065656b3d3120646f6e653d312f392f7761726e"
+  },
+  {
+   "name": "defer-sort-stable",
+   "kind": 0,
+   "msgs": [
+    {
+     "kind": 1,
+     "id": 0,
+     "text": "w2"
+    },
+    {
+     "kind": 1,
+     "id": 0,
+     "text": "w1"
+    }
+   ],
+   "outputHex": "6861734572726f72733d66616c7365207065656b3d3220646f6e653d312f302f77323b312f302f7731"
+  }
+ ]
+}

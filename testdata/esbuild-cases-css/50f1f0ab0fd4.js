@@ -1,0 +1,1 @@
+a { color: red } a.cls { color: red }

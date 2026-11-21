@@ -1,0 +1,1 @@
+class Foo { foo = this?.#foo; #foo }

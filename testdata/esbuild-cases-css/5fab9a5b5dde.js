@@ -1,0 +1,1 @@
+a { mask-composite: add, subtract, intersect, exclude }

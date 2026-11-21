@@ -1,0 +1,1 @@
+.foo { & .bar, &:after { color: red } }

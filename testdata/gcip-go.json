@@ -1,0 +1,30 @@
+[
+  {
+    "fn": "generateChunksInParallel",
+    "arg": {
+      "case": "hash-chunk"
+    },
+    "out": [
+      {
+        "contents": "",
+        "exec": false,
+        "merge": false,
+        "path": "[dir]entry[name]-KQTCBY5C.js"
+      }
+    ]
+  },
+  {
+    "fn": "generateChunksInParallel",
+    "arg": {
+      "case": "static-path"
+    },
+    "out": [
+      {
+        "contents": "",
+        "exec": false,
+        "merge": false,
+        "path": "out.js"
+      }
+    ]
+  }
+]

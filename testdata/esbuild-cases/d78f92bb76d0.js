@@ -1,0 +1,1 @@
+function foo(__proto__) { return { __proto__: __proto__ } }

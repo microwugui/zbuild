@@ -1,0 +1,1 @@
+@x @y export default class Foo {}

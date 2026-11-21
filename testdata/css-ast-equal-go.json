@@ -1,0 +1,2036 @@
+[
+  {
+    "fn": "Token.Equal",
+    "a": {
+      "k": 29,
+      "t": "x",
+      "ws": 1
+    },
+    "b": {
+      "k": 29,
+      "t": "x",
+      "ws": 1
+    },
+    "check": null,
+    "out": "true"
+  },
+  {
+    "fn": "Token.Equal",
+    "a": {
+      "k": 29,
+      "t": "x",
+      "ws": 1
+    },
+    "b": {
+      "k": 29,
+      "t": "x",
+      "ws": 2
+    },
+    "check": null,
+    "out": "false"
+  },
+  {
+    "fn": "Token.Equal",
+    "a": {
+      "k": 29,
+      "t": "x",
+      "ws": 1
+    },
+    "b": {
+      "k": 29,
+      "t": "y",
+      "ws": 1
+    },
+    "check": null,
+    "out": "false"
+  },
+  {
+    "fn": "Token.Equal",
+    "a": {
+      "k": 29,
+      "t": "x",
+      "ws": 1
+    },
+    "b": {
+      "k": 30,
+      "t": "x",
+      "ws": 1
+    },
+    "check": null,
+    "out": "false"
+  },
+  {
+    "fn": "Token.Equal",
+    "a": {
+      "k": 27,
+      "t": "f",
+      "c": [
+        {
+          "k": 29,
+          "t": "a"
+        }
+      ]
+    },
+    "b": {
+      "k": 27,
+      "t": "f",
+      "c": [
+        {
+          "k": 29,
+          "t": "a"
+        }
+      ]
+    },
+    "check": null,
+    "out": "true"
+  },
+  {
+    "fn": "Token.Equal",
+    "a": {
+      "k": 27,
+      "t": "f",
+      "c": [
+        {
+          "k": 29,
+          "t": "a"
+        }
+      ]
+    },
+    "b": {
+      "k": 27,
+      "t": "f",
+      "c": [
+        {
+          "k": 29,
+          "t": "b"
+        }
+      ]
+    },
+    "check": null,
+    "out": "false"
+  },
+  {
+    "fn": "Token.Equal",
+    "a": {
+      "k": 37,
+      "t": "u",
+      "pi": 1
+    },
+    "b": {
+      "k": 37,
+      "t": "other",
+      "pi": 1
+    },
+    "check": null,
+    "out": "false"
+  },
+  {
+    "fn": "Token.Equal",
+    "a": {
+      "k": 37,
+      "t": "u",
+      "pi": 1
+    },
+    "b": {
+      "k": 37,
+      "t": "u",
+      "pi": 2
+    },
+    "check": null,
+    "out": "false"
+  },
+  {
+    "fn": "Token.Equal",
+    "a": {
+      "k": 37,
+      "t": "u"
+    },
+    "b": {
+      "k": 37,
+      "t": "x"
+    },
+    "check": {
+      "ra": [
+        "p.css"
+      ],
+      "rb": [
+        "p.css"
+      ]
+    },
+    "out": "false"
+  },
+  {
+    "fn": "Token.Equal",
+    "a": {
+      "k": 37,
+      "t": "same"
+    },
+    "b": {
+      "k": 37,
+      "t": "same"
+    },
+    "check": {
+      "ra": [
+        "p.css"
+      ],
+      "rb": [
+        "p.css"
+      ]
+    },
+    "out": "true"
+  },
+  {
+    "fn": "Token.Equal",
+    "a": {
+      "k": 37,
+      "t": "same"
+    },
+    "b": {
+      "k": 37,
+      "t": "same"
+    },
+    "check": {
+      "ra": [
+        "p.css"
+      ],
+      "rb": [
+        "q.css"
+      ]
+    },
+    "out": "false"
+  },
+  {
+    "fn": "Token.Equal",
+    "a": {
+      "k": 39,
+      "t": "sym"
+    },
+    "b": {
+      "k": 39,
+      "t": "sym"
+    },
+    "check": {
+      "symA": [
+        {
+          "kind": 25,
+          "name": "g"
+        }
+      ],
+      "symB": [
+        {
+          "kind": 25,
+          "name": "g"
+        }
+      ],
+      "sb": 1
+    },
+    "out": "true"
+  },
+  {
+    "fn": "Token.Equal",
+    "a": {
+      "k": 39,
+      "t": "sym"
+    },
+    "b": {
+      "k": 39,
+      "t": "sym"
+    },
+    "check": {
+      "symA": [
+        {
+          "kind": 25,
+          "name": "g"
+        }
+      ],
+      "symB": [
+        {
+          "kind": 25,
+          "name": "h"
+        }
+      ],
+      "sb": 1
+    },
+    "out": "false"
+  },
+  {
+    "fn": "Token.Equal",
+    "a": {
+      "k": 39,
+      "t": "s",
+      "pi": 3
+    },
+    "b": {
+      "k": 39,
+      "t": "z",
+      "pi": 3
+    },
+    "check": null,
+    "out": "false"
+  },
+  {
+    "fn": "Token.Equal",
+    "a": {
+      "k": 39,
+      "t": "s",
+      "pi": 3
+    },
+    "b": {
+      "k": 39,
+      "t": "s",
+      "pi": 4
+    },
+    "check": null,
+    "out": "false"
+  },
+  {
+    "fn": "TokensEqual",
+    "a": [
+      {
+        "k": 29,
+        "t": "x",
+        "ws": 1
+      },
+      {
+        "k": 30,
+        "t": "1"
+      }
+    ],
+    "b": [
+      {
+        "k": 29,
+        "t": "x",
+        "ws": 1
+      },
+      {
+        "k": 30,
+        "t": "1"
+      }
+    ],
+    "check": null,
+    "out": "true"
+  },
+  {
+    "fn": "TokensEqual",
+    "a": [
+      {
+        "k": 29,
+        "t": "x",
+        "ws": 1
+      },
+      {
+        "k": 30,
+        "t": "1"
+      }
+    ],
+    "b": [
+      {
+        "k": 29,
+        "t": "x",
+        "ws": 1
+      }
+    ],
+    "check": null,
+    "out": "false"
+  },
+  {
+    "fn": "Token.EqualIgnoringWhitespace",
+    "a": {
+      "k": 29,
+      "t": "x",
+      "ws": 1
+    },
+    "b": {
+      "k": 29,
+      "t": "x",
+      "ws": 2
+    },
+    "check": null,
+    "out": "true"
+  },
+  {
+    "fn": "Token.EqualIgnoringWhitespace",
+    "a": {
+      "k": 29,
+      "t": "x",
+      "ws": 1
+    },
+    "b": {
+      "k": 29,
+      "t": "y",
+      "ws": 1
+    },
+    "check": null,
+    "out": "false"
+  },
+  {
+    "fn": "Token.EqualIgnoringWhitespace",
+    "a": {
+      "k": 27,
+      "t": "f",
+      "c": [
+        {
+          "k": 29,
+          "t": "a"
+        }
+      ]
+    },
+    "b": {
+      "k": 27,
+      "t": "f",
+      "c": [
+        {
+          "k": 29,
+          "t": "a"
+        }
+      ]
+    },
+    "check": null,
+    "out": "true"
+  },
+  {
+    "fn": "TokensEqualIgnoringWhitespace",
+    "a": [
+      {
+        "k": 29,
+        "t": "x",
+        "ws": 1
+      }
+    ],
+    "b": [
+      {
+        "k": 29,
+        "t": "x",
+        "ws": 2
+      }
+    ],
+    "check": null,
+    "out": "true"
+  },
+  {
+    "fn": "RefsAreEquivalent",
+    "a": {
+      "ii": 5,
+      "si": 0
+    },
+    "b": {
+      "ii": 5,
+      "si": 0
+    },
+    "check": null,
+    "out": "true"
+  },
+  {
+    "fn": "RefsAreEquivalent",
+    "a": {
+      "ii": 5,
+      "si": 0
+    },
+    "b": {
+      "ii": 5,
+      "si": 1
+    },
+    "check": null,
+    "out": "false"
+  },
+  {
+    "fn": "RefsAreEquivalent",
+    "a": {
+      "ii": 0,
+      "si": 0
+    },
+    "b": {
+      "ii": 0,
+      "si": 1
+    },
+    "check": {
+      "symA": [
+        {
+          "kind": 25,
+          "name": "foo"
+        }
+      ],
+      "symB": [
+        {
+          "kind": 25,
+          "name": "foo"
+        }
+      ],
+      "sb": 1
+    },
+    "out": "true"
+  },
+  {
+    "fn": "RefsAreEquivalent",
+    "a": {
+      "ii": 0,
+      "si": 0
+    },
+    "b": {
+      "ii": 0,
+      "si": 1
+    },
+    "check": {
+      "symA": [
+        {
+          "kind": 25,
+          "name": "foo"
+        }
+      ],
+      "symB": [
+        {
+          "kind": 25,
+          "name": "bar"
+        }
+      ],
+      "sb": 1
+    },
+    "out": "false"
+  },
+  {
+    "fn": "R.RAtCharset.Equal",
+    "a": {
+      "ty": "charset",
+      "enc": "utf-8"
+    },
+    "b": {
+      "ty": "charset",
+      "enc": "utf-8"
+    },
+    "check": null,
+    "out": "true"
+  },
+  {
+    "fn": "R.RAtCharset.Equal",
+    "a": {
+      "ty": "charset",
+      "enc": "utf-8"
+    },
+    "b": {
+      "ty": "charset",
+      "enc": "latin1"
+    },
+    "check": null,
+    "out": "false"
+  },
+  {
+    "fn": "R.RAtImport.Equal",
+    "a": {
+      "ty": "import"
+    },
+    "b": {
+      "ty": "import"
+    },
+    "check": null,
+    "out": "false"
+  },
+  {
+    "fn": "R.RAtKeyframes.Equal",
+    "a": {
+      "ty": "keyframes",
+      "at": "@KEYFRAMES",
+      "blocks": [
+        {
+          "sels": [
+            "from",
+            "to"
+          ],
+          "rules": [
+            {
+              "ty": "comment",
+              "text": "x"
+            }
+          ]
+        }
+      ]
+    },
+    "b": {
+      "ty": "keyframes",
+      "at": "@KEYFRAMES",
+      "blocks": [
+        {
+          "sels": [
+            "from",
+            "to"
+          ],
+          "rules": [
+            {
+              "ty": "comment",
+              "text": "x"
+            }
+          ]
+        }
+      ]
+    },
+    "check": null,
+    "out": "true"
+  },
+  {
+    "fn": "R.RAtKeyframes.Equal",
+    "a": {
+      "ty": "keyframes",
+      "at": "@KEYFRAMES",
+      "blocks": [
+        {
+          "sels": [
+            "from",
+            "to"
+          ],
+          "rules": [
+            {
+              "ty": "comment",
+              "text": "x"
+            }
+          ]
+        }
+      ]
+    },
+    "b": {
+      "ty": "keyframes",
+      "at": "@keyframes",
+      "blocks": [
+        {
+          "sels": [
+            "from",
+            "to"
+          ],
+          "rules": [
+            {
+              "ty": "comment",
+              "text": "x"
+            }
+          ]
+        }
+      ]
+    },
+    "check": null,
+    "out": "true"
+  },
+  {
+    "fn": "R.RKnownAt.Equal",
+    "a": {
+      "ty": "known",
+      "at": "@media",
+      "pre": [
+        {
+          "k": 29,
+          "t": "x"
+        }
+      ],
+      "rules": [
+        {
+          "ty": "comment",
+          "text": "c"
+        }
+      ]
+    },
+    "b": {
+      "ty": "known",
+      "at": "@media",
+      "pre": [
+        {
+          "k": 29,
+          "t": "x"
+        }
+      ],
+      "rules": [
+        {
+          "ty": "comment",
+          "text": "c"
+        }
+      ]
+    },
+    "check": null,
+    "out": "true"
+  },
+  {
+    "fn": "R.RKnownAt.Equal",
+    "a": {
+      "ty": "known",
+      "at": "@media",
+      "pre": [
+        {
+          "k": 29,
+          "t": "x"
+        }
+      ],
+      "rules": [
+        {
+          "ty": "comment",
+          "text": "c"
+        }
+      ]
+    },
+    "b": {
+      "ty": "known",
+      "at": "@media",
+      "pre": [
+        {
+          "k": 29,
+          "t": "y"
+        }
+      ],
+      "rules": [
+        {
+          "ty": "comment",
+          "text": "c"
+        }
+      ]
+    },
+    "check": null,
+    "out": "false"
+  },
+  {
+    "fn": "R.RUnknownAt.Equal",
+    "a": {
+      "ty": "unknown",
+      "at": "@foo",
+      "pre": [
+        {
+          "k": 29,
+          "t": "a"
+        }
+      ],
+      "block": [
+        {
+          "k": 30,
+          "t": "1"
+        }
+      ]
+    },
+    "b": {
+      "ty": "unknown",
+      "at": "@foo",
+      "pre": [
+        {
+          "k": 29,
+          "t": "a"
+        }
+      ],
+      "block": [
+        {
+          "k": 30,
+          "t": "1"
+        }
+      ]
+    },
+    "check": null,
+    "out": "true"
+  },
+  {
+    "fn": "R.RSelector.Equal",
+    "a": {
+      "ty": "selector",
+      "rules": [
+        {
+          "ty": "comment",
+          "text": "z"
+        }
+      ],
+      "sels": [
+        {
+          "sels": [
+            {
+              "ts": {
+                "n": {
+                  "t": "div",
+                  "k": 29
+                }
+              }
+            },
+            {
+              "sub": [
+                {
+                  "ty": "class"
+                }
+              ],
+              "cb": 32
+            }
+          ]
+        }
+      ]
+    },
+    "b": {
+      "ty": "selector",
+      "rules": [
+        {
+          "ty": "comment",
+          "text": "z"
+        }
+      ],
+      "sels": [
+        {
+          "sels": [
+            {
+              "ts": {
+                "n": {
+                  "t": "div",
+                  "k": 29
+                }
+              }
+            },
+            {
+              "sub": [
+                {
+                  "ty": "class"
+                }
+              ],
+              "cb": 32
+            }
+          ]
+        }
+      ]
+    },
+    "check": {
+      "symA": [
+        {
+          "kind": 25,
+          "name": "foo"
+        }
+      ],
+      "symB": [
+        {
+          "kind": 25,
+          "name": "foo"
+        }
+      ],
+      "sb": 1
+    },
+    "out": "true"
+  },
+  {
+    "fn": "R.RQualified.Equal",
+    "a": {
+      "ty": "qualified",
+      "pre": [
+        {
+          "k": 29,
+          "t": "h1"
+        }
+      ],
+      "rules": [
+        {
+          "ty": "bad",
+          "toks": [
+            {
+              "k": 30,
+              "t": "9"
+            }
+          ]
+        }
+      ]
+    },
+    "b": {
+      "ty": "qualified",
+      "pre": [
+        {
+          "k": 29,
+          "t": "h1"
+        }
+      ],
+      "rules": [
+        {
+          "ty": "bad",
+          "toks": [
+            {
+              "k": 30,
+              "t": "9"
+            }
+          ]
+        }
+      ]
+    },
+    "check": null,
+    "out": "true"
+  },
+  {
+    "fn": "R.RDeclaration.Equal",
+    "a": {
+      "ty": "declaration",
+      "kt": "color",
+      "val": [
+        {
+          "k": 29,
+          "t": "red"
+        }
+      ]
+    },
+    "b": {
+      "ty": "declaration",
+      "kt": "color",
+      "val": [
+        {
+          "k": 29,
+          "t": "red"
+        }
+      ]
+    },
+    "check": null,
+    "out": "true"
+  },
+  {
+    "fn": "R.RDeclaration.Equal",
+    "a": {
+      "ty": "declaration",
+      "kt": "color",
+      "val": [
+        {
+          "k": 29,
+          "t": "red"
+        }
+      ]
+    },
+    "b": {
+      "ty": "declaration",
+      "kt": "color",
+      "imp": true,
+      "val": [
+        {
+          "k": 29,
+          "t": "red"
+        }
+      ]
+    },
+    "check": null,
+    "out": "false"
+  },
+  {
+    "fn": "R.RBadDeclaration.Equal",
+    "a": {
+      "ty": "bad",
+      "toks": [
+        {
+          "k": 29,
+          "t": "oops"
+        },
+        {
+          "k": 10,
+          "t": ","
+        }
+      ]
+    },
+    "b": {
+      "ty": "bad",
+      "toks": [
+        {
+          "k": 29,
+          "t": "oops"
+        },
+        {
+          "k": 10,
+          "t": ","
+        }
+      ]
+    },
+    "check": null,
+    "out": "true"
+  },
+  {
+    "fn": "R.RComment.Equal",
+    "a": {
+      "ty": "comment",
+      "text": "hello"
+    },
+    "b": {
+      "ty": "comment",
+      "text": "hello"
+    },
+    "check": null,
+    "out": "true"
+  },
+  {
+    "fn": "R.RComment.Equal",
+    "a": {
+      "ty": "comment",
+      "text": "hello"
+    },
+    "b": {
+      "ty": "comment",
+      "text": "world"
+    },
+    "check": null,
+    "out": "false"
+  },
+  {
+    "fn": "R.RAtLayer.Equal",
+    "a": {
+      "ty": "layer",
+      "rules": [
+        {
+          "ty": "comment",
+          "text": "l"
+        }
+      ],
+      "names": [
+        [
+          "a",
+          "b"
+        ]
+      ]
+    },
+    "b": {
+      "ty": "layer",
+      "rules": [
+        {
+          "ty": "comment",
+          "text": "l"
+        }
+      ],
+      "names": [
+        [
+          "a",
+          "b"
+        ]
+      ]
+    },
+    "check": null,
+    "out": "false"
+  },
+  {
+    "fn": "R.RAtMedia.Equal",
+    "a": {
+      "ty": "media",
+      "rules": [
+        {
+          "ty": "comment",
+          "text": "m"
+        }
+      ],
+      "q": [
+        {
+          "ty": "plain",
+          "text": "screen"
+        }
+      ]
+    },
+    "b": {
+      "ty": "media",
+      "rules": [
+        {
+          "ty": "comment",
+          "text": "m"
+        }
+      ],
+      "q": [
+        {
+          "ty": "plain",
+          "text": "screen"
+        }
+      ]
+    },
+    "check": null,
+    "out": "true"
+  },
+  {
+    "fn": "R.RAtScope.Equal",
+    "a": {
+      "ty": "scope",
+      "rules": [
+        {
+          "ty": "comment",
+          "text": "s"
+        }
+      ],
+      "start": [
+        {
+          "sels": [
+            {
+              "ts": {
+                "n": {
+                  "t": "a",
+                  "k": 29
+                }
+              }
+            }
+          ]
+        }
+      ],
+      "end": [
+        {
+          "sels": [
+            {
+              "ts": {
+                "n": {
+                  "t": "b",
+                  "k": 29
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "b": {
+      "ty": "scope",
+      "rules": [
+        {
+          "ty": "comment",
+          "text": "s"
+        }
+      ],
+      "start": [
+        {
+          "sels": [
+            {
+              "ts": {
+                "n": {
+                  "t": "a",
+                  "k": 29
+                }
+              }
+            }
+          ]
+        }
+      ],
+      "end": [
+        {
+          "sels": [
+            {
+              "ts": {
+                "n": {
+                  "t": "b",
+                  "k": 29
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "check": null,
+    "out": "true"
+  },
+  {
+    "fn": "RulesEqual",
+    "a": [
+      {
+        "ty": "comment",
+        "text": "hello"
+      },
+      {
+        "ty": "bad",
+        "toks": [
+          {
+            "k": 29,
+            "t": "oops"
+          },
+          {
+            "k": 10,
+            "t": ","
+          }
+        ]
+      }
+    ],
+    "b": [
+      {
+        "ty": "comment",
+        "text": "hello"
+      },
+      {
+        "ty": "bad",
+        "toks": [
+          {
+            "k": 29,
+            "t": "oops"
+          },
+          {
+            "k": 10,
+            "t": ","
+          }
+        ]
+      }
+    ],
+    "check": null,
+    "out": "true"
+  },
+  {
+    "fn": "RulesEqual",
+    "a": [
+      {
+        "ty": "comment",
+        "text": "hello"
+      },
+      {
+        "ty": "bad",
+        "toks": [
+          {
+            "k": 29,
+            "t": "oops"
+          },
+          {
+            "k": 10,
+            "t": ","
+          }
+        ]
+      }
+    ],
+    "b": [
+      {
+        "ty": "comment",
+        "text": "hello"
+      }
+    ],
+    "check": null,
+    "out": "false"
+  },
+  {
+    "fn": "MQ.MQType.Equal",
+    "a": {
+      "ty": "type",
+      "op": 1,
+      "text": "screen",
+      "and": {
+        "ty": "plain",
+        "text": "x"
+      }
+    },
+    "b": {
+      "ty": "type",
+      "op": 1,
+      "text": "screen",
+      "and": {
+        "ty": "plain",
+        "text": "x"
+      }
+    },
+    "check": null,
+    "out": "true"
+  },
+  {
+    "fn": "MQ.MQType.Equal",
+    "a": {
+      "ty": "type",
+      "op": 1,
+      "text": "screen",
+      "and": {
+        "ty": "plain",
+        "text": "x"
+      }
+    },
+    "b": {
+      "ty": "type",
+      "op": 1,
+      "text": "print"
+    },
+    "check": null,
+    "out": "false"
+  },
+  {
+    "fn": "MQ.MQNot.Equal",
+    "a": {
+      "ty": "not",
+      "inner": {
+        "ty": "plain",
+        "text": "screen"
+      }
+    },
+    "b": {
+      "ty": "not",
+      "inner": {
+        "ty": "plain",
+        "text": "screen"
+      }
+    },
+    "check": null,
+    "out": "true"
+  },
+  {
+    "fn": "MQ.MQBinary.Equal",
+    "a": {
+      "ty": "binary",
+      "op": 1,
+      "terms": [
+        {
+          "ty": "plain",
+          "text": "a"
+        },
+        {
+          "ty": "plain",
+          "text": "b"
+        }
+      ]
+    },
+    "b": {
+      "ty": "binary",
+      "op": 1,
+      "terms": [
+        {
+          "ty": "plain",
+          "text": "a"
+        },
+        {
+          "ty": "plain",
+          "text": "b"
+        }
+      ]
+    },
+    "check": null,
+    "out": "true"
+  },
+  {
+    "fn": "MQ.MQArbitraryTokens.Equal",
+    "a": {
+      "ty": "arb",
+      "toks": [
+        {
+          "k": 29,
+          "t": "f"
+        },
+        {
+          "k": 10,
+          "t": ","
+        }
+      ]
+    },
+    "b": {
+      "ty": "arb",
+      "toks": [
+        {
+          "k": 29,
+          "t": "f"
+        },
+        {
+          "k": 10,
+          "t": ","
+        }
+      ]
+    },
+    "check": null,
+    "out": "true"
+  },
+  {
+    "fn": "MQ.MQPlainOrBoolean.Equal",
+    "a": {
+      "ty": "plain",
+      "text": "color",
+      "toks": [
+        {
+          "k": 29,
+          "t": "red"
+        }
+      ]
+    },
+    "b": {
+      "ty": "plain",
+      "text": "color",
+      "toks": [
+        {
+          "k": 29,
+          "t": "red"
+        }
+      ]
+    },
+    "check": null,
+    "out": "true"
+  },
+  {
+    "fn": "MQ.MQRange.Equal",
+    "a": {
+      "ty": "range",
+      "text": "w",
+      "before": [
+        {
+          "k": 30,
+          "t": "1"
+        }
+      ],
+      "after": [
+        {
+          "k": 30,
+          "t": "2"
+        }
+      ],
+      "bc": 2,
+      "ac": 5
+    },
+    "b": {
+      "ty": "range",
+      "text": "w",
+      "before": [
+        {
+          "k": 30,
+          "t": "1"
+        }
+      ],
+      "after": [
+        {
+          "k": 30,
+          "t": "2"
+        }
+      ],
+      "bc": 2,
+      "ac": 5
+    },
+    "check": null,
+    "out": "true"
+  },
+  {
+    "fn": "MQ.MQPlainOrBoolean.EqualIgnoringWhitespace",
+    "a": {
+      "ty": "plain",
+      "text": "c",
+      "toks": [
+        {
+          "k": 29,
+          "t": "red",
+          "ws": 1
+        }
+      ]
+    },
+    "b": {
+      "ty": "plain",
+      "text": "c",
+      "toks": [
+        {
+          "k": 29,
+          "t": "red",
+          "ws": 2
+        }
+      ]
+    },
+    "check": null,
+    "out": "true"
+  },
+  {
+    "fn": "MQ.MQRange.EqualIgnoringWhitespace",
+    "a": {
+      "ty": "range",
+      "text": "w",
+      "before": [
+        {
+          "k": 30,
+          "t": "1"
+        }
+      ],
+      "after": [
+        {
+          "k": 30,
+          "t": "2"
+        }
+      ],
+      "bc": 2,
+      "ac": 5
+    },
+    "b": {
+      "ty": "range",
+      "text": "w",
+      "before": [
+        {
+          "k": 30,
+          "t": "1"
+        }
+      ],
+      "after": [
+        {
+          "k": 30,
+          "t": "2"
+        }
+      ],
+      "bc": 2,
+      "ac": 5
+    },
+    "check": null,
+    "out": "true"
+  },
+  {
+    "fn": "MQ.MQType.EqualIgnoringWhitespace",
+    "a": {
+      "ty": "type",
+      "op": 1,
+      "text": "screen",
+      "and": {
+        "ty": "plain",
+        "text": "x"
+      }
+    },
+    "b": {
+      "ty": "type",
+      "op": 1,
+      "text": "screen",
+      "and": {
+        "ty": "plain",
+        "text": "x"
+      }
+    },
+    "check": null,
+    "out": "true"
+  },
+  {
+    "fn": "MQ.MQNot.EqualIgnoringWhitespace",
+    "a": {
+      "ty": "not",
+      "inner": {
+        "ty": "plain",
+        "text": "screen"
+      }
+    },
+    "b": {
+      "ty": "not",
+      "inner": {
+        "ty": "plain",
+        "text": "screen"
+      }
+    },
+    "check": null,
+    "out": "true"
+  },
+  {
+    "fn": "MQ.MQBinary.EqualIgnoringWhitespace",
+    "a": {
+      "ty": "binary",
+      "op": 1,
+      "terms": [
+        {
+          "ty": "plain",
+          "text": "a"
+        },
+        {
+          "ty": "plain",
+          "text": "b"
+        }
+      ]
+    },
+    "b": {
+      "ty": "binary",
+      "op": 1,
+      "terms": [
+        {
+          "ty": "plain",
+          "text": "a"
+        },
+        {
+          "ty": "plain",
+          "text": "b"
+        }
+      ]
+    },
+    "check": null,
+    "out": "true"
+  },
+  {
+    "fn": "MQ.MQArbitraryTokens.EqualIgnoringWhitespace",
+    "a": {
+      "ty": "arb",
+      "toks": [
+        {
+          "k": 29,
+          "t": "f"
+        },
+        {
+          "k": 10,
+          "t": ","
+        }
+      ]
+    },
+    "b": {
+      "ty": "arb",
+      "toks": [
+        {
+          "k": 29,
+          "t": "f"
+        },
+        {
+          "k": 10,
+          "t": ","
+        }
+      ]
+    },
+    "check": null,
+    "out": "true"
+  },
+  {
+    "fn": "MediaQueriesEqual",
+    "a": [
+      {
+        "ty": "plain",
+        "text": "color",
+        "toks": [
+          {
+            "k": 29,
+            "t": "red"
+          }
+        ]
+      },
+      {
+        "ty": "range",
+        "text": "w",
+        "before": [
+          {
+            "k": 30,
+            "t": "1"
+          }
+        ],
+        "after": [
+          {
+            "k": 30,
+            "t": "2"
+          }
+        ],
+        "bc": 2,
+        "ac": 5
+      }
+    ],
+    "b": [
+      {
+        "ty": "plain",
+        "text": "color",
+        "toks": [
+          {
+            "k": 29,
+            "t": "red"
+          }
+        ]
+      },
+      {
+        "ty": "range",
+        "text": "w",
+        "before": [
+          {
+            "k": 30,
+            "t": "1"
+          }
+        ],
+        "after": [
+          {
+            "k": 30,
+            "t": "2"
+          }
+        ],
+        "bc": 2,
+        "ac": 5
+      }
+    ],
+    "check": null,
+    "out": "true"
+  },
+  {
+    "fn": "MediaQueriesEqualIgnoringWhitespace",
+    "a": [
+      {
+        "ty": "plain",
+        "text": "color",
+        "toks": [
+          {
+            "k": 29,
+            "t": "red"
+          }
+        ]
+      },
+      {
+        "ty": "range",
+        "text": "w",
+        "before": [
+          {
+            "k": 30,
+            "t": "1"
+          }
+        ],
+        "after": [
+          {
+            "k": 30,
+            "t": "2"
+          }
+        ],
+        "bc": 2,
+        "ac": 5
+      }
+    ],
+    "b": [
+      {
+        "ty": "plain",
+        "text": "color",
+        "toks": [
+          {
+            "k": 29,
+            "t": "red"
+          }
+        ]
+      },
+      {
+        "ty": "range",
+        "text": "w",
+        "before": [
+          {
+            "k": 30,
+            "t": "1"
+          }
+        ],
+        "after": [
+          {
+            "k": 30,
+            "t": "2"
+          }
+        ],
+        "bc": 2,
+        "ac": 5
+      }
+    ],
+    "check": null,
+    "out": "true"
+  },
+  {
+    "fn": "SS.SSHash.Equal",
+    "a": {
+      "ty": "hash"
+    },
+    "b": {
+      "ty": "hash"
+    },
+    "check": null,
+    "out": "true"
+  },
+  {
+    "fn": "SS.SSClass.Equal",
+    "a": {
+      "ty": "class"
+    },
+    "b": {
+      "ty": "class"
+    },
+    "check": null,
+    "out": "true"
+  },
+  {
+    "fn": "SS.SSAttribute.Equal",
+    "a": {
+      "ty": "attr",
+      "nn": {
+        "n": {
+          "t": "color",
+          "k": 29
+        }
+      },
+      "op": "=",
+      "val": "red",
+      "mod": 105
+    },
+    "b": {
+      "ty": "attr",
+      "nn": {
+        "n": {
+          "t": "color",
+          "k": 29
+        }
+      },
+      "op": "=",
+      "val": "red",
+      "mod": 105
+    },
+    "check": null,
+    "out": "true"
+  },
+  {
+    "fn": "SS.SSAttribute.Equal",
+    "a": {
+      "ty": "attr",
+      "nn": {
+        "n": {
+          "t": "color",
+          "k": 29
+        }
+      },
+      "op": "=",
+      "val": "red",
+      "mod": 105
+    },
+    "b": {
+      "ty": "attr",
+      "nn": {
+        "n": {
+          "t": "color",
+          "k": 29
+        }
+      },
+      "op": "=",
+      "val": "blue",
+      "mod": 105
+    },
+    "check": null,
+    "out": "false"
+  },
+  {
+    "fn": "SS.SSPseudoClass.Equal",
+    "a": {
+      "ty": "pseudo",
+      "name": "nth-child",
+      "args": [
+        {
+          "k": 30,
+          "t": "2"
+        }
+      ]
+    },
+    "b": {
+      "ty": "pseudo",
+      "name": "nth-child",
+      "args": [
+        {
+          "k": 30,
+          "t": "2"
+        }
+      ]
+    },
+    "check": null,
+    "out": "true"
+  },
+  {
+    "fn": "SS.SSPseudoClassWithSelectorList.Equal",
+    "a": {
+      "ty": "pseudolist",
+      "sels": [
+        {
+          "sels": [
+            {
+              "ts": {
+                "n": {
+                  "t": "div",
+                  "k": 29
+                }
+              }
+            }
+          ]
+        }
+      ],
+      "kind": 5,
+      "a": "2",
+      "b": "1"
+    },
+    "b": {
+      "ty": "pseudolist",
+      "sels": [
+        {
+          "sels": [
+            {
+              "ts": {
+                "n": {
+                  "t": "div",
+                  "k": 29
+                }
+              }
+            }
+          ]
+        }
+      ],
+      "kind": 5,
+      "a": "2",
+      "b": "1"
+    },
+    "check": null,
+    "out": "true"
+  },
+  {
+    "fn": "ComplexSelector.Equal",
+    "a": {
+      "sels": [
+        {
+          "ts": {
+            "n": {
+              "t": "div",
+              "k": 29
+            }
+          }
+        },
+        {
+          "sub": [
+            {
+              "ty": "class"
+            }
+          ],
+          "cb": 62
+        }
+      ]
+    },
+    "b": {
+      "sels": [
+        {
+          "ts": {
+            "n": {
+              "t": "div",
+              "k": 29
+            }
+          }
+        },
+        {
+          "sub": [
+            {
+              "ty": "class"
+            }
+          ],
+          "cb": 62
+        }
+      ]
+    },
+    "check": null,
+    "out": "true"
+  },
+  {
+    "fn": "ComplexSelectorsEqual",
+    "a": [
+      {
+        "sels": [
+          {
+            "ts": {
+              "n": {
+                "t": "div",
+                "k": 29
+              }
+            }
+          },
+          {
+            "sub": [
+              {
+                "ty": "class"
+              }
+            ],
+            "cb": 62
+          }
+        ]
+      }
+    ],
+    "b": [
+      {
+        "sels": [
+          {
+            "ts": {
+              "n": {
+                "t": "div",
+                "k": 29
+              }
+            }
+          },
+          {
+            "sub": [
+              {
+                "ty": "class"
+              }
+            ],
+            "cb": 62
+          }
+        ]
+      }
+    ],
+    "check": null,
+    "out": "true"
+  },
+  {
+    "fn": "NameToken.Equal",
+    "a": {
+      "t": "a",
+      "k": 29
+    },
+    "b": {
+      "t": "a",
+      "k": 29
+    },
+    "check": null,
+    "out": "true"
+  },
+  {
+    "fn": "NameToken.Equal",
+    "a": {
+      "t": "a",
+      "k": 29
+    },
+    "b": {
+      "t": "a",
+      "k": 30
+    },
+    "check": null,
+    "out": "false"
+  },
+  {
+    "fn": "NamespacedName.Equal",
+    "a": {
+      "n": {
+        "t": "x",
+        "k": 29
+      }
+    },
+    "b": {
+      "n": {
+        "t": "x",
+        "k": 29
+      }
+    },
+    "check": null,
+    "out": "true"
+  },
+  {
+    "fn": "NamespacedName.Equal",
+    "a": {
+      "n": {
+        "t": "x",
+        "k": 29
+      }
+    },
+    "b": {
+      "p": {
+        "t": "s",
+        "k": 29
+      },
+      "n": {
+        "t": "x",
+        "k": 29
+      }
+    },
+    "check": null,
+    "out": "false"
+  },
+  {
+    "fn": "ContainsNestingCombinator",
+    "a": {
+      "sels": [
+        {
+          "nest": 1
+        }
+      ]
+    },
+    "b": null,
+    "check": null,
+    "out": "true"
+  },
+  {
+    "fn": "ContainsNestingCombinator",
+    "a": {
+      "sels": [
+        {}
+      ]
+    },
+    "b": null,
+    "check": null,
+    "out": "false"
+  },
+  {
+    "fn": "IsRelative",
+    "a": {
+      "sels": [
+        {
+          "nest": 1
+        },
+        {}
+      ]
+    },
+    "b": null,
+    "check": null,
+    "out": "false"
+  },
+  {
+    "fn": "IsRelative",
+    "a": {
+      "sels": [
+        {
+          "ts": {
+            "n": {
+              "t": "a",
+              "k": 29
+            }
+          },
+          "cb": 62
+        }
+      ]
+    },
+    "b": null,
+    "check": null,
+    "out": "true"
+  }
+]

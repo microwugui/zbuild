@@ -1,0 +1,102 @@
+[
+  {
+    "fn": "NextRenamedName",
+    "arg": "[\"foo\"]",
+    "out": "foo"
+  },
+  {
+    "fn": "NextRenamedName",
+    "arg": "[\"foo\",\"foo\"]",
+    "out": "foo;foo2"
+  },
+  {
+    "fn": "NextRenamedName",
+    "arg": "[\"foo\",\"foo\",\"bar\",\"foo\"]",
+    "out": "foo;foo2;bar;foo3"
+  },
+  {
+    "fn": "NextRenamedName",
+    "arg": "[\"a\",\"b\",\"a\",\"a2\",\"a\"]",
+    "out": "a;b;a2;a23;a3"
+  },
+  {
+    "fn": "NextMinifiedName",
+    "arg": "1",
+    "out": "b;c;d;e"
+  },
+  {
+    "fn": "NextMinifiedName",
+    "arg": "5",
+    "out": "f;g;h;i"
+  },
+  {
+    "fn": "NextMinifiedName",
+    "arg": "60",
+    "out": "ga;ha;ia;ja"
+  },
+  {
+    "fn": "NextMinifiedName",
+    "arg": "100",
+    "out": "Ua;Va;Wa;Xa"
+  },
+  {
+    "fn": "findNameUse",
+    "arg": "{\"scopes\":[{\"x\":1}],\"name\":\"x\"}",
+    "out": "2"
+  },
+  {
+    "fn": "findNameUse",
+    "arg": "{\"scopes\":[{\"x\":1},{}],\"name\":\"x\"}",
+    "out": "1"
+  },
+  {
+    "fn": "findNameUse",
+    "arg": "{\"scopes\":[{\"x\":1},{\"y\":2}],\"name\":\"x\"}",
+    "out": "1"
+  },
+  {
+    "fn": "findNameUse",
+    "arg": "{\"scopes\":[{},{}],\"name\":\"z\"}",
+    "out": "0"
+  },
+  {
+    "fn": "findNameUse",
+    "arg": "{\"scopes\":[{\"a\":3,\"b\":9},{}],\"name\":\"b\"}",
+    "out": "1"
+  },
+  {
+    "fn": "findUnusedName",
+    "arg": "{\"scopes\":[{}],\"name\":\"foo\",\"ns\":0}",
+    "out": "foo|foo=1"
+  },
+  {
+    "fn": "findUnusedName",
+    "arg": "{\"scopes\":[{\"foo\":1}],\"name\":\"foo\",\"ns\":0}",
+    "out": "foo2|foo=2,foo2=1"
+  },
+  {
+    "fn": "findUnusedName",
+    "arg": "{\"scopes\":[{\"foo\":1},{\"foo\":2}],\"name\":\"foo\",\"ns\":0}",
+    "out": "foo3|foo=3,foo3=1"
+  },
+  {
+    "fn": "findUnusedName",
+    "arg": "{\"scopes\":[{\"foo\":1},{\"foo\":2},{\"foo\":5}],\"name\":\"foo\",\"ns\":0}",
+    "out": "foo6|foo=6,foo6=1"
+  },
+  {
+    "fn": "findUnusedName",
+    "arg": "{\"scopes\":[{\"1abc\":1}],\"name\":\"1abc\",\"ns\":0}",
+    "out": "_abc|1abc=1,_abc=1"
+  },
+  {
+    "fn": "findUnusedName",
+    "arg": "{\"scopes\":[{\"#1abc\":1}],\"name\":\"#1abc\",\"ns\":2}",
+    "out": "#_abc|#1abc=1,#_abc=1"
+  },
+  {
+    "fn": "findUnusedName",
+    "arg": "{\"scopes\":[{\"a\":1,\"a2\":1,\"a3\":1}],\"name\":\"a\",\"ns\":0}",
+    "out": "a4|a=4,a2=1,a3=1,a4=1"
+  }
+]

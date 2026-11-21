@@ -1,0 +1,37 @@
+[
+  {
+    "fn": "isPolar",
+    "arg": "10",
+    "out": "false"
+  },
+  {
+    "fn": "isPolar",
+    "arg": "2",
+    "out": "true"
+  },
+  {
+    "fn": "isPolar",
+    "arg": "3",
+    "out": "true"
+  },
+  {
+    "fn": "isPolar",
+    "arg": "5",
+    "out": "true"
+  },
+  {
+    "fn": "isPolar",
+    "arg": "7",
+    "out": "true"
+  },
+  {
+    "fn": "isPolar",
+    "arg": "4",
+    "out": "false"
+  },
+  {
+    "fn": "multiplyMatrices",
+    "arg": "0.5,0.3,0.8",
+    "out": "0.4578800000,0.3786200000,0.8058100000"
+  }
+]

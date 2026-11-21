@@ -1,0 +1,101 @@
+package linker
+
+// 第 153 批 Go 探针：renameSymbolsInChunk（chunk 符号重命名核心），dump NameForSymbol。
+import (
+  "encoding/json"
+  "os"
+  "testing"
+
+  "github.com/evanw/esbuild/internal/ast"
+  "github.com/evanw/esbuild/internal/config"
+  "github.com/evanw/esbuild/internal/graph"
+  "github.com/evanw/esbuild/internal/js_ast"
+  "github.com/evanw/esbuild/internal/runtime"
+)
+
+func rcRef(s, i uint32) ast.Ref { return ast.Ref{SourceIndex: s, InnerIndex: i} }
+
+type rcRow struct { Fn string `json:"fn"`; Arg map[string]interface{} `json:"arg"`; Out interface{} `json:"out"` }
+
+func TestTmpGenRenameChunk(t *testing.T) {
+  var out []rcRow
+  add := func(fn string, arg map[string]interface{}, o interface{}) { out = append(out, rcRow{fn, arg, o}) }
+
+  for _, minify := range []bool{false, true} {
+    // graph: runtime(0) + file(1) with 4 symbols, one nested scope + one cross-chunk import
+    inputs := make([]graph.InputFile, 2)
+    // runtime
+    rt := &graph.JSRepr{AST: js_ast.AST{ModuleScope: &js_ast.Scope{}}}
+    inputs[runtime.SourceIndex] = graph.InputFile{Repr: rt}
+    // file 1
+    syms := []ast.Symbol{
+      {OriginalName: "alpha", Link: ast.InvalidRef, Kind: ast.SymbolConst},
+      {OriginalName: "beta", Link: ast.InvalidRef, Kind: ast.SymbolConst},
+      {OriginalName: "if", Link: ast.InvalidRef, Kind: ast.SymbolConst},   // reserved word
+      {OriginalName: "helper", Link: ast.InvalidRef, Kind: ast.SymbolConst}, // nested scope
+    }
+    moduleScope := &js_ast.Scope{Members: map[string]js_ast.ScopeMember{}}
+    moduleScope.Members["alpha"] = js_ast.ScopeMember{Ref: rcRef(1, 0)}
+    moduleScope.Members["beta"] = js_ast.ScopeMember{Ref: rcRef(1, 1)}
+    moduleScope.Members["if"] = js_ast.ScopeMember{Ref: rcRef(1, 2)}
+    nested := &js_ast.Scope{Parent: moduleScope, Members: map[string]js_ast.ScopeMember{}}
+    nested.Members["helper"] = js_ast.ScopeMember{Ref: rcRef(1, 3)}
+    moduleScope.Children = append(moduleScope.Children, nested)
+    part0 := js_ast.Part{
+      DeclaredSymbols: []js_ast.DeclaredSymbol{{Ref: rcRef(1, 0), IsTopLevel: true}, {Ref: rcRef(1, 1), IsTopLevel: true}},
+      SymbolUses: map[ast.Ref]js_ast.SymbolUse{rcRef(1, 0): {CountEstimate: 3}, rcRef(1, 1): {CountEstimate: 1}},
+      Scopes: []*js_ast.Scope{nested},
+      IsLive: true,
+    }
+    repr := &graph.JSRepr{AST: js_ast.AST{
+      Symbols: syms, Parts: []js_ast.Part{part0}, ModuleScope: moduleScope,
+    }}
+    // NestedScopeSlotCounts for minify
+    repr.AST.NestedScopeSlotCounts = ast.SlotCounts{}
+    inputs[1] = graph.InputFile{Repr: repr}
+
+    reachable := []uint32{0, 1}
+    eps := []graph.EntryPoint{{SourceIndex: 1, OutputPath: "e.js"}}
+    g := graph.CloneLinkerGraph(inputs, reachable, eps, false)
+    // give symbols proper map entries (CloneLinkerGraph copies AST.Symbols into SymbolsForSource)
+    c := &linkerContext{graph: g, options: &config.Options{MinifyIdentifiers: minify, OutputFormat: config.FormatIIFE, Mode: config.ModeBundle}}
+    chunk := &chunkInfo{chunkRepr: &chunkReprJS{}}
+    // cross-chunk import from other chunk symbol (use ref 1:2 to exercise sortedImports)
+    ci := chunkReprJS{}
+    ci.importsFromOtherChunks = map[uint32]crossChunkImportItemArray{}
+    chunk.chunkRepr = &ci
+    r := c.renameSymbolsInChunk(chunk, []uint32{1}, nil)
+    names := []interface{}{}
+    for i := range syms {
+      names = append(names, r.NameForSymbol(rcRef(1, uint32(i))))
+    }
+    add("renameSymbolsInChunk", map[string]interface{}{"minify": minify}, names)
+  }
+
+  // Scenario B: two files each declaring "value" -> collision suffix; plus reserved "default"
+  {
+    inputs := make([]graph.InputFile, 3)
+    inputs[0] = graph.InputFile{Repr: &graph.JSRepr{AST: js_ast.AST{ModuleScope: &js_ast.Scope{}}}}
+    for si := uint32(1); si <= 2; si++ {
+      syms := []ast.Symbol{{OriginalName: "value", Link: ast.InvalidRef, Kind: ast.SymbolConst}, {OriginalName: "default", Link: ast.InvalidRef, Kind: ast.SymbolConst}}
+      ms := &js_ast.Scope{Members: map[string]js_ast.ScopeMember{}}
+      ms.Members["value"] = js_ast.ScopeMember{Ref: rcRef(si, 0)}
+      ms.Members["default"] = js_ast.ScopeMember{Ref: rcRef(si, 1)}
+      part := js_ast.Part{DeclaredSymbols: []js_ast.DeclaredSymbol{{Ref: rcRef(si, 0), IsTopLevel: true}}, IsLive: true}
+      repr := &graph.JSRepr{AST: js_ast.AST{Symbols: syms, Parts: []js_ast.Part{part}, ModuleScope: ms}}
+      inputs[si] = graph.InputFile{Repr: repr}
+    }
+    g := graph.CloneLinkerGraph(inputs, []uint32{0, 1, 2}, []graph.EntryPoint{{SourceIndex: 1, OutputPath: "a.js"}, {SourceIndex: 2, OutputPath: "b.js"}}, false)
+    c := &linkerContext{graph: g, options: &config.Options{MinifyIdentifiers: false, OutputFormat: config.FormatESModule, Mode: config.ModeBundle}}
+    chunk := &chunkInfo{chunkRepr: &chunkReprJS{}}
+    r := c.renameSymbolsInChunk(chunk, []uint32{1, 2}, nil)
+    names := []interface{}{}
+    for si := uint32(1); si <= 2; si++ { for k := 0; k < 2; k++ { names = append(names, r.NameForSymbol(rcRef(si, uint32(k)))) } }
+    add("renameSymbolsInChunk", map[string]interface{}{"scenario": "collision"}, names)
+  }
+
+  b, err := json.MarshalIndent(out, "", "  ")
+  if err != nil { t.Fatal(err) }
+  if err := os.WriteFile("/root/port/testdata/rename-chunk-go.json", b, 0644); err != nil { t.Fatal(err) }
+  t.Logf("wrote %d rows", len(out))
+}

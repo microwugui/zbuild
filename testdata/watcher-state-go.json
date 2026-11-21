@@ -1,0 +1,37 @@
+[
+  {
+    "name": "fresh",
+    "dataPaths": [
+      "a.js",
+      "b.js"
+    ],
+    "recentItems": [],
+    "itemsToScan": 0
+  },
+  {
+    "name": "filter-recent",
+    "dataPaths": [
+      "a.js",
+      "b.js"
+    ],
+    "recentItems": [
+      "a.js",
+      "b.js"
+    ],
+    "itemsToScan": 0
+  },
+  {
+    "name": "all-recent-gone",
+    "dataPaths": [
+      "a.js"
+    ],
+    "recentItems": [],
+    "itemsToScan": 0
+  },
+  {
+    "name": "empty-data",
+    "dataPaths": [],
+    "recentItems": [],
+    "itemsToScan": 0
+  }
+]

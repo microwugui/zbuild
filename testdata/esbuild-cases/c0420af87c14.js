@@ -1,0 +1,1 @@
+x: while (x) y: while (y) { if (a) continue y; if (b) continue y; }

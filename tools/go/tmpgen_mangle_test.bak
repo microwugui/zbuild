@@ -1,0 +1,36 @@
+package cli
+
+import (
+	"encoding/json"
+	"os"
+	"testing"
+)
+
+type mgrow struct { Name string `json:"name"`; Data json.RawMessage `json:"data"` }
+type mgfix struct { Rows []mgrow `json:"rows"` }
+
+func TestTmpGenMangle(t *testing.T) {
+	fx := mgfix{}
+	cases := []struct {
+		name string
+		cache map[string]interface{}
+		order []string
+		ascii bool
+	}{
+		{"empty", map[string]interface{}{}, nil, false},
+		{"one-str", map[string]interface{}{"foo": "bar"}, nil, false},
+		{"with-false", map[string]interface{}{"foo": false, "bar": "baz"}, nil, false},
+		{"preserve-order", map[string]interface{}{"z": "1", "a": "2"}, []string{"z", "a"}, false},
+		{"new-keys-sorted", map[string]interface{}{"z": "1", "a": "2", "m": "3"}, []string{"z"}, false},
+		{"ascii", map[string]interface{}{"café": "naïve"}, nil, true},
+		{"escapes", map[string]interface{}{"a\"b": "x\\y\nz"}, nil, false},
+	}
+	for _, c := range cases {
+		out := printMangleCache(c.cache, c.order, c.ascii)
+		b, _ := json.Marshal(map[string]interface{}{"out": string(out)})
+		fx.Rows = append(fx.Rows, mgrow{c.name, b})
+	}
+	bts, _ := json.MarshalIndent(fx, "", "  ")
+	if err := os.WriteFile("/root/port/testdata/mangle-go.json", bts, 0644); err != nil { t.Fatal(err) }
+	t.Logf("wrote %d rows bytes=%d", len(fx.Rows), len(bts))
+}

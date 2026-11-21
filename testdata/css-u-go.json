@@ -1,0 +1,263 @@
+[
+  {
+    "fn": "parseURLOrString",
+    "src": "url(\"a.png\") rest",
+    "out": {
+      "msgs": [],
+      "out": {
+        "index": 3,
+        "len": 7,
+        "ok": true,
+        "start": 4,
+        "text": "a.png"
+      }
+    }
+  },
+  {
+    "fn": "parseURLOrString",
+    "src": "\"a.png\" rest",
+    "out": {
+      "msgs": [],
+      "out": {
+        "index": 1,
+        "len": 7,
+        "ok": true,
+        "start": 0,
+        "text": "a.png"
+      }
+    }
+  },
+  {
+    "fn": "parseURLOrString",
+    "src": "url('x')",
+    "out": {
+      "msgs": [],
+      "out": {
+        "index": 3,
+        "len": 3,
+        "ok": true,
+        "start": 4,
+        "text": "x"
+      }
+    }
+  },
+  {
+    "fn": "parseURLOrString",
+    "src": "url(  \"x\"  ) rest",
+    "out": {
+      "msgs": [],
+      "out": {
+        "index": 5,
+        "len": 3,
+        "ok": true,
+        "start": 6,
+        "text": "x"
+      }
+    }
+  },
+  {
+    "fn": "parseURLOrString",
+    "src": "foo",
+    "out": {
+      "msgs": [],
+      "out": {
+        "index": 0,
+        "len": 0,
+        "ok": false,
+        "start": 0,
+        "text": ""
+      }
+    }
+  },
+  {
+    "fn": "expectURLOrString",
+    "src": "url(a.png) rest",
+    "out": {
+      "msgs": [],
+      "out": {
+        "index": 1,
+        "len": 10,
+        "ok": true,
+        "start": 0,
+        "text": "a.png"
+      }
+    }
+  },
+  {
+    "fn": "expectURLOrString",
+    "src": "foo",
+    "out": {
+      "msgs": [],
+      "out": {
+        "index": 0,
+        "len": 0,
+        "ok": false,
+        "start": 0,
+        "text": ""
+      }
+    }
+  },
+  {
+    "fn": "expectValidLayerNameIdent",
+    "src": "foo;",
+    "out": {
+      "msgs": [],
+      "out": {
+        "index": 1,
+        "ok": true,
+        "text": "foo"
+      }
+    }
+  },
+  {
+    "fn": "expectValidLayerNameIdent",
+    "src": "initial;",
+    "out": {
+      "msgs": [
+        {
+          "text": "\"initial\" cannot be used as a layer name",
+          "kind": 1,
+          "line": 1,
+          "col": 0,
+          "len": 7
+        }
+      ],
+      "out": {
+        "index": 1,
+        "ok": false,
+        "text": ""
+      }
+    }
+  },
+  {
+    "fn": "expectValidLayerNameIdent",
+    "src": "123;",
+    "out": {
+      "msgs": [],
+      "out": {
+        "index": 0,
+        "ok": false,
+        "text": ""
+      }
+    }
+  },
+  {
+    "fn": "symbolForName",
+    "src": "abc",
+    "mode": "global",
+    "out": {
+      "locals": 0,
+      "refs": [
+        {
+          "inner": 0,
+          "loc": 3,
+          "src": 7
+        },
+        {
+          "inner": 1,
+          "loc": 3,
+          "src": 7
+        },
+        {
+          "inner": 0,
+          "loc": 3,
+          "src": 7
+        }
+      ],
+      "syms": [
+        {
+          "kind": 25,
+          "name": "a",
+          "use": 2
+        },
+        {
+          "kind": 25,
+          "name": "b",
+          "use": 1
+        }
+      ]
+    }
+  },
+  {
+    "fn": "symbolForName",
+    "src": "abc",
+    "mode": "local",
+    "out": {
+      "locals": 2,
+      "refs": [
+        {
+          "inner": 0,
+          "loc": 3,
+          "src": 7
+        },
+        {
+          "inner": 1,
+          "loc": 3,
+          "src": 7
+        },
+        {
+          "inner": 0,
+          "loc": 3,
+          "src": 7
+        }
+      ],
+      "syms": [
+        {
+          "kind": 26,
+          "name": "a",
+          "use": 2
+        },
+        {
+          "kind": 26,
+          "name": "b",
+          "use": 1
+        }
+      ]
+    }
+  },
+  {
+    "fn": "recordAtLayerRule",
+    "src": "",
+    "layers": [
+      "a"
+    ],
+    "out": {
+      "post": [
+        [
+          "a"
+        ]
+      ]
+    }
+  },
+  {
+    "fn": "recordAtLayerRule",
+    "src": "",
+    "layers": [
+      "b",
+      "c"
+    ],
+    "enclose": [
+      "x"
+    ],
+    "out": {
+      "post": [
+        [
+          "x",
+          "b",
+          "c"
+        ]
+      ]
+    }
+  },
+  {
+    "fn": "recordAtLayerRule",
+    "src": "",
+    "layers": [
+      "a"
+    ],
+    "anon": 1,
+    "out": {
+      "post": null
+    }
+  }
+]

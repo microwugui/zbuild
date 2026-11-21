@@ -1,0 +1,82 @@
+[
+  {
+    "fn": "String",
+    "arg": "0",
+    "out": "end of file"
+  },
+  {
+    "fn": "String",
+    "arg": "1",
+    "out": "@-keyword"
+  },
+  {
+    "fn": "String",
+    "arg": "26",
+    "out": "dimension"
+  },
+  {
+    "fn": "String",
+    "arg": "29",
+    "out": "identifier"
+  },
+  {
+    "fn": "String",
+    "arg": "36",
+    "out": "string token"
+  },
+  {
+    "fn": "String",
+    "arg": "37",
+    "out": "URL token"
+  },
+  {
+    "fn": "wouldStartIdentifier",
+    "arg": "YWJj|0|97",
+    "out": "true"
+  },
+  {
+    "fn": "wouldStartIdentifier",
+    "arg": "LWZvbw==|0|45",
+    "out": "true"
+  },
+  {
+    "fn": "wouldStartIdentifier",
+    "arg": "LTE=|0|45",
+    "out": "true"
+  },
+  {
+    "fn": "wouldStartIdentifier",
+    "arg": "LVw2Mng=|0|45",
+    "out": "true"
+  },
+  {
+    "fn": "wouldStartIdentifier",
+    "arg": "YQ==|0|97",
+    "out": "true"
+  },
+  {
+    "fn": "consumeURL",
+    "arg": "YWJjKQ==",
+    "out": "37|4"
+  },
+  {
+    "fn": "consumeURL",
+    "arg": "YVw2MiBjKQ==",
+    "out": "37|7"
+  },
+  {
+    "fn": "consumeURL",
+    "arg": "KQ==",
+    "out": "37|1"
+  },
+  {
+    "fn": "consumeURL",
+    "arg": "YSBiICk=",
+    "out": "3|5"
+  },
+  {
+    "fn": "consumeURL",
+    "arg": "eFx0IHkp",
+    "out": "3|6"
+  }
+]

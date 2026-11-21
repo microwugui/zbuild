@@ -1,0 +1,146 @@
+package linker
+
+// 第 151 批 Go 探针：chunk 生成链纯助手底座（requireOrImportMetaForSource /
+// maybeAppendLegalComments / wrapRulesWithConditions / generateExtraDataForFileJS /
+// maybeForbidArbitraryModuleNamespaceIdentifier），逐字节固化。
+import (
+  "encoding/json"
+  "os"
+  "testing"
+
+  "github.com/evanw/esbuild/internal/ast"
+  "github.com/evanw/esbuild/internal/config"
+  "github.com/evanw/esbuild/internal/css_ast"
+  "github.com/evanw/esbuild/internal/css_lexer"
+  "github.com/evanw/esbuild/internal/graph"
+  "github.com/evanw/esbuild/internal/helpers"
+  "github.com/evanw/esbuild/internal/js_ast"
+  "github.com/evanw/esbuild/internal/logger"
+)
+
+func ghRef(s, i uint32) ast.Ref { return ast.Ref{SourceIndex: s, InnerIndex: i} }
+
+type ghRow struct { Fn string `json:"fn"`; Arg map[string]interface{} `json:"arg"`; Out interface{} `json:"out"` }
+func ghJoinerStr(j helpers.Joiner) string { return string(j.Done()) }
+func ghToks(ts []css_ast.Token) interface{} {
+  out := []interface{}{}
+  for _, t := range ts {
+    var kids interface{} = nil
+    if t.Children != nil { kids = ghToks(*t.Children) }
+    out = append(out, []interface{}{int(t.Kind), t.Text, kids})
+  }
+  return out
+}
+func ghRules(rs []css_ast.Rule) interface{} {
+  out := []interface{}{}
+  for _, r := range rs {
+    switch d := r.Data.(type) {
+    case *css_ast.RKnownAt:
+      out = append(out, []interface{}{"known", d.AtToken, ghToks(d.Prelude), ghRules(d.Rules)})
+    case *css_ast.RAtMedia:
+      out = append(out, []interface{}{"media", len(d.Queries), ghRules(d.Rules)})
+    case *css_ast.RAtLayer:
+      out = append(out, []interface{}{"layer", d.Names, ghRules(d.Rules)})
+    case *css_ast.RAtImport:
+      out = append(out, []interface{}{"import", d.ImportRecordIndex})
+    default:
+      out = append(out, []interface{}{"other"})
+    }
+  }
+  return out
+}
+func ghCond(supports string, layers string, media int) css_ast.ImportConditions {
+  c := css_ast.ImportConditions{}
+  if layers != "" { c.Layers = []css_ast.Token{{Kind: css_lexer.TIdent, Text: layers}} }
+  if supports != "" { c.Supports = []css_ast.Token{{Kind: css_lexer.TIdent, Text: supports}} }
+  for i := 0; i < media; i++ { c.Queries = append(c.Queries, css_ast.MediaQuery{Data: &css_ast.MQPlainOrBoolean{Name: "screen"}}) }
+  return c
+}
+
+func TestTmpGenGenHelpers(t *testing.T) {
+  var out []ghRow
+  add := func(fn string, arg map[string]interface{}, o interface{}) { out = append(out, ghRow{fn, arg, o}) }
+
+  // requireOrImportMetaForSource: WrapESM vs non-ESM
+  for _, wrap := range []graph.WrapKind{graph.WrapNone, graph.WrapESM, graph.WrapCJS} {
+    c := &linkerContext{graph: graph.LinkerGraph{Files: make([]graph.LinkerFile, 1)}}
+    repr := &graph.JSRepr{AST: js_ast.AST{WrapperRef: ghRef(0, 7), ExportsRef: ghRef(0, 9)}}
+    repr.Meta.Wrap = wrap
+    repr.Meta.IsAsyncOrHasAsyncDependency = wrap == graph.WrapCJS
+    c.graph.Files[0].InputFile.Repr = repr
+    m := c.requireOrImportMetaForSource(0)
+    add("requireOrImportMetaForSource", map[string]interface{}{"wrap": int(wrap)}, map[string]interface{}{
+      "wrapper": []uint32{m.WrapperRef.SourceIndex, m.WrapperRef.InnerIndex},
+      "exports": []uint32{m.ExportsRef.SourceIndex, m.ExportsRef.InnerIndex},
+      "validExports": (m.ExportsRef.SourceIndex != 0 || m.ExportsRef.InnerIndex != 0), "async": m.IsWrapperAsync,
+    })
+  }
+
+  // maybeAppendLegalComments: EOF + linked + none
+  mkChunk := func() *chunkInfo { return &chunkInfo{} }
+  for _, mode := range []config.LegalComments{
+    config.LegalCommentsNone, config.LegalCommentsEndOfFile, config.LegalCommentsLinkedWithComment, config.LegalCommentsExternalWithoutComment,
+  } {
+    c := &linkerContext{graph: graph.LinkerGraph{Files: make([]graph.LinkerFile, 3)}}
+    c.graph.Files[0].InputFile.Source = logger.Source{KeyPath: logger.Path{Text: "/p/a.js", Namespace: "file"}}
+    c.graph.Files[1].InputFile.Source = logger.Source{KeyPath: logger.Path{Text: "/p/node_modules/pkg/lib.js", Namespace: "file"}}
+    c.graph.Files[2].InputFile.Source = logger.Source{KeyPath: logger.Path{Text: "dataurl:xxx", Namespace: "dataurl"}}
+    list := []legalCommentEntry{
+      {sourceIndex: 0, comments: []string{"/*! first */", "// second"}},
+      {sourceIndex: 1, comments: []string{"/*! pkg lic */"}},
+      {sourceIndex: 2, comments: []string{"/*! dataurl */"}},
+      {sourceIndex: 0, comments: []string{"/*! first */"}}, // duplicate first-party
+    }
+    ch := mkChunk()
+    j := helpers.Joiner{}
+    c.maybeAppendLegalComments(mode, list, ch, &j, "/script")
+    add("maybeAppendLegalComments", map[string]interface{}{"mode": int(mode)}, map[string]interface{}{
+      "joiner": ghJoinerStr(j), "external": string(ch.externalLegalComments),
+    })
+  }
+
+  // wrapRulesWithConditions: layers/supports/media chain
+  {
+    baseRules := []css_ast.Rule{{Data: &css_ast.RAtLayer{Names: [][]string{{"base"}}}}}
+    conds := []css_ast.ImportConditions{
+      ghCond("grid", "foo", 1),
+      ghCond("", "", 0),
+    }
+    rules, recs := wrapRulesWithConditions(baseRules, nil, conds, nil)
+    add("wrapRulesWithConditions", map[string]interface{}{"case": "chain"}, map[string]interface{}{
+      "rules": ghRules(rules), "recCount": len(recs),
+    })
+  }
+  {
+    rules, recs := wrapRulesWithConditions(nil, nil, []css_ast.ImportConditions{ghCond("", "empty", 0)}, nil)
+    add("wrapRulesWithConditions", map[string]interface{}{"case": "empty-layer"}, map[string]interface{}{
+      "rules": ghRules(rules), "recCount": len(recs),
+    })
+  }
+
+  // generateExtraDataForFileJS: debug flag false -> always ""
+  {
+    c := &linkerContext{graph: graph.LinkerGraph{Files: make([]graph.LinkerFile, 1)}}
+    repr := &graph.JSRepr{AST: js_ast.AST{Parts: []js_ast.Part{{}}, ModuleScope: &js_ast.Scope{}}}
+    c.graph.Files[0].InputFile.Repr = repr
+    add("generateExtraDataForFileJS", map[string]interface{}{}, c.generateExtraDataForFileJS(0))
+  }
+
+  // maybeForbidArbitraryModuleNamespaceIdentifier: valid vs invalid alias
+  for _, alias := range []string{"validName", "not valid", "123bad"} {
+    log := logger.NewDeferLog(logger.DeferLogNoVerboseOrDebug, nil)
+    c := &linkerContext{graph: graph.LinkerGraph{Files: make([]graph.LinkerFile, 1)}, log: log,
+      options: &config.Options{OriginalTargetEnv: "es2020"}}
+    c.graph.Files[0].InputFile.Source = logger.Source{KeyPath: logger.Path{Text: "/p/a.js", Namespace: "file"}, Contents: "x"}
+    c.maybeForbidArbitraryModuleNamespaceIdentifier("import", 0, logger.Loc{Start: 0}, alias)
+    msgs := log.Done()
+    texts := []string{}
+    for _, m := range msgs { texts = append(texts, m.Data.Text) }
+    add("maybeForbidArbitraryModuleNamespaceIdentifier", map[string]interface{}{"alias": alias}, texts)
+  }
+
+  b, err := json.MarshalIndent(out, "", "  ")
+  if err != nil { t.Fatal(err) }
+  if err := os.WriteFile("/root/port/testdata/gen-helpers-go.json", b, 0644); err != nil { t.Fatal(err) }
+  t.Logf("wrote %d rows", len(out))
+}

@@ -1,0 +1,69 @@
+package resolver
+
+// 第 176 批 Go 探针：NewResolver 逐字节固化（Resolver 构造器底座，config.Options→extension orders/conditions/tsconfig override）。
+import (
+	"encoding/json"
+	"os"
+	"sort"
+	"testing"
+
+	"github.com/evanw/esbuild/internal/cache"
+	"github.com/evanw/esbuild/internal/config"
+	"github.com/evanw/esbuild/internal/fs"
+	"github.com/evanw/esbuild/internal/logger"
+)
+
+type nrRow struct {
+	Arg map[string]interface{} `json:"arg"`
+	Out interface{}            `json:"out"`
+}
+
+func sortedKeys(m map[string]bool) []string {
+	k := []string{}
+	for x := range m { k = append(k, x) }
+	sort.Strings(k)
+	return k
+}
+
+func TestTmpGenNewResolver(t *testing.T) {
+	var out []nrRow
+	type tc struct {
+		name string
+		extOrder []string
+		loader map[string]config.Loader
+		conditions []string
+		platform config.Platform
+		tsconfigRaw string
+	}
+	cases := []tc{
+		{"basic", []string{".js", ".ts", ".css"}, map[string]config.Loader{".js": config.LoaderJS, ".ts": config.LoaderTS, ".css": config.LoaderCSS}, nil, config.PlatformBrowser, ""},
+		{"css-filter", []string{".js", ".css", ".scss"}, map[string]config.Loader{".js": config.LoaderJS, ".css": config.LoaderCSS, ".scss": config.LoaderLocalCSS}, nil, config.PlatformBrowser, ""},
+		{"conditions", []string{".js"}, map[string]config.Loader{".js": config.LoaderJS}, []string{"custom", "development"}, config.PlatformNode, ""},
+		{"node", []string{".js", ".mjs", ".ts"}, map[string]config.Loader{".js": config.LoaderJS, ".mjs": config.LoaderJS, ".ts": config.LoaderTS}, nil, config.PlatformNode, ""},
+		{"tsconfig-jsx", []string{".js"}, map[string]config.Loader{".js": config.LoaderJS}, nil, config.PlatformBrowser, `{"compilerOptions":{"jsx":"react-jsx"}}`},
+	}
+	for _, c := range cases {
+		fsObj := fs.MockFS(map[string]string{}, fs.MockUnix, "/")
+		log := logger.NewDeferLog(logger.DeferLogAll, nil)
+		opts := config.Options{
+			Platform: c.platform, ExtensionOrder: c.extOrder, ExtensionToLoader: c.loader,
+			Conditions: c.conditions, TSConfigRaw: c.tsconfigRaw,
+		}
+		res := NewResolver(config.BuildCall, fsObj, log, cache.MakeCacheSet(), &opts)
+		// jsx override 结果
+		jsxOut := []interface{}{opts.JSX.AutomaticRuntime, opts.JSX.Development, opts.JSX.Factory.Parts, opts.JSX.Fragment.Parts, opts.JSX.ImportSource}
+		tscOverride := res.tsConfigOverride != nil
+		out = append(out, nrRow{
+			Arg: map[string]interface{}{"name": c.name, "extOrder": c.extOrder, "conditions": c.conditions, "platform": int(c.platform), "tsconfigRaw": c.tsconfigRaw},
+			Out: []interface{}{
+				res.cssExtensionOrder, res.nodeModulesExtensionOrder,
+				sortedKeys(res.esmConditionsDefault), sortedKeys(res.esmConditionsImport), sortedKeys(res.esmConditionsRequire),
+				tscOverride, jsxOut,
+			},
+		})
+	}
+	b, err := json.Marshal(out)
+	if err != nil { t.Fatal(err) }
+	if err := os.WriteFile("/root/port/testdata/newresolver-go.json", b, 0644); err != nil { t.Fatal(err) }
+	t.Logf("wrote %d cases", len(out))
+}

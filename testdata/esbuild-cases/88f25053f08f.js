@@ -1,0 +1,1 @@
+import {ev\u0061l as x} from 'foo'

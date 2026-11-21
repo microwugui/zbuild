@@ -1,0 +1,1 @@
+@x export class Foo {}

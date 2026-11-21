@@ -1,0 +1,34 @@
+[
+ {
+  "op": "ReadDirectory",
+  "arg": "inner",
+  "out": "",
+  "names": [
+   "a.txt",
+   "b.txt",
+   "sub"
+  ],
+  "err": ""
+ },
+ {
+  "op": "ReadFile",
+  "arg": "a.txt",
+  "out": "ZIP-A",
+  "names": null,
+  "err": ""
+ },
+ {
+  "op": "ReadFile",
+  "arg": "b.txt",
+  "out": "ZIP-BB",
+  "names": null,
+  "err": ""
+ },
+ {
+  "op": "ReadFile",
+  "arg": "c.txt",
+  "out": "ZIP-C",
+  "names": null,
+  "err": ""
+ }
+]

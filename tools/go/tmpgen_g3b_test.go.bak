@@ -1,0 +1,35 @@
+package js_parser
+import("encoding/json";"os";"testing";"github.com/evanw/esbuild/internal/js_ast"
+ "github.com/evanw/esbuild/internal/ast";"github.com/evanw/esbuild/internal/logger")
+func TestTmpG3b(t *testing.T){
+ type row struct{ Input string `json:"input"`; Inlined bool `json:"inlined"`; Removable bool `json:"removable"`; ResultKind string `json:"resultKind"` }
+ loc:=logger.Loc{Start:0}
+ ex:=func(d js_ast.E)js_ast.Expr{return js_ast.Expr{Loc:loc,Data:d}}
+ arrowBody:=func(stmts ...js_ast.Stmt)*js_ast.ECall{a:=&js_ast.EArrow{};a.Body.Block.Stmts=stmts;return &js_ast.ECall{Target:ex(a)}}
+ var out []row
+ // maybeInlineIIFE cases
+ mkCall:=func(c *js_ast.ECall,args ...js_ast.Expr)*js_ast.ECall{c.Args=args;return c}
+ cases:=[]struct{name string;c *js_ast.ECall}{
+  {"empty-body",arrowBody()},
+  {"return-123",arrowBody(js_ast.Stmt{Loc:loc,Data:&js_ast.SReturn{ValueOrNil:ex(&js_ast.ENumber{Value:123})}})},
+  {"expr-x",arrowBody(js_ast.Stmt{Loc:loc,Data:&js_ast.SExpr{Value:ex(&js_ast.EIdentifier{})}})},
+  {"two-stmts",arrowBody(js_ast.Stmt{Loc:loc,Data:&js_ast.SExpr{}},js_ast.Stmt{Loc:loc,Data:&js_ast.SExpr{}})},
+  {"with-arg",mkCall(arrowBody(),ex(&js_ast.ENumber{}))},
+ }
+ p:=&parser{}
+ for _,c:=range cases{
+  res,ok:=p.maybeInlineIIFE(loc,c.c)
+  kind:="none";if ok {kind=fmtKind(res.Data)}
+  out=append(out,row{c.name,ok,false,kind})
+ }
+ // iifeCanBeRemovedIfUnused cases
+ p.astHelpers=js_ast.MakeHelperContext(func(ref ast.Ref)bool{return false})
+ remCases:=[]struct{name string;args []js_ast.Arg;body js_ast.FnBody}{
+  {"no-args-empty",nil,js_ast.FnBody{}},
+  {"simple-arg",[]js_ast.Arg{{Binding:js_ast.Binding{Data:&js_ast.BIdentifier{}}}},js_ast.FnBody{}},
+  {"destructure-arg",[]js_ast.Arg{{Binding:js_ast.Binding{Data:&js_ast.BArray{}}}},js_ast.FnBody{}},
+ }
+ for _,c:=range remCases{out=append(out,row{Input:c.name,Inlined:false,Removable:p.iifeCanBeRemovedIfUnused(c.args,c.body),ResultKind:""})}
+ raw,_:=json.Marshal(out);os.WriteFile("/tmp/g3b.json",raw,0644)
+}
+func fmtKind(d js_ast.E)string{switch d.(type){case *js_ast.EUndefined:return "undefined";case *js_ast.ENumber:return "number";case *js_ast.EUnary:return "unary-void";case *js_ast.EIdentifier:return "identifier"};return "other"}

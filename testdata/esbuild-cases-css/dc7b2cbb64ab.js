@@ -1,0 +1,1 @@
+a { margin: inherit; margin-left: 1px }

@@ -1,0 +1,1 @@
+function foo() { using x = y }

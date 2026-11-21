@@ -1,0 +1,138 @@
+package css_parser
+
+// 第 137 批 Go 探针：Parse / computeCharacterFrequency / OptionsFromConfig / Options.Equal。
+import (
+	"encoding/json"
+	"os"
+	"sort"
+	"testing"
+
+	"github.com/evanw/esbuild/internal/ast"
+	"github.com/evanw/esbuild/internal/compat"
+	"github.com/evanw/esbuild/internal/config"
+	"github.com/evanw/esbuild/internal/css_ast"
+	"github.com/evanw/esbuild/internal/css_lexer"
+	"github.com/evanw/esbuild/internal/logger"
+)
+
+func peOpts(minify, minifyWS, minifyIdents bool, feature compat.CSSFeature, env string, mode symbolMode) Options {
+	return Options{
+		cssPrefixData: nil,
+		optionsThatSupportStructuralEquality: optionsThatSupportStructuralEquality{
+			minifySyntax: minify, minifyWhitespace: minifyWS, minifyIdentifiers: minifyIdents,
+			unsupportedCSSFeatures: feature, originalTargetEnv: env, symbolMode: mode,
+		},
+	}
+}
+
+func peDumpCharFreq(f *ast.CharFreq) interface{} {
+	if f == nil { return nil }
+	out := make([]int32, 64)
+	for i, v := range f { out[i] = v }
+	return out
+}
+
+func peDumpAST(a css_ast.AST, log logger.Log) map[string]interface{} {
+	syms := []interface{}{}
+	for i, s := range a.Symbols {
+		syms = append(syms, []interface{}{s.OriginalName, int(s.Kind), int(s.UseCountEstimate), i})
+	}
+	imports := []interface{}{}
+	for _, r := range a.ImportRecords {
+		imports = append(imports, []interface{}{int(r.Kind), r.Path.Text, r.Range.Loc.Start, int(r.Range.Len)})
+	}
+	locals := []interface{}{}
+	for _, l := range a.LocalSymbols { locals = append(locals, []interface{}{l.Ref.InnerIndex, l.Loc.Start}) }
+	gkeys := []string{}
+	for k := range a.GlobalScope { gkeys = append(gkeys, k) }
+	lkeys := []string{}
+	for k := range a.LocalScope { lkeys = append(lkeys, k) }
+	sort.Strings(gkeys)
+	sort.Strings(lkeys)
+	return map[string]interface{}{
+		"rules": mcRules(a.Rules), "msgs": mcMsgs(log), "charfreq": peDumpCharFreq(a.CharFreq),
+		"symbols": syms, "imports": imports, "lineCount": a.ApproximateLineCount,
+		"localSymbols": locals, "globalKeys": gkeys, "localKeys": lkeys,
+		"preLayers": a.LayersPreImport, "postLayers": a.LayersPostImport,
+		"sourceMapText": a.SourceMapComment.Text,
+	}
+}
+
+type peRow struct {
+	Fn    string `json:"fn"`
+	Src   string `json:"src"`
+	Arg   map[string]interface{} `json:"arg"`
+	Out   interface{} `json:"out"`
+}
+
+func TestTmpGenParseEntry(t *testing.T) {
+	var out []peRow
+	sources := []string{
+		"a { color: red } b { color: blue }",
+		"@charset \"UTF-8\"; @import url(a.css); .a { color: red }",
+		"@layer a, b; @layer c { .x { color: red } }",
+		"/* license */ .foo { background: url(x.png); color: #fff }",
+		"@media screen and (min-width:100px) { a { color: red } }",
+		".a { composes: b; color: red }",
+		"a { & b { color: red } }",
+	}
+	for _, src := range sources {
+		for _, idents := range []bool{false, true} {
+			for _, mode := range []symbolMode{symbolModeDisabled, symbolModeGlobal, symbolModeLocal} {
+				log := logger.NewDeferLog(logger.DeferLogNoVerboseOrDebug, nil)
+				source := logger.Source{Contents: src}
+				opts := peOpts(false, false, idents, 0, "", mode)
+				a := Parse(log, source, opts)
+				out = append(out, peRow{"Parse", src, map[string]interface{}{"idents": idents, "mode": int(mode)}, peDumpAST(a, log)})
+			}
+		}
+	}
+
+	// computeCharacterFrequency 直调：构造带 comment / import / symbol 的 parser
+	{
+		log := logger.NewDeferLog(logger.DeferLogNoVerboseOrDebug, nil)
+		src := "abc /*comment*/ xyz"
+		source := logger.Source{Contents: src}
+		tok := css_lexer.Tokenize(log, source, css_lexer.Options{RecordAllComments: true})
+		p := &parser{
+			log: log, source: source, tokens: tok.Tokens, allComments: tok.AllComments,
+			options: peOpts(false, false, true, 0, "", symbolModeDisabled),
+		}
+		p.importRecords = append(p.importRecords, ast.ImportRecord{Path: logger.Path{Text: "xyz"}})
+		p.symbols = append(p.symbols, ast.Symbol{Kind: ast.SymbolLocalCSS, OriginalName: "abc", UseCountEstimate: 2})
+		p.symbols = append(p.symbols, ast.Symbol{Kind: ast.SymbolGlobalCSS, OriginalName: "xyz", UseCountEstimate: 3})
+		out = append(out, peRow{"computeCharacterFrequency", src, map[string]interface{}{}, peDumpCharFreq(p.computeCharacterFrequency())})
+	}
+
+	// OptionsFromConfig
+	for _, loader := range []config.Loader{config.LoaderCSS, config.LoaderGlobalCSS, config.LoaderLocalCSS, config.LoaderJS} {
+		co := &config.Options{MinifySyntax: true, MinifyWhitespace: false, MinifyIdentifiers: true, OriginalTargetEnv: "es2020", UnsupportedCSSFeatures: compat.Nesting}
+		o := OptionsFromConfig(loader, co)
+		out = append(out, peRow{"OptionsFromConfig", "", map[string]interface{}{"loader": int(loader)}, map[string]interface{}{
+			"minifySyntax": o.minifySyntax, "minifyWhitespace": o.minifyWhitespace, "minifyIdentifiers": o.minifyIdentifiers,
+			"feature": int(o.unsupportedCSSFeatures), "env": o.originalTargetEnv, "symbolMode": int(o.symbolMode),
+		}})
+	}
+
+	// Options.Equal
+	oa := peOpts(false, false, false, 0, "", symbolModeDisabled)
+	ob := peOpts(false, false, false, 0, "", symbolModeDisabled)
+	oc := peOpts(true, false, false, 0, "", symbolModeDisabled)
+	od := peOpts(false, false, false, 0, "", symbolModeDisabled)
+	od.cssPrefixData = map[css_ast.D]compat.CSSPrefix{1: 2}
+	oe := peOpts(false, false, false, 0, "", symbolModeDisabled)
+	oe.cssPrefixData = map[css_ast.D]compat.CSSPrefix{1: 2}
+	of := peOpts(false, false, false, 0, "", symbolModeDisabled)
+	of.cssPrefixData = map[css_ast.D]compat.CSSPrefix{1: 3}
+	for _, pair := range []struct{ name string; a, b Options }{
+		{"same", oa, ob}, {"diff-min", oa, oc}, {"nil-vs-map", oa, od},
+		{"same-map", od, oe}, {"diff-map", od, of},
+	} {
+		out = append(out, peRow{"Options.Equal", "", map[string]interface{}{"pair": pair.name}, pair.a.Equal(&pair.b)})
+	}
+
+	b, err := json.MarshalIndent(out, "", "  ")
+	if err != nil { t.Fatal(err) }
+	if err := os.WriteFile("/root/port/testdata/parse-entry-go.json", b, 0644); err != nil { t.Fatal(err) }
+	t.Logf("wrote %d rows", len(out))
+}

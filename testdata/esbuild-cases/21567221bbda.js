@@ -1,0 +1,1 @@
+return a != null ? a.b : undefined

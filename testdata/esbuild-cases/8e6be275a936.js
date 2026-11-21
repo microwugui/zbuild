@@ -1,0 +1,1 @@
+export {π} from 'path'; π

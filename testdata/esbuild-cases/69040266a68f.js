@@ -1,0 +1,1 @@
+export {x};export {x as y} from 'foo';let x

@@ -1,0 +1,134 @@
+[
+  {
+    "heapFile": "",
+    "traceFile": "",
+    "cpuProfile": "",
+    "isRunningService": false,
+    "sendPings": false,
+    "isWatch": false,
+    "isWatchForever": false,
+    "isServe": false,
+    "useTimer": false,
+    "args": [
+      "a.js"
+    ],
+    "earlyAction": ""
+  },
+  {
+    "heapFile": "",
+    "traceFile": "",
+    "cpuProfile": "",
+    "isRunningService": false,
+    "sendPings": false,
+    "isWatch": false,
+    "isWatchForever": false,
+    "isServe": false,
+    "useTimer": false,
+    "args": null,
+    "earlyAction": "help"
+  },
+  {
+    "heapFile": "",
+    "traceFile": "",
+    "cpuProfile": "",
+    "isRunningService": false,
+    "sendPings": false,
+    "isWatch": false,
+    "isWatchForever": false,
+    "isServe": false,
+    "useTimer": false,
+    "args": null,
+    "earlyAction": "version:0.28.2"
+  },
+  {
+    "heapFile": "",
+    "traceFile": "",
+    "cpuProfile": "",
+    "isRunningService": true,
+    "sendPings": true,
+    "isWatch": false,
+    "isWatchForever": false,
+    "isServe": false,
+    "useTimer": false,
+    "args": [],
+    "earlyAction": ""
+  },
+  {
+    "heapFile": "",
+    "traceFile": "",
+    "cpuProfile": "",
+    "isRunningService": true,
+    "sendPings": false,
+    "isWatch": false,
+    "isWatchForever": false,
+    "isServe": false,
+    "useTimer": false,
+    "args": null,
+    "earlyAction": "version-mismatch:0.99.0"
+  },
+  {
+    "heapFile": "/tmp/h",
+    "traceFile": "/tmp/t",
+    "cpuProfile": "/tmp/c",
+    "isRunningService": false,
+    "sendPings": false,
+    "isWatch": false,
+    "isWatchForever": false,
+    "isServe": false,
+    "useTimer": true,
+    "args": [
+      "a.js"
+    ],
+    "earlyAction": ""
+  },
+  {
+    "heapFile": "",
+    "traceFile": "",
+    "cpuProfile": "",
+    "isRunningService": false,
+    "sendPings": false,
+    "isWatch": true,
+    "isWatchForever": true,
+    "isServe": false,
+    "useTimer": false,
+    "args": [
+      "--watch",
+      "a.js"
+    ],
+    "earlyAction": ""
+  },
+  {
+    "heapFile": "",
+    "traceFile": "",
+    "cpuProfile": "",
+    "isRunningService": false,
+    "sendPings": false,
+    "isWatch": false,
+    "isWatchForever": false,
+    "isServe": true,
+    "useTimer": false,
+    "args": [
+      "--serve=8000",
+      "a.js"
+    ],
+    "earlyAction": ""
+  },
+  {
+    "heapFile": "",
+    "traceFile": "",
+    "cpuProfile": "",
+    "isRunningService": false,
+    "sendPings": false,
+    "isWatch": true,
+    "isWatchForever": false,
+    "isServe": true,
+    "useTimer": false,
+    "args": [
+      "--watch",
+      "--serve",
+      "a.js",
+      "--minify"
+    ],
+    "earlyAction": ""
+  }
+]

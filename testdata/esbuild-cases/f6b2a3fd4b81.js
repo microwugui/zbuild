@@ -1,0 +1,1 @@
+let x = '\uD801\uDC02\uDC03\uD804'

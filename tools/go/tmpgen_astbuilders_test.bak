@@ -1,0 +1,108 @@
+package js_parser_test
+
+// 第 112 轮 Go 探针：js_parser.LazyExportAST / GlobResolveAST（共享 prepareForVisitPass+toAST 底座）。
+// 真调目标函数，dump 规范 AST（符号名/parts/stmts 类型/importRecords/flags），TS 侧同构 dump 逐字节比对。
+import (
+	"encoding/json"
+	"os"
+	"testing"
+
+	"github.com/evanw/esbuild/internal/ast"
+	"github.com/evanw/esbuild/internal/config"
+	"github.com/evanw/esbuild/internal/helpers"
+	"github.com/evanw/esbuild/internal/js_ast"
+	"github.com/evanw/esbuild/internal/js_parser"
+	"github.com/evanw/esbuild/internal/logger"
+)
+
+type abRow struct {
+	Name         string   `json:"name"`
+	Symbols      []string `json:"symbols"`
+	Parts        int      `json:"parts"`
+	StmtKinds    [][]string `json:"stmtKinds"`
+	ImportPaths  []string `json:"importPaths"`
+	HasLazyExport bool    `json:"hasLazyExport"`
+	NumImports   int      `json:"numImports"`
+}
+
+func abStmtKind(s js_ast.Stmt) string {
+	switch s.Data.(type) {
+	case *js_ast.SLazyExport: return "LazyExport"
+	case *js_ast.SLocal: return "Local"
+	case *js_ast.SEmpty: return "Empty"
+	case *js_ast.SExpr: return "Expr"
+	}
+	return "other"
+}
+
+func dumpAB(name string, tree js_ast.AST) abRow {
+	syms := []string{}
+	for _, s := range tree.Symbols { syms = append(syms, s.OriginalName) }
+	kinds := [][]string{}
+	for _, p := range tree.Parts {
+		ks := []string{}
+		for _, st := range p.Stmts { ks = append(ks, abStmtKind(st)) }
+		kinds = append(kinds, ks)
+	}
+	paths := []string{}
+	for _, r := range tree.ImportRecords { paths = append(paths, r.Path.Text) }
+	return abRow{Name: name, Symbols: syms, Parts: len(tree.Parts), StmtKinds: kinds,
+		ImportPaths: paths, HasLazyExport: tree.HasLazyExport, NumImports: len(tree.ImportRecords)}
+}
+
+func mkSource(path string) logger.Source {
+	s := logger.Source{KeyPath: logger.Path{Text: path, Namespace: "file"}}
+	s.Index = 0
+	return s
+}
+
+func TestTmpGenASTBuilders112(t *testing.T) {
+	rows := []abRow{}
+	emptyLog := logger.NewDeferLog(logger.DeferLogNoVerboseOrDebug, nil)
+
+	// 1: LazyExportAST — no helper call
+	{
+		expr := js_ast.Expr{Loc: logger.Loc{Start: 3}, Data: &js_ast.ENumber{Value: 42}}
+		tree := js_parser.LazyExportAST(emptyLog, mkSource("lazy.js"), js_parser.Options{}, expr, nil)
+		rows = append(rows, dumpAB("lazy-nohelper", tree))
+	}
+	// 2: LazyExportAST — runtime helper call
+	{
+		expr := js_ast.Expr{Loc: logger.Loc{Start: 3}, Data: &js_ast.ENumber{Value: 42}}
+		tree := js_parser.LazyExportAST(emptyLog, mkSource("lazy.js"), js_parser.Options{}, expr,
+			&js_parser.HelperCall{Runtime: "__identity"})
+		rows = append(rows, dumpAB("lazy-runtime-helper", tree))
+	}
+	// 3: LazyExportAST — global helper call chain
+	{
+		expr := js_ast.Expr{Loc: logger.Loc{Start: 3}, Data: &js_ast.ENumber{Value: 42}}
+		tree := js_parser.LazyExportAST(emptyLog, mkSource("lazy.js"), js_parser.Options{}, expr,
+			&js_parser.HelperCall{Global: []string{"React", "createElement"}})
+		rows = append(rows, dumpAB("lazy-global-helper", tree))
+	}
+	// 4: GlobResolveAST — object with two props, two import records
+	{
+		obj := &js_ast.EObject{Properties: []js_ast.Property{
+			{Key: js_ast.Expr{Data: &js_ast.EString{Value: helpers.StringToUTF16("a")}}, ValueOrNil: js_ast.Expr{Data: &js_ast.ENumber{Value: 1}}},
+		}}
+		recs := []ast.ImportRecord{
+			{Path: logger.Path{Text: "./a.js"}, Kind: ast.ImportDynamic},
+			{Path: logger.Path{Text: "./b.js"}, Kind: ast.ImportDynamic},
+		}
+		tree := js_parser.GlobResolveAST(emptyLog, mkSource("glob.js"), recs, obj, "_glob")
+		rows = append(rows, dumpAB("glob-resolve", tree))
+	}
+	// 5: GlobResolveAST — empty object, no imports
+	{
+		obj := &js_ast.EObject{}
+		tree := js_parser.GlobResolveAST(emptyLog, mkSource("glob.js"), nil, obj, "_g")
+		rows = append(rows, dumpAB("glob-empty", tree))
+	}
+
+	b, err := json.MarshalIndent(rows, "", "  ")
+	if err != nil { t.Fatal(err) }
+	if err := os.WriteFile("/root/port/testdata/astbuilders-go.json", b, 0644); err != nil { t.Fatal(err) }
+	t.Logf("wrote %d rows bytes=%d", len(rows), len(b))
+}
+
+var _ = config.Options{}

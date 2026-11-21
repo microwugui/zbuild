@@ -1,0 +1,62 @@
+[
+  {
+    "fn": "NameToken.Equal",
+    "arg": "a|29|a|29",
+    "out": "true"
+  },
+  {
+    "fn": "NameToken.Equal",
+    "arg": "a|29|b|29",
+    "out": "false"
+  },
+  {
+    "fn": "NameToken.Equal",
+    "arg": "a|29|a|30",
+    "out": "false"
+  },
+  {
+    "fn": "NameToken.Equal",
+    "arg": "日本|29|日本|29",
+    "out": "true"
+  },
+  {
+    "fn": "NamespacedName.Range",
+    "arg": "0|0|0|5|3",
+    "out": "5:3"
+  },
+  {
+    "fn": "NamespacedName.Range",
+    "arg": "1|2|4|10|3",
+    "out": "2:11"
+  },
+  {
+    "fn": "NamespacedName.Range",
+    "arg": "1|0|2|8|5",
+    "out": "0:13"
+  },
+  {
+    "fn": "CompoundSelector.Range",
+    "arg": "0|0|-1|",
+    "out": "0:0"
+  },
+  {
+    "fn": "CompoundSelector.Range",
+    "arg": "1|5|-1|",
+    "out": "5:1"
+  },
+  {
+    "fn": "CompoundSelector.Range",
+    "arg": "0|0|2,4|",
+    "out": "2:3"
+  },
+  {
+    "fn": "CompoundSelector.Range",
+    "arg": "0|0|-1|3:2;8:4",
+    "out": "3:9"
+  },
+  {
+    "fn": "CompoundSelector.Range",
+    "arg": "1|1|10|3:2",
+    "out": "1:10"
+  }
+]

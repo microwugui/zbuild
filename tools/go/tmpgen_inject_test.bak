@@ -1,0 +1,54 @@
+package js_parser
+
+// 第 107 轮 Go 探针：parser.instantiateInjectDotName（注入符号实例化 + 赋值误用报错）—— 受控状态全确定。
+import ("encoding/json"
+ "fmt";"os";"testing"
+ "github.com/evanw/esbuild/internal/ast"
+ "github.com/evanw/esbuild/internal/js_ast"
+ "github.com/evanw/esbuild/internal/logger"
+)
+
+type ijMsg struct { Text string `json:"text"`; Kind int `json:"kind"`; Notes []string `json:"notes"` }
+type ijRow struct { Name string `json:"name"`; ExprRef string `json:"exprRef"`; ExprLoc int `json:"exprLoc"`; UseCount int `json:"useCount"`; Msgs []ijMsg `json:"msgs"` }
+func ijKey(r ast.Ref) string { return fmt.Sprintf("%d:%d",r.SourceIndex,r.InnerIndex) }
+
+func TestTmpGenInject107(t *testing.T){
+  rows:=[]ijRow{}
+  run:=func(name string, assign js_ast.AssignTarget, withSource bool, parts []string) ijRow {
+    log:=logger.NewDeferLog(logger.DeferLogAll,nil)
+    srcText:="foo.bar"
+    src:=logger.Source{Contents:srcText,KeyPath:logger.Path{Text:"main.js",Namespace:"file"}}
+    src.PrettyPaths.Rel="main.js";src.PrettyPaths.Abs="/p/main.js"
+    ref:=ast.Ref{SourceIndex:1,InnerIndex:0}
+    syms:=[]ast.Symbol{{Kind:ast.SymbolOther,OriginalName:"foo"}}
+    part:=&js_ast.Part{SymbolUses:map[ast.Ref]js_ast.SymbolUse{}}
+    p:=&parser{source:src,log:log,symbols:syms,currentPart:part,
+      injectedDefineSymbols:[]ast.Ref{ref},
+      tracker:logger.MakeLineColumnTracker(&src),
+    }
+    if withSource{
+      otherSrc:=logger.Source{Contents:"export const foo = 1",KeyPath:logger.Path{Text:"inject.js",Namespace:"file"}}
+      otherSrc.PrettyPaths.Rel="inject.js";otherSrc.PrettyPaths.Abs="/p/inject.js"
+      p.injectedSymbolSources=map[ast.Ref]injectedSymbolSource{ref:{source:otherSrc,loc:logger.Loc{Start:13}}}
+    }
+    expr:=p.instantiateInjectDotName(logger.Loc{Start:0},injectedDotName{parts:parts,injectedDefineIndex:0},assign)
+    r:=ijRow{Name:name,ExprLoc:int(expr.Loc.Start)}
+    if id,ok:=expr.Data.(*js_ast.EIdentifier);ok{r.ExprRef=ijKey(id.Ref)}
+    r.UseCount=int(syms[0].UseCountEstimate)
+    r.Msgs=[]ijMsg{}
+    for _,m:=range log.Done(){
+      im:=ijMsg{Text:m.Data.Text,Kind:int(m.Kind),Notes:[]string{}}
+      for _,n:=range m.Notes{im.Notes=append(im.Notes,n.Text)}
+      r.Msgs=append(r.Msgs,im)
+    }
+    return r
+  }
+  parts:=[]string{"foo","bar"}
+  rows=append(rows,run("plain",js_ast.AssignTargetNone,false,parts))
+  rows=append(rows,run("assign-no-source",js_ast.AssignTargetReplace,false,parts))
+  rows=append(rows,run("assign-with-source",js_ast.AssignTargetReplace,true,parts))
+  rows=append(rows,run("update-with-source",js_ast.AssignTargetUpdate,true,parts))
+  b,_:=json.MarshalIndent(rows,"","  ")
+  if err:=os.WriteFile("/root/port/testdata/inject-dot-go.json",b,0644);err!=nil{t.Fatal(err)}
+  t.Logf("wrote %d rows bytes=%d",len(rows),len(b))
+}

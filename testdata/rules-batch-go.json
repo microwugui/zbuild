@@ -1,0 +1,273 @@
+[
+  {
+    "fn": "scanForEndOfRule",
+    "src": "a: b; c {}",
+    "arg": "a: b; c {}",
+    "out": {
+      "index": 4,
+      "scan": 1
+    }
+  },
+  {
+    "fn": "scanForEndOfRule",
+    "src": "a: {x: y}; b {}",
+    "arg": "a: {x: y}; b {}",
+    "out": {
+      "index": 3,
+      "scan": 2
+    }
+  },
+  {
+    "fn": "scanForEndOfRule",
+    "src": "--x: {a: b}; c {}",
+    "arg": "--x: {a: b}; c {}",
+    "out": {
+      "index": 9,
+      "scan": 1
+    }
+  },
+  {
+    "fn": "scanForEndOfRule",
+    "src": "calc(1 + 2) {}",
+    "arg": "calc(1 + 2) {}",
+    "out": {
+      "index": 8,
+      "scan": 2
+    }
+  },
+  {
+    "fn": "scanForEndOfRule",
+    "src": "[x=\"}\"] {}",
+    "arg": "[x=\"}\"] {}",
+    "out": {
+      "index": 6,
+      "scan": 2
+    }
+  },
+  {
+    "fn": "scanForEndOfRule",
+    "src": "a: b } c",
+    "arg": "a: b } c",
+    "out": {
+      "index": -1,
+      "scan": 0
+    }
+  },
+  {
+    "fn": "scanForEndOfRule",
+    "src": "fn(a; b) {}",
+    "arg": "fn(a; b) {}",
+    "out": {
+      "index": 7,
+      "scan": 2
+    }
+  },
+  {
+    "fn": "scanForEndOfRule",
+    "src": "--x: {a:b;c:d}; z {}",
+    "arg": "--x: {a:b;c:d}; z {}",
+    "out": {
+      "index": 12,
+      "scan": 1
+    }
+  },
+  {
+    "fn": "mangleRules",
+    "arg": {
+      "set": 0,
+      "top": true
+    },
+    "out": [
+      {
+        "names": [
+          "a",
+          "b"
+        ],
+        "rules": [
+          {
+            "key": 0,
+            "t": "decl",
+            "val": "red"
+          }
+        ],
+        "t": "sel"
+      }
+    ]
+  },
+  {
+    "fn": "mangleRules",
+    "arg": {
+      "set": 0,
+      "top": false
+    },
+    "out": [
+      {
+        "names": [
+          "a",
+          "b"
+        ],
+        "rules": [
+          {
+            "key": 0,
+            "t": "decl",
+            "val": "red"
+          }
+        ],
+        "t": "sel"
+      }
+    ]
+  },
+  {
+    "fn": "mangleRules",
+    "arg": {
+      "set": 1,
+      "top": true
+    },
+    "out": [
+      {
+        "key": 0,
+        "t": "decl",
+        "val": "y"
+      }
+    ]
+  },
+  {
+    "fn": "mangleRules",
+    "arg": {
+      "set": 1,
+      "top": false
+    },
+    "out": [
+      {
+        "key": 0,
+        "t": "decl",
+        "val": "y"
+      }
+    ]
+  },
+  {
+    "fn": "mangleRules",
+    "arg": {
+      "set": 2,
+      "top": true
+    },
+    "out": [
+      {
+        "names": [
+          "a",
+          "b"
+        ],
+        "rules": [
+          {
+            "key": 0,
+            "t": "decl",
+            "val": "red"
+          }
+        ],
+        "t": "sel"
+      },
+      {
+        "t": "comment"
+      }
+    ]
+  },
+  {
+    "fn": "mangleRules",
+    "arg": {
+      "set": 2,
+      "top": false
+    },
+    "out": [
+      {
+        "names": [
+          "a",
+          "b"
+        ],
+        "rules": [
+          {
+            "key": 0,
+            "t": "decl",
+            "val": "red"
+          }
+        ],
+        "t": "sel"
+      },
+      {
+        "t": "comment"
+      }
+    ]
+  },
+  {
+    "fn": "mangleRules",
+    "arg": {
+      "set": 3,
+      "top": true
+    },
+    "out": [
+      {
+        "rules": [
+          {
+            "names": [
+              "a"
+            ],
+            "rules": [
+              {
+                "key": 0,
+                "t": "decl",
+                "val": "red"
+              }
+            ],
+            "t": "sel"
+          }
+        ],
+        "t": "media"
+      }
+    ]
+  },
+  {
+    "fn": "mangleRules",
+    "arg": {
+      "set": 3,
+      "top": false
+    },
+    "out": [
+      {
+        "rules": [
+          {
+            "names": [
+              "a"
+            ],
+            "rules": [
+              {
+                "key": 0,
+                "t": "decl",
+                "val": "red"
+              }
+            ],
+            "t": "sel"
+          }
+        ],
+        "t": "media"
+      }
+    ]
+  },
+  {
+    "fn": "RemoveDeadRulesInPlace",
+    "arg": null,
+    "out": [
+      {
+        "names": [
+          "a"
+        ],
+        "rules": [
+          {
+            "key": 0,
+            "t": "decl",
+            "val": "red"
+          }
+        ],
+        "t": "sel"
+      }
+    ]
+  }
+]

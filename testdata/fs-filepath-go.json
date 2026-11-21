@@ -1,0 +1,164 @@
+[
+  {
+    "fn": "isReservedName",
+    "arg": "CON",
+    "win": false,
+    "out": "true"
+  },
+  {
+    "fn": "isReservedName",
+    "arg": "con",
+    "win": false,
+    "out": "true"
+  },
+  {
+    "fn": "isReservedName",
+    "arg": "PRN",
+    "win": false,
+    "out": "true"
+  },
+  {
+    "fn": "isReservedName",
+    "arg": "COM1",
+    "win": false,
+    "out": "true"
+  },
+  {
+    "fn": "isReservedName",
+    "arg": "NUL",
+    "win": false,
+    "out": "true"
+  },
+  {
+    "fn": "isReservedName",
+    "arg": "foo",
+    "win": false,
+    "out": "false"
+  },
+  {
+    "fn": "isReservedName",
+    "arg": "CON.txt",
+    "win": false,
+    "out": "false"
+  },
+  {
+    "fn": "isReservedName",
+    "arg": "",
+    "win": false,
+    "out": "false"
+  },
+  {
+    "fn": "isReservedName",
+    "arg": "LPT9",
+    "win": false,
+    "out": "true"
+  },
+  {
+    "fn": "isPathSeparator",
+    "arg": "/",
+    "win": false,
+    "out": "true"
+  },
+  {
+    "fn": "isPathSeparator",
+    "arg": "\\",
+    "win": false,
+    "out": "false"
+  },
+  {
+    "fn": "isPathSeparator",
+    "arg": "a",
+    "win": false,
+    "out": "false"
+  },
+  {
+    "fn": "fromSlash",
+    "arg": "a/b\\c",
+    "win": false,
+    "out": "a/b\\c"
+  },
+  {
+    "fn": "fromSlash",
+    "arg": "a/b/c",
+    "win": false,
+    "out": "a/b/c"
+  },
+  {
+    "fn": "fromSlash",
+    "arg": "",
+    "win": false,
+    "out": ""
+  },
+  {
+    "fn": "sameWord",
+    "arg": "Foo|foo",
+    "win": false,
+    "out": "false"
+  },
+  {
+    "fn": "sameWord",
+    "arg": "a|b",
+    "win": false,
+    "out": "false"
+  },
+  {
+    "fn": "sameWord",
+    "arg": "A|A",
+    "win": false,
+    "out": "true"
+  },
+  {
+    "fn": "isPathSeparator",
+    "arg": "/",
+    "win": true,
+    "out": "true"
+  },
+  {
+    "fn": "isPathSeparator",
+    "arg": "\\",
+    "win": true,
+    "out": "true"
+  },
+  {
+    "fn": "isPathSeparator",
+    "arg": "a",
+    "win": true,
+    "out": "false"
+  },
+  {
+    "fn": "fromSlash",
+    "arg": "a/b\\c",
+    "win": true,
+    "out": "a\\b\\c"
+  },
+  {
+    "fn": "fromSlash",
+    "arg": "a/b/c",
+    "win": true,
+    "out": "a\\b\\c"
+  },
+  {
+    "fn": "fromSlash",
+    "arg": "",
+    "win": true,
+    "out": ""
+  },
+  {
+    "fn": "sameWord",
+    "arg": "Foo|foo",
+    "win": true,
+    "out": "true"
+  },
+  {
+    "fn": "sameWord",
+    "arg": "a|b",
+    "win": true,
+    "out": "false"
+  },
+  {
+    "fn": "sameWord",
+    "arg": "A|A",
+    "win": true,
+    "out": "true"
+  }
+]

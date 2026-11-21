@@ -1,0 +1,1 @@
+a { transform: perspective(0) }

@@ -1,0 +1,1 @@
+x = `template` + tag`template2`

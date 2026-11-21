@@ -1,0 +1,1 @@
+@layer initial { @layer foo { a { b: c } } }

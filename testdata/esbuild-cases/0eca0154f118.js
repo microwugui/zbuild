@@ -1,0 +1,1 @@
+let b; a = null === b || b === undefined ? c : b

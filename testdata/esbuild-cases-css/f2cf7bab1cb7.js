@@ -1,0 +1,1 @@
+.foo, div { composes: bar; color: red }

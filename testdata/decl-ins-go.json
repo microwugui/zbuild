@@ -1,0 +1,556 @@
+[
+  {
+    "arg": {
+      "existing": null,
+      "name": "background-clip",
+      "prefix": "-webkit-"
+    },
+    "fn": "insertPrefixedDeclaration",
+    "out": [
+      {
+        "important": false,
+        "key": "-webkit-background-clip",
+        "val": [
+          "text"
+        ]
+      },
+      {
+        "important": false,
+        "key": "background-clip",
+        "val": [
+          "text"
+        ]
+      }
+    ]
+  },
+  {
+    "arg": {
+      "existing": null,
+      "name": "background-clip",
+      "prefix": "-webkit-"
+    },
+    "fn": "insertPrefixedDeclaration",
+    "out": [
+      {
+        "important": false,
+        "key": "background-clip",
+        "val": [
+          "border-box"
+        ]
+      }
+    ]
+  },
+  {
+    "arg": {
+      "existing": null,
+      "name": "position",
+      "prefix": "-webkit-"
+    },
+    "fn": "insertPrefixedDeclaration",
+    "out": [
+      {
+        "important": false,
+        "key": "position",
+        "val": [
+          "-webkit-sticky"
+        ]
+      },
+      {
+        "important": false,
+        "key": "position",
+        "val": [
+          "sticky"
+        ]
+      }
+    ]
+  },
+  {
+    "arg": {
+      "existing": null,
+      "name": "width",
+      "prefix": "-webkit-"
+    },
+    "fn": "insertPrefixedDeclaration",
+    "out": [
+      {
+        "important": false,
+        "key": "width",
+        "val": [
+          "-webkit-fill-available"
+        ]
+      },
+      {
+        "important": false,
+        "key": "width",
+        "val": [
+          "stretch"
+        ]
+      }
+    ]
+  },
+  {
+    "arg": {
+      "existing": null,
+      "name": "width",
+      "prefix": "-moz-"
+    },
+    "fn": "insertPrefixedDeclaration",
+    "out": [
+      {
+        "important": false,
+        "key": "width",
+        "val": [
+          "-moz-available"
+        ]
+      },
+      {
+        "important": false,
+        "key": "width",
+        "val": [
+          "stretch"
+        ]
+      }
+    ]
+  },
+  {
+    "arg": {
+      "existing": null,
+      "name": "user-select",
+      "prefix": "-moz-"
+    },
+    "fn": "insertPrefixedDeclaration",
+    "out": [
+      {
+        "important": false,
+        "key": "-moz-user-select",
+        "val": [
+          "-moz-none"
+        ]
+      },
+      {
+        "important": false,
+        "key": "user-select",
+        "val": [
+          "none"
+        ]
+      }
+    ]
+  },
+  {
+    "arg": {
+      "existing": null,
+      "name": "mask-composite",
+      "prefix": "-webkit-"
+    },
+    "fn": "insertPrefixedDeclaration",
+    "out": [
+      {
+        "important": false,
+        "key": "-webkit-mask-composite",
+        "val": [
+          "source-over",
+          "source-out"
+        ]
+      },
+      {
+        "important": false,
+        "key": "mask-composite",
+        "val": [
+          "add",
+          "subtract"
+        ]
+      }
+    ]
+  },
+  {
+    "arg": {
+      "existing": null,
+      "name": "color",
+      "prefix": "-moz-"
+    },
+    "fn": "insertPrefixedDeclaration",
+    "out": [
+      {
+        "important": false,
+        "key": "-moz-color",
+        "val": [
+          "red"
+        ]
+      },
+      {
+        "important": false,
+        "key": "color",
+        "val": [
+          "red"
+        ]
+      }
+    ]
+  },
+  {
+    "arg": {
+      "existing": [
+        "-moz-color"
+      ],
+      "name": "color",
+      "prefix": "-moz-"
+    },
+    "fn": "insertPrefixedDeclaration",
+    "out": [
+      {
+        "important": false,
+        "key": "color",
+        "val": [
+          "red"
+        ]
+      }
+    ]
+  },
+  {
+    "arg": {
+      "minify": false,
+      "vals": [
+        "1px"
+      ]
+    },
+    "fn": "lowerInset",
+    "out": {
+      "ok": true,
+      "rules": [
+        {
+          "important": false,
+          "key": "top",
+          "val": [
+            "1px"
+          ]
+        },
+        {
+          "important": false,
+          "key": "right",
+          "val": [
+            "1px"
+          ]
+        },
+        {
+          "important": false,
+          "key": "bottom",
+          "val": [
+            "1px"
+          ]
+        },
+        {
+          "important": false,
+          "key": "left",
+          "val": [
+            "1px"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "arg": {
+      "minify": true,
+      "vals": [
+        "1px"
+      ]
+    },
+    "fn": "lowerInset",
+    "out": {
+      "ok": true,
+      "rules": [
+        {
+          "important": false,
+          "key": "top",
+          "val": [
+            "1px"
+          ]
+        },
+        {
+          "important": false,
+          "key": "right",
+          "val": [
+            "1px"
+          ]
+        },
+        {
+          "important": false,
+          "key": "bottom",
+          "val": [
+            "1px"
+          ]
+        },
+        {
+          "important": false,
+          "key": "left",
+          "val": [
+            "1px"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "arg": {
+      "minify": false,
+      "vals": [
+        "1px",
+        "2px"
+      ]
+    },
+    "fn": "lowerInset",
+    "out": {
+      "ok": true,
+      "rules": [
+        {
+          "important": false,
+          "key": "top",
+          "val": [
+            "1px"
+          ]
+        },
+        {
+          "important": false,
+          "key": "right",
+          "val": [
+            "2px"
+          ]
+        },
+        {
+          "important": false,
+          "key": "bottom",
+          "val": [
+            "1px"
+          ]
+        },
+        {
+          "important": false,
+          "key": "left",
+          "val": [
+            "2px"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "arg": {
+      "minify": true,
+      "vals": [
+        "1px",
+        "2px"
+      ]
+    },
+    "fn": "lowerInset",
+    "out": {
+      "ok": true,
+      "rules": [
+        {
+          "important": false,
+          "key": "top",
+          "val": [
+            "1px"
+          ]
+        },
+        {
+          "important": false,
+          "key": "right",
+          "val": [
+            "2px"
+          ]
+        },
+        {
+          "important": false,
+          "key": "bottom",
+          "val": [
+            "1px"
+          ]
+        },
+        {
+          "important": false,
+          "key": "left",
+          "val": [
+            "2px"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "arg": {
+      "minify": false,
+      "vals": [
+        "1px",
+        "2px",
+        "3px"
+      ]
+    },
+    "fn": "lowerInset",
+    "out": {
+      "ok": true,
+      "rules": [
+        {
+          "important": false,
+          "key": "top",
+          "val": [
+            "1px"
+          ]
+        },
+        {
+          "important": false,
+          "key": "right",
+          "val": [
+            "2px"
+          ]
+        },
+        {
+          "important": false,
+          "key": "bottom",
+          "val": [
+            "3px"
+          ]
+        },
+        {
+          "important": false,
+          "key": "left",
+          "val": [
+            "2px"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "arg": {
+      "minify": true,
+      "vals": [
+        "1px",
+        "2px",
+        "3px"
+      ]
+    },
+    "fn": "lowerInset",
+    "out": {
+      "ok": true,
+      "rules": [
+        {
+          "important": false,
+          "key": "top",
+          "val": [
+            "1px"
+          ]
+        },
+        {
+          "important": false,
+          "key": "right",
+          "val": [
+            "2px"
+          ]
+        },
+        {
+          "important": false,
+          "key": "bottom",
+          "val": [
+            "3px"
+          ]
+        },
+        {
+          "important": false,
+          "key": "left",
+          "val": [
+            "2px"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "arg": {
+      "minify": false,
+      "vals": [
+        "1px",
+        "2px",
+        "3px",
+        "4px"
+      ]
+    },
+    "fn": "lowerInset",
+    "out": {
+      "ok": true,
+      "rules": [
+        {
+          "important": false,
+          "key": "top",
+          "val": [
+            "1px"
+          ]
+        },
+        {
+          "important": false,
+          "key": "right",
+          "val": [
+            "2px"
+          ]
+        },
+        {
+          "important": false,
+          "key": "bottom",
+          "val": [
+            "3px"
+          ]
+        },
+        {
+          "important": false,
+          "key": "left",
+          "val": [
+            "4px"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "arg": {
+      "minify": true,
+      "vals": [
+        "1px",
+        "2px",
+        "3px",
+        "4px"
+      ]
+    },
+    "fn": "lowerInset",
+    "out": {
+      "ok": true,
+      "rules": [
+        {
+          "important": false,
+          "key": "top",
+          "val": [
+            "1px"
+          ]
+        },
+        {
+          "important": false,
+          "key": "right",
+          "val": [
+            "2px"
+          ]
+        },
+        {
+          "important": false,
+          "key": "bottom",
+          "val": [
+            "3px"
+          ]
+        },
+        {
+          "important": false,
+          "key": "left",
+          "val": [
+            "4px"
+          ]
+        }
+      ]
+    }
+  }
+]

@@ -1,0 +1,49 @@
+package api
+
+// 第 112 轮 Go 探针：apiHandler.broadcastBuildResult（older/new hashes 差异 → SSE change 事件）。
+// 手工构造 apiHandler + buffered activeStreams，dump 发出的 serverSentEvent。
+import (
+	"encoding/json"
+	"os"
+	"testing"
+)
+
+func TestTmpGenBroadcast112(t *testing.T) {
+	type ev struct { Event string `json:"event"`; Data string `json:"data"` }
+	type row struct { Name string `json:"name"`; Events [][]ev `json:"events"`; NewHashes map[string]string `json:"newHashes"` }
+
+	run := func(name string, oldHashes, newHashes map[string]string, hasErrors bool, absOut, prefix, public string, nstreams int) row {
+		h := &apiHandler{
+			absOutputDir: absOut, outdirPathPrefix: prefix, publicPath: public,
+			currentHashes: oldHashes,
+		}
+		chans := make([]chan serverSentEvent, nstreams)
+		for i := range chans { chans[i] = make(chan serverSentEvent, 16) }
+		h.activeStreams = chans
+		result := BuildResult{}
+		if hasErrors {
+			result.Errors = []Message{{Text: "err"}}
+		}
+		h.broadcastBuildResult(result, newHashes)
+		out := make([][]ev, nstreams)
+		for i, ch := range chans {
+			close(ch)
+			for e := range ch { out[i] = append(out[i], ev{e.event, e.data}) }
+		}
+		return row{name, out, h.currentHashes}
+	}
+
+	rows := []row{
+		run("added", map[string]string{}, map[string]string{"/out/a.js": "h1"}, false, "/out", "", "", 1),
+		run("updated", map[string]string{"/out/a.js": "h1"}, map[string]string{"/out/a.js": "h2"}, false, "/out", "", "", 1),
+		run("removed", map[string]string{"/out/a.js": "h1"}, map[string]string{}, false, "/out", "", "", 1),
+		run("mixed-sorted", map[string]string{"/out/b.js": "x", "/out/c.js": "y"}, map[string]string{"/out/a.js": "n", "/out/b.js": "z"}, false, "/out", "dist", "/static", 2),
+		run("errors-skip", map[string]string{"/out/a.js": "h1"}, map[string]string{"/out/a.js": "h2"}, true, "/out", "", "", 1),
+		run("nochange", map[string]string{"/out/a.js": "h1"}, map[string]string{"/out/a.js": "h1"}, false, "/out", "", "", 1),
+	}
+
+	b, err := json.MarshalIndent(rows, "", "  ")
+	if err != nil { t.Fatal(err) }
+	if err := os.WriteFile("/root/port/testdata/broadcast-go.json", b, 0644); err != nil { t.Fatal(err) }
+	t.Logf("wrote %d rows bytes=%d", len(rows), len(b))
+}

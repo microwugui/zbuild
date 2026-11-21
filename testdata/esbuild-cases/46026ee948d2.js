@@ -1,0 +1,1 @@
+export default /*@__PURE__*/(function() { foo() })()

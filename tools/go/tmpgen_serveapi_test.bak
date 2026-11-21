@@ -1,0 +1,208 @@
+package api
+
+// 第 114 轮 Go 探针：api-serve 族状态/SSE 字节（hackListener.Accept / watcher.start / watcher.stop /
+// internalContext.Watch / apiHandler.serveEventStream）。package api（可访问未导出符号）。
+import (
+	"encoding/base64"
+	"encoding/json"
+	"fmt"
+	"net"
+	"net/http"
+	"net/url"
+	"os"
+	"sync/atomic"
+	"testing"
+	"time"
+
+	"github.com/evanw/esbuild/internal/fs"
+)
+
+type fakeAddr struct{}
+
+func (fakeAddr) Network() string { return "tcp" }
+func (fakeAddr) String() string  { return "127.0.0.1:0" }
+
+type fakeListener struct{ err error }
+
+func (f *fakeListener) Accept() (net.Conn, error) { return nil, f.err }
+func (f *fakeListener) Close() error              { return nil }
+func (f *fakeListener) Addr() net.Addr            { return fakeAddr{} }
+
+type acceptRow struct {
+	Name         string `json:"name"`
+	Done         bool   `json:"done"`
+	WaitReturned bool   `json:"waitReturned"`
+	ConnPresent  bool   `json:"connPresent"`
+	Err          string `json:"err"`
+}
+
+type watchRow struct {
+	Name         string `json:"name"`
+	Rebuilt      bool   `json:"rebuilt"`
+	ShouldStop   int32  `json:"shouldStop"`
+	StopReturned bool   `json:"stopReturned"`
+}
+
+type watchCtxRow struct {
+	Name       string `json:"name"`
+	Err        string `json:"err"`
+	HasWatcher bool   `json:"hasWatcher"`
+	WatchMode  bool   `json:"watchMode"`
+}
+
+// fakeRW 实现 ResponseWriter + Flusher + CloseNotifier
+type fakeRW struct {
+	h       http.Header
+	status  int
+	body    []byte
+	flushes int
+	closeCh chan bool
+}
+
+func (f *fakeRW) Header() http.Header         { return f.h }
+func (f *fakeRW) WriteHeader(status int)      { f.status = status }
+func (f *fakeRW) Write(b []byte) (int, error) { f.body = append(f.body, b...); return len(b), nil }
+func (f *fakeRW) Flush()                      { f.flushes++ }
+func (f *fakeRW) CloseNotify() <-chan bool    { return f.closeCh }
+
+// plainRW 不实现 Flusher/CloseNotifier
+type plainRW struct {
+	h      http.Header
+	status int
+	body   []byte
+}
+
+func (f *plainRW) Header() http.Header         { return f.h }
+func (f *plainRW) WriteHeader(status int)      { f.status = status }
+func (f *plainRW) Write(b []byte) (int, error) { f.body = append(f.body, b...); return len(b), nil }
+
+type sseRow struct {
+	Name         string            `json:"name"`
+	Headers      map[string]string `json:"headers"`
+	Status       int               `json:"status"`
+	Body         string            `json:"body"`
+	Flushes      int               `json:"flushes"`
+	StreamsAfter int               `json:"streamsAfter"`
+}
+
+func TestTmpGenServeAPI114(t *testing.T) {
+	out := map[string]interface{}{}
+
+	// ---- Accept ----
+	acceptRows := []acceptRow{}
+	{
+		inner := &fakeListener{err: fmt.Errorf("fake-err")}
+		hack := &hackListener{Listener: inner}
+		hack.waitGroup.Add(1)
+		waitDone := make(chan struct{})
+		go func() { hack.waitGroup.Wait(); close(waitDone) }()
+		conn, err := hack.Accept()
+		returned := false
+		select {
+		case <-waitDone:
+			returned = true
+		case <-time.After(2 * time.Second):
+		}
+		acceptRows = append(acceptRows, acceptRow{"first", hack.done, returned, conn != nil, err.Error()})
+		conn2, err2 := hack.Accept()
+		acceptRows = append(acceptRows, acceptRow{"second", hack.done, true, conn2 != nil, err2.Error()})
+	}
+	out["accept"] = acceptRows
+
+	// ---- watcher ----
+	watchRows := []watchRow{}
+	{
+		w := &watcher{shouldLog: false}
+		w.stop()
+		watchRows = append(watchRows, watchRow{"stop-before-start", false, atomic.LoadInt32(&w.shouldStop), true})
+	}
+	{
+		w := &watcher{shouldLog: false, delayInMS: 0}
+		w.data = fs.WatchData{Paths: map[string]func() string{"a.js": func() string { return "a.js" }}}
+		rebuilt := make(chan struct{}, 4)
+		w.rebuild = func() fs.WatchData { rebuilt <- struct{}{}; return fs.WatchData{} }
+		w.start()
+		rebuiltOK := false
+		select {
+		case <-rebuilt:
+			rebuiltOK = true
+		case <-time.After(3 * time.Second):
+		}
+		w.stop()
+		watchRows = append(watchRows, watchRow{"start-rebuild-stop", rebuiltOK, atomic.LoadInt32(&w.shouldStop), true})
+	}
+	out["watcher"] = watchRows
+
+	// ---- Watch ----
+	watchCtxRows := []watchCtxRow{}
+	{
+		ctx := &internalContext{didDispose: true}
+		err := ctx.Watch(WatchOptions{})
+		watchCtxRows = append(watchCtxRows, watchCtxRow{"disposed", err.Error(), ctx.watcher != nil, ctx.args.options.WatchMode})
+	}
+	{
+		ctx := &internalContext{watcher: &watcher{}}
+		err := ctx.Watch(WatchOptions{})
+		watchCtxRows = append(watchCtxRows, watchCtxRow{"already", err.Error(), true, ctx.args.options.WatchMode})
+	}
+	out["watch"] = watchCtxRows
+
+	// ---- serveEventStream ----
+	sseRows := []sseRow{}
+	{
+		h := &apiHandler{}
+		res := &fakeRW{h: http.Header{}, closeCh: make(chan bool)}
+		req := &http.Request{Method: "GET", URL: &url.URL{Path: "/esbuild"}, Header: http.Header{"Accept": []string{"text/event-stream"}}}
+		done := make(chan struct{})
+		go func() { h.serveEventStream(time.Now(), req, res); close(done) }()
+		for i := 0; i < 3000; i++ {
+			h.mutex.Lock()
+			n := len(h.activeStreams)
+			h.mutex.Unlock()
+			if n == 1 {
+				break
+			}
+			time.Sleep(time.Millisecond)
+		}
+		h.mutex.Lock()
+		ch := h.activeStreams[0]
+		h.mutex.Unlock()
+		ch <- serverSentEvent{event: "change", data: `{"added":["/a.js"]}`}
+		ch <- serverSentEvent{event: "x", data: "y"}
+		want := "retry: 500\nevent: change\ndata: {\"added\":[\"/a.js\"]}\n\nevent: x\ndata: y\n\n"
+		for i := 0; i < 3000; i++ {
+			if string(res.body) == want {
+				break
+			}
+			time.Sleep(time.Millisecond)
+		}
+		hdrs := map[string]string{
+			"Content-Type":  res.h.Get("Content-Type"),
+			"Connection":    res.h.Get("Connection"),
+			"Cache-Control": res.h.Get("Cache-Control"),
+		}
+		res.closeCh <- true
+		<-done
+		h.mutex.Lock()
+		n := len(h.activeStreams)
+		h.mutex.Unlock()
+		sseRows = append(sseRows, sseRow{"success", hdrs, res.status, base64.StdEncoding.EncodeToString(res.body), res.flushes, n})
+	}
+	{
+		h := &apiHandler{}
+		res := &plainRW{h: http.Header{}}
+		req := &http.Request{Method: "GET", URL: &url.URL{Path: "/esbuild"}, Header: http.Header{}}
+		h.serveEventStream(time.Now(), req, res)
+		sseRows = append(sseRows, sseRow{"error", map[string]string{}, res.status, base64.StdEncoding.EncodeToString(res.body), 0, 0})
+	}
+	out["sse"] = sseRows
+
+	b, err := json.MarshalIndent(out, "", "  ")
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := os.WriteFile("/root/port/testdata/serve-api-go.json", b, 0644); err != nil {
+		t.Fatal(err)
+	}
+	t.Logf("wrote serve-api-go.json bytes=%d", len(b))
+}

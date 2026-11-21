@@ -1,0 +1,154 @@
+[
+  {
+    "fn": "mergeAdjacentLocalStmts",
+    "arg": {
+      "case": "empty"
+    },
+    "out": []
+  },
+  {
+    "fn": "mergeAdjacentLocalStmts",
+    "arg": {
+      "case": "single"
+    },
+    "out": [
+      [
+        "local",
+        0,
+        false,
+        1,
+        1
+      ]
+    ]
+  },
+  {
+    "fn": "mergeAdjacentLocalStmts",
+    "arg": {
+      "case": "two-var"
+    },
+    "out": [
+      [
+        "local",
+        0,
+        false,
+        3,
+        1
+      ]
+    ]
+  },
+  {
+    "fn": "mergeAdjacentLocalStmts",
+    "arg": {
+      "case": "three-var"
+    },
+    "out": [
+      [
+        "local",
+        0,
+        false,
+        6,
+        1
+      ]
+    ]
+  },
+  {
+    "fn": "mergeAdjacentLocalStmts",
+    "arg": {
+      "case": "diff-kind"
+    },
+    "out": [
+      [
+        "local",
+        0,
+        false,
+        1,
+        1
+      ],
+      [
+        "local",
+        2,
+        false,
+        1,
+        5
+      ]
+    ]
+  },
+  {
+    "fn": "mergeAdjacentLocalStmts",
+    "arg": {
+      "case": "diff-export"
+    },
+    "out": [
+      [
+        "local",
+        0,
+        false,
+        1,
+        1
+      ],
+      [
+        "local",
+        0,
+        true,
+        1,
+        5
+      ]
+    ]
+  },
+  {
+    "fn": "mergeAdjacentLocalStmts",
+    "arg": {
+      "case": "separated"
+    },
+    "out": [
+      [
+        "local",
+        0,
+        false,
+        1,
+        1
+      ],
+      [
+        "expr",
+        5
+      ],
+      [
+        "local",
+        0,
+        false,
+        1,
+        9
+      ]
+    ]
+  },
+  {
+    "fn": "mergeAdjacentLocalStmts",
+    "arg": {
+      "case": "mixed"
+    },
+    "out": [
+      [
+        "expr",
+        0
+      ],
+      [
+        "local",
+        1,
+        false,
+        2,
+        1
+      ],
+      [
+        "expr",
+        9
+      ],
+      [
+        "local",
+        0,
+        false,
+        3,
+        11
+      ]
+    ]
+  }
+]

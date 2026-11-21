@@ -1,0 +1,1 @@
+b: { if (0) a(); else { break b } }

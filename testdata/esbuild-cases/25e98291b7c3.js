@@ -1,0 +1,1 @@
+x = 1 << / script/.exec(y).length

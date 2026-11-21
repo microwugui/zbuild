@@ -1,0 +1,1 @@
+var e; try {} catch (e) {}

@@ -1,0 +1,92 @@
+package api
+
+// 第 96 轮 Go 探针：serve 层可确定性驱动的函数簇（prettyPrintPath / matchQueryPathToResult /
+// notifyRequest / printURLs），用 fs.MockFS + 回调捕获 + stderr 管道，一次覆盖 4 个未移植函数。
+import (
+	"encoding/json"
+	"io"
+	"os"
+	"testing"
+	"time"
+	"net/http"
+	"net/url"
+
+	"github.com/evanw/esbuild/internal/fs"
+	"github.com/evanw/esbuild/internal/logger"
+)
+
+type s96Row struct { Fn string `json:"fn"`; Arg string `json:"arg"`; Out interface{} `json:"out"` }
+
+func s96Handler() *apiHandler {
+	return &apiHandler{
+		fs: fs.MockFS(map[string]string{
+			"/out/dist/index.html": "<html>",
+			"/out/dist/js/main.js": "js",
+			"/out/dist/style.css":  "css",
+		}, fs.MockUnix, "/workspace"),
+		absOutputDir: "/out/dist",
+	}
+}
+
+func TestTmpGenServePure96(t *testing.T) {
+	rows := []s96Row{}
+	add := func(fn, arg string, out interface{}) { rows = append(rows, s96Row{fn, arg, out}) }
+
+	// prettyPrintPath：path 在 cwd 下 -> 相对；否则原样
+	h := s96Handler()
+	if rel, ok := h.fs.Rel(h.fs.Cwd(), "/workspace/src/a.js"); ok {
+		add("prettyPrintPath", "rel", rel)
+	} else { add("prettyPrintPath", "rel", "/workspace/src/a.js") }
+
+	// matchQueryPathToResult：精确 / index.html / 目录 / 无匹配
+	mkResult := func() *BuildResult {
+		return &BuildResult{OutputFiles: []OutputFile{
+			{Path: "/out/dist/index.html", Contents: []byte("<html>")},
+			{Path: "/out/dist/js/main.js", Contents: []byte("js")},
+			{Path: "/out/dist/style.css", Contents: []byte("css")},
+		}}
+	}
+	for _, q := range []string{"", "index.html", "js/main.js", "js", "nope", "style.css"} {
+		dirs := map[string]bool{}; files := map[string]bool{}
+		kind, contents, path, isIndex := h.matchQueryPathToResult(q, mkResult(), dirs, files)
+		add("matchQueryPathToResult", q, []interface{}{int(kind), string(contents), path, isIndex, len(dirs), len(files)})
+	}
+
+	// notifyRequest：回调捕获
+	{
+		var got *ServeOnRequestArgs
+		hh := s96Handler()
+		hh.onRequest = func(a ServeOnRequestArgs) { cp := a; got = &cp }
+		req := &http.Request{RemoteAddr: "1.2.3.4:5678", Method: "GET", URL: &url.URL{Path: "/foo"}}
+		hh.notifyRequest(12*time.Millisecond, req, 200)
+		if got == nil { add("notifyRequest", "called", false) } else {
+			add("notifyRequest", "args", []interface{}{got.RemoteAddress, got.Method, got.Path, got.Status, got.TimeInMS})
+		}
+		// nil callback -> no panic
+		hh.onRequest = nil
+		hh.notifyRequest(0, req, 404)
+		add("notifyRequest", "nil-cb-ok", true)
+	}
+
+	// printURLs：捕获 os.Stderr
+	{
+		old := os.Stderr
+		r, w, _ := os.Pipe()
+		os.Stderr = w
+		printURLs([]string{"127.0.0.1", "::1", "192.168.1.5"}, 8080, false, logger.ColorNever)
+		w.Close()
+		os.Stderr = old
+		b, _ := io.ReadAll(r)
+		add("printURLs", "hosts", string(b))
+		// https + color never
+		r2, w2, _ := os.Pipe(); os.Stderr = w2
+		printURLs([]string{"0.0.0.0"}, 443, true, logger.ColorNever)
+		w2.Close(); os.Stderr = old
+		b2, _ := io.ReadAll(r2)
+		add("printURLs", "https", string(b2))
+	}
+
+	out, _ := json.MarshalIndent(rows, "", "  ")
+	if err := os.WriteFile("/root/port/testdata/serve-pure-go.json", out, 0644); err != nil { t.Fatal(err) }
+	t.Logf("wrote %d rows bytes=%d", len(rows), len(out))
+}

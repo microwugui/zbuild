@@ -1,0 +1,157 @@
+[
+  {
+    "fn": "isSlash",
+    "arg": "47",
+    "out": "true"
+  },
+  {
+    "fn": "isSlash",
+    "arg": "92",
+    "out": "true"
+  },
+  {
+    "fn": "isSlash",
+    "arg": "97",
+    "out": "false"
+  },
+  {
+    "fn": "isSlash",
+    "arg": "58",
+    "out": "false"
+  },
+  {
+    "fn": "isSlash",
+    "arg": "0",
+    "out": "false"
+  },
+  {
+    "fn": "isReservedName",
+    "arg": "",
+    "out": "false"
+  },
+  {
+    "fn": "isReservedName",
+    "arg": "CON",
+    "out": "true"
+  },
+  {
+    "fn": "isReservedName",
+    "arg": "con",
+    "out": "true"
+  },
+  {
+    "fn": "isReservedName",
+    "arg": "PRN",
+    "out": "true"
+  },
+  {
+    "fn": "isReservedName",
+    "arg": "aux",
+    "out": "true"
+  },
+  {
+    "fn": "isReservedName",
+    "arg": "COM1",
+    "out": "true"
+  },
+  {
+    "fn": "isReservedName",
+    "arg": "COM10",
+    "out": "false"
+  },
+  {
+    "fn": "isReservedName",
+    "arg": "NUL.txt",
+    "out": "false"
+  },
+  {
+    "fn": "isReservedName",
+    "arg": "foo",
+    "out": "false"
+  },
+  {
+    "fn": "ext",
+    "arg": "0|foo.txt",
+    "out": ".txt"
+  },
+  {
+    "fn": "ext",
+    "arg": "0|a.b.c",
+    "out": ".c"
+  },
+  {
+    "fn": "ext",
+    "arg": "0|foo",
+    "out": ""
+  },
+  {
+    "fn": "ext",
+    "arg": "0|.hidden",
+    "out": ".hidden"
+  },
+  {
+    "fn": "ext",
+    "arg": "1|C:\\a\\b.txt",
+    "out": ".txt"
+  },
+  {
+    "fn": "ext",
+    "arg": "0|dir.name/file",
+    "out": ""
+  },
+  {
+    "fn": "ext",
+    "arg": "0|trailing.",
+    "out": "."
+  },
+  {
+    "fn": "ParseYarnPnPVirtualPath",
+    "arg": "foo",
+    "out": "||false"
+  },
+  {
+    "fn": "ParseYarnPnPVirtualPath",
+    "arg": "/a/__virtual__/b/2/node_modules/x",
+    "out": "/|node_modules/x|true"
+  },
+  {
+    "fn": "ParseYarnPnPVirtualPath",
+    "arg": "/a/$$virtual/b/1/pkg",
+    "out": "/|pkg|true"
+  },
+  {
+    "fn": "ParseYarnPnPVirtualPath",
+    "arg": "C:\\a\\__virtual__\\b\\3\\x",
+    "out": "C:\\|x|true"
+  },
+  {
+    "fn": "ParseYarnPnPVirtualPath",
+    "arg": "/a/__virtual__/b/0/x",
+    "out": "/a/|x|true"
+  },
+  {
+    "fn": "ParseYarnPnPVirtualPath",
+    "arg": "/a/__virtual__/b/abc/x",
+    "out": "||false"
+  },
+  {
+    "fn": "ParseYarnPnPVirtualPath",
+    "arg": "/__virtual__/b/2/x",
+    "out": "/|x|true"
+  },
+  {
+    "fn": "mangleYarnPnPVirtualPath",
+    "arg": "foo",
+    "out": "foo"
+  },
+  {
+    "fn": "mangleYarnPnPVirtualPath",
+    "arg": "/a/__virtual__/b/2/node_modules/x",
+    "out": "/node_modules/x"
+  },
+  {
+    "fn": "mangleYarnPnPVirtualPath",
+    "arg": "/a/$$virtual/b/1/pkg",
+    "out": "/pkg"
+  }
+]

@@ -1,0 +1,1 @@
+a = 'xy'.charCodeAt(1e99)

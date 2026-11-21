@@ -1,0 +1,1 @@
+.foo { @media screen { &:hover { color: red } } }

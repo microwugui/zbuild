@@ -1,0 +1,152 @@
+{
+  "note": "已知偏差：Go math 库与 V8 在 1 ULP 上不同。断言原样保留（未删未 skip），tests 见 evidence。这些函数只被 css_parser 使用，不在 M1 的 js parse→print 路径上，故判为 M-later，不计入本档阻塞。",
+  "entries": [
+    {
+      "pkg": "internal/helpers",
+      "fn": "Round",
+      "tier": "known-deviation",
+      "evidence": "PLAN.md#F64-偏差定性",
+      "repro": "cd /root/port && node --experimental-strip-types --test src/internal/helpers/helpers_extra.test.ts"
+    },
+    {
+      "pkg": "internal/helpers",
+      "fn": "Sin",
+      "tier": "known-deviation",
+      "evidence": "PLAN.md#F64-偏差定性",
+      "repro": "同上"
+    },
+    {
+      "pkg": "internal/helpers",
+      "fn": "Cos",
+      "tier": "known-deviation",
+      "evidence": "PLAN.md#F64-偏差定性",
+      "repro": "同上"
+    },
+    {
+      "pkg": "internal/helpers",
+      "fn": "Log2",
+      "tier": "known-deviation",
+      "evidence": "PLAN.md#F64-偏差定性",
+      "repro": "同上"
+    },
+    {
+      "pkg": "internal/helpers",
+      "fn": "Pow",
+      "tier": "known-deviation",
+      "evidence": "PLAN.md#F64-偏差定性",
+      "repro": "同上"
+    },
+    {
+      "pkg": "internal/helpers",
+      "fn": "PowConst",
+      "tier": "known-deviation",
+      "evidence": "PLAN.md#F64-偏差定性",
+      "repro": "同上"
+    },
+    {
+      "pkg": "internal/helpers",
+      "fn": "Atan2",
+      "tier": "known-deviation",
+      "evidence": "PLAN.md#F64-偏差定性",
+      "repro": "同上"
+    },
+    {
+      "pkg": "internal/css_parser",
+      "fn": "gamut_mapping_xyz_to_srgb",
+      "tier": "known-deviation",
+      "evidence": "testdata/css-colorspace2-go.json + css_colorspace2.test.ts (toFixed(10) 比对，1-ULP Go math vs V8)",
+      "repro": "cd /root/port && node --experimental-strip-types --test src/internal/css_parser/css_colorspace2.test.ts"
+    },
+    {
+      "pkg": "internal/css_parser",
+      "fn": "xyz_to_colorSpace",
+      "tier": "known-deviation",
+      "evidence": "testdata/css-colorspace2-go.json + css_colorspace2.test.ts (toFixed(10) 比对，1-ULP Go math vs V8)",
+      "repro": "cd /root/port && node --experimental-strip-types --test src/internal/css_parser/css_colorspace2.test.ts"
+    },
+    {
+      "pkg": "internal/css_parser",
+      "fn": "colorSpace_to_xyz",
+      "tier": "known-deviation",
+      "evidence": "testdata/css-colorspace2-go.json + css_colorspace2.test.ts (toFixed(10) 比对，1-ULP Go math vs V8)",
+      "repro": "cd /root/port && node --experimental-strip-types --test src/internal/css_parser/css_colorspace2.test.ts"
+    },
+    {
+      "pkg": "internal/css_parser",
+      "fn": "tryToParseColorStops",
+      "tier": "known-deviation",
+      "evidence": "testdata/css-cps-go.json + css_cps.test.ts (xyz/rgb/alpha 走 toFixed(10) 比对，Go math vs V8 1-ULP；positionTerms/midpoint/失败分支逐字节)",
+      "repro": "cd /root/port && node --experimental-strip-types --test src/internal/css_parser/css_cps.test.ts"
+    },
+    {
+      "pkg": "internal/css_parser",
+      "fn": "tryToExpandGradient",
+      "tier": "known-deviation",
+      "evidence": "testdata/css-cps2-go.json + css_cps2.test.ts (hash 颜色通道 ±1 容差，仅覆盖 Go math vs V8 1-ULP 经色彩转换链放大；token 结构/位置文本逐字节)",
+      "repro": "cd /root/port && node --experimental-strip-types --test src/internal/css_parser/css_cps2.test.ts"
+    },
+    {
+      "kind": "prohibited-port",
+      "pkg": "pkg/cli",
+      "fn": "serveImpl",
+      "reason": "CLI serveImpl 写 stderr、跑真实 net.Listen http.Server 且末尾 <-make(chan struct{}) 永久阻塞，无法确定性字节验证；按诚信口径不端口、不造假桩（第115轮）",
+      "tier": "prohibited-port"
+    },
+    {
+      "pkg": "internal/bundler",
+      "fn": "generateUniqueKeyPrefix",
+      "tier": "prohibited-port",
+      "reason": "crypto/rand 随机 12 字节 base64，输出每轮不同，无确定性字节 oracle；Go 源码 bundler.go:1355 仅 rand.Seed(time)+rand.Read。按诚信口径不端口、不造假桩（第116轮 Go 探针根因实测）。",
+      "evidence": "PLAN.md 第116轮诚实复盘；go 源 internal/bundler/bundler.go:1355-1364"
+    },
+    {
+      "kind": "prohibited-port",
+      "tier": "prohibited-port",
+      "pkg": "pkg/api",
+      "fn": "Serve",
+      "reason": "WASM build-tag 桩（serve_wasm.ts）：throw-shell，Go 侧是真实现但 WASM 目标不可达；按既有决定如实登记为禁止端口，不端口、不造假桩。"
+    },
+    {
+      "kind": "prohibited-port",
+      "tier": "prohibited-port",
+      "pkg": "pkg/api",
+      "fn": "broadcastBuildResult",
+      "reason": "WASM build-tag 桩（serve_wasm.ts）：throw-shell，Go 侧是真实现但 WASM 目标不可达；按既有决定如实登记为禁止端口，不端口、不造假桩。"
+    },
+    {
+      "kind": "prohibited-port",
+      "tier": "prohibited-port",
+      "pkg": "pkg/api",
+      "fn": "stop",
+      "reason": "WASM build-tag 桩（serve_wasm.ts）：throw-shell，Go 侧是真实现但 WASM 目标不可达；按既有决定如实登记为禁止端口，不端口、不造假桩。"
+    }
+  ],
+  "portedAliases": [
+    {
+      "file": "internal/css_ast/css_ast.go",
+      "goFn": "String",
+      "tsFn": "MQCmpString",
+      "evidence": "testdata/css-ast-string-go.json (mq[] 6 值逐字节) + src/internal/css_ast/css_ast_string.test.ts; Go MQCmp.String 移植为 TS 导出 MQCmpString，因 Go 方法名 String 与 TS 名不符被误计 missing"
+    },
+    {
+      "file": "internal/css_ast/css_ast.go",
+      "goFn": "String",
+      "tsFn": "PseudoClassKindString",
+      "evidence": "testdata/css-ast-string-go.json (pc[] 10 值逐字节) + src/internal/css_ast/css_ast_string.test.ts; Go PseudoClassKind.String 移植为 TS 导出 PseudoClassKindString，因方法名 String 与 TS 名不符被误计 missing"
+    }
+  ],
+  "m2Deferred": {
+    "pkg": "internal/helpers",
+    "functions": [
+      "glob.go:2",
+      "mime.go:1",
+      "path.go:3",
+      "dataurl.go:3",
+      "serializer.go:3",
+      "timer.go:3",
+      "waitgroup.go:2"
+    ],
+    "reason": "resolver/bundler 阶段（M2）才用，不阻塞 M1"
+  },
+  "disposition-note": "第116轮：剩余未移植按逐轮看板 = 深耦合编排(bundler8+linker2) + 进程控制(cmd2) + 禁止端口6(serve_wasm3+serveImpl+generateUniqueKeyPrefix) + parseRuntime(端到端等价)。这些均不可单轮隔离逐字节验；本登记让看板反映真实根因，剩余按注入缝手法逐族推进。宁缺毋滥，不造假桩。"
+}

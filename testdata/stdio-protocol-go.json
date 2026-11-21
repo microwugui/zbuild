@@ -1,0 +1,82 @@
+[
+  {
+    "fn": "readUint32",
+    "in": "eFY0Eqo=",
+    "val": 0,
+    "out": "305419896",
+    "left": "qg==",
+    "ok": true
+  },
+  {
+    "fn": "readUint32",
+    "in": "AQID",
+    "val": 0,
+    "out": "0",
+    "left": "AQID",
+    "ok": false
+  },
+  {
+    "fn": "readUint32",
+    "in": "",
+    "val": 0,
+    "out": "0",
+    "left": "",
+    "ok": false
+  },
+  {
+    "fn": "writeUint32",
+    "in": "",
+    "val": 0,
+    "out": "AAAAAA==",
+    "left": "",
+    "ok": true
+  },
+  {
+    "fn": "writeUint32",
+    "in": "",
+    "val": 1,
+    "out": "AQAAAA==",
+    "left": "",
+    "ok": true
+  },
+  {
+    "fn": "writeUint32",
+    "in": "",
+    "val": 305419896,
+    "out": "eFY0Eg==",
+    "left": "",
+    "ok": true
+  },
+  {
+    "fn": "writeUint32",
+    "in": "",
+    "val": 4294967295,
+    "out": "/////w==",
+    "left": "",
+    "ok": true
+  },
+  {
+    "fn": "readLengthPrefixedSlice",
+    "in": "AwAAAGFiY1g=",
+    "val": 0,
+    "out": "YWJj",
+    "left": "WA==",
+    "ok": true
+  },
+  {
+    "fn": "readLengthPrefixedSlice",
+    "in": "BQAAAGE=",
+    "val": 0,
+    "out": "",
+    "left": "BQAAAGE=",
+    "ok": false
+  },
+  {
+    "fn": "readLengthPrefixedSlice",
+    "in": "AQI=",
+    "val": 0,
+    "out": "",
+    "left": "AQI=",
+    "ok": false
+  }
+]

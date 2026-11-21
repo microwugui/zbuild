@@ -1,0 +1,1 @@
+for (var x = async function() { a in b };;);

@@ -1,0 +1,27 @@
+[
+  {
+    "fn": "PeekEntryCount",
+    "arg": "empty",
+    "out": "0"
+  },
+  {
+    "fn": "PeekEntryCount",
+    "arg": "two",
+    "out": "2"
+  },
+  {
+    "fn": "Read",
+    "arg": "0,5",
+    "out": "hello|\u003cnil\u003e"
+  },
+  {
+    "fn": "Read",
+    "arg": "6,11",
+    "out": "world|\u003cnil\u003e"
+  },
+  {
+    "fn": "Close",
+    "arg": "",
+    "out": "\u003cnil\u003e"
+  }
+]

@@ -1,0 +1,1 @@
+class Foo { static { /* @__PURE__ */ foo() } }

@@ -1,0 +1,44 @@
+[
+  {
+    "name": "nometa",
+    "meta": [
+      ""
+    ],
+    "relAfter": [
+      "a.js"
+    ],
+    "mf": 0
+  },
+  {
+    "name": "meta-noimports",
+    "meta": [
+      "\"a.js\": {\n      \"bytes\": 8,\n      \"imports\": []\n    }"
+    ],
+    "relAfter": [
+      "a.js"
+    ],
+    "mf": 0
+  },
+  {
+    "name": "collision",
+    "meta": [
+      "\"m.js with { type: 'json' }\": {\n      \"bytes\": 8,\n      \"imports\": [],\n      \"with\": {\n        \"type\": \"json\"\n      }\n    }",
+      "\"m.js with { type: 'text' }\": {\n      \"bytes\": 8,\n      \"imports\": [],\n      \"with\": {\n        \"type\": \"text\"\n      }\n    }"
+    ],
+    "relAfter": [
+      "m.js with { type: 'json' }",
+      "m.js with { type: 'text' }"
+    ],
+    "mf": 0
+  },
+  {
+    "name": "big-minified",
+    "meta": [
+      "\"a.js\":{\"bytes\":8,\"imports\":[]}"
+    ],
+    "relAfter": [
+      "a.js"
+    ],
+    "mf": 1
+  }
+]

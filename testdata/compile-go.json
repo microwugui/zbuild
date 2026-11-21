@@ -1,0 +1,45 @@
+[
+  {
+    "name": "basic",
+    "outputs": [
+      "L291dC9hLmpzAGNvbnNvbGUubG9nKDEp"
+    ],
+    "metafile": "",
+    "errors": []
+  },
+  {
+    "name": "two-entries-group",
+    "outputs": [
+      "L291dC9hLmpzAGE=",
+      "L291dC9iLmpzAGI="
+    ],
+    "metafile": "",
+    "errors": []
+  },
+  {
+    "name": "dedup-merged",
+    "outputs": [
+      "L291dC9hLmpzAHNhbWU="
+    ],
+    "metafile": "",
+    "errors": []
+  },
+  {
+    "name": "overwrite-input",
+    "outputs": [
+      "L3NyYy9hLmpzAG91dA=="
+    ],
+    "metafile": "",
+    "errors": [
+      "Refusing to overwrite input file \"\" (use \"--allow-overwrite\" to allow this)"
+    ]
+  },
+  {
+    "name": "allow-overwrite",
+    "outputs": [
+      "L3NyYy9hLmpzAG91dA=="
+    ],
+    "metafile": "",
+    "errors": []
+  }
+]

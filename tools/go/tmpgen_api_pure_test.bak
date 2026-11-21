@@ -1,0 +1,44 @@
+package api
+
+// Batch 62 Go probe: pkg/api pure string helpers (3 functions, one oracle).
+import (
+	"encoding/json"
+	"os"
+	"strconv"
+	"testing"
+
+	"github.com/evanw/esbuild/internal/config"
+)
+
+func TestTmpGenApiPure(t *testing.T) {
+	type row struct { Fn string `json:"fn"`; Arg string `json:"arg"`; Out string `json:"out"` }
+	var out []row
+
+	// parseRangeInt: arg = text|maxValue
+	for _, c := range [][2]string{{"123", "1000"}, {"123", "100"}, {"", "100"}, {"12a", "100"}, {"0007", "100"}, {"99999", "100000"}, {"-1", "100"}, {"0", "100"}} {
+		max, _ := strconv.Atoi(c[1])
+		v, ok := parseRangeInt(c[0], max)
+		out = append(out, row{"parseRangeInt", c[0] + "|" + c[1], strconv.Itoa(v) + "|" + strconv.FormatBool(ok)})
+	}
+
+	// escapeForAttribute
+	for _, s := range []string{"plain", `a&b<c>d`, `a"b'c`, `&<>"'`, "", `&amp;`} {
+		out = append(out, row{"escapeForAttribute", s, escapeForAttribute(s)})
+	}
+
+	// validatePathTemplate: arg = template
+	for _, s := range []string{"", "./out.js", "[dir]/[name].[ext]", "[hash]-abc.js", "a\\b/[name]", "x/y", "[bad]/[name]", "[dir][name][hash][ext]"} {
+		parts := validatePathTemplate(s)
+		dump := ""
+		for _, p := range parts {
+			dump += strconv.Itoa(int(p.Placeholder)) + ":" + p.Data + ";"
+		}
+		out = append(out, row{"validatePathTemplate", s, dump})
+	}
+
+	_ = config.NoPlaceholder
+	b, err := json.MarshalIndent(out, "", "  ")
+	if err != nil { t.Fatal(err) }
+	if err := os.WriteFile("/root/port/testdata/api-pure-go.json", b, 0644); err != nil { t.Fatal(err) }
+	t.Logf("wrote %d rows", len(out))
+}

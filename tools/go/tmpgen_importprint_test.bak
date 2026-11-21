@@ -1,0 +1,106 @@
+package js_printer_test
+
+// 第 111 轮 Go 探针：import-record 底座的 printRequireOrImportExpr /
+// printImportCallAssertOrWith。手工构造外部 import record（SourceIndex 无效）+
+// ERequireString/EImportString/ERequireResolveString 节点，直接 js_printer.Print，
+// dump 打印字节（base64）。TS 侧同构构造 AST 逐字节比对。
+import (
+	"encoding/base64"
+	"encoding/json"
+	"os"
+	"testing"
+
+	"github.com/evanw/esbuild/internal/ast"
+	"github.com/evanw/esbuild/internal/compat"
+	"github.com/evanw/esbuild/internal/config"
+	"github.com/evanw/esbuild/internal/helpers"
+	"github.com/evanw/esbuild/internal/js_ast"
+	"github.com/evanw/esbuild/internal/js_printer"
+	"github.com/evanw/esbuild/internal/logger"
+	"github.com/evanw/esbuild/internal/renamer"
+)
+
+func strToUTF16(s string) []uint16 { return helpers.StringToUTF16(s) }
+
+func TestTmpGenImportPrint111(t *testing.T) {
+	type row struct {
+		Name string `json:"name"`
+		Out  string `json:"out"`
+	}
+	rows := []row{}
+
+	run := func(name string, expr js_ast.Expr, record ast.ImportRecord, opts js_printer.Options, unsupported compat.JSFeature) {
+		opts.UnsupportedFeatures = unsupported
+		symbols := ast.NewSymbolMap(1)
+		symbols.SymbolsForSource[0] = []ast.Symbol{{OriginalName: "x", Link: ast.InvalidRef}}
+		scope := &js_ast.Scope{}
+		tree := js_ast.AST{
+			ImportRecords: []ast.ImportRecord{record},
+			Parts: []js_ast.Part{{Stmts: []js_ast.Stmt{
+				{Loc: logger.Loc{Start: 0}, Data: &js_ast.SExpr{Value: expr}},
+			}}},
+			ModuleScope: scope,
+		}
+		r := renamer.NewNoOpRenamer(symbols)
+		js := js_printer.Print(tree, symbols, r, opts).JS
+		rows = append(rows, row{name, base64.StdEncoding.EncodeToString(js)})
+	}
+
+	extRec := func(kind ast.ImportKind, path string) ast.ImportRecord {
+		return ast.ImportRecord{Path: logger.Path{Text: path}, Range: logger.Range{Loc: logger.Loc{Start: 0}, Len: 4}, Kind: kind}
+	}
+
+	requireNode := func(idx uint32) js_ast.Expr {
+		return js_ast.Expr{Data: &js_ast.ERequireString{ImportRecordIndex: idx}}
+	}
+	importNode := func(idx uint32) js_ast.Expr {
+		return js_ast.Expr{Data: &js_ast.EImportString{ImportRecordIndex: idx}}
+	}
+	resolveNode := func(idx uint32) js_ast.Expr {
+		return js_ast.Expr{Data: &js_ast.ERequireResolveString{ImportRecordIndex: idx}}
+	}
+	_ = strToUTF16
+
+	// 1: external require("foo")
+	run("require-external", requireNode(0), extRec(ast.ImportRequire, "foo"), js_printer.Options{}, 0)
+	// 2: external require.resolve("foo")
+	run("require-resolve", resolveNode(0), extRec(ast.ImportRequireResolve, "foo"), js_printer.Options{}, 0)
+	// 3: external import("bar")
+	run("import-external", importNode(0), extRec(ast.ImportDynamic, "bar"), js_printer.Options{}, 0)
+	// 4: external import("bar", { with: { type: "json" } })  —— assert/with 子句
+	aow := &ast.ImportAssertOrWith{
+		Keyword: ast.WithKeyword,
+		Entries: []ast.AssertOrWithEntry{{Key: strToUTF16("type"), Value: strToUTF16("json"), KeyLoc: logger.Loc{Start: 0}, ValueLoc: logger.Loc{Start: 0}}},
+	}
+	rec4 := extRec(ast.ImportDynamic, "bar")
+	rec4.AssertOrWith = aow
+	run("import-with", importNode(0), rec4, js_printer.Options{}, 0)
+	// 5: external import assert
+	aowA := &ast.ImportAssertOrWith{
+		Keyword: ast.AssertKeyword,
+		Entries: []ast.AssertOrWithEntry{{Key: strToUTF16("type"), Value: strToUTF16("json")}},
+	}
+	rec5 := extRec(ast.ImportDynamic, "bar")
+	rec5.AssertOrWith = aowA
+	run("import-assert", importNode(0), rec5, js_printer.Options{}, 0)
+	// 6: import() with both features unsupported -> omit second arg
+	run("import-with-unsupported", importNode(0), rec4, js_printer.Options{}, compat.ImportAssertions|compat.ImportAttributes)
+	// 7: require wrapped with __toESM (needs ToESMRef symbol + ESM module type)
+	rec7 := extRec(ast.ImportRequire, "foo")
+	rec7.Flags = ast.WrapWithToESM
+	symbols7 := ast.NewSymbolMap(1)
+	// handled separately below (needs option ref); skip in generic run
+	_ = rec7
+	_ = symbols7
+
+	b, err := json.MarshalIndent(rows, "", "  ")
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := os.WriteFile("/root/port/testdata/import-print-go.json", b, 0644); err != nil {
+		t.Fatal(err)
+	}
+	t.Logf("wrote %d rows bytes=%d", len(rows), len(b))
+}
+
+var _ = config.Options{}

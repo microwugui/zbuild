@@ -1,0 +1,359 @@
+[
+  {
+    "name": "valid-simple",
+    "out": {
+      "nil": false,
+      "sources": [
+        "a.js"
+      ],
+      "contents": [
+        {
+          "q": "\"let foo = 1\"",
+          "v": [
+            108,
+            101,
+            116,
+            32,
+            102,
+            111,
+            111,
+            32,
+            61,
+            32,
+            49
+          ]
+        }
+      ],
+      "mappings": [
+        {
+          "gl": 0,
+          "gc": 0,
+          "si": 0,
+          "ol": 0,
+          "oc": 0,
+          "on": 0,
+          "onv": true
+        }
+      ],
+      "names": [
+        "foo"
+      ]
+    },
+    "msgs": []
+  },
+  {
+    "name": "valid-multi",
+    "out": {
+      "nil": false,
+      "sources": [
+        "a.js",
+        "b.js"
+      ],
+      "contents": [],
+      "mappings": [
+        {
+          "gl": 0,
+          "gc": 0,
+          "si": 0,
+          "ol": 0,
+          "oc": 0,
+          "on": 0,
+          "onv": true
+        },
+        {
+          "gl": 0,
+          "gc": 1,
+          "si": 0,
+          "ol": 0,
+          "oc": 1,
+          "on": 4294967295,
+          "onv": false
+        },
+        {
+          "gl": 1,
+          "gc": 0,
+          "si": 0,
+          "ol": 1,
+          "oc": 0,
+          "on": 4294967295,
+          "onv": false
+        }
+      ],
+      "names": [
+        "x",
+        "y"
+      ]
+    },
+    "msgs": []
+  },
+  {
+    "name": "valid-no-names",
+    "out": {
+      "nil": false,
+      "sources": [
+        "a.js"
+      ],
+      "contents": [],
+      "mappings": [
+        {
+          "gl": 0,
+          "gc": 0,
+          "si": 0,
+          "ol": 0,
+          "oc": 0,
+          "on": 4294967295,
+          "onv": false
+        }
+      ],
+      "names": null
+    },
+    "msgs": []
+  },
+  {
+    "name": "invalid-json",
+    "out": {
+      "nil": true,
+      "sources": null,
+      "contents": null,
+      "mappings": null,
+      "names": null
+    },
+    "msgs": [
+      {
+        "id": 0,
+        "kind": 0,
+        "text": "Expected string in source map but found end of file"
+      }
+    ]
+  },
+  {
+    "name": "non-object",
+    "out": {
+      "nil": true,
+      "sources": null,
+      "contents": null,
+      "mappings": null,
+      "names": null
+    },
+    "msgs": [
+      {
+        "id": 0,
+        "kind": 0,
+        "text": "Invalid source map"
+      }
+    ]
+  },
+  {
+    "name": "no-version",
+    "out": {
+      "nil": true,
+      "sources": null,
+      "contents": null,
+      "mappings": null,
+      "names": null
+    },
+    "msgs": []
+  },
+  {
+    "name": "bad-version",
+    "out": {
+      "nil": true,
+      "sources": null,
+      "contents": null,
+      "mappings": null,
+      "names": null
+    },
+    "msgs": []
+  },
+  {
+    "name": "empty-mappings",
+    "out": {
+      "nil": true,
+      "sources": null,
+      "contents": null,
+      "mappings": null,
+      "names": null
+    },
+    "msgs": []
+  },
+  {
+    "name": "empty-sources",
+    "out": {
+      "nil": true,
+      "sources": null,
+      "contents": null,
+      "mappings": null,
+      "names": null
+    },
+    "msgs": []
+  },
+  {
+    "name": "bad-mappings-char",
+    "out": {
+      "nil": true,
+      "sources": null,
+      "contents": null,
+      "mappings": null,
+      "names": null
+    },
+    "msgs": [
+      {
+        "id": 52,
+        "kind": 1,
+        "text": "Bad \"mappings\" data in source map at character 4: Invalid character after mapping: \"!\""
+      }
+    ]
+  },
+  {
+    "name": "bad-source-index",
+    "out": {
+      "nil": true,
+      "sources": null,
+      "contents": null,
+      "mappings": null,
+      "names": null
+    },
+    "msgs": [
+      {
+        "id": 52,
+        "kind": 1,
+        "text": "Bad \"mappings\" data in source map at character 1: Invalid source index value: 1"
+      }
+    ]
+  },
+  {
+    "name": "source-root",
+    "out": {
+      "nil": false,
+      "sources": [
+        "/a.js"
+      ],
+      "contents": [],
+      "mappings": [
+        {
+          "gl": 0,
+          "gc": 0,
+          "si": 0,
+          "ol": 0,
+          "oc": 0,
+          "on": 4294967295,
+          "onv": false
+        }
+      ],
+      "names": null
+    },
+    "msgs": []
+  },
+  {
+    "name": "source-root-slash",
+    "out": {
+      "nil": false,
+      "sources": [
+        "/static/a.js"
+      ],
+      "contents": [],
+      "mappings": [
+        {
+          "gl": 0,
+          "gc": 0,
+          "si": 0,
+          "ol": 0,
+          "oc": 0,
+          "on": 4294967295,
+          "onv": false
+        }
+      ],
+      "names": null
+    },
+    "msgs": []
+  },
+  {
+    "name": "with-sections",
+    "out": {
+      "nil": false,
+      "sources": [
+        "a.js"
+      ],
+      "contents": [],
+      "mappings": [
+        {
+          "gl": 0,
+          "gc": 0,
+          "si": 0,
+          "ol": 0,
+          "oc": 0,
+          "on": 0,
+          "onv": true
+        }
+      ],
+      "names": [
+        "x"
+      ]
+    },
+    "msgs": []
+  },
+  {
+    "name": "bad-sections-type",
+    "out": {
+      "nil": true,
+      "sources": null,
+      "contents": null,
+      "mappings": null,
+      "names": null
+    },
+    "msgs": [
+      {
+        "id": 0,
+        "kind": 0,
+        "text": "Expected \"sections\" to be an array"
+      }
+    ]
+  },
+  {
+    "name": "file-url",
+    "out": {
+      "nil": false,
+      "sources": [
+        "file:///p/src/a.js"
+      ],
+      "contents": [],
+      "mappings": [
+        {
+          "gl": 0,
+          "gc": 0,
+          "si": 0,
+          "ol": 0,
+          "oc": 0,
+          "on": 4294967295,
+          "onv": false
+        }
+      ],
+      "names": null
+    },
+    "msgs": []
+  },
+  {
+    "name": "null-source-entry",
+    "out": {
+      "nil": false,
+      "sources": [
+        "",
+        "a.js"
+      ],
+      "contents": [],
+      "mappings": [
+        {
+          "gl": 0,
+          "gc": 0,
+          "si": 0,
+          "ol": 0,
+          "oc": 0,
+          "on": 4294967295,
+          "onv": false
+        }
+      ],
+      "names": null
+    },
+    "msgs": []
+  }
+]

@@ -1,0 +1,97 @@
+[
+ {
+  "op": "ReadDirectory",
+  "arg": "real79268831428",
+  "out": "",
+  "err": "",
+  "names": [
+   "a.txt",
+   "b.txt",
+   "link.txt",
+   "sub"
+  ],
+  "kind": 0,
+  "symlink": ""
+ },
+ {
+  "op": "ReadDirectory",
+  "arg": "a.txt",
+  "out": "",
+  "err": "err",
+  "names": null,
+  "kind": 0,
+  "symlink": ""
+ },
+ {
+  "op": "ReadDirectory",
+  "arg": "missing",
+  "out": "",
+  "err": "err",
+  "names": null,
+  "kind": 0,
+  "symlink": ""
+ },
+ {
+  "op": "ReadFile",
+  "arg": "a.txt",
+  "out": "AAA",
+  "err": "",
+  "names": null,
+  "kind": 0,
+  "symlink": ""
+ },
+ {
+  "op": "ReadFile",
+  "arg": "missing",
+  "out": "",
+  "err": "err",
+  "names": null,
+  "kind": 0,
+  "symlink": ""
+ },
+ {
+  "op": "ReadFile",
+  "arg": "real79268831428",
+  "out": "",
+  "err": "err",
+  "names": null,
+  "kind": 0,
+  "symlink": ""
+ },
+ {
+  "op": "kind",
+  "arg": "a.txt",
+  "out": "false",
+  "err": "",
+  "names": null,
+  "kind": 2,
+  "symlink": "USED"
+ },
+ {
+  "op": "kind",
+  "arg": "sub",
+  "out": "false",
+  "err": "",
+  "names": null,
+  "kind": 1,
+  "symlink": "USED"
+ },
+ {
+  "op": "kind",
+  "arg": "link.txt",
+  "out": "true",
+  "err": "",
+  "names": null,
+  "kind": 2,
+  "symlink": "USED"
+ },
+ {
+  "op": "kind",
+  "arg": "missing",
+  "out": "false",
+  "err": "",
+  "names": null,
+  "kind": 0,
+  "symlink": "USED"
+ }
+]

@@ -1,0 +1,242 @@
+[
+  {
+    "name": "pb-basic",
+    "out": {
+      "bundle": true,
+      "defines": [],
+      "entryPoints": [
+        "in.js"
+      ],
+      "format": 3,
+      "logLevel": 0,
+      "logLimit": 0,
+      "metafile": false,
+      "minifyIdent": false,
+      "minifySyntax": false,
+      "minifyWS": false,
+      "platform": 2,
+      "target": 0,
+      "write": false
+    }
+  },
+  {
+    "name": "pb-minify",
+    "out": {
+      "bundle": false,
+      "defines": [],
+      "entryPoints": [
+        "a.js"
+      ],
+      "format": 0,
+      "logLevel": 0,
+      "logLimit": 0,
+      "metafile": false,
+      "minifyIdent": true,
+      "minifySyntax": true,
+      "minifyWS": true,
+      "platform": 0,
+      "target": 3,
+      "write": false
+    }
+  },
+  {
+    "name": "pb-define",
+    "out": {
+      "bundle": false,
+      "defines": [
+        "DEBUG=false"
+      ],
+      "entryPoints": [
+        "in.js"
+      ],
+      "format": 0,
+      "logLevel": 0,
+      "logLimit": 0,
+      "metafile": true,
+      "minifyIdent": false,
+      "minifySyntax": false,
+      "minifyWS": false,
+      "platform": 0,
+      "target": 0,
+      "write": false
+    }
+  },
+  {
+    "name": "pb-bad",
+    "out": {
+      "err": "Invalid build flag: \"--no-such\""
+    }
+  },
+  {
+    "name": "pt-basic",
+    "out": {
+      "defines": [],
+      "format": 3,
+      "logLevel": 0,
+      "logLimit": 0,
+      "minifySyntax": false,
+      "minifyWS": false,
+      "target": 0
+    }
+  },
+  {
+    "name": "pt-minify",
+    "out": {
+      "defines": [],
+      "format": 0,
+      "logLevel": 0,
+      "logLimit": 0,
+      "minifySyntax": true,
+      "minifyWS": true,
+      "target": 8
+    }
+  },
+  {
+    "name": "pt-define",
+    "out": {
+      "defines": [
+        "DEBUG=false"
+      ],
+      "format": 0,
+      "logLevel": 0,
+      "logLimit": 0,
+      "minifySyntax": false,
+      "minifyWS": false,
+      "target": 0
+    }
+  },
+  {
+    "name": "pt-bad",
+    "out": {
+      "err": "Invalid transform flag: \"--no-such\""
+    }
+  },
+  {
+    "name": "ps-basic",
+    "out": {
+      "opts": {
+        "certfile": "",
+        "fallback": "",
+        "host": "",
+        "keyfile": "",
+        "origin": null,
+        "port": 8000,
+        "servedir": ""
+      },
+      "rest": [
+        "in.js"
+      ]
+    }
+  },
+  {
+    "name": "ps-host",
+    "out": {
+      "opts": {
+        "certfile": "",
+        "fallback": "",
+        "host": "127.0.0.1",
+        "keyfile": "",
+        "origin": null,
+        "port": 3000,
+        "servedir": "public"
+      },
+      "rest": [
+        "in.js"
+      ]
+    }
+  },
+  {
+    "name": "ps-origin",
+    "out": {
+      "opts": {
+        "certfile": "",
+        "fallback": "",
+        "host": "",
+        "keyfile": "",
+        "origin": [
+          "*",
+          "foo"
+        ],
+        "port": 8080,
+        "servedir": ""
+      },
+      "rest": [
+        "in.js"
+      ]
+    }
+  },
+  {
+    "name": "ps-none",
+    "out": {
+      "opts": {
+        "certfile": "",
+        "fallback": "",
+        "host": "",
+        "keyfile": "",
+        "origin": null,
+        "port": 0,
+        "servedir": ""
+      },
+      "rest": [
+        "in.js",
+        "--bundle"
+      ]
+    }
+  },
+  {
+    "name": "ps-bad",
+    "out": {
+      "err": "strconv.ParseInt: parsing \"notaport\": invalid syntax"
+    }
+  },
+  {
+    "name": "pfr-build",
+    "out": {
+      "build": {
+        "bundle": true,
+        "defines": [],
+        "entryPoints": [
+          "in.js"
+        ],
+        "format": 3,
+        "logLevel": 3,
+        "logLimit": 6,
+        "metafile": false,
+        "minifyIdent": false,
+        "minifySyntax": false,
+        "minifyWS": false,
+        "platform": 0,
+        "target": 0,
+        "write": true
+      },
+      "errText": "",
+      "watch": false,
+      "watchDelay": 0
+    }
+  },
+  {
+    "name": "pfr-transform",
+    "out": {
+      "errText": "",
+      "transform": {
+        "defines": [],
+        "format": 0,
+        "logLevel": 3,
+        "logLimit": 6,
+        "minifySyntax": true,
+        "minifyWS": true,
+        "target": 0
+      },
+      "watch": false,
+      "watchDelay": 0
+    }
+  },
+  {
+    "name": "pfr-bad",
+    "out": {
+      "errText": "Invalid transform flag: \"--no-such\"",
+      "watch": false,
+      "watchDelay": 0
+    }
+  }
+]

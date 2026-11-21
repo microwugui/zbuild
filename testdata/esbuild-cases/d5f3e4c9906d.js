@@ -1,0 +1,1 @@
+export var a; for (var b;;) ;

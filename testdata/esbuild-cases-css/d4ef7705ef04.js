@@ -1,0 +1,1 @@
+a, b::before { & .foo { color: red } }

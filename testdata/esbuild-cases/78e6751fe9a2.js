@@ -1,0 +1,1 @@
+try { let x = foo() } catch {}

@@ -1,0 +1,91 @@
+package resolver
+
+// 第 166 批 Go 探针：loadAsIndexWithBrowserRemapping + DebugMeta.LogErrorMsg 逐字节固化。
+import (
+	"encoding/json"
+	"os"
+	"testing"
+
+	"github.com/evanw/esbuild/internal/config"
+	"github.com/evanw/esbuild/internal/fs"
+	"github.com/evanw/esbuild/internal/logger"
+)
+
+type rmRow struct {
+	Fn  string                 `json:"fn"`
+	Arg map[string]interface{} `json:"arg"`
+	Out interface{}            `json:"out"`
+}
+
+func sPtr(s string) *string { return &s }
+
+func dumpMsg(m logger.Msg) interface{} {
+	loc := map[string]interface{}{}
+	if m.Data.Location != nil { loc["suggestion"] = m.Data.Location.Suggestion; loc["line"] = m.Data.Location.Line; loc["column"] = m.Data.Location.Column }
+	notes := []interface{}{}; for _, n := range m.Notes { notes = append(notes, n.Text) }
+	return map[string]interface{}{"kind": int(m.Kind), "text": m.Data.Text, "loc": loc, "notes": notes}
+}
+
+func TestTmpGenRemap(t *testing.T) {
+	var out []rmRow
+	fsObj := fs.MockFS(nil, fs.MockUnix, "/")
+	extOrder := []string{".js", ".ts"}
+
+	// ---- loadAsIndexWithBrowserRemapping ----
+	// helper build dirInfo with browser scope
+	mkDir := func(browserMap map[string]*string, entries map[string]string) *dirInfo {
+		fs2 := fs.MockFS(entries, fs.MockUnix, "/")
+		scope := &dirInfo{absPath: "/pkg", entries: mustReadDir(fs2, "/pkg")}
+		scope.packageJSON = &packageJSON{browserMap: browserMap}; scope.packageJSON.source.KeyPath.Text = "/pkg/package.json"
+		di := &dirInfo{absPath: "/pkg", enclosingBrowserScope: scope, entries: mustReadDir(fs2, "/pkg")}
+		di.parent = scope
+		return di
+	}
+	remapCases := []struct{ name string; bm map[string]*string; entries map[string]string; path string }{
+		{"index-normal", nil, map[string]string{"/pkg/index.js": ""}, "/pkg"},
+		{"index-remapped", map[string]*string{"index": sPtr("./browser.js")}, map[string]string{"/pkg/browser.js": ""}, "/pkg"},
+		{"index-disabled", map[string]*string{"index": nil}, map[string]string{"/pkg/index.js": ""}, "/pkg"},
+		{"index-remap-miss", map[string]*string{"index": sPtr("./missing.js")}, map[string]string{"/pkg/index.js": ""}, "/pkg"},
+	}
+	for _, c := range remapCases {
+		fsObj = fs.MockFS(c.entries, fs.MockUnix, "/") // loadAsFile 走 r.fs，需含映射目标文件
+		log := logger.NewDeferLog(logger.DeferLogAll, nil)
+		r := resolverQuery{Resolver: &Resolver{log: log}, debugLogs: &debugLogs{}}
+		r.options = config.Options{Platform: config.PlatformBrowser, ExtensionOrder: extOrder}
+		r.fs = fsObj
+		r.dirCache = make(map[string]*dirInfo)
+		r.pnpManifestWasChecked = true
+		di := mkDir(c.bm, c.entries)
+		pair, ok, dc := r.loadAsIndexWithBrowserRemapping(di, c.path, extOrder)
+		var dcOut interface{}; if dc != nil { dcOut = []interface{}{dc.Dir, dc.Query, dc.Actual} }
+		out = append(out, rmRow{Fn: "loadAsIndexWithBrowserRemapping", Arg: map[string]interface{}{"name": c.name},
+			Out: []interface{}{pair.Primary.Text, pair.Primary.Namespace, int(pair.Primary.Flags), ok, dcOut}})
+	}
+
+	// ---- DebugMeta.LogErrorMsg ----
+	logCases := []struct{ name, sugMsg, sugText, text, suggestion string; sr suggestionRange; rangeStart, rangeLen int; hasSource bool; extraNote string }{
+		{"plain", "", "", "some error", "", suggestionRangeFull, 2, 5, true, ""},
+		{"with-suggestion", "try this", "replacement", "typo error", "final", suggestionRangeFull, 0, 4, true, ""},
+		{"suggestion-end", "try this", "replacement", "typo error", "", suggestionRangeEnd, 0, 9, true, ""},
+		{"with-note", "", "", "error", "", suggestionRangeFull, 0, 1, true, "extra info"},
+		{"no-source", "try this", "rep", "error", "", suggestionRangeFull, 0, 1, false, ""},
+	}
+	for _, c := range logCases {
+		log := logger.NewDeferLog(logger.DeferLogAll, nil)
+		var src *logger.Source
+		if c.hasSource { s := logger.Source{Contents: "abcdefghij", KeyPath: logger.Path{Text: "/src.js"}}; src = &s }
+		dm := DebugMeta{suggestionMessage: c.sugMsg, suggestionText: c.sugText, suggestionRange: c.sr}
+		notes := []logger.MsgData{}; if c.extraNote != "" { notes = append(notes, logger.MsgData{Text: c.extraNote}) }
+		rng := logger.Range{Loc: logger.Loc{Start: int32(c.rangeStart)}, Len: int32(c.rangeLen)}
+		dm.LogErrorMsg(log, src, rng, c.text, c.suggestion, notes)
+		msgs := []interface{}{}; for _, m := range log.Done() { msgs = append(msgs, dumpMsg(m)) }
+		out = append(out, rmRow{Fn: "LogErrorMsg", Arg: map[string]interface{}{"name": c.name}, Out: msgs})
+	}
+
+	b, err := json.Marshal(out)
+	if err != nil { t.Fatal(err) }
+	if err := os.WriteFile("/root/port/testdata/remap-go.json", b, 0644); err != nil { t.Fatal(err) }
+	t.Logf("wrote %d cases", len(out))
+}
+
+func mustReadDir(fsObj fs.FS, path string) fs.DirEntries { d, _, _ := fsObj.ReadDirectory(path); return d }

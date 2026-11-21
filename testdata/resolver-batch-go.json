@@ -1,0 +1,321 @@
+[
+  {
+    "fn": "isSlash",
+    "arg": "/",
+    "out": true
+  },
+  {
+    "fn": "isSlash",
+    "arg": "\\",
+    "out": true
+  },
+  {
+    "fn": "isSlash",
+    "arg": "a",
+    "out": false
+  },
+  {
+    "fn": "isSlash",
+    "arg": ":",
+    "out": false
+  },
+  {
+    "fn": "getSubstitutedPathWithConfigDirTemplate",
+    "arg": "${configDir}/src",
+    "out": "/root/port/src"
+  },
+  {
+    "fn": "getSubstitutedPathWithConfigDirTemplate",
+    "arg": "${configDir}",
+    "out": "/root/port"
+  },
+  {
+    "fn": "getSubstitutedPathWithConfigDirTemplate",
+    "arg": "${configDir}foo",
+    "out": "/root/port/foo"
+  },
+  {
+    "fn": "getSubstitutedPathWithConfigDirTemplate",
+    "arg": "plain/path",
+    "out": "plain/path"
+  },
+  {
+    "fn": "parseMemberExpressionForJSX",
+    "arg": "",
+    "out": {
+      "errs": [],
+      "parts": null
+    }
+  },
+  {
+    "fn": "parseMemberExpressionForJSX",
+    "arg": "Foo.Bar",
+    "out": {
+      "errs": [],
+      "parts": [
+        "Foo",
+        "Bar"
+      ]
+    }
+  },
+  {
+    "fn": "parseMemberExpressionForJSX",
+    "arg": "Foo.1",
+    "out": {
+      "errs": [
+        "1|Invalid JSX member expression: \"Foo.1\""
+      ],
+      "parts": null
+    }
+  },
+  {
+    "fn": "parseMemberExpressionForJSX",
+    "arg": "a-b.C",
+    "out": {
+      "errs": [
+        "1|Invalid JSX member expression: \"a-b.C\""
+      ],
+      "parts": null
+    }
+  },
+  {
+    "fn": "parseMemberExpressionForJSX",
+    "arg": "A.B.C",
+    "out": {
+      "errs": [],
+      "parts": [
+        "A",
+        "B",
+        "C"
+      ]
+    }
+  },
+  {
+    "fn": "isValidTSConfigPathPattern",
+    "arg": "*",
+    "out": {
+      "errs": [],
+      "ok": true
+    }
+  },
+  {
+    "fn": "isValidTSConfigPathPattern",
+    "arg": "a*b*c",
+    "out": {
+      "errs": [
+        "1|Invalid pattern \"a*b*c\", must have at most one \"*\" character"
+      ],
+      "ok": false
+    }
+  },
+  {
+    "fn": "isValidTSConfigPathPattern",
+    "arg": "abc",
+    "out": {
+      "errs": [],
+      "ok": true
+    }
+  },
+  {
+    "fn": "isValidTSConfigPathPattern",
+    "arg": "a*b",
+    "out": {
+      "errs": [],
+      "ok": true
+    }
+  },
+  {
+    "fn": "isValidTSConfigPathNoBaseURLPattern",
+    "arg": ".",
+    "out": {
+      "errs": [],
+      "ok": true
+    }
+  },
+  {
+    "fn": "isValidTSConfigPathNoBaseURLPattern",
+    "arg": "..",
+    "out": {
+      "errs": [],
+      "ok": true
+    }
+  },
+  {
+    "fn": "isValidTSConfigPathNoBaseURLPattern",
+    "arg": "./x",
+    "out": {
+      "errs": [],
+      "ok": true
+    }
+  },
+  {
+    "fn": "isValidTSConfigPathNoBaseURLPattern",
+    "arg": "../x",
+    "out": {
+      "errs": [],
+      "ok": true
+    }
+  },
+  {
+    "fn": "isValidTSConfigPathNoBaseURLPattern",
+    "arg": ".\\x",
+    "out": {
+      "errs": [],
+      "ok": true
+    }
+  },
+  {
+    "fn": "isValidTSConfigPathNoBaseURLPattern",
+    "arg": "..\\x",
+    "out": {
+      "errs": [],
+      "ok": true
+    }
+  },
+  {
+    "fn": "isValidTSConfigPathNoBaseURLPattern",
+    "arg": "/abs",
+    "out": {
+      "errs": [],
+      "ok": true
+    }
+  },
+  {
+    "fn": "isValidTSConfigPathNoBaseURLPattern",
+    "arg": "\\unc",
+    "out": {
+      "errs": [],
+      "ok": true
+    }
+  },
+  {
+    "fn": "isValidTSConfigPathNoBaseURLPattern",
+    "arg": "c:/x",
+    "out": {
+      "errs": [],
+      "ok": true
+    }
+  },
+  {
+    "fn": "isValidTSConfigPathNoBaseURLPattern",
+    "arg": "C:\\x",
+    "out": {
+      "errs": [],
+      "ok": true
+    }
+  },
+  {
+    "fn": "isValidTSConfigPathNoBaseURLPattern",
+    "arg": "bare",
+    "out": {
+      "errs": [
+        "1|Non-relative path \"bare\" is not allowed when \"baseUrl\" is not set (did you forget a leading \"./\"?)"
+      ],
+      "ok": false
+    }
+  },
+  {
+    "fn": "isValidTSConfigPathNoBaseURLPattern",
+    "arg": "",
+    "out": {
+      "errs": [
+        "1|Non-relative path \"\" is not allowed when \"baseUrl\" is not set (did you forget a leading \"./\"?)"
+      ],
+      "ok": false
+    }
+  },
+  {
+    "fn": "parseBareIdentifier",
+    "arg": "foo",
+    "out": {
+      "ident": "foo",
+      "ok": true,
+      "sub": ""
+    }
+  },
+  {
+    "fn": "parseBareIdentifier",
+    "arg": "foo/bar",
+    "out": {
+      "ident": "foo",
+      "ok": true,
+      "sub": "/bar"
+    }
+  },
+  {
+    "fn": "parseBareIdentifier",
+    "arg": "@scope/pkg",
+    "out": {
+      "ident": "@scope/pkg",
+      "ok": true,
+      "sub": ""
+    }
+  },
+  {
+    "fn": "parseBareIdentifier",
+    "arg": "@scope/pkg/sub",
+    "out": {
+      "ident": "@scope/pkg",
+      "ok": true,
+      "sub": "/sub"
+    }
+  },
+  {
+    "fn": "parseBareIdentifier",
+    "arg": "@scope",
+    "out": {
+      "ident": "",
+      "ok": false,
+      "sub": ""
+    }
+  },
+  {
+    "fn": "parseBareIdentifier",
+    "arg": "@",
+    "out": {
+      "ident": "",
+      "ok": false,
+      "sub": ""
+    }
+  },
+  {
+    "fn": "parseBareIdentifier",
+    "arg": "a/b/c",
+    "out": {
+      "ident": "a",
+      "ok": true,
+      "sub": "/b/c"
+    }
+  },
+  {
+    "fn": "expansionKeysArray.Len",
+    "arg": null,
+    "out": 3
+  },
+  {
+    "fn": "expansionKeysArray.Swap",
+    "arg": null,
+    "out": [
+      "a/",
+      "z/*",
+      "b*"
+    ]
+  },
+  {
+    "fn": "expansionKeysArray.Less",
+    "arg": [
+      0,
+      1
+    ],
+    "out": false
+  },
+  {
+    "fn": "expansionKeysArray.sort",
+    "arg": null,
+    "out": [
+      "z/*",
+      "a/",
+      "b*"
+    ]
+  }
+]

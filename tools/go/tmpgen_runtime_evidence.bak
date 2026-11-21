@@ -1,0 +1,38 @@
+package bundler
+
+// 第 106 轮 Go 探针：runtimeCache.parseRuntime（runtime.Source + js_parser.Parse + 缓存）。
+// dump source 内容 sha256 + AST 摘要（符号/parts/imports），确定性。
+import ("crypto/sha256";"encoding/hex";"encoding/json";"os";"sort";"testing"
+ "github.com/evanw/esbuild/internal/compat"
+ "github.com/evanw/esbuild/internal/config"
+)
+
+type rtRow struct { Name string `json:"name"`; Features uint64 `json:"features"`; SourceSHA string `json:"sourceSHA"`; OK bool `json:"ok"`; NumSymbols int `json:"numSymbols"`; SymbolNames []string `json:"symbolNames"`; NumParts int `json:"numParts"`; NumImports int `json:"numImports"`; PartStmtCounts []int `json:"partStmtCounts"`; CacheHit bool `json:"cacheHit"` }
+
+func TestTmpGenRuntime106(t *testing.T){
+  rows:=[]rtRow{}
+  cases:=[]struct{name string; f compat.JSFeature}{
+    {"esnext",0},
+    {"es2015",compat.AsyncAwait|compat.ObjectRestSpread|compat.ForAwait|compat.TopLevelAwait},
+    {"with-using",compat.Using},
+  }
+  cache:=&runtimeCache{}
+  for _,c:=range cases{
+    opts:=&config.Options{UnsupportedJSFeatures:c.f}
+    src,ast,ok:=cache.parseRuntime(opts)
+    h:=sha256.Sum256([]byte(src.Contents))
+    names:=[]string{}
+    for _,s:=range ast.Symbols { names=append(names,s.OriginalName) }
+    sort.Strings(names)
+    counts:=[]int{}
+    for _,p:=range ast.Parts { counts=append(counts,len(p.Stmts)) }
+    rows=append(rows,rtRow{c.name,uint64(c.f),hex.EncodeToString(h[:]),ok,len(ast.Symbols),names,len(ast.Parts),len(ast.ImportRecords),counts,false})
+    // second call -> cache hit
+    src2,ast2,ok2:=cache.parseRuntime(opts)
+    h2:=sha256.Sum256([]byte(src2.Contents))
+    rows=append(rows,rtRow{c.name+"-cached",uint64(c.f),hex.EncodeToString(h2[:]),ok2,len(ast2.Symbols),names,len(ast2.Parts),len(ast2.ImportRecords),counts,true})
+  }
+  b,err:=json.MarshalIndent(rows,"","  ");if err!=nil{t.Fatal(err)}
+  if err:=os.WriteFile("/root/port/testdata/runtime-parse-go.json",b,0644);err!=nil{t.Fatal(err)}
+  t.Logf("wrote %d rows bytes=%d",len(rows),len(b))
+}

@@ -1,0 +1,52 @@
+[
+  {
+    "fn": "UnsupportedJSFeatures",
+    "arg": "3:2020.0.0;",
+    "out": "1302666380189237121"
+  },
+  {
+    "fn": "UnsupportedCSSFeatures",
+    "arg": "3:2020.0.0;",
+    "out": "0"
+  },
+  {
+    "fn": "UnsupportedJSFeatures",
+    "arg": "0:90.0.0;",
+    "out": "1175583588226466304"
+  },
+  {
+    "fn": "UnsupportedCSSFeatures",
+    "arg": "0:90.0.0;",
+    "out": "2581"
+  },
+  {
+    "fn": "UnsupportedJSFeatures",
+    "arg": "4:60.0.0;0:80.0.0;",
+    "out": "1323925454702641057"
+  },
+  {
+    "fn": "UnsupportedCSSFeatures",
+    "arg": "4:60.0.0;0:80.0.0;",
+    "out": "2967"
+  },
+  {
+    "fn": "UnsupportedJSFeatures",
+    "arg": "11:13.0.0;",
+    "out": "1321392162999762849"
+  },
+  {
+    "fn": "UnsupportedCSSFeatures",
+    "arg": "11:13.0.0;",
+    "out": "2965"
+  },
+  {
+    "fn": "UnsupportedJSFeatures",
+    "arg": "",
+    "out": "0"
+  },
+  {
+    "fn": "UnsupportedCSSFeatures",
+    "arg": "",
+    "out": "0"
+  }
+]

@@ -1,0 +1,1 @@
+class x {set ['y'](z) {}}

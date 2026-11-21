@@ -1,0 +1,1 @@
+a { box-shadow: calc(1px + var(--foo)) 0px 0px 0px black }

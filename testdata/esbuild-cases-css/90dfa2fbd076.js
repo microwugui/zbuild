@@ -1,0 +1,1 @@
+div { animation-name: 'unset' }

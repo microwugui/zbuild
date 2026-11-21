@@ -1,0 +1,1 @@
+a { color: hsla(0.5turn 2% 3%) }

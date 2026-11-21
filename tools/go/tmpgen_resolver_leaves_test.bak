@@ -1,0 +1,146 @@
+package resolver
+
+// 第 141 批 Go 探针：resolver 剩余叶子（parseImportsExportsMap / checkForBuiltInNodeModules /
+// TSConfig helpers / yarnpnp 纯助手），bundler import 路径。
+import (
+	"encoding/json"
+	"os"
+	"testing"
+
+	"github.com/evanw/esbuild/internal/ast"
+	"github.com/evanw/esbuild/internal/compat"
+	"github.com/evanw/esbuild/internal/config"
+	"github.com/evanw/esbuild/internal/fs"
+	"github.com/evanw/esbuild/internal/js_lexer"
+	"github.com/evanw/esbuild/internal/js_parser"
+	"github.com/evanw/esbuild/internal/logger"
+)
+
+type rlRow struct { Fn string `json:"fn"`; Arg map[string]interface{} `json:"arg"`; Out interface{} `json:"out"` }
+
+func rlPjEntry(e pjEntry) interface{} {
+	m := map[string]interface{}{"k": int(e.kind), "s": e.strData, "tok": []interface{}{e.firstToken.Loc.Start, e.firstToken.Len}}
+	arr := []interface{}{}; for _, x := range e.arrData { arr = append(arr, rlPjEntry(x)) }; m["a"] = arr
+	mp := []interface{}{}; for _, p := range e.mapData { mp = append(mp, []interface{}{p.key, rlPjEntry(p.value), []interface{}{p.keyRange.Loc.Start, p.keyRange.Len}}) }; m["m"] = mp
+	ex := []string{}; for _, p := range e.expansionKeys { ex = append(ex, p.key) }; m["e"] = ex
+	return m
+}
+
+func TestTmpGenResolverLeaves(t *testing.T) {
+	var out []rlRow
+	add := func(fn string, arg map[string]interface{}, o interface{}) { out = append(out, rlRow{fn, arg, o}) }
+
+	// parseImportsExportsMap over JSON sources
+	srcs := []string{
+		`{"import":"./a.js","require":"./b.js"}`,
+		`{"./a":"./x.js","./b/*":"./y/*.js","./dir/":"./d/"}`,
+		`["./a.js",null]`,
+		`"main.js"`,
+		`null`,
+		`{"./a":{"import":"./i.js","default":"./d.js"}}`,
+		`[["a","./x.js"],null]`,
+		`{"./a/":"./x/","./a/*":"./y/*"}`,
+		`{"./x":true}`,
+	}
+	for _, src := range srcs {
+		log := logger.NewDeferLog(logger.DeferLogNoVerboseOrDebug, nil)
+		source := logger.Source{Contents: src, KeyPath: logger.Path{Text: "/pkg/package.json"}}
+		expr, ok := js_parser.ParseJSON(log, source, js_parser.JSONOptions{Flavor: js_lexer.TSConfigJSON})
+		var o interface{}
+		if !ok { o = map[string]interface{}{"nil": true, "msgs": []interface{}{}} } else {
+			m := parseImportsExportsMap(source, log, expr, "exports", logger.Loc{})
+			if m == nil { o = map[string]interface{}{"nil": true, "msgs": []interface{}{}} } else {
+				msgs := []interface{}{}; for _, mm := range log.Done() { msgs = append(msgs, mm.Data.Text) }
+				o = map[string]interface{}{"root": rlPjEntry(m.root), "key": m.propertyKey, "msgs": msgs}
+			}
+		}
+		add("parseImportsExportsMap", map[string]interface{}{"src": src}, o)
+	}
+
+	// checkForBuiltInNodeModules
+	for _, c := range []struct{ path string; platform config.Platform; format config.Format; kind ast.ImportKind; feat compat.JSFeature }{
+		{"fs", config.PlatformNode, config.FormatPreserve, ast.ImportStmt, 0},
+		{"node:fs", config.PlatformNode, config.FormatPreserve, ast.ImportStmt, 0},
+		{"node:fs", config.PlatformNode, config.FormatCommonJS, ast.ImportStmt, 0},
+		{"node:fs", config.PlatformNode, config.FormatPreserve, ast.ImportStmt, compat.NodeColonPrefixImport},
+		{"node:fs", config.PlatformNode, config.FormatCommonJS, ast.ImportRequire, compat.NodeColonPrefixRequire},
+		{"node:unknown", config.PlatformNode, config.FormatPreserve, ast.ImportStmt, 0},
+		{"fs", config.PlatformBrowser, config.FormatPreserve, ast.ImportStmt, 0},
+		{"unknown", config.PlatformNode, config.FormatPreserve, ast.ImportStmt, 0},
+	} {
+		log := logger.NewDeferLog(logger.DeferLogNoVerboseOrDebug, nil)
+		r := resolverQuery{Resolver: &Resolver{log: log}, kind: c.kind}
+		r.options = config.Options{}
+		r.options.Platform = c.platform
+		r.options.OutputFormat = c.format
+		r.options.UnsupportedJSFeatures = c.feat
+		pp, ok, se := r.checkForBuiltInNodeModules(c.path)
+		var side bool = se != nil
+		add("checkForBuiltInNodeModules", map[string]interface{}{"path": c.path, "platform": int(c.platform), "format": int(c.format), "kind": int(c.kind), "feat": int(c.feat)},
+			[]interface{}{pp.Primary.Text, pp.IsExternal, ok, side})
+	}
+
+	// applyExtendedConfig / TSAlwaysStrictOrStrict
+	{
+		base := TSConfigJSON{BaseURL: ptrStr("/base"), BaseURLForPaths: "/base", tsTargetKey: tsTargetKey{LowerValue: "es2020", Range: logger.Range{Loc: logger.Loc{Start: 1}, Len: 6}},
+			TSAlwaysStrict: &config.TSAlwaysStrict{Name: "alwaysStrict", Value: true}, TSStrict: &config.TSAlwaysStrict{Name: "strict", Value: false}}
+		derived := TSConfigJSON{AbsPath: "/derived"}
+		derived.applyExtendedConfig(base)
+		o := []interface{}{derived.BaseURL, derived.BaseURLForPaths, derived.tsTargetKey.LowerValue, derived.tsTargetKey.Range.Loc.Start,
+			derived.TSAlwaysStrict != nil && derived.TSAlwaysStrict.Value, derived.TSStrict != nil && derived.TSStrict.Value}
+		add("applyExtendedConfig", map[string]interface{}{}, o)
+		// TSAlwaysStrictOrStrict
+		d2 := TSConfigJSON{TSStrict: &config.TSAlwaysStrict{Value: false}}
+		v := d2.TSAlwaysStrictOrStrict(); add("TSAlwaysStrictOrStrict", map[string]interface{}{"which":"strict"}, v != nil && v.Value)
+		d3 := TSConfigJSON{TSAlwaysStrict: &config.TSAlwaysStrict{Value: true}, TSStrict: &config.TSAlwaysStrict{Value: false}}
+		v2 := d3.TSAlwaysStrictOrStrict(); add("TSAlwaysStrictOrStrict", map[string]interface{}{"which":"alwaysStrict"}, v2 != nil && v2.Value)
+		d4 := TSConfigJSON{}; add("TSAlwaysStrictOrStrict", map[string]interface{}{"which":"none"}, d4.TSAlwaysStrictOrStrict() == nil)
+	}
+
+	// getDependencyTarget over JSON expressions
+	deps := []string{`null`, `"ref"`, `["ident","ref"]`, `["ident"]`, `123`, `{}`}
+	for _, d := range deps {
+		log := logger.NewDeferLog(logger.DeferLogNoVerboseOrDebug, nil)
+		src := logger.Source{Contents: d}
+		expr, ok := js_parser.ParseJSON(log, src, js_parser.JSONOptions{})
+		if !ok { add("getDependencyTarget", map[string]interface{}{"json":d}, []interface{}{false,"","",0,0}); continue }
+		v, ok := getDependencyTarget(expr)
+		add("getDependencyTarget", map[string]interface{}{"json":d}, []interface{}{ok, v.ident, v.reference, v.span.Loc.Start, v.span.Len})
+	}
+
+	// yarnpnp: getPackage / resolveViaFallback / findLocator over constructed pnpData
+	{
+		ident := func(i, r string) pnpIdentAndReference { return pnpIdentAndReference{ident: i, reference: r} }
+		manifest := &pnpData{
+			absDirPath: "/repo",
+			packageRegistryData: map[string]map[string]pnpPackage{
+				"": {"": {packageDependencies: map[string]pnpIdentAndReference{"react": ident("react", "18.0.0")}}},
+				"react": {"18.0.0": {packageLocation: "./node_modules/react"}},
+			},
+			fallbackPool: map[string]pnpIdentAndReference{"lodash": ident("lodash", "4.0.0")},
+			packageLocatorsByLocations: map[string]pnpPackageLocatorByLocation{
+				"./node_modules/react/": {locator: ident("react", "18.0.0")},
+				"./node_modules/old/": {locator: ident("old", "1.0.0"), discardFromLookup: true},
+			},
+		}
+		rq := func() resolverQuery { return resolverQuery{Resolver: &Resolver{fs: fs.MockFS(map[string]string{}, fs.MockUnix, "/repo")}, debugLogs: &debugLogs{}} }
+		for _, pair := range [][2]string{{"", ""}, {"react", "18.0.0"}, {"react", "nope"}, {"missing", "x"}} {
+			r := rq(); pkg, ok := r.getPackage(manifest, pair[0], pair[1])
+			add("getPackage", map[string]interface{}{"ident": pair[0], "ref": pair[1]}, []interface{}{ok, pkg.packageLocation, len(pkg.packageDependencies)})
+		}
+		for _, id := range []string{"react", "lodash", "unknown"} {
+			r := rq(); v, ok := r.resolveViaFallback(manifest, id)
+			add("resolveViaFallback", map[string]interface{}{"ident": id}, []interface{}{ok, v.ident, v.reference})
+		}
+		for _, u := range []string{"/repo/node_modules/react/index.js", "/repo/node_modules/old/x.js", "/repo/other/x.js"} {
+			r := rq(); v, ok := r.findLocator(manifest, u)
+			add("findLocator", map[string]interface{}{"url": u}, []interface{}{ok, v.ident, v.reference})
+		}
+	}
+
+	b, err := json.MarshalIndent(out, "", "  ")
+	if err != nil { t.Fatal(err) }
+	if err := os.WriteFile("/root/port/testdata/resolver-leaves-go.json", b, 0644); err != nil { t.Fatal(err) }
+	t.Logf("wrote %d rows", len(out))
+}
+func ptrStr(s string) *string { return &s }

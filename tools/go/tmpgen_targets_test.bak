@@ -1,0 +1,37 @@
+package cli
+
+import (
+	"encoding/json"
+	"os"
+	"testing"
+)
+
+type tgrow struct { Name string `json:"name"`; Data json.RawMessage `json:"data"` }
+type tgfix struct { Rows []tgrow `json:"rows"` }
+
+func TestTmpGenTargets(t *testing.T) {
+	fx := tgfix{}
+	cases := []struct{name string; targets []string}{
+		{"esnext", []string{"esnext"}},
+		{"es2015-alias", []string{"es6"}},
+		{"multi", []string{"es2020", "node18"}},
+		{"engines", []string{"chrome90", "safari14"}},
+		{"missing-version", []string{"chrome"}},
+		{"invalid", []string{"bogus"}},
+		{"case-insensitive", []string{"ES2022"}},
+	}
+	for _, c := range cases {
+		target, engines, err := parseTargets(c.targets, "--target")
+		engs := []map[string]interface{}{}
+		for _, e := range engines { engs = append(engs, map[string]interface{}{"name": int(e.Name), "version": e.Version}) }
+		errText, errNote := "", ""
+		if err != nil { errText, errNote = err.Text, err.Note }
+		b, _ := json.Marshal(map[string]interface{}{
+			"target": int(target), "engines": engs, "errText": errText, "errNote": errNote,
+		})
+		fx.Rows = append(fx.Rows, tgrow{c.name, b})
+	}
+	bts, _ := json.MarshalIndent(fx, "", "  ")
+	if err := os.WriteFile("/root/port/testdata/targets-go.json", bts, 0644); err != nil { t.Fatal(err) }
+	t.Logf("wrote %d rows bytes=%d", len(fx.Rows), len(bts))
+}

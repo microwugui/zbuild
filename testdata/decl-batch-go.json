@@ -1,0 +1,529 @@
+[
+  {
+    "src": "color: red;",
+    "out": {
+      "index": 4,
+      "msgs": [],
+      "rule": {
+        "important": false,
+        "key": 93,
+        "t": "decl",
+        "text": "color",
+        "val": [
+          [
+            29,
+            "red",
+            1
+          ]
+        ]
+      }
+    }
+  },
+  {
+    "src": "color: red;",
+    "minify": true,
+    "out": {
+      "index": 4,
+      "msgs": [],
+      "rule": {
+        "important": false,
+        "key": 93,
+        "t": "decl",
+        "text": "color",
+        "val": [
+          [
+            29,
+            "red",
+            0
+          ]
+        ]
+      }
+    }
+  },
+  {
+    "src": "color : red !important;",
+    "out": {
+      "index": 8,
+      "msgs": [],
+      "rule": {
+        "important": true,
+        "key": 93,
+        "t": "decl",
+        "text": "color",
+        "val": [
+          [
+            29,
+            "red",
+            1
+          ]
+        ]
+      }
+    }
+  },
+  {
+    "src": "color : red !important;",
+    "minify": true,
+    "out": {
+      "index": 8,
+      "msgs": [],
+      "rule": {
+        "important": true,
+        "key": 93,
+        "t": "decl",
+        "text": "color",
+        "val": [
+          [
+            29,
+            "red",
+            0
+          ]
+        ]
+      }
+    }
+  },
+  {
+    "src": "color:red ! important;",
+    "out": {
+      "index": 7,
+      "msgs": [],
+      "rule": {
+        "important": true,
+        "key": 93,
+        "t": "decl",
+        "text": "color",
+        "val": [
+          [
+            29,
+            "red",
+            1
+          ]
+        ]
+      }
+    }
+  },
+  {
+    "src": "color:red ! important;",
+    "minify": true,
+    "out": {
+      "index": 7,
+      "msgs": [],
+      "rule": {
+        "important": true,
+        "key": 93,
+        "t": "decl",
+        "text": "color",
+        "val": [
+          [
+            29,
+            "red",
+            0
+          ]
+        ]
+      }
+    }
+  },
+  {
+    "src": "--x: {a: b};",
+    "out": {
+      "index": 9,
+      "msgs": [],
+      "rule": {
+        "important": false,
+        "key": 0,
+        "t": "decl",
+        "text": "--x",
+        "val": [
+          [
+            31,
+            "{",
+            1
+          ]
+        ]
+      }
+    }
+  },
+  {
+    "src": "--x: {a: b};",
+    "minify": true,
+    "out": {
+      "index": 9,
+      "msgs": [],
+      "rule": {
+        "important": false,
+        "key": 0,
+        "t": "decl",
+        "text": "--x",
+        "val": [
+          [
+            31,
+            "{",
+            1
+          ]
+        ]
+      }
+    }
+  },
+  {
+    "src": "--x: 1 ;",
+    "out": {
+      "index": 5,
+      "msgs": [],
+      "rule": {
+        "important": false,
+        "key": 0,
+        "t": "decl",
+        "text": "--x",
+        "val": [
+          [
+            30,
+            "1",
+            3
+          ]
+        ]
+      }
+    }
+  },
+  {
+    "src": "--x: 1 ;",
+    "minify": true,
+    "out": {
+      "index": 5,
+      "msgs": [],
+      "rule": {
+        "important": false,
+        "key": 0,
+        "t": "decl",
+        "text": "--x",
+        "val": [
+          [
+            30,
+            "1",
+            3
+          ]
+        ]
+      }
+    }
+  },
+  {
+    "src": "foo: bar;",
+    "out": {
+      "index": 4,
+      "msgs": [],
+      "rule": {
+        "important": false,
+        "key": 0,
+        "t": "decl",
+        "text": "foo",
+        "val": [
+          [
+            29,
+            "bar",
+            1
+          ]
+        ]
+      }
+    }
+  },
+  {
+    "src": "foo: bar;",
+    "minify": true,
+    "out": {
+      "index": 4,
+      "msgs": [],
+      "rule": {
+        "important": false,
+        "key": 0,
+        "t": "decl",
+        "text": "foo",
+        "val": [
+          [
+            29,
+            "bar",
+            0
+          ]
+        ]
+      }
+    }
+  },
+  {
+    "src": "colour: red;",
+    "out": {
+      "index": 4,
+      "msgs": [],
+      "rule": {
+        "important": false,
+        "key": 0,
+        "t": "decl",
+        "text": "colour",
+        "val": [
+          [
+            29,
+            "red",
+            1
+          ]
+        ]
+      }
+    }
+  },
+  {
+    "src": "colour: red;",
+    "minify": true,
+    "out": {
+      "index": 4,
+      "msgs": [],
+      "rule": {
+        "important": false,
+        "key": 0,
+        "t": "decl",
+        "text": "colour",
+        "val": [
+          [
+            29,
+            "red",
+            0
+          ]
+        ]
+      }
+    }
+  },
+  {
+    "src": "color red;",
+    "out": {
+      "index": 3,
+      "msgs": [
+        "1|Expected \":\""
+      ],
+      "rule": {
+        "t": "bad",
+        "val": [
+          [
+            29,
+            "color",
+            2
+          ],
+          [
+            29,
+            "red",
+            1
+          ]
+        ]
+      }
+    }
+  },
+  {
+    "src": "color red;",
+    "minify": true,
+    "out": {
+      "index": 3,
+      "msgs": [
+        "1|Expected \":\""
+      ],
+      "rule": {
+        "t": "bad",
+        "val": [
+          [
+            29,
+            "color",
+            2
+          ],
+          [
+            29,
+            "red",
+            1
+          ]
+        ]
+      }
+    }
+  },
+  {
+    "src": ";",
+    "out": {
+      "index": 0,
+      "msgs": [],
+      "rule": {
+        "t": "bad",
+        "val": []
+      }
+    }
+  },
+  {
+    "src": ";",
+    "minify": true,
+    "out": {
+      "index": 0,
+      "msgs": [],
+      "rule": {
+        "t": "bad",
+        "val": []
+      }
+    }
+  },
+  {
+    "src": "@x;",
+    "out": {
+      "index": 1,
+      "msgs": [],
+      "rule": {
+        "t": "bad",
+        "val": [
+          [
+            1,
+            "x",
+            0
+          ]
+        ]
+      }
+    }
+  },
+  {
+    "src": "@x;",
+    "minify": true,
+    "out": {
+      "index": 1,
+      "msgs": [],
+      "rule": {
+        "t": "bad",
+        "val": [
+          [
+            1,
+            "x",
+            0
+          ]
+        ]
+      }
+    }
+  },
+  {
+    "src": "width: calc(1 + 2);",
+    "out": {
+      "index": 10,
+      "msgs": [],
+      "rule": {
+        "important": false,
+        "key": 321,
+        "t": "decl",
+        "text": "width",
+        "val": [
+          [
+            27,
+            "calc",
+            1
+          ]
+        ]
+      }
+    }
+  },
+  {
+    "src": "width: calc(1 + 2);",
+    "minify": true,
+    "out": {
+      "index": 10,
+      "msgs": [],
+      "rule": {
+        "important": false,
+        "key": 321,
+        "t": "decl",
+        "text": "width",
+        "val": [
+          [
+            30,
+            "3",
+            0
+          ]
+        ]
+      }
+    }
+  },
+  {
+    "src": "color: rgb(1, 2, 3) !IMPORTANT;",
+    "out": {
+      "index": 15,
+      "msgs": [],
+      "rule": {
+        "important": true,
+        "key": 93,
+        "t": "decl",
+        "text": "color",
+        "val": [
+          [
+            27,
+            "rgb",
+            1
+          ]
+        ]
+      }
+    }
+  },
+  {
+    "src": "color: rgb(1, 2, 3) !IMPORTANT;",
+    "minify": true,
+    "out": {
+      "index": 15,
+      "msgs": [],
+      "rule": {
+        "important": true,
+        "key": 93,
+        "t": "decl",
+        "text": "color",
+        "val": [
+          [
+            27,
+            "rgb",
+            0
+          ]
+        ]
+      }
+    }
+  },
+  {
+    "src": "margin : 0 auto;",
+    "out": {
+      "index": 7,
+      "msgs": [],
+      "rule": {
+        "important": false,
+        "key": 189,
+        "t": "decl",
+        "text": "margin",
+        "val": [
+          [
+            30,
+            "0",
+            3
+          ],
+          [
+            29,
+            "auto",
+            1
+          ]
+        ]
+      }
+    }
+  },
+  {
+    "src": "margin : 0 auto;",
+    "minify": true,
+    "out": {
+      "index": 7,
+      "msgs": [],
+      "rule": {
+        "important": false,
+        "key": 189,
+        "t": "decl",
+        "text": "margin",
+        "val": [
+          [
+            30,
+            "0",
+            2
+          ],
+          [
+            29,
+            "auto",
+            1
+          ]
+        ]
+      }
+    }
+  }
+]

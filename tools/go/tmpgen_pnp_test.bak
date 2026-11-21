@@ -1,0 +1,143 @@
+package resolver
+
+// 第 162 批 Go 探针：compileYarnPnPData + resolveToUnqualified 逐字节固化（pnpData 底座一次搭厚）。
+import (
+	"encoding/json"
+	"os"
+	"sort"
+	"testing"
+
+	"github.com/evanw/esbuild/internal/config"
+	"github.com/evanw/esbuild/internal/fs"
+	"github.com/evanw/esbuild/internal/js_lexer"
+	"github.com/evanw/esbuild/internal/js_parser"
+	"github.com/evanw/esbuild/internal/logger"
+)
+
+type pnpRow struct {
+	Fn  string                 `json:"fn"`
+	Arg map[string]interface{} `json:"arg"`
+	Out interface{}            `json:"out"`
+}
+
+func pnpRng(r logger.Range) interface{} { return []interface{}{r.Loc.Start, r.Len} }
+func pnpIar(a pnpIdentAndReference) interface{} { return []interface{}{a.ident, a.reference, pnpRng(a.span)} }
+
+func dumpPnp(d *pnpData) interface{} {
+	if d == nil { return nil }
+	// fallbackExclusionList sorted
+	var fel interface{}
+	if d.fallbackExclusionList != nil {
+		keys := make([]string, 0, len(d.fallbackExclusionList)); for k := range d.fallbackExclusionList { keys = append(keys, k) }; sort.Strings(keys)
+		arr := []interface{}{}
+		for _, k := range keys {
+			refs := make([]string, 0, len(d.fallbackExclusionList[k])); for r := range d.fallbackExclusionList[k] { refs = append(refs, r) }; sort.Strings(refs)
+			arr = append(arr, []interface{}{k, refs})
+		}
+		fel = arr
+	}
+	// fallbackPool sorted
+	var fp interface{}
+	if d.fallbackPool != nil {
+		keys := make([]string, 0, len(d.fallbackPool)); for k := range d.fallbackPool { keys = append(keys, k) }; sort.Strings(keys)
+		arr := []interface{}{}; for _, k := range keys { arr = append(arr, []interface{}{k, pnpIar(d.fallbackPool[k])}) }
+		fp = arr
+	}
+	// packageRegistryData sorted
+	var prd interface{}
+	if d.packageRegistryData != nil {
+		keys := make([]string, 0, len(d.packageRegistryData)); for k := range d.packageRegistryData { keys = append(keys, k) }; sort.Strings(keys)
+		arr := []interface{}{}
+		for _, k := range keys {
+			inner := d.packageRegistryData[k]
+			rkeys := make([]string, 0, len(inner)); for r := range inner { rkeys = append(rkeys, r) }; sort.Strings(rkeys)
+			innerArr := []interface{}{}
+			for _, r := range rkeys {
+				p := inner[r]
+				deps := make([]string, 0, len(p.packageDependencies)); for dep := range p.packageDependencies { deps = append(deps, dep) }; sort.Strings(deps)
+				depsArr := []interface{}{}; for _, dep := range deps { depsArr = append(depsArr, []interface{}{dep, pnpIar(p.packageDependencies[dep])}) }
+				innerArr = append(innerArr, []interface{}{r, []interface{}{p.packageLocation, depsArr, pnpRng(p.packageDependenciesRange), p.discardFromLookup}})
+			}
+			arr = append(arr, []interface{}{k, innerArr})
+		}
+		prd = arr
+	}
+	// packageLocatorsByLocations sorted
+	var plbl interface{}
+	if d.packageLocatorsByLocations != nil {
+		keys := make([]string, 0, len(d.packageLocatorsByLocations)); for k := range d.packageLocatorsByLocations { keys = append(keys, k) }; sort.Strings(keys)
+		arr := []interface{}{}; for _, k := range keys { e := d.packageLocatorsByLocations[k]; arr = append(arr, []interface{}{k, pnpIar(e.locator), e.discardFromLookup}) }
+		plbl = arr
+	}
+	ignorePattern := ""
+	if d.ignorePatternData != nil { ignorePattern = d.ignorePatternData.String() }
+	return map[string]interface{}{
+		"absPath": d.absPath, "absDirPath": d.absDirPath,
+		"enableTopLevelFallback": d.enableTopLevelFallback,
+		"fallbackExclusionList": fel, "fallbackPool": fp,
+		"ignorePatternData": ignorePattern, "invalidIgnorePatternData": d.invalidIgnorePatternData,
+		"packageRegistryData": prd, "packageLocatorsByLocations": plbl,
+	}
+}
+
+func dumpResult(r pnpResult) interface{} {
+	return []interface{}{int(r.status), r.pkgDirPath, r.pkgIdent, r.pkgSubpath, r.errorIdent, pnpRng(r.errorRange)}
+}
+
+func TestTmpGenPnp(t *testing.T) {
+	var out []pnpRow
+	log := logger.NewDeferLog(logger.DeferLogAll, nil)
+
+	manifests := []struct{ name, contents string }{
+		{"simple", `{"enableTopLevelFallback":false}`},
+		{"fallback", `{"enableTopLevelFallback":true,"fallbackExclusionList":[["pkgA",["r1","r2"]]],"fallbackPool":[["util",null],["left-pad","pad@1"]]}`},
+		{"registry", `{"packageRegistryData":[
+			[null,[[null,{"packageLocation":"./","packageDependencies":[["depA","depA@1"],["depB",["aliasB","depB@2"]],["peer",null]],"discardFromLookup":false}]]],
+			["depA",[["depA@1",{"packageLocation":"./node_modules/depA","packageDependencies":[],"discardFromLookup":true}]]],
+			["aliasB",[["depB@2",{"packageLocation":"./node_modules/depB","packageDependencies":[]}]]]
+		]}`},
+		{"ignore", `{"ignorePatternData":"^/ignored/(?!\\.)foo"}`},
+		{"badpattern", `{"ignorePatternData":"[invalid"}`},
+	}
+	manifestByName := map[string]string{}
+	for _, m := range manifests { manifestByName[m.name] = m.contents }
+
+	build := func(name, contents string) *pnpData {
+		source := logger.Source{Contents: contents, KeyPath: logger.Path{Text: "/cache/install-state.gz.js"}}
+		json, ok := js_parser.ParseJSON(log, source, js_parser.JSONOptions{Flavor: js_lexer.TSConfigJSON})
+		if !ok { t.Fatalf("parse %s failed", name) }
+		return compileYarnPnPData("/cache/.pnp.js", "/cache", json, source)
+	}
+
+	// compileYarnPnPData cases
+	for _, m := range manifests {
+		d := build(m.name, m.contents)
+		out = append(out, pnpRow{Fn: "compileYarnPnPData", Arg: map[string]interface{}{"name": m.name, "contents": m.contents}, Out: dumpPnp(d)})
+	}
+
+	// resolveToUnqualified cases (reuse registry manifest)
+	fsObj := fs.MockFS(nil, fs.MockUnix, "/")
+	d := build("registry", manifestByName["registry"])
+	resolveCases := []struct{ spec, parent string }{
+		{"depA", "/cache/index.js"},          // success via top-level
+		{"aliasB", "/cache/index.js"},         // aliased package
+		{"missing", "/cache/index.js"},        // dependency not found
+		{"peer", "/cache/index.js"},           // unfulfilled peer
+		{"depA/sub/path", "/cache/index.js"},  // success with subpath
+		{"depA", "/nowhere/index.js"},         // parent locator not found -> skipped
+	}
+	for _, c := range resolveCases {
+		dl := &debugLogs{}
+		r := resolverQuery{Resolver: &Resolver{log: log}, debugLogs: dl}
+		r.options = config.Options{Platform: config.PlatformNode}
+		r.fs = fsObj
+		res := r.resolveToUnqualified(c.spec, c.parent, d)
+		notes := []string{}; for _, n := range dl.notes { notes = append(notes, n.Text) }
+		out = append(out, pnpRow{Fn: "resolveToUnqualified", Arg: map[string]interface{}{"spec": c.spec, "parent": c.parent}, Out: []interface{}{dumpResult(res), notes}})
+	}
+
+	b, err := json.Marshal(out)
+	if err != nil { t.Fatal(err) }
+	if err := os.WriteFile("/root/port/testdata/pnp-go.json", b, 0644); err != nil { t.Fatal(err) }
+	t.Logf("wrote %d cases", len(out))
+}

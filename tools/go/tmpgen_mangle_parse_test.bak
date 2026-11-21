@@ -1,0 +1,28 @@
+package cli
+// 第 103 轮 Go 探针：parseMangleCache 逐字节（文件缺失 / 合法对象 / false / 非法值 / 非对象）。
+import ("encoding/json";"io";"os";"testing";"github.com/evanw/esbuild/internal/fs")
+type mpRow struct { Name string `json:"name"`; Cache map[string]interface{} `json:"cache"`; Order []string `json:"order"`; Err string `json:"err"` }
+func TestTmpMangleParse103(t *testing.T){
+  files:=map[string]string{
+    "/valid.json":`{"foo":"a","bar":"b"}`,
+    "/false.json":`{"foo":false,"bar":"x"}`,
+    "/badval.json":`{"foo":true}`,
+    "/nonobj.json":`[1,2,3]`,
+  }
+  mfs:=fs.MockFS(files,fs.MockUnix,"/")
+  rows:=[]mpRow{}
+  probe:=func(name,path string){
+    old:=os.Stderr; r,w,_:=os.Pipe(); os.Stderr=w
+    cache,order:=parseMangleCache([]string{},mfs,path)
+    w.Close(); os.Stderr=old; eb,_:=io.ReadAll(r)
+    rows=append(rows,mpRow{name,cache,order,string(eb)})
+  }
+  probe("missing","/nope.json")
+  probe("valid","/valid.json")
+  probe("false","/false.json")
+  probe("badval","/badval.json")
+  probe("nonobj","/nonobj.json")
+  out,_:=json.MarshalIndent(rows,"","  ")
+  if err:=os.WriteFile("/root/port/testdata/mangle-parse-go.json",out,0644);err!=nil{t.Fatal(err)}
+  t.Logf("wrote %d rows bytes=%d",len(rows),len(out))
+}

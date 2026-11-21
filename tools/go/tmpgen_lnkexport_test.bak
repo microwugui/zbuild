@@ -1,0 +1,170 @@
+package linker
+
+// 第 177 批 Go 探针：linker export/wrap 图遍历簇
+// (recursivelyWrapDependencies / hasDynamicExportsDueToExportStar / addExportsForExportStar)
+// 逐字节固化（构造 LinkerGraph + JSRepr 验图状态变更）。
+import (
+	"encoding/json"
+	"fmt"
+	"os"
+	"sort"
+	"testing"
+
+	"github.com/evanw/esbuild/internal/ast"
+	"github.com/evanw/esbuild/internal/config"
+	"github.com/evanw/esbuild/internal/graph"
+	"github.com/evanw/esbuild/internal/js_ast"
+	"github.com/evanw/esbuild/internal/logger"
+	"github.com/evanw/esbuild/internal/runtime"
+)
+
+type leRow struct {
+	Fn  string                 `json:"fn"`
+	Arg map[string]interface{} `json:"arg"`
+	Out interface{}            `json:"out"`
+}
+
+func leRef(s, i uint32) ast.Ref { return ast.Ref{SourceIndex: s, InnerIndex: i} }
+
+// 构造一个最小 linkerContext：n 个文件，每个文件有 exportsKind / exportStars(目标索引列表,-1=external) / namedExports / imports。
+func leBuild(n int, kinds []js_ast.ExportsKind, exportStars [][]int, named [][]string, entryPoints []uint32) *linkerContext {
+	c := &linkerContext{}
+	c.graph.Files = make([]graph.LinkerFile, n)
+	for si := 0; si < n; si++ {
+		syms := []ast.Symbol{{OriginalName: "runtime", Link: ast.InvalidRef}}
+		for _, nm := range named[si] { syms = append(syms, ast.Symbol{OriginalName: nm, Link: ast.InvalidRef, Kind: ast.SymbolConst}) }
+		records := []ast.ImportRecord{}
+		starIdx := []uint32{}
+		for _, tgt := range exportStars[si] {
+			r := ast.ImportRecord{Kind: ast.ImportStmt}
+			if tgt >= 0 { r.SourceIndex = ast.MakeIndex32(uint32(tgt)) }
+			records = append(records, r)
+			starIdx = append(starIdx, uint32(len(records)-1))
+		}
+		namedExports := map[string]js_ast.NamedExport{}
+		for k, nm := range named[si] { namedExports[nm] = js_ast.NamedExport{Ref: leRef(uint32(si), uint32(k+1)), AliasLoc: logger.Loc{Start: int32(k+1)}} }
+		repr := &graph.JSRepr{AST: js_ast.AST{
+			Symbols: syms, ExportsKind: kinds[si], ImportRecords: records, ExportStarImportRecords: starIdx,
+			NamedExports: namedExports, ModuleScope: &js_ast.Scope{},
+		}}
+		repr.Meta.ImportsToBind = map[ast.Ref]graph.ImportData{}
+		repr.Meta.ResolvedExports = map[string]graph.ExportData{}
+		c.graph.Files[si].InputFile.Repr = repr
+	}
+	inputs := make([]graph.InputFile, n)
+	for si := 0; si < n; si++ { inputs[si] = c.graph.Files[si].InputFile }
+	reachable := make([]uint32, n)
+	for i := range reachable { reachable[i] = uint32(i) }
+	eps := make([]graph.EntryPoint, len(entryPoints))
+	for i, si := range entryPoints { eps[i] = graph.EntryPoint{SourceIndex: si, OutputPath: fmt.Sprintf("e%d.js", i)} }
+	c.graph = graph.CloneLinkerGraph(inputs, reachable, eps, false)
+	c.options = &config.Options{OutputFormat: config.FormatESModule}
+	return c
+}
+
+func leWrap(c *linkerContext) []interface{} {
+	out := []interface{}{}
+	for si := range c.graph.Files {
+		repr := c.graph.Files[si].InputFile.Repr.(*graph.JSRepr)
+		out = append(out, []interface{}{int(repr.Meta.Wrap), repr.Meta.DidWrapDependencies})
+	}
+	return out
+}
+func leKinds(c *linkerContext) []int {
+	out := []int{}
+	for si := range c.graph.Files {
+		repr := c.graph.Files[si].InputFile.Repr.(*graph.JSRepr)
+		out = append(out, int(repr.AST.ExportsKind))
+	}
+	return out
+}
+func leResolved(c *linkerContext, si int) interface{} {
+	repr := c.graph.Files[si].InputFile.Repr.(*graph.JSRepr)
+	keys := []string{}
+	for k := range repr.Meta.ResolvedExports { keys = append(keys, k) }
+	sort.Strings(keys)
+	out := []interface{}{}
+	for _, k := range keys {
+		d := repr.Meta.ResolvedExports[k]
+		out = append(out, []interface{}{k, d.Ref.SourceIndex, d.Ref.InnerIndex, d.SourceIndex, len(d.PotentiallyAmbiguousExportStarRefs)})
+	}
+	return out
+}
+
+func TestTmpGenLnkExport(t *testing.T) {
+	var out []leRow
+	add := func(fn string, arg map[string]interface{}, o interface{}) { out = append(out, leRow{fn, arg, o}) }
+
+	// ---- recursivelyWrapDependencies ----
+	{
+		// file1 imports file2; file2 is CJS -> both wrapped
+		c := leBuild(3, []js_ast.ExportsKind{js_ast.ExportsESM, js_ast.ExportsESM, js_ast.ExportsCommonJS},
+			[][]int{nil, nil, nil}, [][]string{nil, nil, nil}, []uint32{1})
+		f1 := c.graph.Files[1].InputFile.Repr.(*graph.JSRepr)
+		f1.AST.ImportRecords = []ast.ImportRecord{{Kind: ast.ImportStmt, SourceIndex: ast.MakeIndex32(2)}}
+		c.recursivelyWrapDependencies(1)
+		add("recursivelyWrapDependencies", map[string]interface{}{"name": "cjs-dep"}, leWrap(c))
+	}
+	{
+		// runtime file (index 0) not wrapped
+		c := leBuild(2, []js_ast.ExportsKind{js_ast.ExportsESM, js_ast.ExportsESM}, [][]int{nil, nil}, [][]string{nil, nil}, []uint32{1})
+		c.recursivelyWrapDependencies(runtime.SourceIndex)
+		add("recursivelyWrapDependencies", map[string]interface{}{"name": "runtime"}, leWrap(c))
+	}
+
+	// ---- hasDynamicExportsDueToExportStar ----
+	{
+		// file1 export* from external; not entry -> dynamic
+		c := leBuild(2, []js_ast.ExportsKind{js_ast.ExportsESM, js_ast.ExportsESM}, [][]int{nil, {-1}}, [][]string{nil, nil}, nil)
+		v := map[uint32]bool{}
+		res := c.hasDynamicExportsDueToExportStar(1, v)
+		add("hasDynamicExportsDueToExportStar", map[string]interface{}{"name": "external-nonentry"}, []interface{}{res, leKinds(c)})
+	}
+	{
+		// file1 export* from external; entry + KeepESM -> no dynamic
+		c := leBuild(2, []js_ast.ExportsKind{js_ast.ExportsESM, js_ast.ExportsESM}, [][]int{nil, {-1}}, [][]string{nil, nil}, []uint32{1})
+		c.options.OutputFormat = config.FormatPreserve // KeepESMImportExportSyntax true
+		v := map[uint32]bool{}
+		res := c.hasDynamicExportsDueToExportStar(1, v)
+		add("hasDynamicExportsDueToExportStar", map[string]interface{}{"name": "external-entry-keepesm"}, []interface{}{res, leKinds(c)})
+	}
+	{
+		// file1 export* from file2 which is CJS -> dynamic transitively
+		c := leBuild(3, []js_ast.ExportsKind{js_ast.ExportsESM, js_ast.ExportsESM, js_ast.ExportsCommonJS}, [][]int{nil, {2}, nil}, [][]string{nil, nil, nil}, []uint32{1})
+		v := map[uint32]bool{}
+		res := c.hasDynamicExportsDueToExportStar(1, v)
+		add("hasDynamicExportsDueToExportStar", map[string]interface{}{"name": "cjs-transitive"}, []interface{}{res, leKinds(c)})
+	}
+	{
+		// cycle: file1 export* file2, file2 export* file1 -> terminate
+		c := leBuild(3, []js_ast.ExportsKind{js_ast.ExportsESM, js_ast.ExportsESM, js_ast.ExportsESM}, [][]int{nil, {2}, {1}}, [][]string{nil, nil, nil}, []uint32{1})
+		v := map[uint32]bool{}
+		res := c.hasDynamicExportsDueToExportStar(1, v)
+		add("hasDynamicExportsDueToExportStar", map[string]interface{}{"name": "cycle"}, []interface{}{res, leKinds(c)})
+	}
+
+	// ---- addExportsForExportStar ----
+	{
+		// file1 export* file2 (ESM with export x); entry file1 -> resolved x
+		c := leBuild(4, []js_ast.ExportsKind{js_ast.ExportsESM, js_ast.ExportsESM, js_ast.ExportsESM, js_ast.ExportsESM}, [][]int{nil, {2}, {3}, nil}, [][]string{nil, nil, nil, {"x"}}, []uint32{1})
+		resolved := map[string]graph.ExportData{}
+		f1 := c.graph.Files[1].InputFile.Repr.(*graph.JSRepr)
+		f1.Meta.ResolvedExports = resolved
+		c.addExportsForExportStar(resolved, 1, nil)
+		add("addExportsForExportStar", map[string]interface{}{"name": "chain"}, leResolved(c, 1))
+	}
+	{
+		// file1 export* file2 (CJS) -> ignore (nothing added)
+		c := leBuild(3, []js_ast.ExportsKind{js_ast.ExportsESM, js_ast.ExportsESM, js_ast.ExportsCommonJS}, [][]int{nil, {2}, nil}, [][]string{nil, nil, {"x"}}, []uint32{1})
+		resolved := map[string]graph.ExportData{}
+		f1 := c.graph.Files[1].InputFile.Repr.(*graph.JSRepr)
+		f1.Meta.ResolvedExports = resolved
+		c.addExportsForExportStar(resolved, 1, nil)
+		add("addExportsForExportStar", map[string]interface{}{"name": "cjs-ignored"}, leResolved(c, 1))
+	}
+
+	b, err := json.Marshal(out)
+	if err != nil { t.Fatal(err) }
+	if err := os.WriteFile("/root/port/testdata/lnkexport-go.json", b, 0644); err != nil { t.Fatal(err) }
+	t.Logf("wrote %d cases", len(out))
+}

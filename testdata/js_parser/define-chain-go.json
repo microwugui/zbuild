@@ -1,0 +1,12 @@
+[
+  { "name": "ident-bool", "src": "console.log(DEBUG);", "defines": [["DEBUG", "true"]], "go": "console.log(true);" },
+  { "name": "ident-str", "src": "console.log(VERSION);", "defines": [["VERSION", "\"1.2.3\""]], "go": "console.log(\"1.2.3\");" },
+  { "name": "ident-num", "src": "foo(ANSWER);", "defines": [["ANSWER", "42"]], "go": "foo(42);" },
+  { "name": "dot", "src": "console.log(process.env.NODE_ENV);", "defines": [["process.env.NODE_ENV", "\"prod\""]], "go": "console.log(\"prod\");" },
+  { "name": "index", "src": "console.log(process['env']['X']);", "defines": [["process.env.X", "1"]], "go": "console.log(1);" },
+  { "name": "mixed-chain", "src": "console.log(a.b['c'].d);", "defines": [["a.b.c.d", "99"]], "go": "console.log(99);" },
+  { "name": "no-match", "src": "console.log(process.env.OTHER);", "defines": [["process.env.NODE_ENV", "1"]], "go": "console.log(process.env.OTHER);" },
+  { "name": "dup-dot", "src": "console.log(A.B + A.B);", "defines": [["A.B", "7"]], "go": "console.log(7 + 7);" },
+  { "name": "this-define", "src": "console.log(FLAG);", "defines": [["FLAG", "this"]], "go": "console.log(this);" },
+  { "name": "null-define", "src": "if (X) foo();", "defines": [["X", "null"]], "go": "if (null) foo();" }
+]

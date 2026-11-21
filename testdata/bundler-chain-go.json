@@ -1,0 +1,124 @@
+{
+  "rows": [
+    {
+      "name": "report:defer-cjs",
+      "data": {
+        "errors": [
+          "Bundling deferred imports with the \"cjs\" output format is not supported"
+        ]
+      }
+    },
+    {
+      "name": "report:defer-esm-internal",
+      "data": {
+        "errors": [
+          "Bundling with deferred imports is not supported unless they are external"
+        ]
+      }
+    },
+    {
+      "name": "report:defer-esm-external",
+      "data": {
+        "errors": []
+      }
+    },
+    {
+      "name": "report:source-iife",
+      "data": {
+        "errors": [
+          "Bundling source phase imports with the \"iife\" output format is not supported"
+        ]
+      }
+    },
+    {
+      "name": "report:source-esm-external",
+      "data": {
+        "errors": []
+      }
+    },
+    {
+      "name": "report:eval-ignored",
+      "data": {
+        "errors": []
+      }
+    },
+    {
+      "name": "reachable:empty",
+      "data": {
+        "order": [
+          0
+        ]
+      }
+    },
+    {
+      "name": "reachable:one",
+      "data": {
+        "order": [
+          0,
+          3,
+          2,
+          1
+        ]
+      }
+    },
+    {
+      "name": "reachable:two",
+      "data": {
+        "order": [
+          0,
+          3,
+          2,
+          1
+        ]
+      }
+    },
+    {
+      "name": "reachable:copy-cycle",
+      "data": {
+        "order": [
+          0,
+          4
+        ]
+      }
+    },
+    {
+      "name": "reachable:isolated",
+      "data": {
+        "order": [
+          0,
+          5
+        ]
+      }
+    },
+    {
+      "name": "metadata:empty",
+      "data": {
+        "json": "{\n  \"inputs\": {\n  },\n  \"outputs\": {\n  }\n}\n"
+      }
+    },
+    {
+      "name": "metadata:one-input",
+      "data": {
+        "json": "{\n  \"inputs\": {\n    \"./a.js\": {\"bytes\": 10}\n  },\n  \"outputs\": {\n  }\n}\n"
+      }
+    },
+    {
+      "name": "metadata:with-output",
+      "data": {
+        "json": "{\n  \"inputs\": {\n    \"./a.js\": {\"bytes\": 10}\n  },\n  \"outputs\": {\n    \"../../../dist/out.js\": \"./out.js\": {\"bytes\": 20}\n  }\n}\n"
+      }
+    },
+    {
+      "name": "metadata:minified",
+      "data": {
+        "json": "{\"inputs\":{\"./a.js\": {\"bytes\": 10}},\"outputs\":{\"../../../dist/out.js\":\"./out.js\": {\"bytes\": 20}}}\n"
+      }
+    },
+    {
+      "name": "metadata:dup-output",
+      "data": {
+        "json": "{\n  \"inputs\": {\n  },\n  \"outputs\": {\n    \"../../../dist/out.js\": A\n  }\n}\n"
+      }
+    }
+  ]
+}

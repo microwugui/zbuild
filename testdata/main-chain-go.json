@@ -1,0 +1,3012 @@
+[
+  {
+    "src": "color: red;",
+    "minify": false,
+    "feature": 0,
+    "out": {
+      "msgs": [
+        "Expected identifier but found \";\""
+      ],
+      "rules": [
+        {
+          "imp": false,
+          "k": "color",
+          "t": "decl",
+          "v": [
+            "red"
+          ]
+        },
+        {
+          "t": "other"
+        }
+      ]
+    }
+  },
+  {
+    "src": "color: red;",
+    "minify": true,
+    "feature": 0,
+    "out": {
+      "msgs": [
+        "Expected identifier but found \";\""
+      ],
+      "rules": [
+        {
+          "imp": false,
+          "k": "color",
+          "t": "decl",
+          "v": [
+            "red"
+          ]
+        },
+        {
+          "t": "other"
+        }
+      ]
+    }
+  },
+  {
+    "src": "color: red;",
+    "minify": false,
+    "feature": 1,
+    "out": {
+      "msgs": [
+        "Expected identifier but found \";\""
+      ],
+      "rules": [
+        {
+          "imp": false,
+          "k": "color",
+          "t": "decl",
+          "v": [
+            "red"
+          ]
+        },
+        {
+          "t": "other"
+        }
+      ]
+    }
+  },
+  {
+    "src": "color: red;",
+    "minify": true,
+    "feature": 1,
+    "out": {
+      "msgs": [
+        "Expected identifier but found \";\""
+      ],
+      "rules": [
+        {
+          "imp": false,
+          "k": "color",
+          "t": "decl",
+          "v": [
+            "red"
+          ]
+        },
+        {
+          "t": "other"
+        }
+      ]
+    }
+  },
+  {
+    "src": "color: red;",
+    "minify": false,
+    "feature": 2,
+    "out": {
+      "msgs": [
+        "Expected identifier but found \";\""
+      ],
+      "rules": [
+        {
+          "imp": false,
+          "k": "color",
+          "t": "decl",
+          "v": [
+            "red"
+          ]
+        },
+        {
+          "t": "other"
+        }
+      ]
+    }
+  },
+  {
+    "src": "color: red;",
+    "minify": true,
+    "feature": 2,
+    "out": {
+      "msgs": [
+        "Expected identifier but found \";\""
+      ],
+      "rules": [
+        {
+          "imp": false,
+          "k": "color",
+          "t": "decl",
+          "v": [
+            "red"
+          ]
+        },
+        {
+          "t": "other"
+        }
+      ]
+    }
+  },
+  {
+    "src": "color: red;",
+    "minify": false,
+    "feature": 8,
+    "out": {
+      "msgs": [
+        "Expected identifier but found \";\""
+      ],
+      "rules": [
+        {
+          "imp": false,
+          "k": "color",
+          "t": "decl",
+          "v": [
+            "red"
+          ]
+        },
+        {
+          "t": "other"
+        }
+      ]
+    }
+  },
+  {
+    "src": "color: red;",
+    "minify": true,
+    "feature": 8,
+    "out": {
+      "msgs": [
+        "Expected identifier but found \";\""
+      ],
+      "rules": [
+        {
+          "imp": false,
+          "k": "color",
+          "t": "decl",
+          "v": [
+            "red"
+          ]
+        },
+        {
+          "t": "other"
+        }
+      ]
+    }
+  },
+  {
+    "src": "color: red;",
+    "minify": false,
+    "feature": 32,
+    "out": {
+      "msgs": [
+        "Expected identifier but found \";\""
+      ],
+      "rules": [
+        {
+          "imp": false,
+          "k": "color",
+          "t": "decl",
+          "v": [
+            "red"
+          ]
+        },
+        {
+          "t": "other"
+        }
+      ]
+    }
+  },
+  {
+    "src": "color: red;",
+    "minify": true,
+    "feature": 32,
+    "out": {
+      "msgs": [
+        "Expected identifier but found \";\""
+      ],
+      "rules": [
+        {
+          "imp": false,
+          "k": "color",
+          "t": "decl",
+          "v": [
+            "red"
+          ]
+        },
+        {
+          "t": "other"
+        }
+      ]
+    }
+  },
+  {
+    "src": "color: red; color: blue;",
+    "minify": false,
+    "feature": 0,
+    "out": {
+      "msgs": [
+        "Expected identifier but found \";\""
+      ],
+      "rules": [
+        {
+          "imp": false,
+          "k": "color",
+          "t": "decl",
+          "v": [
+            "red"
+          ]
+        },
+        {
+          "t": "other"
+        }
+      ]
+    }
+  },
+  {
+    "src": "color: red; color: blue;",
+    "minify": true,
+    "feature": 0,
+    "out": {
+      "msgs": [
+        "Expected identifier but found \";\""
+      ],
+      "rules": [
+        {
+          "imp": false,
+          "k": "color",
+          "t": "decl",
+          "v": [
+            "red"
+          ]
+        },
+        {
+          "t": "other"
+        }
+      ]
+    }
+  },
+  {
+    "src": "color: red; color: blue;",
+    "minify": false,
+    "feature": 1,
+    "out": {
+      "msgs": [
+        "Expected identifier but found \";\""
+      ],
+      "rules": [
+        {
+          "imp": false,
+          "k": "color",
+          "t": "decl",
+          "v": [
+            "red"
+          ]
+        },
+        {
+          "t": "other"
+        }
+      ]
+    }
+  },
+  {
+    "src": "color: red; color: blue;",
+    "minify": true,
+    "feature": 1,
+    "out": {
+      "msgs": [
+        "Expected identifier but found \";\""
+      ],
+      "rules": [
+        {
+          "imp": false,
+          "k": "color",
+          "t": "decl",
+          "v": [
+            "red"
+          ]
+        },
+        {
+          "t": "other"
+        }
+      ]
+    }
+  },
+  {
+    "src": "color: red; color: blue;",
+    "minify": false,
+    "feature": 2,
+    "out": {
+      "msgs": [
+        "Expected identifier but found \";\""
+      ],
+      "rules": [
+        {
+          "imp": false,
+          "k": "color",
+          "t": "decl",
+          "v": [
+            "red"
+          ]
+        },
+        {
+          "t": "other"
+        }
+      ]
+    }
+  },
+  {
+    "src": "color: red; color: blue;",
+    "minify": true,
+    "feature": 2,
+    "out": {
+      "msgs": [
+        "Expected identifier but found \";\""
+      ],
+      "rules": [
+        {
+          "imp": false,
+          "k": "color",
+          "t": "decl",
+          "v": [
+            "red"
+          ]
+        },
+        {
+          "t": "other"
+        }
+      ]
+    }
+  },
+  {
+    "src": "color: red; color: blue;",
+    "minify": false,
+    "feature": 8,
+    "out": {
+      "msgs": [
+        "Expected identifier but found \";\""
+      ],
+      "rules": [
+        {
+          "imp": false,
+          "k": "color",
+          "t": "decl",
+          "v": [
+            "red"
+          ]
+        },
+        {
+          "t": "other"
+        }
+      ]
+    }
+  },
+  {
+    "src": "color: red; color: blue;",
+    "minify": true,
+    "feature": 8,
+    "out": {
+      "msgs": [
+        "Expected identifier but found \";\""
+      ],
+      "rules": [
+        {
+          "imp": false,
+          "k": "color",
+          "t": "decl",
+          "v": [
+            "red"
+          ]
+        },
+        {
+          "t": "other"
+        }
+      ]
+    }
+  },
+  {
+    "src": "color: red; color: blue;",
+    "minify": false,
+    "feature": 32,
+    "out": {
+      "msgs": [
+        "Expected identifier but found \";\""
+      ],
+      "rules": [
+        {
+          "imp": false,
+          "k": "color",
+          "t": "decl",
+          "v": [
+            "red"
+          ]
+        },
+        {
+          "t": "other"
+        }
+      ]
+    }
+  },
+  {
+    "src": "color: red; color: blue;",
+    "minify": true,
+    "feature": 32,
+    "out": {
+      "msgs": [
+        "Expected identifier but found \";\""
+      ],
+      "rules": [
+        {
+          "imp": false,
+          "k": "color",
+          "t": "decl",
+          "v": [
+            "red"
+          ]
+        },
+        {
+          "t": "other"
+        }
+      ]
+    }
+  },
+  {
+    "src": "margin: 0 1px 2px 3px; padding: 0;",
+    "minify": false,
+    "feature": 0,
+    "out": {
+      "msgs": [
+        "Expected identifier but found \";\""
+      ],
+      "rules": [
+        {
+          "imp": false,
+          "k": "margin",
+          "t": "decl",
+          "v": [
+            "0",
+            "1px",
+            "2px",
+            "3px"
+          ]
+        },
+        {
+          "t": "other"
+        }
+      ]
+    }
+  },
+  {
+    "src": "margin: 0 1px 2px 3px; padding: 0;",
+    "minify": true,
+    "feature": 0,
+    "out": {
+      "msgs": [
+        "Expected identifier but found \";\""
+      ],
+      "rules": [
+        {
+          "imp": false,
+          "k": "margin",
+          "t": "decl",
+          "v": [
+            "0",
+            "1px",
+            "2px",
+            "3px"
+          ]
+        },
+        {
+          "t": "other"
+        }
+      ]
+    }
+  },
+  {
+    "src": "margin: 0 1px 2px 3px; padding: 0;",
+    "minify": false,
+    "feature": 1,
+    "out": {
+      "msgs": [
+        "Expected identifier but found \";\""
+      ],
+      "rules": [
+        {
+          "imp": false,
+          "k": "margin",
+          "t": "decl",
+          "v": [
+            "0",
+            "1px",
+            "2px",
+            "3px"
+          ]
+        },
+        {
+          "t": "other"
+        }
+      ]
+    }
+  },
+  {
+    "src": "margin: 0 1px 2px 3px; padding: 0;",
+    "minify": true,
+    "feature": 1,
+    "out": {
+      "msgs": [
+        "Expected identifier but found \";\""
+      ],
+      "rules": [
+        {
+          "imp": false,
+          "k": "margin",
+          "t": "decl",
+          "v": [
+            "0",
+            "1px",
+            "2px",
+            "3px"
+          ]
+        },
+        {
+          "t": "other"
+        }
+      ]
+    }
+  },
+  {
+    "src": "margin: 0 1px 2px 3px; padding: 0;",
+    "minify": false,
+    "feature": 2,
+    "out": {
+      "msgs": [
+        "Expected identifier but found \";\""
+      ],
+      "rules": [
+        {
+          "imp": false,
+          "k": "margin",
+          "t": "decl",
+          "v": [
+            "0",
+            "1px",
+            "2px",
+            "3px"
+          ]
+        },
+        {
+          "t": "other"
+        }
+      ]
+    }
+  },
+  {
+    "src": "margin: 0 1px 2px 3px; padding: 0;",
+    "minify": true,
+    "feature": 2,
+    "out": {
+      "msgs": [
+        "Expected identifier but found \";\""
+      ],
+      "rules": [
+        {
+          "imp": false,
+          "k": "margin",
+          "t": "decl",
+          "v": [
+            "0",
+            "1px",
+            "2px",
+            "3px"
+          ]
+        },
+        {
+          "t": "other"
+        }
+      ]
+    }
+  },
+  {
+    "src": "margin: 0 1px 2px 3px; padding: 0;",
+    "minify": false,
+    "feature": 8,
+    "out": {
+      "msgs": [
+        "Expected identifier but found \";\""
+      ],
+      "rules": [
+        {
+          "imp": false,
+          "k": "margin",
+          "t": "decl",
+          "v": [
+            "0",
+            "1px",
+            "2px",
+            "3px"
+          ]
+        },
+        {
+          "t": "other"
+        }
+      ]
+    }
+  },
+  {
+    "src": "margin: 0 1px 2px 3px; padding: 0;",
+    "minify": true,
+    "feature": 8,
+    "out": {
+      "msgs": [
+        "Expected identifier but found \";\""
+      ],
+      "rules": [
+        {
+          "imp": false,
+          "k": "margin",
+          "t": "decl",
+          "v": [
+            "0",
+            "1px",
+            "2px",
+            "3px"
+          ]
+        },
+        {
+          "t": "other"
+        }
+      ]
+    }
+  },
+  {
+    "src": "margin: 0 1px 2px 3px; padding: 0;",
+    "minify": false,
+    "feature": 32,
+    "out": {
+      "msgs": [
+        "Expected identifier but found \";\""
+      ],
+      "rules": [
+        {
+          "imp": false,
+          "k": "margin",
+          "t": "decl",
+          "v": [
+            "0",
+            "1px",
+            "2px",
+            "3px"
+          ]
+        },
+        {
+          "t": "other"
+        }
+      ]
+    }
+  },
+  {
+    "src": "margin: 0 1px 2px 3px; padding: 0;",
+    "minify": true,
+    "feature": 32,
+    "out": {
+      "msgs": [
+        "Expected identifier but found \";\""
+      ],
+      "rules": [
+        {
+          "imp": false,
+          "k": "margin",
+          "t": "decl",
+          "v": [
+            "0",
+            "1px",
+            "2px",
+            "3px"
+          ]
+        },
+        {
+          "t": "other"
+        }
+      ]
+    }
+  },
+  {
+    "src": "transform: translate(0px, 1px) scale(1);",
+    "minify": false,
+    "feature": 0,
+    "out": {
+      "msgs": [
+        "Expected identifier but found \";\""
+      ],
+      "rules": [
+        {
+          "imp": false,
+          "k": "transform",
+          "t": "decl",
+          "v": [
+            "translate",
+            "scale"
+          ]
+        },
+        {
+          "t": "other"
+        }
+      ]
+    }
+  },
+  {
+    "src": "transform: translate(0px, 1px) scale(1);",
+    "minify": true,
+    "feature": 0,
+    "out": {
+      "msgs": [
+        "Expected identifier but found \";\""
+      ],
+      "rules": [
+        {
+          "imp": false,
+          "k": "transform",
+          "t": "decl",
+          "v": [
+            "translateY",
+            "scale"
+          ]
+        },
+        {
+          "t": "other"
+        }
+      ]
+    }
+  },
+  {
+    "src": "transform: translate(0px, 1px) scale(1);",
+    "minify": false,
+    "feature": 1,
+    "out": {
+      "msgs": [
+        "Expected identifier but found \";\""
+      ],
+      "rules": [
+        {
+          "imp": false,
+          "k": "transform",
+          "t": "decl",
+          "v": [
+            "translate",
+            "scale"
+          ]
+        },
+        {
+          "t": "other"
+        }
+      ]
+    }
+  },
+  {
+    "src": "transform: translate(0px, 1px) scale(1);",
+    "minify": true,
+    "feature": 1,
+    "out": {
+      "msgs": [
+        "Expected identifier but found \";\""
+      ],
+      "rules": [
+        {
+          "imp": false,
+          "k": "transform",
+          "t": "decl",
+          "v": [
+            "translateY",
+            "scale"
+          ]
+        },
+        {
+          "t": "other"
+        }
+      ]
+    }
+  },
+  {
+    "src": "transform: translate(0px, 1px) scale(1);",
+    "minify": false,
+    "feature": 2,
+    "out": {
+      "msgs": [
+        "Expected identifier but found \";\""
+      ],
+      "rules": [
+        {
+          "imp": false,
+          "k": "transform",
+          "t": "decl",
+          "v": [
+            "translate",
+            "scale"
+          ]
+        },
+        {
+          "t": "other"
+        }
+      ]
+    }
+  },
+  {
+    "src": "transform: translate(0px, 1px) scale(1);",
+    "minify": true,
+    "feature": 2,
+    "out": {
+      "msgs": [
+        "Expected identifier but found \";\""
+      ],
+      "rules": [
+        {
+          "imp": false,
+          "k": "transform",
+          "t": "decl",
+          "v": [
+            "translateY",
+            "scale"
+          ]
+        },
+        {
+          "t": "other"
+        }
+      ]
+    }
+  },
+  {
+    "src": "transform: translate(0px, 1px) scale(1);",
+    "minify": false,
+    "feature": 8,
+    "out": {
+      "msgs": [
+        "Expected identifier but found \";\""
+      ],
+      "rules": [
+        {
+          "imp": false,
+          "k": "transform",
+          "t": "decl",
+          "v": [
+            "translate",
+            "scale"
+          ]
+        },
+        {
+          "t": "other"
+        }
+      ]
+    }
+  },
+  {
+    "src": "transform: translate(0px, 1px) scale(1);",
+    "minify": true,
+    "feature": 8,
+    "out": {
+      "msgs": [
+        "Expected identifier but found \";\""
+      ],
+      "rules": [
+        {
+          "imp": false,
+          "k": "transform",
+          "t": "decl",
+          "v": [
+            "translateY",
+            "scale"
+          ]
+        },
+        {
+          "t": "other"
+        }
+      ]
+    }
+  },
+  {
+    "src": "transform: translate(0px, 1px) scale(1);",
+    "minify": false,
+    "feature": 32,
+    "out": {
+      "msgs": [
+        "Expected identifier but found \";\""
+      ],
+      "rules": [
+        {
+          "imp": false,
+          "k": "transform",
+          "t": "decl",
+          "v": [
+            "translate",
+            "scale"
+          ]
+        },
+        {
+          "t": "other"
+        }
+      ]
+    }
+  },
+  {
+    "src": "transform: translate(0px, 1px) scale(1);",
+    "minify": true,
+    "feature": 32,
+    "out": {
+      "msgs": [
+        "Expected identifier but found \";\""
+      ],
+      "rules": [
+        {
+          "imp": false,
+          "k": "transform",
+          "t": "decl",
+          "v": [
+            "translateY",
+            "scale"
+          ]
+        },
+        {
+          "t": "other"
+        }
+      ]
+    }
+  },
+  {
+    "src": "font: bold 12px/1.5 Arial, sans-serif;",
+    "minify": false,
+    "feature": 0,
+    "out": {
+      "msgs": [
+        "Expected identifier but found \";\""
+      ],
+      "rules": [
+        {
+          "imp": false,
+          "k": "font",
+          "t": "decl",
+          "v": [
+            "bold",
+            "12px",
+            "/",
+            "1.5",
+            "Arial",
+            ",",
+            "sans-serif"
+          ]
+        },
+        {
+          "t": "other"
+        }
+      ]
+    }
+  },
+  {
+    "src": "font: bold 12px/1.5 Arial, sans-serif;",
+    "minify": true,
+    "feature": 0,
+    "out": {
+      "msgs": [
+        "Expected identifier but found \";\""
+      ],
+      "rules": [
+        {
+          "imp": false,
+          "k": "font",
+          "t": "decl",
+          "v": [
+            "700",
+            "12px",
+            "/",
+            "1.5",
+            "Arial",
+            ",",
+            "sans-serif"
+          ]
+        },
+        {
+          "t": "other"
+        }
+      ]
+    }
+  },
+  {
+    "src": "font: bold 12px/1.5 Arial, sans-serif;",
+    "minify": false,
+    "feature": 1,
+    "out": {
+      "msgs": [
+        "Expected identifier but found \";\""
+      ],
+      "rules": [
+        {
+          "imp": false,
+          "k": "font",
+          "t": "decl",
+          "v": [
+            "bold",
+            "12px",
+            "/",
+            "1.5",
+            "Arial",
+            ",",
+            "sans-serif"
+          ]
+        },
+        {
+          "t": "other"
+        }
+      ]
+    }
+  },
+  {
+    "src": "font: bold 12px/1.5 Arial, sans-serif;",
+    "minify": true,
+    "feature": 1,
+    "out": {
+      "msgs": [
+        "Expected identifier but found \";\""
+      ],
+      "rules": [
+        {
+          "imp": false,
+          "k": "font",
+          "t": "decl",
+          "v": [
+            "700",
+            "12px",
+            "/",
+            "1.5",
+            "Arial",
+            ",",
+            "sans-serif"
+          ]
+        },
+        {
+          "t": "other"
+        }
+      ]
+    }
+  },
+  {
+    "src": "font: bold 12px/1.5 Arial, sans-serif;",
+    "minify": false,
+    "feature": 2,
+    "out": {
+      "msgs": [
+        "Expected identifier but found \";\""
+      ],
+      "rules": [
+        {
+          "imp": false,
+          "k": "font",
+          "t": "decl",
+          "v": [
+            "bold",
+            "12px",
+            "/",
+            "1.5",
+            "Arial",
+            ",",
+            "sans-serif"
+          ]
+        },
+        {
+          "t": "other"
+        }
+      ]
+    }
+  },
+  {
+    "src": "font: bold 12px/1.5 Arial, sans-serif;",
+    "minify": true,
+    "feature": 2,
+    "out": {
+      "msgs": [
+        "Expected identifier but found \";\""
+      ],
+      "rules": [
+        {
+          "imp": false,
+          "k": "font",
+          "t": "decl",
+          "v": [
+            "700",
+            "12px",
+            "/",
+            "1.5",
+            "Arial",
+            ",",
+            "sans-serif"
+          ]
+        },
+        {
+          "t": "other"
+        }
+      ]
+    }
+  },
+  {
+    "src": "font: bold 12px/1.5 Arial, sans-serif;",
+    "minify": false,
+    "feature": 8,
+    "out": {
+      "msgs": [
+        "Expected identifier but found \";\""
+      ],
+      "rules": [
+        {
+          "imp": false,
+          "k": "font",
+          "t": "decl",
+          "v": [
+            "bold",
+            "12px",
+            "/",
+            "1.5",
+            "Arial",
+            ",",
+            "sans-serif"
+          ]
+        },
+        {
+          "t": "other"
+        }
+      ]
+    }
+  },
+  {
+    "src": "font: bold 12px/1.5 Arial, sans-serif;",
+    "minify": true,
+    "feature": 8,
+    "out": {
+      "msgs": [
+        "Expected identifier but found \";\""
+      ],
+      "rules": [
+        {
+          "imp": false,
+          "k": "font",
+          "t": "decl",
+          "v": [
+            "700",
+            "12px",
+            "/",
+            "1.5",
+            "Arial",
+            ",",
+            "sans-serif"
+          ]
+        },
+        {
+          "t": "other"
+        }
+      ]
+    }
+  },
+  {
+    "src": "font: bold 12px/1.5 Arial, sans-serif;",
+    "minify": false,
+    "feature": 32,
+    "out": {
+      "msgs": [
+        "Expected identifier but found \";\""
+      ],
+      "rules": [
+        {
+          "imp": false,
+          "k": "font",
+          "t": "decl",
+          "v": [
+            "bold",
+            "12px",
+            "/",
+            "1.5",
+            "Arial",
+            ",",
+            "sans-serif"
+          ]
+        },
+        {
+          "t": "other"
+        }
+      ]
+    }
+  },
+  {
+    "src": "font: bold 12px/1.5 Arial, sans-serif;",
+    "minify": true,
+    "feature": 32,
+    "out": {
+      "msgs": [
+        "Expected identifier but found \";\""
+      ],
+      "rules": [
+        {
+          "imp": false,
+          "k": "font",
+          "t": "decl",
+          "v": [
+            "700",
+            "12px",
+            "/",
+            "1.5",
+            "Arial",
+            ",",
+            "sans-serif"
+          ]
+        },
+        {
+          "t": "other"
+        }
+      ]
+    }
+  },
+  {
+    "src": "box-shadow: 0 0 0 0 red, 1px 2px;",
+    "minify": false,
+    "feature": 0,
+    "out": {
+      "msgs": [
+        "Expected identifier but found \";\""
+      ],
+      "rules": [
+        {
+          "imp": false,
+          "k": "box-shadow",
+          "t": "decl",
+          "v": [
+            "0",
+            "0",
+            "0",
+            "0",
+            "red",
+            ",",
+            "1px",
+            "2px"
+          ]
+        },
+        {
+          "t": "other"
+        }
+      ]
+    }
+  },
+  {
+    "src": "box-shadow: 0 0 0 0 red, 1px 2px;",
+    "minify": true,
+    "feature": 0,
+    "out": {
+      "msgs": [
+        "Expected identifier but found \";\""
+      ],
+      "rules": [
+        {
+          "imp": false,
+          "k": "box-shadow",
+          "t": "decl",
+          "v": [
+            "0",
+            "0",
+            "red",
+            ",",
+            "1px",
+            "2px"
+          ]
+        },
+        {
+          "t": "other"
+        }
+      ]
+    }
+  },
+  {
+    "src": "box-shadow: 0 0 0 0 red, 1px 2px;",
+    "minify": false,
+    "feature": 1,
+    "out": {
+      "msgs": [
+        "Expected identifier but found \";\""
+      ],
+      "rules": [
+        {
+          "imp": false,
+          "k": "box-shadow",
+          "t": "decl",
+          "v": [
+            "0",
+            "0",
+            "0",
+            "0",
+            "red",
+            ",",
+            "1px",
+            "2px"
+          ]
+        },
+        {
+          "t": "other"
+        }
+      ]
+    }
+  },
+  {
+    "src": "box-shadow: 0 0 0 0 red, 1px 2px;",
+    "minify": true,
+    "feature": 1,
+    "out": {
+      "msgs": [
+        "Expected identifier but found \";\""
+      ],
+      "rules": [
+        {
+          "imp": false,
+          "k": "box-shadow",
+          "t": "decl",
+          "v": [
+            "0",
+            "0",
+            "red",
+            ",",
+            "1px",
+            "2px"
+          ]
+        },
+        {
+          "t": "other"
+        }
+      ]
+    }
+  },
+  {
+    "src": "box-shadow: 0 0 0 0 red, 1px 2px;",
+    "minify": false,
+    "feature": 2,
+    "out": {
+      "msgs": [
+        "Expected identifier but found \";\""
+      ],
+      "rules": [
+        {
+          "imp": false,
+          "k": "box-shadow",
+          "t": "decl",
+          "v": [
+            "0",
+            "0",
+            "0",
+            "0",
+            "red",
+            ",",
+            "1px",
+            "2px"
+          ]
+        },
+        {
+          "t": "other"
+        }
+      ]
+    }
+  },
+  {
+    "src": "box-shadow: 0 0 0 0 red, 1px 2px;",
+    "minify": true,
+    "feature": 2,
+    "out": {
+      "msgs": [
+        "Expected identifier but found \";\""
+      ],
+      "rules": [
+        {
+          "imp": false,
+          "k": "box-shadow",
+          "t": "decl",
+          "v": [
+            "0",
+            "0",
+            "red",
+            ",",
+            "1px",
+            "2px"
+          ]
+        },
+        {
+          "t": "other"
+        }
+      ]
+    }
+  },
+  {
+    "src": "box-shadow: 0 0 0 0 red, 1px 2px;",
+    "minify": false,
+    "feature": 8,
+    "out": {
+      "msgs": [
+        "Expected identifier but found \";\""
+      ],
+      "rules": [
+        {
+          "imp": false,
+          "k": "box-shadow",
+          "t": "decl",
+          "v": [
+            "0",
+            "0",
+            "0",
+            "0",
+            "red",
+            ",",
+            "1px",
+            "2px"
+          ]
+        },
+        {
+          "t": "other"
+        }
+      ]
+    }
+  },
+  {
+    "src": "box-shadow: 0 0 0 0 red, 1px 2px;",
+    "minify": true,
+    "feature": 8,
+    "out": {
+      "msgs": [
+        "Expected identifier but found \";\""
+      ],
+      "rules": [
+        {
+          "imp": false,
+          "k": "box-shadow",
+          "t": "decl",
+          "v": [
+            "0",
+            "0",
+            "red",
+            ",",
+            "1px",
+            "2px"
+          ]
+        },
+        {
+          "t": "other"
+        }
+      ]
+    }
+  },
+  {
+    "src": "box-shadow: 0 0 0 0 red, 1px 2px;",
+    "minify": false,
+    "feature": 32,
+    "out": {
+      "msgs": [
+        "Expected identifier but found \";\""
+      ],
+      "rules": [
+        {
+          "imp": false,
+          "k": "box-shadow",
+          "t": "decl",
+          "v": [
+            "0",
+            "0",
+            "0",
+            "0",
+            "red",
+            ",",
+            "1px",
+            "2px"
+          ]
+        },
+        {
+          "t": "other"
+        }
+      ]
+    }
+  },
+  {
+    "src": "box-shadow: 0 0 0 0 red, 1px 2px;",
+    "minify": true,
+    "feature": 32,
+    "out": {
+      "msgs": [
+        "Expected identifier but found \";\""
+      ],
+      "rules": [
+        {
+          "imp": false,
+          "k": "box-shadow",
+          "t": "decl",
+          "v": [
+            "0",
+            "0",
+            "red",
+            ",",
+            "1px",
+            "2px"
+          ]
+        },
+        {
+          "t": "other"
+        }
+      ]
+    }
+  },
+  {
+    "src": "list-style: square inside;",
+    "minify": false,
+    "feature": 0,
+    "out": {
+      "msgs": [
+        "Expected identifier but found \";\""
+      ],
+      "rules": [
+        {
+          "imp": false,
+          "k": "list-style",
+          "t": "decl",
+          "v": [
+            "square",
+            "inside"
+          ]
+        },
+        {
+          "t": "other"
+        }
+      ]
+    }
+  },
+  {
+    "src": "list-style: square inside;",
+    "minify": true,
+    "feature": 0,
+    "out": {
+      "msgs": [
+        "Expected identifier but found \";\""
+      ],
+      "rules": [
+        {
+          "imp": false,
+          "k": "list-style",
+          "t": "decl",
+          "v": [
+            "square",
+            "inside"
+          ]
+        },
+        {
+          "t": "other"
+        }
+      ]
+    }
+  },
+  {
+    "src": "list-style: square inside;",
+    "minify": false,
+    "feature": 1,
+    "out": {
+      "msgs": [
+        "Expected identifier but found \";\""
+      ],
+      "rules": [
+        {
+          "imp": false,
+          "k": "list-style",
+          "t": "decl",
+          "v": [
+            "square",
+            "inside"
+          ]
+        },
+        {
+          "t": "other"
+        }
+      ]
+    }
+  },
+  {
+    "src": "list-style: square inside;",
+    "minify": true,
+    "feature": 1,
+    "out": {
+      "msgs": [
+        "Expected identifier but found \";\""
+      ],
+      "rules": [
+        {
+          "imp": false,
+          "k": "list-style",
+          "t": "decl",
+          "v": [
+            "square",
+            "inside"
+          ]
+        },
+        {
+          "t": "other"
+        }
+      ]
+    }
+  },
+  {
+    "src": "list-style: square inside;",
+    "minify": false,
+    "feature": 2,
+    "out": {
+      "msgs": [
+        "Expected identifier but found \";\""
+      ],
+      "rules": [
+        {
+          "imp": false,
+          "k": "list-style",
+          "t": "decl",
+          "v": [
+            "square",
+            "inside"
+          ]
+        },
+        {
+          "t": "other"
+        }
+      ]
+    }
+  },
+  {
+    "src": "list-style: square inside;",
+    "minify": true,
+    "feature": 2,
+    "out": {
+      "msgs": [
+        "Expected identifier but found \";\""
+      ],
+      "rules": [
+        {
+          "imp": false,
+          "k": "list-style",
+          "t": "decl",
+          "v": [
+            "square",
+            "inside"
+          ]
+        },
+        {
+          "t": "other"
+        }
+      ]
+    }
+  },
+  {
+    "src": "list-style: square inside;",
+    "minify": false,
+    "feature": 8,
+    "out": {
+      "msgs": [
+        "Expected identifier but found \";\""
+      ],
+      "rules": [
+        {
+          "imp": false,
+          "k": "list-style",
+          "t": "decl",
+          "v": [
+            "square",
+            "inside"
+          ]
+        },
+        {
+          "t": "other"
+        }
+      ]
+    }
+  },
+  {
+    "src": "list-style: square inside;",
+    "minify": true,
+    "feature": 8,
+    "out": {
+      "msgs": [
+        "Expected identifier but found \";\""
+      ],
+      "rules": [
+        {
+          "imp": false,
+          "k": "list-style",
+          "t": "decl",
+          "v": [
+            "square",
+            "inside"
+          ]
+        },
+        {
+          "t": "other"
+        }
+      ]
+    }
+  },
+  {
+    "src": "list-style: square inside;",
+    "minify": false,
+    "feature": 32,
+    "out": {
+      "msgs": [
+        "Expected identifier but found \";\""
+      ],
+      "rules": [
+        {
+          "imp": false,
+          "k": "list-style",
+          "t": "decl",
+          "v": [
+            "square",
+            "inside"
+          ]
+        },
+        {
+          "t": "other"
+        }
+      ]
+    }
+  },
+  {
+    "src": "list-style: square inside;",
+    "minify": true,
+    "feature": 32,
+    "out": {
+      "msgs": [
+        "Expected identifier but found \";\""
+      ],
+      "rules": [
+        {
+          "imp": false,
+          "k": "list-style",
+          "t": "decl",
+          "v": [
+            "square",
+            "inside"
+          ]
+        },
+        {
+          "t": "other"
+        }
+      ]
+    }
+  },
+  {
+    "src": "animation: foo 1s ease infinite;",
+    "minify": false,
+    "feature": 0,
+    "out": {
+      "msgs": [
+        "Expected identifier but found \";\""
+      ],
+      "rules": [
+        {
+          "imp": false,
+          "k": "animation",
+          "t": "decl",
+          "v": [
+            "foo",
+            "1s",
+            "ease",
+            "infinite"
+          ]
+        },
+        {
+          "t": "other"
+        }
+      ]
+    }
+  },
+  {
+    "src": "animation: foo 1s ease infinite;",
+    "minify": true,
+    "feature": 0,
+    "out": {
+      "msgs": [
+        "Expected identifier but found \";\""
+      ],
+      "rules": [
+        {
+          "imp": false,
+          "k": "animation",
+          "t": "decl",
+          "v": [
+            "foo",
+            "1s",
+            "ease",
+            "infinite"
+          ]
+        },
+        {
+          "t": "other"
+        }
+      ]
+    }
+  },
+  {
+    "src": "animation: foo 1s ease infinite;",
+    "minify": false,
+    "feature": 1,
+    "out": {
+      "msgs": [
+        "Expected identifier but found \";\""
+      ],
+      "rules": [
+        {
+          "imp": false,
+          "k": "animation",
+          "t": "decl",
+          "v": [
+            "foo",
+            "1s",
+            "ease",
+            "infinite"
+          ]
+        },
+        {
+          "t": "other"
+        }
+      ]
+    }
+  },
+  {
+    "src": "animation: foo 1s ease infinite;",
+    "minify": true,
+    "feature": 1,
+    "out": {
+      "msgs": [
+        "Expected identifier but found \";\""
+      ],
+      "rules": [
+        {
+          "imp": false,
+          "k": "animation",
+          "t": "decl",
+          "v": [
+            "foo",
+            "1s",
+            "ease",
+            "infinite"
+          ]
+        },
+        {
+          "t": "other"
+        }
+      ]
+    }
+  },
+  {
+    "src": "animation: foo 1s ease infinite;",
+    "minify": false,
+    "feature": 2,
+    "out": {
+      "msgs": [
+        "Expected identifier but found \";\""
+      ],
+      "rules": [
+        {
+          "imp": false,
+          "k": "animation",
+          "t": "decl",
+          "v": [
+            "foo",
+            "1s",
+            "ease",
+            "infinite"
+          ]
+        },
+        {
+          "t": "other"
+        }
+      ]
+    }
+  },
+  {
+    "src": "animation: foo 1s ease infinite;",
+    "minify": true,
+    "feature": 2,
+    "out": {
+      "msgs": [
+        "Expected identifier but found \";\""
+      ],
+      "rules": [
+        {
+          "imp": false,
+          "k": "animation",
+          "t": "decl",
+          "v": [
+            "foo",
+            "1s",
+            "ease",
+            "infinite"
+          ]
+        },
+        {
+          "t": "other"
+        }
+      ]
+    }
+  },
+  {
+    "src": "animation: foo 1s ease infinite;",
+    "minify": false,
+    "feature": 8,
+    "out": {
+      "msgs": [
+        "Expected identifier but found \";\""
+      ],
+      "rules": [
+        {
+          "imp": false,
+          "k": "animation",
+          "t": "decl",
+          "v": [
+            "foo",
+            "1s",
+            "ease",
+            "infinite"
+          ]
+        },
+        {
+          "t": "other"
+        }
+      ]
+    }
+  },
+  {
+    "src": "animation: foo 1s ease infinite;",
+    "minify": true,
+    "feature": 8,
+    "out": {
+      "msgs": [
+        "Expected identifier but found \";\""
+      ],
+      "rules": [
+        {
+          "imp": false,
+          "k": "animation",
+          "t": "decl",
+          "v": [
+            "foo",
+            "1s",
+            "ease",
+            "infinite"
+          ]
+        },
+        {
+          "t": "other"
+        }
+      ]
+    }
+  },
+  {
+    "src": "animation: foo 1s ease infinite;",
+    "minify": false,
+    "feature": 32,
+    "out": {
+      "msgs": [
+        "Expected identifier but found \";\""
+      ],
+      "rules": [
+        {
+          "imp": false,
+          "k": "animation",
+          "t": "decl",
+          "v": [
+            "foo",
+            "1s",
+            "ease",
+            "infinite"
+          ]
+        },
+        {
+          "t": "other"
+        }
+      ]
+    }
+  },
+  {
+    "src": "animation: foo 1s ease infinite;",
+    "minify": true,
+    "feature": 32,
+    "out": {
+      "msgs": [
+        "Expected identifier but found \";\""
+      ],
+      "rules": [
+        {
+          "imp": false,
+          "k": "animation",
+          "t": "decl",
+          "v": [
+            "foo",
+            "1s",
+            "ease",
+            "infinite"
+          ]
+        },
+        {
+          "t": "other"
+        }
+      ]
+    }
+  },
+  {
+    "src": "container: foo / bar;",
+    "minify": false,
+    "feature": 0,
+    "out": {
+      "msgs": [
+        "Expected identifier but found \";\""
+      ],
+      "rules": [
+        {
+          "imp": false,
+          "k": "container",
+          "t": "decl",
+          "v": [
+            "foo",
+            "/",
+            "bar"
+          ]
+        },
+        {
+          "t": "other"
+        }
+      ]
+    }
+  },
+  {
+    "src": "container: foo / bar;",
+    "minify": true,
+    "feature": 0,
+    "out": {
+      "msgs": [
+        "Expected identifier but found \";\""
+      ],
+      "rules": [
+        {
+          "imp": false,
+          "k": "container",
+          "t": "decl",
+          "v": [
+            "foo",
+            "/",
+            "bar"
+          ]
+        },
+        {
+          "t": "other"
+        }
+      ]
+    }
+  },
+  {
+    "src": "container: foo / bar;",
+    "minify": false,
+    "feature": 1,
+    "out": {
+      "msgs": [
+        "Expected identifier but found \";\""
+      ],
+      "rules": [
+        {
+          "imp": false,
+          "k": "container",
+          "t": "decl",
+          "v": [
+            "foo",
+            "/",
+            "bar"
+          ]
+        },
+        {
+          "t": "other"
+        }
+      ]
+    }
+  },
+  {
+    "src": "container: foo / bar;",
+    "minify": true,
+    "feature": 1,
+    "out": {
+      "msgs": [
+        "Expected identifier but found \";\""
+      ],
+      "rules": [
+        {
+          "imp": false,
+          "k": "container",
+          "t": "decl",
+          "v": [
+            "foo",
+            "/",
+            "bar"
+          ]
+        },
+        {
+          "t": "other"
+        }
+      ]
+    }
+  },
+  {
+    "src": "container: foo / bar;",
+    "minify": false,
+    "feature": 2,
+    "out": {
+      "msgs": [
+        "Expected identifier but found \";\""
+      ],
+      "rules": [
+        {
+          "imp": false,
+          "k": "container",
+          "t": "decl",
+          "v": [
+            "foo",
+            "/",
+            "bar"
+          ]
+        },
+        {
+          "t": "other"
+        }
+      ]
+    }
+  },
+  {
+    "src": "container: foo / bar;",
+    "minify": true,
+    "feature": 2,
+    "out": {
+      "msgs": [
+        "Expected identifier but found \";\""
+      ],
+      "rules": [
+        {
+          "imp": false,
+          "k": "container",
+          "t": "decl",
+          "v": [
+            "foo",
+            "/",
+            "bar"
+          ]
+        },
+        {
+          "t": "other"
+        }
+      ]
+    }
+  },
+  {
+    "src": "container: foo / bar;",
+    "minify": false,
+    "feature": 8,
+    "out": {
+      "msgs": [
+        "Expected identifier but found \";\""
+      ],
+      "rules": [
+        {
+          "imp": false,
+          "k": "container",
+          "t": "decl",
+          "v": [
+            "foo",
+            "/",
+            "bar"
+          ]
+        },
+        {
+          "t": "other"
+        }
+      ]
+    }
+  },
+  {
+    "src": "container: foo / bar;",
+    "minify": true,
+    "feature": 8,
+    "out": {
+      "msgs": [
+        "Expected identifier but found \";\""
+      ],
+      "rules": [
+        {
+          "imp": false,
+          "k": "container",
+          "t": "decl",
+          "v": [
+            "foo",
+            "/",
+            "bar"
+          ]
+        },
+        {
+          "t": "other"
+        }
+      ]
+    }
+  },
+  {
+    "src": "container: foo / bar;",
+    "minify": false,
+    "feature": 32,
+    "out": {
+      "msgs": [
+        "Expected identifier but found \";\""
+      ],
+      "rules": [
+        {
+          "imp": false,
+          "k": "container",
+          "t": "decl",
+          "v": [
+            "foo",
+            "/",
+            "bar"
+          ]
+        },
+        {
+          "t": "other"
+        }
+      ]
+    }
+  },
+  {
+    "src": "container: foo / bar;",
+    "minify": true,
+    "feature": 32,
+    "out": {
+      "msgs": [
+        "Expected identifier but found \";\""
+      ],
+      "rules": [
+        {
+          "imp": false,
+          "k": "container",
+          "t": "decl",
+          "v": [
+            "foo",
+            "/",
+            "bar"
+          ]
+        },
+        {
+          "t": "other"
+        }
+      ]
+    }
+  },
+  {
+    "src": "inset: 0 1px 2px 3px;",
+    "minify": false,
+    "feature": 0,
+    "out": {
+      "msgs": [
+        "Expected identifier but found \";\""
+      ],
+      "rules": [
+        {
+          "imp": false,
+          "k": "inset",
+          "t": "decl",
+          "v": [
+            "0",
+            "1px",
+            "2px",
+            "3px"
+          ]
+        },
+        {
+          "t": "other"
+        }
+      ]
+    }
+  },
+  {
+    "src": "inset: 0 1px 2px 3px;",
+    "minify": true,
+    "feature": 0,
+    "out": {
+      "msgs": [
+        "Expected identifier but found \";\""
+      ],
+      "rules": [
+        {
+          "imp": false,
+          "k": "inset",
+          "t": "decl",
+          "v": [
+            "0",
+            "1px",
+            "2px",
+            "3px"
+          ]
+        },
+        {
+          "t": "other"
+        }
+      ]
+    }
+  },
+  {
+    "src": "inset: 0 1px 2px 3px;",
+    "minify": false,
+    "feature": 1,
+    "out": {
+      "msgs": [
+        "Expected identifier but found \";\""
+      ],
+      "rules": [
+        {
+          "imp": false,
+          "k": "inset",
+          "t": "decl",
+          "v": [
+            "0",
+            "1px",
+            "2px",
+            "3px"
+          ]
+        },
+        {
+          "t": "other"
+        }
+      ]
+    }
+  },
+  {
+    "src": "inset: 0 1px 2px 3px;",
+    "minify": true,
+    "feature": 1,
+    "out": {
+      "msgs": [
+        "Expected identifier but found \";\""
+      ],
+      "rules": [
+        {
+          "imp": false,
+          "k": "inset",
+          "t": "decl",
+          "v": [
+            "0",
+            "1px",
+            "2px",
+            "3px"
+          ]
+        },
+        {
+          "t": "other"
+        }
+      ]
+    }
+  },
+  {
+    "src": "inset: 0 1px 2px 3px;",
+    "minify": false,
+    "feature": 2,
+    "out": {
+      "msgs": [
+        "Expected identifier but found \";\""
+      ],
+      "rules": [
+        {
+          "imp": false,
+          "k": "inset",
+          "t": "decl",
+          "v": [
+            "0",
+            "1px",
+            "2px",
+            "3px"
+          ]
+        },
+        {
+          "t": "other"
+        }
+      ]
+    }
+  },
+  {
+    "src": "inset: 0 1px 2px 3px;",
+    "minify": true,
+    "feature": 2,
+    "out": {
+      "msgs": [
+        "Expected identifier but found \";\""
+      ],
+      "rules": [
+        {
+          "imp": false,
+          "k": "inset",
+          "t": "decl",
+          "v": [
+            "0",
+            "1px",
+            "2px",
+            "3px"
+          ]
+        },
+        {
+          "t": "other"
+        }
+      ]
+    }
+  },
+  {
+    "src": "inset: 0 1px 2px 3px;",
+    "minify": false,
+    "feature": 8,
+    "out": {
+      "msgs": [
+        "Expected identifier but found \";\""
+      ],
+      "rules": [
+        {
+          "imp": false,
+          "k": "inset",
+          "t": "decl",
+          "v": [
+            "0",
+            "1px",
+            "2px",
+            "3px"
+          ]
+        },
+        {
+          "t": "other"
+        }
+      ]
+    }
+  },
+  {
+    "src": "inset: 0 1px 2px 3px;",
+    "minify": true,
+    "feature": 8,
+    "out": {
+      "msgs": [
+        "Expected identifier but found \";\""
+      ],
+      "rules": [
+        {
+          "imp": false,
+          "k": "inset",
+          "t": "decl",
+          "v": [
+            "0",
+            "1px",
+            "2px",
+            "3px"
+          ]
+        },
+        {
+          "t": "other"
+        }
+      ]
+    }
+  },
+  {
+    "src": "inset: 0 1px 2px 3px;",
+    "minify": false,
+    "feature": 32,
+    "out": {
+      "msgs": [
+        "Expected identifier but found \";\""
+      ],
+      "rules": [
+        {
+          "imp": false,
+          "k": "inset",
+          "t": "decl",
+          "v": [
+            "0",
+            "1px",
+            "2px",
+            "3px"
+          ]
+        },
+        {
+          "t": "other"
+        }
+      ]
+    }
+  },
+  {
+    "src": "inset: 0 1px 2px 3px;",
+    "minify": true,
+    "feature": 32,
+    "out": {
+      "msgs": [
+        "Expected identifier but found \";\""
+      ],
+      "rules": [
+        {
+          "imp": false,
+          "k": "inset",
+          "t": "decl",
+          "v": [
+            "0",
+            "1px",
+            "2px",
+            "3px"
+          ]
+        },
+        {
+          "t": "other"
+        }
+      ]
+    }
+  },
+  {
+    "src": "colour: red;",
+    "minify": false,
+    "feature": 0,
+    "out": {
+      "msgs": [
+        "Expected identifier but found \";\""
+      ],
+      "rules": [
+        {
+          "imp": false,
+          "k": "colour",
+          "t": "decl",
+          "v": [
+            "red"
+          ]
+        },
+        {
+          "t": "other"
+        }
+      ]
+    }
+  },
+  {
+    "src": "colour: red;",
+    "minify": true,
+    "feature": 0,
+    "out": {
+      "msgs": [
+        "Expected identifier but found \";\""
+      ],
+      "rules": [
+        {
+          "imp": false,
+          "k": "colour",
+          "t": "decl",
+          "v": [
+            "red"
+          ]
+        },
+        {
+          "t": "other"
+        }
+      ]
+    }
+  },
+  {
+    "src": "colour: red;",
+    "minify": false,
+    "feature": 1,
+    "out": {
+      "msgs": [
+        "Expected identifier but found \";\""
+      ],
+      "rules": [
+        {
+          "imp": false,
+          "k": "colour",
+          "t": "decl",
+          "v": [
+            "red"
+          ]
+        },
+        {
+          "t": "other"
+        }
+      ]
+    }
+  },
+  {
+    "src": "colour: red;",
+    "minify": true,
+    "feature": 1,
+    "out": {
+      "msgs": [
+        "Expected identifier but found \";\""
+      ],
+      "rules": [
+        {
+          "imp": false,
+          "k": "colour",
+          "t": "decl",
+          "v": [
+            "red"
+          ]
+        },
+        {
+          "t": "other"
+        }
+      ]
+    }
+  },
+  {
+    "src": "colour: red;",
+    "minify": false,
+    "feature": 2,
+    "out": {
+      "msgs": [
+        "Expected identifier but found \";\""
+      ],
+      "rules": [
+        {
+          "imp": false,
+          "k": "colour",
+          "t": "decl",
+          "v": [
+            "red"
+          ]
+        },
+        {
+          "t": "other"
+        }
+      ]
+    }
+  },
+  {
+    "src": "colour: red;",
+    "minify": true,
+    "feature": 2,
+    "out": {
+      "msgs": [
+        "Expected identifier but found \";\""
+      ],
+      "rules": [
+        {
+          "imp": false,
+          "k": "colour",
+          "t": "decl",
+          "v": [
+            "red"
+          ]
+        },
+        {
+          "t": "other"
+        }
+      ]
+    }
+  },
+  {
+    "src": "colour: red;",
+    "minify": false,
+    "feature": 8,
+    "out": {
+      "msgs": [
+        "Expected identifier but found \";\""
+      ],
+      "rules": [
+        {
+          "imp": false,
+          "k": "colour",
+          "t": "decl",
+          "v": [
+            "red"
+          ]
+        },
+        {
+          "t": "other"
+        }
+      ]
+    }
+  },
+  {
+    "src": "colour: red;",
+    "minify": true,
+    "feature": 8,
+    "out": {
+      "msgs": [
+        "Expected identifier but found \";\""
+      ],
+      "rules": [
+        {
+          "imp": false,
+          "k": "colour",
+          "t": "decl",
+          "v": [
+            "red"
+          ]
+        },
+        {
+          "t": "other"
+        }
+      ]
+    }
+  },
+  {
+    "src": "colour: red;",
+    "minify": false,
+    "feature": 32,
+    "out": {
+      "msgs": [
+        "Expected identifier but found \";\""
+      ],
+      "rules": [
+        {
+          "imp": false,
+          "k": "colour",
+          "t": "decl",
+          "v": [
+            "red"
+          ]
+        },
+        {
+          "t": "other"
+        }
+      ]
+    }
+  },
+  {
+    "src": "colour: red;",
+    "minify": true,
+    "feature": 32,
+    "out": {
+      "msgs": [
+        "Expected identifier but found \";\""
+      ],
+      "rules": [
+        {
+          "imp": false,
+          "k": "colour",
+          "t": "decl",
+          "v": [
+            "red"
+          ]
+        },
+        {
+          "t": "other"
+        }
+      ]
+    }
+  },
+  {
+    "src": "background: linear-gradient(red 0%, blue 100%);",
+    "minify": false,
+    "feature": 0,
+    "out": {
+      "msgs": [
+        "Expected identifier but found \";\""
+      ],
+      "rules": [
+        {
+          "imp": false,
+          "k": "background",
+          "t": "decl",
+          "v": [
+            "linear-gradient"
+          ]
+        },
+        {
+          "t": "other"
+        }
+      ]
+    }
+  },
+  {
+    "src": "background: linear-gradient(red 0%, blue 100%);",
+    "minify": true,
+    "feature": 0,
+    "out": {
+      "msgs": [
+        "Expected identifier but found \";\""
+      ],
+      "rules": [
+        {
+          "imp": false,
+          "k": "background",
+          "t": "decl",
+          "v": [
+            "linear-gradient"
+          ]
+        },
+        {
+          "t": "other"
+        }
+      ]
+    }
+  },
+  {
+    "src": "background: linear-gradient(red 0%, blue 100%);",
+    "minify": false,
+    "feature": 1,
+    "out": {
+      "msgs": [
+        "Expected identifier but found \";\""
+      ],
+      "rules": [
+        {
+          "imp": false,
+          "k": "background",
+          "t": "decl",
+          "v": [
+            "linear-gradient"
+          ]
+        },
+        {
+          "t": "other"
+        }
+      ]
+    }
+  },
+  {
+    "src": "background: linear-gradient(red 0%, blue 100%);",
+    "minify": true,
+    "feature": 1,
+    "out": {
+      "msgs": [
+        "Expected identifier but found \";\""
+      ],
+      "rules": [
+        {
+          "imp": false,
+          "k": "background",
+          "t": "decl",
+          "v": [
+            "linear-gradient"
+          ]
+        },
+        {
+          "t": "other"
+        }
+      ]
+    }
+  },
+  {
+    "src": "background: linear-gradient(red 0%, blue 100%);",
+    "minify": false,
+    "feature": 2,
+    "out": {
+      "msgs": [
+        "Expected identifier but found \";\""
+      ],
+      "rules": [
+        {
+          "imp": false,
+          "k": "background",
+          "t": "decl",
+          "v": [
+            "linear-gradient"
+          ]
+        },
+        {
+          "t": "other"
+        }
+      ]
+    }
+  },
+  {
+    "src": "background: linear-gradient(red 0%, blue 100%);",
+    "minify": true,
+    "feature": 2,
+    "out": {
+      "msgs": [
+        "Expected identifier but found \";\""
+      ],
+      "rules": [
+        {
+          "imp": false,
+          "k": "background",
+          "t": "decl",
+          "v": [
+            "linear-gradient"
+          ]
+        },
+        {
+          "t": "other"
+        }
+      ]
+    }
+  },
+  {
+    "src": "background: linear-gradient(red 0%, blue 100%);",
+    "minify": false,
+    "feature": 8,
+    "out": {
+      "msgs": [
+        "Expected identifier but found \";\""
+      ],
+      "rules": [
+        {
+          "imp": false,
+          "k": "background",
+          "t": "decl",
+          "v": [
+            "linear-gradient"
+          ]
+        },
+        {
+          "t": "other"
+        }
+      ]
+    }
+  },
+  {
+    "src": "background: linear-gradient(red 0%, blue 100%);",
+    "minify": true,
+    "feature": 8,
+    "out": {
+      "msgs": [
+        "Expected identifier but found \";\""
+      ],
+      "rules": [
+        {
+          "imp": false,
+          "k": "background",
+          "t": "decl",
+          "v": [
+            "linear-gradient"
+          ]
+        },
+        {
+          "t": "other"
+        }
+      ]
+    }
+  },
+  {
+    "src": "background: linear-gradient(red 0%, blue 100%);",
+    "minify": false,
+    "feature": 32,
+    "out": {
+      "msgs": [
+        "Expected identifier but found \";\""
+      ],
+      "rules": [
+        {
+          "imp": false,
+          "k": "background",
+          "t": "decl",
+          "v": [
+            "linear-gradient"
+          ]
+        },
+        {
+          "t": "other"
+        }
+      ]
+    }
+  },
+  {
+    "src": "background: linear-gradient(red 0%, blue 100%);",
+    "minify": true,
+    "feature": 32,
+    "out": {
+      "msgs": [
+        "Expected identifier but found \";\""
+      ],
+      "rules": [
+        {
+          "imp": false,
+          "k": "background",
+          "t": "decl",
+          "v": [
+            "linear-gradient"
+          ]
+        },
+        {
+          "t": "other"
+        }
+      ]
+    }
+  }
+]

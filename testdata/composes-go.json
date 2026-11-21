@@ -1,0 +1,33 @@
+[
+  {
+    "imports": 0,
+    "msgs": [],
+    "names": [
+      "foo",
+      "bar"
+    ],
+    "src": "foo bar"
+  },
+  {
+    "imports": 0,
+    "msgs": [],
+    "names": [
+      "foo"
+    ],
+    "src": "foo from global"
+  },
+  {
+    "imports": 0,
+    "msgs": [],
+    "names": [
+      "none"
+    ],
+    "src": "none"
+  },
+  {
+    "imports": 1,
+    "msgs": [],
+    "names": [],
+    "src": "foo from \"./x.css\""
+  }
+]

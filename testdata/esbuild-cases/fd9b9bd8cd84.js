@@ -1,0 +1,1 @@
+for (x of y) switch (0) { case 0: a(); continue; default: b(); continue }

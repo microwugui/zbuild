@@ -1,0 +1,47 @@
+package cli
+
+import (
+	"encoding/json"
+	"os"
+	"sort"
+	"testing"
+)
+
+type cprow struct { Name string `json:"name"`; Data json.RawMessage `json:"data"` }
+type cpfix struct { Rows []cprow `json:"rows"` }
+func cpadd(fx *cpfix, name string, m map[string]interface{}) { b,_:=json.Marshal(m); fx.Rows=append(fx.Rows,cprow{name,b}) }
+func sortedKeys(m map[string]bool) []string { out:=[]string{}; for k:=range m { out=append(out,k) }; sort.Strings(out); return out }
+
+func TestTmpGenCliPure(t *testing.T) {
+	fx := cpfix{}
+
+	// newBuildOptions — dump initialized map fields
+	bo := newBuildOptions()
+	cpadd(&fx, "newBuildOptions", map[string]interface{}{
+		"banner": len(bo.Banner), "define": len(bo.Define), "footer": len(bo.Footer),
+		"loader": len(bo.Loader), "logOverride": len(bo.LogOverride), "supported": len(bo.Supported),
+	})
+
+	// newTransformOptions
+	to := newTransformOptions()
+	cpadd(&fx, "newTransformOptions", map[string]interface{}{
+		"define": len(to.Define), "logOverride": len(to.LogOverride), "supported": len(to.Supported),
+	})
+
+	// filterAnalyzeFlags
+	for _, c := range []struct{name string; args []string}{
+		{"none", []string{"--bundle", "a.js", "--outfile=out.js"}},
+		{"analyze", []string{"--bundle", "--analyze", "a.js"}},
+		{"verbose", []string{"--analyze=verbose", "a.js", "--bundle"}},
+		{"no-build", []string{"--analyze", "a.js"}},
+		{"mixed", []string{"--bundle", "--analyze", "a.js", "--analyze=verbose", "b.js"}},
+	} {
+		args := append([]string{}, c.args...)
+		out, mode := filterAnalyzeFlags(args)
+		cpadd(&fx, "filterAnalyzeFlags:"+c.name, map[string]interface{}{"args": out, "mode": int(mode)})
+	}
+
+	bts, _ := json.MarshalIndent(fx, "", "  ")
+	if err := os.WriteFile("/root/port/testdata/cli-pure-go.json", bts, 0644); err != nil { t.Fatal(err) }
+	t.Logf("wrote %d rows bytes=%d", len(fx.Rows), len(bts))
+}

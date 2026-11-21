@@ -1,0 +1,161 @@
+package linker
+
+// 第 152 批 Go 探针：statement 转换底座（shouldRemoveImportExportStmt / convertStmtsForChunk）。
+import (
+  "encoding/json"
+  "fmt"
+  "os"
+  "testing"
+
+  "github.com/evanw/esbuild/internal/ast"
+  "github.com/evanw/esbuild/internal/config"
+  "github.com/evanw/esbuild/internal/graph"
+  "github.com/evanw/esbuild/internal/js_ast"
+  "github.com/evanw/esbuild/internal/logger"
+  "github.com/evanw/esbuild/internal/runtime"
+)
+
+func scRef(s, i uint32) ast.Ref { return ast.Ref{SourceIndex: s, InnerIndex: i} }
+
+// ---- stmt dump IR ----
+func scExpr(e js_ast.Expr) interface{} {
+  switch d := e.Data.(type) {
+  case *js_ast.ERequireString:
+    return []interface{}{"require", d.ImportRecordIndex}
+  case *js_ast.EIdentifier:
+    return []interface{}{"id", d.Ref.SourceIndex, d.Ref.InnerIndex}
+  case *js_ast.EDot:
+    return []interface{}{"dot", scExpr(d.Target), d.Name}
+  case *js_ast.ECall:
+    args := []interface{}{}
+    for _, a := range d.Args { args = append(args, scExpr(a)) }
+    return []interface{}{"call", scExpr(d.Target), args}
+  case *js_ast.EAwait:
+    return []interface{}{"await", scExpr(d.Value)}
+  }
+  return []interface{}{"expr"}
+}
+func scStmt(s js_ast.Stmt) interface{} {
+  switch d := s.Data.(type) {
+  case *js_ast.SImport:
+    items := []interface{}{}
+    if d.Items != nil { for _, it := range *d.Items { items = append(items, []interface{}{it.OriginalName, it.Alias}) } }
+    return []interface{}{"import", d.NamespaceRef.SourceIndex, d.NamespaceRef.InnerIndex, d.ImportRecordIndex, items}
+  case *js_ast.SExportStar:
+    alias := interface{}(nil)
+    if d.Alias != nil { alias = []interface{}{d.Alias.OriginalName, d.Alias.Loc.Start} }
+    return []interface{}{"exportStar", alias, d.NamespaceRef.SourceIndex, d.NamespaceRef.InnerIndex, d.ImportRecordIndex}
+  case *js_ast.SExportFrom:
+    items := []interface{}{}
+    for _, it := range d.Items { items = append(items, []interface{}{it.OriginalName, it.Alias}) }
+    return []interface{}{"exportFrom", items, d.NamespaceRef.SourceIndex, d.ImportRecordIndex, d.IsSingleLine}
+  case *js_ast.SExportClause:
+    items := []interface{}{}
+    for _, it := range d.Items { items = append(items, []interface{}{it.Alias}) }
+    return []interface{}{"exportClause", items}
+  case *js_ast.SFunction:
+    name := interface{}(nil); if d.Fn.Name != nil { name = fmt.Sprintf("%d:%d", d.Fn.Name.Ref.SourceIndex, d.Fn.Name.Ref.InnerIndex) }
+    return []interface{}{"function", name, d.IsExport}
+  case *js_ast.SClass:
+    name := interface{}(nil); if d.Class.Name != nil { name = fmt.Sprintf("%d:%d", d.Class.Name.Ref.SourceIndex, d.Class.Name.Ref.InnerIndex) }
+    return []interface{}{"class", name, d.IsExport}
+  case *js_ast.SLocal:
+    kind := int(d.Kind)
+    decls := []interface{}{}
+    for _, dc := range d.Decls { decls = append(decls, scExpr(dc.ValueOrNil)) }
+    return []interface{}{"local", kind, d.IsExport, decls}
+  case *js_ast.SExportDefault:
+    return []interface{}{"exportDefault", fmt.Sprintf("%d:%d", d.DefaultName.Ref.SourceIndex, d.DefaultName.Ref.InnerIndex), scStmt(d.Value)}
+  case *js_ast.SExpr:
+    return []interface{}{"expr", scExpr(d.Value)}
+  }
+  return []interface{}{"other"}
+}
+func dumpStmtList(sl stmtList) interface{} {
+  dump := func(ss []js_ast.Stmt) []interface{} { out := []interface{}{}; for _, s := range ss { out = append(out, scStmt(s)) }; return out }
+  return map[string]interface{}{"prefix": dump(sl.insideWrapperPrefix), "suffix": dump(sl.insideWrapperSuffix), "outside": dump(sl.outsideWrapperPrefix)}
+}
+
+type scCtxSpec struct {
+  wrap graph.WrapKind
+  isEntry bool
+  outputFormat config.Format
+  mode config.Mode
+  otherWrap graph.WrapKind
+  otherLive bool
+  otherExportsKind js_ast.ExportsKind
+  external bool
+  shouldNotRemove bool // module.exports self-import case
+}
+func scBuild(spec scCtxSpec) (*linkerContext, uint32) {
+  c := &linkerContext{}
+  c.graph.Files = make([]graph.LinkerFile, 3)
+  // runtime file at index 0 with __reExport symbol
+  rt := &graph.JSRepr{AST: js_ast.AST{ModuleScope: &js_ast.Scope{}}}
+  rt.AST.ModuleScope.Members = map[string]js_ast.ScopeMember{"__reExport": {Ref: scRef(0, 100)}}
+  c.graph.Files[runtime.SourceIndex].InputFile.Repr = rt
+  // file 1: importing file
+  repr := &graph.JSRepr{AST: js_ast.AST{ExportsRef: scRef(1, 9), ModuleScope: &js_ast.Scope{}, ExportsKind: js_ast.ExportsESM}}
+  repr.Meta.Wrap = spec.wrap
+  c.graph.Files[1].InputFile.Repr = repr
+  _ = spec.isEntry
+  c.unboundModuleRef = scRef(0, 50)
+  c.options = &config.Options{Mode: spec.mode, OutputFormat: spec.outputFormat}
+  // import record
+  rec := ast.ImportRecord{Kind: ast.ImportStmt, Flags: ast.CallsRunTimeReExportFn}
+  if !spec.external { rec.SourceIndex = ast.MakeIndex32(2) }
+  repr.AST.ImportRecords = []ast.ImportRecord{rec}
+  // file 2: other
+  other := &graph.JSRepr{AST: js_ast.AST{ExportsRef: scRef(2, 8), WrapperRef: scRef(2, 7), ModuleScope: &js_ast.Scope{}, ExportsKind: spec.otherExportsKind}}
+  other.Meta.Wrap = spec.otherWrap
+  c.graph.Files[2].InputFile.Repr = other
+  c.graph.Files[2].IsLive = spec.otherLive
+  return c, 1
+}
+
+type scRow struct { Fn string `json:"fn"`; Arg map[string]interface{} `json:"arg"`; Out interface{} `json:"out"` }
+func TestTmpGenStmtConvert(t *testing.T) {
+  var out []scRow
+  add := func(fn string, arg map[string]interface{}, o interface{}) { out = append(out, scRow{fn, arg, o}) }
+
+  // shouldRemoveImportExportStmt across wrap modes
+  for _, wrap := range []graph.WrapKind{graph.WrapNone, graph.WrapCJS, graph.WrapESM} {
+    for _, external := range []bool{false, true} {
+      c, si := scBuild(scCtxSpec{wrap: wrap, otherWrap: graph.WrapCJS, otherLive: true, external: external, outputFormat: config.FormatESModule, mode: config.ModeBundle})
+      sl := stmtList{}
+      removed := c.shouldRemoveImportExportStmt(si, &sl, logger.Loc{Start: 5}, scRef(1, 3), 0)
+      add("shouldRemoveImportExportStmt", map[string]interface{}{"wrap": int(wrap), "external": external},
+        map[string]interface{}{"removed": removed, "list": dumpStmtList(sl)})
+    }
+  }
+
+  // convertStmtsForChunk: SFunction export strip + SLocal export strip + SImport external + SExportClause
+  scenarios := []struct{ name string; spec scCtxSpec; stmts []js_ast.Stmt }{
+    {"stripExports", scCtxSpec{wrap: graph.WrapNone, isEntry: false, outputFormat: config.FormatESModule, mode: config.ModeBundle, otherWrap: graph.WrapNone, otherLive: true, external: true},
+      []js_ast.Stmt{
+        {Loc: logger.Loc{Start: 1}, Data: &js_ast.SFunction{Fn: js_ast.Fn{Name: &ast.LocRef{Ref: scRef(1, 10)}}, IsExport: true}},
+        {Loc: logger.Loc{Start: 2}, Data: &js_ast.SLocal{IsExport: true, Kind: js_ast.LocalConst}},
+      }},
+    {"esmWrap", scCtxSpec{wrap: graph.WrapESM, isEntry: false, outputFormat: config.FormatESModule, mode: config.ModeBundle, otherWrap: graph.WrapNone, otherLive: true, external: true},
+      []js_ast.Stmt{
+        {Loc: logger.Loc{Start: 3}, Data: &js_ast.SImport{NamespaceRef: scRef(1, 3), ImportRecordIndex: 0}},
+        {Loc: logger.Loc{Start: 4}, Data: &js_ast.SExportClause{Items: []js_ast.ClauseItem{{Alias: "x"}}}},
+      }},
+    {"exportDefault", scCtxSpec{wrap: graph.WrapNone, isEntry: false, outputFormat: config.FormatESModule, mode: config.ModeBundle, external: true},
+      []js_ast.Stmt{
+        {Loc: logger.Loc{Start: 5}, Data: &js_ast.SExportDefault{DefaultName: ast.LocRef{Ref: scRef(1, 20)}, Value: js_ast.Stmt{Data: &js_ast.SExpr{Value: js_ast.Expr{Data: &js_ast.EIdentifier{Ref: scRef(1, 21)}}}}}},
+      }},
+  }
+  for _, sc := range scenarios {
+    c, si := scBuild(sc.spec)
+    sl := stmtList{}
+    c.convertStmtsForChunk(si, &sl, sc.stmts)
+    add("convertStmtsForChunk", map[string]interface{}{"scenario": sc.name}, dumpStmtList(sl))
+  }
+
+  b, err := json.MarshalIndent(out, "", "  ")
+  if err != nil { t.Fatal(err) }
+  if err := os.WriteFile("/root/port/testdata/stmt-convert-go.json", b, 0644); err != nil { t.Fatal(err) }
+  t.Logf("wrote %d rows, runtime.SourceIndex=%d", len(out), runtime.SourceIndex)
+  _ = fmt.Sprint
+}

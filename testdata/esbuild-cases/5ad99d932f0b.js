@@ -1,0 +1,1 @@
+let a; a.x ? b(c) : b(d)

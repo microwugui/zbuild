@@ -1,0 +1,56 @@
+package js_parser
+
+import (
+  "encoding/json"
+  "fmt"
+  "os"
+  "testing"
+
+  "github.com/evanw/esbuild/internal/js_lexer"
+  "github.com/evanw/esbuild/internal/logger"
+)
+
+// 第 35 轮 K-2 通道② Go 探针：把 type-skipper 在 lexer 上的字节推进钉死。
+// 对每个 TS 类型片段，用真实 lexer + newParser，定位到类型起点，调用 skipTypeScriptType，
+// 记录停止时的 token 序列 + loc（字节偏移），供 TS 侧直调逐字节比对。
+func TestTmpGenK2(t *testing.T) {
+  type row struct {
+    Input string `json:"input"`
+    Tokens []int `json:"tokens"`
+    Locs []int `json:"locs"`
+    FinalTok int `json:"finalTok"`
+    FinalStart int `json:"finalStart"`
+  }
+  inputs := []string{
+    "number", "string | number", "A & B & C", "{ a: number; b?: string }",
+    "Foo<number, string>", "number[]", "[number, string]", "(a: number) => string",
+    "<T extends string>(x: T) => T", "typeof x.y", "import('fs')", "keyof T",
+    "readonly string[]", "unique symbol", "T extends U ? X : Y",
+    "new () => Foo", "{ [K in keyof T]: T[K] }", "'a' | 'b'", "-123",
+    "any", "never", "unknown", "void", "this", "abstract new () => Foo",
+    "asserts x", "infer T", "{ foo(): number; bar: string }", "{ [key: string]: number }",
+    "Array<Array<number>>", "number | undefined", "boolean", "bigint", "symbol",
+    "(number | string)", "A.B.C", "A<number>.B", "x! ",
+  }
+  var out []row
+  for _, in := range inputs {
+    func() {
+    defer func(){ if r:=recover(); r!=nil { out = append(out, row{in, nil, nil, -1, -1}) } }()
+    source := logger.Source{Index: 0, KeyPath: logger.Path{Text: "<stdin>"}, Contents: in}
+    log := logger.NewDeferLog(logger.DeferLogNoVerboseOrDebug, nil)
+    options := Options{}
+    options.ts.Parse = true
+    lexer := js_lexer.NewLexer(log, source, options.ts)
+    p := newParser(log, source, lexer, &options)
+    // NewLexer 已定位到第一个 token；直接跑 skipper
+    p.skipTypeScriptType(0) // js_ast.LLowest
+    // 记录停止时的 token 与字节偏移（skipper 消费到哪里）
+    tok := int(p.lexer.Token)
+    loc := int(p.lexer.Loc().Start)
+    out = append(out, row{in, []int{tok}, []int{loc}, tok, loc})
+    }()
+  }
+  raw, _ := json.Marshal(out)
+  os.WriteFile("/tmp/genk2.json", raw, 0644)
+  fmt.Printf("rows=%d\n", len(out))
+}

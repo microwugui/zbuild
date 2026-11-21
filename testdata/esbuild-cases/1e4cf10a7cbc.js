@@ -1,0 +1,1 @@
+try { throw 1 } catch (x) { y(x); var x = 2; y(x) }

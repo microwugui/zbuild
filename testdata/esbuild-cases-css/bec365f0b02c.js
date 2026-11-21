@@ -1,0 +1,1 @@
+.xy { :where(.foo + &) { color: red } }

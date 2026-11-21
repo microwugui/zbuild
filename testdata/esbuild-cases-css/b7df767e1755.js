@@ -1,0 +1,1 @@
+@scope to a { div { color: red } }

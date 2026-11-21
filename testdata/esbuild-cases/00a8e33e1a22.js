@@ -1,0 +1,1 @@
+import {x as 𐀀} from 'path'

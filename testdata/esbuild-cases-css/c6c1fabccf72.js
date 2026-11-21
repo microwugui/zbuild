@@ -1,0 +1,1 @@
+@media screen or (color) {}

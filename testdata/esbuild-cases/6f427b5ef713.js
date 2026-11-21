@@ -1,0 +1,1 @@
+switch (x) { /* 1 */ case 1: /* 2 */ case 2: /* default */ default: break }

@@ -1,0 +1,41 @@
+package js_parser
+
+// 第 107 轮 Go 探针：parser.logExprErrors（三分支：default 值 / ?后 / array spread feature）。
+import ("encoding/json";"os";"testing"
+ "github.com/evanw/esbuild/internal/compat"
+ "github.com/evanw/esbuild/internal/js_lexer"
+ "github.com/evanw/esbuild/internal/logger"
+)
+
+type leMsg struct { Text string `json:"text"`; Kind int `json:"kind"`; Start int `json:"start"`; Len int `json:"len"` }
+type leRow struct { Name string `json:"name"`; Msgs []leMsg `json:"msgs"` }
+
+func TestTmpGenLogExpr107(t *testing.T){
+  srcText:="abc = ? ..."
+  mkParser:=func(log logger.Log, features compat.JSFeature) *parser {
+    src:=logger.Source{Contents:srcText,KeyPath:logger.Path{Text:"<stdin>"}}
+    opts:=&Options{optionsThatSupportStructuralEquality:optionsThatSupportStructuralEquality{unsupportedJSFeatures:features}}
+    return newParser(log,src,js_lexer.Lexer{},opts)
+  }
+  rows:=[]leRow{}
+  run:=func(name string, features compat.JSFeature, setup func(*deferredErrors)) {
+    log:=logger.NewDeferLog(logger.DeferLogAll,nil)
+    p:=mkParser(log,features)
+    errs:=&deferredErrors{}
+    setup(errs)
+    p.logExprErrors(errs)
+    r:=leRow{Name:name,Msgs:[]leMsg{}}
+    for _,m:=range log.Done(){st:=0;ln:=0;if m.Data.Location!=nil{st=m.Data.Location.Column;ln=m.Data.Location.Length};r.Msgs=append(r.Msgs,leMsg{m.Data.Text,int(m.Kind),st,ln})}
+    rows=append(rows,r)
+  }
+  rng:=func(start,len int32)logger.Range{return logger.Range{Loc:logger.Loc{Start:start},Len:len}}
+  run("default-value",0,func(e *deferredErrors){e.invalidExprDefaultValue=rng(1,1)})
+  run("after-question",0,func(e *deferredErrors){e.invalidExprAfterQuestion=rng(0,3)}) // src[0:3]="abc"
+  run("array-spread-unsupported",compat.ArraySpread,func(e *deferredErrors){e.arraySpreadFeature=rng(0,1)})
+  run("array-spread-supported",0,func(e *deferredErrors){e.arraySpreadFeature=rng(0,1)})
+  run("all-three",compat.ArraySpread,func(e *deferredErrors){e.invalidExprDefaultValue=rng(1,1);e.invalidExprAfterQuestion=rng(0,3);e.arraySpreadFeature=rng(0,1)})
+  run("none",0,func(e *deferredErrors){})
+  b,err:=json.MarshalIndent(rows,"","  ");if err!=nil{t.Fatal(err)}
+  if err:=os.WriteFile("/root/port/testdata/log-expr-go.json",b,0644);err!=nil{t.Fatal(err)}
+  t.Logf("wrote %d rows bytes=%d",len(rows),len(b))
+}

@@ -1,0 +1,1 @@
+for (x of y) z: switch (1) { case 0: a(); break z; default: b(); break z }

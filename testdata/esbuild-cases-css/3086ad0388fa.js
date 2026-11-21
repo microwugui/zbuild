@@ -1,0 +1,1 @@
+@media (2px > width >= 1px) { a { color: red } }

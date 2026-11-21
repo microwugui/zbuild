@@ -1,0 +1,1 @@
+@media( color )or( opacity ){}

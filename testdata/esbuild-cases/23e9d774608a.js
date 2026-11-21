@@ -1,0 +1,1 @@
+a = BigInt(b ? 0n : 1n)

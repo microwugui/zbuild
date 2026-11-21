@@ -1,0 +1,1 @@
+@media and { div { color: red } }

@@ -1,0 +1,1 @@
+@media ((a) and (b)) and (c) { a { color: red } }

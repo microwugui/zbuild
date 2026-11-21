@@ -1,0 +1,1 @@
+class Foo { ['prototype'] = 0 }

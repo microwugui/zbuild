@@ -1,0 +1,27 @@
+package cli
+// 第 103 轮 Go 探针：CLI 主循环 runImpl/Run 确定性字节契约（stdout / stderr / exit code）。
+// 重定向 os.Stdout/os.Stderr/os.Stdin 捕获；用例全为 stdin→stdout 或错误路径，不写文件。
+import ("encoding/hex";"encoding/json";"io";"os";"testing")
+type r103Row struct { Name string `json:"name"`; Exit int `json:"exit"`; Out string `json:"out"`; Err string `json:"err"` }
+func capture103(name string, args []string, stdin string) r103Row {
+  oldOut, oldErr, oldIn := os.Stdout, os.Stderr, os.Stdin
+  rout,wout,_:=os.Pipe(); rerr,werr,_:=os.Pipe()
+  os.Stdout=wout; os.Stderr=werr
+  tmp,_:=os.CreateTemp("","stdin"); tmp.WriteString(stdin); tmp.Seek(0,0); os.Stdin=tmp
+  code:=Run(args)
+  wout.Close(); werr.Close(); os.Stdout=oldOut; os.Stderr=oldErr; os.Stdin=oldIn; tmp.Close(); os.Remove(tmp.Name())
+  ob,_:=io.ReadAll(rout); eb,_:=io.ReadAll(rerr)
+  return r103Row{name,code,hex.EncodeToString(ob),hex.EncodeToString(eb)}
+}
+func TestTmpRunChain103(t *testing.T){
+  rows:=[]r103Row{
+    capture103("tx-ts", []string{"--loader=ts","--format=esm"}, "export const x = 1;\n"),
+    capture103("tx-minify", []string{"--minify-whitespace"}, "const value = 1; export {value};\n"),
+    capture103("bd-stdin", []string{"--bundle","--format=esm"}, "const x = 1; console.log(x);\n"),
+    capture103("tx-badflag", []string{"--no-such"}, "const x = 1;\n"),
+    capture103("bd-badflag", []string{"in.js","--no-such"}, ""),
+  }
+  out,_:=json.MarshalIndent(rows,"","  ")
+  if err:=os.WriteFile("/root/port/testdata/run-chain-go.json",out,0644);err!=nil{t.Fatal(err)}
+  t.Logf("wrote %d rows bytes=%d",len(rows),len(out))
+}

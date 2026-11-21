@@ -1,0 +1,107 @@
+[
+  {
+    "fn": "print",
+    "arg": "aGVsbG8=",
+    "out": "aGVsbG8="
+  },
+  {
+    "fn": "print",
+    "arg": "YQpi",
+    "out": "YQpi"
+  },
+  {
+    "fn": "print",
+    "arg": "5pel5pys6Kqe",
+    "out": "5pel5pys6Kqe"
+  },
+  {
+    "fn": "print",
+    "arg": "",
+    "out": ""
+  },
+  {
+    "fn": "printIndent",
+    "arg": "2|0",
+    "out": "ICAgIA=="
+  },
+  {
+    "fn": "printIndent",
+    "arg": "5|0",
+    "out": "ICAgICAgICAgIA=="
+  },
+  {
+    "fn": "printIndent",
+    "arg": "10|20",
+    "out": "ICAgICAgICAgICAgICAgICAgICA="
+  },
+  {
+    "fn": "printIndent",
+    "arg": "3|4",
+    "out": "ICAgIA=="
+  },
+  {
+    "fn": "printIndent",
+    "arg": "0|0",
+    "out": ""
+  },
+  {
+    "fn": "printNthIndex",
+    "arg": "1|",
+    "out": "n"
+  },
+  {
+    "fn": "printNthIndex",
+    "arg": "-1|",
+    "out": "-n"
+  },
+  {
+    "fn": "printNthIndex",
+    "arg": "2|",
+    "out": "2n"
+  },
+  {
+    "fn": "printNthIndex",
+    "arg": "|odd",
+    "out": "odd"
+  },
+  {
+    "fn": "printNthIndex",
+    "arg": "1|0",
+    "out": "n+0"
+  },
+  {
+    "fn": "printNthIndex",
+    "arg": "2|-3",
+    "out": "2n-3"
+  },
+  {
+    "fn": "printNthIndex",
+    "arg": "3|5",
+    "out": "3n+5"
+  },
+  {
+    "fn": "printNthIndex",
+    "arg": "1|2",
+    "out": "n+2"
+  },
+  {
+    "fn": "currentLineLength",
+    "arg": "YWJjCmRlZg==|0",
+    "out": "3|4"
+  },
+  {
+    "fn": "currentLineLength",
+    "arg": "YWJjCmRlZg==|4",
+    "out": "7|0"
+  },
+  {
+    "fn": "currentLineLength",
+    "arg": "bm8gbmV3bGluZQ==|0",
+    "out": "10|0"
+  },
+  {
+    "fn": "currentLineLength",
+    "arg": "YQ0KYg==|0",
+    "out": "1|3"
+  }
+]

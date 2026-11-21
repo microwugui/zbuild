@@ -1,0 +1,1 @@
+a { div.major { color: blue } color: red }

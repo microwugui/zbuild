@@ -1,0 +1,1 @@
+@media (resolution >= calc(3x - 1x)) { a { color: red } }

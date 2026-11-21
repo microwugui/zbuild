@@ -1,0 +1,1 @@
+a { box-shadow: yellow 1px 0px 1px 0px inset }

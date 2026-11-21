@@ -1,0 +1,37 @@
+[
+  {
+    "fn": "index",
+    "case": "path1",
+    "out": "b"
+  },
+  {
+    "fn": "index",
+    "case": "buf2",
+    "out": "z"
+  },
+  {
+    "fn": "append",
+    "case": "abc+abc",
+    "out": "abc"
+  },
+  {
+    "fn": "append",
+    "case": "abc+aXc",
+    "out": "aXc"
+  },
+  {
+    "fn": "append",
+    "case": "abc+AXC",
+    "out": "AXC"
+  },
+  {
+    "fn": "string",
+    "case": "nobuf",
+    "out": "VOLpath"
+  },
+  {
+    "fn": "string",
+    "case": "buf",
+    "out": "VOLXY"
+  }
+]

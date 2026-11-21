@@ -1,0 +1,27 @@
+[
+  {
+    "name": "direct",
+    "rel": "real/a.js",
+    "err": ""
+  },
+  {
+    "name": "symlink-dir",
+    "rel": "real/a.js",
+    "err": ""
+  },
+  {
+    "name": "dot-clean",
+    "rel": "real/a.js",
+    "err": ""
+  },
+  {
+    "name": "missing",
+    "rel": "",
+    "err": "err"
+  },
+  {
+    "name": "broken",
+    "rel": "",
+    "err": "err"
+  }
+]

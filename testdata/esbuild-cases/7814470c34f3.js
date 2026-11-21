@@ -1,0 +1,1 @@
+class Foo { x = class { arguments = 1 } }

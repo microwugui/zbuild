@@ -1,0 +1,291 @@
+[
+  {
+    "fn": "containsLocalOrGlobalSelector",
+    "a": {
+      "sels": [
+        {
+          "sub": [
+            {
+              "ty": "pseudo",
+              "name": "local"
+            }
+          ]
+        }
+      ]
+    },
+    "b": null,
+    "flag": false,
+    "out": true
+  },
+  {
+    "fn": "containsLocalOrGlobalSelector",
+    "a": {
+      "sels": [
+        {
+          "sub": [
+            {
+              "ty": "list"
+            }
+          ]
+        }
+      ]
+    },
+    "b": null,
+    "flag": false,
+    "out": true
+  },
+  {
+    "fn": "containsLocalOrGlobalSelector",
+    "a": {
+      "sels": [
+        {
+          "ts": "div",
+          "sub": [
+            {
+              "ty": "pseudo",
+              "name": "hover"
+            }
+          ]
+        }
+      ]
+    },
+    "b": null,
+    "flag": false,
+    "out": false
+  },
+  {
+    "fn": "analyzeLeadingAmpersand",
+    "a": {
+      "sels": [
+        {
+          "nest": 1
+        },
+        {
+          "ts": "div"
+        }
+      ]
+    },
+    "b": null,
+    "flag": false,
+    "out": 1
+  },
+  {
+    "fn": "analyzeLeadingAmpersand",
+    "a": {
+      "sels": [
+        {
+          "nest": 1
+        },
+        {
+          "ts": "div",
+          "cb": 32
+        }
+      ]
+    },
+    "b": null,
+    "flag": true,
+    "out": 1
+  },
+  {
+    "fn": "analyzeLeadingAmpersand",
+    "a": {
+      "sels": [
+        {
+          "nest": 1
+        }
+      ]
+    },
+    "b": null,
+    "flag": false,
+    "out": 0
+  },
+  {
+    "fn": "compoundSelectorTermCount",
+    "a": {
+      "sels": [
+        {
+          "ts": "div",
+          "sub": [
+            {
+              "ty": "pseudo",
+              "name": "hover"
+            },
+            {
+              "ty": "list",
+              "kind": 2,
+              "sels": [
+                {
+                  "sels": [
+                    {
+                      "ts": "a",
+                      "sub": [
+                        {
+                          "ty": "pseudo",
+                          "name": "x"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "b": null,
+    "flag": false,
+    "out": 3
+  },
+  {
+    "fn": "complexSelectorTermCount",
+    "a": {
+      "sels": [
+        {
+          "ts": "div",
+          "sub": [
+            {
+              "ty": "pseudo",
+              "name": "hover"
+            },
+            {
+              "ty": "list",
+              "kind": 2,
+              "sels": [
+                {
+                  "sels": [
+                    {
+                      "ts": "a",
+                      "sub": [
+                        {
+                          "ty": "pseudo",
+                          "name": "x"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "b": null,
+    "flag": false,
+    "out": 3
+  },
+  {
+    "fn": "mergeCompoundSelectors",
+    "a": {
+      "ts": "div",
+      "sub": [
+        {
+          "ty": "pseudo",
+          "name": "foo"
+        }
+      ]
+    },
+    "b": {
+      "ts": "span"
+    },
+    "flag": false,
+    "out": [
+      [
+        "div",
+        [
+          [
+            "pseudo",
+            "foo"
+          ],
+          [
+            "list",
+            2,
+            [
+              [
+                [
+                  "span",
+                  [],
+                  0,
+                  0,
+                  false
+                ]
+              ]
+            ]
+          ]
+        ],
+        0,
+        0,
+        false
+      ]
+    ]
+  },
+  {
+    "fn": "mergeCompoundSelectors",
+    "a": {
+      "sub": [
+        {
+          "ty": "pseudo",
+          "name": "foo"
+        }
+      ]
+    },
+    "b": {
+      "ts": "div"
+    },
+    "flag": false,
+    "out": [
+      [
+        "div",
+        [
+          [
+            "pseudo",
+            "foo"
+          ]
+        ],
+        0,
+        0,
+        false
+      ]
+    ]
+  },
+  {
+    "fn": "mergeCompoundSelectors",
+    "a": {
+      "sub": [
+        {
+          "ty": "pseudo",
+          "name": "foo"
+        }
+      ]
+    },
+    "b": {
+      "nest": 1,
+      "sub": [
+        {
+          "ty": "pseudo",
+          "name": "bar"
+        }
+      ]
+    },
+    "flag": false,
+    "out": [
+      [
+        null,
+        [
+          [
+            "pseudo",
+            "foo"
+          ],
+          [
+            "pseudo",
+            "bar"
+          ]
+        ],
+        1,
+        0,
+        false
+      ]
+    ]
+  }
+]

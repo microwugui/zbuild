@@ -1,0 +1,128 @@
+package bundler
+
+// 第 116 轮 Go 探针：Bundle.Compile 的真 1:1 确定性核心（注入 link 回调）。
+// 验：output 分组拼接、覆盖检测（Refusing to overwrite input）、重复输出去重（CanBeMerged）、
+// metafile 生成（generateMetadataJSON 已端口）。dump 最终 outputFiles + metafile + 错误。
+import (
+	"encoding/base64"
+	"encoding/json"
+	"os"
+	"testing"
+
+	"github.com/evanw/esbuild/internal/ast"
+	"github.com/evanw/esbuild/internal/cache"
+	"github.com/evanw/esbuild/internal/config"
+	"github.com/evanw/esbuild/internal/fs"
+	"github.com/evanw/esbuild/internal/graph"
+	"github.com/evanw/esbuild/internal/helpers"
+	"github.com/evanw/esbuild/internal/js_ast"
+	"github.com/evanw/esbuild/internal/logger"
+	"github.com/evanw/esbuild/internal/resolver"
+)
+
+type compileRow struct {
+	Name        string   `json:"name"`
+	Outputs     []string `json:"outputs"`   // base64(absPath + "\0" + contents)
+	Metafile    string   `json:"metafile"`  // base64
+	Errors      []string `json:"errors"`
+}
+
+func TestTmpGenCompile116(t *testing.T) {
+	mock := fs.MockFS(map[string]string{}, fs.MockUnix, "/")
+	type tc struct {
+		name       string
+		writeToStdout bool
+		needsMeta  bool
+		allowOverwrite bool
+		api logger.APIKind
+		// link returns these outputs
+		linkOutputs []graph.OutputFile
+		// input files (source abs paths) for overwrite check
+		inputAbs []string
+		entryCount int
+	}
+	_ = ast.InvalidRef
+	_ = cache.MakeCacheSet
+	_ = js_ast.ExportsNone
+
+	cases := []tc{
+		{"basic", false, false, false, logger.CLIAPI, []graph.OutputFile{
+			{AbsPath: "/out/a.js", Contents: []byte("console.log(1)")},
+		}, nil, 1},
+		{"two-entries-group", false, false, false, logger.CLIAPI, []graph.OutputFile{
+			{AbsPath: "/out/a.js", Contents: []byte("a")},
+			{AbsPath: "/out/b.js", Contents: []byte("b")},
+		}, nil, 1},
+		{"dedup-merged", false, false, false, logger.CLIAPI, []graph.OutputFile{
+			{AbsPath: "/out/a.js", Contents: []byte("same"), CanBeMerged: true},
+			{AbsPath: "/out/a.js", Contents: []byte("same"), CanBeMerged: true},
+		}, nil, 1},
+		{"overwrite-input", false, false, false, logger.CLIAPI, []graph.OutputFile{
+			{AbsPath: "/src/a.js", Contents: []byte("out")},
+		}, []string{"/src/a.js"}, 1},
+		{"allow-overwrite", false, false, true, logger.CLIAPI, []graph.OutputFile{
+			{AbsPath: "/src/a.js", Contents: []byte("out")},
+		}, []string{"/src/a.js"}, 1},
+	}
+
+	rows := []compileRow{}
+	for _, c := range cases {
+		log := logger.NewDeferLog(logger.DeferLogAll, nil)
+		oldAPI := logger.API
+		logger.API = c.api
+		// build Bundle with one input file per inputAbs (Source.KeyPath namespace=file) + runtime slot 0
+		bundle := Bundle{
+			fs: mock,
+			uniqueKeyPrefix: "key",
+			options: config.Options{
+				WriteToStdout: c.writeToStdout, NeedsMetafile: c.needsMeta,
+				AllowOverwrite: c.allowOverwrite, CodeSplitting: true,
+			},
+			entryPoints: []graph.EntryPoint{},
+		}
+		// results/files: index 0 runtime + one per inputAbs
+		bundle.files = []scannerFile{}
+		runtimeInput := graph.InputFile{Source: logger.Source{KeyPath: logger.Path{Text: "<runtime>"}}, Repr: &graph.JSRepr{}}
+		bundle.files = append(bundle.files, scannerFile{inputFile: runtimeInput})
+		for _, abs := range c.inputAbs {
+			inp := graph.InputFile{Source: logger.Source{KeyPath: logger.Path{Text: abs, Namespace: "file"}}, Repr: &graph.JSRepr{}}
+			bundle.files = append(bundle.files, scannerFile{inputFile: inp})
+		}
+		// entryPoints: point to runtime (index 0) so findReachableFiles returns [0]
+		entryIdx := uint32(0)
+		if len(c.inputAbs) > 0 { entryIdx = uint32(len(bundle.files) - 1) }
+		for i := 0; i < c.entryCount; i++ {
+			bundle.entryPoints = append(bundle.entryPoints, graph.EntryPoint{SourceIndex: entryIdx})
+		}
+		linkCalls := 0
+		linkFn := func(options *config.Options, timer *helpers.Timer, log logger.Log, fs fs.FS, res *resolver.Resolver,
+			inputFiles []graph.InputFile, entryPoints []graph.EntryPoint, uniqueKey string,
+			reachable []uint32, dataForSourceMaps func() []DataForSourceMap) []graph.OutputFile {
+			linkCalls++
+			out := make([]graph.OutputFile, len(c.linkOutputs))
+			copy(out, c.linkOutputs)
+			return out
+		}
+		outputs, metafile := bundle.Compile(log, &helpers.Timer{}, map[string]interface{}{}, linkFn)
+		logger.API = oldAPI
+
+		outs := []string{}
+		for _, o := range outputs {
+			blob := append([]byte(o.AbsPath), 0)
+			blob = append(blob, o.Contents...)
+			outs = append(outs, base64.StdEncoding.EncodeToString(blob))
+		}
+		errs := []string{}
+		for _, m := range log.Done() {
+			errs = append(errs, m.Data.Text)
+		}
+		rows = append(rows, compileRow{c.name, outs, base64.StdEncoding.EncodeToString([]byte(metafile)), errs})
+	}
+	b, _ := json.MarshalIndent(rows, "", "  ")
+	if err := os.WriteFile("/root/port/testdata/compile-go.json", b, 0644); err != nil {
+		t.Fatal(err)
+	}
+	for _, r := range rows {
+		t.Logf("%-18s outputs=%d errors=%v meta=%d", r.Name, len(r.Outputs), r.Errors, len(r.Metafile))
+	}
+}

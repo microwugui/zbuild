@@ -1,0 +1,1 @@
+.card { .featured & & & { color: red } }

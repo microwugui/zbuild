@@ -1,0 +1,1 @@
+let a; return a != undefined ? a.b : undefined

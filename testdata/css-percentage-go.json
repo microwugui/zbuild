@@ -1,0 +1,110 @@
+[
+  {
+    "fn": "NumberOrFractionForPercentage",
+    "text": "50",
+    "kind": 30,
+    "ref": 100,
+    "flags": 0,
+    "out": "50.000000",
+    "ok": true
+  },
+  {
+    "fn": "NumberOrFractionForPercentage",
+    "text": "0.5",
+    "kind": 30,
+    "ref": 100,
+    "flags": 0,
+    "out": "0.500000",
+    "ok": true
+  },
+  {
+    "fn": "NumberOrFractionForPercentage",
+    "text": "-10",
+    "kind": 30,
+    "ref": 100,
+    "flags": 0,
+    "out": "-10.000000",
+    "ok": true
+  },
+  {
+    "fn": "NumberOrFractionForPercentage",
+    "text": "50%",
+    "kind": 34,
+    "ref": 100,
+    "flags": 0,
+    "out": "50.000000",
+    "ok": true
+  },
+  {
+    "fn": "NumberOrFractionForPercentage",
+    "text": "150%",
+    "kind": 34,
+    "ref": 100,
+    "flags": 0,
+    "out": "100.000000",
+    "ok": true
+  },
+  {
+    "fn": "NumberOrFractionForPercentage",
+    "text": "-10%",
+    "kind": 34,
+    "ref": 100,
+    "flags": 0,
+    "out": "0.000000",
+    "ok": true
+  },
+  {
+    "fn": "NumberOrFractionForPercentage",
+    "text": "25%",
+    "kind": 34,
+    "ref": 360,
+    "flags": 0,
+    "out": "90.000000",
+    "ok": true
+  },
+  {
+    "fn": "NumberOrFractionForPercentage",
+    "text": "150%",
+    "kind": 34,
+    "ref": 100,
+    "flags": 2,
+    "out": "150.000000",
+    "ok": true
+  },
+  {
+    "fn": "ClampedFractionForPercentage",
+    "text": "50%",
+    "kind": 34,
+    "ref": 0,
+    "flags": 0,
+    "out": "0.500000",
+    "ok": true
+  },
+  {
+    "fn": "ClampedFractionForPercentage",
+    "text": "150%",
+    "kind": 34,
+    "ref": 0,
+    "flags": 0,
+    "out": "1.000000",
+    "ok": true
+  },
+  {
+    "fn": "ClampedFractionForPercentage",
+    "text": "-10%",
+    "kind": 34,
+    "ref": 0,
+    "flags": 0,
+    "out": "0.000000",
+    "ok": true
+  },
+  {
+    "fn": "ClampedFractionForPercentage",
+    "text": "50",
+    "kind": 30,
+    "ref": 0,
+    "flags": 0,
+    "out": "0.000000",
+    "ok": false
+  }
+]

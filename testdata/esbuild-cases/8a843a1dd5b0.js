@@ -1,0 +1,1 @@
+a(); if (b) throw c

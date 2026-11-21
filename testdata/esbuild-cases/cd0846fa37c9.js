@@ -1,0 +1,1 @@
+x: { class X { static { new X } } }

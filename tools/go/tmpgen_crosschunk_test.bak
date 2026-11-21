@@ -1,0 +1,205 @@
+package linker
+
+// 第 148 批 Go 探针：computeCrossChunkDependencies + sortedCrossChunkImports/Exports。
+// 构造 2 个 entry chunk，其中 file B 的 live part 使用 file A 声明的符号 → 跨 chunk import/export。
+import (
+  "encoding/json"
+  "fmt"
+  "os"
+  "sort"
+  "testing"
+
+  "github.com/evanw/esbuild/internal/ast"
+  "github.com/evanw/esbuild/internal/config"
+  "github.com/evanw/esbuild/internal/fs"
+  "github.com/evanw/esbuild/internal/graph"
+  "github.com/evanw/esbuild/internal/js_ast"
+  "github.com/evanw/esbuild/internal/logger"
+  "github.com/evanw/esbuild/internal/renamer"
+)
+
+func xcRef(s, i uint32) ast.Ref { return ast.Ref{SourceIndex: s, InnerIndex: i} }
+
+// 构造一个 JS 输入：symbols[inner] 的 OriginalName，parts 按 spec，exports 别名列表。
+type xcPart struct {
+  declared []uint32              // top-level declared symbol inner indices
+  uses []uint32                  // symbol use inner indices (sourceIndex = this file)
+  importRecs []int               // import record source index or -1
+  dynamicRecs []int              // dynamic import record source index
+}
+type xcFile struct {
+  path string
+  parts []xcPart
+  symbols []string
+  exports []string              // export aliases -> symbol inner 0
+  exportAliases []string        // SortedAndFilteredExportAliases
+  forceExport bool
+}
+
+func xcBuild(specs []xcFile, entries []uint32, optsFn func(*config.Options)) *linkerContext {
+  inputs := make([]graph.InputFile, len(specs))
+  for si, sp := range specs {
+    syms := make([]ast.Symbol, len(sp.symbols))
+    for i, n := range sp.symbols { syms[i] = ast.Symbol{OriginalName: n, Link: ast.InvalidRef, Kind: ast.SymbolConst} }
+    parts := make([]js_ast.Part, len(sp.parts))
+    for pi, ps := range sp.parts {
+      p := js_ast.Part{SymbolUses: map[ast.Ref]js_ast.SymbolUse{}}
+      for _, d := range ps.declared { p.DeclaredSymbols = append(p.DeclaredSymbols, js_ast.DeclaredSymbol{Ref: xcRef(uint32(si), d), IsTopLevel: true}) }
+      for _, u := range ps.uses { p.SymbolUses[xcRef(uint32(si), u)] = js_ast.SymbolUse{CountEstimate: 1} }
+      for _, rec := range ps.importRecs {
+        r := ast.ImportRecord{Kind: ast.ImportStmt}
+        if rec >= 0 { r.SourceIndex = ast.MakeIndex32(uint32(rec)) }
+        p.ImportRecordIndices = append(p.ImportRecordIndices, uint32(len(parts[0].ImportRecordIndices))) // placeholder fixed below
+        _ = r
+      }
+      parts[pi] = p
+    }
+    // rebuild import records cleanly at AST level
+    parts = make([]js_ast.Part, len(sp.parts))
+    records := []ast.ImportRecord{}
+    for pi, ps := range sp.parts {
+      p := js_ast.Part{SymbolUses: map[ast.Ref]js_ast.SymbolUse{}}
+      for _, d := range ps.declared { p.DeclaredSymbols = append(p.DeclaredSymbols, js_ast.DeclaredSymbol{Ref: xcRef(uint32(si), d), IsTopLevel: true}) }
+      for _, u := range ps.uses { p.SymbolUses[xcRef(uint32(si), u)] = js_ast.SymbolUse{CountEstimate: 1} }
+      for _, rec := range ps.importRecs {
+        r := ast.ImportRecord{Kind: ast.ImportStmt}
+        if rec >= 0 { r.SourceIndex = ast.MakeIndex32(uint32(rec)) }
+        records = append(records, r)
+        p.ImportRecordIndices = append(p.ImportRecordIndices, uint32(len(records)-1))
+      }
+      for _, rec := range ps.dynamicRecs {
+        r := ast.ImportRecord{Kind: ast.ImportDynamic}
+        if rec >= 0 { r.SourceIndex = ast.MakeIndex32(uint32(rec)) }
+        records = append(records, r)
+        p.ImportRecordIndices = append(p.ImportRecordIndices, uint32(len(records)-1))
+      }
+      parts[pi] = p
+    }
+    named := map[string]js_ast.NamedExport{}
+    for _, e := range sp.exports { named[e] = js_ast.NamedExport{Ref: xcRef(uint32(si), 0)} }
+    repr := &graph.JSRepr{AST: js_ast.AST{
+      Symbols: syms, Parts: parts, ImportRecords: records, ModuleScope: &js_ast.Scope{},
+      NamedExports: named, ExportsRef: xcRef(uint32(si), 0),
+    }}
+    repr.Meta.SortedAndFilteredExportAliases = sp.exportAliases
+    repr.Meta.ForceIncludeExportsForEntryPoint = sp.forceExport
+    inp := graph.InputFile{Repr: repr, Source: logger.Source{KeyPath: logger.Path{Text: sp.path, Namespace: "file"}}}
+    inp.SideEffects.Kind = graph.HasSideEffects
+    inputs[si] = inp
+  }
+  eps := make([]graph.EntryPoint, len(entries))
+  for i, si := range entries { eps[i] = graph.EntryPoint{SourceIndex: si, OutputPath: fmt.Sprintf("e%d.js", i)} }
+  reachable := make([]uint32, len(specs)); for i := range reachable { reachable[i] = uint32(i) }
+  g := graph.CloneLinkerGraph(inputs, reachable, eps, true)
+  opts := &config.Options{
+    CodeSplitting: true, TreeShaking: true, OutputFormat: config.FormatESModule,
+    OutputExtensionJS: ".js", OutputExtensionCSS: ".css", AbsOutputBase: "/p",
+    EntryPathTemplate: []config.PathTemplate{{Data:"./",Placeholder:config.DirPlaceholder},{Data:"/",Placeholder:config.NamePlaceholder}},
+    ChunkPathTemplate: []config.PathTemplate{{Data:"./",Placeholder:config.NamePlaceholder},{Data:"-",Placeholder:config.HashPlaceholder}},
+  }
+  if optsFn != nil { optsFn(opts) }
+  c := &linkerContext{graph: g, options: opts, fs: fs.MockFS(map[string]string{}, fs.MockUnix, "/"), uniqueKeyPrefix: "TEST"}
+  c.treeShakingAndCodeSplitting()
+  c.computeChunks()
+  return c
+}
+
+type xcClause struct { Ref [2]uint32 `json:"ref"`; Alias string `json:"alias"` }
+type xcImportGroup struct { ChunkIndex uint32 `json:"chunkIndex"`; Items []xcClause `json:"items"` }
+type xcChunkDump struct {
+  Key string `json:"key"`
+  CrossImports []struct{Kind int `json:"kind"`; ChunkIndex uint32 `json:"chunkIndex"`} `json:"crossImports"`
+  Exports map[string]string `json:"exports"`   // "s:i" -> alias
+  ImportGroups []xcImportGroup `json:"importGroups"`
+  Prefix []xcClause `json:"prefix"`
+  Suffix []xcClause `json:"suffix"`
+}
+func dumpClauses(stmts []js_ast.Stmt) []xcClause {
+  out := []xcClause{}
+  for _, st := range stmts {
+    switch d := st.Data.(type) {
+    case *js_ast.SExportClause:
+      for _, it := range d.Items { out = append(out, xcClause{Ref: [2]uint32{it.Name.Ref.SourceIndex, it.Name.Ref.InnerIndex}, Alias: it.Alias}) }
+    case *js_ast.SImport:
+      if d.Items != nil { for _, it := range *d.Items { out = append(out, xcClause{Ref: [2]uint32{it.Name.Ref.SourceIndex, it.Name.Ref.InnerIndex}, Alias: it.Alias}) } }
+    }
+  }
+  return out
+}
+func xcDump(c *linkerContext) []xcChunkDump {
+  out := []xcChunkDump{}
+  for _, ch := range c.chunks {
+    d := xcChunkDump{Key: ch.uniqueKey, CrossImports: []struct{Kind int `json:"kind"`; ChunkIndex uint32 `json:"chunkIndex"`}{}, Exports: map[string]string{}, ImportGroups: []xcImportGroup{}, Prefix: []xcClause{}, Suffix: []xcClause{}}
+    for _, ci := range ch.crossChunkImports { d.CrossImports = append(d.CrossImports, struct{Kind int `json:"kind"`; ChunkIndex uint32 `json:"chunkIndex"`}{int(ci.importKind), ci.chunkIndex}) }
+    if r, ok := ch.chunkRepr.(*chunkReprJS); ok {
+      for ref, alias := range r.exportsToOtherChunks { d.Exports[fmt.Sprintf("%d:%d", ref.SourceIndex, ref.InnerIndex)] = alias }
+      for ci, items := range r.importsFromOtherChunks {
+        g := xcImportGroup{ChunkIndex: ci, Items: []xcClause{}}
+        for _, it := range items { g.Items = append(g.Items, xcClause{Ref: [2]uint32{it.ref.SourceIndex, it.ref.InnerIndex}, Alias: it.exportAlias}) }
+        sort.Slice(g.Items, func(a,b int) bool { return g.Items[a].Alias < g.Items[b].Alias })
+        d.ImportGroups = append(d.ImportGroups, g)
+      }
+      sort.Slice(d.ImportGroups, func(a,b int) bool { return d.ImportGroups[a].ChunkIndex < d.ImportGroups[b].ChunkIndex })
+      d.Prefix = dumpClauses(r.crossChunkPrefixStmts)
+      d.Suffix = dumpClauses(r.crossChunkSuffixStmts)
+    }
+    out = append(out, d)
+  }
+  return out
+}
+
+type xcRow struct { Fn string `json:"fn"`; Arg map[string]interface{} `json:"arg"`; Out interface{} `json:"out"` }
+
+func TestTmpGenCrossChunk(t *testing.T) {
+  var out []xcRow
+  add := func(fn string, arg map[string]interface{}, o interface{}) { out = append(out, xcRow{fn, arg, o}) }
+
+  // A: entry0 declares "shared", entry1 uses it -> cross-chunk import (ESM)
+  scenA := []xcFile{
+    {path:"/p/a.js", symbols:[]string{"shared"}, parts:[]xcPart{{declared:[]uint32{0}}}, exports:[]string{"shared"}, exportAliases:[]string{"shared"}},
+    {path:"/p/b.js", symbols:[]string{"b"}, parts:[]xcPart{{uses:[]uint32{0}}}},
+  }
+  // uses must reference source 0's symbol; our xcPart.uses uses this file's sourceIndex. Fix with a special cross source marker below.
+  // Rebuild scenario A with explicit cross-source uses via a dedicated builder tweak: use symbol ref (0,0) in file1.
+  {
+    // manually build file1 with use ref(0,0)
+    c := xcBuild(scenA, []uint32{0,1}, nil)
+    // patch: no symbol use crossing yet; add one directly on the cloned graph file1 part0
+    f1 := c.graph.Files[1].InputFile.Repr.(*graph.JSRepr)
+    f1.AST.Parts[0].SymbolUses[xcRef(0,0)] = js_ast.SymbolUse{CountEstimate: 1}
+    // recompute deps after mutation
+    c.computeCrossChunkDependencies()
+    add("computeCrossChunkDependencies", map[string]interface{}{"scenario":"A"}, xcDump(c))
+    _ = renamer.ExportRenamer{}
+  }
+
+  // B: minified aliases + entry that imports all its chunks (entry0 imports chunk via shared entry bits)
+  {
+    specs := []xcFile{
+      {path:"/p/a.js", symbols:[]string{"alpha","beta"}, parts:[]xcPart{{declared:[]uint32{0,1}}}, exports:[]string{"alpha","beta"}, exportAliases:[]string{"alpha","beta"}},
+      {path:"/p/b.js", symbols:[]string{"b"}, parts:[]xcPart{{}}},
+    }
+    c := xcBuild(specs, []uint32{0,1}, func(o *config.Options){ o.MinifyIdentifiers = true })
+    f1 := c.graph.Files[1].InputFile.Repr.(*graph.JSRepr)
+    f1.AST.Parts[0].SymbolUses[xcRef(0,0)] = js_ast.SymbolUse{CountEstimate: 1}
+    f1.AST.Parts[0].SymbolUses[xcRef(0,1)] = js_ast.SymbolUse{CountEstimate: 1}
+    c.computeCrossChunkDependencies()
+    add("computeCrossChunkDependencies", map[string]interface{}{"scenario":"B","minify":true}, xcDump(c))
+  }
+
+  // C: dynamic cross-chunk import tracked in crossChunkImports
+  {
+    specs := []xcFile{
+      {path:"/p/entry.js", symbols:[]string{"e"}, parts:[]xcPart{{dynamicRecs:[]int{1}}}},
+      {path:"/p/dyn.js", symbols:[]string{"d"}, parts:[]xcPart{{}}, exports:[]string{}, exportAliases:[]string{}},
+    }
+    c := xcBuild(specs, []uint32{0,1}, nil)
+    c.computeCrossChunkDependencies()
+    add("computeCrossChunkDependencies", map[string]interface{}{"scenario":"C"}, xcDump(c))
+  }
+
+  b, err := json.MarshalIndent(out, "", "  ")
+  if err != nil { t.Fatal(err) }
+  if err := os.WriteFile("/root/port/testdata/cross-chunk-deps-go.json", b, 0644); err != nil { t.Fatal(err) }
+  t.Logf("wrote %d rows", len(out))
+}

@@ -1,0 +1,1 @@
+export {default as foo, if as bar} from 'path'

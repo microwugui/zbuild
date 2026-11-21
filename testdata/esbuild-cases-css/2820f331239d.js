@@ -1,0 +1,1 @@
+.card { aspect-ratio: 3/4; @scope (&) { :scope { border: 1px solid white } } }

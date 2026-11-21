@@ -1,0 +1,77 @@
+[
+  {
+    "fn": "containsDeadSelectors",
+    "desc": "empty :is",
+    "out": true
+  },
+  {
+    "fn": "containsDeadSelectors",
+    "desc": "normal div",
+    "out": false
+  },
+  {
+    "fn": "containsDeadSelectors",
+    "desc": "plain then empty :is",
+    "out": true
+  },
+  {
+    "fn": "allSelectorsAreDead",
+    "desc": "all dead",
+    "out": true
+  },
+  {
+    "fn": "allSelectorsAreDead",
+    "desc": "one live",
+    "out": false
+  },
+  {
+    "fn": "isSafeSelectors",
+    "desc": "plain div",
+    "out": true
+  },
+  {
+    "fn": "isSafeSelectors",
+    "desc": "non-IE7 element",
+    "out": false
+  },
+  {
+    "fn": "isSafeSelectors",
+    "desc": "namespace",
+    "out": false
+  },
+  {
+    "fn": "isSafeSelectors",
+    "desc": "nesting",
+    "out": false
+  },
+  {
+    "fn": "isSafeSelectors",
+    "desc": "combinator",
+    "out": false
+  },
+  {
+    "fn": "isSafeSelectors",
+    "desc": "attribute modifier",
+    "out": false
+  },
+  {
+    "fn": "isSafeSelectors",
+    "desc": "focus",
+    "out": false
+  },
+  {
+    "fn": "isSafeSelectors",
+    "desc": "hover",
+    "out": true
+  },
+  {
+    "fn": "isSafeSelectors",
+    "desc": "pseudo with list",
+    "out": false
+  },
+  {
+    "fn": "isSafeSelectors",
+    "desc": "multiple",
+    "out": true
+  }
+]

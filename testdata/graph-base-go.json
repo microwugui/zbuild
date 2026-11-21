@@ -1,0 +1,409 @@
+[
+  {
+    "fn": "CloneLinkerGraph",
+    "arg": {
+      "codeSplit": false
+    },
+    "out": {
+      "entryPoints": [
+        [
+          "a.js",
+          1,
+          true
+        ]
+      ],
+      "files": [
+        {
+          "bits": [],
+          "dist": 4294967295,
+          "epChunk": 0,
+          "isLive": false,
+          "kind": 0
+        },
+        {
+          "bits": [],
+          "dist": 4294967295,
+          "epChunk": 0,
+          "isLive": false,
+          "kind": 1
+        },
+        {
+          "bits": [],
+          "dist": 4294967295,
+          "epChunk": 0,
+          "isLive": false,
+          "kind": 0
+        }
+      ],
+      "reachable": [
+        0,
+        1,
+        2
+      ],
+      "stable": [
+        0,
+        1,
+        2
+      ],
+      "symCounts": [
+        4,
+        2,
+        1
+      ]
+    }
+  },
+  {
+    "fn": "CloneLinkerGraph.repr1",
+    "arg": {
+      "codeSplit": false
+    },
+    "out": {
+      "generated": [],
+      "importsToBind": [],
+      "nImportRecords": 1,
+      "overlay": [],
+      "parts": [
+        {
+          "decl": 0,
+          "deps": [],
+          "uses": []
+        },
+        {
+          "decl": 0,
+          "deps": [],
+          "uses": []
+        }
+      ],
+      "resolvedExports": 2
+    }
+  },
+  {
+    "fn": "CloneLinkerGraph",
+    "arg": {
+      "codeSplit": true
+    },
+    "out": {
+      "entryPoints": [
+        [
+          "a.js",
+          1,
+          true
+        ]
+      ],
+      "files": [
+        {
+          "bits": [],
+          "dist": 4294967295,
+          "epChunk": 0,
+          "isLive": false,
+          "kind": 0
+        },
+        {
+          "bits": [],
+          "dist": 4294967295,
+          "epChunk": 0,
+          "isLive": false,
+          "kind": 1
+        },
+        {
+          "bits": [],
+          "dist": 4294967295,
+          "epChunk": 0,
+          "isLive": false,
+          "kind": 0
+        }
+      ],
+      "reachable": [
+        0,
+        1,
+        2
+      ],
+      "stable": [
+        0,
+        1,
+        2
+      ],
+      "symCounts": [
+        4,
+        2,
+        1
+      ]
+    }
+  },
+  {
+    "fn": "CloneLinkerGraph.repr1",
+    "arg": {
+      "codeSplit": true
+    },
+    "out": {
+      "generated": [],
+      "importsToBind": [],
+      "nImportRecords": 1,
+      "overlay": [],
+      "parts": [
+        {
+          "decl": 0,
+          "deps": [],
+          "uses": []
+        },
+        {
+          "decl": 0,
+          "deps": [],
+          "uses": []
+        }
+      ],
+      "resolvedExports": 2
+    }
+  },
+  {
+    "fn": "CloneLinkerGraph.antiAlias",
+    "arg": {},
+    "out": [
+      true,
+      0
+    ]
+  },
+  {
+    "fn": "GenerateNewSymbol",
+    "arg": {
+      "kind": 0,
+      "name": "generated",
+      "src": 1
+    },
+    "out": {
+      "ref": [
+        1,
+        2
+      ],
+      "repr": {
+        "generated": [
+          [
+            1,
+            2
+          ]
+        ],
+        "importsToBind": [],
+        "nImportRecords": 1,
+        "overlay": [],
+        "parts": [
+          {
+            "decl": 0,
+            "deps": [],
+            "uses": []
+          },
+          {
+            "decl": 0,
+            "deps": [],
+            "uses": []
+          }
+        ],
+        "resolvedExports": 2
+      },
+      "symCount": 3
+    }
+  },
+  {
+    "fn": "AddPartToFile",
+    "arg": {
+      "declTop": true,
+      "src": 1,
+      "uses": 2
+    },
+    "out": {
+      "partIndex": 2,
+      "repr": {
+        "generated": [
+          [
+            1,
+            2
+          ]
+        ],
+        "importsToBind": [],
+        "nImportRecords": 1,
+        "overlay": [
+          [
+            0,
+            2
+          ]
+        ],
+        "parts": [
+          {
+            "decl": 0,
+            "deps": [],
+            "uses": []
+          },
+          {
+            "decl": 0,
+            "deps": [],
+            "uses": []
+          },
+          {
+            "decl": 1,
+            "deps": [],
+            "uses": [
+              2
+            ]
+          }
+        ],
+        "resolvedExports": 2
+      }
+    }
+  },
+  {
+    "fn": "GenerateSymbolImportAndUse",
+    "arg": {
+      "cross": true,
+      "useCount": 3
+    },
+    "out": {
+      "generated": [],
+      "importsToBind": [
+        [
+          2,
+          [
+            2,
+            0
+          ]
+        ]
+      ],
+      "nImportRecords": 1,
+      "overlay": [
+        [
+          0,
+          2
+        ]
+      ],
+      "parts": [
+        {
+          "decl": 0,
+          "deps": [],
+          "uses": []
+        },
+        {
+          "decl": 0,
+          "deps": [],
+          "uses": []
+        },
+        {
+          "decl": 1,
+          "deps": [
+            [
+              2,
+              0
+            ]
+          ],
+          "uses": [
+            3
+          ]
+        }
+      ],
+      "resolvedExports": 2
+    }
+  },
+  {
+    "fn": "GenerateSymbolImportAndUse.zero",
+    "arg": {
+      "useCount": 0
+    },
+    "out": {
+      "generated": [],
+      "importsToBind": [],
+      "nImportRecords": 1,
+      "overlay": [],
+      "parts": [
+        {
+          "decl": 0,
+          "deps": [],
+          "uses": []
+        },
+        {
+          "decl": 0,
+          "deps": [],
+          "uses": []
+        },
+        {
+          "decl": 0,
+          "deps": [],
+          "uses": []
+        }
+      ],
+      "resolvedExports": 2
+    }
+  },
+  {
+    "fn": "GenerateRuntimeSymbolImportAndUse",
+    "arg": {
+      "name": "__esm",
+      "useCount": 5
+    },
+    "out": {
+      "generated": [],
+      "importsToBind": [
+        [
+          0,
+          [
+            0,
+            0
+          ]
+        ]
+      ],
+      "nImportRecords": 1,
+      "overlay": [],
+      "parts": [
+        {
+          "decl": 0,
+          "deps": [],
+          "uses": []
+        },
+        {
+          "decl": 0,
+          "deps": [],
+          "uses": []
+        },
+        {
+          "decl": 0,
+          "deps": [],
+          "uses": [
+            5
+          ]
+        }
+      ],
+      "resolvedExports": 2
+    }
+  },
+  {
+    "fn": "TopLevelSymbolToParts.parser",
+    "arg": {
+      "src": 1
+    },
+    "out": [
+      0
+    ]
+  },
+  {
+    "fn": "LineColumnTracker",
+    "arg": {
+      "src": 1
+    },
+    "out": [
+      1,
+      0,
+      true
+    ]
+  },
+  {
+    "fn": "JSRepr.ImportRecords",
+    "arg": {},
+    "out": 2
+  },
+  {
+    "fn": "CSSRepr.ImportRecords",
+    "arg": {},
+    "out": 1
+  },
+  {
+    "fn": "CopyRepr.ImportRecords",
+    "arg": {},
+    "out": true
+  }
+]

@@ -1,0 +1,52 @@
+[
+  {
+    "fn": "encodeLocation",
+    "arg": "null",
+    "out": "null"
+  },
+  {
+    "fn": "encodeLocation",
+    "arg": "{\"file\":\"a.js\",\"namespace\":\"\",\"line\":1,\"column\":0,\"length\":5,\"lineText\":\"x\",\"suggestion\":\"\"}",
+    "out": "{\"column\":0,\"file\":\"a.js\",\"length\":5,\"line\":1,\"lineText\":\"x\",\"namespace\":\"\",\"suggestion\":\"\"}"
+  },
+  {
+    "fn": "encodeLocation",
+    "arg": "{\"file\":\"b.css\",\"namespace\":\"file\",\"line\":3,\"column\":7,\"length\":0,\"lineText\":\"abc\",\"suggestion\":\"try\"}",
+    "out": "{\"column\":7,\"file\":\"b.css\",\"length\":0,\"line\":3,\"lineText\":\"abc\",\"namespace\":\"file\",\"suggestion\":\"try\"}"
+  },
+  {
+    "fn": "decodeLocation",
+    "arg": "null",
+    "out": "null"
+  },
+  {
+    "fn": "decodeLocation",
+    "arg": "a",
+    "out": "{\"File\":\"a.js\",\"Namespace\":\"file\",\"Line\":1,\"Column\":0,\"Length\":5,\"LineText\":\"x\",\"Suggestion\":\"\"}"
+  },
+  {
+    "fn": "decodeLocation",
+    "arg": "b",
+    "out": "{\"File\":\"b.css\",\"Namespace\":\"ns\",\"Line\":3,\"Column\":7,\"Length\":0,\"LineText\":\"abc\",\"Suggestion\":\"try\"}"
+  },
+  {
+    "fn": "decodeLocationToPrivate",
+    "arg": "null",
+    "out": "null"
+  },
+  {
+    "fn": "decodeLocationToPrivate",
+    "arg": "a",
+    "out": "{\"File\":{\"Abs\":\"a.js\",\"Rel\":\"a.js\"},\"Namespace\":\"file\",\"LineText\":\"x\",\"Suggestion\":\"\",\"Line\":1,\"Column\":0,\"Length\":5}"
+  },
+  {
+    "fn": "encodeOutputFiles",
+    "arg": "[]",
+    "out": "[]"
+  },
+  {
+    "fn": "encodeOutputFiles",
+    "arg": "[{\"path\":\"out.js\",\"contents\":\"YQ==\",\"hash\":\"abc\"}]",
+    "out": "[{\"contents\":\"YQ==\",\"hash\":\"abc\",\"path\":\"out.js\"}]"
+  }
+]

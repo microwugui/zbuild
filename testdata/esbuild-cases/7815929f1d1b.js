@@ -1,0 +1,1 @@
+for (x of y) switch (0) { case 0: throw a(); default: throw b() }

@@ -1,0 +1,1 @@
+a, b { .bar&&& { color: red } }

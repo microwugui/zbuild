@@ -1,0 +1,18 @@
+[
+  {
+    "name": "add-loc",
+    "mappings": "AAAA;AAAA;"
+  },
+  {
+    "name": "add-two",
+    "mappings": "AAAA,AAAI;AAAA;"
+  },
+  {
+    "name": "add-name",
+    "mappings": "AAAI;AAAA;"
+  },
+  {
+    "name": "add-name-diff",
+    "mappings": "AAAIA;AAAA;"
+  }
+]

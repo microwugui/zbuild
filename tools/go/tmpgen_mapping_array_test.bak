@@ -1,0 +1,48 @@
+package js_parser
+
+// 第 138 批 Go 探针：mappingArray.Len/Swap/Less。
+import (
+	"encoding/json"
+	"os"
+	"testing"
+
+	"github.com/evanw/esbuild/internal/sourcemap"
+)
+
+func TestTmpGenMappingArray(t *testing.T) {
+	type row struct {
+		Fn    string `json:"fn"`
+		Arr   [][3]int32 `json:"arr"`
+		I     int `json:"i"`
+		J     int `json:"j"`
+		Out   interface{} `json:"out"`
+	}
+	arrs := [][][3]int32{
+		{}, {{0, 0, 0}}, {{1, 0, 0}, {0, 5, 1}, {1, 3, 2}},
+		{{2, 10, 0}, {2, 10, 1}, {2, 9, 2}, {1, 0, 3}},
+	}
+	var out []row
+	for _, a := range arrs {
+		ma := make(mappingArray, len(a))
+		for i, x := range a {
+			ma[i] = sourcemap.Mapping{GeneratedLine: x[0], GeneratedColumn: x[1], SourceIndex: x[2]}
+		}
+		out = append(out, row{"Len", a, 0, 0, ma.Len()})
+		for _, ij := range [][2]int{{0, 0}, {0, 1}, {1, 2}} {
+			if ij[1] >= ma.Len() { continue }
+			cp := append(mappingArray{}, ma...)
+			cp.Swap(ij[0], ij[1])
+			dump := []interface{}{}
+			for _, m := range cp { dump = append(dump, []int32{m.GeneratedLine, m.GeneratedColumn, m.SourceIndex}) }
+			out = append(out, row{"Swap", a, ij[0], ij[1], dump})
+		}
+		for _, ij := range [][2]int{{0, 0}, {0, 1}, {1, 2}} {
+			if ij[1] >= ma.Len() { continue }
+			out = append(out, row{"Less", a, ij[0], ij[1], ma.Less(ij[0], ij[1])})
+		}
+	}
+	b, err := json.MarshalIndent(out, "", "  ")
+	if err != nil { t.Fatal(err) }
+	if err := os.WriteFile("/root/port/testdata/mapping-array-go.json", b, 0644); err != nil { t.Fatal(err) }
+	t.Logf("wrote %d rows", len(out))
+}

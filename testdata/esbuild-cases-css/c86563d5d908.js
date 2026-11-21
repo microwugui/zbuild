@@ -1,0 +1,1 @@
+a { border-top-left-radius: inherit; border-radius: 0 }

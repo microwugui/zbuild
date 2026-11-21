@@ -1,0 +1,1 @@
+.foo { composes: bar from url(file.css); color: red }

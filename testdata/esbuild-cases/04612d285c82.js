@@ -1,0 +1,1 @@
+a = '🧀'.charCodeAt(0)

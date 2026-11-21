@@ -1,0 +1,158 @@
+package bundler
+
+// 第 90 轮 Go 探针：bundle-scan 路径函数逐字节固化
+// iterativelyValidateTLA / recursivelyValidateTLA / reportInvalidTLA（TLA 校验链）
+// generateUniqueKeyPrefix 因含 rand 不可逐字节，跳过
+import (
+	"encoding/json"
+	"os"
+	"testing"
+
+	"github.com/evanw/esbuild/internal/ast"
+	"github.com/evanw/esbuild/internal/cache"
+	"github.com/evanw/esbuild/internal/config"
+	"github.com/evanw/esbuild/internal/fs"
+	"github.com/evanw/esbuild/internal/graph"
+	"github.com/evanw/esbuild/internal/js_ast"
+	"github.com/evanw/esbuild/internal/logger"
+)
+
+type bsRow struct { Name string `json:"name"`; Data interface{} `json:"data"` }
+type bsFix struct { Rows []bsRow `json:"rows"` }
+func bsAdd(fx *bsFix, name string, data interface{}) { fx.Rows = append(fx.Rows, bsRow{name, data}) }
+
+// dumpTLA 把 tlaCheck 结构序列化
+func dumpTLA(c tlaCheck) map[string]interface{} {
+	return map[string]interface{}{
+		"parentValid": c.parent.IsValid(), "parent": c.parent.GetIndex(),
+		"depthValid": c.depth.IsValid(), "depth": c.depth.GetIndex(),
+		"pass": c.pass, "importRecordIndex": c.importRecordIndex,
+	}
+}
+
+// mkJSFile 构造一个带 ImportRecords / LiveTopLevelAwaitKeyword 的 JS 输入文件
+func mkJSFile(srcPath string, importer string, imports []uint32, kinds []ast.ImportKind, liveTLA bool) parseResult {
+	repr := &graph.JSRepr{}
+	repr.AST.ImportRecords = make([]ast.ImportRecord, len(imports))
+	for i, idx := range imports {
+		rec := ast.ImportRecord{SourceIndex: ast.MakeIndex32(idx), Kind: kinds[i]}
+		// 给每条 import record 一个非空 Range，便于 reportInvalidTLA 生成 "imports here" note
+		if kinds[i] == ast.ImportStmt || kinds[i] == ast.ImportRequire {
+			rec.Range = logger.Range{Loc: logger.Loc{Start: int32(i * 10)}, Len: 5}
+		}
+		repr.AST.ImportRecords[i] = rec
+	}
+	if liveTLA {
+		repr.AST.LiveTopLevelAwaitKeyword = logger.Range{Loc: logger.Loc{Start: 0}, Len: 10}
+	}
+	pretty := logger.PrettyPaths{Abs: srcPath, Rel: importer}
+	input := graph.InputFile{
+		Repr:   repr,
+		Source: logger.Source{PrettyPaths: pretty, KeyPath: logger.Path{Text: srcPath, Namespace: "file"},
+			Contents: "0123456789import './dep.js'; require('./cjs.js');"},
+	}
+	return parseResult{ok: true, file: scannerFile{inputFile: input}}
+}
+
+func TestTmpGenBundleScan(t *testing.T) {
+	fx := bsFix{}
+
+	// ===== iterativelyValidateTLA / recursivelyValidateTLA / reportInvalidTLA =====
+	// 多种图结构：DAG、环、require-TLA、动态 import、import-statement 传递链
+	tlaCases := []struct {
+		name    string
+		files   []parseResult
+	}{
+		{"empty", nil},
+		{"single-no-tla", []parseResult{mkJSFile("/p/a.js", "a.js", nil, nil, false)}},
+		{"single-tla", []parseResult{mkJSFile("/p/a.js", "a.js", nil, nil, true)}},
+		{"import-tla", []parseResult{
+			mkJSFile("/p/a.js", "a.js", []uint32{1}, []ast.ImportKind{ast.ImportStmt}, false),
+			mkJSFile("/p/b.js", "b.js", nil, nil, true),
+		}},
+		{"require-tla", []parseResult{
+			// file0: ImportStmt -> file1(TLA) 使 parent 有效；同时 require -> file2(TLA) 触发 reportInvalidTLA
+			mkJSFile("/p/a.js", "a.js", []uint32{1, 2}, []ast.ImportKind{ast.ImportStmt, ast.ImportRequire}, false),
+			mkJSFile("/p/b.js", "b.js", nil, nil, true),
+			mkJSFile("/p/c.js", "c.js", nil, nil, true),
+		}},
+		{"require-transitive-tla", []parseResult{
+			// file0 自身 import-chain 到 TLA(parent 有效)，require -> file1 -> file3(TLA) 传递
+			mkJSFile("/p/a.js", "a.js", []uint32{1}, []ast.ImportKind{ast.ImportStmt}, false),
+			mkJSFile("/p/b.js", "b.js", []uint32{2, 3}, []ast.ImportKind{ast.ImportStmt, ast.ImportRequire}, false),
+			mkJSFile("/p/c.js", "c.js", nil, nil, false),
+			mkJSFile("/p/d.js", "d.js", nil, nil, true),
+		}},
+		{"dynamic-tla", []parseResult{
+			mkJSFile("/p/a.js", "a.js", []uint32{1}, []ast.ImportKind{ast.ImportDynamic}, false),
+			mkJSFile("/p/b.js", "b.js", nil, nil, true),
+		}},
+		{"chain-tla", []parseResult{
+			mkJSFile("/p/a.js", "a.js", []uint32{1}, []ast.ImportKind{ast.ImportStmt}, false),
+			mkJSFile("/p/b.js", "b.js", []uint32{2}, []ast.ImportKind{ast.ImportStmt}, false),
+			mkJSFile("/p/c.js", "c.js", nil, nil, true),
+		}},
+		{"cycle-tla", []parseResult{
+			mkJSFile("/p/a.js", "a.js", []uint32{1}, []ast.ImportKind{ast.ImportStmt}, false),
+			mkJSFile("/p/b.js", "b.js", []uint32{0}, []ast.ImportKind{ast.ImportStmt}, true),
+		}},
+		{"mixed-kinds", []parseResult{
+			mkJSFile("/p/a.js", "a.js", []uint32{1, 2}, []ast.ImportKind{ast.ImportStmt, ast.ImportRequire}, false),
+			mkJSFile("/p/b.js", "b.js", nil, nil, true),
+			mkJSFile("/p/c.js", "c.js", []uint32{1}, []ast.ImportKind{ast.ImportDynamic}, false),
+		}},
+	}
+	for _, c := range tlaCases {
+		log := logger.NewDeferLog(logger.DeferLogAll, nil)
+		s := &scanner{results: c.files, log: log, options: config.Options{LogPathStyle: logger.RelPath}}
+		hasTLA := s.iterativelyValidateTLA()
+		checks := []interface{}{}
+		for i := range s.results { checks = append(checks, dumpTLA(s.results[i].tlaCheck)) }
+		// reportInvalidTLA 只在有 TLA 时产生错误
+		reportInvalidTLA := func() []interface{} {
+			log2 := logger.NewDeferLog(logger.DeferLogAll, nil)
+			s2 := &scanner{results: c.files, log: log2, options: config.Options{LogPathStyle: logger.RelPath}}
+			s2.iterativelyValidateTLA()
+			s2.reportInvalidTLA()
+			errs := []interface{}{}
+			for _, m := range log2.Peek() {
+				texts := []string{}
+				for _, n := range m.Notes { texts = append(texts, n.Text) }
+				errs = append(errs, map[string]interface{}{"text": m.Data.Text, "notes": texts})
+			}
+			return errs
+		}()
+		bsAdd(&fx, "tla:"+c.name, map[string]interface{}{
+			"hasTLA": hasTLA, "checks": checks, "errors": reportInvalidTLA,
+		})
+	}
+
+	// ===== allocateSourceIndex / allocateGlobSourceIndex =====
+	// 与 SourceIndexCache 交互：同 path 复用、不同 path 递增、glob 独立空间、results 数组增长
+	{
+		s := &scanner{caches: cache.MakeCacheSet()}
+		seq := []interface{}{}
+		alloc := func(path string, kind int) {
+			idx := s.allocateSourceIndex(logger.Path{Text: path, Namespace: "file"}, cache.SourceIndexKind(kind))
+			seq = append(seq, map[string]interface{}{"path": path, "kind": kind, "idx": idx, "resultsLen": len(s.results)})
+		}
+		alloc("/p/a.js", 0)
+		alloc("/p/a.js", 0) // 复用
+		alloc("/p/b.js", 0) // 递增
+		alloc("/p/a.js", 1) // 不同 kind => 不同 key
+		gidx1 := s.allocateGlobSourceIndex(1, 0)
+		gidx2 := s.allocateGlobSourceIndex(1, 0) // 复用
+		gidx3 := s.allocateGlobSourceIndex(1, 1) // 不同 globIndex
+		bsAdd(&fx, "alloc:source-index", map[string]interface{}{
+			"seq": seq, "glob": []interface{}{gidx1, gidx2, gidx3}, "resultsLen": len(s.results),
+		})
+	}
+
+	// 编译期引用，确保 import 未被优化（fs/graph/js_ast 用于 mkJSFile）
+	_ = fs.MockUnix
+	_ = js_ast.ENumber{}
+
+	bts, _ := json.MarshalIndent(fx, "", "  ")
+	if err := os.WriteFile("/root/port/testdata/bundle-scan-go.json", bts, 0644); err != nil { t.Fatal(err) }
+	t.Logf("wrote %d rows bytes=%d", len(fx.Rows), len(bts))
+}

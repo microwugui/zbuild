@@ -1,0 +1,1 @@
+try { throw 0 } catch (e) { 0 && console.log(0, e) }

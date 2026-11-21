@@ -1,0 +1,175 @@
+package resolver
+
+// 第 174 批 Go 探针：resolveWithoutRemapping / loadNodeModules / loadPackageImports /
+// resolveWithoutSymlinks 逐字节固化（resolver 递归核心，mockFS 真实目录树 + NewResolver）。
+import (
+	"encoding/json"
+	"os"
+	"testing"
+
+	"github.com/evanw/esbuild/internal/ast"
+	"github.com/evanw/esbuild/internal/cache"
+	"github.com/evanw/esbuild/internal/config"
+	"github.com/evanw/esbuild/internal/fs"
+	"github.com/evanw/esbuild/internal/logger"
+)
+
+type rcRow struct {
+	Fn  string                 `json:"fn"`
+	Arg map[string]interface{} `json:"arg"`
+	Out interface{}            `json:"out"`
+}
+
+func rcPath(p logger.Path) interface{} {
+	return []interface{}{p.Text, p.Namespace, int(p.Flags), p.IgnoredSuffix}
+}
+
+func rcPair(pp PathPair) interface{} {
+	out := []interface{}{rcPath(pp.Primary)}
+	if pp.HasSecondary() {
+		out = append(out, rcPath(pp.Secondary))
+	} else {
+		out = append(out, nil)
+	}
+	return append(out, pp.IsExternal)
+}
+
+func rcDiff(dc *fs.DifferentCase) interface{} {
+	if dc == nil { return nil }
+	return []interface{}{dc.Dir, dc.Query, dc.Actual}
+}
+
+func rcResult(r *ResolveResult) interface{} {
+	if r == nil { return nil }
+	var side interface{} = nil
+	if r.PrimarySideEffectsData != nil && r.PrimarySideEffectsData.Source != nil {
+		side = r.PrimarySideEffectsData.Source.KeyPath.Text
+	}
+	return []interface{}{rcPair(r.PathPair), rcDiff(r.DifferentCase), side, int(r.ModuleTypeData.Type)}
+}
+
+type resolvedTriple struct {
+	pair PathPair
+	ok   bool
+	dc   *fs.DifferentCase
+	side *SideEffectsData
+}
+
+func rcTriple(t resolvedTriple, notes []string) interface{} {
+	var side interface{} = nil
+	if t.side != nil && t.side.Source != nil { side = t.side.Source.KeyPath.Text }
+	return []interface{}{rcPair(t.pair), t.ok, rcDiff(t.dc), side, notes}
+}
+
+// 构造一棵典型 node_modules 树，返回 NewResolver 产出的 Resolver。
+func rcMakeResolver(tree map[string]string, opts *config.Options) (*Resolver, fs.FS, logger.Log) {
+	fsObj := fs.MockFS(tree, fs.MockUnix, "/")
+	log := logger.NewDeferLog(logger.DeferLogAll, nil)
+	log.Level = logger.LevelDebug
+	res := NewResolver(config.BuildCall, fsObj, log, cache.MakeCacheSet(), opts)
+	return res, fsObj, log
+}
+
+func rcNotes(dl *debugLogs) []string {
+	if dl == nil { return []string{} }
+	out := []string{}
+	for _, n := range dl.notes { out = append(out, n.Text) }
+	return out
+}
+
+func TestTmpGenResCore(t *testing.T) {
+	var out []rcRow
+	baseTree := map[string]string{
+		"/proj/package.json":              `{"name":"root","imports":{"#dep":"./src/dep.js","#pkg":"dep"}}`,
+		"/proj/src/dep.js":                "",
+		"/proj/src/a.js":                  "",
+		"/proj/node_modules/dep/package.json": `{"name":"dep","main":"main.js"}`,
+		"/proj/node_modules/dep/main.js":  "",
+		"/proj/node_modules/dep/sub.js":   "",
+		"/proj/node_modules/other/index.js": "",
+	}
+
+	// ---- resolveWithoutRemapping (direct) ----
+	{
+		cases := []struct{ name, dir, importPath string }{
+			{"relative-file", "/proj/src", "./a.js"},
+			{"relative-missing", "/proj/src", "./nope.js"},
+			{"package-node-modules", "/proj/src", "dep"},
+			{"package-subpath", "/proj/src", "dep/sub.js"},
+			{"package-missing", "/proj/src", "zzz"},
+		}
+		for _, c := range cases {
+			res, fsObj, _ := rcMakeResolver(baseTree, &config.Options{Platform: config.PlatformNode, ExtensionOrder: []string{".js"}, MainFields: []string{"main"}})
+			r := resolverQuery{Resolver: res, debugLogs: &debugLogs{}, debugMeta: &DebugMeta{}}
+			dinfo := r.dirInfoCached(c.dir)
+			pair, ok, dc, side := r.resolveWithoutRemapping(dinfo, c.importPath)
+			out = append(out, rcRow{Fn: "resolveWithoutRemapping", Arg: map[string]interface{}{"name": c.name, "dir": c.dir, "importPath": c.importPath},
+				Out: rcTriple(resolvedTriple{pair, ok, dc, side}, rcNotes(r.debugLogs))})
+			_ = fsObj
+		}
+	}
+
+	// ---- loadNodeModules (direct) ----
+	{
+		cases := []struct{ name, dir, importPath string; forbid bool }{
+			{"plain-pkg", "/proj/src", "dep", false},
+			{"subpath", "/proj/src", "dep/sub.js", false},
+			{"missing", "/proj/src", "zzz", false},
+			{"hash-imports", "/proj/src", "#dep", false},
+			{"hash-imports-forbid", "/proj/src", "#dep", true},
+			{"hash-remap-to-pkg", "/proj/src", "#pkg", false},
+		}
+		for _, c := range cases {
+			res, _, _ := rcMakeResolver(baseTree, &config.Options{Platform: config.PlatformNode, ExtensionOrder: []string{".js"}, MainFields: []string{"main"}})
+			r := resolverQuery{Resolver: res, debugLogs: &debugLogs{}, debugMeta: &DebugMeta{}}
+			dinfo := r.dirInfoCached(c.dir)
+			pair, ok, dc, side := r.loadNodeModules(c.importPath, dinfo, c.forbid)
+			out = append(out, rcRow{Fn: "loadNodeModules", Arg: map[string]interface{}{"name": c.name, "dir": c.dir, "importPath": c.importPath, "forbid": c.forbid},
+				Out: rcTriple(resolvedTriple{pair, ok, dc, side}, rcNotes(r.debugLogs))})
+		}
+	}
+
+	// ---- loadPackageImports (direct) ----
+	{
+		cases := []struct{ name, importPath string }{
+			{"hash-dep", "#dep"},
+			{"hash-pkg", "#pkg"},
+			{"hash-invalid", "#"},
+			{"hash-missing", "#nope"},
+		}
+		for _, c := range cases {
+			res, _, _ := rcMakeResolver(baseTree, &config.Options{Platform: config.PlatformNode, ExtensionOrder: []string{".js"}, MainFields: []string{"main"}})
+			r := resolverQuery{Resolver: res, debugLogs: &debugLogs{}, debugMeta: &DebugMeta{}}
+			dinfo := r.dirInfoCached("/proj/src")
+			pkg := dinfo
+			for pkg != nil && pkg.packageJSON == nil { pkg = pkg.parent }
+			pair, ok, dc, side := r.loadPackageImports(c.importPath, pkg)
+			out = append(out, rcRow{Fn: "loadPackageImports", Arg: map[string]interface{}{"name": c.name, "importPath": c.importPath},
+				Out: rcTriple(resolvedTriple{pair, ok, dc, side}, rcNotes(r.debugLogs))})
+		}
+	}
+
+	// ---- resolveWithoutSymlinks (direct) ----
+	{
+		cases := []struct{ name, dir, importPath string; kind ast.ImportKind }{
+			{"relative-file", "/proj/src", "./a.js", ast.ImportStmt},
+			{"relative-missing", "/proj/src", "./nope.js", ast.ImportStmt},
+			{"absolute", "/proj/src", "/proj/src/a.js", ast.ImportStmt},
+			{"package", "/proj/src", "dep", ast.ImportStmt},
+			{"external", "/proj/src", "/proj/src/a.js", ast.ImportStmt},
+		}
+		for _, c := range cases {
+			res, _, _ := rcMakeResolver(baseTree, &config.Options{Platform: config.PlatformNode, ExtensionOrder: []string{".js"}, MainFields: []string{"main"}})
+			r := resolverQuery{Resolver: res, debugLogs: &debugLogs{}, debugMeta: &DebugMeta{}, kind: c.kind}
+			dinfo := r.dirInfoCached(c.dir)
+			result := r.resolveWithoutSymlinks(c.dir, dinfo, c.importPath)
+			out = append(out, rcRow{Fn: "resolveWithoutSymlinks", Arg: map[string]interface{}{"name": c.name, "dir": c.dir, "importPath": c.importPath, "kind": int(c.kind)},
+				Out: []interface{}{rcResult(result), rcNotes(r.debugLogs)}})
+		}
+	}
+
+	b, err := json.Marshal(out)
+	if err != nil { t.Fatal(err) }
+	if err := os.WriteFile("/root/port/testdata/rescore-go.json", b, 0644); err != nil { t.Fatal(err) }
+	t.Logf("wrote %d cases", len(out))
+}

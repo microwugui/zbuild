@@ -1,0 +1,67 @@
+[
+  {
+    "fn": "isASCIIOnly",
+    "arg": "hello",
+    "out": "true"
+  },
+  {
+    "fn": "isASCIIOnly",
+    "arg": "ABC123",
+    "out": "true"
+  },
+  {
+    "fn": "isASCIIOnly",
+    "arg": "a b",
+    "out": "true"
+  },
+  {
+    "fn": "isASCIIOnly",
+    "arg": "café",
+    "out": "false"
+  },
+  {
+    "fn": "isASCIIOnly",
+    "arg": "line\n",
+    "out": "false"
+  },
+  {
+    "fn": "isASCIIOnly",
+    "arg": "\u0000",
+    "out": "false"
+  },
+  {
+    "fn": "isASCIIOnly",
+    "arg": "",
+    "out": "true"
+  },
+  {
+    "fn": "canonicalFileSystemPathForWindows",
+    "arg": "C:\\Users\\Foo\\bar.js",
+    "out": "c:/users/foo/bar.js"
+  },
+  {
+    "fn": "canonicalFileSystemPathForWindows",
+    "arg": "D:/x/y",
+    "out": "d:/x/y"
+  },
+  {
+    "fn": "canonicalFileSystemPathForWindows",
+    "arg": "relative\\path",
+    "out": "relative/path"
+  },
+  {
+    "fn": "HashForFileName",
+    "arg": "[0 0 0 0]",
+    "out": "AAAAAAA="
+  },
+  {
+    "fn": "HashForFileName",
+    "arg": "[1 2 3 4]",
+    "out": "AEBAGBA="
+  },
+  {
+    "fn": "HashForFileName",
+    "arg": "[255 254 253 252 251]",
+    "out": "777P37H3"
+  }
+]

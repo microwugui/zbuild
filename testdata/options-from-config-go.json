@@ -1,0 +1,336 @@
+{
+  "rows": [
+    {
+      "name": "ofc:default",
+      "data": {
+        "asciiOnly": false,
+        "codePathStyle": 0,
+        "definesDots": 0,
+        "definesIds": 0,
+        "dropDebugger": false,
+        "dropLabels": null,
+        "ignoreDCE": false,
+        "injectedFiles": [],
+        "jsxAuto": false,
+        "jsxDev": false,
+        "jsxFactory": [
+          "React",
+          "createElement"
+        ],
+        "jsxFragment": [
+          "React",
+          "Fragment"
+        ],
+        "jsxImportSource": "react",
+        "jsxParse": false,
+        "jsxPreserve": false,
+        "jsxSideEffects": false,
+        "keepNames": false,
+        "logPathStyle": 0,
+        "mangleProps": null,
+        "mangleQuoted": false,
+        "minifyIdentifiers": false,
+        "minifySyntax": false,
+        "minifyWhitespace": false,
+        "mode": 0,
+        "moduleType": 0,
+        "omitJSXRuntime": false,
+        "omitRuntime": false,
+        "originalTargetEnv": "",
+        "outputFormat": 0,
+        "platform": 0,
+        "reserveProps": null,
+        "treeShaking": false,
+        "tsAlwaysStrict": null,
+        "tsNoAmb": false,
+        "tsParse": false,
+        "unsupportedJS": 0,
+        "unsupportedJSMask": 0,
+        "unsupportedJSOverrides": 0
+      }
+    },
+    {
+      "name": "ofc:esnext-three",
+      "data": {
+        "asciiOnly": false,
+        "codePathStyle": 0,
+        "definesDots": 0,
+        "definesIds": 0,
+        "dropDebugger": false,
+        "dropLabels": null,
+        "ignoreDCE": false,
+        "injectedFiles": [],
+        "jsxAuto": false,
+        "jsxDev": false,
+        "jsxFactory": [
+          "React",
+          "createElement"
+        ],
+        "jsxFragment": [
+          "React",
+          "Fragment"
+        ],
+        "jsxImportSource": "react",
+        "jsxParse": false,
+        "jsxPreserve": false,
+        "jsxSideEffects": false,
+        "keepNames": false,
+        "logPathStyle": 0,
+        "mangleProps": null,
+        "mangleQuoted": false,
+        "minifyIdentifiers": false,
+        "minifySyntax": false,
+        "minifyWhitespace": false,
+        "mode": 2,
+        "moduleType": 0,
+        "omitJSXRuntime": false,
+        "omitRuntime": false,
+        "originalTargetEnv": "",
+        "outputFormat": 3,
+        "platform": 1,
+        "reserveProps": null,
+        "treeShaking": false,
+        "tsAlwaysStrict": null,
+        "tsNoAmb": false,
+        "tsParse": false,
+        "unsupportedJS": 0,
+        "unsupportedJSMask": 0,
+        "unsupportedJSOverrides": 0
+      }
+    },
+    {
+      "name": "ofc:features",
+      "data": {
+        "asciiOnly": false,
+        "codePathStyle": 0,
+        "definesDots": 0,
+        "definesIds": 0,
+        "dropDebugger": false,
+        "dropLabels": null,
+        "ignoreDCE": false,
+        "injectedFiles": [],
+        "jsxAuto": false,
+        "jsxDev": false,
+        "jsxFactory": [
+          "React",
+          "createElement"
+        ],
+        "jsxFragment": [
+          "React",
+          "Fragment"
+        ],
+        "jsxImportSource": "react",
+        "jsxParse": false,
+        "jsxPreserve": false,
+        "jsxSideEffects": false,
+        "keepNames": false,
+        "logPathStyle": 0,
+        "mangleProps": null,
+        "mangleQuoted": false,
+        "minifyIdentifiers": false,
+        "minifySyntax": false,
+        "minifyWhitespace": false,
+        "mode": 0,
+        "moduleType": 0,
+        "omitJSXRuntime": false,
+        "omitRuntime": false,
+        "originalTargetEnv": "es2015",
+        "outputFormat": 0,
+        "platform": 0,
+        "reserveProps": null,
+        "treeShaking": false,
+        "tsAlwaysStrict": null,
+        "tsNoAmb": false,
+        "tsParse": false,
+        "unsupportedJS": 33685504,
+        "unsupportedJSMask": 26388279066624,
+        "unsupportedJSOverrides": 8796093022208
+      }
+    },
+    {
+      "name": "ofc:flags",
+      "data": {
+        "asciiOnly": true,
+        "codePathStyle": 1,
+        "definesDots": 0,
+        "definesIds": 0,
+        "dropDebugger": true,
+        "dropLabels": [
+          "a",
+          "b"
+        ],
+        "ignoreDCE": true,
+        "injectedFiles": [],
+        "jsxAuto": false,
+        "jsxDev": false,
+        "jsxFactory": [
+          "React",
+          "createElement"
+        ],
+        "jsxFragment": [
+          "React",
+          "Fragment"
+        ],
+        "jsxImportSource": "react",
+        "jsxParse": false,
+        "jsxPreserve": false,
+        "jsxSideEffects": false,
+        "keepNames": true,
+        "logPathStyle": 1,
+        "mangleProps": null,
+        "mangleQuoted": true,
+        "minifyIdentifiers": true,
+        "minifySyntax": true,
+        "minifyWhitespace": true,
+        "mode": 0,
+        "moduleType": 0,
+        "omitJSXRuntime": true,
+        "omitRuntime": true,
+        "originalTargetEnv": "",
+        "outputFormat": 0,
+        "platform": 0,
+        "reserveProps": null,
+        "treeShaking": true,
+        "tsAlwaysStrict": null,
+        "tsNoAmb": false,
+        "tsParse": false,
+        "unsupportedJS": 0,
+        "unsupportedJSMask": 0,
+        "unsupportedJSOverrides": 0
+      }
+    },
+    {
+      "name": "ofc:regexes",
+      "data": {
+        "asciiOnly": false,
+        "codePathStyle": 0,
+        "definesDots": 0,
+        "definesIds": 0,
+        "dropDebugger": false,
+        "dropLabels": null,
+        "ignoreDCE": false,
+        "injectedFiles": [],
+        "jsxAuto": false,
+        "jsxDev": false,
+        "jsxFactory": [
+          "React",
+          "createElement"
+        ],
+        "jsxFragment": [
+          "React",
+          "Fragment"
+        ],
+        "jsxImportSource": "react",
+        "jsxParse": false,
+        "jsxPreserve": false,
+        "jsxSideEffects": false,
+        "keepNames": false,
+        "logPathStyle": 0,
+        "mangleProps": "^_",
+        "mangleQuoted": false,
+        "minifyIdentifiers": false,
+        "minifySyntax": false,
+        "minifyWhitespace": false,
+        "mode": 0,
+        "moduleType": 0,
+        "omitJSXRuntime": false,
+        "omitRuntime": false,
+        "originalTargetEnv": "",
+        "outputFormat": 0,
+        "platform": 0,
+        "reserveProps": "^__",
+        "treeShaking": false,
+        "tsAlwaysStrict": null,
+        "tsNoAmb": false,
+        "tsParse": false,
+        "unsupportedJS": 0,
+        "unsupportedJSMask": 0,
+        "unsupportedJSOverrides": 0
+      }
+    },
+    {
+      "name": "ofc:injected",
+      "data": {
+        "asciiOnly": false,
+        "codePathStyle": 0,
+        "definesDots": 0,
+        "definesIds": 0,
+        "dropDebugger": false,
+        "dropLabels": null,
+        "ignoreDCE": false,
+        "injectedFiles": [
+          [
+            "bar",
+            "x",
+            0,
+            false
+          ]
+        ],
+        "jsxAuto": false,
+        "jsxDev": false,
+        "jsxFactory": [
+          "React",
+          "createElement"
+        ],
+        "jsxFragment": [
+          "React",
+          "Fragment"
+        ],
+        "jsxImportSource": "react",
+        "jsxParse": false,
+        "jsxPreserve": false,
+        "jsxSideEffects": false,
+        "keepNames": false,
+        "logPathStyle": 0,
+        "mangleProps": null,
+        "mangleQuoted": false,
+        "minifyIdentifiers": false,
+        "minifySyntax": false,
+        "minifyWhitespace": false,
+        "mode": 0,
+        "moduleType": 0,
+        "omitJSXRuntime": false,
+        "omitRuntime": false,
+        "originalTargetEnv": "",
+        "outputFormat": 0,
+        "platform": 0,
+        "reserveProps": null,
+        "treeShaking": false,
+        "tsAlwaysStrict": null,
+        "tsNoAmb": false,
+        "tsParse": false,
+        "unsupportedJS": 0,
+        "unsupportedJSMask": 0,
+        "unsupportedJSOverrides": 0
+      }
+    },
+    {
+      "name": "equal:identical",
+      "data": true
+    },
+    {
+      "name": "equal:diff-minify",
+      "data": false
+    },
+    {
+      "name": "equal:diff-features",
+      "data": false
+    },
+    {
+      "name": "equal:same-regex-diff-inst",
+      "data": true
+    },
+    {
+      "name": "equal:diff-regex",
+      "data": false
+    },
+    {
+      "name": "equal:diff-jsx-factory",
+      "data": false
+    },
+    {
+      "name": "equal:diff-droplabels",
+      "data": false
+    }
+  ]
+}

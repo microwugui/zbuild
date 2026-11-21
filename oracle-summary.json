@@ -1,0 +1,66 @@
+{
+  "generatedAt": "2026-11-17T01:14:32.042Z",
+  "corpus": {
+    "cliCases": 16952,
+    "fixtureCases": 6,
+    "corpusTotal": 16958,
+    "corpusTotalAllParams": 16958,
+    "sources": [
+      {
+        "id": "three-build",
+        "files": 5,
+        "bytes": 6941062,
+        "caseCount": 20
+      },
+      {
+        "id": "three-src",
+        "files": 757,
+        "bytes": 4735566,
+        "caseCount": 3028
+      },
+      {
+        "id": "esbuild-cases",
+        "files": 3476,
+        "bytes": 79037,
+        "caseCount": 13904
+      }
+    ]
+  },
+  "total": 16958,
+  "applicable": 15818,
+  "equal": 2672,
+  "byStatus": {
+    "equal": 2672,
+    "fixture-fail": 1,
+    "diff": 5227,
+    "ts-error": 7918,
+    "go-error": 1140
+  },
+  "tsMissing": false,
+  "fixtures": [
+    {
+      "name": "xxhash",
+      "referenceSha256": "b1196e5431bd87227275fe2a00f7708cc8ae914b3b0d60d2e31723edc2700577"
+    },
+    {
+      "name": "helpers-utf",
+      "referenceSha256": "0f8bf785cb3f785450a133e8ad0e8df3bccf79a0998246fe6b3da8ed6a0428d3"
+    },
+    {
+      "name": "helpers-quote",
+      "referenceSha256": "0f8bf785cb3f785450a133e8ad0e8df3bccf79a0998246fe6b3da8ed6a0428d3"
+    },
+    {
+      "name": "helpers-extra",
+      "referenceSha256": "59378a8572435c3eefa6a56c699af1ede5d7a79dcc8e4a580d786c1d98a1cd02"
+    },
+    {
+      "name": "js-printer-basic",
+      "referenceSha256": "29f04b4e5507c0e6d6cff3c56ecc9ccb880204528210462c032e0b908e9cfd1a"
+    },
+    {
+      "name": "js-ast-paths",
+      "referenceSha256": "8950c2e1689051f6c114add1bd2889d46d53f8c62590c032ef09ca213db6784e"
+    }
+  ]
+}

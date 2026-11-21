@@ -1,0 +1,70 @@
+package resolver
+
+// 第 171 批 Go 探针：esmResolveAlgorithm 逐字节固化（ESM 解析算法协调层，深簇最后一函数）。
+import (
+	"encoding/json"
+	"os"
+	"testing"
+
+	"github.com/evanw/esbuild/internal/ast"
+	"github.com/evanw/esbuild/internal/cache"
+	"github.com/evanw/esbuild/internal/config"
+	"github.com/evanw/esbuild/internal/fs"
+	"github.com/evanw/esbuild/internal/js_lexer"
+	"github.com/evanw/esbuild/internal/js_parser"
+	"github.com/evanw/esbuild/internal/logger"
+)
+
+type eaRow struct {
+	Arg map[string]interface{} `json:"arg"`
+	Out interface{}            `json:"out"`
+}
+func eaDC(dc *fs.DifferentCase) interface{} { if dc==nil{return nil}; return []interface{}{dc.Dir,dc.Query,dc.Actual} }
+func eaDM(dm *DebugMeta) interface{} {
+	notes:=[]string{}; for _,n:=range dm.notes{notes=append(notes,n.Text)}
+	return []interface{}{notes, dm.suggestionText, dm.suggestionMessage, int(dm.suggestionRange)}
+}
+
+func TestTmpGenEsmAlgo(t *testing.T) {
+	var out []eaRow
+	type tc struct {
+		name string
+		exportsJSON string
+		subpath string
+		kind ast.ImportKind
+		tree map[string]string
+	}
+	cases := []tc{
+		{"exact-import", `{"exports":{"./foo":"./foo.js"}}`, "./foo", ast.ImportStmt, map[string]string{"/pkg/foo.js": ""}},
+		{"exact-require", `{"exports":{"./foo":{"import":"./foo.mjs","require":"./foo.cjs"}}}`, "./foo", ast.ImportRequire, map[string]string{"/pkg/foo.cjs": ""}},
+		{"wildcard-import", `{"exports":{"./*":"./*.js"}}`, "./bar", ast.ImportDynamic, map[string]string{"/pkg/bar.js": ""}},
+		{"main-import", `{"exports":{".":"./index.js"}}`, ".", ast.ImportStmt, map[string]string{"/pkg/index.js": ""}},
+		{"not-exported", `{"exports":{"./foo":"./foo.js"}}`, "./bar", ast.ImportStmt, map[string]string{"/pkg/bar.js": ""}},
+		{"null-disabled", `{"exports":{"./foo":null}}`, "./foo", ast.ImportStmt, map[string]string{}},
+	}
+	for _, c := range cases {
+		fsobj := fs.MockFS(c.tree, fs.MockUnix, "/")
+		caches := cache.MakeCacheSet()
+		log := logger.NewDeferLog(logger.DeferLogAll, nil)
+		source := logger.Source{Contents: c.exportsJSON, KeyPath: logger.Path{Text: "/pkg/package.json"}}
+		expr, _ := js_parser.ParseJSON(log, source, js_parser.JSONOptions{Flavor: js_lexer.TSConfigJSON})
+		exportsJSON, _, _ := getProperty(expr, "exports")
+		exportsMap := parseImportsExportsMap(source, log, exportsJSON, "exports", logger.Loc{Start: 1})
+		pj := &packageJSON{exportsMap: exportsMap}
+		pj.source = logger.Source{Contents: "abcdefghijklmnopqrstuvwxyz\nline2", KeyPath: logger.Path{Text: "/pkg/package.json"}}
+		r := resolverQuery{Resolver: &Resolver{log: log}, debugLogs: &debugLogs{}, debugMeta: &DebugMeta{}}
+		r.options = config.Options{Platform: config.PlatformNode, ExtensionOrder: []string{".js"}}
+		r.fs = fsobj; r.caches = caches
+		r.dirCache = make(map[string]*dirInfo); r.pnpManifestWasChecked = true
+		r.kind = c.kind
+		r.esmConditionsDefault = map[string]bool{"default": true}
+		r.esmConditionsImport = map[string]bool{"import": true}
+		r.esmConditionsRequire = map[string]bool{"require": true}
+		pair, ok, dc := r.esmResolveAlgorithm(finalizeImportsExportsNormal, "mypkg", c.subpath, pj, "/pkg", "/abs/import.js")
+		out = append(out, eaRow{Arg: map[string]interface{}{"name": c.name},
+			Out: []interface{}{[]interface{}{pair.Primary.Text, pair.Primary.Namespace, pair.Secondary.Text, int(pair.Primary.Flags)}, ok, eaDC(dc), eaDM(r.debugMeta)}})
+	}
+	b, e := json.Marshal(out); if e != nil { t.Fatal(e) }
+	if e := os.WriteFile("/root/port/testdata/esmalgo-go.json", b, 0644); e != nil { t.Fatal(e) }
+	t.Logf("wrote %d cases", len(out))
+}

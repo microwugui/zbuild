@@ -1,0 +1,1 @@
+a { font: 1rem/1.2 'aaa bbb' }

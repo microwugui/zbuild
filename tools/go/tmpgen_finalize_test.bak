@@ -1,0 +1,73 @@
+package resolver
+
+// 第 170 批 Go 探针：finalizeImportsExportsResult 逐字节固化（ESM exports 解析核心深簇）。
+import (
+	"encoding/json"
+	"os"
+	"testing"
+
+	"github.com/evanw/esbuild/internal/cache"
+	"github.com/evanw/esbuild/internal/config"
+	"github.com/evanw/esbuild/internal/fs"
+	"github.com/evanw/esbuild/internal/logger"
+)
+
+type fzRow struct {
+	Arg map[string]interface{} `json:"arg"`
+	Out interface{}            `json:"out"`
+}
+
+func fzRange(r logger.Range) interface{} { return []interface{}{r.Loc.Start, r.Len} }
+func fzDC(dc *fs.DifferentCase) interface{} { if dc==nil{return nil}; return []interface{}{dc.Dir,dc.Query,dc.Actual} }
+func fzDM(dm *DebugMeta) interface{} {
+	notes := []string{}; for _, n := range dm.notes { notes = append(notes, n.Text) }
+	return []interface{}{notes, dm.suggestionText, dm.suggestionMessage, int(dm.suggestionRange)}
+}
+
+func TestTmpGenFinalize(t *testing.T) {
+	var out []fzRow
+	type tc struct {
+		name string
+		kind finalizeImportsExportsKind
+		resolvedPath string
+		status pjStatus
+		tree map[string]string
+		debugInvalid string
+	}
+	cases := []tc{
+		{"exact-file", finalizeImportsExportsNormal, "/foo.js", pjStatusExact, map[string]string{"/pkg/foo.js": ""}, ""},
+		{"exact-missing", finalizeImportsExportsNormal, "/missing.js", pjStatusExact, map[string]string{"/pkg/other.js": ""}, ""},
+		{"exact-rewrite-js-ts", finalizeImportsExportsNormal, "/foo.js", pjStatusExact, map[string]string{"/pkg/foo.ts": ""}, ""},
+		{"exact-star-missing-ext", finalizeImportsExportsNormal, "/foo", pjStatusExactEndsWithStar, map[string]string{"/pkg/foo.js": ""}, ""},
+		{"exact-dir", finalizeImportsExportsNormal, "/sub", pjStatusExact, map[string]string{"/pkg/sub/index.js": ""}, ""},
+		{"yarnpnp-shortcut", finalizeImportsExportsYarnPnPTSConfigExtends, "/foo.js", pjStatusExact, map[string]string{}, ""},
+		{"inexact-file", finalizeImportsExportsNormal, "/foo", pjStatusInexact, map[string]string{"/pkg/foo.js": ""}, ""},
+		{"inexact-miss", finalizeImportsExportsNormal, "/nope", pjStatusInexact, map[string]string{"/pkg/foo.js": ""}, ""},
+		{"invalid-module", finalizeImportsExportsNormal, "./foo.js", pjStatusInvalidModuleSpecifier, map[string]string{}, " because of something"},
+	}
+	for _, c := range cases {
+		t.Logf("case %s start", c.name)
+		fsobj := fs.MockFS(c.tree, fs.MockUnix, "/")
+		caches := cache.MakeCacheSet()
+		log := logger.NewDeferLog(logger.DeferLogAll, nil)
+		r := resolverQuery{Resolver: &Resolver{log: log}, debugLogs: &debugLogs{}, debugMeta: &DebugMeta{}}
+		r.options = config.Options{Platform: config.PlatformNode, ExtensionOrder: []string{".js", ".ts"}}
+		r.fs = fsobj; r.caches = caches
+		r.dirCache = make(map[string]*dirInfo); r.pnpManifestWasChecked = true
+		// packageJSON with source for tracker
+		pj := &packageJSON{}
+		pj.source = logger.Source{KeyPath: logger.Path{Text: "/pkg/package.json"}, Contents: "abcdefghijklmnopqrstuvwxyz0123456789\nsecond line\nthird line"}
+		// pjMap (empty root) for propertyKey fields
+		pm := &pjMap{propertyKey: "exports", propertyKeyLoc: logger.Loc{Start: 1}}
+		pm.root = pjEntry{kind: pjObject, firstToken: logger.Range{Loc: logger.Loc{Start: 0}, Len: 1}}
+		dbg := pjDebug{invalidBecause: c.debugInvalid, token: logger.Range{Loc: logger.Loc{Start: 2}, Len: 5}}
+		pair, ok, dc := r.finalizeImportsExportsResult(c.kind, "/pkg", map[string]bool{"import": true}, *pm, pj,
+			c.resolvedPath, c.status, dbg, "mypkg", "./sub", "/abs/import.js")
+		out = append(out, fzRow{Arg: map[string]interface{}{"name": c.name},
+			Out: []interface{}{[]interface{}{pair.Primary.Text, pair.Primary.Namespace, pair.Secondary.Text, int(pair.Primary.Flags)}, ok, fzDC(dc), fzDM(r.debugMeta)}})
+	}
+	b, e := json.Marshal(out); if e != nil { t.Fatal(e) }
+	if e := os.WriteFile("/root/port/testdata/finalize-go.json", b, 0644); e != nil { t.Fatal(e) }
+	t.Logf("wrote %d cases", len(out))
+	_ = fzRange
+}

@@ -1,0 +1,58 @@
+package cli
+// 第 102 轮 Go 探针：CLI 公开解析入口成片（ParseBuildOptions / ParseTransformOptions /
+// ParseServeOptions / parseOptionsForRun / parseServeOptionsImpl）逐字节固化。
+import ("encoding/json";"os";"testing";"github.com/evanw/esbuild/pkg/api")
+type c102Row struct { Name string `json:"name"`; Out interface{} `json:"out"` }
+func c102BuildOpts(o api.BuildOptions) map[string]interface{}{
+ return map[string]interface{}{"bundle":o.Bundle,"format":int(o.Format),"platform":int(o.Platform),
+  "minifyWS":o.MinifyWhitespace,"minifySyntax":o.MinifySyntax,"minifyIdent":o.MinifyIdentifiers,
+  "target":int(o.Target),"metafile":o.Metafile,"write":o.Write,"logLimit":o.LogLimit,"logLevel":int(o.LogLevel),
+  "entryPoints":o.EntryPoints,"defines":func()[]string{r:=[]string{};for k,v:=range o.Define{r=append(r,k+"="+v)};return r}()}
+}
+func c102TransformOpts(o api.TransformOptions) map[string]interface{}{
+ return map[string]interface{}{"format":int(o.Format),"minifyWS":o.MinifyWhitespace,"minifySyntax":o.MinifySyntax,
+  "target":int(o.Target),"logLimit":o.LogLimit,"logLevel":int(o.LogLevel),
+  "defines":func()[]string{r:=[]string{};for k,v:=range o.Define{r=append(r,k+"="+v)};return r}()}
+}
+func c102ServeOpts(o api.ServeOptions) map[string]interface{}{
+ return map[string]interface{}{"port":o.Port,"host":o.Host,"servedir":o.Servedir,"keyfile":o.Keyfile,
+  "certfile":o.Certfile,"fallback":o.Fallback,"origin":o.CORS.Origin}
+}
+func TestTmpCliChain102(t *testing.T){
+ rows:=[]c102Row{}
+ // ParseBuildOptions
+ for _,c:=range []struct{name string;args []string}{
+  {"pb-basic",[]string{"in.js","--bundle","--format=esm","--platform=node"}},
+  {"pb-minify",[]string{"a.js","--minify","--target=es2015"}},
+  {"pb-define",[]string{"in.js","--define:DEBUG=false","--metafile"}},
+  {"pb-bad",[]string{"--no-such"}},
+ }{o,err:=ParseBuildOptions(c.args); if err!=nil{rows=append(rows,c102Row{c.name,map[string]interface{}{"err":err.Error()}})}else{rows=append(rows,c102Row{c.name,c102BuildOpts(o)})}}
+ // ParseTransformOptions
+ for _,c:=range []struct{name string;args []string}{
+  {"pt-basic",[]string{"--loader=ts","--format=esm"}},
+  {"pt-minify",[]string{"--minify","--target=es2020"}},
+  {"pt-define",[]string{"--define:DEBUG=false"}},
+  {"pt-bad",[]string{"--no-such"}},
+ }{o,err:=ParseTransformOptions(c.args); if err!=nil{rows=append(rows,c102Row{c.name,map[string]interface{}{"err":err.Error()}})}else{rows=append(rows,c102Row{c.name,c102TransformOpts(o)})}}
+ // ParseServeOptions
+ for _,c:=range []struct{name string;args []string}{
+  {"ps-basic",[]string{"--serve=8000","in.js"}},
+  {"ps-host",[]string{"--serve=127.0.0.1:3000","--servedir=public","in.js"}},
+  {"ps-origin",[]string{"--serve=8080","--cors-origin=*,foo","in.js"}},
+  {"ps-none",[]string{"in.js","--bundle"}},
+  {"ps-bad",[]string{"--serve=notaport"}},
+ }{o,rest,err:=ParseServeOptions(c.args); if err!=nil{rows=append(rows,c102Row{c.name,map[string]interface{}{"err":err.Error()}})}else{rows=append(rows,c102Row{c.name,map[string]interface{}{"opts":c102ServeOpts(o),"rest":rest}})}}
+ // parseOptionsForRun
+ for _,c:=range []struct{name string;args []string}{
+  {"pfr-build",[]string{"in.js","--bundle","--format=esm"}},
+  {"pfr-transform",[]string{"--loader=ts","--minify"}},
+  {"pfr-bad",[]string{"--no-such"}},
+ }{bo,to,ex,err:=parseOptionsForRun(c.args); m:=map[string]interface{}{"errText":""};
+  if err!=nil{m["errText"]=err.Text}
+  if bo!=nil{m["build"]=c102BuildOpts(*bo)}; if to!=nil{m["transform"]=c102TransformOpts(*to)}
+  m["watch"]=ex.watch;m["watchDelay"]=ex.watchDelay
+  rows=append(rows,c102Row{c.name,m})}
+ out,_:=json.MarshalIndent(rows,"","  ")
+ if err:=os.WriteFile("/root/port/testdata/cli-chain-go.json",out,0644);err!=nil{t.Fatal(err)}
+ t.Logf("wrote %d rows bytes=%d",len(rows),len(out))
+}

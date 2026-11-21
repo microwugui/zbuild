@@ -1,0 +1,42 @@
+[
+  {
+    "name": "disposed",
+    "err": "Cannot serve a disposed context"
+  },
+  {
+    "name": "already-enabled",
+    "err": "Serve mode has already been enabled"
+  },
+  {
+    "name": "keyfile-only",
+    "err": "Must specify both key and certificate for HTTPS"
+  },
+  {
+    "name": "certfile-only",
+    "err": "Must specify both key and certificate for HTTPS"
+  },
+  {
+    "name": "bad-servedir",
+    "err": "Invalid serve path: /bad"
+  },
+  {
+    "name": "bad-fallback",
+    "err": "Invalid fallback path: /badfb"
+  },
+  {
+    "name": "bad-cors",
+    "err": "Invalid origin: a*b*c"
+  },
+  {
+    "name": "stdout-one-entry",
+    "err": "Cannot serve an entry point without an output path"
+  },
+  {
+    "name": "stdout-two-entries",
+    "err": "Cannot serve entry points without an output path"
+  },
+  {
+    "name": "outdir-outside-servedir",
+    "err": "Output directory \"../out\" must be contained in serve directory \"../out\""
+  }
+]

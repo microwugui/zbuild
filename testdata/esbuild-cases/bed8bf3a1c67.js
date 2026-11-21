@@ -1,0 +1,1 @@
+class 𐀀 extends π {}

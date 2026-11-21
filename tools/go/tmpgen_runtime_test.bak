@@ -1,0 +1,71 @@
+package bundler
+
+// 第 120 轮 Go 探针：runtimeCache.parseRuntime 的确定性 1:1 投影（source bytes hash +
+// AST parts/stmt 结构）。符号表 Go344/TS233（unbound 全局）差异属 parser 骨架限制，不纳入本缝。
+// 3 feature 配置逐字节。注入 runtimeCache{}（空 map，强制 cache miss → 真 parse）。
+import (
+	"crypto/sha256"
+	"encoding/base64"
+	"encoding/json"
+	"os"
+	"testing"
+
+	"github.com/evanw/esbuild/internal/compat"
+	"github.com/evanw/esbuild/internal/config"
+	"github.com/evanw/esbuild/internal/js_ast"
+)
+
+type rtRow struct {
+	Name string `json:"name"`
+	SourceLen int `json:"sourceLen"`
+	SourceSha string `json:"sourceSha"`
+	OK bool `json:"ok"`
+	NumParts int `json:"numParts"`
+	StmtKinds [][]string `json:"stmtKinds"`
+	NumImports int `json:"numImports"`
+}
+
+func rtKind(s js_ast.Stmt) string {
+	switch s.Data.(type) {
+	case *js_ast.SExpr: return "Expr"
+	case *js_ast.SLocal: return "Local"
+	case *js_ast.SFunction: return "Function"
+	case *js_ast.SReturn: return "Return"
+	case *js_ast.SBlock: return "Block"
+	case *js_ast.SIf: return "If"
+	case *js_ast.SThrow: return "Throw"
+	case *js_ast.STry: return "Try"
+	case *js_ast.SClass: return "Class"
+	}
+	return "other"
+}
+
+func TestTmpGenRuntime120(t *testing.T) {
+	cases := []struct {
+		name string
+		features compat.JSFeature
+		minifySyntax, minifyIdentifiers bool
+	}{
+		{"default", 0, false, false},
+		{"es2015", compat.UnsupportedJSFeatures(map[compat.Engine]compat.Semver{compat.ES: {Parts: []int{2015}}}), false, false},
+		{"minify", 0, true, true},
+	}
+	rows := []rtRow{}
+	for _, c := range cases {
+		cache := &runtimeCache{}
+		opts := &config.Options{UnsupportedJSFeatures: c.features, MinifySyntax: c.minifySyntax, MinifyIdentifiers: c.minifyIdentifiers}
+		source, tree, ok := cache.parseRuntime(opts)
+		sha := sha256.Sum256([]byte(source.Contents))
+		kinds := [][]string{}
+		for _, p := range tree.Parts {
+			ks := []string{}
+			for _, st := range p.Stmts { ks = append(ks, rtKind(st)) }
+			kinds = append(kinds, ks)
+		}
+		rows = append(rows, rtRow{c.name, len(source.Contents),
+			base64.RawURLEncoding.EncodeToString(sha[:]), ok, len(tree.Parts), kinds, len(tree.ImportRecords)})
+	}
+	b, _ := json.MarshalIndent(rows, "", "  ")
+	if err := os.WriteFile("/root/port/testdata/runtime-parse-go.json", b, 0644); err != nil { t.Fatal(err) }
+	for _, r := range rows { t.Logf("%-8s srclen=%d ok=%v parts=%d imports=%d sha=%s", r.Name, r.SourceLen, r.OK, r.NumParts, r.NumImports, r.SourceSha) }
+}

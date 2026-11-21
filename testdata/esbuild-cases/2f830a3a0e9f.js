@@ -1,0 +1,1 @@
+return typeof (false || x); var x

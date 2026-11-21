@@ -1,0 +1,1 @@
+.xy { :where(&, span:is(.foo &)) { color: red } }

@@ -1,0 +1,26 @@
+[
+  {
+    "name": "empty",
+    "plugins": 1,
+    "hasOnEnd": false,
+    "err": ""
+  },
+  {
+    "name": "onend",
+    "plugins": 1,
+    "hasOnEnd": true,
+    "err": ""
+  },
+  {
+    "name": "plain",
+    "plugins": 1,
+    "hasOnEnd": false,
+    "err": ""
+  },
+  {
+    "name": "bad-filter",
+    "plugins": 0,
+    "hasOnEnd": false,
+    "err": "[p] \"onResolve\" filter is not a valid Go regular expression: \"[\""
+  }
+]

@@ -1,0 +1,1 @@
+try { 'use strict'; with (x) y } catch {}

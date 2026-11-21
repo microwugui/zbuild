@@ -1,0 +1,116 @@
+package renamer_test
+
+// 第 94 轮 Go 探针：逐文件 dump 真实模块作用域 unbound（区分 document/self/window
+// 这种真全局与 event/i/array 这种假 unbound），产出 ComputeReservedNames 业务名集合。
+// 用于让 TS bundle_multi 用「逐文件 unbound 精确口径」替换过宽的 knownGlobals 白名单。
+import (
+	"encoding/json"
+	"os"
+	"path/filepath"
+	"sort"
+	"strings"
+	"testing"
+
+	"github.com/evanw/esbuild/internal/ast"
+	"github.com/evanw/esbuild/internal/config"
+	"github.com/evanw/esbuild/internal/js_ast"
+	"github.com/evanw/esbuild/internal/js_lexer"
+	"github.com/evanw/esbuild/internal/js_parser"
+	"github.com/evanw/esbuild/internal/logger"
+	"github.com/evanw/esbuild/internal/renamer"
+)
+
+type u94File struct {
+	Path           string   `json:"path"`
+	Unbound        []string `json:"unbound"`
+	MustNotRenamed []string `json:"mustNotRenamed"`
+}
+type u94Entry struct {
+	Entry       string    `json:"entry"`
+	Files       []u94File `json:"files"`
+	ReservedBiz []string  `json:"reservedBiz"`
+}
+
+func u94Parse(path string) (*js_ast.AST, bool) {
+	contents, err := os.ReadFile(path)
+	if err != nil { return nil, false }
+	src := logger.Source{
+		Contents: string(contents),
+		KeyPath:  logger.Path{Text: filepath.Base(path), Namespace: "file"},
+		PrettyPaths: logger.PrettyPaths{Abs: path, Rel: path},
+	}
+	log := logger.NewDeferLog(logger.DeferLogNoVerboseOrDebug, nil)
+	opts := js_parser.OptionsFromConfig(&config.Options{
+		Mode: config.ModeBundle, OutputFormat: config.FormatESModule,
+		Platform: config.PlatformNode, TreeShaking: true,
+	})
+	a, ok := js_parser.Parse(log, src, opts)
+	if !ok { return nil, false }
+	return &a, true
+}
+
+// 递归收集相对 import 依赖（filepath，去重）
+func u94Collect(path string, seen map[string]bool, out *[]*js_ast.AST, paths *[]string) {
+	abs, _ := filepath.Abs(path)
+	if seen[abs] { return }
+	seen[abs] = true
+	a, ok := u94Parse(path)
+	if !ok { return }
+	*out = append(*out, a)
+	*paths = append(*paths, filepath.Base(path))
+	dir := filepath.Dir(abs)
+	for _, rec := range a.ImportRecords {
+		spec := rec.Path.Text
+		if !strings.HasPrefix(spec, ".") && !strings.HasPrefix(spec, "/") { continue }
+		if !strings.HasSuffix(spec, ".js") { spec += ".js" }
+		u94Collect(filepath.Join(dir, spec), seen, out, paths)
+	}
+}
+
+func TestTmpGenUnbound94(t *testing.T) {
+	base := "/root/port/testdata/three/package/build"
+	entries := []string{"three.module.js", "three.tsl.js", "three.webgpu.js"}
+	rows := []u94Entry{}
+	for _, entry := range entries {
+		seen := map[string]bool{}
+		var asts []*js_ast.AST
+		var paths []string
+		u94Collect(filepath.Join(base, entry), seen, &asts, &paths)
+
+		bizSet := map[string]bool{}
+		files := []u94File{}
+		for i, a := range asts {
+			sm := ast.NewSymbolMap(1)
+			sm.SymbolsForSource[0] = a.Symbols
+			unbound := []string{}
+			mnr := []string{}
+			if a.ModuleScope != nil {
+				for _, m := range a.ModuleScope.Members {
+					sy := sm.Get(m.Ref)
+					if sy.Kind == ast.SymbolUnbound { unbound = append(unbound, sy.OriginalName) }
+					if sy.Flags.Has(ast.MustNotBeRenamed) { mnr = append(mnr, sy.OriginalName) }
+				}
+				for _, ref := range a.ModuleScope.Generated {
+					sy := sm.Get(ref)
+					if sy.Kind == ast.SymbolUnbound { unbound = append(unbound, sy.OriginalName) }
+					if sy.Flags.Has(ast.MustNotBeRenamed) { mnr = append(mnr, sy.OriginalName) }
+				}
+			}
+			reserved := renamer.ComputeReservedNames([]*js_ast.Scope{a.ModuleScope}, sm)
+			for name := range reserved {
+				if _, ok := js_lexer.Keywords[name]; ok { continue }
+				if _, ok := js_lexer.StrictModeReservedWords[name]; ok { continue }
+				bizSet[name] = true
+			}
+			sort.Strings(unbound); sort.Strings(mnr)
+			files = append(files, u94File{paths[i], unbound, mnr})
+		}
+		biz := make([]string, 0, len(bizSet))
+		for n := range bizSet { biz = append(biz, n) }
+		sort.Strings(biz)
+		rows = append(rows, u94Entry{entry, files, biz})
+	}
+	b, _ := json.MarshalIndent(rows, "", "  ")
+	if err := os.WriteFile("/root/port/testdata/three-unbound-go.json", b, 0644); err != nil { t.Fatal(err) }
+	t.Logf("wrote %d entries bytes=%d", len(rows), len(b))
+}

@@ -1,0 +1,1 @@
+@media or { div { color: red } }

@@ -1,0 +1,1 @@
+let a; for (const b=0;;) ;

@@ -1,0 +1,85 @@
+package api
+
+// 第 105 轮 Go 探针：loadPlugins 整链（Setup 注册 onStart/onResolve/onLoad/onEnd/onDispose + 初始选项变更 + 缺名报错）。
+// Setup 不调用 Resolve，故输出全确定。一探针覆盖 loadPlugins。
+import (
+  "encoding/json"
+  "os"
+  "testing"
+
+  "github.com/evanw/esbuild/internal/cache"
+  "github.com/evanw/esbuild/internal/config"
+  "github.com/evanw/esbuild/internal/fs"
+  "github.com/evanw/esbuild/internal/logger"
+)
+
+type lpMsg struct { Text string `json:"text"`; Kind int `json:"kind"` }
+type lpRow struct {
+  Name string `json:"name"`
+  NumPlugins int `json:"numPlugins"`
+  PluginNames []string `json:"pluginNames"`
+  OnStartCounts []int `json:"onStartCounts"`
+  OnResolveCounts []int `json:"onResolveCounts"`
+  OnLoadCounts []int `json:"onLoadCounts"`
+  OnEndCallbacks int `json:"onEndCallbacks"`
+  OnEndNames []string `json:"onEndNames"`
+  OnDisposeCallbacks int `json:"onDisposeCallbacks"`
+  FinalMinifyWS bool `json:"finalMinifyWS"`
+  Msgs []lpMsg `json:"msgs"`
+}
+
+func TestTmpGenLoadPlugins105(t *testing.T) {
+  mfs := fs.MockFS(map[string]string{}, fs.MockUnix, "/")
+  rows := []lpRow{}
+
+  run := func(name string, plugins []Plugin) lpRow {
+    log := logger.NewDeferLog(logger.DeferLogAll, nil)
+    opts := &BuildOptions{Plugins: plugins}
+    onEnd, onDispose, finalize := loadPlugins(opts, mfs, log, cache.MakeCacheSet())
+    copts := &config.Options{}
+    finalize(copts)
+    r := lpRow{Name:name, NumPlugins:len(copts.Plugins), PluginNames:[]string{}, OnStartCounts:[]int{},
+      OnResolveCounts:[]int{}, OnLoadCounts:[]int{}, OnEndNames:[]string{}, Msgs:[]lpMsg{},
+      OnEndCallbacks:len(onEnd), OnDisposeCallbacks:len(onDispose), FinalMinifyWS:opts.MinifyWhitespace}
+    for _, p := range copts.Plugins {
+      r.PluginNames=append(r.PluginNames,p.Name)
+      r.OnStartCounts=append(r.OnStartCounts,len(p.OnStart))
+      r.OnResolveCounts=append(r.OnResolveCounts,len(p.OnResolve))
+      r.OnLoadCounts=append(r.OnLoadCounts,len(p.OnLoad))
+    }
+    for _, e := range onEnd { r.OnEndNames=append(r.OnEndNames,e.pluginName) }
+    for _, m := range log.Done() { r.Msgs=append(r.Msgs,lpMsg{m.Data.Text,int(m.Kind)}) }
+    return r
+  }
+  noopStart:=func()(OnStartResult,error){return OnStartResult{},nil}
+  noopResolve:=func(OnResolveArgs)(OnResolveResult,error){return OnResolveResult{},nil}
+  noopLoad:=func(OnLoadArgs)(OnLoadResult,error){return OnLoadResult{},nil}
+  noopEnd:=func(*BuildResult)(OnEndResult,error){return OnEndResult{},nil}
+  noopDispose:=func(){}
+
+  // 1: 两插件各注册，Setup 改 InitialOptions.MinifyWhitespace
+  rows=append(rows,run("two-plugins",[]Plugin{
+    {Name:"alpha",Setup:func(b PluginBuild){
+      b.OnStart(noopStart); b.OnResolve(OnResolveOptions{Filter:`\.js$`},noopResolve); b.OnLoad(OnLoadOptions{Filter:`\.ts$`},noopLoad)
+      b.OnEnd(noopEnd); b.OnDispose(noopDispose); b.InitialOptions.MinifyWhitespace=true
+    }},
+    {Name:"beta",Setup:func(b PluginBuild){ b.OnEnd(noopEnd) }},
+  }))
+  // 2: 空名字（报错跳过）+ 正常
+  rows=append(rows,run("empty-name",[]Plugin{
+    {Setup:func(PluginBuild){}},
+    {Name:"ok",Setup:func(b PluginBuild){ b.OnStart(noopStart) }},
+  }))
+  // 3: 无插件
+  rows=append(rows,run("none",nil))
+  // 4: setup 注册多个 + dispose
+  rows=append(rows,run("multi-reg",[]Plugin{
+    {Name:"p",Setup:func(b PluginBuild){
+      b.OnResolve(OnResolveOptions{Filter:`a`},noopResolve); b.OnResolve(OnResolveOptions{Filter:`b`},noopResolve); b.OnDispose(noopDispose)
+    }},
+  }))
+
+  b,err:=json.MarshalIndent(rows,"","  "); if err!=nil{t.Fatal(err)}
+  if err:=os.WriteFile("/root/port/testdata/load-plugins-go.json",b,0644);err!=nil{t.Fatal(err)}
+  t.Logf("wrote %d rows bytes=%d",len(rows),len(b))
+}

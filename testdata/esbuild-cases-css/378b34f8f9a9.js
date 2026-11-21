@@ -1,0 +1,1 @@
+a { font: oblique 45deg 1px 'aaa bbb' }

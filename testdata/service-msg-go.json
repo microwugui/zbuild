@@ -1,0 +1,22 @@
+[
+  {
+    "fn": "encodeMessages",
+    "arg": "three-msgs",
+    "out": "[{\"detail\":42,\"id\":\"assign-to-constant\",\"location\":{\"column\":7,\"file\":\"a.js\",\"length\":5,\"line\":3,\"lineText\":\"xy\",\"namespace\":\"file\",\"suggestion\":\"try\"},\"notes\":[{\"location\":{\"column\":0,\"file\":\"b.css\",\"length\":0,\"line\":1,\"lineText\":\"\",\"namespace\":\"ns\",\"suggestion\":\"\"},\"text\":\"note1\"},{\"location\":null,\"text\":\"note2\"}],\"pluginName\":\"\",\"text\":\"cannot assign\"},{\"detail\":-1,\"id\":\"\",\"location\":null,\"notes\":[],\"pluginName\":\"my-plugin\",\"text\":\"oops\"},{\"detail\":-1,\"id\":\"bigint\",\"location\":{\"column\":0,\"file\":\"b.css\",\"length\":0,\"line\":1,\"lineText\":\"\",\"namespace\":\"ns\",\"suggestion\":\"\"},\"notes\":[],\"pluginName\":\"\",\"text\":\"big\"}]"
+  },
+  {
+    "fn": "encodeErrorPacket",
+    "arg": "id7",
+    "out": "\"GwAAAA8AAAAGAQAAAAUAAABlcnJvcgMEAAAAYm9vbQ==\""
+  },
+  {
+    "fn": "decodeMessages",
+    "arg": "roundtrip",
+    "out": "[{\"detail\":42,\"id\":\"assign-to-constant\",\"loc\":\"a.js|file|3|7|5|xy|try\",\"notes\":2,\"notesData\":[\"note1|b.css|ns|1|0|0||\",\"note2|nil\"],\"plugin\":\"\",\"text\":\"cannot assign\"},{\"detail\":-1,\"id\":\"\",\"loc\":\"nil\",\"notes\":0,\"notesData\":[],\"plugin\":\"my-plugin\",\"text\":\"oops\"},{\"detail\":-1,\"id\":\"bigint\",\"loc\":\"b.css|ns|1|0|0||\",\"notes\":0,\"notesData\":[],\"plugin\":\"\",\"text\":\"big\"}]"
+  },
+  {
+    "fn": "decodeMessageToPrivate",
+    "arg": "one",
+    "out": "{\"detail\":9,\"id\":\"assign-to-constant\",\"locNil\":false,\"notes\":1,\"plugin\":\"p\",\"text\":\"txt\"}"
+  }
+]

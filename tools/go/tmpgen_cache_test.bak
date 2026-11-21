@@ -1,0 +1,117 @@
+package cache_test
+
+// 第 95 轮 Go 探针：cache 整片（MakeCacheSet + CSSCache/JSONCache/JSCache.Parse + FSCache.ReadFile）
+// 的缓存命中/未命中/失效语义逐字节固化。一次性覆盖 5 个未移植函数，供 TS 侧成片端口。
+import (
+	"encoding/json"
+	"errors"
+	"os"
+	"testing"
+
+	"github.com/evanw/esbuild/internal/cache"
+	"github.com/evanw/esbuild/internal/config"
+	"github.com/evanw/esbuild/internal/css_parser"
+	"github.com/evanw/esbuild/internal/fs"
+	"github.com/evanw/esbuild/internal/js_parser"
+	"github.com/evanw/esbuild/internal/logger"
+)
+
+type c95Row struct {
+	Fn string `json:"fn"`
+	Arg string `json:"arg"`
+	Out interface{} `json:"out"`
+}
+
+// customFS：嵌入 fs.FS，覆盖 ModKey/ReadFile，用可变字段模拟内容/modkey 变化。
+type c95FS struct {
+	fs.FS
+	contents string
+	modKeyErr error
+	readCalls int
+}
+func (f *c95FS) ModKey(path string) (fs.ModKey, error) { return fs.ModKey{}, f.modKeyErr }
+func (f *c95FS) ReadFile(path string) (string, error, error) { f.readCalls++; return f.contents, nil, nil }
+
+func mkSource(text, key string) logger.Source {
+	return logger.Source{
+		Contents: text,
+		KeyPath: logger.Path{Text: key, Namespace: "file"},
+		PrettyPaths: logger.PrettyPaths{Abs: key, Rel: key},
+	}
+}
+
+func logMsgs(l logger.Log) int { return len(l.Done()) }
+
+func TestTmpGenCache95(t *testing.T) {
+	rows := []c95Row{}
+	add := func(fn, arg string, out interface{}) { rows = append(rows, c95Row{fn, arg, out}) }
+
+	// ===== MakeCacheSet：初始 nextSourceIndex = runtime.SourceIndex(0)+1 = 1，LenHint = 17 =====
+	cs := cache.MakeCacheSet()
+	add("MakeCacheSet", "LenHint", cs.SourceIndexCache.LenHint())
+	add("MakeCacheSet", "Get(a)", cs.SourceIndexCache.Get(logger.Path{Text: "a"}, cache.SourceIndexNormal))
+	add("MakeCacheSet", "Get(a again)", cs.SourceIndexCache.Get(logger.Path{Text: "a"}, cache.SourceIndexNormal))
+
+	// ===== JSCache.Parse：同一 source+options 命中；改 contents 触发 miss =====
+	{
+		c := cache.MakeCacheSet().JSCache
+		opts := js_parser.OptionsFromConfig(&config.Options{Mode: config.ModeBundle, OutputFormat: config.FormatESModule})
+		good := mkSource("var x = 1;", "in.js")
+		bad := mkSource("var x = ", "in.js") // 语法错误 -> ok=false
+		_, o1 := c.Parse(logger.NewDeferLog(logger.DeferLogAll, nil), good, opts)
+		_, o2 := c.Parse(logger.NewDeferLog(logger.DeferLogAll, nil), good, opts)
+		_, o3 := c.Parse(logger.NewDeferLog(logger.DeferLogAll, nil), bad, opts)
+		_, o4 := c.Parse(logger.NewDeferLog(logger.DeferLogAll, nil), bad, opts)
+		_, o5 := c.Parse(logger.NewDeferLog(logger.DeferLogAll, nil), good, opts)
+		add("JSCache.Parse", "ok seq", []bool{o1, o2, o3, o4, o5})
+	}
+
+	// ===== JSONCache.Parse =====
+	{
+		c := cache.MakeCacheSet().JSONCache
+		opts := js_parser.JSONOptions{}
+		good := mkSource(`{"a":1}`, "in.json")
+		bad := mkSource(`{`, "in.json")
+		_, o1 := c.Parse(logger.NewDeferLog(logger.DeferLogAll, nil), good, opts)
+		_, o2 := c.Parse(logger.NewDeferLog(logger.DeferLogAll, nil), good, opts)
+		_, o3 := c.Parse(logger.NewDeferLog(logger.DeferLogAll, nil), bad, opts)
+		_, o4 := c.Parse(logger.NewDeferLog(logger.DeferLogAll, nil), bad, opts)
+		_, o5 := c.Parse(logger.NewDeferLog(logger.DeferLogAll, nil), good, opts)
+		add("JSONCache.Parse", "ok seq", []bool{o1, o2, o3, o4, o5})
+	}
+
+	// ===== CSSCache.Parse =====
+	{
+		c := cache.MakeCacheSet().CSSCache
+		cssOpts := css_parser.Options{}
+		good := mkSource("body { color: red; }", "in.css")
+		bad := mkSource("/* empty */", "in.css")
+		r1 := len(c.Parse(logger.NewDeferLog(logger.DeferLogAll, nil), good, cssOpts).Rules) > 0
+		r2 := len(c.Parse(logger.NewDeferLog(logger.DeferLogAll, nil), good, cssOpts).Rules) > 0
+		r3 := len(c.Parse(logger.NewDeferLog(logger.DeferLogAll, nil), bad, cssOpts).Rules) > 0
+		r4 := len(c.Parse(logger.NewDeferLog(logger.DeferLogAll, nil), bad, cssOpts).Rules) > 0
+		r5 := len(c.Parse(logger.NewDeferLog(logger.DeferLogAll, nil), good, cssOpts).Rules) > 0
+		add("CSSCache.Parse", "has-rules seq", []bool{r1, r2, r3, r4, r5})
+	}
+
+	// ===== FSCache.ReadFile：miss(读1次) → hit(modkey OK，不读) → 失效(modkey err，重读) =====
+	{
+		c := cache.MakeCacheSet().FSCache
+		f := &c95FS{FS: fs.MockFS(map[string]string{}, fs.MockUnix, "/"), contents: "hello", modKeyErr: nil}
+		s1, _, _ := c.ReadFile(f, "x.txt")
+		add("FSCache.ReadFile", "miss contents", s1)
+		add("FSCache.ReadFile", "miss readCalls", f.readCalls)
+		s2, _, _ := c.ReadFile(f, "x.txt")
+		add("FSCache.ReadFile", "hit contents", s2)
+		add("FSCache.ReadFile", "hit readCalls(still)", f.readCalls)
+		// 内容变化 + modkey error => 强制 miss 重读
+		f.contents = "world"; f.modKeyErr = errors.New("modkey unavailable")
+		s3, _, _ := c.ReadFile(f, "x.txt")
+		add("FSCache.ReadFile", "invalidate contents", s3)
+		add("FSCache.ReadFile", "invalidate readCalls", f.readCalls)
+	}
+
+	b, _ := json.MarshalIndent(rows, "", "  ")
+	if err := os.WriteFile("/root/port/testdata/cache-full-go.json", b, 0644); err != nil { t.Fatal(err) }
+	t.Logf("wrote %d rows bytes=%d", len(rows), len(b))
+}

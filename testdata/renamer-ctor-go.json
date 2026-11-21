@@ -1,0 +1,77 @@
+[
+  {
+    "fn": "noOp",
+    "arg": "0:0",
+    "out": "foo"
+  },
+  {
+    "fn": "noOp",
+    "arg": "0:1",
+    "out": "foo"
+  },
+  {
+    "fn": "noOp",
+    "arg": "0:2",
+    "out": "pinned"
+  },
+  {
+    "fn": "noOp",
+    "arg": "0:3",
+    "out": "bar"
+  },
+  {
+    "fn": "noOp",
+    "arg": "0:4",
+    "out": "unbound"
+  },
+  {
+    "fn": "minify",
+    "arg": "0:0",
+    "out": "a"
+  },
+  {
+    "fn": "minify",
+    "arg": "0:1",
+    "out": "a"
+  },
+  {
+    "fn": "minify",
+    "arg": "0:2",
+    "out": "pinned"
+  },
+  {
+    "fn": "minify",
+    "arg": "0:3",
+    "out": "a"
+  },
+  {
+    "fn": "minify",
+    "arg": "0:4",
+    "out": "unbound"
+  },
+  {
+    "fn": "number",
+    "arg": "0:0",
+    "out": "X"
+  },
+  {
+    "fn": "number",
+    "arg": "0:1",
+    "out": "X"
+  },
+  {
+    "fn": "number",
+    "arg": "0:2",
+    "out": "pinned"
+  },
+  {
+    "fn": "number",
+    "arg": "0:3",
+    "out": "bar"
+  },
+  {
+    "fn": "number",
+    "arg": "0:4",
+    "out": "unbound"
+  }
+]

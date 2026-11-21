@@ -1,0 +1,1 @@
+a { width: -webkit-fill-available; width: stretch }

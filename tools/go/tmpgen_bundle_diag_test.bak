@@ -1,0 +1,131 @@
+package bundler
+
+// 第 90 轮 Go 探针（第二份）：resolve 失败提示 / plugin 消息日志 / source map 注释提取
+// 三者都是 parseFile/scan 路径上的真函数，逐字节固化输出文本与日志。
+import (
+	"encoding/json"
+	"errors"
+	"os"
+	"testing"
+
+	"github.com/evanw/esbuild/internal/ast"
+	"github.com/evanw/esbuild/internal/cache"
+	"github.com/evanw/esbuild/internal/config"
+	"github.com/evanw/esbuild/internal/fs"
+	"github.com/evanw/esbuild/internal/logger"
+	"github.com/evanw/esbuild/internal/resolver"
+)
+
+type bdRow struct { Name string `json:"name"`; Data interface{} `json:"data"` }
+type bdFix struct { Rows []bdRow `json:"rows"` }
+func bdAdd(fx *bdFix, name string, data interface{}) { fx.Rows = append(fx.Rows, bdRow{name, data}) }
+
+func bdMsgs(log logger.Log) []interface{} {
+	out := []interface{}{}
+	for _, m := range log.Peek() {
+		notes := []string{}
+		for _, n := range m.Notes { notes = append(notes, n.Text) }
+		out = append(out, map[string]interface{}{"kind": int(m.Kind), "text": m.Data.Text, "notes": notes})
+	}
+	return out
+}
+
+func TestTmpGenBundleDiag(t *testing.T) {
+	fx := bdFix{}
+	realFS := fs.MockFS(map[string]string{
+		"/p/node_modules/some-pkg/package.json": `{"name":"some-pkg"}`,
+		"/p/foo.js": "var foo = 1;",
+		"/p/foo.js.map": `{"version":3,"sources":["foo.js"]}`,
+	}, fs.MockUnix, "/p")
+	log := logger.NewDeferLog(logger.DeferLogAll, nil)
+	caches := cache.MakeCacheSet()
+	opts := &config.Options{Platform: config.PlatformBrowser, LogPathStyle: logger.RelPath}
+	res := resolver.NewResolver(config.BuildCall, realFS, log, caches, opts)
+
+	// ===== ResolveFailureErrorTextSuggestionNotes =====
+	// 覆盖：普通包路径、require 变体、dynamic 变体、node builtin、外部路径、alias remap、plugin 无 resolve dir
+	rfCases := []struct {
+		name string; path string; kind ast.ImportKind; plugin string; absResolveDir string
+		platform config.Platform; origin logger.PrettyPaths; modified string; style logger.PathStyle
+	}{
+		{"plain-pkg", "some-pkg", ast.ImportStmt, "", "/p", config.PlatformBrowser, logger.PrettyPaths{}, "", logger.RelPath},
+		{"require-pkg", "some-pkg", ast.ImportRequire, "", "/p", config.PlatformBrowser, logger.PrettyPaths{}, "", logger.RelPath},
+		{"dynamic-pkg", "some-pkg", ast.ImportDynamic, "", "/p", config.PlatformBrowser, logger.PrettyPaths{}, "", logger.RelPath},
+		{"node-builtin", "node:fs", ast.ImportStmt, "", "/p", config.PlatformBrowser, logger.PrettyPaths{}, "", logger.RelPath},
+		{"node-builtin-no-prefix", "fs", ast.ImportStmt, "", "/p", config.PlatformBrowser, logger.PrettyPaths{}, "", logger.RelPath},
+		{"external-rel", "./missing.js", ast.ImportStmt, "", "/p", config.PlatformBrowser, logger.PrettyPaths{}, "", logger.RelPath},
+		{"alias-remap", "alias-name", ast.ImportStmt, "", "/p", config.PlatformBrowser, logger.PrettyPaths{}, "real-pkg", logger.RelPath},
+		{"plugin-no-dir", "some-pkg", ast.ImportStmt, "my-plugin", "", config.PlatformBrowser, logger.PrettyPaths{Rel: "src/main.js", Abs: "/p/src/main.js"}, "", logger.RelPath},
+	}
+	for _, c := range rfCases {
+		text, suggestion, notes := ResolveFailureErrorTextSuggestionNotes(
+			res, c.path, c.kind, c.plugin, realFS, c.absResolveDir, c.platform, c.origin, c.modified, c.style)
+		noteTexts := []string{}
+		for _, n := range notes { noteTexts = append(noteTexts, n.Text) }
+		bdAdd(&fx, "resolve:"+c.name, map[string]interface{}{
+			"text": text, "suggestion": suggestion, "notes": noteTexts,
+		})
+	}
+
+	// ===== logPluginMessages =====
+	// 覆盖：error/warning 消息、pluginName 默认值、notes 位置清洗、thrown error
+	lpCases := []struct {
+		name string; pluginName string; msgs []logger.Msg; thrown error; hasImport bool
+	}{
+		{"empty", "test-plugin", nil, nil, false},
+		{"one-error", "test-plugin", []logger.Msg{{Kind: logger.Error, Data: logger.MsgData{Text: "build failed"}}}, nil, false},
+		{"warning-with-note", "test-plugin", []logger.Msg{{Kind: logger.Warning, Data: logger.MsgData{Text: "a warning"},
+			Notes: []logger.MsgData{{Text: "note text", Location: &logger.MsgLocation{Namespace: ""}}}}}, nil, false},
+		{"default-plugin-name", "test-plugin", []logger.Msg{{Kind: logger.Error, PluginName: "", Data: logger.MsgData{Text: "no name"}}}, nil, false},
+		{"thrown", "test-plugin", nil, errors.New("plugin crashed"), false},
+		{"with-import-source", "test-plugin", []logger.Msg{{Kind: logger.Error, Data: logger.MsgData{Text: "load error"}}}, nil, true},
+	}
+	for _, c := range lpCases {
+		l := logger.NewDeferLog(logger.DeferLogAll, nil)
+		var importSource *logger.Source
+		var importRange logger.Range
+		if c.hasImport {
+			s := &logger.Source{Contents: "import './x.js';", KeyPath: logger.Path{Text: "/p/src/main.js", Namespace: "file"},
+				PrettyPaths: logger.PrettyPaths{Rel: "src/main.js", Abs: "/p/src/main.js"}}
+			importSource = s
+			importRange = logger.Range{Loc: logger.Loc{Start: 0}, Len: 16}
+		}
+		didErr := logPluginMessages(realFS, l, c.pluginName, c.msgs, c.thrown, importSource, importRange)
+		bdAdd(&fx, "logplugin:"+c.name, map[string]interface{}{
+			"didLogError": didErr, "msgs": bdMsgs(l),
+		})
+	}
+
+	// ===== extractSourceMapFromComment =====
+	// 覆盖：data URL (base64/percent)、bad base64、非 file scheme、host、相对路径无 resolve dir、真实文件、缺失文件
+	esCases := []struct {
+		name string; comment string; absResolveDir string
+	}{
+		{"data-percent", `data:application/json;charset=utf-8,%7B%22version%22:3%7D`, "/p"},
+		{"data-base64", `data:application/json;base64,eyJ2ZXJzaW9uIjozfQ==`, "/p"},
+		{"data-bad-base64", `data:application/json;base64,!!!!`, "/p"},
+		{"http-scheme", `http://example.com/foo.js.map`, "/p"},
+		{"file-host", `file://remotehost/foo.js.map`, "/p"},
+		{"relative-no-dir", `./foo.js.map`, ""},
+		{"relative-file", `./foo.js.map`, "/p"},
+		{"missing-file", `./nope.js.map`, "/p"},
+	}
+	for _, c := range esCases {
+		l := logger.NewDeferLog(logger.DeferLogAll, nil)
+		src := &logger.Source{Contents: "var x=1;\n//# sourceMappingURL=foo", KeyPath: logger.Path{Text: "/p/main.js", Namespace: "file"},
+			PrettyPaths: logger.PrettyPaths{Rel: "main.js", Abs: "/p/main.js"}}
+		tracker := logger.MakeLineColumnTracker(src)
+		comment := logger.Span{Text: c.comment, Range: logger.Range{Loc: logger.Loc{Start: 9}, Len: int32(len(c.comment))}}
+		path, contents := extractSourceMapFromComment(l, realFS, &caches.FSCache, src, &tracker, comment, c.absResolveDir, logger.RelPath)
+		var contentsVal interface{}
+		if contents != nil { contentsVal = *contents }
+		bdAdd(&fx, "extract:"+c.name, map[string]interface{}{
+			"path": map[string]interface{}{"text": path.Text, "namespace": path.Namespace, "ignoredSuffix": path.IgnoredSuffix},
+			"contents": contentsVal, "msgs": bdMsgs(l),
+		})
+	}
+
+	bts, _ := json.MarshalIndent(fx, "", "  ")
+	if err := os.WriteFile("/root/port/testdata/bundle-diag-go.json", bts, 0644); err != nil { t.Fatal(err) }
+	t.Logf("wrote %d rows bytes=%d", len(fx.Rows), len(bts))
+}

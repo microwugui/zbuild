@@ -1,0 +1,1 @@
+import { __proto__ } from 'foo'; let foo = () => ({ '__proto__': __proto__ })

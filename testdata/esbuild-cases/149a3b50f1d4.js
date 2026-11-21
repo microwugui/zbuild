@@ -1,0 +1,1 @@
+export const a=0; while (1) ;

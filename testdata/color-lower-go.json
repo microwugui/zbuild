@@ -1,0 +1,1225 @@
+[
+  {
+    "fn": "tryToGenerateColor",
+    "arg": {
+      "feature": 0,
+      "minify": false,
+      "name": "opaque"
+    },
+    "out": {
+      "clip": false,
+      "tok": {
+        "c": [],
+        "k": 28,
+        "t": "ff0000",
+        "u": 0
+      }
+    }
+  },
+  {
+    "fn": "tryToGenerateColor",
+    "arg": {
+      "feature": 0,
+      "minify": true,
+      "name": "opaque"
+    },
+    "out": {
+      "clip": false,
+      "tok": {
+        "c": [],
+        "k": 29,
+        "t": "red",
+        "u": 0
+      }
+    }
+  },
+  {
+    "fn": "tryToGenerateColor",
+    "arg": {
+      "feature": 32,
+      "minify": false,
+      "name": "opaque"
+    },
+    "out": {
+      "clip": false,
+      "tok": {
+        "c": [],
+        "k": 28,
+        "t": "ff0000",
+        "u": 0
+      }
+    }
+  },
+  {
+    "fn": "tryToGenerateColor",
+    "arg": {
+      "feature": 32,
+      "minify": true,
+      "name": "opaque"
+    },
+    "out": {
+      "clip": false,
+      "tok": {
+        "c": [],
+        "k": 29,
+        "t": "red",
+        "u": 0
+      }
+    }
+  },
+  {
+    "fn": "tryToGenerateColor",
+    "arg": {
+      "feature": 0,
+      "minify": false,
+      "name": "alpha"
+    },
+    "out": {
+      "clip": false,
+      "tok": {
+        "c": [],
+        "k": 28,
+        "t": "11223380",
+        "u": 0
+      }
+    }
+  },
+  {
+    "fn": "tryToGenerateColor",
+    "arg": {
+      "feature": 0,
+      "minify": true,
+      "name": "alpha"
+    },
+    "out": {
+      "clip": false,
+      "tok": {
+        "c": [],
+        "k": 28,
+        "t": "11223380",
+        "u": 0
+      }
+    }
+  },
+  {
+    "fn": "tryToGenerateColor",
+    "arg": {
+      "feature": 32,
+      "minify": false,
+      "name": "alpha"
+    },
+    "out": {
+      "clip": false,
+      "tok": {
+        "c": [
+          {
+            "c": [],
+            "k": 30,
+            "t": "17",
+            "u": 0
+          },
+          {
+            "c": [],
+            "k": 10,
+            "t": ",",
+            "u": 0
+          },
+          {
+            "c": [],
+            "k": 30,
+            "t": "34",
+            "u": 0
+          },
+          {
+            "c": [],
+            "k": 10,
+            "t": ",",
+            "u": 0
+          },
+          {
+            "c": [],
+            "k": 30,
+            "t": "51",
+            "u": 0
+          },
+          {
+            "c": [],
+            "k": 10,
+            "t": ",",
+            "u": 0
+          },
+          {
+            "c": [],
+            "k": 30,
+            "t": ".5",
+            "u": 0
+          }
+        ],
+        "k": 27,
+        "t": "rgba",
+        "u": 0
+      }
+    }
+  },
+  {
+    "fn": "tryToGenerateColor",
+    "arg": {
+      "feature": 32,
+      "minify": true,
+      "name": "alpha"
+    },
+    "out": {
+      "clip": false,
+      "tok": {
+        "c": [
+          {
+            "c": [],
+            "k": 30,
+            "t": "17",
+            "u": 0
+          },
+          {
+            "c": [],
+            "k": 10,
+            "t": ",",
+            "u": 0
+          },
+          {
+            "c": [],
+            "k": 30,
+            "t": "34",
+            "u": 0
+          },
+          {
+            "c": [],
+            "k": 10,
+            "t": ",",
+            "u": 0
+          },
+          {
+            "c": [],
+            "k": 30,
+            "t": "51",
+            "u": 0
+          },
+          {
+            "c": [],
+            "k": 10,
+            "t": ",",
+            "u": 0
+          },
+          {
+            "c": [],
+            "k": 30,
+            "t": ".5",
+            "u": 0
+          }
+        ],
+        "k": 27,
+        "t": "rgba",
+        "u": 0
+      }
+    }
+  },
+  {
+    "fn": "tryToGenerateColor",
+    "arg": {
+      "feature": 0,
+      "minify": false,
+      "name": "colorspace"
+    },
+    "out": {
+      "clip": true,
+      "tok": {
+        "c": [],
+        "k": 27,
+        "t": "rgb",
+        "u": 0
+      }
+    }
+  },
+  {
+    "fn": "tryToGenerateColor",
+    "arg": {
+      "feature": 0,
+      "minify": true,
+      "name": "colorspace"
+    },
+    "out": {
+      "clip": true,
+      "tok": {
+        "c": [],
+        "k": 27,
+        "t": "rgb",
+        "u": 0
+      }
+    }
+  },
+  {
+    "fn": "tryToGenerateColor",
+    "arg": {
+      "feature": 32,
+      "minify": false,
+      "name": "colorspace"
+    },
+    "out": {
+      "clip": true,
+      "tok": {
+        "c": [],
+        "k": 27,
+        "t": "rgb",
+        "u": 0
+      }
+    }
+  },
+  {
+    "fn": "tryToGenerateColor",
+    "arg": {
+      "feature": 32,
+      "minify": true,
+      "name": "colorspace"
+    },
+    "out": {
+      "clip": true,
+      "tok": {
+        "c": [],
+        "k": 27,
+        "t": "rgb",
+        "u": 0
+      }
+    }
+  },
+  {
+    "fn": "tryToGenerateColor",
+    "arg": {
+      "feature": 0,
+      "minify": false,
+      "name": "outofgamut"
+    },
+    "out": {
+      "clip": true,
+      "tok": {
+        "c": [],
+        "k": 27,
+        "t": "rgb",
+        "u": 0
+      }
+    }
+  },
+  {
+    "fn": "tryToGenerateColor",
+    "arg": {
+      "feature": 0,
+      "minify": true,
+      "name": "outofgamut"
+    },
+    "out": {
+      "clip": true,
+      "tok": {
+        "c": [],
+        "k": 27,
+        "t": "rgb",
+        "u": 0
+      }
+    }
+  },
+  {
+    "fn": "tryToGenerateColor",
+    "arg": {
+      "feature": 32,
+      "minify": false,
+      "name": "outofgamut"
+    },
+    "out": {
+      "clip": true,
+      "tok": {
+        "c": [],
+        "k": 27,
+        "t": "rgb",
+        "u": 0
+      }
+    }
+  },
+  {
+    "fn": "tryToGenerateColor",
+    "arg": {
+      "feature": 32,
+      "minify": true,
+      "name": "outofgamut"
+    },
+    "out": {
+      "clip": true,
+      "tok": {
+        "c": [],
+        "k": 27,
+        "t": "rgb",
+        "u": 0
+      }
+    }
+  },
+  {
+    "fn": "lowerAndMinifyColor",
+    "arg": {
+      "feature": 0,
+      "minify": false,
+      "name": "hash4"
+    },
+    "out": {
+      "clip": false,
+      "tok": {
+        "c": [],
+        "k": 28,
+        "t": "1234",
+        "u": 0
+      }
+    }
+  },
+  {
+    "fn": "lowerAndMinifyColor",
+    "arg": {
+      "feature": 0,
+      "minify": true,
+      "name": "hash4"
+    },
+    "out": {
+      "clip": false,
+      "tok": {
+        "c": [],
+        "k": 28,
+        "t": "1234",
+        "u": 0
+      }
+    }
+  },
+  {
+    "fn": "lowerAndMinifyColor",
+    "arg": {
+      "feature": 5152,
+      "minify": false,
+      "name": "hash4"
+    },
+    "out": {
+      "clip": false,
+      "tok": {
+        "c": [
+          {
+            "c": [],
+            "k": 30,
+            "t": "17",
+            "u": 0
+          },
+          {
+            "c": [],
+            "k": 10,
+            "t": ",",
+            "u": 0
+          },
+          {
+            "c": [],
+            "k": 30,
+            "t": "34",
+            "u": 0
+          },
+          {
+            "c": [],
+            "k": 10,
+            "t": ",",
+            "u": 0
+          },
+          {
+            "c": [],
+            "k": 30,
+            "t": "51",
+            "u": 0
+          },
+          {
+            "c": [],
+            "k": 10,
+            "t": ",",
+            "u": 0
+          },
+          {
+            "c": [],
+            "k": 30,
+            "t": ".267",
+            "u": 0
+          }
+        ],
+        "k": 27,
+        "t": "rgba",
+        "u": 0
+      }
+    }
+  },
+  {
+    "fn": "lowerAndMinifyColor",
+    "arg": {
+      "feature": 5152,
+      "minify": true,
+      "name": "hash4"
+    },
+    "out": {
+      "clip": false,
+      "tok": {
+        "c": [
+          {
+            "c": [],
+            "k": 30,
+            "t": "17",
+            "u": 0
+          },
+          {
+            "c": [],
+            "k": 10,
+            "t": ",",
+            "u": 0
+          },
+          {
+            "c": [],
+            "k": 30,
+            "t": "34",
+            "u": 0
+          },
+          {
+            "c": [],
+            "k": 10,
+            "t": ",",
+            "u": 0
+          },
+          {
+            "c": [],
+            "k": 30,
+            "t": "51",
+            "u": 0
+          },
+          {
+            "c": [],
+            "k": 10,
+            "t": ",",
+            "u": 0
+          },
+          {
+            "c": [],
+            "k": 30,
+            "t": ".267",
+            "u": 0
+          }
+        ],
+        "k": 27,
+        "t": "rgba",
+        "u": 0
+      }
+    }
+  },
+  {
+    "fn": "lowerAndMinifyColor",
+    "arg": {
+      "feature": 0,
+      "minify": false,
+      "name": "hash8"
+    },
+    "out": {
+      "clip": false,
+      "tok": {
+        "c": [],
+        "k": 28,
+        "t": "11223344",
+        "u": 0
+      }
+    }
+  },
+  {
+    "fn": "lowerAndMinifyColor",
+    "arg": {
+      "feature": 0,
+      "minify": true,
+      "name": "hash8"
+    },
+    "out": {
+      "clip": false,
+      "tok": {
+        "c": [],
+        "k": 28,
+        "t": "1234",
+        "u": 0
+      }
+    }
+  },
+  {
+    "fn": "lowerAndMinifyColor",
+    "arg": {
+      "feature": 5152,
+      "minify": false,
+      "name": "hash8"
+    },
+    "out": {
+      "clip": false,
+      "tok": {
+        "c": [
+          {
+            "c": [],
+            "k": 30,
+            "t": "17",
+            "u": 0
+          },
+          {
+            "c": [],
+            "k": 10,
+            "t": ",",
+            "u": 0
+          },
+          {
+            "c": [],
+            "k": 30,
+            "t": "34",
+            "u": 0
+          },
+          {
+            "c": [],
+            "k": 10,
+            "t": ",",
+            "u": 0
+          },
+          {
+            "c": [],
+            "k": 30,
+            "t": "51",
+            "u": 0
+          },
+          {
+            "c": [],
+            "k": 10,
+            "t": ",",
+            "u": 0
+          },
+          {
+            "c": [],
+            "k": 30,
+            "t": ".267",
+            "u": 0
+          }
+        ],
+        "k": 27,
+        "t": "rgba",
+        "u": 0
+      }
+    }
+  },
+  {
+    "fn": "lowerAndMinifyColor",
+    "arg": {
+      "feature": 5152,
+      "minify": true,
+      "name": "hash8"
+    },
+    "out": {
+      "clip": false,
+      "tok": {
+        "c": [
+          {
+            "c": [],
+            "k": 30,
+            "t": "17",
+            "u": 0
+          },
+          {
+            "c": [],
+            "k": 10,
+            "t": ",",
+            "u": 0
+          },
+          {
+            "c": [],
+            "k": 30,
+            "t": "34",
+            "u": 0
+          },
+          {
+            "c": [],
+            "k": 10,
+            "t": ",",
+            "u": 0
+          },
+          {
+            "c": [],
+            "k": 30,
+            "t": "51",
+            "u": 0
+          },
+          {
+            "c": [],
+            "k": 10,
+            "t": ",",
+            "u": 0
+          },
+          {
+            "c": [],
+            "k": 30,
+            "t": ".267",
+            "u": 0
+          }
+        ],
+        "k": 27,
+        "t": "rgba",
+        "u": 0
+      }
+    }
+  },
+  {
+    "fn": "lowerAndMinifyColor",
+    "arg": {
+      "feature": 0,
+      "minify": false,
+      "name": "hash3"
+    },
+    "out": {
+      "clip": false,
+      "tok": {
+        "c": [],
+        "k": 28,
+        "t": "f00",
+        "u": 0
+      }
+    }
+  },
+  {
+    "fn": "lowerAndMinifyColor",
+    "arg": {
+      "feature": 0,
+      "minify": true,
+      "name": "hash3"
+    },
+    "out": {
+      "clip": false,
+      "tok": {
+        "c": [],
+        "k": 29,
+        "t": "red",
+        "u": 0
+      }
+    }
+  },
+  {
+    "fn": "lowerAndMinifyColor",
+    "arg": {
+      "feature": 5152,
+      "minify": false,
+      "name": "hash3"
+    },
+    "out": {
+      "clip": false,
+      "tok": {
+        "c": [],
+        "k": 28,
+        "t": "f00",
+        "u": 0
+      }
+    }
+  },
+  {
+    "fn": "lowerAndMinifyColor",
+    "arg": {
+      "feature": 5152,
+      "minify": true,
+      "name": "hash3"
+    },
+    "out": {
+      "clip": false,
+      "tok": {
+        "c": [],
+        "k": 29,
+        "t": "red",
+        "u": 0
+      }
+    }
+  },
+  {
+    "fn": "lowerAndMinifyColor",
+    "arg": {
+      "feature": 0,
+      "minify": false,
+      "name": "rebeccapurple"
+    },
+    "out": {
+      "clip": false,
+      "tok": {
+        "c": [],
+        "k": 29,
+        "t": "rebeccapurple",
+        "u": 0
+      }
+    }
+  },
+  {
+    "fn": "lowerAndMinifyColor",
+    "arg": {
+      "feature": 0,
+      "minify": true,
+      "name": "rebeccapurple"
+    },
+    "out": {
+      "clip": false,
+      "tok": {
+        "c": [],
+        "k": 28,
+        "t": "639",
+        "u": 0
+      }
+    }
+  },
+  {
+    "fn": "lowerAndMinifyColor",
+    "arg": {
+      "feature": 5152,
+      "minify": false,
+      "name": "rebeccapurple"
+    },
+    "out": {
+      "clip": false,
+      "tok": {
+        "c": [],
+        "k": 28,
+        "t": "663399",
+        "u": 0
+      }
+    }
+  },
+  {
+    "fn": "lowerAndMinifyColor",
+    "arg": {
+      "feature": 5152,
+      "minify": true,
+      "name": "rebeccapurple"
+    },
+    "out": {
+      "clip": false,
+      "tok": {
+        "c": [],
+        "k": 28,
+        "t": "639",
+        "u": 0
+      }
+    }
+  },
+  {
+    "fn": "lowerAndMinifyColor",
+    "arg": {
+      "feature": 0,
+      "minify": false,
+      "name": "rgb-space"
+    },
+    "out": {
+      "clip": false,
+      "tok": {
+        "c": [
+          {
+            "c": [],
+            "k": 30,
+            "t": "1",
+            "u": 0
+          },
+          {
+            "c": [],
+            "k": 30,
+            "t": "2",
+            "u": 0
+          },
+          {
+            "c": [],
+            "k": 30,
+            "t": "3",
+            "u": 0
+          }
+        ],
+        "k": 27,
+        "t": "rgb",
+        "u": 0
+      }
+    }
+  },
+  {
+    "fn": "lowerAndMinifyColor",
+    "arg": {
+      "feature": 0,
+      "minify": true,
+      "name": "rgb-space"
+    },
+    "out": {
+      "clip": false,
+      "tok": {
+        "c": [],
+        "k": 28,
+        "t": "010203",
+        "u": 0
+      }
+    }
+  },
+  {
+    "fn": "lowerAndMinifyColor",
+    "arg": {
+      "feature": 5152,
+      "minify": false,
+      "name": "rgb-space"
+    },
+    "out": {
+      "clip": false,
+      "tok": {
+        "c": [
+          {
+            "c": [],
+            "k": 30,
+            "t": "1",
+            "u": 0
+          },
+          {
+            "c": [],
+            "k": 10,
+            "t": ",",
+            "u": 0
+          },
+          {
+            "c": [],
+            "k": 30,
+            "t": "2",
+            "u": 0
+          },
+          {
+            "c": [],
+            "k": 10,
+            "t": ",",
+            "u": 0
+          },
+          {
+            "c": [],
+            "k": 30,
+            "t": "3",
+            "u": 0
+          }
+        ],
+        "k": 27,
+        "t": "rgb",
+        "u": 0
+      }
+    }
+  },
+  {
+    "fn": "lowerAndMinifyColor",
+    "arg": {
+      "feature": 5152,
+      "minify": true,
+      "name": "rgb-space"
+    },
+    "out": {
+      "clip": false,
+      "tok": {
+        "c": [],
+        "k": 28,
+        "t": "010203",
+        "u": 0
+      }
+    }
+  },
+  {
+    "fn": "lowerAndMinifyColor",
+    "arg": {
+      "feature": 0,
+      "minify": false,
+      "name": "rgba-slash"
+    },
+    "out": {
+      "clip": false,
+      "tok": {
+        "c": [
+          {
+            "c": [],
+            "k": 30,
+            "t": "1",
+            "u": 0
+          },
+          {
+            "c": [],
+            "k": 30,
+            "t": "2",
+            "u": 0
+          },
+          {
+            "c": [],
+            "k": 30,
+            "t": "3",
+            "u": 0
+          },
+          {
+            "c": [],
+            "k": 24,
+            "t": "/",
+            "u": 0
+          },
+          {
+            "c": [],
+            "k": 34,
+            "t": "50%",
+            "u": 0
+          }
+        ],
+        "k": 27,
+        "t": "rgba",
+        "u": 0
+      }
+    }
+  },
+  {
+    "fn": "lowerAndMinifyColor",
+    "arg": {
+      "feature": 0,
+      "minify": true,
+      "name": "rgba-slash"
+    },
+    "out": {
+      "clip": false,
+      "tok": {
+        "c": [],
+        "k": 28,
+        "t": "0102037f",
+        "u": 0
+      }
+    }
+  },
+  {
+    "fn": "lowerAndMinifyColor",
+    "arg": {
+      "feature": 5152,
+      "minify": false,
+      "name": "rgba-slash"
+    },
+    "out": {
+      "clip": false,
+      "tok": {
+        "c": [
+          {
+            "c": [],
+            "k": 30,
+            "t": "1",
+            "u": 0
+          },
+          {
+            "c": [],
+            "k": 10,
+            "t": ",",
+            "u": 0
+          },
+          {
+            "c": [],
+            "k": 30,
+            "t": "2",
+            "u": 0
+          },
+          {
+            "c": [],
+            "k": 10,
+            "t": ",",
+            "u": 0
+          },
+          {
+            "c": [],
+            "k": 30,
+            "t": "3",
+            "u": 0
+          },
+          {
+            "c": [],
+            "k": 10,
+            "t": ",",
+            "u": 0
+          },
+          {
+            "c": [],
+            "k": 30,
+            "t": "0.5",
+            "u": 0
+          }
+        ],
+        "k": 27,
+        "t": "rgba",
+        "u": 0
+      }
+    }
+  },
+  {
+    "fn": "lowerAndMinifyColor",
+    "arg": {
+      "feature": 5152,
+      "minify": true,
+      "name": "rgba-slash"
+    },
+    "out": {
+      "clip": false,
+      "tok": {
+        "c": [
+          {
+            "c": [],
+            "k": 30,
+            "t": "1",
+            "u": 0
+          },
+          {
+            "c": [],
+            "k": 10,
+            "t": ",",
+            "u": 0
+          },
+          {
+            "c": [],
+            "k": 30,
+            "t": "2",
+            "u": 0
+          },
+          {
+            "c": [],
+            "k": 10,
+            "t": ",",
+            "u": 0
+          },
+          {
+            "c": [],
+            "k": 30,
+            "t": "3",
+            "u": 0
+          },
+          {
+            "c": [],
+            "k": 10,
+            "t": ",",
+            "u": 0
+          },
+          {
+            "c": [],
+            "k": 30,
+            "t": ".5",
+            "u": 0
+          }
+        ],
+        "k": 27,
+        "t": "rgba",
+        "u": 0
+      }
+    }
+  },
+  {
+    "fn": "lowerAndMinifyColor",
+    "arg": {
+      "feature": 0,
+      "minify": false,
+      "name": "hsl-deg"
+    },
+    "out": {
+      "clip": false,
+      "tok": {
+        "c": [
+          {
+            "c": [],
+            "k": 26,
+            "t": "1deg",
+            "u": 1
+          },
+          {
+            "c": [],
+            "k": 34,
+            "t": "2%",
+            "u": 0
+          },
+          {
+            "c": [],
+            "k": 34,
+            "t": "3%",
+            "u": 0
+          }
+        ],
+        "k": 27,
+        "t": "hsl",
+        "u": 0
+      }
+    }
+  },
+  {
+    "fn": "lowerAndMinifyColor",
+    "arg": {
+      "feature": 0,
+      "minify": true,
+      "name": "hsl-deg"
+    },
+    "out": {
+      "clip": false,
+      "tok": {
+        "c": [],
+        "k": 28,
+        "t": "080807",
+        "u": 0
+      }
+    }
+  },
+  {
+    "fn": "lowerAndMinifyColor",
+    "arg": {
+      "feature": 5152,
+      "minify": false,
+      "name": "hsl-deg"
+    },
+    "out": {
+      "clip": false,
+      "tok": {
+        "c": [
+          {
+            "c": [],
+            "k": 30,
+            "t": "1",
+            "u": 1
+          },
+          {
+            "c": [],
+            "k": 10,
+            "t": ",",
+            "u": 0
+          },
+          {
+            "c": [],
+            "k": 34,
+            "t": "2%",
+            "u": 0
+          },
+          {
+            "c": [],
+            "k": 10,
+            "t": ",",
+            "u": 0
+          },
+          {
+            "c": [],
+            "k": 34,
+            "t": "3%",
+            "u": 0
+          }
+        ],
+        "k": 27,
+        "t": "hsl",
+        "u": 0
+      }
+    }
+  },
+  {
+    "fn": "lowerAndMinifyColor",
+    "arg": {
+      "feature": 5152,
+      "minify": true,
+      "name": "hsl-deg"
+    },
+    "out": {
+      "clip": false,
+      "tok": {
+        "c": [],
+        "k": 28,
+        "t": "080807",
+        "u": 0
+      }
+    }
+  }
+]

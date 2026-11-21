@@ -1,0 +1,182 @@
+[
+  {
+    "fn": "join",
+    "win": 0,
+    "arg": "[\"a\",\"b\"]",
+    "out": "a/b"
+  },
+  {
+    "fn": "join",
+    "win": 0,
+    "arg": "[\"a/\",\"b\"]",
+    "out": "a/b"
+  },
+  {
+    "fn": "join",
+    "win": 0,
+    "arg": "[\"\",\"a\",\"\",\"b\"]",
+    "out": "a/b"
+  },
+  {
+    "fn": "join",
+    "win": 0,
+    "arg": "[]",
+    "out": ""
+  },
+  {
+    "fn": "join",
+    "win": 0,
+    "arg": "[\"/a\",\"b\",\"../c\"]",
+    "out": "/a/c"
+  },
+  {
+    "fn": "join",
+    "win": 0,
+    "arg": "[\"a\",\"..\",\"b\"]",
+    "out": "b"
+  },
+  {
+    "fn": "join",
+    "win": 1,
+    "arg": "[\"a\",\"b\"]",
+    "out": "a\\b"
+  },
+  {
+    "fn": "join",
+    "win": 1,
+    "arg": "[\"a/\",\"b\"]",
+    "out": "a\\b"
+  },
+  {
+    "fn": "join",
+    "win": 1,
+    "arg": "[\"\",\"a\",\"\",\"b\"]",
+    "out": "a\\b"
+  },
+  {
+    "fn": "join",
+    "win": 1,
+    "arg": "[]",
+    "out": ""
+  },
+  {
+    "fn": "join",
+    "win": 1,
+    "arg": "[\"/a\",\"b\",\"../c\"]",
+    "out": "\\a\\c"
+  },
+  {
+    "fn": "join",
+    "win": 1,
+    "arg": "[\"a\",\"..\",\"b\"]",
+    "out": "b"
+  },
+  {
+    "fn": "rel",
+    "win": 0,
+    "arg": "a|b",
+    "out": "../b"
+  },
+  {
+    "fn": "rel",
+    "win": 0,
+    "arg": "/a/b|/a/c",
+    "out": "../c"
+  },
+  {
+    "fn": "rel",
+    "win": 0,
+    "arg": "/a|/a/b/c",
+    "out": "b/c"
+  },
+  {
+    "fn": "rel",
+    "win": 0,
+    "arg": "/a/b/c|/a",
+    "out": "../.."
+  },
+  {
+    "fn": "rel",
+    "win": 0,
+    "arg": "a|b/c",
+    "out": "../b/c"
+  },
+  {
+    "fn": "rel",
+    "win": 0,
+    "arg": "|x",
+    "out": "x"
+  },
+  {
+    "fn": "rel",
+    "win": 0,
+    "arg": "x|x",
+    "out": "."
+  },
+  {
+    "fn": "rel",
+    "win": 1,
+    "arg": "a|b",
+    "out": "..\\b"
+  },
+  {
+    "fn": "rel",
+    "win": 1,
+    "arg": "/a/b|/a/c",
+    "out": "..\\c"
+  },
+  {
+    "fn": "rel",
+    "win": 1,
+    "arg": "/a|/a/b/c",
+    "out": "b\\c"
+  },
+  {
+    "fn": "rel",
+    "win": 1,
+    "arg": "/a/b/c|/a",
+    "out": "..\\.."
+  },
+  {
+    "fn": "rel",
+    "win": 1,
+    "arg": "a|b/c",
+    "out": "..\\b\\c"
+  },
+  {
+    "fn": "rel",
+    "win": 1,
+    "arg": "|x",
+    "out": "x"
+  },
+  {
+    "fn": "rel",
+    "win": 1,
+    "arg": "x|x",
+    "out": "."
+  },
+  {
+    "fn": "abs",
+    "win": 0,
+    "arg": "/a",
+    "out": "/a|true"
+  },
+  {
+    "fn": "abs",
+    "win": 0,
+    "arg": "a/b",
+    "out": "/home/user/a/b|true"
+  },
+  {
+    "fn": "abs",
+    "win": 0,
+    "arg": "",
+    "out": "/home/user|true"
+  },
+  {
+    "fn": "abs",
+    "win": 0,
+    "arg": "../x",
+    "out": "/home/x|true"
+  }
+]

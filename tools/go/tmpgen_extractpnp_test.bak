@@ -1,0 +1,89 @@
+package resolver
+
+// 第 164 批 Go 探针：extractYarnPnPDataFromJSON 逐字节固化（PnP manifest 加载，resolveToUnqualified 搭档）。
+import (
+	"encoding/json"
+	"os"
+	"sort"
+	"testing"
+
+	"github.com/evanw/esbuild/internal/cache"
+	"github.com/evanw/esbuild/internal/config"
+	"github.com/evanw/esbuild/internal/fs"
+	"github.com/evanw/esbuild/internal/helpers"
+	"github.com/evanw/esbuild/internal/js_ast"
+	"github.com/evanw/esbuild/internal/logger"
+)
+
+type epRow struct {
+	Arg map[string]interface{} `json:"arg"`
+	Out interface{}            `json:"out"`
+}
+
+func dumpExpr(e js_ast.Expr) interface{} {
+	d := e.Data
+	switch v := d.(type) {
+	case *js_ast.EString:
+		return []interface{}{"s", string(utf16ToBytes(v.Value))}
+	case *js_ast.EBoolean:
+		return []interface{}{"b", v.Value}
+	case *js_ast.ENull:
+		return []interface{}{"null"}
+	case *js_ast.ENumber:
+		return []interface{}{"n", v.Value}
+	case *js_ast.EArray:
+		arr := []interface{}{}; for _, it := range v.Items { arr = append(arr, dumpExpr(it)) }
+		return []interface{}{"a", arr}
+	case *js_ast.EObject:
+		type kv struct{ k string; v interface{} }
+		props := []kv{}
+		for _, p := range v.Properties {
+			key := ""
+			if ks, ok := p.Key.Data.(*js_ast.EString); ok { key = string(utf16ToBytes(ks.Value)) }
+			props = append(props, kv{key, dumpExpr(p.ValueOrNil)})
+		}
+		sort.Slice(props, func(i, j int) bool { return props[i].k < props[j].k })
+		arr := []interface{}{}; for _, p := range props { arr = append(arr, []interface{}{p.k, p.v}) }
+		return []interface{}{"o", arr}
+	default:
+		return []interface{}{"other"}
+	}
+}
+
+func utf16ToBytes(u []uint16) []byte { return []byte(helpers.UTF16ToString(u)) }
+
+func TestTmpGenExtractPnp(t *testing.T) {
+	var out []epRow
+	type tc struct{ name, contents string; mode pnpDataMode; path string }
+	cases := []tc{
+		{"object", `{"enableTopLevelFallback":true,"fallbackPool":[["a",null]]}`, pnpIgnoreErrorsAboutMissingFiles, "/pnp/.pnp.data.json"},
+		{"missing-ignore", "", pnpIgnoreErrorsAboutMissingFiles, "/pnp/missing.json"},
+		{"missing-report", "", pnpReportErrorsAboutMissingFiles, "/pnp/missing.json"},
+		{"bad-json", `{ not json`, pnpIgnoreErrorsAboutMissingFiles, "/pnp/bad.json"},
+		{"array", `["a","b",false,null]`, pnpIgnoreErrorsAboutMissingFiles, "/pnp/arr.json"},
+	}
+	for _, c := range cases {
+		fsObj := fs.MockFS(map[string]string{}, fs.MockUnix, "/")
+		if c.contents != "" || c.name == "bad-json" {
+			fsObj = fs.MockFS(map[string]string{c.path: c.contents}, fs.MockUnix, "/")
+		}
+		caches := cache.MakeCacheSet()
+		log := logger.NewDeferLog(logger.DeferLogAll, nil)
+		dl := &debugLogs{}
+		r := resolverQuery{Resolver: &Resolver{log: log}, debugLogs: dl}
+		r.options = config.Options{Platform: config.PlatformNode}
+		r.fs = fsObj
+		r.caches = caches
+		result, source := r.extractYarnPnPDataFromJSON(c.path, c.mode)
+		msgs := []string{}; for _, m := range log.Done() { msgs = append(msgs, m.Data.Text) }
+		notes := []string{}; for _, n := range dl.notes { notes = append(notes, n.Text) }
+		var exprDump interface{} = nil
+		if result.Data != nil { exprDump = dumpExpr(result) }
+		out = append(out, epRow{Arg: map[string]interface{}{"name": c.name, "contents": c.contents, "mode": int(c.mode), "path": c.path},
+			Out: []interface{}{exprDump, source.KeyPath.Text, msgs, notes}})
+	}
+	b, err := json.Marshal(out)
+	if err != nil { t.Fatal(err) }
+	if err := os.WriteFile("/root/port/testdata/extract-pnp-go.json", b, 0644); err != nil { t.Fatal(err) }
+	t.Logf("wrote %d cases", len(out))
+}

@@ -1,0 +1,152 @@
+[
+  {
+    "name": "findInvalidSegment",
+    "val": "",
+    "out": ""
+  },
+  {
+    "name": "findInvalidSegment",
+    "val": "foo",
+    "out": ""
+  },
+  {
+    "name": "findInvalidSegment",
+    "val": "a/b",
+    "out": ""
+  },
+  {
+    "name": "findInvalidSegment",
+    "val": "a\\b",
+    "out": ""
+  },
+  {
+    "name": "findInvalidSegment",
+    "val": "a/b/c",
+    "out": ""
+  },
+  {
+    "name": "findInvalidSegment",
+    "val": "a/./b",
+    "out": "."
+  },
+  {
+    "name": "findInvalidSegment",
+    "val": "node_modules/x",
+    "out": ""
+  },
+  {
+    "name": "findInvalidSegment",
+    "val": "a//b",
+    "out": ""
+  },
+  {
+    "name": "findInvalidSegment",
+    "val": ".hidden/x",
+    "out": ""
+  },
+  {
+    "name": "findInvalidSegment",
+    "val": "a/../b",
+    "out": ".."
+  },
+  {
+    "name": "hasCaseInsensitiveSuffix(.js)",
+    "val": "foo.js",
+    "out": "true"
+  },
+  {
+    "name": "hasCaseInsensitiveSuffix(.js)",
+    "val": "foo.JS",
+    "out": "true"
+  },
+  {
+    "name": "hasCaseInsensitiveSuffix(.js)",
+    "val": "foo",
+    "out": "false"
+  },
+  {
+    "name": "hasCaseInsensitiveSuffix(.js)",
+    "val": ".js",
+    "out": "true"
+  },
+  {
+    "name": "hasCaseInsensitiveSuffix(.js)",
+    "val": "FOO.Js",
+    "out": "true"
+  },
+  {
+    "name": "hasCaseInsensitiveSuffix(.js)",
+    "val": "x.jsx",
+    "out": "false"
+  },
+  {
+    "name": "hasCaseInsensitiveSuffix(.js)",
+    "val": "a/b.js",
+    "out": "true"
+  },
+  {
+    "name": "IsPackagePath",
+    "val": "foo",
+    "out": "true"
+  },
+  {
+    "name": "IsPackagePath",
+    "val": "/abs",
+    "out": "false"
+  },
+  {
+    "name": "IsPackagePath",
+    "val": "./rel",
+    "out": "false"
+  },
+  {
+    "name": "IsPackagePath",
+    "val": "../up",
+    "out": "false"
+  },
+  {
+    "name": "IsPackagePath",
+    "val": ".",
+    "out": "false"
+  },
+  {
+    "name": "IsPackagePath",
+    "val": "..",
+    "out": "false"
+  },
+  {
+    "name": "IsPackagePath",
+    "val": "@scope/pkg",
+    "out": "true"
+  },
+  {
+    "name": "IsPackagePath",
+    "val": "a/b",
+    "out": "true"
+  },
+  {
+    "name": "quoteOrNullIfEmpty",
+    "val": "",
+    "out": "null"
+  },
+  {
+    "name": "quoteOrNullIfEmpty",
+    "val": "foo",
+    "out": "\"foo\""
+  },
+  {
+    "name": "quoteOrNullIfEmpty",
+    "val": "a b",
+    "out": "\"a b\""
+  },
+  {
+    "name": "quoteOrNullIfEmpty",
+    "val": "a\"b",
+    "out": "\"a\\\"b\""
+  },
+  {
+    "name": "quoteOrNullIfEmpty",
+    "val": "日本語",
+    "out": "\"日本語\""
+  }
+]

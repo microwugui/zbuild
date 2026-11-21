@@ -1,0 +1,1 @@
+function f() { x() } var f; function f() { y() }

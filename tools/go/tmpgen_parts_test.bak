@@ -1,0 +1,149 @@
+package js_parser
+
+// 第 92 轮 Go 探针：tree-shaking 下 Parse 的 part 拆分结构逐字节固化。
+// 这是 parse-pass 的底座（Go js_parser.go:18029-18099 每顶层语句一 part）。
+import (
+	"encoding/json"
+	"os"
+	"testing"
+
+	"github.com/evanw/esbuild/internal/ast"
+	"github.com/evanw/esbuild/internal/config"
+	"github.com/evanw/esbuild/internal/js_ast"
+	"github.com/evanw/esbuild/internal/logger"
+	"github.com/evanw/esbuild/internal/runtime"
+)
+
+type ptRow struct { Name string `json:"name"`; Data interface{} `json:"data"` }
+type ptFix struct { Rows []ptRow `json:"rows"` }
+func ptAdd(fx *ptFix, name string, data interface{}) { fx.Rows = append(fx.Rows, ptRow{name, data}) }
+
+func stmtKind(s js_ast.Stmt) string {
+	switch s.Data.(type) {
+	case *js_ast.SLocal: return "local"
+	case *js_ast.SImport: return "import"
+	case *js_ast.SExportClause: return "export-clause"
+	case *js_ast.SExportFrom: return "export-from"
+	case *js_ast.SExportStar: return "export-star"
+	case *js_ast.SExportEquals: return "export-equals"
+	case *js_ast.SExpr: return "expr"
+	case *js_ast.SFunction: return "function"
+	case *js_ast.SClass: return "class"
+	case *js_ast.SComment: return "comment"
+	case *js_ast.SEmpty: return "empty"
+	case *js_ast.SDirective: return "directive"
+	case *js_ast.SDebugger: return "debugger"
+	case *js_ast.SIf: return "if"
+	case *js_ast.SBlock: return "block"
+	case *js_ast.SReturn: return "return"
+	case *js_ast.SThrow: return "throw"
+	case *js_ast.SWhile: return "while"
+	case *js_ast.SDoWhile: return "do-while"
+	case *js_ast.SFor: return "for"
+	case *js_ast.SForIn: return "for-in"
+	case *js_ast.SForOf: return "for-of"
+	case *js_ast.STry: return "try"
+	case *js_ast.SSwitch: return "switch"
+	case *js_ast.SEnum: return "enum"
+	case *js_ast.SLabel: return "label"
+	case *js_ast.SLazyExport: return "lazy-export"
+	default: return "other"
+	}
+}
+
+func dumpParts(a js_ast.AST, symbols []ast.Symbol) interface{} {
+	parts := []interface{}{}
+	for _, p := range a.Parts {
+		kinds := []string{}
+		for _, s := range p.Stmts {
+			k := stmtKind(s)
+			if sl, ok := s.Data.(*js_ast.SLocal); ok {
+				declCount := len(sl.Decls)
+				k = k + ":" + string(rune('0'+declCount))
+			}
+			kinds = append(kinds, k)
+		}
+		declNames := []string{}
+		for _, d := range p.DeclaredSymbols {
+			if d.Ref.InnerIndex < uint32(len(symbols)) {
+				declNames = append(declNames, symbols[d.Ref.InnerIndex].OriginalName)
+			}
+		}
+		uses := []interface{}{}
+		// SymbolUses 顺序非确定，dump 排序后的 [name, count]
+		type useEnt struct { name string; count int }
+		ues := []useEnt{}
+		for ref, u := range p.SymbolUses {
+			if ref.InnerIndex < uint32(len(symbols)) {
+				ues = append(ues, useEnt{symbols[ref.InnerIndex].OriginalName, int(u.CountEstimate)})
+			}
+		}
+		for i := 1; i < len(ues); i++ { for j := i; j > 0 && ues[j].name < ues[j-1].name; j-- { ues[j], ues[j-1] = ues[j-1], ues[j] } }
+		for _, u := range ues { uses = append(uses, []interface{}{u.name, u.count}) }
+		parts = append(parts, map[string]interface{}{
+			"kinds": kinds, "declNames": declNames, "canRemove": p.CanBeRemovedIfUnused,
+			"uses": uses, "importRecs": p.ImportRecordIndices,
+		})
+	}
+	return map[string]interface{}{
+		"parts": parts, "numParts": len(a.Parts), "numSymbols": len(symbols),
+	}
+}
+
+
+
+// dumpStructure 只序列化 part 拆分底座的契约：part 数 + 每 part 的语句种类。
+// symbol 表 / DeclaredSymbols / CanBeRemovedIfUnused 属更深的 visit-pass 底座，另立。
+func dumpStructure(a js_ast.AST) interface{} {
+	out := []interface{}{}
+	for _, part := range a.Parts {
+		kinds := []string{}
+		for _, st := range part.Stmts {
+			k := stmtKind(st)
+			if sl, ok := st.Data.(*js_ast.SLocal); ok {
+				k = k + ":" + string(rune('0'+len(sl.Decls)))
+			}
+			kinds = append(kinds, k)
+		}
+		out = append(out, kinds)
+	}
+	return map[string]interface{}{"numParts": len(a.Parts), "partKinds": out}
+}
+
+func TestTmpGenParts(t *testing.T) {
+	fx := ptFix{}
+	cases := []struct { name, src string; tree bool; format config.Format; mode config.Mode }{
+		{"single-expr", "var x = 1;", true, config.FormatPreserve, config.ModePassThrough},
+		{"multi-decl", "var a = 1, b = 2, c = 3;", true, config.FormatPreserve, config.ModePassThrough},
+		{"three-stmts", "var a=1;\nlet b=2;\nconst c=3;", true, config.FormatPreserve, config.ModePassThrough},
+		{"import-export", "import x from 'm';\nexport var y = x;", true, config.FormatESModule, config.ModeBundle},
+		{"functions", "function f(){return 1}\nfunction g(){return 2}\nvar z=f()+g();", true, config.FormatPreserve, config.ModePassThrough},
+		{"mixed", "var a=1; if(a) b(); for(var i=0;i<2;i++){} debugger;", true, config.FormatPreserve, config.ModePassThrough},
+	}
+	for _, c := range cases {
+		src := logger.Source{Contents: c.src, KeyPath: logger.Path{Text: "<test>", Namespace: "file"},
+			PrettyPaths: logger.PrettyPaths{Abs: "<test>", Rel: "<test>"}}
+		log := logger.NewDeferLog(logger.DeferLogNoVerboseOrDebug, nil)
+		opts := Options{optionsThatSupportStructuralEquality: optionsThatSupportStructuralEquality{
+			treeShaking: c.tree, outputFormat: c.format, mode: c.mode}}
+		// Options 内嵌 optionsThatSupportStructuralEquality，字段提升访问
+		result, ok := Parse(log, src, opts)
+		data := map[string]interface{}{"ok": ok}
+		if ok { data["ast"] = dumpStructure(result) }
+		ptAdd(&fx, c.name, data)
+	}
+
+	// runtime source（three.js esnext 口径）：console.log(Foo.FOO) 前置 enum 不在此，直接 runtime.Source(0)
+	runtimeSrc := runtime.Source(0)
+	log := logger.NewDeferLog(logger.DeferLogNoVerboseOrDebug, nil)
+	opts := Options{optionsThatSupportStructuralEquality: optionsThatSupportStructuralEquality{
+		treeShaking: true, mode: config.ModeBundle}}
+	result, ok := Parse(log, runtimeSrc, opts)
+	data := map[string]interface{}{"ok": ok}
+	if ok { data["ast"] = dumpStructure(result) }
+	ptAdd(&fx, "runtime-esnext", data)
+
+	bts, _ := json.MarshalIndent(fx, "", "  ")
+	if err := os.WriteFile("/root/port/testdata/parse-parts-go.json", bts, 0644); err != nil { t.Fatal(err) }
+	t.Logf("wrote %d rows bytes=%d", len(fx.Rows), len(bts))
+}

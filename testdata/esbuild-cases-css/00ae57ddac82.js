@@ -1,0 +1,1 @@
+@font-face { unicode-range: U+0e2e-0e2f }

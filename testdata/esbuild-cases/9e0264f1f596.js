@@ -1,0 +1,1 @@
+export {𐀀} from 'path'; 𐀀

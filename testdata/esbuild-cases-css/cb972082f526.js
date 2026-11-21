@@ -1,0 +1,1 @@
+html { @layer base { block-size: 100%; @layer support { & body { min-block-size: 100%; } } } }

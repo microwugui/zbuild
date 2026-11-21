@@ -1,0 +1,1 @@
+<a>b{/* comment */}c</a>

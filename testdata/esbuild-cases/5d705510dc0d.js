@@ -1,0 +1,1 @@
+function foo() { a = b; if (a) return; if (b) c = b; return c; }

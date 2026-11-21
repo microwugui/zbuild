@@ -1,0 +1,16 @@
+package linker
+
+import ("encoding/json";"os";"testing")
+
+func TestTmpGenDebug104(t *testing.T) {
+  // debugVerboseMetafile 恒 false，generateExtraDataForFileJS 对任意参数恒返回 ""
+  c := &linkerContext{}
+  rows := []map[string]interface{}{
+    {"name":"empty-ctx","out":c.generateExtraDataForFileJS(0)},
+    {"name":"index7","out":c.generateExtraDataForFileJS(7)},
+    {"name":"index-max","out":c.generateExtraDataForFileJS(4294967295)},
+  }
+  b,_:=json.MarshalIndent(rows,"","  ")
+  if err:=os.WriteFile("/root/port/testdata/linker-extra-data-go.json",b,0644);err!=nil{t.Fatal(err)}
+  t.Logf("wrote %d rows",len(rows))
+}

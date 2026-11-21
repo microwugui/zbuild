@@ -1,0 +1,1 @@
+div, span::pseudo { @layer foo { & { color: red } } }

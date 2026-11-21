@@ -1,0 +1,1 @@
+class Foo { #foo = #foo in (#bar in this); #bar }

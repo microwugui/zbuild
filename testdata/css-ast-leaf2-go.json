@@ -1,0 +1,206 @@
+[
+  {
+    "fn": "MQCmpConst",
+    "arg": "0",
+    "unit": 0,
+    "out": "2"
+  },
+  {
+    "fn": "MQCmpConst",
+    "arg": "1",
+    "unit": 0,
+    "out": "3"
+  },
+  {
+    "fn": "MQCmpConst",
+    "arg": "2",
+    "unit": 0,
+    "out": "4"
+  },
+  {
+    "fn": "MQCmpConst",
+    "arg": "3",
+    "unit": 0,
+    "out": "5"
+  },
+  {
+    "fn": "IsAngle",
+    "arg": "45deg",
+    "unit": 2,
+    "out": "true"
+  },
+  {
+    "fn": "DimensionUnitIsSafeLength",
+    "arg": "45deg",
+    "unit": 2,
+    "out": "false"
+  },
+  {
+    "fn": "IsAngle",
+    "arg": "1.5rad",
+    "unit": 3,
+    "out": "true"
+  },
+  {
+    "fn": "DimensionUnitIsSafeLength",
+    "arg": "1.5rad",
+    "unit": 3,
+    "out": "false"
+  },
+  {
+    "fn": "IsAngle",
+    "arg": "100grad",
+    "unit": 3,
+    "out": "true"
+  },
+  {
+    "fn": "DimensionUnitIsSafeLength",
+    "arg": "100grad",
+    "unit": 3,
+    "out": "false"
+  },
+  {
+    "fn": "IsAngle",
+    "arg": "0.25turn",
+    "unit": 4,
+    "out": "true"
+  },
+  {
+    "fn": "DimensionUnitIsSafeLength",
+    "arg": "0.25turn",
+    "unit": 4,
+    "out": "false"
+  },
+  {
+    "fn": "IsAngle",
+    "arg": "10px",
+    "unit": 2,
+    "out": "false"
+  },
+  {
+    "fn": "DimensionUnitIsSafeLength",
+    "arg": "10px",
+    "unit": 2,
+    "out": "true"
+  },
+  {
+    "fn": "IsAngle",
+    "arg": "fooDEG",
+    "unit": 3,
+    "out": "true"
+  },
+  {
+    "fn": "DimensionUnitIsSafeLength",
+    "arg": "fooDEG",
+    "unit": 3,
+    "out": "false"
+  },
+  {
+    "fn": "IsAngle",
+    "arg": "2%",
+    "unit": 1,
+    "out": "false"
+  },
+  {
+    "fn": "DimensionUnitIsSafeLength",
+    "arg": "2%",
+    "unit": 1,
+    "out": "false"
+  },
+  {
+    "fn": "TurnIntoZero",
+    "arg": "0px",
+    "unit": 1,
+    "out": "true|30|0"
+  },
+  {
+    "fn": "TurnIntoZero",
+    "arg": "0",
+    "unit": 1,
+    "out": "true|30|0"
+  },
+  {
+    "fn": "TurnIntoZero",
+    "arg": "0deg",
+    "unit": 1,
+    "out": "true|30|0"
+  },
+  {
+    "fn": "TurnIntoZero",
+    "arg": "1px",
+    "unit": 1,
+    "out": "false|26|1px"
+  },
+  {
+    "fn": "Dir",
+    "arg": "2",
+    "unit": 0,
+    "out": "-1"
+  },
+  {
+    "fn": "Flip",
+    "arg": "2",
+    "unit": 0,
+    "out": "5"
+  },
+  {
+    "fn": "Reverse",
+    "arg": "2",
+    "unit": 0,
+    "out": "4"
+  },
+  {
+    "fn": "Dir",
+    "arg": "3",
+    "unit": 0,
+    "out": "-1"
+  },
+  {
+    "fn": "Flip",
+    "arg": "3",
+    "unit": 0,
+    "out": "4"
+  },
+  {
+    "fn": "Reverse",
+    "arg": "3",
+    "unit": 0,
+    "out": "5"
+  },
+  {
+    "fn": "Dir",
+    "arg": "4",
+    "unit": 0,
+    "out": "1"
+  },
+  {
+    "fn": "Flip",
+    "arg": "4",
+    "unit": 0,
+    "out": "3"
+  },
+  {
+    "fn": "Reverse",
+    "arg": "4",
+    "unit": 0,
+    "out": "2"
+  },
+  {
+    "fn": "Dir",
+    "arg": "5",
+    "unit": 0,
+    "out": "1"
+  },
+  {
+    "fn": "Flip",
+    "arg": "5",
+    "unit": 0,
+    "out": "2"
+  },
+  {
+    "fn": "Reverse",
+    "arg": "5",
+    "unit": 0,
+    "out": "3"
+  }
+]

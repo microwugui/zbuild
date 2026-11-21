@@ -1,0 +1,147 @@
+[
+  {
+    "fn": "validatePlatform",
+    "arg": "0",
+    "out": "0"
+  },
+  {
+    "fn": "validatePlatform",
+    "arg": "1",
+    "out": "0"
+  },
+  {
+    "fn": "validatePlatform",
+    "arg": "2",
+    "out": "1"
+  },
+  {
+    "fn": "validatePlatform",
+    "arg": "3",
+    "out": "2"
+  },
+  {
+    "fn": "validateColor",
+    "arg": "0",
+    "out": "0"
+  },
+  {
+    "fn": "validateColor",
+    "arg": "1",
+    "out": "1"
+  },
+  {
+    "fn": "validateColor",
+    "arg": "2",
+    "out": "2"
+  },
+  {
+    "fn": "validateLogStyle",
+    "arg": "0",
+    "out": "0"
+  },
+  {
+    "fn": "validateLogStyle",
+    "arg": "1",
+    "out": "1"
+  },
+  {
+    "fn": "validateLogStyle",
+    "arg": "2",
+    "out": "2"
+  },
+  {
+    "fn": "validateASCIIOnly",
+    "arg": "0",
+    "out": "true"
+  },
+  {
+    "fn": "validateASCIIOnly",
+    "arg": "1",
+    "out": "true"
+  },
+  {
+    "fn": "validateASCIIOnly",
+    "arg": "2",
+    "out": "false"
+  },
+  {
+    "fn": "validateExternalPackages",
+    "arg": "0",
+    "out": "false"
+  },
+  {
+    "fn": "validateExternalPackages",
+    "arg": "1",
+    "out": "false"
+  },
+  {
+    "fn": "validateExternalPackages",
+    "arg": "2",
+    "out": "true"
+  },
+  {
+    "fn": "prettyPrintByteCount",
+    "arg": "0",
+    "out": "0b "
+  },
+  {
+    "fn": "prettyPrintByteCount",
+    "arg": "1",
+    "out": "1b "
+  },
+  {
+    "fn": "prettyPrintByteCount",
+    "arg": "999",
+    "out": "999b "
+  },
+  {
+    "fn": "prettyPrintByteCount",
+    "arg": "1023",
+    "out": "1023b "
+  },
+  {
+    "fn": "prettyPrintByteCount",
+    "arg": "1024",
+    "out": "1.0kb"
+  },
+  {
+    "fn": "prettyPrintByteCount",
+    "arg": "1536",
+    "out": "1.5kb"
+  },
+  {
+    "fn": "prettyPrintByteCount",
+    "arg": "1048576",
+    "out": "1.0mb"
+  },
+  {
+    "fn": "prettyPrintByteCount",
+    "arg": "1572864",
+    "out": "1.5mb"
+  },
+  {
+    "fn": "prettyPrintByteCount",
+    "arg": "1073741824",
+    "out": "1.0gb"
+  },
+  {
+    "fn": "escapeForHTML",
+    "arg": "hello",
+    "out": "hello"
+  },
+  {
+    "fn": "escapeForHTML",
+    "arg": "a\u0026b",
+    "out": "a\u0026amp;b"
+  },
+  {
+    "fn": "escapeForHTML",
+    "arg": "\u003ctag\u003e",
+    "out": "\u0026lt;tag\u0026gt;"
+  },
+  {
+    "fn": "escapeForHTML",
+    "arg": "a\u0026\u003cb\u003e\"",
+    "out": "a\u0026amp;\u0026lt;b\u0026gt;\""
+  }
+]

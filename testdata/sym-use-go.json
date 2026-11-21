@@ -1,0 +1,60 @@
+[
+  {
+    "name": "count1-delete",
+    "uses": {},
+    "callUses": {
+      "1:0": [
+        1,
+        1
+      ]
+    }
+  },
+  {
+    "name": "count3-keep",
+    "uses": {
+      "1:0": 2
+    },
+    "callUses": {
+      "1:0": [
+        1,
+        0
+      ]
+    }
+  },
+  {
+    "name": "existing-call",
+    "uses": {
+      "1:0": 1
+    },
+    "callUses": {
+      "1:0": [
+        5,
+        3
+      ]
+    }
+  },
+  {
+    "name": "other-ref-untouched",
+    "uses": {
+      "1:1": 5
+    },
+    "callUses": {
+      "1:0": [
+        1,
+        0
+      ]
+    }
+  },
+  {
+    "name": "no-use",
+    "uses": {
+      "1:0": 4294967295
+    },
+    "callUses": {
+      "1:0": [
+        1,
+        0
+      ]
+    }
+  }
+]

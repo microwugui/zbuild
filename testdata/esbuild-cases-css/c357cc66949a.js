@@ -1,0 +1,1 @@
+a { before: value; mask-image: a; middle: value; mask-image: b; after: value }

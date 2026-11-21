@@ -1,0 +1,22 @@
+[
+  {
+    "fn": "AccumulateSymbolUseCounts",
+    "arg": "main",
+    "out": "0::8:0;0::9:1;0::0:0;1::4:0;|1|10:2:7,"
+  },
+  {
+    "fn": "AllocateTopLevelSymbolSlots",
+    "arg": "main",
+    "out": "0::8:0;0::9:1;0::0:0;0::7:0;1::4:0;|1"
+  },
+  {
+    "fn": "AssignNamesByFrequency",
+    "arg": "main",
+    "out": "0:B:8:0;0:A:9:1;0:D:0:0;0:C:7:0;1:a:4:0;"
+  },
+  {
+    "fn": "AssignNamesByFrequency",
+    "arg": "label",
+    "out": "1:a:5:0;1:b:4:0;1:c:3:0;1:d:2:0;"
+  }
+]

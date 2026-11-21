@@ -1,0 +1,124 @@
+package css_printer
+
+import (
+	"encoding/base64"
+	"encoding/json"
+	"os"
+	"testing"
+
+	"github.com/evanw/esbuild/internal/ast"
+	"github.com/evanw/esbuild/internal/config"
+	"github.com/evanw/esbuild/internal/css_ast"
+	"github.com/evanw/esbuild/internal/css_lexer"
+	"github.com/evanw/esbuild/internal/logger"
+)
+
+func tok(kind css_lexer.T, text string) css_ast.Token {
+	t := css_ast.Token{Kind: kind, Text: text}
+	if kind == css_lexer.TDimension { t.UnitOffset = uint16(len(text) - 2) }
+	if kind == css_lexer.TPercentage { t.UnitOffset = uint16(len(text) - 1) }
+	return t
+}
+func tokWs(kind css_lexer.T, text string, ws css_ast.WhitespaceFlags) css_ast.Token {
+	t := tok(kind, text); t.Whitespace = ws; return t
+}
+func ident(text string) css_ast.Token { return tok(css_lexer.TIdent, text) }
+func decl(key string, val []css_ast.Token, important bool) css_ast.Rule {
+	return css_ast.Rule{Data: &css_ast.RDeclaration{KeyText: key, Value: val, Important: important}}
+}
+func cp(text string) css_ast.CompoundSelector {
+	return css_ast.CompoundSelector{TypeSelector: &css_ast.NamespacedName{Name: css_ast.NameToken{Text: text, Kind: css_lexer.TIdent}}}
+}
+
+func TestTmpGenPrint(t *testing.T) {
+	type row struct { Name string `json:"name"`; Minify bool `json:"minify"`; CSS string `json:"css"` }
+	var out []row
+	run := func(name string, rules []css_ast.Rule, minify bool, records []ast.ImportRecord, metafile bool) {
+		opts := Options{MinifyWhitespace: minify, NeedsMetafile: metafile, MetafileFormat: config.UnminifiedMetafile}
+		syms := ast.SymbolMap{SymbolsForSource: [][]ast.Symbol{
+			{{OriginalName: "cls", Link: ast.InvalidRef}, {OriginalName: "id", Link: ast.InvalidRef}, {OriginalName: "keyframe", Link: ast.InvalidRef}},
+		}}
+		res := Print(css_ast.AST{Rules: rules, ImportRecords: records}, syms, opts)
+		out = append(out, row{name, minify, base64.StdEncoding.EncodeToString(res.CSS)})
+	}
+
+	// 1: simple declarations
+	rules1 := []css_ast.Rule{
+		decl("color", []css_ast.Token{ident("red")}, false),
+		decl("width", []css_ast.Token{tok(css_lexer.TDimension, "10px")}, true),
+		decl("margin", []css_ast.Token{tok(css_lexer.TNumber, "0")}, false),
+	}
+	run("decls", rules1, false, nil, false)
+	run("decls-min", rules1, true, nil, false)
+
+	// 2: selector rule with nested decls
+	selRule := css_ast.Rule{Data: &css_ast.RSelector{
+		Selectors: []css_ast.ComplexSelector{{Selectors: []css_ast.CompoundSelector{cp("div"), cp("span")}}},
+		Rules: []css_ast.Rule{decl("color", []css_ast.Token{ident("blue")}, false)},
+	}}
+	run("selector", []css_ast.Rule{selRule}, false, nil, false)
+	run("selector-min", []css_ast.Rule{selRule}, true, nil, false)
+
+	// 3: charset
+	run("charset", []css_ast.Rule{{Data: &css_ast.RAtCharset{Encoding: "UTF-8"}}}, false, nil, false)
+
+	// 4: function token with children
+	fn := tok(css_lexer.TFunction, "rgb(")
+	fn.Children = &[]css_ast.Token{tok(css_lexer.TNumber, "1"), tokWs(css_lexer.TComma, ",", css_ast.WhitespaceAfter), tok(css_lexer.TNumber, "2")}
+	run("function", []css_ast.Rule{decl("color", []css_ast.Token{fn}, false)}, false, nil, false)
+
+	// 5: known at-rule with rules
+	supports := css_ast.Rule{Data: &css_ast.RKnownAt{AtToken: "supports", Rules: []css_ast.Rule{decl("display", []css_ast.Token{ident("grid")}, false)}}}
+	run("knownat", []css_ast.Rule{supports}, false, nil, false)
+
+	// 6: unknown at-rule
+	unk := css_ast.Rule{Data: &css_ast.RUnknownAt{AtToken: "foo", Prelude: []css_ast.Token{ident("bar")}}}
+	run("unknownat", []css_ast.Rule{unk}, false, nil, false)
+
+	// 7: at-layer
+	layer := css_ast.Rule{Data: &css_ast.RAtLayer{Names: [][]string{{"a", "b"}}}}
+	run("layer", []css_ast.Rule{layer}, false, nil, false)
+
+	// 8: at-media with media queries
+	pq := css_ast.MediaQuery{Data: &css_ast.MQPlainOrBoolean{Name: "color", ValueOrNil: []css_ast.Token{ident("red")}}}
+	media := css_ast.Rule{Data: &css_ast.RAtMedia{Queries: []css_ast.MediaQuery{pq}, Rules: []css_ast.Rule{decl("x", []css_ast.Token{ident("y")}, false)}}}
+	run("media", []css_ast.Rule{media}, false, nil, false)
+
+	// 9: comment (normal, not legal)
+	comm := css_ast.Rule{Data: &css_ast.RComment{Text: "hello"}}
+	run("comment", []css_ast.Rule{comm}, false, nil, false)
+
+	// 10: class + pseudo-element selectors
+	cls := css_ast.CompoundSelector{}
+	cls.SubclassSelectors = []css_ast.SubclassSelector{
+		{Data: &css_ast.SSClass{Name: ast.LocRef{Ref: ast.Ref{InnerIndex: 0}}}},
+		{Data: &css_ast.SSPseudoClass{Name: "before", IsElement: true}},
+	}
+	selRule2 := css_ast.Rule{Data: &css_ast.RSelector{
+		Selectors: []css_ast.ComplexSelector{{Selectors: []css_ast.CompoundSelector{cls}}},
+		Rules: []css_ast.Rule{decl("content", []css_ast.Token{tok(css_lexer.TString, "x")}, false)},
+	}}
+	run("pseudo", []css_ast.Rule{selRule2}, false, nil, false)
+
+	// 11: hash + attribute selectors
+	hcls := css_ast.CompoundSelector{}
+	hcls.SubclassSelectors = []css_ast.SubclassSelector{
+		{Data: &css_ast.SSHash{Name: ast.LocRef{Ref: ast.Ref{InnerIndex: 1}}}},
+		{Data: &css_ast.SSAttribute{NamespacedName: css_ast.NamespacedName{Name: css_ast.NameToken{Text: "foo", Kind: css_lexer.TIdent}}, MatcherOp: "="}},
+	}
+	_ = hcls
+	selRule3 := css_ast.Rule{Data: &css_ast.RSelector{
+		Selectors: []css_ast.ComplexSelector{{Selectors: []css_ast.CompoundSelector{hcls}}},
+		Rules: []css_ast.Rule{decl("a", []css_ast.Token{ident("b")}, false)},
+	}}
+	run("hashattr", []css_ast.Rule{selRule3}, false, nil, false)
+
+	// 12: @import with URL + metafile
+	rec := ast.ImportRecord{Path: logger.Path{Text: "x.css"}}
+	imp := css_ast.Rule{Data: &css_ast.RAtImport{ImportRecordIndex: 0}}
+	run("import-meta", []css_ast.Rule{imp}, false, []ast.ImportRecord{rec}, true)
+
+	b, _ := json.MarshalIndent(out, "", "  ")
+	if err := os.WriteFile("/root/port/testdata/css-print-go.json", b, 0644); err != nil { t.Fatal(err) }
+	t.Logf("wrote %d rows", len(out))
+}

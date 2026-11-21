@@ -1,0 +1,50 @@
+[
+  {
+    "name": "js-to-css",
+    "records": [
+      {
+        "path": "data:text/css;base64,AAAA",
+        "namespace": "",
+        "flags": 4096,
+        "sourceValid": false,
+        "copyValid": false
+      }
+    ]
+  },
+  {
+    "name": "js-empty-loader",
+    "records": [
+      {
+        "path": "data:text/plain;base64,BBBB",
+        "namespace": "",
+        "flags": 8192,
+        "sourceValid": false,
+        "copyValid": false
+      }
+    ]
+  },
+  {
+    "name": "js-unique-key",
+    "records": [
+      {
+        "path": "/static/key_hash.js",
+        "namespace": "",
+        "flags": 20480,
+        "sourceValid": false,
+        "copyValid": false
+      }
+    ]
+  },
+  {
+    "name": "copy-file",
+    "records": [
+      {
+        "path": "/static/copied.png",
+        "namespace": "",
+        "flags": 20480,
+        "sourceValid": false,
+        "copyValid": false
+      }
+    ]
+  }
+]

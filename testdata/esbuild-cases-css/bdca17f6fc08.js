@@ -1,0 +1,1 @@
+div, span:hover { @media screen { & { color: red } } }

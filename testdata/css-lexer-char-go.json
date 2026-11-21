@@ -1,0 +1,152 @@
+[
+  {
+    "fn": "isNewline",
+    "arg": "10",
+    "out": "true"
+  },
+  {
+    "fn": "isNewline",
+    "arg": "13",
+    "out": "true"
+  },
+  {
+    "fn": "isNewline",
+    "arg": "12",
+    "out": "true"
+  },
+  {
+    "fn": "isNewline",
+    "arg": "32",
+    "out": "false"
+  },
+  {
+    "fn": "isNewline",
+    "arg": "9",
+    "out": "false"
+  },
+  {
+    "fn": "isNewline",
+    "arg": "97",
+    "out": "false"
+  },
+  {
+    "fn": "isNewline",
+    "arg": "0",
+    "out": "false"
+  },
+  {
+    "fn": "isWhitespace",
+    "arg": "10",
+    "out": "true"
+  },
+  {
+    "fn": "isWhitespace",
+    "arg": "13",
+    "out": "true"
+  },
+  {
+    "fn": "isWhitespace",
+    "arg": "12",
+    "out": "true"
+  },
+  {
+    "fn": "isWhitespace",
+    "arg": "32",
+    "out": "true"
+  },
+  {
+    "fn": "isWhitespace",
+    "arg": "9",
+    "out": "true"
+  },
+  {
+    "fn": "isWhitespace",
+    "arg": "97",
+    "out": "false"
+  },
+  {
+    "fn": "isWhitespace",
+    "arg": "0",
+    "out": "false"
+  },
+  {
+    "fn": "isHex",
+    "arg": "48",
+    "out": "0|true"
+  },
+  {
+    "fn": "isHex",
+    "arg": "57",
+    "out": "9|true"
+  },
+  {
+    "fn": "isHex",
+    "arg": "97",
+    "out": "10|true"
+  },
+  {
+    "fn": "isHex",
+    "arg": "102",
+    "out": "15|true"
+  },
+  {
+    "fn": "isHex",
+    "arg": "65",
+    "out": "10|true"
+  },
+  {
+    "fn": "isHex",
+    "arg": "70",
+    "out": "15|true"
+  },
+  {
+    "fn": "isHex",
+    "arg": "103",
+    "out": "0|false"
+  },
+  {
+    "fn": "isHex",
+    "arg": "47",
+    "out": "0|false"
+  },
+  {
+    "fn": "WouldStartIdentifierWithoutEscapes",
+    "arg": "abc",
+    "out": "true"
+  },
+  {
+    "fn": "WouldStartIdentifierWithoutEscapes",
+    "arg": "-foo",
+    "out": "true"
+  },
+  {
+    "fn": "WouldStartIdentifierWithoutEscapes",
+    "arg": "--x",
+    "out": "true"
+  },
+  {
+    "fn": "WouldStartIdentifierWithoutEscapes",
+    "arg": "-1",
+    "out": "false"
+  },
+  {
+    "fn": "WouldStartIdentifierWithoutEscapes",
+    "arg": "1abc",
+    "out": "false"
+  },
+  {
+    "fn": "WouldStartIdentifierWithoutEscapes",
+    "arg": "\\65",
+    "out": "false"
+  },
+  {
+    "fn": "WouldStartIdentifierWithoutEscapes",
+    "arg": "",
+    "out": "false"
+  },
+  {
+    "fn": "WouldStartIdentifierWithoutEscapes",
+    "arg": "_x",
+    "out": "true"
+  }
+]

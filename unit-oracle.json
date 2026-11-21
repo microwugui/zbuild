@@ -1,0 +1,52 @@
+{
+  "generatedAt": "2026-11-19T07:08:06.400Z",
+  "total": 4,
+  "applicable": 4,
+  "equal": 4,
+  "cases": [
+    {
+      "name": "unit:js_lexer-token-differential",
+      "kind": "unit",
+      "file": "src/internal/js_lexer/js_lexer.test.ts,src/internal/js_lexer/js_lexer_unit.test.ts",
+      "equal": true,
+      "status": "equal",
+      "exercises": [
+        "internal/js_lexer"
+      ],
+      "referenceSha256": "c0dee860344771b9771b35b4fc6fe48a988fb78e491236a371a4c7a9b37fc772"
+    },
+    {
+      "name": "unit:js_ast-types-differential",
+      "kind": "unit",
+      "file": "src/internal/js_ast/js_ast.test.ts,src/internal/js_ast/js_ast_helpers.test.ts,src/internal/js_ast/js_ast_constval.test.ts",
+      "equal": true,
+      "status": "equal",
+      "exercises": [
+        "internal/js_ast"
+      ],
+      "referenceSha256": "8aafcad9831a90d91c135b13f31bb501969ae7ede5f79455e3eed8bc340efcfa"
+    },
+    {
+      "name": "unit:js_parser-skeleton-differential",
+      "kind": "unit",
+      "file": "src/internal/js_parser/js_parser.test.ts",
+      "equal": true,
+      "status": "equal",
+      "exercises": [
+        "internal/js_parser"
+      ],
+      "referenceSha256": "bf9fdfa17c0b74963a19bfd51384c829d2c81b69b9a5675365d3d7e3ee15dd70"
+    },
+    {
+      "name": "unit:test-fs-batch-differential",
+      "kind": "unit",
+      "file": "src/internal/test/diff.test.ts,src/internal/fs/fs_zip.test.ts,src/internal/fs/fs_real.test.ts",
+      "equal": true,
+      "status": "equal",
+      "exercises": [
+        "internal/test"
+      ],
+      "referenceSha256": "23693260c77086a2595ad6e0057ff9df6af6389116c62458221e58ce74a0f3ca"
+    }
+  ]
+}

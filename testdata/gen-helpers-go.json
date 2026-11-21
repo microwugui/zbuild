@@ -1,0 +1,182 @@
+[
+  {
+    "fn": "requireOrImportMetaForSource",
+    "arg": {
+      "wrap": 0
+    },
+    "out": {
+      "async": false,
+      "exports": [
+        4294967295,
+        4294967295
+      ],
+      "validExports": true,
+      "wrapper": [
+        0,
+        7
+      ]
+    }
+  },
+  {
+    "fn": "requireOrImportMetaForSource",
+    "arg": {
+      "wrap": 2
+    },
+    "out": {
+      "async": false,
+      "exports": [
+        0,
+        9
+      ],
+      "validExports": true,
+      "wrapper": [
+        0,
+        7
+      ]
+    }
+  },
+  {
+    "fn": "requireOrImportMetaForSource",
+    "arg": {
+      "wrap": 1
+    },
+    "out": {
+      "async": true,
+      "exports": [
+        4294967295,
+        4294967295
+      ],
+      "validExports": true,
+      "wrapper": [
+        0,
+        7
+      ]
+    }
+  },
+  {
+    "fn": "maybeAppendLegalComments",
+    "arg": {
+      "mode": 1
+    },
+    "out": {
+      "external": "",
+      "joiner": ""
+    }
+  },
+  {
+    "fn": "maybeAppendLegalComments",
+    "arg": {
+      "mode": 2
+    },
+    "out": {
+      "external": "",
+      "joiner": "/*! first */\n// second\n/*! dataurl */\n/*! Bundled license information:\n\npkg/lib.js:\n  (*! pkg lic *)\n*/\n"
+    }
+  },
+  {
+    "fn": "maybeAppendLegalComments",
+    "arg": {
+      "mode": 3
+    },
+    "out": {
+      "external": "/*! first */\n// second\n/*! dataurl */\n\nBundled license information:\n\npkg/lib.js:\n  /*! pkg lic */\n",
+      "joiner": ""
+    }
+  },
+  {
+    "fn": "maybeAppendLegalComments",
+    "arg": {
+      "mode": 4
+    },
+    "out": {
+      "external": "/*! first */\n// second\n/*! dataurl */\n\nBundled license information:\n\npkg/lib.js:\n  /*! pkg lic */\n",
+      "joiner": ""
+    }
+  },
+  {
+    "fn": "wrapRulesWithConditions",
+    "arg": {
+      "case": "chain"
+    },
+    "out": {
+      "recCount": 0,
+      "rules": [
+        [
+          "media",
+          1,
+          [
+            [
+              "known",
+              "supports",
+              [
+                [
+                  33,
+                  "(",
+                  null
+                ]
+              ],
+              [
+                [
+                  "known",
+                  "layer",
+                  [],
+                  [
+                    [
+                      "layer",
+                      [
+                        [
+                          "base"
+                        ]
+                      ],
+                      []
+                    ]
+                  ]
+                ]
+              ]
+            ]
+          ]
+        ]
+      ]
+    }
+  },
+  {
+    "fn": "wrapRulesWithConditions",
+    "arg": {
+      "case": "empty-layer"
+    },
+    "out": {
+      "recCount": 0,
+      "rules": []
+    }
+  },
+  {
+    "fn": "generateExtraDataForFileJS",
+    "arg": {},
+    "out": ""
+  },
+  {
+    "fn": "maybeForbidArbitraryModuleNamespaceIdentifier",
+    "arg": {
+      "alias": "validName"
+    },
+    "out": []
+  },
+  {
+    "fn": "maybeForbidArbitraryModuleNamespaceIdentifier",
+    "arg": {
+      "alias": "not valid"
+    },
+    "out": [
+      "Using the string \"not valid\" as an import name is not supported in the configured target environment (es2020)"
+    ]
+  },
+  {
+    "fn": "maybeForbidArbitraryModuleNamespaceIdentifier",
+    "arg": {
+      "alias": "123bad"
+    },
+    "out": [
+      "Using the string \"123bad\" as an import name is not supported in the configured target environment (es2020)"
+    ]
+  }
+]

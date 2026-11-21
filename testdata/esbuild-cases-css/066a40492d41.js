@@ -1,0 +1,1 @@
+a { font: italic small-caps bold ultra-condensed 1rem/1.2 'aaa bbb' }

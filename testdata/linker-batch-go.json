@@ -1,0 +1,180 @@
+[
+  {
+    "fn": "crossChunkImportArray.Len",
+    "arg": null,
+    "out": 3
+  },
+  {
+    "fn": "crossChunkImportArray.Swap",
+    "arg": null,
+    "out": [
+      1,
+      3,
+      2
+    ]
+  },
+  {
+    "fn": "crossChunkImportArray.Less",
+    "arg": [
+      0,
+      1
+    ],
+    "out": false
+  },
+  {
+    "fn": "crossChunkImportArray.sort",
+    "arg": null,
+    "out": [
+      1,
+      2,
+      3
+    ]
+  },
+  {
+    "fn": "crossChunkImportItemArray.Len",
+    "arg": null,
+    "out": 3
+  },
+  {
+    "fn": "crossChunkImportItemArray.Swap",
+    "arg": null,
+    "out": [
+      "m",
+      "a",
+      "z"
+    ]
+  },
+  {
+    "fn": "crossChunkImportItemArray.Less",
+    "arg": [
+      0,
+      1
+    ],
+    "out": false
+  },
+  {
+    "fn": "crossChunkImportItemArray.sort",
+    "arg": null,
+    "out": [
+      "a",
+      "m",
+      "z"
+    ]
+  },
+  {
+    "fn": "stableRefArray.Len",
+    "arg": null,
+    "out": 3
+  },
+  {
+    "fn": "stableRefArray.Swap",
+    "arg": null,
+    "out": [
+      "2:0",
+      "1:9",
+      "2:1"
+    ]
+  },
+  {
+    "fn": "stableRefArray.Less",
+    "arg": [
+      0,
+      2
+    ],
+    "out": false
+  },
+  {
+    "fn": "stableRefArray.sort",
+    "arg": null,
+    "out": [
+      "1:9",
+      "2:0",
+      "2:1"
+    ]
+  },
+  {
+    "fn": "chunkOrderArray.Len",
+    "arg": null,
+    "out": 3
+  },
+  {
+    "fn": "chunkOrderArray.Swap",
+    "arg": null,
+    "out": [
+      "3:2",
+      "5:1",
+      "5:0"
+    ]
+  },
+  {
+    "fn": "chunkOrderArray.Less",
+    "arg": [
+      0,
+      2
+    ],
+    "out": false
+  },
+  {
+    "fn": "chunkOrderArray.sort",
+    "arg": null,
+    "out": [
+      "3:2",
+      "5:0",
+      "5:1"
+    ]
+  },
+  {
+    "fn": "chunkReprJS.isChunk",
+    "arg": null,
+    "out": true
+  },
+  {
+    "fn": "chunkReprCSS.isChunk",
+    "arg": null,
+    "out": true
+  },
+  {
+    "fn": "wrappedLog",
+    "arg": null,
+    "out": {
+      "afterErr": true,
+      "afterWarn": false,
+      "before": false,
+      "msgs": [
+        "old",
+        "warn",
+        "new"
+      ]
+    }
+  },
+  {
+    "fn": "importConditionsAreEqual",
+    "arg": "a|a",
+    "out": true
+  },
+  {
+    "fn": "importConditionsAreEqual",
+    "arg": "a|c",
+    "out": false
+  },
+  {
+    "fn": "isConditionalImportRedundant",
+    "arg": "a|a",
+    "out": true
+  },
+  {
+    "fn": "isConditionalImportRedundant",
+    "arg": "a|c",
+    "out": true
+  },
+  {
+    "fn": "isConditionalImportRedundant",
+    "arg": "a|d",
+    "out": true
+  },
+  {
+    "fn": "hashWriteLengthPrefixed",
+    "arg": null,
+    "out": "ebfde5b4e967e5114faa09ea0008a0e0caf25725bac316a8f900f3605d184684"
+  }
+]

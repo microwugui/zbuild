@@ -1,0 +1,1 @@
+x = {['__proto__']: null}.__proto__

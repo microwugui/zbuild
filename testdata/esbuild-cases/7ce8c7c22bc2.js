@@ -1,0 +1,1 @@
+class Foo { accessor [x]; static accessor [y] }

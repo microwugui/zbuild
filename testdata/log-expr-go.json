@@ -1,0 +1,66 @@
+[
+  {
+    "name": "default-value",
+    "msgs": [
+      {
+        "text": "Unexpected \"=\"",
+        "kind": 0,
+        "start": 1,
+        "len": 1
+      }
+    ]
+  },
+  {
+    "name": "after-question",
+    "msgs": [
+      {
+        "text": "Unexpected \"abc\"",
+        "kind": 0,
+        "start": 0,
+        "len": 3
+      }
+    ]
+  },
+  {
+    "name": "array-spread-unsupported",
+    "msgs": [
+      {
+        "text": "Transforming array spread to the configured target environment is not supported yet",
+        "kind": 0,
+        "start": 0,
+        "len": 1
+      }
+    ]
+  },
+  {
+    "name": "array-spread-supported",
+    "msgs": []
+  },
+  {
+    "name": "all-three",
+    "msgs": [
+      {
+        "text": "Transforming array spread to the configured target environment is not supported yet",
+        "kind": 0,
+        "start": 0,
+        "len": 1
+      },
+      {
+        "text": "Unexpected \"abc\"",
+        "kind": 0,
+        "start": 0,
+        "len": 3
+      },
+      {
+        "text": "Unexpected \"=\"",
+        "kind": 0,
+        "start": 1,
+        "len": 1
+      }
+    ]
+  },
+  {
+    "name": "none",
+    "msgs": []
+  }
+]

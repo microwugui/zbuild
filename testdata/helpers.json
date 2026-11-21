@@ -1,0 +1,884 @@
+{
+ "decodes": [
+  {
+   "name": "d0",
+   "hex": "616263",
+   "at": 0,
+   "r": 97,
+   "width": 1
+  },
+  {
+   "name": "d0",
+   "hex": "616263",
+   "at": 1,
+   "r": 98,
+   "width": 1
+  },
+  {
+   "name": "d0",
+   "hex": "616263",
+   "at": 2,
+   "r": 99,
+   "width": 1
+  },
+  {
+   "name": "d0",
+   "hex": "616263",
+   "at": 3,
+   "r": 65533,
+   "width": 0
+  },
+  {
+   "name": "d1",
+   "hex": "c3a9",
+   "at": 0,
+   "r": 233,
+   "width": 2
+  },
+  {
+   "name": "d1",
+   "hex": "c3a9",
+   "at": 1,
+   "r": 65533,
+   "width": 1
+  },
+  {
+   "name": "d1",
+   "hex": "c3a9",
+   "at": 2,
+   "r": 65533,
+   "width": 0
+  },
+  {
+   "name": "d2",
+   "hex": "e697a5e69cac",
+   "at": 0,
+   "r": 26085,
+   "width": 3
+  },
+  {
+   "name": "d2",
+   "hex": "e697a5e69cac",
+   "at": 1,
+   "r": 65533,
+   "width": 1
+  },
+  {
+   "name": "d2",
+   "hex": "e697a5e69cac",
+   "at": 2,
+   "r": 65533,
+   "width": 1
+  },
+  {
+   "name": "d2",
+   "hex": "e697a5e69cac",
+   "at": 3,
+   "r": 26412,
+   "width": 3
+  },
+  {
+   "name": "d2",
+   "hex": "e697a5e69cac",
+   "at": 4,
+   "r": 65533,
+   "width": 1
+  },
+  {
+   "name": "d2",
+   "hex": "e697a5e69cac",
+   "at": 5,
+   "r": 65533,
+   "width": 1
+  },
+  {
+   "name": "d2",
+   "hex": "e697a5e69cac",
+   "at": 6,
+   "r": 65533,
+   "width": 0
+  },
+  {
+   "name": "d3",
+   "hex": "f09f9880",
+   "at": 0,
+   "r": 128512,
+   "width": 4
+  },
+  {
+   "name": "d3",
+   "hex": "f09f9880",
+   "at": 1,
+   "r": 65533,
+   "width": 1
+  },
+  {
+   "name": "d3",
+   "hex": "f09f9880",
+   "at": 2,
+   "r": 65533,
+   "width": 1
+  },
+  {
+   "name": "d3",
+   "hex": "f09f9880",
+   "at": 3,
+   "r": 65533,
+   "width": 1
+  },
+  {
+   "name": "d3",
+   "hex": "f09f9880",
+   "at": 4,
+   "r": 65533,
+   "width": 0
+  },
+  {
+   "name": "d4",
+   "hex": "eda080",
+   "at": 0,
+   "r": 55296,
+   "width": 3
+  },
+  {
+   "name": "d4",
+   "hex": "eda080",
+   "at": 1,
+   "r": 65533,
+   "width": 1
+  },
+  {
+   "name": "d4",
+   "hex": "eda080",
+   "at": 2,
+   "r": 65533,
+   "width": 1
+  },
+  {
+   "name": "d4",
+   "hex": "eda080",
+   "at": 3,
+   "r": 65533,
+   "width": 0
+  },
+  {
+   "name": "d5",
+   "hex": "edb080",
+   "at": 0,
+   "r": 56320,
+   "width": 3
+  },
+  {
+   "name": "d5",
+   "hex": "edb080",
+   "at": 1,
+   "r": 65533,
+   "width": 1
+  },
+  {
+   "name": "d5",
+   "hex": "edb080",
+   "at": 2,
+   "r": 65533,
+   "width": 1
+  },
+  {
+   "name": "d5",
+   "hex": "edb080",
+   "at": 3,
+   "r": 65533,
+   "width": 0
+  },
+  {
+   "name": "d6",
+   "hex": "c3",
+   "at": 0,
+   "r": 65533,
+   "width": 0
+  },
+  {
+   "name": "d6",
+   "hex": "c3",
+   "at": 1,
+   "r": 65533,
+   "width": 0
+  },
+  {
+   "name": "d7",
+   "hex": "e697",
+   "at": 0,
+   "r": 65533,
+   "width": 0
+  },
+  {
+   "name": "d7",
+   "hex": "e697",
+   "at": 1,
+   "r": 65533,
+   "width": 1
+  },
+  {
+   "name": "d7",
+   "hex": "e697",
+   "at": 2,
+   "r": 65533,
+   "width": 0
+  },
+  {
+   "name": "d8",
+   "hex": "f09f98",
+   "at": 0,
+   "r": 65533,
+   "width": 0
+  },
+  {
+   "name": "d8",
+   "hex": "f09f98",
+   "at": 1,
+   "r": 65533,
+   "width": 1
+  },
+  {
+   "name": "d8",
+   "hex": "f09f98",
+   "at": 2,
+   "r": 65533,
+   "width": 1
+  },
+  {
+   "name": "d8",
+   "hex": "f09f98",
+   "at": 3,
+   "r": 65533,
+   "width": 0
+  },
+  {
+   "name": "d9",
+   "hex": "80",
+   "at": 0,
+   "r": 65533,
+   "width": 1
+  },
+  {
+   "name": "d9",
+   "hex": "80",
+   "at": 1,
+   "r": 65533,
+   "width": 0
+  },
+  {
+   "name": "d10",
+   "hex": "ff",
+   "at": 0,
+   "r": 65533,
+   "width": 1
+  },
+  {
+   "name": "d10",
+   "hex": "ff",
+   "at": 1,
+   "r": 65533,
+   "width": 0
+  }
+ ],
+ "quotes": [
+  {
+   "name": "q0",
+   "hex": "",
+   "single": "2727",
+   "singleAscii": "2727",
+   "json": "2222",
+   "jsonAscii": "2222"
+  },
+  {
+   "name": "q1",
+   "hex": "61",
+   "single": "276127",
+   "singleAscii": "276127",
+   "json": "226122",
+   "jsonAscii": "226122"
+  },
+  {
+   "name": "q2",
+   "hex": "616263",
+   "single": "2761626327",
+   "singleAscii": "2761626327",
+   "json": "2261626322",
+   "jsonAscii": "2261626322"
+  },
+  {
+   "name": "q3",
+   "hex": "612262",
+   "single": "2761226227",
+   "singleAscii": "2761226227",
+   "json": "22615c226222",
+   "jsonAscii": "22615c226222"
+  },
+  {
+   "name": "q4",
+   "hex": "612762",
+   "single": "2761276227",
+   "singleAscii": "2761276227",
+   "json": "2261276222",
+   "jsonAscii": "2261276222"
+  },
+  {
+   "name": "q5",
+   "hex": "5c",
+   "single": "275c5c27",
+   "singleAscii": "275c5c27",
+   "json": "225c5c22",
+   "jsonAscii": "225c5c22"
+  },
+  {
+   "name": "q6",
+   "hex": "0a090d080c",
+   "single": "275c6e5c745c725c625c6627",
+   "singleAscii": "275c6e5c745c725c625c6627",
+   "json": "225c6e5c745c725c625c6622",
+   "jsonAscii": "225c6e5c745c725c625c6622"
+  },
+  {
+   "name": "q7",
+   "hex": "68c3a96c6c6f",
+   "single": "2768c3a96c6c6f27",
+   "singleAscii": "27685c75303045396c6c6f27",
+   "json": "2268c3a96c6c6f22",
+   "jsonAscii": "22685c75303045396c6c6f22"
+  },
+  {
+   "name": "q8",
+   "hex": "e697a5e69cace8aa9e",
+   "single": "27e697a5e69cace8aa9e27",
+   "singleAscii": "275c75363545355c75363732435c753841394527",
+   "json": "22e697a5e69cace8aa9e22",
+   "jsonAscii": "225c75363545355c75363732435c753841394522"
+  },
+  {
+   "name": "q9",
+   "hex": "f09f9880",
+   "single": "27f09f988027",
+   "singleAscii": "275c75443833445c754445303027",
+   "json": "22f09f988022",
+   "jsonAscii": "225c75443833445c754445303022"
+  },
+  {
+   "name": "q10",
+   "hex": "f09f9880f09f9880",
+   "single": "27f09f9880f09f988027",
+   "singleAscii": "275c75443833445c75444530305c75443833445c754445303027",
+   "json": "22f09f9880f09f988022",
+   "jsonAscii": "225c75443833445c75444530305c75443833445c754445303022"
+  },
+  {
+   "name": "q11",
+   "hex": "efbbbf",
+   "single": "275c754645464627",
+   "singleAscii": "275c754645464627",
+   "json": "225c754645464622",
+   "jsonAscii": "225c754645464622"
+  },
+  {
+   "name": "q12",
+   "hex": "613c2f623e",
+   "single": "27613c2f623e27",
+   "singleAscii": "27613c2f623e27",
+   "json": "22613c2f623e22",
+   "jsonAscii": "22613c2f623e22"
+  },
+  {
+   "name": "q13",
+   "hex": "3c2f7363726970743e",
+   "single": "273c2f7363726970743e27",
+   "singleAscii": "273c2f7363726970743e27",
+   "json": "223c2f7363726970743e22",
+   "jsonAscii": "223c2f7363726970743e22"
+  },
+  {
+   "name": "q14",
+   "hex": "001f7f",
+   "single": "275c75303030305c75303031467f27",
+   "singleAscii": "275c75303030305c75303031465c753030374627",
+   "json": "225c75303030305c75303031467f22",
+   "jsonAscii": "225c75303030305c75303031465c753030374622"
+  },
+  {
+   "name": "q15",
+   "hex": "eda080",
+   "single": "275c754438303027",
+   "singleAscii": "275c754438303027",
+   "json": "225c754438303022",
+   "jsonAscii": "225c754438303022"
+  },
+  {
+   "name": "q16",
+   "hex": "edb080",
+   "single": "275c754443303027",
+   "singleAscii": "275c754443303027",
+   "json": "225c754443303022",
+   "jsonAscii": "225c754443303022"
+  },
+  {
+   "name": "q17",
+   "hex": "78787878787878787878787878787878787878787878787878787878787878787878787878787878",
+   "single": "277878787878787878787878787878787878787878787878787878787878787878787878787878787827",
+   "singleAscii": "277878787878787878787878787878787878787878787878787878787878787878787878787878787827",
+   "json": "227878787878787878787878787878787878787878787878787878787878787878787878787878787822",
+   "jsonAscii": "227878787878787878787878787878787878787878787878787878787878787878787878787878787822"
+  },
+  {
+   "name": "q18",
+   "hex": "3c2f5343524950543e",
+   "single": "273c2f5343524950543e27",
+   "singleAscii": "273c2f5343524950543e27",
+   "json": "223c2f5343524950543e22",
+   "jsonAscii": "223c2f5343524950543e22"
+  },
+  {
+   "name": "q19",
+   "hex": "3c2f536352695074203e",
+   "single": "273c2f536352695074203e27",
+   "singleAscii": "273c2f536352695074203e27",
+   "json": "223c2f536352695074203e22",
+   "jsonAscii": "223c2f536352695074203e22"
+  },
+  {
+   "name": "q20",
+   "hex": "3ce280a83e",
+   "single": "273ce280a83e27",
+   "singleAscii": "273c5c75323032383e27",
+   "json": "223ce280a83e22",
+   "jsonAscii": "223c5c75323032383e22"
+  },
+  {
+   "name": "q21",
+   "hex": "7fc280",
+   "single": "277fc28027",
+   "singleAscii": "275c75303037465c753030383027",
+   "json": "227fc28022",
+   "jsonAscii": "225c75303037465c753030383022"
+  }
+ ],
+ "source": "esbuild internal/helpers (Go, commit f6058f83)",
+ "utf16": [
+  {
+   "name": "u0",
+   "hex": "",
+   "utf16": [],
+   "back": "",
+   "validBack": "",
+   "hasNonBmp": false,
+   "valid": true,
+   "badRune": 0,
+   "equalsString": true,
+   "synthetic": false
+  },
+  {
+   "name": "u1",
+   "hex": "61",
+   "utf16": [
+    97
+   ],
+   "back": "61",
+   "validBack": "61",
+   "hasNonBmp": false,
+   "valid": true,
+   "badRune": 0,
+   "equalsString": true,
+   "synthetic": false
+  },
+  {
+   "name": "u2",
+   "hex": "616263",
+   "utf16": [
+    97,
+    98,
+    99
+   ],
+   "back": "616263",
+   "validBack": "616263",
+   "hasNonBmp": false,
+   "valid": true,
+   "badRune": 0,
+   "equalsString": true,
+   "synthetic": false
+  },
+  {
+   "name": "u3",
+   "hex": "612262",
+   "utf16": [
+    97,
+    34,
+    98
+   ],
+   "back": "612262",
+   "validBack": "612262",
+   "hasNonBmp": false,
+   "valid": true,
+   "badRune": 0,
+   "equalsString": true,
+   "synthetic": false
+  },
+  {
+   "name": "u4",
+   "hex": "612762",
+   "utf16": [
+    97,
+    39,
+    98
+   ],
+   "back": "612762",
+   "validBack": "612762",
+   "hasNonBmp": false,
+   "valid": true,
+   "badRune": 0,
+   "equalsString": true,
+   "synthetic": false
+  },
+  {
+   "name": "u5",
+   "hex": "5c",
+   "utf16": [
+    92
+   ],
+   "back": "5c",
+   "validBack": "5c",
+   "hasNonBmp": false,
+   "valid": true,
+   "badRune": 0,
+   "equalsString": true,
+   "synthetic": false
+  },
+  {
+   "name": "u6",
+   "hex": "0a090d080c",
+   "utf16": [
+    10,
+    9,
+    13,
+    8,
+    12
+   ],
+   "back": "0a090d080c",
+   "validBack": "0a090d080c",
+   "hasNonBmp": false,
+   "valid": true,
+   "badRune": 0,
+   "equalsString": true,
+   "synthetic": false
+  },
+  {
+   "name": "u7",
+   "hex": "68c3a96c6c6f",
+   "utf16": [
+    104,
+    233,
+    108,
+    108,
+    111
+   ],
+   "back": "68c3a96c6c6f",
+   "validBack": "68c3a96c6c6f",
+   "hasNonBmp": false,
+   "valid": true,
+   "badRune": 0,
+   "equalsString": true,
+   "synthetic": false
+  },
+  {
+   "name": "u8",
+   "hex": "e697a5e69cace8aa9e",
+   "utf16": [
+    26085,
+    26412,
+    35486
+   ],
+   "back": "e697a5e69cace8aa9e",
+   "validBack": "e697a5e69cace8aa9e",
+   "hasNonBmp": false,
+   "valid": true,
+   "badRune": 0,
+   "equalsString": true,
+   "synthetic": false
+  },
+  {
+   "name": "u9",
+   "hex": "f09f9880",
+   "utf16": [
+    55357,
+    56832
+   ],
+   "back": "f09f9880",
+   "validBack": "f09f9880",
+   "hasNonBmp": true,
+   "valid": true,
+   "badRune": 0,
+   "equalsString": true,
+   "synthetic": false
+  },
+  {
+   "name": "u10",
+   "hex": "f09f9880f09f9880",
+   "utf16": [
+    55357,
+    56832,
+    55357,
+    56832
+   ],
+   "back": "f09f9880f09f9880",
+   "validBack": "f09f9880f09f9880",
+   "hasNonBmp": true,
+   "valid": true,
+   "badRune": 0,
+   "equalsString": true,
+   "synthetic": false
+  },
+  {
+   "name": "u11",
+   "hex": "efbbbf",
+   "utf16": [
+    65279
+   ],
+   "back": "efbbbf",
+   "validBack": "efbbbf",
+   "hasNonBmp": false,
+   "valid": true,
+   "badRune": 0,
+   "equalsString": true,
+   "synthetic": false
+  },
+  {
+   "name": "u12",
+   "hex": "613c2f623e",
+   "utf16": [
+    97,
+    60,
+    47,
+    98,
+    62
+   ],
+   "back": "613c2f623e",
+   "validBack": "613c2f623e",
+   "hasNonBmp": false,
+   "valid": true,
+   "badRune": 0,
+   "equalsString": true,
+   "synthetic": false
+  },
+  {
+   "name": "u13",
+   "hex": "3c2f7363726970743e",
+   "utf16": [
+    60,
+    47,
+    115,
+    99,
+    114,
+    105,
+    112,
+    116,
+    62
+   ],
+   "back": "3c2f7363726970743e",
+   "validBack": "3c2f7363726970743e",
+   "hasNonBmp": false,
+   "valid": true,
+   "badRune": 0,
+   "equalsString": true,
+   "synthetic": false
+  },
+  {
+   "name": "u14",
+   "hex": "001f7f",
+   "utf16": [
+    0,
+    31,
+    127
+   ],
+   "back": "001f7f",
+   "validBack": "001f7f",
+   "hasNonBmp": false,
+   "valid": true,
+   "badRune": 0,
+   "equalsString": true,
+   "synthetic": false
+  },
+  {
+   "name": "u15",
+   "hex": "eda080",
+   "utf16": [
+    65533,
+    65533,
+    65533
+   ],
+   "back": "efbfbdefbfbdefbfbd",
+   "validBack": "efbfbdefbfbdefbfbd",
+   "hasNonBmp": false,
+   "valid": true,
+   "badRune": 0,
+   "equalsString": false,
+   "synthetic": false
+  },
+  {
+   "name": "u16",
+   "hex": "edb080",
+   "utf16": [
+    65533,
+    65533,
+    65533
+   ],
+   "back": "efbfbdefbfbdefbfbd",
+   "validBack": "efbfbdefbfbdefbfbd",
+   "hasNonBmp": false,
+   "valid": true,
+   "badRune": 0,
+   "equalsString": false,
+   "synthetic": false
+  },
+  {
+   "name": "u17",
+   "hex": "78787878787878787878787878787878787878787878787878787878787878787878787878787878",
+   "utf16": [
+    120,
+    120,
+    120,
+    120,
+    120,
+    120,
+    120,
+    120,
+    120,
+    120,
+    120,
+    120,
+    120,
+    120,
+    120,
+    120,
+    120,
+    120,
+    120,
+    120,
+    120,
+    120,
+    120,
+    120,
+    120,
+    120,
+    120,
+    120,
+    120,
+    120,
+    120,
+    120,
+    120,
+    120,
+    120,
+    120,
+    120,
+    120,
+    120,
+    120
+   ],
+   "back": "78787878787878787878787878787878787878787878787878787878787878787878787878787878",
+   "validBack": "78787878787878787878787878787878787878787878787878787878787878787878787878787878",
+   "hasNonBmp": false,
+   "valid": true,
+   "badRune": 0,
+   "equalsString": true,
+   "synthetic": false
+  },
+  {
+   "name": "u18",
+   "hex": "3c2f5343524950543e",
+   "utf16": [
+    60,
+    47,
+    83,
+    67,
+    82,
+    73,
+    80,
+    84,
+    62
+   ],
+   "back": "3c2f5343524950543e",
+   "validBack": "3c2f5343524950543e",
+   "hasNonBmp": false,
+   "valid": true,
+   "badRune": 0,
+   "equalsString": true,
+   "synthetic": false
+  },
+  {
+   "name": "u19",
+   "hex": "3c2f536352695074203e",
+   "utf16": [
+    60,
+    47,
+    83,
+    99,
+    82,
+    105,
+    80,
+    116,
+    32,
+    62
+   ],
+   "back": "3c2f536352695074203e",
+   "validBack": "3c2f536352695074203e",
+   "hasNonBmp": false,
+   "valid": true,
+   "badRune": 0,
+   "equalsString": true,
+   "synthetic": false
+  },
+  {
+   "name": "u20",
+   "hex": "3ce280a83e",
+   "utf16": [
+    60,
+    8232,
+    62
+   ],
+   "back": "3ce280a83e",
+   "validBack": "3ce280a83e",
+   "hasNonBmp": false,
+   "valid": true,
+   "badRune": 0,
+   "equalsString": true,
+   "synthetic": false
+  },
+  {
+   "name": "u21",
+   "hex": "7fc280",
+   "utf16": [
+    127,
+    128
+   ],
+   "back": "7fc280",
+   "validBack": "7fc280",
+   "hasNonBmp": false,
+   "valid": true,
+   "badRune": 0,
+   "equalsString": true,
+   "synthetic": false
+  },
+  {
+   "name": "invalid",
+   "hex": "",
+   "utf16": [
+    97,
+    55296,
+    98
+   ],
+   "back": "61eda08062",
+   "validBack": "",
+   "hasNonBmp": false,
+   "valid": false,
+   "badRune": 55296,
+   "equalsString": false,
+   "synthetic": true
+  }
+ ]
+}

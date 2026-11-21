@@ -1,0 +1,1 @@
+@import "foo.css" (1px<=width<=2px);

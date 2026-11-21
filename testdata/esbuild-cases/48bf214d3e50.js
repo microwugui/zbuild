@@ -1,0 +1,1 @@
+import {\u0061rguments as x} from 'foo'

@@ -1,0 +1,1 @@
+a { border-top-left-radius: ; border-radius: 1px }

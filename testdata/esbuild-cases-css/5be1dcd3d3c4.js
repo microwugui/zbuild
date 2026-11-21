@@ -1,0 +1,1 @@
+unknown { color: red } a { color: red }

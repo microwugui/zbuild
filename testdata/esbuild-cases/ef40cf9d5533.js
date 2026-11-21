@@ -1,0 +1,1 @@
+'abc'; 'use strict'

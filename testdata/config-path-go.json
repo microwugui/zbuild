@@ -1,0 +1,67 @@
+[
+  {
+    "fn": "LoaderFromFileExtension",
+    "arg": "foo.js",
+    "out": "10"
+  },
+  {
+    "fn": "LoaderFromFileExtension",
+    "arg": "foo.module.css",
+    "out": "14"
+  },
+  {
+    "fn": "LoaderFromFileExtension",
+    "arg": "foo.css",
+    "out": "4"
+  },
+  {
+    "fn": "LoaderFromFileExtension",
+    "arg": "foo.unknown",
+    "out": "0"
+  },
+  {
+    "fn": "LoaderFromFileExtension",
+    "arg": "noext",
+    "out": "10"
+  },
+  {
+    "fn": "LoaderFromFileExtension",
+    "arg": ".js",
+    "out": "10"
+  },
+  {
+    "fn": "LoaderFromFileExtension",
+    "arg": "a.b.js",
+    "out": "10"
+  },
+  {
+    "fn": "TemplateToString",
+    "arg": "multi",
+    "out": "dist/[name][ext]"
+  },
+  {
+    "fn": "TemplateToString",
+    "arg": "single",
+    "out": "plain.js"
+  },
+  {
+    "fn": "MaybeRemoveWhitespace",
+    "arg": "hello world",
+    "out": "helloworld"
+  },
+  {
+    "fn": "MaybeRemoveWhitespace",
+    "arg": "a\nb  c",
+    "out": "abc"
+  },
+  {
+    "fn": "MaybeRemoveWhitespace",
+    "arg": "  x ",
+    "out": "x"
+  },
+  {
+    "fn": "MaybeRemoveWhitespace",
+    "arg": "no-space",
+    "out": "no-space"
+  }
+]

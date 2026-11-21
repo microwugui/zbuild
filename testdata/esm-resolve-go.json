@@ -1,0 +1,8149 @@
+[
+  {
+    "fn": "esmHandlePostConditions",
+    "arg": {
+      "resolved": "./foo",
+      "st": 3
+    },
+    "out": [
+      "./foo",
+      3,
+      [
+        "",
+        [],
+        0,
+        0,
+        false
+      ],
+      []
+    ]
+  },
+  {
+    "fn": "esmHandlePostConditions",
+    "arg": {
+      "resolved": "./a%2fb",
+      "st": 3
+    },
+    "out": [
+      "./a%2fb",
+      7,
+      [
+        "",
+        [],
+        0,
+        0,
+        false
+      ],
+      [
+        "The path \"./a%2fb\" is not allowed to contain \"%2f\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmHandlePostConditions",
+    "arg": {
+      "resolved": "./a%2Fb",
+      "st": 3
+    },
+    "out": [
+      "./a%2Fb",
+      7,
+      [
+        "",
+        [],
+        0,
+        0,
+        false
+      ],
+      [
+        "The path \"./a%2Fb\" is not allowed to contain \"%2F\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmHandlePostConditions",
+    "arg": {
+      "resolved": "./a%5cb",
+      "st": 3
+    },
+    "out": [
+      "./a%5cb",
+      7,
+      [
+        "",
+        [],
+        0,
+        0,
+        false
+      ],
+      [
+        "The path \"./a%5cb\" is not allowed to contain \"%5c\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmHandlePostConditions",
+    "arg": {
+      "resolved": "./a%5Cb",
+      "st": 3
+    },
+    "out": [
+      "./a%5Cb",
+      7,
+      [
+        "",
+        [],
+        0,
+        0,
+        false
+      ],
+      [
+        "The path \"./a%5Cb\" is not allowed to contain \"%5C\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmHandlePostConditions",
+    "arg": {
+      "resolved": "foo/",
+      "st": 3
+    },
+    "out": [
+      "foo/",
+      14,
+      [
+        "",
+        [],
+        0,
+        0,
+        false
+      ],
+      [
+        "The path \"foo/\" is not allowed to end with a slash"
+      ]
+    ]
+  },
+  {
+    "fn": "esmHandlePostConditions",
+    "arg": {
+      "resolved": "foo\\",
+      "st": 3
+    },
+    "out": [
+      "foo\\",
+      14,
+      [
+        "",
+        [],
+        0,
+        0,
+        false
+      ],
+      [
+        "The path \"foo\\\\\" is not allowed to end with a slash"
+      ]
+    ]
+  },
+  {
+    "fn": "esmHandlePostConditions",
+    "arg": {
+      "resolved": "a%20b",
+      "st": 3
+    },
+    "out": [
+      "a b",
+      3,
+      [
+        "",
+        [],
+        0,
+        0,
+        false
+      ],
+      []
+    ]
+  },
+  {
+    "fn": "esmHandlePostConditions",
+    "arg": {
+      "resolved": "./foo",
+      "st": 2
+    },
+    "out": [
+      "./foo",
+      2,
+      [
+        "",
+        [],
+        0,
+        0,
+        false
+      ],
+      []
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [],
+      "internal": false,
+      "pat": false,
+      "sub": "sub/x",
+      "tgt": {
+        "k": 1,
+        "s": "./foo.js",
+        "t": [
+          10,
+          3
+        ]
+      }
+    },
+    "out": [
+      "./foo.js",
+      7,
+      [
+        " because it doesn't end in \"/\"",
+        [],
+        10,
+        3,
+        false
+      ],
+      [
+        "Checking path \"sub/x\" against target \"./foo.js\"",
+        "  The target \"./foo.js\" is invalid because it doesn't end in \"/\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [],
+      "internal": true,
+      "pat": false,
+      "sub": "sub/x",
+      "tgt": {
+        "k": 1,
+        "s": "./foo.js",
+        "t": [
+          10,
+          3
+        ]
+      }
+    },
+    "out": [
+      "./foo.js",
+      7,
+      [
+        " because it doesn't end in \"/\"",
+        [],
+        10,
+        3,
+        false
+      ],
+      [
+        "Checking path \"sub/x\" against target \"./foo.js\"",
+        "  The target \"./foo.js\" is invalid because it doesn't end in \"/\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [],
+      "internal": false,
+      "pat": true,
+      "sub": "sub/x",
+      "tgt": {
+        "k": 1,
+        "s": "./foo.js",
+        "t": [
+          10,
+          3
+        ]
+      }
+    },
+    "out": [
+      "/pkg/foo.js",
+      3,
+      [
+        "",
+        [],
+        10,
+        3,
+        false
+      ],
+      [
+        "Checking path \"sub/x\" against target \"./foo.js\"",
+        "  Substituted \"sub/x\" for \"*\" in \"./pkg/foo.js\" to get \"./pkg/foo.js\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [],
+      "internal": true,
+      "pat": true,
+      "sub": "sub/x",
+      "tgt": {
+        "k": 1,
+        "s": "./foo.js",
+        "t": [
+          10,
+          3
+        ]
+      }
+    },
+    "out": [
+      "/pkg/foo.js",
+      3,
+      [
+        "",
+        [],
+        10,
+        3,
+        false
+      ],
+      [
+        "Checking path \"sub/x\" against target \"./foo.js\"",
+        "  Substituted \"sub/x\" for \"*\" in \"./pkg/foo.js\" to get \"./pkg/foo.js\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [
+        "import"
+      ],
+      "internal": false,
+      "pat": false,
+      "sub": "sub/x",
+      "tgt": {
+        "k": 1,
+        "s": "./foo.js",
+        "t": [
+          10,
+          3
+        ]
+      }
+    },
+    "out": [
+      "./foo.js",
+      7,
+      [
+        " because it doesn't end in \"/\"",
+        [],
+        10,
+        3,
+        false
+      ],
+      [
+        "Checking path \"sub/x\" against target \"./foo.js\"",
+        "  The target \"./foo.js\" is invalid because it doesn't end in \"/\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [
+        "import"
+      ],
+      "internal": true,
+      "pat": false,
+      "sub": "sub/x",
+      "tgt": {
+        "k": 1,
+        "s": "./foo.js",
+        "t": [
+          10,
+          3
+        ]
+      }
+    },
+    "out": [
+      "./foo.js",
+      7,
+      [
+        " because it doesn't end in \"/\"",
+        [],
+        10,
+        3,
+        false
+      ],
+      [
+        "Checking path \"sub/x\" against target \"./foo.js\"",
+        "  The target \"./foo.js\" is invalid because it doesn't end in \"/\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [
+        "import"
+      ],
+      "internal": false,
+      "pat": true,
+      "sub": "sub/x",
+      "tgt": {
+        "k": 1,
+        "s": "./foo.js",
+        "t": [
+          10,
+          3
+        ]
+      }
+    },
+    "out": [
+      "/pkg/foo.js",
+      3,
+      [
+        "",
+        [],
+        10,
+        3,
+        false
+      ],
+      [
+        "Checking path \"sub/x\" against target \"./foo.js\"",
+        "  Substituted \"sub/x\" for \"*\" in \"./pkg/foo.js\" to get \"./pkg/foo.js\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [
+        "import"
+      ],
+      "internal": true,
+      "pat": true,
+      "sub": "sub/x",
+      "tgt": {
+        "k": 1,
+        "s": "./foo.js",
+        "t": [
+          10,
+          3
+        ]
+      }
+    },
+    "out": [
+      "/pkg/foo.js",
+      3,
+      [
+        "",
+        [],
+        10,
+        3,
+        false
+      ],
+      [
+        "Checking path \"sub/x\" against target \"./foo.js\"",
+        "  Substituted \"sub/x\" for \"*\" in \"./pkg/foo.js\" to get \"./pkg/foo.js\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [
+        "require"
+      ],
+      "internal": false,
+      "pat": false,
+      "sub": "sub/x",
+      "tgt": {
+        "k": 1,
+        "s": "./foo.js",
+        "t": [
+          10,
+          3
+        ]
+      }
+    },
+    "out": [
+      "./foo.js",
+      7,
+      [
+        " because it doesn't end in \"/\"",
+        [],
+        10,
+        3,
+        false
+      ],
+      [
+        "Checking path \"sub/x\" against target \"./foo.js\"",
+        "  The target \"./foo.js\" is invalid because it doesn't end in \"/\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [
+        "require"
+      ],
+      "internal": true,
+      "pat": false,
+      "sub": "sub/x",
+      "tgt": {
+        "k": 1,
+        "s": "./foo.js",
+        "t": [
+          10,
+          3
+        ]
+      }
+    },
+    "out": [
+      "./foo.js",
+      7,
+      [
+        " because it doesn't end in \"/\"",
+        [],
+        10,
+        3,
+        false
+      ],
+      [
+        "Checking path \"sub/x\" against target \"./foo.js\"",
+        "  The target \"./foo.js\" is invalid because it doesn't end in \"/\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [
+        "require"
+      ],
+      "internal": false,
+      "pat": true,
+      "sub": "sub/x",
+      "tgt": {
+        "k": 1,
+        "s": "./foo.js",
+        "t": [
+          10,
+          3
+        ]
+      }
+    },
+    "out": [
+      "/pkg/foo.js",
+      3,
+      [
+        "",
+        [],
+        10,
+        3,
+        false
+      ],
+      [
+        "Checking path \"sub/x\" against target \"./foo.js\"",
+        "  Substituted \"sub/x\" for \"*\" in \"./pkg/foo.js\" to get \"./pkg/foo.js\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [
+        "require"
+      ],
+      "internal": true,
+      "pat": true,
+      "sub": "sub/x",
+      "tgt": {
+        "k": 1,
+        "s": "./foo.js",
+        "t": [
+          10,
+          3
+        ]
+      }
+    },
+    "out": [
+      "/pkg/foo.js",
+      3,
+      [
+        "",
+        [],
+        10,
+        3,
+        false
+      ],
+      [
+        "Checking path \"sub/x\" against target \"./foo.js\"",
+        "  Substituted \"sub/x\" for \"*\" in \"./pkg/foo.js\" to get \"./pkg/foo.js\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [
+        "import",
+        "node"
+      ],
+      "internal": false,
+      "pat": false,
+      "sub": "sub/x",
+      "tgt": {
+        "k": 1,
+        "s": "./foo.js",
+        "t": [
+          10,
+          3
+        ]
+      }
+    },
+    "out": [
+      "./foo.js",
+      7,
+      [
+        " because it doesn't end in \"/\"",
+        [],
+        10,
+        3,
+        false
+      ],
+      [
+        "Checking path \"sub/x\" against target \"./foo.js\"",
+        "  The target \"./foo.js\" is invalid because it doesn't end in \"/\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [
+        "import",
+        "node"
+      ],
+      "internal": true,
+      "pat": false,
+      "sub": "sub/x",
+      "tgt": {
+        "k": 1,
+        "s": "./foo.js",
+        "t": [
+          10,
+          3
+        ]
+      }
+    },
+    "out": [
+      "./foo.js",
+      7,
+      [
+        " because it doesn't end in \"/\"",
+        [],
+        10,
+        3,
+        false
+      ],
+      [
+        "Checking path \"sub/x\" against target \"./foo.js\"",
+        "  The target \"./foo.js\" is invalid because it doesn't end in \"/\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [
+        "import",
+        "node"
+      ],
+      "internal": false,
+      "pat": true,
+      "sub": "sub/x",
+      "tgt": {
+        "k": 1,
+        "s": "./foo.js",
+        "t": [
+          10,
+          3
+        ]
+      }
+    },
+    "out": [
+      "/pkg/foo.js",
+      3,
+      [
+        "",
+        [],
+        10,
+        3,
+        false
+      ],
+      [
+        "Checking path \"sub/x\" against target \"./foo.js\"",
+        "  Substituted \"sub/x\" for \"*\" in \"./pkg/foo.js\" to get \"./pkg/foo.js\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [
+        "import",
+        "node"
+      ],
+      "internal": true,
+      "pat": true,
+      "sub": "sub/x",
+      "tgt": {
+        "k": 1,
+        "s": "./foo.js",
+        "t": [
+          10,
+          3
+        ]
+      }
+    },
+    "out": [
+      "/pkg/foo.js",
+      3,
+      [
+        "",
+        [],
+        10,
+        3,
+        false
+      ],
+      [
+        "Checking path \"sub/x\" against target \"./foo.js\"",
+        "  Substituted \"sub/x\" for \"*\" in \"./pkg/foo.js\" to get \"./pkg/foo.js\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [],
+      "internal": false,
+      "pat": false,
+      "sub": "sub/x",
+      "tgt": {
+        "k": 1,
+        "s": "pkg/sub",
+        "t": [
+          20,
+          3
+        ]
+      }
+    },
+    "out": [
+      "pkg/sub",
+      7,
+      [
+        " because it doesn't end in \"/\"",
+        [],
+        20,
+        3,
+        false
+      ],
+      [
+        "Checking path \"sub/x\" against target \"pkg/sub\"",
+        "  The target \"pkg/sub\" is invalid because it doesn't end in \"/\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [],
+      "internal": true,
+      "pat": false,
+      "sub": "sub/x",
+      "tgt": {
+        "k": 1,
+        "s": "pkg/sub",
+        "t": [
+          20,
+          3
+        ]
+      }
+    },
+    "out": [
+      "pkg/sub",
+      7,
+      [
+        " because it doesn't end in \"/\"",
+        [],
+        20,
+        3,
+        false
+      ],
+      [
+        "Checking path \"sub/x\" against target \"pkg/sub\"",
+        "  The target \"pkg/sub\" is invalid because it doesn't end in \"/\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [],
+      "internal": false,
+      "pat": true,
+      "sub": "sub/x",
+      "tgt": {
+        "k": 1,
+        "s": "pkg/sub",
+        "t": [
+          20,
+          3
+        ]
+      }
+    },
+    "out": [
+      "pkg/sub",
+      9,
+      [
+        " because it doesn't start with \"./\"",
+        [],
+        20,
+        3,
+        false
+      ],
+      [
+        "Checking path \"sub/x\" against target \"pkg/sub\"",
+        "  The target \"pkg/sub\" is invalid because it doesn't start with \"./\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [],
+      "internal": true,
+      "pat": true,
+      "sub": "sub/x",
+      "tgt": {
+        "k": 1,
+        "s": "pkg/sub",
+        "t": [
+          20,
+          3
+        ]
+      }
+    },
+    "out": [
+      "pkg/sub",
+      6,
+      [
+        "",
+        [],
+        20,
+        3,
+        false
+      ],
+      [
+        "Checking path \"sub/x\" against target \"pkg/sub\"",
+        "  Substituted \"sub/x\" for \"*\" in \"pkg/sub\" to get \"pkg/sub\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [
+        "import"
+      ],
+      "internal": false,
+      "pat": false,
+      "sub": "sub/x",
+      "tgt": {
+        "k": 1,
+        "s": "pkg/sub",
+        "t": [
+          20,
+          3
+        ]
+      }
+    },
+    "out": [
+      "pkg/sub",
+      7,
+      [
+        " because it doesn't end in \"/\"",
+        [],
+        20,
+        3,
+        false
+      ],
+      [
+        "Checking path \"sub/x\" against target \"pkg/sub\"",
+        "  The target \"pkg/sub\" is invalid because it doesn't end in \"/\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [
+        "import"
+      ],
+      "internal": true,
+      "pat": false,
+      "sub": "sub/x",
+      "tgt": {
+        "k": 1,
+        "s": "pkg/sub",
+        "t": [
+          20,
+          3
+        ]
+      }
+    },
+    "out": [
+      "pkg/sub",
+      7,
+      [
+        " because it doesn't end in \"/\"",
+        [],
+        20,
+        3,
+        false
+      ],
+      [
+        "Checking path \"sub/x\" against target \"pkg/sub\"",
+        "  The target \"pkg/sub\" is invalid because it doesn't end in \"/\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [
+        "import"
+      ],
+      "internal": false,
+      "pat": true,
+      "sub": "sub/x",
+      "tgt": {
+        "k": 1,
+        "s": "pkg/sub",
+        "t": [
+          20,
+          3
+        ]
+      }
+    },
+    "out": [
+      "pkg/sub",
+      9,
+      [
+        " because it doesn't start with \"./\"",
+        [],
+        20,
+        3,
+        false
+      ],
+      [
+        "Checking path \"sub/x\" against target \"pkg/sub\"",
+        "  The target \"pkg/sub\" is invalid because it doesn't start with \"./\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [
+        "import"
+      ],
+      "internal": true,
+      "pat": true,
+      "sub": "sub/x",
+      "tgt": {
+        "k": 1,
+        "s": "pkg/sub",
+        "t": [
+          20,
+          3
+        ]
+      }
+    },
+    "out": [
+      "pkg/sub",
+      6,
+      [
+        "",
+        [],
+        20,
+        3,
+        false
+      ],
+      [
+        "Checking path \"sub/x\" against target \"pkg/sub\"",
+        "  Substituted \"sub/x\" for \"*\" in \"pkg/sub\" to get \"pkg/sub\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [
+        "require"
+      ],
+      "internal": false,
+      "pat": false,
+      "sub": "sub/x",
+      "tgt": {
+        "k": 1,
+        "s": "pkg/sub",
+        "t": [
+          20,
+          3
+        ]
+      }
+    },
+    "out": [
+      "pkg/sub",
+      7,
+      [
+        " because it doesn't end in \"/\"",
+        [],
+        20,
+        3,
+        false
+      ],
+      [
+        "Checking path \"sub/x\" against target \"pkg/sub\"",
+        "  The target \"pkg/sub\" is invalid because it doesn't end in \"/\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [
+        "require"
+      ],
+      "internal": true,
+      "pat": false,
+      "sub": "sub/x",
+      "tgt": {
+        "k": 1,
+        "s": "pkg/sub",
+        "t": [
+          20,
+          3
+        ]
+      }
+    },
+    "out": [
+      "pkg/sub",
+      7,
+      [
+        " because it doesn't end in \"/\"",
+        [],
+        20,
+        3,
+        false
+      ],
+      [
+        "Checking path \"sub/x\" against target \"pkg/sub\"",
+        "  The target \"pkg/sub\" is invalid because it doesn't end in \"/\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [
+        "require"
+      ],
+      "internal": false,
+      "pat": true,
+      "sub": "sub/x",
+      "tgt": {
+        "k": 1,
+        "s": "pkg/sub",
+        "t": [
+          20,
+          3
+        ]
+      }
+    },
+    "out": [
+      "pkg/sub",
+      9,
+      [
+        " because it doesn't start with \"./\"",
+        [],
+        20,
+        3,
+        false
+      ],
+      [
+        "Checking path \"sub/x\" against target \"pkg/sub\"",
+        "  The target \"pkg/sub\" is invalid because it doesn't start with \"./\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [
+        "require"
+      ],
+      "internal": true,
+      "pat": true,
+      "sub": "sub/x",
+      "tgt": {
+        "k": 1,
+        "s": "pkg/sub",
+        "t": [
+          20,
+          3
+        ]
+      }
+    },
+    "out": [
+      "pkg/sub",
+      6,
+      [
+        "",
+        [],
+        20,
+        3,
+        false
+      ],
+      [
+        "Checking path \"sub/x\" against target \"pkg/sub\"",
+        "  Substituted \"sub/x\" for \"*\" in \"pkg/sub\" to get \"pkg/sub\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [
+        "import",
+        "node"
+      ],
+      "internal": false,
+      "pat": false,
+      "sub": "sub/x",
+      "tgt": {
+        "k": 1,
+        "s": "pkg/sub",
+        "t": [
+          20,
+          3
+        ]
+      }
+    },
+    "out": [
+      "pkg/sub",
+      7,
+      [
+        " because it doesn't end in \"/\"",
+        [],
+        20,
+        3,
+        false
+      ],
+      [
+        "Checking path \"sub/x\" against target \"pkg/sub\"",
+        "  The target \"pkg/sub\" is invalid because it doesn't end in \"/\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [
+        "import",
+        "node"
+      ],
+      "internal": true,
+      "pat": false,
+      "sub": "sub/x",
+      "tgt": {
+        "k": 1,
+        "s": "pkg/sub",
+        "t": [
+          20,
+          3
+        ]
+      }
+    },
+    "out": [
+      "pkg/sub",
+      7,
+      [
+        " because it doesn't end in \"/\"",
+        [],
+        20,
+        3,
+        false
+      ],
+      [
+        "Checking path \"sub/x\" against target \"pkg/sub\"",
+        "  The target \"pkg/sub\" is invalid because it doesn't end in \"/\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [
+        "import",
+        "node"
+      ],
+      "internal": false,
+      "pat": true,
+      "sub": "sub/x",
+      "tgt": {
+        "k": 1,
+        "s": "pkg/sub",
+        "t": [
+          20,
+          3
+        ]
+      }
+    },
+    "out": [
+      "pkg/sub",
+      9,
+      [
+        " because it doesn't start with \"./\"",
+        [],
+        20,
+        3,
+        false
+      ],
+      [
+        "Checking path \"sub/x\" against target \"pkg/sub\"",
+        "  The target \"pkg/sub\" is invalid because it doesn't start with \"./\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [
+        "import",
+        "node"
+      ],
+      "internal": true,
+      "pat": true,
+      "sub": "sub/x",
+      "tgt": {
+        "k": 1,
+        "s": "pkg/sub",
+        "t": [
+          20,
+          3
+        ]
+      }
+    },
+    "out": [
+      "pkg/sub",
+      6,
+      [
+        "",
+        [],
+        20,
+        3,
+        false
+      ],
+      [
+        "Checking path \"sub/x\" against target \"pkg/sub\"",
+        "  Substituted \"sub/x\" for \"*\" in \"pkg/sub\" to get \"pkg/sub\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [],
+      "internal": false,
+      "pat": false,
+      "sub": "sub/x",
+      "tgt": {
+        "k": 1,
+        "s": "../up",
+        "t": [
+          30,
+          3
+        ]
+      }
+    },
+    "out": [
+      "../up",
+      7,
+      [
+        " because it doesn't end in \"/\"",
+        [],
+        30,
+        3,
+        false
+      ],
+      [
+        "Checking path \"sub/x\" against target \"../up\"",
+        "  The target \"../up\" is invalid because it doesn't end in \"/\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [],
+      "internal": true,
+      "pat": false,
+      "sub": "sub/x",
+      "tgt": {
+        "k": 1,
+        "s": "../up",
+        "t": [
+          30,
+          3
+        ]
+      }
+    },
+    "out": [
+      "../up",
+      7,
+      [
+        " because it doesn't end in \"/\"",
+        [],
+        30,
+        3,
+        false
+      ],
+      [
+        "Checking path \"sub/x\" against target \"../up\"",
+        "  The target \"../up\" is invalid because it doesn't end in \"/\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [],
+      "internal": false,
+      "pat": true,
+      "sub": "sub/x",
+      "tgt": {
+        "k": 1,
+        "s": "../up",
+        "t": [
+          30,
+          3
+        ]
+      }
+    },
+    "out": [
+      "../up",
+      9,
+      [
+        " because it doesn't start with \"./\"",
+        [],
+        30,
+        3,
+        false
+      ],
+      [
+        "Checking path \"sub/x\" against target \"../up\"",
+        "  The target \"../up\" is invalid because it doesn't start with \"./\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [],
+      "internal": true,
+      "pat": true,
+      "sub": "sub/x",
+      "tgt": {
+        "k": 1,
+        "s": "../up",
+        "t": [
+          30,
+          3
+        ]
+      }
+    },
+    "out": [
+      "../up",
+      9,
+      [
+        " because it doesn't start with \"./\"",
+        [],
+        30,
+        3,
+        false
+      ],
+      [
+        "Checking path \"sub/x\" against target \"../up\"",
+        "  The target \"../up\" is invalid because it doesn't start with \"./\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [
+        "import"
+      ],
+      "internal": false,
+      "pat": false,
+      "sub": "sub/x",
+      "tgt": {
+        "k": 1,
+        "s": "../up",
+        "t": [
+          30,
+          3
+        ]
+      }
+    },
+    "out": [
+      "../up",
+      7,
+      [
+        " because it doesn't end in \"/\"",
+        [],
+        30,
+        3,
+        false
+      ],
+      [
+        "Checking path \"sub/x\" against target \"../up\"",
+        "  The target \"../up\" is invalid because it doesn't end in \"/\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [
+        "import"
+      ],
+      "internal": true,
+      "pat": false,
+      "sub": "sub/x",
+      "tgt": {
+        "k": 1,
+        "s": "../up",
+        "t": [
+          30,
+          3
+        ]
+      }
+    },
+    "out": [
+      "../up",
+      7,
+      [
+        " because it doesn't end in \"/\"",
+        [],
+        30,
+        3,
+        false
+      ],
+      [
+        "Checking path \"sub/x\" against target \"../up\"",
+        "  The target \"../up\" is invalid because it doesn't end in \"/\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [
+        "import"
+      ],
+      "internal": false,
+      "pat": true,
+      "sub": "sub/x",
+      "tgt": {
+        "k": 1,
+        "s": "../up",
+        "t": [
+          30,
+          3
+        ]
+      }
+    },
+    "out": [
+      "../up",
+      9,
+      [
+        " because it doesn't start with \"./\"",
+        [],
+        30,
+        3,
+        false
+      ],
+      [
+        "Checking path \"sub/x\" against target \"../up\"",
+        "  The target \"../up\" is invalid because it doesn't start with \"./\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [
+        "import"
+      ],
+      "internal": true,
+      "pat": true,
+      "sub": "sub/x",
+      "tgt": {
+        "k": 1,
+        "s": "../up",
+        "t": [
+          30,
+          3
+        ]
+      }
+    },
+    "out": [
+      "../up",
+      9,
+      [
+        " because it doesn't start with \"./\"",
+        [],
+        30,
+        3,
+        false
+      ],
+      [
+        "Checking path \"sub/x\" against target \"../up\"",
+        "  The target \"../up\" is invalid because it doesn't start with \"./\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [
+        "require"
+      ],
+      "internal": false,
+      "pat": false,
+      "sub": "sub/x",
+      "tgt": {
+        "k": 1,
+        "s": "../up",
+        "t": [
+          30,
+          3
+        ]
+      }
+    },
+    "out": [
+      "../up",
+      7,
+      [
+        " because it doesn't end in \"/\"",
+        [],
+        30,
+        3,
+        false
+      ],
+      [
+        "Checking path \"sub/x\" against target \"../up\"",
+        "  The target \"../up\" is invalid because it doesn't end in \"/\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [
+        "require"
+      ],
+      "internal": true,
+      "pat": false,
+      "sub": "sub/x",
+      "tgt": {
+        "k": 1,
+        "s": "../up",
+        "t": [
+          30,
+          3
+        ]
+      }
+    },
+    "out": [
+      "../up",
+      7,
+      [
+        " because it doesn't end in \"/\"",
+        [],
+        30,
+        3,
+        false
+      ],
+      [
+        "Checking path \"sub/x\" against target \"../up\"",
+        "  The target \"../up\" is invalid because it doesn't end in \"/\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [
+        "require"
+      ],
+      "internal": false,
+      "pat": true,
+      "sub": "sub/x",
+      "tgt": {
+        "k": 1,
+        "s": "../up",
+        "t": [
+          30,
+          3
+        ]
+      }
+    },
+    "out": [
+      "../up",
+      9,
+      [
+        " because it doesn't start with \"./\"",
+        [],
+        30,
+        3,
+        false
+      ],
+      [
+        "Checking path \"sub/x\" against target \"../up\"",
+        "  The target \"../up\" is invalid because it doesn't start with \"./\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [
+        "require"
+      ],
+      "internal": true,
+      "pat": true,
+      "sub": "sub/x",
+      "tgt": {
+        "k": 1,
+        "s": "../up",
+        "t": [
+          30,
+          3
+        ]
+      }
+    },
+    "out": [
+      "../up",
+      9,
+      [
+        " because it doesn't start with \"./\"",
+        [],
+        30,
+        3,
+        false
+      ],
+      [
+        "Checking path \"sub/x\" against target \"../up\"",
+        "  The target \"../up\" is invalid because it doesn't start with \"./\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [
+        "import",
+        "node"
+      ],
+      "internal": false,
+      "pat": false,
+      "sub": "sub/x",
+      "tgt": {
+        "k": 1,
+        "s": "../up",
+        "t": [
+          30,
+          3
+        ]
+      }
+    },
+    "out": [
+      "../up",
+      7,
+      [
+        " because it doesn't end in \"/\"",
+        [],
+        30,
+        3,
+        false
+      ],
+      [
+        "Checking path \"sub/x\" against target \"../up\"",
+        "  The target \"../up\" is invalid because it doesn't end in \"/\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [
+        "import",
+        "node"
+      ],
+      "internal": true,
+      "pat": false,
+      "sub": "sub/x",
+      "tgt": {
+        "k": 1,
+        "s": "../up",
+        "t": [
+          30,
+          3
+        ]
+      }
+    },
+    "out": [
+      "../up",
+      7,
+      [
+        " because it doesn't end in \"/\"",
+        [],
+        30,
+        3,
+        false
+      ],
+      [
+        "Checking path \"sub/x\" against target \"../up\"",
+        "  The target \"../up\" is invalid because it doesn't end in \"/\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [
+        "import",
+        "node"
+      ],
+      "internal": false,
+      "pat": true,
+      "sub": "sub/x",
+      "tgt": {
+        "k": 1,
+        "s": "../up",
+        "t": [
+          30,
+          3
+        ]
+      }
+    },
+    "out": [
+      "../up",
+      9,
+      [
+        " because it doesn't start with \"./\"",
+        [],
+        30,
+        3,
+        false
+      ],
+      [
+        "Checking path \"sub/x\" against target \"../up\"",
+        "  The target \"../up\" is invalid because it doesn't start with \"./\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [
+        "import",
+        "node"
+      ],
+      "internal": true,
+      "pat": true,
+      "sub": "sub/x",
+      "tgt": {
+        "k": 1,
+        "s": "../up",
+        "t": [
+          30,
+          3
+        ]
+      }
+    },
+    "out": [
+      "../up",
+      9,
+      [
+        " because it doesn't start with \"./\"",
+        [],
+        30,
+        3,
+        false
+      ],
+      [
+        "Checking path \"sub/x\" against target \"../up\"",
+        "  The target \"../up\" is invalid because it doesn't start with \"./\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [],
+      "internal": false,
+      "pat": false,
+      "sub": "sub/x",
+      "tgt": {
+        "k": 1,
+        "s": "./a/*/b.js",
+        "t": [
+          40,
+          3
+        ]
+      }
+    },
+    "out": [
+      "./a/*/b.js",
+      7,
+      [
+        " because it doesn't end in \"/\"",
+        [],
+        40,
+        3,
+        false
+      ],
+      [
+        "Checking path \"sub/x\" against target \"./a/*/b.js\"",
+        "  The target \"./a/*/b.js\" is invalid because it doesn't end in \"/\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [],
+      "internal": true,
+      "pat": false,
+      "sub": "sub/x",
+      "tgt": {
+        "k": 1,
+        "s": "./a/*/b.js",
+        "t": [
+          40,
+          3
+        ]
+      }
+    },
+    "out": [
+      "./a/*/b.js",
+      7,
+      [
+        " because it doesn't end in \"/\"",
+        [],
+        40,
+        3,
+        false
+      ],
+      [
+        "Checking path \"sub/x\" against target \"./a/*/b.js\"",
+        "  The target \"./a/*/b.js\" is invalid because it doesn't end in \"/\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [],
+      "internal": false,
+      "pat": true,
+      "sub": "sub/x",
+      "tgt": {
+        "k": 1,
+        "s": "./a/*/b.js",
+        "t": [
+          40,
+          3
+        ]
+      }
+    },
+    "out": [
+      "/pkg/a/sub/x/b.js",
+      3,
+      [
+        "",
+        [],
+        40,
+        3,
+        false
+      ],
+      [
+        "Checking path \"sub/x\" against target \"./a/*/b.js\"",
+        "  Substituted \"sub/x\" for \"*\" in \"./pkg/a/*/b.js\" to get \"./pkg/a/sub/x/b.js\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [],
+      "internal": true,
+      "pat": true,
+      "sub": "sub/x",
+      "tgt": {
+        "k": 1,
+        "s": "./a/*/b.js",
+        "t": [
+          40,
+          3
+        ]
+      }
+    },
+    "out": [
+      "/pkg/a/sub/x/b.js",
+      3,
+      [
+        "",
+        [],
+        40,
+        3,
+        false
+      ],
+      [
+        "Checking path \"sub/x\" against target \"./a/*/b.js\"",
+        "  Substituted \"sub/x\" for \"*\" in \"./pkg/a/*/b.js\" to get \"./pkg/a/sub/x/b.js\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [
+        "import"
+      ],
+      "internal": false,
+      "pat": false,
+      "sub": "sub/x",
+      "tgt": {
+        "k": 1,
+        "s": "./a/*/b.js",
+        "t": [
+          40,
+          3
+        ]
+      }
+    },
+    "out": [
+      "./a/*/b.js",
+      7,
+      [
+        " because it doesn't end in \"/\"",
+        [],
+        40,
+        3,
+        false
+      ],
+      [
+        "Checking path \"sub/x\" against target \"./a/*/b.js\"",
+        "  The target \"./a/*/b.js\" is invalid because it doesn't end in \"/\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [
+        "import"
+      ],
+      "internal": true,
+      "pat": false,
+      "sub": "sub/x",
+      "tgt": {
+        "k": 1,
+        "s": "./a/*/b.js",
+        "t": [
+          40,
+          3
+        ]
+      }
+    },
+    "out": [
+      "./a/*/b.js",
+      7,
+      [
+        " because it doesn't end in \"/\"",
+        [],
+        40,
+        3,
+        false
+      ],
+      [
+        "Checking path \"sub/x\" against target \"./a/*/b.js\"",
+        "  The target \"./a/*/b.js\" is invalid because it doesn't end in \"/\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [
+        "import"
+      ],
+      "internal": false,
+      "pat": true,
+      "sub": "sub/x",
+      "tgt": {
+        "k": 1,
+        "s": "./a/*/b.js",
+        "t": [
+          40,
+          3
+        ]
+      }
+    },
+    "out": [
+      "/pkg/a/sub/x/b.js",
+      3,
+      [
+        "",
+        [],
+        40,
+        3,
+        false
+      ],
+      [
+        "Checking path \"sub/x\" against target \"./a/*/b.js\"",
+        "  Substituted \"sub/x\" for \"*\" in \"./pkg/a/*/b.js\" to get \"./pkg/a/sub/x/b.js\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [
+        "import"
+      ],
+      "internal": true,
+      "pat": true,
+      "sub": "sub/x",
+      "tgt": {
+        "k": 1,
+        "s": "./a/*/b.js",
+        "t": [
+          40,
+          3
+        ]
+      }
+    },
+    "out": [
+      "/pkg/a/sub/x/b.js",
+      3,
+      [
+        "",
+        [],
+        40,
+        3,
+        false
+      ],
+      [
+        "Checking path \"sub/x\" against target \"./a/*/b.js\"",
+        "  Substituted \"sub/x\" for \"*\" in \"./pkg/a/*/b.js\" to get \"./pkg/a/sub/x/b.js\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [
+        "require"
+      ],
+      "internal": false,
+      "pat": false,
+      "sub": "sub/x",
+      "tgt": {
+        "k": 1,
+        "s": "./a/*/b.js",
+        "t": [
+          40,
+          3
+        ]
+      }
+    },
+    "out": [
+      "./a/*/b.js",
+      7,
+      [
+        " because it doesn't end in \"/\"",
+        [],
+        40,
+        3,
+        false
+      ],
+      [
+        "Checking path \"sub/x\" against target \"./a/*/b.js\"",
+        "  The target \"./a/*/b.js\" is invalid because it doesn't end in \"/\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [
+        "require"
+      ],
+      "internal": true,
+      "pat": false,
+      "sub": "sub/x",
+      "tgt": {
+        "k": 1,
+        "s": "./a/*/b.js",
+        "t": [
+          40,
+          3
+        ]
+      }
+    },
+    "out": [
+      "./a/*/b.js",
+      7,
+      [
+        " because it doesn't end in \"/\"",
+        [],
+        40,
+        3,
+        false
+      ],
+      [
+        "Checking path \"sub/x\" against target \"./a/*/b.js\"",
+        "  The target \"./a/*/b.js\" is invalid because it doesn't end in \"/\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [
+        "require"
+      ],
+      "internal": false,
+      "pat": true,
+      "sub": "sub/x",
+      "tgt": {
+        "k": 1,
+        "s": "./a/*/b.js",
+        "t": [
+          40,
+          3
+        ]
+      }
+    },
+    "out": [
+      "/pkg/a/sub/x/b.js",
+      3,
+      [
+        "",
+        [],
+        40,
+        3,
+        false
+      ],
+      [
+        "Checking path \"sub/x\" against target \"./a/*/b.js\"",
+        "  Substituted \"sub/x\" for \"*\" in \"./pkg/a/*/b.js\" to get \"./pkg/a/sub/x/b.js\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [
+        "require"
+      ],
+      "internal": true,
+      "pat": true,
+      "sub": "sub/x",
+      "tgt": {
+        "k": 1,
+        "s": "./a/*/b.js",
+        "t": [
+          40,
+          3
+        ]
+      }
+    },
+    "out": [
+      "/pkg/a/sub/x/b.js",
+      3,
+      [
+        "",
+        [],
+        40,
+        3,
+        false
+      ],
+      [
+        "Checking path \"sub/x\" against target \"./a/*/b.js\"",
+        "  Substituted \"sub/x\" for \"*\" in \"./pkg/a/*/b.js\" to get \"./pkg/a/sub/x/b.js\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [
+        "import",
+        "node"
+      ],
+      "internal": false,
+      "pat": false,
+      "sub": "sub/x",
+      "tgt": {
+        "k": 1,
+        "s": "./a/*/b.js",
+        "t": [
+          40,
+          3
+        ]
+      }
+    },
+    "out": [
+      "./a/*/b.js",
+      7,
+      [
+        " because it doesn't end in \"/\"",
+        [],
+        40,
+        3,
+        false
+      ],
+      [
+        "Checking path \"sub/x\" against target \"./a/*/b.js\"",
+        "  The target \"./a/*/b.js\" is invalid because it doesn't end in \"/\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [
+        "import",
+        "node"
+      ],
+      "internal": true,
+      "pat": false,
+      "sub": "sub/x",
+      "tgt": {
+        "k": 1,
+        "s": "./a/*/b.js",
+        "t": [
+          40,
+          3
+        ]
+      }
+    },
+    "out": [
+      "./a/*/b.js",
+      7,
+      [
+        " because it doesn't end in \"/\"",
+        [],
+        40,
+        3,
+        false
+      ],
+      [
+        "Checking path \"sub/x\" against target \"./a/*/b.js\"",
+        "  The target \"./a/*/b.js\" is invalid because it doesn't end in \"/\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [
+        "import",
+        "node"
+      ],
+      "internal": false,
+      "pat": true,
+      "sub": "sub/x",
+      "tgt": {
+        "k": 1,
+        "s": "./a/*/b.js",
+        "t": [
+          40,
+          3
+        ]
+      }
+    },
+    "out": [
+      "/pkg/a/sub/x/b.js",
+      3,
+      [
+        "",
+        [],
+        40,
+        3,
+        false
+      ],
+      [
+        "Checking path \"sub/x\" against target \"./a/*/b.js\"",
+        "  Substituted \"sub/x\" for \"*\" in \"./pkg/a/*/b.js\" to get \"./pkg/a/sub/x/b.js\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [
+        "import",
+        "node"
+      ],
+      "internal": true,
+      "pat": true,
+      "sub": "sub/x",
+      "tgt": {
+        "k": 1,
+        "s": "./a/*/b.js",
+        "t": [
+          40,
+          3
+        ]
+      }
+    },
+    "out": [
+      "/pkg/a/sub/x/b.js",
+      3,
+      [
+        "",
+        [],
+        40,
+        3,
+        false
+      ],
+      [
+        "Checking path \"sub/x\" against target \"./a/*/b.js\"",
+        "  Substituted \"sub/x\" for \"*\" in \"./pkg/a/*/b.js\" to get \"./pkg/a/sub/x/b.js\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [],
+      "internal": false,
+      "pat": false,
+      "sub": "sub/x",
+      "tgt": {
+        "k": 1,
+        "s": "./a/../b.js",
+        "t": [
+          50,
+          3
+        ]
+      }
+    },
+    "out": [
+      "./a/../b.js",
+      7,
+      [
+        " because it doesn't end in \"/\"",
+        [],
+        50,
+        3,
+        false
+      ],
+      [
+        "Checking path \"sub/x\" against target \"./a/../b.js\"",
+        "  The target \"./a/../b.js\" is invalid because it doesn't end in \"/\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [],
+      "internal": true,
+      "pat": false,
+      "sub": "sub/x",
+      "tgt": {
+        "k": 1,
+        "s": "./a/../b.js",
+        "t": [
+          50,
+          3
+        ]
+      }
+    },
+    "out": [
+      "./a/../b.js",
+      7,
+      [
+        " because it doesn't end in \"/\"",
+        [],
+        50,
+        3,
+        false
+      ],
+      [
+        "Checking path \"sub/x\" against target \"./a/../b.js\"",
+        "  The target \"./a/../b.js\" is invalid because it doesn't end in \"/\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [],
+      "internal": false,
+      "pat": true,
+      "sub": "sub/x",
+      "tgt": {
+        "k": 1,
+        "s": "./a/../b.js",
+        "t": [
+          50,
+          3
+        ]
+      }
+    },
+    "out": [
+      "./a/../b.js",
+      9,
+      [
+        " because it contains invalid segment \"..\"",
+        [],
+        50,
+        3,
+        false
+      ],
+      [
+        "Checking path \"sub/x\" against target \"./a/../b.js\"",
+        "  The target \"./a/../b.js\" is invalid because it contains invalid segment \"..\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [],
+      "internal": true,
+      "pat": true,
+      "sub": "sub/x",
+      "tgt": {
+        "k": 1,
+        "s": "./a/../b.js",
+        "t": [
+          50,
+          3
+        ]
+      }
+    },
+    "out": [
+      "./a/../b.js",
+      9,
+      [
+        " because it contains invalid segment \"..\"",
+        [],
+        50,
+        3,
+        false
+      ],
+      [
+        "Checking path \"sub/x\" against target \"./a/../b.js\"",
+        "  The target \"./a/../b.js\" is invalid because it contains invalid segment \"..\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [
+        "import"
+      ],
+      "internal": false,
+      "pat": false,
+      "sub": "sub/x",
+      "tgt": {
+        "k": 1,
+        "s": "./a/../b.js",
+        "t": [
+          50,
+          3
+        ]
+      }
+    },
+    "out": [
+      "./a/../b.js",
+      7,
+      [
+        " because it doesn't end in \"/\"",
+        [],
+        50,
+        3,
+        false
+      ],
+      [
+        "Checking path \"sub/x\" against target \"./a/../b.js\"",
+        "  The target \"./a/../b.js\" is invalid because it doesn't end in \"/\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [
+        "import"
+      ],
+      "internal": true,
+      "pat": false,
+      "sub": "sub/x",
+      "tgt": {
+        "k": 1,
+        "s": "./a/../b.js",
+        "t": [
+          50,
+          3
+        ]
+      }
+    },
+    "out": [
+      "./a/../b.js",
+      7,
+      [
+        " because it doesn't end in \"/\"",
+        [],
+        50,
+        3,
+        false
+      ],
+      [
+        "Checking path \"sub/x\" against target \"./a/../b.js\"",
+        "  The target \"./a/../b.js\" is invalid because it doesn't end in \"/\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [
+        "import"
+      ],
+      "internal": false,
+      "pat": true,
+      "sub": "sub/x",
+      "tgt": {
+        "k": 1,
+        "s": "./a/../b.js",
+        "t": [
+          50,
+          3
+        ]
+      }
+    },
+    "out": [
+      "./a/../b.js",
+      9,
+      [
+        " because it contains invalid segment \"..\"",
+        [],
+        50,
+        3,
+        false
+      ],
+      [
+        "Checking path \"sub/x\" against target \"./a/../b.js\"",
+        "  The target \"./a/../b.js\" is invalid because it contains invalid segment \"..\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [
+        "import"
+      ],
+      "internal": true,
+      "pat": true,
+      "sub": "sub/x",
+      "tgt": {
+        "k": 1,
+        "s": "./a/../b.js",
+        "t": [
+          50,
+          3
+        ]
+      }
+    },
+    "out": [
+      "./a/../b.js",
+      9,
+      [
+        " because it contains invalid segment \"..\"",
+        [],
+        50,
+        3,
+        false
+      ],
+      [
+        "Checking path \"sub/x\" against target \"./a/../b.js\"",
+        "  The target \"./a/../b.js\" is invalid because it contains invalid segment \"..\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [
+        "require"
+      ],
+      "internal": false,
+      "pat": false,
+      "sub": "sub/x",
+      "tgt": {
+        "k": 1,
+        "s": "./a/../b.js",
+        "t": [
+          50,
+          3
+        ]
+      }
+    },
+    "out": [
+      "./a/../b.js",
+      7,
+      [
+        " because it doesn't end in \"/\"",
+        [],
+        50,
+        3,
+        false
+      ],
+      [
+        "Checking path \"sub/x\" against target \"./a/../b.js\"",
+        "  The target \"./a/../b.js\" is invalid because it doesn't end in \"/\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [
+        "require"
+      ],
+      "internal": true,
+      "pat": false,
+      "sub": "sub/x",
+      "tgt": {
+        "k": 1,
+        "s": "./a/../b.js",
+        "t": [
+          50,
+          3
+        ]
+      }
+    },
+    "out": [
+      "./a/../b.js",
+      7,
+      [
+        " because it doesn't end in \"/\"",
+        [],
+        50,
+        3,
+        false
+      ],
+      [
+        "Checking path \"sub/x\" against target \"./a/../b.js\"",
+        "  The target \"./a/../b.js\" is invalid because it doesn't end in \"/\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [
+        "require"
+      ],
+      "internal": false,
+      "pat": true,
+      "sub": "sub/x",
+      "tgt": {
+        "k": 1,
+        "s": "./a/../b.js",
+        "t": [
+          50,
+          3
+        ]
+      }
+    },
+    "out": [
+      "./a/../b.js",
+      9,
+      [
+        " because it contains invalid segment \"..\"",
+        [],
+        50,
+        3,
+        false
+      ],
+      [
+        "Checking path \"sub/x\" against target \"./a/../b.js\"",
+        "  The target \"./a/../b.js\" is invalid because it contains invalid segment \"..\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [
+        "require"
+      ],
+      "internal": true,
+      "pat": true,
+      "sub": "sub/x",
+      "tgt": {
+        "k": 1,
+        "s": "./a/../b.js",
+        "t": [
+          50,
+          3
+        ]
+      }
+    },
+    "out": [
+      "./a/../b.js",
+      9,
+      [
+        " because it contains invalid segment \"..\"",
+        [],
+        50,
+        3,
+        false
+      ],
+      [
+        "Checking path \"sub/x\" against target \"./a/../b.js\"",
+        "  The target \"./a/../b.js\" is invalid because it contains invalid segment \"..\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [
+        "import",
+        "node"
+      ],
+      "internal": false,
+      "pat": false,
+      "sub": "sub/x",
+      "tgt": {
+        "k": 1,
+        "s": "./a/../b.js",
+        "t": [
+          50,
+          3
+        ]
+      }
+    },
+    "out": [
+      "./a/../b.js",
+      7,
+      [
+        " because it doesn't end in \"/\"",
+        [],
+        50,
+        3,
+        false
+      ],
+      [
+        "Checking path \"sub/x\" against target \"./a/../b.js\"",
+        "  The target \"./a/../b.js\" is invalid because it doesn't end in \"/\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [
+        "import",
+        "node"
+      ],
+      "internal": true,
+      "pat": false,
+      "sub": "sub/x",
+      "tgt": {
+        "k": 1,
+        "s": "./a/../b.js",
+        "t": [
+          50,
+          3
+        ]
+      }
+    },
+    "out": [
+      "./a/../b.js",
+      7,
+      [
+        " because it doesn't end in \"/\"",
+        [],
+        50,
+        3,
+        false
+      ],
+      [
+        "Checking path \"sub/x\" against target \"./a/../b.js\"",
+        "  The target \"./a/../b.js\" is invalid because it doesn't end in \"/\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [
+        "import",
+        "node"
+      ],
+      "internal": false,
+      "pat": true,
+      "sub": "sub/x",
+      "tgt": {
+        "k": 1,
+        "s": "./a/../b.js",
+        "t": [
+          50,
+          3
+        ]
+      }
+    },
+    "out": [
+      "./a/../b.js",
+      9,
+      [
+        " because it contains invalid segment \"..\"",
+        [],
+        50,
+        3,
+        false
+      ],
+      [
+        "Checking path \"sub/x\" against target \"./a/../b.js\"",
+        "  The target \"./a/../b.js\" is invalid because it contains invalid segment \"..\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [
+        "import",
+        "node"
+      ],
+      "internal": true,
+      "pat": true,
+      "sub": "sub/x",
+      "tgt": {
+        "k": 1,
+        "s": "./a/../b.js",
+        "t": [
+          50,
+          3
+        ]
+      }
+    },
+    "out": [
+      "./a/../b.js",
+      9,
+      [
+        " because it contains invalid segment \"..\"",
+        [],
+        50,
+        3,
+        false
+      ],
+      [
+        "Checking path \"sub/x\" against target \"./a/../b.js\"",
+        "  The target \"./a/../b.js\" is invalid because it contains invalid segment \"..\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [],
+      "internal": false,
+      "pat": false,
+      "sub": "sub/x",
+      "tgt": {
+        "k": 1,
+        "s": "./node_modules/x",
+        "t": [
+          60,
+          3
+        ]
+      }
+    },
+    "out": [
+      "./node_modules/x",
+      7,
+      [
+        " because it doesn't end in \"/\"",
+        [],
+        60,
+        3,
+        false
+      ],
+      [
+        "Checking path \"sub/x\" against target \"./node_modules/x\"",
+        "  The target \"./node_modules/x\" is invalid because it doesn't end in \"/\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [],
+      "internal": true,
+      "pat": false,
+      "sub": "sub/x",
+      "tgt": {
+        "k": 1,
+        "s": "./node_modules/x",
+        "t": [
+          60,
+          3
+        ]
+      }
+    },
+    "out": [
+      "./node_modules/x",
+      7,
+      [
+        " because it doesn't end in \"/\"",
+        [],
+        60,
+        3,
+        false
+      ],
+      [
+        "Checking path \"sub/x\" against target \"./node_modules/x\"",
+        "  The target \"./node_modules/x\" is invalid because it doesn't end in \"/\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [],
+      "internal": false,
+      "pat": true,
+      "sub": "sub/x",
+      "tgt": {
+        "k": 1,
+        "s": "./node_modules/x",
+        "t": [
+          60,
+          3
+        ]
+      }
+    },
+    "out": [
+      "./node_modules/x",
+      9,
+      [
+        " because it contains invalid segment \"node_modules\"",
+        [],
+        60,
+        3,
+        false
+      ],
+      [
+        "Checking path \"sub/x\" against target \"./node_modules/x\"",
+        "  The target \"./node_modules/x\" is invalid because it contains invalid segment \"node_modules\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [],
+      "internal": true,
+      "pat": true,
+      "sub": "sub/x",
+      "tgt": {
+        "k": 1,
+        "s": "./node_modules/x",
+        "t": [
+          60,
+          3
+        ]
+      }
+    },
+    "out": [
+      "./node_modules/x",
+      9,
+      [
+        " because it contains invalid segment \"node_modules\"",
+        [],
+        60,
+        3,
+        false
+      ],
+      [
+        "Checking path \"sub/x\" against target \"./node_modules/x\"",
+        "  The target \"./node_modules/x\" is invalid because it contains invalid segment \"node_modules\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [
+        "import"
+      ],
+      "internal": false,
+      "pat": false,
+      "sub": "sub/x",
+      "tgt": {
+        "k": 1,
+        "s": "./node_modules/x",
+        "t": [
+          60,
+          3
+        ]
+      }
+    },
+    "out": [
+      "./node_modules/x",
+      7,
+      [
+        " because it doesn't end in \"/\"",
+        [],
+        60,
+        3,
+        false
+      ],
+      [
+        "Checking path \"sub/x\" against target \"./node_modules/x\"",
+        "  The target \"./node_modules/x\" is invalid because it doesn't end in \"/\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [
+        "import"
+      ],
+      "internal": true,
+      "pat": false,
+      "sub": "sub/x",
+      "tgt": {
+        "k": 1,
+        "s": "./node_modules/x",
+        "t": [
+          60,
+          3
+        ]
+      }
+    },
+    "out": [
+      "./node_modules/x",
+      7,
+      [
+        " because it doesn't end in \"/\"",
+        [],
+        60,
+        3,
+        false
+      ],
+      [
+        "Checking path \"sub/x\" against target \"./node_modules/x\"",
+        "  The target \"./node_modules/x\" is invalid because it doesn't end in \"/\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [
+        "import"
+      ],
+      "internal": false,
+      "pat": true,
+      "sub": "sub/x",
+      "tgt": {
+        "k": 1,
+        "s": "./node_modules/x",
+        "t": [
+          60,
+          3
+        ]
+      }
+    },
+    "out": [
+      "./node_modules/x",
+      9,
+      [
+        " because it contains invalid segment \"node_modules\"",
+        [],
+        60,
+        3,
+        false
+      ],
+      [
+        "Checking path \"sub/x\" against target \"./node_modules/x\"",
+        "  The target \"./node_modules/x\" is invalid because it contains invalid segment \"node_modules\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [
+        "import"
+      ],
+      "internal": true,
+      "pat": true,
+      "sub": "sub/x",
+      "tgt": {
+        "k": 1,
+        "s": "./node_modules/x",
+        "t": [
+          60,
+          3
+        ]
+      }
+    },
+    "out": [
+      "./node_modules/x",
+      9,
+      [
+        " because it contains invalid segment \"node_modules\"",
+        [],
+        60,
+        3,
+        false
+      ],
+      [
+        "Checking path \"sub/x\" against target \"./node_modules/x\"",
+        "  The target \"./node_modules/x\" is invalid because it contains invalid segment \"node_modules\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [
+        "require"
+      ],
+      "internal": false,
+      "pat": false,
+      "sub": "sub/x",
+      "tgt": {
+        "k": 1,
+        "s": "./node_modules/x",
+        "t": [
+          60,
+          3
+        ]
+      }
+    },
+    "out": [
+      "./node_modules/x",
+      7,
+      [
+        " because it doesn't end in \"/\"",
+        [],
+        60,
+        3,
+        false
+      ],
+      [
+        "Checking path \"sub/x\" against target \"./node_modules/x\"",
+        "  The target \"./node_modules/x\" is invalid because it doesn't end in \"/\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [
+        "require"
+      ],
+      "internal": true,
+      "pat": false,
+      "sub": "sub/x",
+      "tgt": {
+        "k": 1,
+        "s": "./node_modules/x",
+        "t": [
+          60,
+          3
+        ]
+      }
+    },
+    "out": [
+      "./node_modules/x",
+      7,
+      [
+        " because it doesn't end in \"/\"",
+        [],
+        60,
+        3,
+        false
+      ],
+      [
+        "Checking path \"sub/x\" against target \"./node_modules/x\"",
+        "  The target \"./node_modules/x\" is invalid because it doesn't end in \"/\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [
+        "require"
+      ],
+      "internal": false,
+      "pat": true,
+      "sub": "sub/x",
+      "tgt": {
+        "k": 1,
+        "s": "./node_modules/x",
+        "t": [
+          60,
+          3
+        ]
+      }
+    },
+    "out": [
+      "./node_modules/x",
+      9,
+      [
+        " because it contains invalid segment \"node_modules\"",
+        [],
+        60,
+        3,
+        false
+      ],
+      [
+        "Checking path \"sub/x\" against target \"./node_modules/x\"",
+        "  The target \"./node_modules/x\" is invalid because it contains invalid segment \"node_modules\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [
+        "require"
+      ],
+      "internal": true,
+      "pat": true,
+      "sub": "sub/x",
+      "tgt": {
+        "k": 1,
+        "s": "./node_modules/x",
+        "t": [
+          60,
+          3
+        ]
+      }
+    },
+    "out": [
+      "./node_modules/x",
+      9,
+      [
+        " because it contains invalid segment \"node_modules\"",
+        [],
+        60,
+        3,
+        false
+      ],
+      [
+        "Checking path \"sub/x\" against target \"./node_modules/x\"",
+        "  The target \"./node_modules/x\" is invalid because it contains invalid segment \"node_modules\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [
+        "import",
+        "node"
+      ],
+      "internal": false,
+      "pat": false,
+      "sub": "sub/x",
+      "tgt": {
+        "k": 1,
+        "s": "./node_modules/x",
+        "t": [
+          60,
+          3
+        ]
+      }
+    },
+    "out": [
+      "./node_modules/x",
+      7,
+      [
+        " because it doesn't end in \"/\"",
+        [],
+        60,
+        3,
+        false
+      ],
+      [
+        "Checking path \"sub/x\" against target \"./node_modules/x\"",
+        "  The target \"./node_modules/x\" is invalid because it doesn't end in \"/\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [
+        "import",
+        "node"
+      ],
+      "internal": true,
+      "pat": false,
+      "sub": "sub/x",
+      "tgt": {
+        "k": 1,
+        "s": "./node_modules/x",
+        "t": [
+          60,
+          3
+        ]
+      }
+    },
+    "out": [
+      "./node_modules/x",
+      7,
+      [
+        " because it doesn't end in \"/\"",
+        [],
+        60,
+        3,
+        false
+      ],
+      [
+        "Checking path \"sub/x\" against target \"./node_modules/x\"",
+        "  The target \"./node_modules/x\" is invalid because it doesn't end in \"/\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [
+        "import",
+        "node"
+      ],
+      "internal": false,
+      "pat": true,
+      "sub": "sub/x",
+      "tgt": {
+        "k": 1,
+        "s": "./node_modules/x",
+        "t": [
+          60,
+          3
+        ]
+      }
+    },
+    "out": [
+      "./node_modules/x",
+      9,
+      [
+        " because it contains invalid segment \"node_modules\"",
+        [],
+        60,
+        3,
+        false
+      ],
+      [
+        "Checking path \"sub/x\" against target \"./node_modules/x\"",
+        "  The target \"./node_modules/x\" is invalid because it contains invalid segment \"node_modules\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [
+        "import",
+        "node"
+      ],
+      "internal": true,
+      "pat": true,
+      "sub": "sub/x",
+      "tgt": {
+        "k": 1,
+        "s": "./node_modules/x",
+        "t": [
+          60,
+          3
+        ]
+      }
+    },
+    "out": [
+      "./node_modules/x",
+      9,
+      [
+        " because it contains invalid segment \"node_modules\"",
+        [],
+        60,
+        3,
+        false
+      ],
+      [
+        "Checking path \"sub/x\" against target \"./node_modules/x\"",
+        "  The target \"./node_modules/x\" is invalid because it contains invalid segment \"node_modules\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [],
+      "internal": false,
+      "pat": false,
+      "sub": "sub/x",
+      "tgt": {
+        "k": 0,
+        "t": [
+          70,
+          4
+        ]
+      }
+    },
+    "out": [
+      "",
+      2,
+      [
+        "",
+        [],
+        70,
+        4,
+        true
+      ],
+      [
+        "The path \"sub/x\" is set to null"
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [],
+      "internal": true,
+      "pat": false,
+      "sub": "sub/x",
+      "tgt": {
+        "k": 0,
+        "t": [
+          70,
+          4
+        ]
+      }
+    },
+    "out": [
+      "",
+      2,
+      [
+        "",
+        [],
+        70,
+        4,
+        true
+      ],
+      [
+        "The path \"sub/x\" is set to null"
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [],
+      "internal": false,
+      "pat": true,
+      "sub": "sub/x",
+      "tgt": {
+        "k": 0,
+        "t": [
+          70,
+          4
+        ]
+      }
+    },
+    "out": [
+      "",
+      2,
+      [
+        "",
+        [],
+        70,
+        4,
+        true
+      ],
+      [
+        "The path \"sub/x\" is set to null"
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [],
+      "internal": true,
+      "pat": true,
+      "sub": "sub/x",
+      "tgt": {
+        "k": 0,
+        "t": [
+          70,
+          4
+        ]
+      }
+    },
+    "out": [
+      "",
+      2,
+      [
+        "",
+        [],
+        70,
+        4,
+        true
+      ],
+      [
+        "The path \"sub/x\" is set to null"
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [
+        "import"
+      ],
+      "internal": false,
+      "pat": false,
+      "sub": "sub/x",
+      "tgt": {
+        "k": 0,
+        "t": [
+          70,
+          4
+        ]
+      }
+    },
+    "out": [
+      "",
+      2,
+      [
+        "",
+        [],
+        70,
+        4,
+        true
+      ],
+      [
+        "The path \"sub/x\" is set to null"
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [
+        "import"
+      ],
+      "internal": true,
+      "pat": false,
+      "sub": "sub/x",
+      "tgt": {
+        "k": 0,
+        "t": [
+          70,
+          4
+        ]
+      }
+    },
+    "out": [
+      "",
+      2,
+      [
+        "",
+        [],
+        70,
+        4,
+        true
+      ],
+      [
+        "The path \"sub/x\" is set to null"
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [
+        "import"
+      ],
+      "internal": false,
+      "pat": true,
+      "sub": "sub/x",
+      "tgt": {
+        "k": 0,
+        "t": [
+          70,
+          4
+        ]
+      }
+    },
+    "out": [
+      "",
+      2,
+      [
+        "",
+        [],
+        70,
+        4,
+        true
+      ],
+      [
+        "The path \"sub/x\" is set to null"
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [
+        "import"
+      ],
+      "internal": true,
+      "pat": true,
+      "sub": "sub/x",
+      "tgt": {
+        "k": 0,
+        "t": [
+          70,
+          4
+        ]
+      }
+    },
+    "out": [
+      "",
+      2,
+      [
+        "",
+        [],
+        70,
+        4,
+        true
+      ],
+      [
+        "The path \"sub/x\" is set to null"
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [
+        "require"
+      ],
+      "internal": false,
+      "pat": false,
+      "sub": "sub/x",
+      "tgt": {
+        "k": 0,
+        "t": [
+          70,
+          4
+        ]
+      }
+    },
+    "out": [
+      "",
+      2,
+      [
+        "",
+        [],
+        70,
+        4,
+        true
+      ],
+      [
+        "The path \"sub/x\" is set to null"
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [
+        "require"
+      ],
+      "internal": true,
+      "pat": false,
+      "sub": "sub/x",
+      "tgt": {
+        "k": 0,
+        "t": [
+          70,
+          4
+        ]
+      }
+    },
+    "out": [
+      "",
+      2,
+      [
+        "",
+        [],
+        70,
+        4,
+        true
+      ],
+      [
+        "The path \"sub/x\" is set to null"
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [
+        "require"
+      ],
+      "internal": false,
+      "pat": true,
+      "sub": "sub/x",
+      "tgt": {
+        "k": 0,
+        "t": [
+          70,
+          4
+        ]
+      }
+    },
+    "out": [
+      "",
+      2,
+      [
+        "",
+        [],
+        70,
+        4,
+        true
+      ],
+      [
+        "The path \"sub/x\" is set to null"
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [
+        "require"
+      ],
+      "internal": true,
+      "pat": true,
+      "sub": "sub/x",
+      "tgt": {
+        "k": 0,
+        "t": [
+          70,
+          4
+        ]
+      }
+    },
+    "out": [
+      "",
+      2,
+      [
+        "",
+        [],
+        70,
+        4,
+        true
+      ],
+      [
+        "The path \"sub/x\" is set to null"
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [
+        "import",
+        "node"
+      ],
+      "internal": false,
+      "pat": false,
+      "sub": "sub/x",
+      "tgt": {
+        "k": 0,
+        "t": [
+          70,
+          4
+        ]
+      }
+    },
+    "out": [
+      "",
+      2,
+      [
+        "",
+        [],
+        70,
+        4,
+        true
+      ],
+      [
+        "The path \"sub/x\" is set to null"
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [
+        "import",
+        "node"
+      ],
+      "internal": true,
+      "pat": false,
+      "sub": "sub/x",
+      "tgt": {
+        "k": 0,
+        "t": [
+          70,
+          4
+        ]
+      }
+    },
+    "out": [
+      "",
+      2,
+      [
+        "",
+        [],
+        70,
+        4,
+        true
+      ],
+      [
+        "The path \"sub/x\" is set to null"
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [
+        "import",
+        "node"
+      ],
+      "internal": false,
+      "pat": true,
+      "sub": "sub/x",
+      "tgt": {
+        "k": 0,
+        "t": [
+          70,
+          4
+        ]
+      }
+    },
+    "out": [
+      "",
+      2,
+      [
+        "",
+        [],
+        70,
+        4,
+        true
+      ],
+      [
+        "The path \"sub/x\" is set to null"
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [
+        "import",
+        "node"
+      ],
+      "internal": true,
+      "pat": true,
+      "sub": "sub/x",
+      "tgt": {
+        "k": 0,
+        "t": [
+          70,
+          4
+        ]
+      }
+    },
+    "out": [
+      "",
+      2,
+      [
+        "",
+        [],
+        70,
+        4,
+        true
+      ],
+      [
+        "The path \"sub/x\" is set to null"
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [],
+      "internal": false,
+      "pat": false,
+      "sub": "sub/x",
+      "tgt": {
+        "k": 3,
+        "m": [
+          [
+            "import",
+            {
+              "k": 1,
+              "s": "./import.js",
+              "t": [
+                90,
+                3
+              ]
+            }
+          ],
+          [
+            "require",
+            {
+              "k": 1,
+              "s": "./require.js",
+              "t": [
+                100,
+                3
+              ]
+            }
+          ],
+          [
+            "default",
+            {
+              "k": 1,
+              "s": "./default.js",
+              "t": [
+                110,
+                3
+              ]
+            }
+          ]
+        ],
+        "t": [
+          80,
+          1
+        ]
+      }
+    },
+    "out": [
+      "./default.js",
+      7,
+      [
+        " because it doesn't end in \"/\"",
+        [],
+        110,
+        3,
+        false
+      ],
+      [
+        "Checking condition map for one of []",
+        "  The key \"import\" does not apply",
+        "  The key \"require\" does not apply",
+        "  The key \"default\" applies",
+        "  Checking path \"sub/x\" against target \"./default.js\"",
+        "    The target \"./default.js\" is invalid because it doesn't end in \"/\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [],
+      "internal": true,
+      "pat": false,
+      "sub": "sub/x",
+      "tgt": {
+        "k": 3,
+        "m": [
+          [
+            "import",
+            {
+              "k": 1,
+              "s": "./import.js",
+              "t": [
+                90,
+                3
+              ]
+            }
+          ],
+          [
+            "require",
+            {
+              "k": 1,
+              "s": "./require.js",
+              "t": [
+                100,
+                3
+              ]
+            }
+          ],
+          [
+            "default",
+            {
+              "k": 1,
+              "s": "./default.js",
+              "t": [
+                110,
+                3
+              ]
+            }
+          ]
+        ],
+        "t": [
+          80,
+          1
+        ]
+      }
+    },
+    "out": [
+      "./default.js",
+      7,
+      [
+        " because it doesn't end in \"/\"",
+        [],
+        110,
+        3,
+        false
+      ],
+      [
+        "Checking condition map for one of []",
+        "  The key \"import\" does not apply",
+        "  The key \"require\" does not apply",
+        "  The key \"default\" applies",
+        "  Checking path \"sub/x\" against target \"./default.js\"",
+        "    The target \"./default.js\" is invalid because it doesn't end in \"/\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [],
+      "internal": false,
+      "pat": true,
+      "sub": "sub/x",
+      "tgt": {
+        "k": 3,
+        "m": [
+          [
+            "import",
+            {
+              "k": 1,
+              "s": "./import.js",
+              "t": [
+                90,
+                3
+              ]
+            }
+          ],
+          [
+            "require",
+            {
+              "k": 1,
+              "s": "./require.js",
+              "t": [
+                100,
+                3
+              ]
+            }
+          ],
+          [
+            "default",
+            {
+              "k": 1,
+              "s": "./default.js",
+              "t": [
+                110,
+                3
+              ]
+            }
+          ]
+        ],
+        "t": [
+          80,
+          1
+        ]
+      }
+    },
+    "out": [
+      "/pkg/default.js",
+      3,
+      [
+        "",
+        [],
+        110,
+        3,
+        false
+      ],
+      [
+        "Checking condition map for one of []",
+        "  The key \"import\" does not apply",
+        "  The key \"require\" does not apply",
+        "  The key \"default\" applies",
+        "  Checking path \"sub/x\" against target \"./default.js\"",
+        "    Substituted \"sub/x\" for \"*\" in \"./pkg/default.js\" to get \"./pkg/default.js\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [],
+      "internal": true,
+      "pat": true,
+      "sub": "sub/x",
+      "tgt": {
+        "k": 3,
+        "m": [
+          [
+            "import",
+            {
+              "k": 1,
+              "s": "./import.js",
+              "t": [
+                90,
+                3
+              ]
+            }
+          ],
+          [
+            "require",
+            {
+              "k": 1,
+              "s": "./require.js",
+              "t": [
+                100,
+                3
+              ]
+            }
+          ],
+          [
+            "default",
+            {
+              "k": 1,
+              "s": "./default.js",
+              "t": [
+                110,
+                3
+              ]
+            }
+          ]
+        ],
+        "t": [
+          80,
+          1
+        ]
+      }
+    },
+    "out": [
+      "/pkg/default.js",
+      3,
+      [
+        "",
+        [],
+        110,
+        3,
+        false
+      ],
+      [
+        "Checking condition map for one of []",
+        "  The key \"import\" does not apply",
+        "  The key \"require\" does not apply",
+        "  The key \"default\" applies",
+        "  Checking path \"sub/x\" against target \"./default.js\"",
+        "    Substituted \"sub/x\" for \"*\" in \"./pkg/default.js\" to get \"./pkg/default.js\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [
+        "import"
+      ],
+      "internal": false,
+      "pat": false,
+      "sub": "sub/x",
+      "tgt": {
+        "k": 3,
+        "m": [
+          [
+            "import",
+            {
+              "k": 1,
+              "s": "./import.js",
+              "t": [
+                90,
+                3
+              ]
+            }
+          ],
+          [
+            "require",
+            {
+              "k": 1,
+              "s": "./require.js",
+              "t": [
+                100,
+                3
+              ]
+            }
+          ],
+          [
+            "default",
+            {
+              "k": 1,
+              "s": "./default.js",
+              "t": [
+                110,
+                3
+              ]
+            }
+          ]
+        ],
+        "t": [
+          80,
+          1
+        ]
+      }
+    },
+    "out": [
+      "./import.js",
+      7,
+      [
+        " because it doesn't end in \"/\"",
+        [],
+        90,
+        3,
+        false
+      ],
+      [
+        "Checking condition map for one of [\"import\"]",
+        "  The key \"import\" applies",
+        "  Checking path \"sub/x\" against target \"./import.js\"",
+        "    The target \"./import.js\" is invalid because it doesn't end in \"/\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [
+        "import"
+      ],
+      "internal": true,
+      "pat": false,
+      "sub": "sub/x",
+      "tgt": {
+        "k": 3,
+        "m": [
+          [
+            "import",
+            {
+              "k": 1,
+              "s": "./import.js",
+              "t": [
+                90,
+                3
+              ]
+            }
+          ],
+          [
+            "require",
+            {
+              "k": 1,
+              "s": "./require.js",
+              "t": [
+                100,
+                3
+              ]
+            }
+          ],
+          [
+            "default",
+            {
+              "k": 1,
+              "s": "./default.js",
+              "t": [
+                110,
+                3
+              ]
+            }
+          ]
+        ],
+        "t": [
+          80,
+          1
+        ]
+      }
+    },
+    "out": [
+      "./import.js",
+      7,
+      [
+        " because it doesn't end in \"/\"",
+        [],
+        90,
+        3,
+        false
+      ],
+      [
+        "Checking condition map for one of [\"import\"]",
+        "  The key \"import\" applies",
+        "  Checking path \"sub/x\" against target \"./import.js\"",
+        "    The target \"./import.js\" is invalid because it doesn't end in \"/\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [
+        "import"
+      ],
+      "internal": false,
+      "pat": true,
+      "sub": "sub/x",
+      "tgt": {
+        "k": 3,
+        "m": [
+          [
+            "import",
+            {
+              "k": 1,
+              "s": "./import.js",
+              "t": [
+                90,
+                3
+              ]
+            }
+          ],
+          [
+            "require",
+            {
+              "k": 1,
+              "s": "./require.js",
+              "t": [
+                100,
+                3
+              ]
+            }
+          ],
+          [
+            "default",
+            {
+              "k": 1,
+              "s": "./default.js",
+              "t": [
+                110,
+                3
+              ]
+            }
+          ]
+        ],
+        "t": [
+          80,
+          1
+        ]
+      }
+    },
+    "out": [
+      "/pkg/import.js",
+      3,
+      [
+        "",
+        [],
+        90,
+        3,
+        false
+      ],
+      [
+        "Checking condition map for one of [\"import\"]",
+        "  The key \"import\" applies",
+        "  Checking path \"sub/x\" against target \"./import.js\"",
+        "    Substituted \"sub/x\" for \"*\" in \"./pkg/import.js\" to get \"./pkg/import.js\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [
+        "import"
+      ],
+      "internal": true,
+      "pat": true,
+      "sub": "sub/x",
+      "tgt": {
+        "k": 3,
+        "m": [
+          [
+            "import",
+            {
+              "k": 1,
+              "s": "./import.js",
+              "t": [
+                90,
+                3
+              ]
+            }
+          ],
+          [
+            "require",
+            {
+              "k": 1,
+              "s": "./require.js",
+              "t": [
+                100,
+                3
+              ]
+            }
+          ],
+          [
+            "default",
+            {
+              "k": 1,
+              "s": "./default.js",
+              "t": [
+                110,
+                3
+              ]
+            }
+          ]
+        ],
+        "t": [
+          80,
+          1
+        ]
+      }
+    },
+    "out": [
+      "/pkg/import.js",
+      3,
+      [
+        "",
+        [],
+        90,
+        3,
+        false
+      ],
+      [
+        "Checking condition map for one of [\"import\"]",
+        "  The key \"import\" applies",
+        "  Checking path \"sub/x\" against target \"./import.js\"",
+        "    Substituted \"sub/x\" for \"*\" in \"./pkg/import.js\" to get \"./pkg/import.js\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [
+        "require"
+      ],
+      "internal": false,
+      "pat": false,
+      "sub": "sub/x",
+      "tgt": {
+        "k": 3,
+        "m": [
+          [
+            "import",
+            {
+              "k": 1,
+              "s": "./import.js",
+              "t": [
+                90,
+                3
+              ]
+            }
+          ],
+          [
+            "require",
+            {
+              "k": 1,
+              "s": "./require.js",
+              "t": [
+                100,
+                3
+              ]
+            }
+          ],
+          [
+            "default",
+            {
+              "k": 1,
+              "s": "./default.js",
+              "t": [
+                110,
+                3
+              ]
+            }
+          ]
+        ],
+        "t": [
+          80,
+          1
+        ]
+      }
+    },
+    "out": [
+      "./require.js",
+      7,
+      [
+        " because it doesn't end in \"/\"",
+        [],
+        100,
+        3,
+        false
+      ],
+      [
+        "Checking condition map for one of [\"require\"]",
+        "  The key \"import\" does not apply",
+        "  The key \"require\" applies",
+        "  Checking path \"sub/x\" against target \"./require.js\"",
+        "    The target \"./require.js\" is invalid because it doesn't end in \"/\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [
+        "require"
+      ],
+      "internal": true,
+      "pat": false,
+      "sub": "sub/x",
+      "tgt": {
+        "k": 3,
+        "m": [
+          [
+            "import",
+            {
+              "k": 1,
+              "s": "./import.js",
+              "t": [
+                90,
+                3
+              ]
+            }
+          ],
+          [
+            "require",
+            {
+              "k": 1,
+              "s": "./require.js",
+              "t": [
+                100,
+                3
+              ]
+            }
+          ],
+          [
+            "default",
+            {
+              "k": 1,
+              "s": "./default.js",
+              "t": [
+                110,
+                3
+              ]
+            }
+          ]
+        ],
+        "t": [
+          80,
+          1
+        ]
+      }
+    },
+    "out": [
+      "./require.js",
+      7,
+      [
+        " because it doesn't end in \"/\"",
+        [],
+        100,
+        3,
+        false
+      ],
+      [
+        "Checking condition map for one of [\"require\"]",
+        "  The key \"import\" does not apply",
+        "  The key \"require\" applies",
+        "  Checking path \"sub/x\" against target \"./require.js\"",
+        "    The target \"./require.js\" is invalid because it doesn't end in \"/\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [
+        "require"
+      ],
+      "internal": false,
+      "pat": true,
+      "sub": "sub/x",
+      "tgt": {
+        "k": 3,
+        "m": [
+          [
+            "import",
+            {
+              "k": 1,
+              "s": "./import.js",
+              "t": [
+                90,
+                3
+              ]
+            }
+          ],
+          [
+            "require",
+            {
+              "k": 1,
+              "s": "./require.js",
+              "t": [
+                100,
+                3
+              ]
+            }
+          ],
+          [
+            "default",
+            {
+              "k": 1,
+              "s": "./default.js",
+              "t": [
+                110,
+                3
+              ]
+            }
+          ]
+        ],
+        "t": [
+          80,
+          1
+        ]
+      }
+    },
+    "out": [
+      "/pkg/require.js",
+      3,
+      [
+        "",
+        [],
+        100,
+        3,
+        false
+      ],
+      [
+        "Checking condition map for one of [\"require\"]",
+        "  The key \"import\" does not apply",
+        "  The key \"require\" applies",
+        "  Checking path \"sub/x\" against target \"./require.js\"",
+        "    Substituted \"sub/x\" for \"*\" in \"./pkg/require.js\" to get \"./pkg/require.js\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [
+        "require"
+      ],
+      "internal": true,
+      "pat": true,
+      "sub": "sub/x",
+      "tgt": {
+        "k": 3,
+        "m": [
+          [
+            "import",
+            {
+              "k": 1,
+              "s": "./import.js",
+              "t": [
+                90,
+                3
+              ]
+            }
+          ],
+          [
+            "require",
+            {
+              "k": 1,
+              "s": "./require.js",
+              "t": [
+                100,
+                3
+              ]
+            }
+          ],
+          [
+            "default",
+            {
+              "k": 1,
+              "s": "./default.js",
+              "t": [
+                110,
+                3
+              ]
+            }
+          ]
+        ],
+        "t": [
+          80,
+          1
+        ]
+      }
+    },
+    "out": [
+      "/pkg/require.js",
+      3,
+      [
+        "",
+        [],
+        100,
+        3,
+        false
+      ],
+      [
+        "Checking condition map for one of [\"require\"]",
+        "  The key \"import\" does not apply",
+        "  The key \"require\" applies",
+        "  Checking path \"sub/x\" against target \"./require.js\"",
+        "    Substituted \"sub/x\" for \"*\" in \"./pkg/require.js\" to get \"./pkg/require.js\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [
+        "import",
+        "node"
+      ],
+      "internal": false,
+      "pat": false,
+      "sub": "sub/x",
+      "tgt": {
+        "k": 3,
+        "m": [
+          [
+            "import",
+            {
+              "k": 1,
+              "s": "./import.js",
+              "t": [
+                90,
+                3
+              ]
+            }
+          ],
+          [
+            "require",
+            {
+              "k": 1,
+              "s": "./require.js",
+              "t": [
+                100,
+                3
+              ]
+            }
+          ],
+          [
+            "default",
+            {
+              "k": 1,
+              "s": "./default.js",
+              "t": [
+                110,
+                3
+              ]
+            }
+          ]
+        ],
+        "t": [
+          80,
+          1
+        ]
+      }
+    },
+    "out": [
+      "./import.js",
+      7,
+      [
+        " because it doesn't end in \"/\"",
+        [],
+        90,
+        3,
+        false
+      ],
+      [
+        "Checking condition map for one of [\"import\", \"node\"]",
+        "  The key \"import\" applies",
+        "  Checking path \"sub/x\" against target \"./import.js\"",
+        "    The target \"./import.js\" is invalid because it doesn't end in \"/\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [
+        "import",
+        "node"
+      ],
+      "internal": true,
+      "pat": false,
+      "sub": "sub/x",
+      "tgt": {
+        "k": 3,
+        "m": [
+          [
+            "import",
+            {
+              "k": 1,
+              "s": "./import.js",
+              "t": [
+                90,
+                3
+              ]
+            }
+          ],
+          [
+            "require",
+            {
+              "k": 1,
+              "s": "./require.js",
+              "t": [
+                100,
+                3
+              ]
+            }
+          ],
+          [
+            "default",
+            {
+              "k": 1,
+              "s": "./default.js",
+              "t": [
+                110,
+                3
+              ]
+            }
+          ]
+        ],
+        "t": [
+          80,
+          1
+        ]
+      }
+    },
+    "out": [
+      "./import.js",
+      7,
+      [
+        " because it doesn't end in \"/\"",
+        [],
+        90,
+        3,
+        false
+      ],
+      [
+        "Checking condition map for one of [\"import\", \"node\"]",
+        "  The key \"import\" applies",
+        "  Checking path \"sub/x\" against target \"./import.js\"",
+        "    The target \"./import.js\" is invalid because it doesn't end in \"/\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [
+        "import",
+        "node"
+      ],
+      "internal": false,
+      "pat": true,
+      "sub": "sub/x",
+      "tgt": {
+        "k": 3,
+        "m": [
+          [
+            "import",
+            {
+              "k": 1,
+              "s": "./import.js",
+              "t": [
+                90,
+                3
+              ]
+            }
+          ],
+          [
+            "require",
+            {
+              "k": 1,
+              "s": "./require.js",
+              "t": [
+                100,
+                3
+              ]
+            }
+          ],
+          [
+            "default",
+            {
+              "k": 1,
+              "s": "./default.js",
+              "t": [
+                110,
+                3
+              ]
+            }
+          ]
+        ],
+        "t": [
+          80,
+          1
+        ]
+      }
+    },
+    "out": [
+      "/pkg/import.js",
+      3,
+      [
+        "",
+        [],
+        90,
+        3,
+        false
+      ],
+      [
+        "Checking condition map for one of [\"import\", \"node\"]",
+        "  The key \"import\" applies",
+        "  Checking path \"sub/x\" against target \"./import.js\"",
+        "    Substituted \"sub/x\" for \"*\" in \"./pkg/import.js\" to get \"./pkg/import.js\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [
+        "import",
+        "node"
+      ],
+      "internal": true,
+      "pat": true,
+      "sub": "sub/x",
+      "tgt": {
+        "k": 3,
+        "m": [
+          [
+            "import",
+            {
+              "k": 1,
+              "s": "./import.js",
+              "t": [
+                90,
+                3
+              ]
+            }
+          ],
+          [
+            "require",
+            {
+              "k": 1,
+              "s": "./require.js",
+              "t": [
+                100,
+                3
+              ]
+            }
+          ],
+          [
+            "default",
+            {
+              "k": 1,
+              "s": "./default.js",
+              "t": [
+                110,
+                3
+              ]
+            }
+          ]
+        ],
+        "t": [
+          80,
+          1
+        ]
+      }
+    },
+    "out": [
+      "/pkg/import.js",
+      3,
+      [
+        "",
+        [],
+        90,
+        3,
+        false
+      ],
+      [
+        "Checking condition map for one of [\"import\", \"node\"]",
+        "  The key \"import\" applies",
+        "  Checking path \"sub/x\" against target \"./import.js\"",
+        "    Substituted \"sub/x\" for \"*\" in \"./pkg/import.js\" to get \"./pkg/import.js\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [],
+      "internal": false,
+      "pat": false,
+      "sub": "sub/x",
+      "tgt": {
+        "a": [
+          {
+            "k": 0,
+            "t": [
+              121,
+              4
+            ]
+          },
+          {
+            "k": 1,
+            "s": "./fallback.js",
+            "t": [
+              122,
+              3
+            ]
+          }
+        ],
+        "k": 2,
+        "t": [
+          120,
+          1
+        ]
+      }
+    },
+    "out": [
+      "./fallback.js",
+      7,
+      [
+        " because it doesn't end in \"/\"",
+        [],
+        122,
+        3,
+        false
+      ],
+      [
+        "Checking for \"sub/x\" in an array",
+        "  The path \"sub/x\" is set to null",
+        "  Checking path \"sub/x\" against target \"./fallback.js\"",
+        "    The target \"./fallback.js\" is invalid because it doesn't end in \"/\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [],
+      "internal": true,
+      "pat": false,
+      "sub": "sub/x",
+      "tgt": {
+        "a": [
+          {
+            "k": 0,
+            "t": [
+              121,
+              4
+            ]
+          },
+          {
+            "k": 1,
+            "s": "./fallback.js",
+            "t": [
+              122,
+              3
+            ]
+          }
+        ],
+        "k": 2,
+        "t": [
+          120,
+          1
+        ]
+      }
+    },
+    "out": [
+      "./fallback.js",
+      7,
+      [
+        " because it doesn't end in \"/\"",
+        [],
+        122,
+        3,
+        false
+      ],
+      [
+        "Checking for \"sub/x\" in an array",
+        "  The path \"sub/x\" is set to null",
+        "  Checking path \"sub/x\" against target \"./fallback.js\"",
+        "    The target \"./fallback.js\" is invalid because it doesn't end in \"/\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [],
+      "internal": false,
+      "pat": true,
+      "sub": "sub/x",
+      "tgt": {
+        "a": [
+          {
+            "k": 0,
+            "t": [
+              121,
+              4
+            ]
+          },
+          {
+            "k": 1,
+            "s": "./fallback.js",
+            "t": [
+              122,
+              3
+            ]
+          }
+        ],
+        "k": 2,
+        "t": [
+          120,
+          1
+        ]
+      }
+    },
+    "out": [
+      "/pkg/fallback.js",
+      3,
+      [
+        "",
+        [],
+        122,
+        3,
+        false
+      ],
+      [
+        "Checking for \"sub/x\" in an array",
+        "  The path \"sub/x\" is set to null",
+        "  Checking path \"sub/x\" against target \"./fallback.js\"",
+        "    Substituted \"sub/x\" for \"*\" in \"./pkg/fallback.js\" to get \"./pkg/fallback.js\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [],
+      "internal": true,
+      "pat": true,
+      "sub": "sub/x",
+      "tgt": {
+        "a": [
+          {
+            "k": 0,
+            "t": [
+              121,
+              4
+            ]
+          },
+          {
+            "k": 1,
+            "s": "./fallback.js",
+            "t": [
+              122,
+              3
+            ]
+          }
+        ],
+        "k": 2,
+        "t": [
+          120,
+          1
+        ]
+      }
+    },
+    "out": [
+      "/pkg/fallback.js",
+      3,
+      [
+        "",
+        [],
+        122,
+        3,
+        false
+      ],
+      [
+        "Checking for \"sub/x\" in an array",
+        "  The path \"sub/x\" is set to null",
+        "  Checking path \"sub/x\" against target \"./fallback.js\"",
+        "    Substituted \"sub/x\" for \"*\" in \"./pkg/fallback.js\" to get \"./pkg/fallback.js\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [
+        "import"
+      ],
+      "internal": false,
+      "pat": false,
+      "sub": "sub/x",
+      "tgt": {
+        "a": [
+          {
+            "k": 0,
+            "t": [
+              121,
+              4
+            ]
+          },
+          {
+            "k": 1,
+            "s": "./fallback.js",
+            "t": [
+              122,
+              3
+            ]
+          }
+        ],
+        "k": 2,
+        "t": [
+          120,
+          1
+        ]
+      }
+    },
+    "out": [
+      "./fallback.js",
+      7,
+      [
+        " because it doesn't end in \"/\"",
+        [],
+        122,
+        3,
+        false
+      ],
+      [
+        "Checking for \"sub/x\" in an array",
+        "  The path \"sub/x\" is set to null",
+        "  Checking path \"sub/x\" against target \"./fallback.js\"",
+        "    The target \"./fallback.js\" is invalid because it doesn't end in \"/\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [
+        "import"
+      ],
+      "internal": true,
+      "pat": false,
+      "sub": "sub/x",
+      "tgt": {
+        "a": [
+          {
+            "k": 0,
+            "t": [
+              121,
+              4
+            ]
+          },
+          {
+            "k": 1,
+            "s": "./fallback.js",
+            "t": [
+              122,
+              3
+            ]
+          }
+        ],
+        "k": 2,
+        "t": [
+          120,
+          1
+        ]
+      }
+    },
+    "out": [
+      "./fallback.js",
+      7,
+      [
+        " because it doesn't end in \"/\"",
+        [],
+        122,
+        3,
+        false
+      ],
+      [
+        "Checking for \"sub/x\" in an array",
+        "  The path \"sub/x\" is set to null",
+        "  Checking path \"sub/x\" against target \"./fallback.js\"",
+        "    The target \"./fallback.js\" is invalid because it doesn't end in \"/\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [
+        "import"
+      ],
+      "internal": false,
+      "pat": true,
+      "sub": "sub/x",
+      "tgt": {
+        "a": [
+          {
+            "k": 0,
+            "t": [
+              121,
+              4
+            ]
+          },
+          {
+            "k": 1,
+            "s": "./fallback.js",
+            "t": [
+              122,
+              3
+            ]
+          }
+        ],
+        "k": 2,
+        "t": [
+          120,
+          1
+        ]
+      }
+    },
+    "out": [
+      "/pkg/fallback.js",
+      3,
+      [
+        "",
+        [],
+        122,
+        3,
+        false
+      ],
+      [
+        "Checking for \"sub/x\" in an array",
+        "  The path \"sub/x\" is set to null",
+        "  Checking path \"sub/x\" against target \"./fallback.js\"",
+        "    Substituted \"sub/x\" for \"*\" in \"./pkg/fallback.js\" to get \"./pkg/fallback.js\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [
+        "import"
+      ],
+      "internal": true,
+      "pat": true,
+      "sub": "sub/x",
+      "tgt": {
+        "a": [
+          {
+            "k": 0,
+            "t": [
+              121,
+              4
+            ]
+          },
+          {
+            "k": 1,
+            "s": "./fallback.js",
+            "t": [
+              122,
+              3
+            ]
+          }
+        ],
+        "k": 2,
+        "t": [
+          120,
+          1
+        ]
+      }
+    },
+    "out": [
+      "/pkg/fallback.js",
+      3,
+      [
+        "",
+        [],
+        122,
+        3,
+        false
+      ],
+      [
+        "Checking for \"sub/x\" in an array",
+        "  The path \"sub/x\" is set to null",
+        "  Checking path \"sub/x\" against target \"./fallback.js\"",
+        "    Substituted \"sub/x\" for \"*\" in \"./pkg/fallback.js\" to get \"./pkg/fallback.js\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [
+        "require"
+      ],
+      "internal": false,
+      "pat": false,
+      "sub": "sub/x",
+      "tgt": {
+        "a": [
+          {
+            "k": 0,
+            "t": [
+              121,
+              4
+            ]
+          },
+          {
+            "k": 1,
+            "s": "./fallback.js",
+            "t": [
+              122,
+              3
+            ]
+          }
+        ],
+        "k": 2,
+        "t": [
+          120,
+          1
+        ]
+      }
+    },
+    "out": [
+      "./fallback.js",
+      7,
+      [
+        " because it doesn't end in \"/\"",
+        [],
+        122,
+        3,
+        false
+      ],
+      [
+        "Checking for \"sub/x\" in an array",
+        "  The path \"sub/x\" is set to null",
+        "  Checking path \"sub/x\" against target \"./fallback.js\"",
+        "    The target \"./fallback.js\" is invalid because it doesn't end in \"/\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [
+        "require"
+      ],
+      "internal": true,
+      "pat": false,
+      "sub": "sub/x",
+      "tgt": {
+        "a": [
+          {
+            "k": 0,
+            "t": [
+              121,
+              4
+            ]
+          },
+          {
+            "k": 1,
+            "s": "./fallback.js",
+            "t": [
+              122,
+              3
+            ]
+          }
+        ],
+        "k": 2,
+        "t": [
+          120,
+          1
+        ]
+      }
+    },
+    "out": [
+      "./fallback.js",
+      7,
+      [
+        " because it doesn't end in \"/\"",
+        [],
+        122,
+        3,
+        false
+      ],
+      [
+        "Checking for \"sub/x\" in an array",
+        "  The path \"sub/x\" is set to null",
+        "  Checking path \"sub/x\" against target \"./fallback.js\"",
+        "    The target \"./fallback.js\" is invalid because it doesn't end in \"/\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [
+        "require"
+      ],
+      "internal": false,
+      "pat": true,
+      "sub": "sub/x",
+      "tgt": {
+        "a": [
+          {
+            "k": 0,
+            "t": [
+              121,
+              4
+            ]
+          },
+          {
+            "k": 1,
+            "s": "./fallback.js",
+            "t": [
+              122,
+              3
+            ]
+          }
+        ],
+        "k": 2,
+        "t": [
+          120,
+          1
+        ]
+      }
+    },
+    "out": [
+      "/pkg/fallback.js",
+      3,
+      [
+        "",
+        [],
+        122,
+        3,
+        false
+      ],
+      [
+        "Checking for \"sub/x\" in an array",
+        "  The path \"sub/x\" is set to null",
+        "  Checking path \"sub/x\" against target \"./fallback.js\"",
+        "    Substituted \"sub/x\" for \"*\" in \"./pkg/fallback.js\" to get \"./pkg/fallback.js\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [
+        "require"
+      ],
+      "internal": true,
+      "pat": true,
+      "sub": "sub/x",
+      "tgt": {
+        "a": [
+          {
+            "k": 0,
+            "t": [
+              121,
+              4
+            ]
+          },
+          {
+            "k": 1,
+            "s": "./fallback.js",
+            "t": [
+              122,
+              3
+            ]
+          }
+        ],
+        "k": 2,
+        "t": [
+          120,
+          1
+        ]
+      }
+    },
+    "out": [
+      "/pkg/fallback.js",
+      3,
+      [
+        "",
+        [],
+        122,
+        3,
+        false
+      ],
+      [
+        "Checking for \"sub/x\" in an array",
+        "  The path \"sub/x\" is set to null",
+        "  Checking path \"sub/x\" against target \"./fallback.js\"",
+        "    Substituted \"sub/x\" for \"*\" in \"./pkg/fallback.js\" to get \"./pkg/fallback.js\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [
+        "import",
+        "node"
+      ],
+      "internal": false,
+      "pat": false,
+      "sub": "sub/x",
+      "tgt": {
+        "a": [
+          {
+            "k": 0,
+            "t": [
+              121,
+              4
+            ]
+          },
+          {
+            "k": 1,
+            "s": "./fallback.js",
+            "t": [
+              122,
+              3
+            ]
+          }
+        ],
+        "k": 2,
+        "t": [
+          120,
+          1
+        ]
+      }
+    },
+    "out": [
+      "./fallback.js",
+      7,
+      [
+        " because it doesn't end in \"/\"",
+        [],
+        122,
+        3,
+        false
+      ],
+      [
+        "Checking for \"sub/x\" in an array",
+        "  The path \"sub/x\" is set to null",
+        "  Checking path \"sub/x\" against target \"./fallback.js\"",
+        "    The target \"./fallback.js\" is invalid because it doesn't end in \"/\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [
+        "import",
+        "node"
+      ],
+      "internal": true,
+      "pat": false,
+      "sub": "sub/x",
+      "tgt": {
+        "a": [
+          {
+            "k": 0,
+            "t": [
+              121,
+              4
+            ]
+          },
+          {
+            "k": 1,
+            "s": "./fallback.js",
+            "t": [
+              122,
+              3
+            ]
+          }
+        ],
+        "k": 2,
+        "t": [
+          120,
+          1
+        ]
+      }
+    },
+    "out": [
+      "./fallback.js",
+      7,
+      [
+        " because it doesn't end in \"/\"",
+        [],
+        122,
+        3,
+        false
+      ],
+      [
+        "Checking for \"sub/x\" in an array",
+        "  The path \"sub/x\" is set to null",
+        "  Checking path \"sub/x\" against target \"./fallback.js\"",
+        "    The target \"./fallback.js\" is invalid because it doesn't end in \"/\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [
+        "import",
+        "node"
+      ],
+      "internal": false,
+      "pat": true,
+      "sub": "sub/x",
+      "tgt": {
+        "a": [
+          {
+            "k": 0,
+            "t": [
+              121,
+              4
+            ]
+          },
+          {
+            "k": 1,
+            "s": "./fallback.js",
+            "t": [
+              122,
+              3
+            ]
+          }
+        ],
+        "k": 2,
+        "t": [
+          120,
+          1
+        ]
+      }
+    },
+    "out": [
+      "/pkg/fallback.js",
+      3,
+      [
+        "",
+        [],
+        122,
+        3,
+        false
+      ],
+      [
+        "Checking for \"sub/x\" in an array",
+        "  The path \"sub/x\" is set to null",
+        "  Checking path \"sub/x\" against target \"./fallback.js\"",
+        "    Substituted \"sub/x\" for \"*\" in \"./pkg/fallback.js\" to get \"./pkg/fallback.js\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [
+        "import",
+        "node"
+      ],
+      "internal": true,
+      "pat": true,
+      "sub": "sub/x",
+      "tgt": {
+        "a": [
+          {
+            "k": 0,
+            "t": [
+              121,
+              4
+            ]
+          },
+          {
+            "k": 1,
+            "s": "./fallback.js",
+            "t": [
+              122,
+              3
+            ]
+          }
+        ],
+        "k": 2,
+        "t": [
+          120,
+          1
+        ]
+      }
+    },
+    "out": [
+      "/pkg/fallback.js",
+      3,
+      [
+        "",
+        [],
+        122,
+        3,
+        false
+      ],
+      [
+        "Checking for \"sub/x\" in an array",
+        "  The path \"sub/x\" is set to null",
+        "  Checking path \"sub/x\" against target \"./fallback.js\"",
+        "    Substituted \"sub/x\" for \"*\" in \"./pkg/fallback.js\" to get \"./pkg/fallback.js\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [],
+      "internal": false,
+      "pat": false,
+      "sub": "sub/x",
+      "tgt": {
+        "k": 4,
+        "t": [
+          130,
+          1
+        ]
+      }
+    },
+    "out": [
+      "",
+      9,
+      [
+        "",
+        [],
+        130,
+        1,
+        false
+      ],
+      [
+        "Invalid package target for path \"sub/x\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [],
+      "internal": true,
+      "pat": false,
+      "sub": "sub/x",
+      "tgt": {
+        "k": 4,
+        "t": [
+          130,
+          1
+        ]
+      }
+    },
+    "out": [
+      "",
+      9,
+      [
+        "",
+        [],
+        130,
+        1,
+        false
+      ],
+      [
+        "Invalid package target for path \"sub/x\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [],
+      "internal": false,
+      "pat": true,
+      "sub": "sub/x",
+      "tgt": {
+        "k": 4,
+        "t": [
+          130,
+          1
+        ]
+      }
+    },
+    "out": [
+      "",
+      9,
+      [
+        "",
+        [],
+        130,
+        1,
+        false
+      ],
+      [
+        "Invalid package target for path \"sub/x\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [],
+      "internal": true,
+      "pat": true,
+      "sub": "sub/x",
+      "tgt": {
+        "k": 4,
+        "t": [
+          130,
+          1
+        ]
+      }
+    },
+    "out": [
+      "",
+      9,
+      [
+        "",
+        [],
+        130,
+        1,
+        false
+      ],
+      [
+        "Invalid package target for path \"sub/x\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [
+        "import"
+      ],
+      "internal": false,
+      "pat": false,
+      "sub": "sub/x",
+      "tgt": {
+        "k": 4,
+        "t": [
+          130,
+          1
+        ]
+      }
+    },
+    "out": [
+      "",
+      9,
+      [
+        "",
+        [],
+        130,
+        1,
+        false
+      ],
+      [
+        "Invalid package target for path \"sub/x\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [
+        "import"
+      ],
+      "internal": true,
+      "pat": false,
+      "sub": "sub/x",
+      "tgt": {
+        "k": 4,
+        "t": [
+          130,
+          1
+        ]
+      }
+    },
+    "out": [
+      "",
+      9,
+      [
+        "",
+        [],
+        130,
+        1,
+        false
+      ],
+      [
+        "Invalid package target for path \"sub/x\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [
+        "import"
+      ],
+      "internal": false,
+      "pat": true,
+      "sub": "sub/x",
+      "tgt": {
+        "k": 4,
+        "t": [
+          130,
+          1
+        ]
+      }
+    },
+    "out": [
+      "",
+      9,
+      [
+        "",
+        [],
+        130,
+        1,
+        false
+      ],
+      [
+        "Invalid package target for path \"sub/x\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [
+        "import"
+      ],
+      "internal": true,
+      "pat": true,
+      "sub": "sub/x",
+      "tgt": {
+        "k": 4,
+        "t": [
+          130,
+          1
+        ]
+      }
+    },
+    "out": [
+      "",
+      9,
+      [
+        "",
+        [],
+        130,
+        1,
+        false
+      ],
+      [
+        "Invalid package target for path \"sub/x\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [
+        "require"
+      ],
+      "internal": false,
+      "pat": false,
+      "sub": "sub/x",
+      "tgt": {
+        "k": 4,
+        "t": [
+          130,
+          1
+        ]
+      }
+    },
+    "out": [
+      "",
+      9,
+      [
+        "",
+        [],
+        130,
+        1,
+        false
+      ],
+      [
+        "Invalid package target for path \"sub/x\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [
+        "require"
+      ],
+      "internal": true,
+      "pat": false,
+      "sub": "sub/x",
+      "tgt": {
+        "k": 4,
+        "t": [
+          130,
+          1
+        ]
+      }
+    },
+    "out": [
+      "",
+      9,
+      [
+        "",
+        [],
+        130,
+        1,
+        false
+      ],
+      [
+        "Invalid package target for path \"sub/x\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [
+        "require"
+      ],
+      "internal": false,
+      "pat": true,
+      "sub": "sub/x",
+      "tgt": {
+        "k": 4,
+        "t": [
+          130,
+          1
+        ]
+      }
+    },
+    "out": [
+      "",
+      9,
+      [
+        "",
+        [],
+        130,
+        1,
+        false
+      ],
+      [
+        "Invalid package target for path \"sub/x\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [
+        "require"
+      ],
+      "internal": true,
+      "pat": true,
+      "sub": "sub/x",
+      "tgt": {
+        "k": 4,
+        "t": [
+          130,
+          1
+        ]
+      }
+    },
+    "out": [
+      "",
+      9,
+      [
+        "",
+        [],
+        130,
+        1,
+        false
+      ],
+      [
+        "Invalid package target for path \"sub/x\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [
+        "import",
+        "node"
+      ],
+      "internal": false,
+      "pat": false,
+      "sub": "sub/x",
+      "tgt": {
+        "k": 4,
+        "t": [
+          130,
+          1
+        ]
+      }
+    },
+    "out": [
+      "",
+      9,
+      [
+        "",
+        [],
+        130,
+        1,
+        false
+      ],
+      [
+        "Invalid package target for path \"sub/x\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [
+        "import",
+        "node"
+      ],
+      "internal": true,
+      "pat": false,
+      "sub": "sub/x",
+      "tgt": {
+        "k": 4,
+        "t": [
+          130,
+          1
+        ]
+      }
+    },
+    "out": [
+      "",
+      9,
+      [
+        "",
+        [],
+        130,
+        1,
+        false
+      ],
+      [
+        "Invalid package target for path \"sub/x\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [
+        "import",
+        "node"
+      ],
+      "internal": false,
+      "pat": true,
+      "sub": "sub/x",
+      "tgt": {
+        "k": 4,
+        "t": [
+          130,
+          1
+        ]
+      }
+    },
+    "out": [
+      "",
+      9,
+      [
+        "",
+        [],
+        130,
+        1,
+        false
+      ],
+      [
+        "Invalid package target for path \"sub/x\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageTargetResolve",
+    "arg": {
+      "conds": [
+        "import",
+        "node"
+      ],
+      "internal": true,
+      "pat": true,
+      "sub": "sub/x",
+      "tgt": {
+        "k": 4,
+        "t": [
+          130,
+          1
+        ]
+      }
+    },
+    "out": [
+      "",
+      9,
+      [
+        "",
+        [],
+        130,
+        1,
+        false
+      ],
+      [
+        "Invalid package target for path \"sub/x\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageImportsExportsResolve",
+    "arg": {
+      "isImports": false,
+      "key": "./exact.js",
+      "obj": {
+        "k": 3,
+        "m": [
+          [
+            "./exact.js",
+            {
+              "k": 1,
+              "s": "./a.js",
+              "t": [
+                201,
+                3
+              ]
+            },
+            [
+              201,
+              9
+            ]
+          ],
+          [
+            "./wild/*",
+            {
+              "k": 1,
+              "s": "./w/*.js",
+              "t": [
+                202,
+                3
+              ]
+            },
+            [
+              202,
+              7
+            ]
+          ],
+          [
+            "./dir/",
+            {
+              "k": 1,
+              "s": "./d/",
+              "t": [
+                203,
+                3
+              ]
+            },
+            [
+              203,
+              6
+            ]
+          ]
+        ],
+        "t": [
+          200,
+          1
+        ]
+      }
+    },
+    "out": [
+      "/pkg/a.js",
+      3,
+      [
+        "",
+        [],
+        201,
+        3,
+        false
+      ],
+      [
+        "Checking object path map for \"./exact.js\"",
+        "Found exact match for \"./exact.js\"",
+        "Checking path \"\" against target \"./a.js\"",
+        "  Joined \"\" to \"./pkg/a.js\" to get \"./pkg/a.js\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageImportsExportsResolve",
+    "arg": {
+      "isImports": true,
+      "key": "./exact.js",
+      "obj": {
+        "k": 3,
+        "m": [
+          [
+            "./exact.js",
+            {
+              "k": 1,
+              "s": "./a.js",
+              "t": [
+                201,
+                3
+              ]
+            },
+            [
+              201,
+              9
+            ]
+          ],
+          [
+            "./wild/*",
+            {
+              "k": 1,
+              "s": "./w/*.js",
+              "t": [
+                202,
+                3
+              ]
+            },
+            [
+              202,
+              7
+            ]
+          ],
+          [
+            "./dir/",
+            {
+              "k": 1,
+              "s": "./d/",
+              "t": [
+                203,
+                3
+              ]
+            },
+            [
+              203,
+              6
+            ]
+          ]
+        ],
+        "t": [
+          200,
+          1
+        ]
+      }
+    },
+    "out": [
+      "/pkg/a.js",
+      3,
+      [
+        "",
+        [],
+        201,
+        3,
+        false
+      ],
+      [
+        "Checking object path map for \"./exact.js\"",
+        "Found exact match for \"./exact.js\"",
+        "Checking path \"\" against target \"./a.js\"",
+        "  Joined \"\" to \"./pkg/a.js\" to get \"./pkg/a.js\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageImportsExportsResolve",
+    "arg": {
+      "isImports": false,
+      "key": "./wild/foo",
+      "obj": {
+        "k": 3,
+        "m": [
+          [
+            "./exact.js",
+            {
+              "k": 1,
+              "s": "./a.js",
+              "t": [
+                201,
+                3
+              ]
+            },
+            [
+              201,
+              9
+            ]
+          ],
+          [
+            "./wild/*",
+            {
+              "k": 1,
+              "s": "./w/*.js",
+              "t": [
+                202,
+                3
+              ]
+            },
+            [
+              202,
+              7
+            ]
+          ],
+          [
+            "./dir/",
+            {
+              "k": 1,
+              "s": "./d/",
+              "t": [
+                203,
+                3
+              ]
+            },
+            [
+              203,
+              6
+            ]
+          ]
+        ],
+        "t": [
+          200,
+          1
+        ]
+      }
+    },
+    "out": [
+      "/pkg/w/foo.js",
+      3,
+      [
+        "",
+        [],
+        202,
+        3,
+        false
+      ],
+      [
+        "Checking object path map for \"./wild/foo\"",
+        "The key \"./wild/*\" matched with \"foo\" left over",
+        "Checking path \"foo\" against target \"./w/*.js\"",
+        "  Substituted \"foo\" for \"*\" in \"./pkg/w/*.js\" to get \"./pkg/w/foo.js\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageImportsExportsResolve",
+    "arg": {
+      "isImports": true,
+      "key": "./wild/foo",
+      "obj": {
+        "k": 3,
+        "m": [
+          [
+            "./exact.js",
+            {
+              "k": 1,
+              "s": "./a.js",
+              "t": [
+                201,
+                3
+              ]
+            },
+            [
+              201,
+              9
+            ]
+          ],
+          [
+            "./wild/*",
+            {
+              "k": 1,
+              "s": "./w/*.js",
+              "t": [
+                202,
+                3
+              ]
+            },
+            [
+              202,
+              7
+            ]
+          ],
+          [
+            "./dir/",
+            {
+              "k": 1,
+              "s": "./d/",
+              "t": [
+                203,
+                3
+              ]
+            },
+            [
+              203,
+              6
+            ]
+          ]
+        ],
+        "t": [
+          200,
+          1
+        ]
+      }
+    },
+    "out": [
+      "/pkg/w/foo.js",
+      3,
+      [
+        "",
+        [],
+        202,
+        3,
+        false
+      ],
+      [
+        "Checking object path map for \"./wild/foo\"",
+        "The key \"./wild/*\" matched with \"foo\" left over",
+        "Checking path \"foo\" against target \"./w/*.js\"",
+        "  Substituted \"foo\" for \"*\" in \"./pkg/w/*.js\" to get \"./pkg/w/foo.js\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageImportsExportsResolve",
+    "arg": {
+      "isImports": false,
+      "key": "./dir/x",
+      "obj": {
+        "k": 3,
+        "m": [
+          [
+            "./exact.js",
+            {
+              "k": 1,
+              "s": "./a.js",
+              "t": [
+                201,
+                3
+              ]
+            },
+            [
+              201,
+              9
+            ]
+          ],
+          [
+            "./wild/*",
+            {
+              "k": 1,
+              "s": "./w/*.js",
+              "t": [
+                202,
+                3
+              ]
+            },
+            [
+              202,
+              7
+            ]
+          ],
+          [
+            "./dir/",
+            {
+              "k": 1,
+              "s": "./d/",
+              "t": [
+                203,
+                3
+              ]
+            },
+            [
+              203,
+              6
+            ]
+          ]
+        ],
+        "t": [
+          200,
+          1
+        ]
+      }
+    },
+    "out": [
+      "/pkg/d/x",
+      5,
+      [
+        "",
+        [],
+        203,
+        3,
+        false
+      ],
+      [
+        "Checking object path map for \"./dir/x\"",
+        "The key \"./wild/*\" did not match",
+        "The key \"./dir/\" matched with \"x\" left over",
+        "Checking path \"x\" against target \"./d/\"",
+        "  Joined \"x\" to \"./pkg/d\" to get \"./pkg/d/x\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageImportsExportsResolve",
+    "arg": {
+      "isImports": true,
+      "key": "./dir/x",
+      "obj": {
+        "k": 3,
+        "m": [
+          [
+            "./exact.js",
+            {
+              "k": 1,
+              "s": "./a.js",
+              "t": [
+                201,
+                3
+              ]
+            },
+            [
+              201,
+              9
+            ]
+          ],
+          [
+            "./wild/*",
+            {
+              "k": 1,
+              "s": "./w/*.js",
+              "t": [
+                202,
+                3
+              ]
+            },
+            [
+              202,
+              7
+            ]
+          ],
+          [
+            "./dir/",
+            {
+              "k": 1,
+              "s": "./d/",
+              "t": [
+                203,
+                3
+              ]
+            },
+            [
+              203,
+              6
+            ]
+          ]
+        ],
+        "t": [
+          200,
+          1
+        ]
+      }
+    },
+    "out": [
+      "/pkg/d/x",
+      5,
+      [
+        "",
+        [],
+        203,
+        3,
+        false
+      ],
+      [
+        "Checking object path map for \"./dir/x\"",
+        "The key \"./wild/*\" did not match",
+        "The key \"./dir/\" matched with \"x\" left over",
+        "Checking path \"x\" against target \"./d/\"",
+        "  Joined \"x\" to \"./pkg/d\" to get \"./pkg/d/x\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageImportsExportsResolve",
+    "arg": {
+      "isImports": false,
+      "key": "./nope",
+      "obj": {
+        "k": 3,
+        "m": [
+          [
+            "./exact.js",
+            {
+              "k": 1,
+              "s": "./a.js",
+              "t": [
+                201,
+                3
+              ]
+            },
+            [
+              201,
+              9
+            ]
+          ],
+          [
+            "./wild/*",
+            {
+              "k": 1,
+              "s": "./w/*.js",
+              "t": [
+                202,
+                3
+              ]
+            },
+            [
+              202,
+              7
+            ]
+          ],
+          [
+            "./dir/",
+            {
+              "k": 1,
+              "s": "./d/",
+              "t": [
+                203,
+                3
+              ]
+            },
+            [
+              203,
+              6
+            ]
+          ]
+        ],
+        "t": [
+          200,
+          1
+        ]
+      }
+    },
+    "out": [
+      "",
+      2,
+      [
+        "",
+        [],
+        200,
+        1,
+        false
+      ],
+      [
+        "Checking object path map for \"./nope\"",
+        "The key \"./wild/*\" did not match",
+        "The key \"./dir/\" did not match",
+        "No keys matched \"./nope\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageImportsExportsResolve",
+    "arg": {
+      "isImports": true,
+      "key": "./nope",
+      "obj": {
+        "k": 3,
+        "m": [
+          [
+            "./exact.js",
+            {
+              "k": 1,
+              "s": "./a.js",
+              "t": [
+                201,
+                3
+              ]
+            },
+            [
+              201,
+              9
+            ]
+          ],
+          [
+            "./wild/*",
+            {
+              "k": 1,
+              "s": "./w/*.js",
+              "t": [
+                202,
+                3
+              ]
+            },
+            [
+              202,
+              7
+            ]
+          ],
+          [
+            "./dir/",
+            {
+              "k": 1,
+              "s": "./d/",
+              "t": [
+                203,
+                3
+              ]
+            },
+            [
+              203,
+              6
+            ]
+          ]
+        ],
+        "t": [
+          200,
+          1
+        ]
+      }
+    },
+    "out": [
+      "",
+      2,
+      [
+        "",
+        [],
+        200,
+        1,
+        false
+      ],
+      [
+        "Checking object path map for \"./nope\"",
+        "The key \"./wild/*\" did not match",
+        "The key \"./dir/\" did not match",
+        "No keys matched \"./nope\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageImportsResolve",
+    "arg": {
+      "key": "#internal"
+    },
+    "out": [
+      "#internal",
+      11,
+      [
+        "",
+        [],
+        200,
+        1,
+        false
+      ],
+      [
+        "Checking object path map for \"#internal\"",
+        "The key \"./wild/*\" did not match",
+        "The key \"./dir/\" did not match",
+        "No keys matched \"#internal\"",
+        "The package import \"#internal\" is not defined"
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageImportsResolve",
+    "arg": {
+      "key": "./exact.js"
+    },
+    "out": [
+      "/a.js",
+      3,
+      [
+        "",
+        [],
+        201,
+        3,
+        false
+      ],
+      [
+        "Checking object path map for \"./exact.js\"",
+        "Found exact match for \"./exact.js\"",
+        "Checking path \"\" against target \"./a.js\"",
+        "  Joined \"\" to \"./a.js\" to get \"./a.js\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageImportsResolve",
+    "arg": {
+      "key": "./wild/foo"
+    },
+    "out": [
+      "/w/foo.js",
+      3,
+      [
+        "",
+        [],
+        202,
+        3,
+        false
+      ],
+      [
+        "Checking object path map for \"./wild/foo\"",
+        "The key \"./wild/*\" matched with \"foo\" left over",
+        "Checking path \"foo\" against target \"./w/*.js\"",
+        "  Substituted \"foo\" for \"*\" in \"./w/*.js\" to get \"./w/foo.js\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageImportsResolve",
+    "arg": {
+      "key": "./missing"
+    },
+    "out": [
+      "./missing",
+      11,
+      [
+        "",
+        [],
+        200,
+        1,
+        false
+      ],
+      [
+        "Checking object path map for \"./missing\"",
+        "The key \"./wild/*\" did not match",
+        "The key \"./dir/\" did not match",
+        "No keys matched \"./missing\"",
+        "The package import \"./missing\" is not defined"
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageExportsResolve",
+    "arg": {
+      "sub": "."
+    },
+    "out": [
+      "",
+      10,
+      [
+        "",
+        [],
+        200,
+        1,
+        false
+      ],
+      [
+        "The path \".\" is not exported"
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageExportsResolve",
+    "arg": {
+      "sub": "./exact.js"
+    },
+    "out": [
+      "/pkg/a.js",
+      3,
+      [
+        "",
+        [],
+        201,
+        3,
+        false
+      ],
+      [
+        "Checking object path map for \"./exact.js\"",
+        "Found exact match for \"./exact.js\"",
+        "Checking path \"\" against target \"./a.js\"",
+        "  Joined \"\" to \"./pkg/a.js\" to get \"./pkg/a.js\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageExportsResolve",
+    "arg": {
+      "sub": "./wild/foo"
+    },
+    "out": [
+      "/pkg/w/foo.js",
+      3,
+      [
+        "",
+        [],
+        202,
+        3,
+        false
+      ],
+      [
+        "Checking object path map for \"./wild/foo\"",
+        "The key \"./wild/*\" matched with \"foo\" left over",
+        "Checking path \"foo\" against target \"./w/*.js\"",
+        "  Substituted \"foo\" for \"*\" in \"./pkg/w/*.js\" to get \"./pkg/w/foo.js\""
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageExportsResolve",
+    "arg": {
+      "sub": "./missing"
+    },
+    "out": [
+      "",
+      10,
+      [
+        "",
+        [],
+        200,
+        1,
+        false
+      ],
+      [
+        "Checking object path map for \"./missing\"",
+        "The key \"./wild/*\" did not match",
+        "The key \"./dir/\" did not match",
+        "No keys matched \"./missing\"",
+        "The path \"./missing\" is not exported"
+      ]
+    ]
+  },
+  {
+    "fn": "esmPackageExportsReverseResolve",
+    "arg": {
+      "query": "./a.js"
+    },
+    "out": [
+      true,
+      "./exact.js",
+      201,
+      3,
+      []
+    ]
+  },
+  {
+    "fn": "esmPackageTargetReverseResolve",
+    "arg": {
+      "key": "./exact.js",
+      "kind": 0,
+      "query": "./a.js",
+      "target": {
+        "k": 1,
+        "s": "./a.js",
+        "t": [
+          201,
+          3
+        ]
+      }
+    },
+    "out": [
+      true,
+      "./exact.js",
+      201,
+      3,
+      []
+    ]
+  },
+  {
+    "fn": "esmPackageTargetReverseResolve",
+    "arg": {
+      "key": "./exact.js",
+      "kind": 1,
+      "query": "./a.js",
+      "target": {
+        "k": 1,
+        "s": "./a.js",
+        "t": [
+          201,
+          3
+        ]
+      }
+    },
+    "out": [
+      true,
+      "./exact.js",
+      201,
+      3,
+      []
+    ]
+  },
+  {
+    "fn": "esmPackageTargetReverseResolve",
+    "arg": {
+      "key": "./exact.js",
+      "kind": 2,
+      "query": "./a.js",
+      "target": {
+        "k": 1,
+        "s": "./a.js",
+        "t": [
+          201,
+          3
+        ]
+      }
+    },
+    "out": [
+      true,
+      "./exact.js",
+      201,
+      3,
+      []
+    ]
+  },
+  {
+    "fn": "esmPackageTargetReverseResolve",
+    "arg": {
+      "key": "./wild/*",
+      "kind": 0,
+      "query": "./a.js",
+      "target": {
+        "k": 1,
+        "s": "./w/*.js",
+        "t": [
+          202,
+          3
+        ]
+      }
+    },
+    "out": [
+      false,
+      "",
+      0,
+      0,
+      []
+    ]
+  },
+  {
+    "fn": "esmPackageTargetReverseResolve",
+    "arg": {
+      "key": "./wild/*",
+      "kind": 1,
+      "query": "./a.js",
+      "target": {
+        "k": 1,
+        "s": "./w/*.js",
+        "t": [
+          202,
+          3
+        ]
+      }
+    },
+    "out": [
+      false,
+      "",
+      0,
+      0,
+      []
+    ]
+  },
+  {
+    "fn": "esmPackageTargetReverseResolve",
+    "arg": {
+      "key": "./wild/*",
+      "kind": 2,
+      "query": "./a.js",
+      "target": {
+        "k": 1,
+        "s": "./w/*.js",
+        "t": [
+          202,
+          3
+        ]
+      }
+    },
+    "out": [
+      false,
+      "",
+      0,
+      0,
+      []
+    ]
+  },
+  {
+    "fn": "esmPackageTargetReverseResolve",
+    "arg": {
+      "key": "./dir/",
+      "kind": 0,
+      "query": "./a.js",
+      "target": {
+        "k": 1,
+        "s": "./d/",
+        "t": [
+          203,
+          3
+        ]
+      }
+    },
+    "out": [
+      false,
+      "",
+      0,
+      0,
+      []
+    ]
+  },
+  {
+    "fn": "esmPackageTargetReverseResolve",
+    "arg": {
+      "key": "./dir/",
+      "kind": 1,
+      "query": "./a.js",
+      "target": {
+        "k": 1,
+        "s": "./d/",
+        "t": [
+          203,
+          3
+        ]
+      }
+    },
+    "out": [
+      false,
+      "",
+      0,
+      0,
+      []
+    ]
+  },
+  {
+    "fn": "esmPackageTargetReverseResolve",
+    "arg": {
+      "key": "./dir/",
+      "kind": 2,
+      "query": "./a.js",
+      "target": {
+        "k": 1,
+        "s": "./d/",
+        "t": [
+          203,
+          3
+        ]
+      }
+    },
+    "out": [
+      false,
+      "",
+      0,
+      0,
+      []
+    ]
+  },
+  {
+    "fn": "esmPackageExportsReverseResolve",
+    "arg": {
+      "query": "./w/foo.js"
+    },
+    "out": [
+      true,
+      "./wild/foo",
+      202,
+      3,
+      []
+    ]
+  },
+  {
+    "fn": "esmPackageTargetReverseResolve",
+    "arg": {
+      "key": "./exact.js",
+      "kind": 0,
+      "query": "./w/foo.js",
+      "target": {
+        "k": 1,
+        "s": "./a.js",
+        "t": [
+          201,
+          3
+        ]
+      }
+    },
+    "out": [
+      false,
+      "",
+      0,
+      0,
+      []
+    ]
+  },
+  {
+    "fn": "esmPackageTargetReverseResolve",
+    "arg": {
+      "key": "./exact.js",
+      "kind": 1,
+      "query": "./w/foo.js",
+      "target": {
+        "k": 1,
+        "s": "./a.js",
+        "t": [
+          201,
+          3
+        ]
+      }
+    },
+    "out": [
+      false,
+      "",
+      0,
+      0,
+      []
+    ]
+  },
+  {
+    "fn": "esmPackageTargetReverseResolve",
+    "arg": {
+      "key": "./exact.js",
+      "kind": 2,
+      "query": "./w/foo.js",
+      "target": {
+        "k": 1,
+        "s": "./a.js",
+        "t": [
+          201,
+          3
+        ]
+      }
+    },
+    "out": [
+      false,
+      "",
+      0,
+      0,
+      []
+    ]
+  },
+  {
+    "fn": "esmPackageTargetReverseResolve",
+    "arg": {
+      "key": "./wild/*",
+      "kind": 0,
+      "query": "./w/foo.js",
+      "target": {
+        "k": 1,
+        "s": "./w/*.js",
+        "t": [
+          202,
+          3
+        ]
+      }
+    },
+    "out": [
+      false,
+      "",
+      0,
+      0,
+      []
+    ]
+  },
+  {
+    "fn": "esmPackageTargetReverseResolve",
+    "arg": {
+      "key": "./wild/*",
+      "kind": 1,
+      "query": "./w/foo.js",
+      "target": {
+        "k": 1,
+        "s": "./w/*.js",
+        "t": [
+          202,
+          3
+        ]
+      }
+    },
+    "out": [
+      true,
+      "./wild/foo",
+      202,
+      3,
+      []
+    ]
+  },
+  {
+    "fn": "esmPackageTargetReverseResolve",
+    "arg": {
+      "key": "./wild/*",
+      "kind": 2,
+      "query": "./w/foo.js",
+      "target": {
+        "k": 1,
+        "s": "./w/*.js",
+        "t": [
+          202,
+          3
+        ]
+      }
+    },
+    "out": [
+      false,
+      "",
+      0,
+      0,
+      []
+    ]
+  },
+  {
+    "fn": "esmPackageTargetReverseResolve",
+    "arg": {
+      "key": "./dir/",
+      "kind": 0,
+      "query": "./w/foo.js",
+      "target": {
+        "k": 1,
+        "s": "./d/",
+        "t": [
+          203,
+          3
+        ]
+      }
+    },
+    "out": [
+      false,
+      "",
+      0,
+      0,
+      []
+    ]
+  },
+  {
+    "fn": "esmPackageTargetReverseResolve",
+    "arg": {
+      "key": "./dir/",
+      "kind": 1,
+      "query": "./w/foo.js",
+      "target": {
+        "k": 1,
+        "s": "./d/",
+        "t": [
+          203,
+          3
+        ]
+      }
+    },
+    "out": [
+      false,
+      "",
+      0,
+      0,
+      []
+    ]
+  },
+  {
+    "fn": "esmPackageTargetReverseResolve",
+    "arg": {
+      "key": "./dir/",
+      "kind": 2,
+      "query": "./w/foo.js",
+      "target": {
+        "k": 1,
+        "s": "./d/",
+        "t": [
+          203,
+          3
+        ]
+      }
+    },
+    "out": [
+      false,
+      "",
+      0,
+      0,
+      []
+    ]
+  },
+  {
+    "fn": "esmPackageExportsReverseResolve",
+    "arg": {
+      "query": "./d/x"
+    },
+    "out": [
+      true,
+      "./dir/x",
+      203,
+      3,
+      []
+    ]
+  },
+  {
+    "fn": "esmPackageTargetReverseResolve",
+    "arg": {
+      "key": "./exact.js",
+      "kind": 0,
+      "query": "./d/x",
+      "target": {
+        "k": 1,
+        "s": "./a.js",
+        "t": [
+          201,
+          3
+        ]
+      }
+    },
+    "out": [
+      false,
+      "",
+      0,
+      0,
+      []
+    ]
+  },
+  {
+    "fn": "esmPackageTargetReverseResolve",
+    "arg": {
+      "key": "./exact.js",
+      "kind": 1,
+      "query": "./d/x",
+      "target": {
+        "k": 1,
+        "s": "./a.js",
+        "t": [
+          201,
+          3
+        ]
+      }
+    },
+    "out": [
+      false,
+      "",
+      0,
+      0,
+      []
+    ]
+  },
+  {
+    "fn": "esmPackageTargetReverseResolve",
+    "arg": {
+      "key": "./exact.js",
+      "kind": 2,
+      "query": "./d/x",
+      "target": {
+        "k": 1,
+        "s": "./a.js",
+        "t": [
+          201,
+          3
+        ]
+      }
+    },
+    "out": [
+      false,
+      "",
+      0,
+      0,
+      []
+    ]
+  },
+  {
+    "fn": "esmPackageTargetReverseResolve",
+    "arg": {
+      "key": "./wild/*",
+      "kind": 0,
+      "query": "./d/x",
+      "target": {
+        "k": 1,
+        "s": "./w/*.js",
+        "t": [
+          202,
+          3
+        ]
+      }
+    },
+    "out": [
+      false,
+      "",
+      0,
+      0,
+      []
+    ]
+  },
+  {
+    "fn": "esmPackageTargetReverseResolve",
+    "arg": {
+      "key": "./wild/*",
+      "kind": 1,
+      "query": "./d/x",
+      "target": {
+        "k": 1,
+        "s": "./w/*.js",
+        "t": [
+          202,
+          3
+        ]
+      }
+    },
+    "out": [
+      false,
+      "",
+      0,
+      0,
+      []
+    ]
+  },
+  {
+    "fn": "esmPackageTargetReverseResolve",
+    "arg": {
+      "key": "./wild/*",
+      "kind": 2,
+      "query": "./d/x",
+      "target": {
+        "k": 1,
+        "s": "./w/*.js",
+        "t": [
+          202,
+          3
+        ]
+      }
+    },
+    "out": [
+      false,
+      "",
+      0,
+      0,
+      []
+    ]
+  },
+  {
+    "fn": "esmPackageTargetReverseResolve",
+    "arg": {
+      "key": "./dir/",
+      "kind": 0,
+      "query": "./d/x",
+      "target": {
+        "k": 1,
+        "s": "./d/",
+        "t": [
+          203,
+          3
+        ]
+      }
+    },
+    "out": [
+      false,
+      "",
+      0,
+      0,
+      []
+    ]
+  },
+  {
+    "fn": "esmPackageTargetReverseResolve",
+    "arg": {
+      "key": "./dir/",
+      "kind": 1,
+      "query": "./d/x",
+      "target": {
+        "k": 1,
+        "s": "./d/",
+        "t": [
+          203,
+          3
+        ]
+      }
+    },
+    "out": [
+      false,
+      "",
+      0,
+      0,
+      []
+    ]
+  },
+  {
+    "fn": "esmPackageTargetReverseResolve",
+    "arg": {
+      "key": "./dir/",
+      "kind": 2,
+      "query": "./d/x",
+      "target": {
+        "k": 1,
+        "s": "./d/",
+        "t": [
+          203,
+          3
+        ]
+      }
+    },
+    "out": [
+      true,
+      "./dir/x",
+      203,
+      3,
+      []
+    ]
+  },
+  {
+    "fn": "esmPackageExportsReverseResolve",
+    "arg": {
+      "query": "./none.js"
+    },
+    "out": [
+      false,
+      "",
+      0,
+      0,
+      []
+    ]
+  },
+  {
+    "fn": "esmPackageTargetReverseResolve",
+    "arg": {
+      "key": "./exact.js",
+      "kind": 0,
+      "query": "./none.js",
+      "target": {
+        "k": 1,
+        "s": "./a.js",
+        "t": [
+          201,
+          3
+        ]
+      }
+    },
+    "out": [
+      false,
+      "",
+      0,
+      0,
+      []
+    ]
+  },
+  {
+    "fn": "esmPackageTargetReverseResolve",
+    "arg": {
+      "key": "./exact.js",
+      "kind": 1,
+      "query": "./none.js",
+      "target": {
+        "k": 1,
+        "s": "./a.js",
+        "t": [
+          201,
+          3
+        ]
+      }
+    },
+    "out": [
+      false,
+      "",
+      0,
+      0,
+      []
+    ]
+  },
+  {
+    "fn": "esmPackageTargetReverseResolve",
+    "arg": {
+      "key": "./exact.js",
+      "kind": 2,
+      "query": "./none.js",
+      "target": {
+        "k": 1,
+        "s": "./a.js",
+        "t": [
+          201,
+          3
+        ]
+      }
+    },
+    "out": [
+      false,
+      "",
+      0,
+      0,
+      []
+    ]
+  },
+  {
+    "fn": "esmPackageTargetReverseResolve",
+    "arg": {
+      "key": "./wild/*",
+      "kind": 0,
+      "query": "./none.js",
+      "target": {
+        "k": 1,
+        "s": "./w/*.js",
+        "t": [
+          202,
+          3
+        ]
+      }
+    },
+    "out": [
+      false,
+      "",
+      0,
+      0,
+      []
+    ]
+  },
+  {
+    "fn": "esmPackageTargetReverseResolve",
+    "arg": {
+      "key": "./wild/*",
+      "kind": 1,
+      "query": "./none.js",
+      "target": {
+        "k": 1,
+        "s": "./w/*.js",
+        "t": [
+          202,
+          3
+        ]
+      }
+    },
+    "out": [
+      false,
+      "",
+      0,
+      0,
+      []
+    ]
+  },
+  {
+    "fn": "esmPackageTargetReverseResolve",
+    "arg": {
+      "key": "./wild/*",
+      "kind": 2,
+      "query": "./none.js",
+      "target": {
+        "k": 1,
+        "s": "./w/*.js",
+        "t": [
+          202,
+          3
+        ]
+      }
+    },
+    "out": [
+      false,
+      "",
+      0,
+      0,
+      []
+    ]
+  },
+  {
+    "fn": "esmPackageTargetReverseResolve",
+    "arg": {
+      "key": "./dir/",
+      "kind": 0,
+      "query": "./none.js",
+      "target": {
+        "k": 1,
+        "s": "./d/",
+        "t": [
+          203,
+          3
+        ]
+      }
+    },
+    "out": [
+      false,
+      "",
+      0,
+      0,
+      []
+    ]
+  },
+  {
+    "fn": "esmPackageTargetReverseResolve",
+    "arg": {
+      "key": "./dir/",
+      "kind": 1,
+      "query": "./none.js",
+      "target": {
+        "k": 1,
+        "s": "./d/",
+        "t": [
+          203,
+          3
+        ]
+      }
+    },
+    "out": [
+      false,
+      "",
+      0,
+      0,
+      []
+    ]
+  },
+  {
+    "fn": "esmPackageTargetReverseResolve",
+    "arg": {
+      "key": "./dir/",
+      "kind": 2,
+      "query": "./none.js",
+      "target": {
+        "k": 1,
+        "s": "./d/",
+        "t": [
+          203,
+          3
+        ]
+      }
+    },
+    "out": [
+      false,
+      "",
+      0,
+      0,
+      []
+    ]
+  },
+  {
+    "fn": "MakePrettyPaths",
+    "arg": {
+      "ns": "file",
+      "text": "/root/port/src/a.js"
+    },
+    "out": [
+      "/root/port/src/a.js",
+      "src/a.js"
+    ]
+  },
+  {
+    "fn": "MakePrettyPaths",
+    "arg": {
+      "ns": "https",
+      "suffix": "?x",
+      "text": "/x.css"
+    },
+    "out": [
+      "https:/x.css?x",
+      "https:/x.css?x"
+    ]
+  },
+  {
+    "fn": "isExternal",
+    "arg": {
+      "kind": 1,
+      "path": "react"
+    },
+    "out": true
+  },
+  {
+    "fn": "isExternal",
+    "arg": {
+      "kind": 0,
+      "path": "react"
+    },
+    "out": false
+  },
+  {
+    "fn": "isExternal",
+    "arg": {
+      "kind": 1,
+      "path": "lodash/fp"
+    },
+    "out": true
+  },
+  {
+    "fn": "isExternal",
+    "arg": {
+      "kind": 1,
+      "path": "other"
+    },
+    "out": false
+  },
+  {
+    "fn": "flushDebugLogs",
+    "arg": {
+      "mode": 0
+    },
+    "out": []
+  }
+]

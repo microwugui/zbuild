@@ -1,0 +1,81 @@
+package bundler
+
+// 第 112 轮 Go 探针：scanner.generateResultForGlobResolve（外部 resolveResults 子集，确定性）。
+// 依赖已落地的 GlobResolveAST 底座。手工构造外部 ResolveResult，dump parseResult 的 AST 规范摘要。
+import (
+	"encoding/json"
+	"os"
+	"testing"
+
+	"github.com/evanw/esbuild/internal/ast"
+	"github.com/evanw/esbuild/internal/config"
+	"github.com/evanw/esbuild/internal/fs"
+	"github.com/evanw/esbuild/internal/graph"
+	"github.com/evanw/esbuild/internal/js_ast"
+	"github.com/evanw/esbuild/internal/logger"
+	"github.com/evanw/esbuild/internal/resolver"
+)
+
+func TestTmpGenGlobResult112(t *testing.T) {
+	type row struct {
+		Name        string   `json:"name"`
+		OK          bool     `json:"ok"`
+		Symbols     []string `json:"symbols"`
+		Parts       int      `json:"parts"`
+		Stmts       [][]string `json:"stmts"`
+		ImportPaths []string `json:"importPaths"`
+	}
+	rows := []row{}
+
+	mkScanner := func() *scanner {
+		s := &scanner{}
+		s.fs = fs.MockFS(map[string]string{}, fs.MockUnix, "/")
+		s.log = logger.NewDeferLog(logger.DeferLogNoVerboseOrDebug, nil)
+		s.options = config.Options{AbsOutputDir: "/out"}
+		s.visited = make(map[logger.Path]visitedFile)
+		return s
+	}
+	ext := func(path string) resolver.ResolveResult {
+		return resolver.ResolveResult{PathPair: resolver.PathPair{Primary: logger.Path{Text: path, Namespace: "file"}, IsExternal: true}}
+	}
+
+	run := func(name string, results map[string]resolver.ResolveResult, alias string, kind ast.ImportKind) {
+		s := mkScanner()
+		src := logger.Source{KeyPath: logger.Path{Text: "glob.js"}}
+		pr := s.generateResultForGlobResolve(0, "glob.js", &src, logger.Range{}, nil, kind, 0,
+			globResolveResult{resolveResults: results, exportAlias: alias}, nil)
+		repr := pr.file.inputFile.Repr.(*graph.JSRepr)
+		r := row{Name: name, OK: pr.ok}
+		for _, sym := range repr.AST.Symbols { r.Symbols = append(r.Symbols, sym.OriginalName) }
+		r.Parts = len(repr.AST.Parts)
+		for _, part := range repr.AST.Parts {
+			ks := []string{}
+			for _, st := range part.Stmts {
+				switch st.Data.(type) {
+				case *js_ast.SLocal: ks = append(ks, "Local")
+				case *js_ast.SEmpty: ks = append(ks, "Empty")
+				default: ks = append(ks, "other")
+				}
+			}
+			r.Stmts = append(r.Stmts, ks)
+		}
+		for _, rec := range repr.AST.ImportRecords { r.ImportPaths = append(r.ImportPaths, rec.Path.Text) }
+		rows = append(rows, r)
+	}
+
+	// 1: single external dynamic import
+	run("one-dynamic", map[string]resolver.ResolveResult{"./a.js": ext("./a.js")}, "_glob", ast.ImportDynamic)
+	// 2: two external, sorted keys
+	run("two-sorted", map[string]resolver.ResolveResult{
+		"./z.js": ext("./z.js"), "./a.js": ext("./a.js"),
+	}, "_g", ast.ImportDynamic)
+	// 3: external require
+	run("one-require", map[string]resolver.ResolveResult{"./a.js": ext("./a.js")}, "_glob", ast.ImportRequire)
+	// 4: empty
+	run("empty", map[string]resolver.ResolveResult{}, "_g", ast.ImportDynamic)
+
+	b, err := json.MarshalIndent(rows, "", "  ")
+	if err != nil { t.Fatal(err) }
+	if err := os.WriteFile("/root/port/testdata/globresult-go.json", b, 0644); err != nil { t.Fatal(err) }
+	t.Logf("wrote %d rows bytes=%d", len(rows), len(b))
+}

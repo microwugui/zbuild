@@ -1,0 +1,1 @@
+@layer inherit { @layer foo; }

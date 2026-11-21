@@ -1,0 +1,1 @@
+div { animation-name: 'name 2' }

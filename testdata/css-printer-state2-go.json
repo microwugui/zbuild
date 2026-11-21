@@ -1,0 +1,67 @@
+[
+  {
+    "fn": "printWithEscape",
+    "arg": "97|0||false",
+    "out": "YQ=="
+  },
+  {
+    "fn": "printWithEscape",
+    "arg": "97|1||false",
+    "out": "XDYx"
+  },
+  {
+    "fn": "printWithEscape",
+    "arg": "49|1||false",
+    "out": "XDMx"
+  },
+  {
+    "fn": "printWithEscape",
+    "arg": "102|1||false",
+    "out": "XDY2"
+  },
+  {
+    "fn": "printWithEscape",
+    "arg": "97|2||false",
+    "out": "XDYx"
+  },
+  {
+    "fn": "printWithEscape",
+    "arg": "49|2|YWJj|true",
+    "out": "XDMxIA=="
+  },
+  {
+    "fn": "printWithEscape",
+    "arg": "65|2||true",
+    "out": "XDQxIA=="
+  },
+  {
+    "fn": "printWithEscape",
+    "arg": "10|2||false",
+    "out": "XGE="
+  },
+  {
+    "fn": "printWithEscape",
+    "arg": "128512|0||false",
+    "out": "8J+YgA=="
+  },
+  {
+    "fn": "printNewlinePastLineLimit",
+    "arg": "YQ==|0|10|false",
+    "out": "false|YQ=="
+  },
+  {
+    "fn": "printNewlinePastLineLimit",
+    "arg": "MDEyMzQ1Njc4OQ==|0|5|false",
+    "out": "true|MDEyMzQ1Njc4OQogICAg"
+  },
+  {
+    "fn": "printNewlinePastLineLimit",
+    "arg": "MDEyMzQ1Njc4OQ==|0|5|true",
+    "out": "true|MDEyMzQ1Njc4OQo="
+  },
+  {
+    "fn": "printNewlinePastLineLimit",
+    "arg": "YQpiY2Q=|2|3|false",
+    "out": "true|YQpiY2QKICA="
+  }
+]

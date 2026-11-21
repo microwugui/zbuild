@@ -1,0 +1,20 @@
+[
+  {
+    "name": "esm-var",
+    "outputs": [
+      "L3Avb3V0L2EuanMALy8gCnZhciB4ID0gMTsK"
+    ]
+  },
+  {
+    "name": "side-effect",
+    "outputs": [
+      "L3Avb3V0L2EuanMALy8gCmNvbnNvbGUubG9nKDEpOwo="
+    ]
+  },
+  {
+    "name": "multi-stmt",
+    "outputs": [
+      "L3Avb3V0L2EuanMALy8gCnZhciB4ID0gMTsKdmFyIHkgPSAyOwpjb25zb2xlLmxvZyh4ICsgeSk7Cg=="
+    ]
+  }
+]

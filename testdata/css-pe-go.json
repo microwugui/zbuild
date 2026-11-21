@@ -1,0 +1,250 @@
+[
+  {
+    "fn": "expect",
+    "src": "a b",
+    "index": 0,
+    "kind": 29,
+    "out": {
+      "index": 1,
+      "ret": true,
+      "msgs": []
+    }
+  },
+  {
+    "fn": "expect",
+    "src": "a b",
+    "index": 1,
+    "kind": 38,
+    "out": {
+      "index": 2,
+      "ret": true,
+      "msgs": []
+    }
+  },
+  {
+    "fn": "expect",
+    "src": "a b",
+    "index": 0,
+    "kind": 10,
+    "out": {
+      "index": 0,
+      "ret": false,
+      "msgs": []
+    }
+  },
+  {
+    "fn": "expect",
+    "src": "a b",
+    "index": 3,
+    "kind": 29,
+    "out": {
+      "index": 3,
+      "ret": false,
+      "msgs": [
+        {
+          "text": "Expected identifier but found end of file",
+          "line": 1,
+          "col": 3,
+          "len": 0,
+          "kind": 1
+        }
+      ]
+    }
+  },
+  {
+    "fn": "expectWithMatchingLoc",
+    "src": "(a",
+    "index": 2,
+    "kind": 8,
+    "out": {
+      "index": 2,
+      "ret": false,
+      "msgs": [
+        {
+          "text": "Expected \")\" to go with \"(\"",
+          "line": 1,
+          "col": 2,
+          "len": 0,
+          "kind": 1,
+          "notes": [
+            "The unbalanced \"(\" is here:"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "fn": "expectWithMatchingLoc",
+    "src": "a:b",
+    "index": 1,
+    "kind": 9,
+    "match": -1,
+    "out": {
+      "index": 2,
+      "ret": true,
+      "msgs": []
+    }
+  },
+  {
+    "fn": "unexpected",
+    "src": "a b",
+    "index": 1,
+    "out": {
+      "index": 1,
+      "ret": true,
+      "msgs": [
+        {
+          "text": "Unexpected whitespace",
+          "line": 1,
+          "col": 1,
+          "len": 0,
+          "kind": 1
+        }
+      ]
+    }
+  },
+  {
+    "fn": "unexpected",
+    "src": "abc",
+    "index": 3,
+    "out": {
+      "index": 3,
+      "ret": true,
+      "msgs": [
+        {
+          "text": "Unexpected end of file",
+          "line": 1,
+          "col": 3,
+          "len": 0,
+          "kind": 1
+        }
+      ]
+    }
+  },
+  {
+    "fn": "parseComponentValue",
+    "src": "fn(a (b) {c} [d])",
+    "index": 0,
+    "out": {
+      "index": 15,
+      "ret": true,
+      "msgs": []
+    }
+  },
+  {
+    "fn": "parseComponentValue",
+    "src": "abc",
+    "index": 3,
+    "out": {
+      "index": 3,
+      "ret": true,
+      "msgs": [
+        {
+          "text": "Unexpected end of file",
+          "line": 1,
+          "col": 3,
+          "len": 0,
+          "kind": 1
+        }
+      ]
+    }
+  },
+  {
+    "fn": "parseComponentValue",
+    "src": "a b",
+    "index": 0,
+    "out": {
+      "index": 1,
+      "ret": true,
+      "msgs": []
+    }
+  },
+  {
+    "fn": "parseBlock",
+    "src": "(a (b) c) d",
+    "index": 0,
+    "kind": 33,
+    "out": {
+      "index": 9,
+      "ret": true,
+      "msgs": []
+    }
+  },
+  {
+    "fn": "parseBlock",
+    "src": "{a {b} c} d",
+    "index": 0,
+    "kind": 31,
+    "out": {
+      "index": 11,
+      "ret": true,
+      "msgs": [
+        {
+          "text": "Expected \")\" to go with \"{\"",
+          "line": 1,
+          "col": 11,
+          "len": 0,
+          "kind": 1,
+          "notes": [
+            "The unbalanced \"{\" is here:"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "fn": "parseBlock",
+    "src": "[a [b] c] d",
+    "index": 0,
+    "kind": 32,
+    "out": {
+      "index": 11,
+      "ret": true,
+      "msgs": [
+        {
+          "text": "Expected \")\" to go with \"[\"",
+          "line": 1,
+          "col": 11,
+          "len": 0,
+          "kind": 1,
+          "notes": [
+            "The unbalanced \"[\" is here:"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "fn": "parseBlock",
+    "src": "(a b",
+    "index": 0,
+    "kind": 33,
+    "out": {
+      "index": 4,
+      "ret": true,
+      "msgs": [
+        {
+          "text": "Expected \")\" to go with \"(\"",
+          "line": 1,
+          "col": 4,
+          "len": 0,
+          "kind": 1,
+          "notes": [
+            "The unbalanced \"(\" is here:"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "fn": "parseBlock",
+    "src": "a b",
+    "index": 0,
+    "kind": 10,
+    "out": {
+      "index": 0,
+      "ret": true,
+      "msgs": []
+    }
+  }
+]

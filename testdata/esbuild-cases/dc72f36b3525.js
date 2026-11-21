@@ -1,0 +1,1 @@
+switch (1) { case 0: var x; case 1: return x }

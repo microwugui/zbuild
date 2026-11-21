@@ -1,0 +1,226 @@
+[
+  {
+    "fn": "lowerNestingInRule",
+    "case": "nested-desc",
+    "out": [
+      {
+        "rules": [
+          {
+            "name": "color",
+            "t": "decl"
+          }
+        ],
+        "selectors": [
+          [
+            {
+              "comb": 0,
+              "nest": [],
+              "type": "div"
+            },
+            {
+              "comb": 0,
+              "nest": [],
+              "type": "b"
+            }
+          ]
+        ],
+        "t": "sel"
+      }
+    ]
+  },
+  {
+    "fn": "lowerNestingInRule",
+    "case": "nested-hover",
+    "out": [
+      {
+        "rules": [
+          {
+            "name": "color",
+            "t": "decl"
+          }
+        ],
+        "selectors": [
+          [
+            {
+              "comb": 0,
+              "nest": [],
+              "type": "div"
+            }
+          ]
+        ],
+        "t": "sel"
+      }
+    ]
+  },
+  {
+    "fn": "lowerNestingInRule",
+    "case": "relative",
+    "out": [
+      {
+        "rules": [
+          {
+            "name": "color",
+            "t": "decl"
+          }
+        ],
+        "selectors": [
+          [
+            {
+              "comb": 0,
+              "nest": [],
+              "type": "div"
+            },
+            {
+              "comb": 0,
+              "nest": [],
+              "type": "b"
+            }
+          ]
+        ],
+        "t": "sel"
+      }
+    ]
+  },
+  {
+    "fn": "lowerNestingInRule",
+    "case": "at-rule",
+    "out": [
+      {
+        "name": "supports",
+        "rules": [
+          {
+            "rules": [
+              {
+                "name": "color",
+                "t": "decl"
+              }
+            ],
+            "selectors": [
+              [
+                {
+                  "comb": 0,
+                  "nest": [],
+                  "type": "div"
+                }
+              ]
+            ],
+            "t": "sel"
+          }
+        ],
+        "t": "at"
+      }
+    ]
+  },
+  {
+    "fn": "lowerNestingInRuleWithContext",
+    "case": "sel",
+    "out": {
+      "lowered": [
+        {
+          "rules": [
+            {
+              "name": "color",
+              "t": "decl"
+            }
+          ],
+          "selectors": [
+            [
+              {
+                "comb": 0,
+                "nest": [],
+                "type": null
+              },
+              {
+                "comb": 0,
+                "nest": [],
+                "type": "b"
+              }
+            ]
+          ],
+          "t": "sel"
+        }
+      ],
+      "rule": [
+        {
+          "t": "other"
+        }
+      ]
+    }
+  },
+  {
+    "fn": "lowerNestingInRuleWithContext",
+    "case": "at",
+    "out": {
+      "lowered": [
+        {
+          "name": "supports",
+          "rules": [
+            {
+              "rules": [
+                {
+                  "name": "color",
+                  "t": "decl"
+                }
+              ],
+              "selectors": [
+                [
+                  {
+                    "comb": 0,
+                    "nest": [],
+                    "type": "div"
+                  }
+                ],
+                [
+                  {
+                    "comb": 0,
+                    "nest": [],
+                    "type": "span"
+                  }
+                ]
+              ],
+              "t": "sel"
+            }
+          ],
+          "t": "at"
+        }
+      ],
+      "rule": [
+        {
+          "t": "other"
+        }
+      ]
+    }
+  },
+  {
+    "fn": "lowerNestingInRulesAndReturnRemaining",
+    "case": "list",
+    "out": {
+      "lowered": [
+        {
+          "rules": [
+            {
+              "name": "x",
+              "t": "decl"
+            }
+          ],
+          "selectors": [
+            [
+              {
+                "comb": 0,
+                "nest": [],
+                "type": null
+              }
+            ]
+          ],
+          "t": "sel"
+        }
+      ],
+      "remaining": [
+        {
+          "name": "color",
+          "t": "decl"
+        }
+      ]
+    }
+  }
+]

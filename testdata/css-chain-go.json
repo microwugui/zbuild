@@ -1,0 +1,4750 @@
+[
+  {
+    "fn": "parseSelectorList",
+    "src": "div.foo#bar",
+    "out": {
+      "index": 4,
+      "msgs": [],
+      "nesting": false,
+      "out": {
+        "list": [
+          [
+            {
+              "combinator": 0,
+              "combinatorLoc": 0,
+              "nesting": [],
+              "subs": [
+                {
+                  "ref": 0,
+                  "t": "class"
+                },
+                {
+                  "ref": 1,
+                  "t": "hash"
+                }
+              ],
+              "type": {
+                "kind": 29,
+                "name": "div",
+                "prefix": null
+              }
+            }
+          ]
+        ],
+        "ok": true
+      },
+      "syms": [
+        "foo|25",
+        "bar|25"
+      ]
+    }
+  },
+  {
+    "fn": "parseSelectorList",
+    "src": "div.foo#bar",
+    "minify": true,
+    "out": {
+      "index": 4,
+      "msgs": [],
+      "nesting": false,
+      "out": {
+        "list": [
+          [
+            {
+              "combinator": 0,
+              "combinatorLoc": 0,
+              "nesting": [],
+              "subs": [
+                {
+                  "ref": 0,
+                  "t": "class"
+                },
+                {
+                  "ref": 1,
+                  "t": "hash"
+                }
+              ],
+              "type": {
+                "kind": 29,
+                "name": "div",
+                "prefix": null
+              }
+            }
+          ]
+        ],
+        "ok": true
+      },
+      "syms": [
+        "foo|25",
+        "bar|25"
+      ]
+    }
+  },
+  {
+    "fn": "parseComplexSelector",
+    "src": "div.foo#bar",
+    "out": {
+      "index": 4,
+      "msgs": [],
+      "nesting": false,
+      "out": {
+        "list": [
+          [
+            {
+              "combinator": 0,
+              "combinatorLoc": 0,
+              "nesting": [],
+              "subs": [
+                {
+                  "ref": 0,
+                  "t": "class"
+                },
+                {
+                  "ref": 1,
+                  "t": "hash"
+                }
+              ],
+              "type": {
+                "kind": 29,
+                "name": "div",
+                "prefix": null
+              }
+            }
+          ]
+        ],
+        "ok": true
+      },
+      "syms": [
+        "foo|25",
+        "bar|25"
+      ]
+    }
+  },
+  {
+    "fn": "parseComplexSelector",
+    "src": "div.foo#bar",
+    "minify": true,
+    "out": {
+      "index": 4,
+      "msgs": [],
+      "nesting": false,
+      "out": {
+        "list": [
+          [
+            {
+              "combinator": 0,
+              "combinatorLoc": 0,
+              "nesting": [],
+              "subs": [
+                {
+                  "ref": 0,
+                  "t": "class"
+                },
+                {
+                  "ref": 1,
+                  "t": "hash"
+                }
+              ],
+              "type": {
+                "kind": 29,
+                "name": "div",
+                "prefix": null
+              }
+            }
+          ]
+        ],
+        "ok": true
+      },
+      "syms": [
+        "foo|25",
+        "bar|25"
+      ]
+    }
+  },
+  {
+    "fn": "parseCompoundSelector",
+    "src": "div.foo#bar",
+    "out": {
+      "index": 4,
+      "msgs": [],
+      "nesting": false,
+      "out": {
+        "list": [
+          [
+            {
+              "combinator": 0,
+              "combinatorLoc": 0,
+              "nesting": [],
+              "subs": [
+                {
+                  "ref": 0,
+                  "t": "class"
+                },
+                {
+                  "ref": 1,
+                  "t": "hash"
+                }
+              ],
+              "type": {
+                "kind": 29,
+                "name": "div",
+                "prefix": null
+              }
+            }
+          ]
+        ],
+        "ok": true
+      },
+      "syms": [
+        "foo|25",
+        "bar|25"
+      ]
+    }
+  },
+  {
+    "fn": "parseCompoundSelector",
+    "src": "div.foo#bar",
+    "minify": true,
+    "out": {
+      "index": 4,
+      "msgs": [],
+      "nesting": false,
+      "out": {
+        "list": [
+          [
+            {
+              "combinator": 0,
+              "combinatorLoc": 0,
+              "nesting": [],
+              "subs": [
+                {
+                  "ref": 0,
+                  "t": "class"
+                },
+                {
+                  "ref": 1,
+                  "t": "hash"
+                }
+              ],
+              "type": {
+                "kind": 29,
+                "name": "div",
+                "prefix": null
+              }
+            }
+          ]
+        ],
+        "ok": true
+      },
+      "syms": [
+        "foo|25",
+        "bar|25"
+      ]
+    }
+  },
+  {
+    "fn": "parseSelectorList",
+    "src": "#id.cls[attr=value]",
+    "out": {
+      "index": 8,
+      "msgs": [],
+      "nesting": false,
+      "out": {
+        "list": [
+          [
+            {
+              "combinator": 0,
+              "combinatorLoc": 0,
+              "nesting": [],
+              "subs": [
+                {
+                  "ref": 0,
+                  "t": "hash"
+                },
+                {
+                  "ref": 1,
+                  "t": "class"
+                },
+                {
+                  "mod": 0,
+                  "name": "attr",
+                  "op": "=",
+                  "t": "attr",
+                  "val": "value"
+                }
+              ],
+              "type": null
+            }
+          ]
+        ],
+        "ok": true
+      },
+      "syms": [
+        "id|25",
+        "cls|25"
+      ]
+    }
+  },
+  {
+    "fn": "parseSelectorList",
+    "src": "#id.cls[attr=value]",
+    "minify": true,
+    "out": {
+      "index": 8,
+      "msgs": [],
+      "nesting": false,
+      "out": {
+        "list": [
+          [
+            {
+              "combinator": 0,
+              "combinatorLoc": 0,
+              "nesting": [],
+              "subs": [
+                {
+                  "ref": 0,
+                  "t": "hash"
+                },
+                {
+                  "ref": 1,
+                  "t": "class"
+                },
+                {
+                  "mod": 0,
+                  "name": "attr",
+                  "op": "=",
+                  "t": "attr",
+                  "val": "value"
+                }
+              ],
+              "type": null
+            }
+          ]
+        ],
+        "ok": true
+      },
+      "syms": [
+        "id|25",
+        "cls|25"
+      ]
+    }
+  },
+  {
+    "fn": "parseComplexSelector",
+    "src": "#id.cls[attr=value]",
+    "out": {
+      "index": 8,
+      "msgs": [],
+      "nesting": false,
+      "out": {
+        "list": [
+          [
+            {
+              "combinator": 0,
+              "combinatorLoc": 0,
+              "nesting": [],
+              "subs": [
+                {
+                  "ref": 0,
+                  "t": "hash"
+                },
+                {
+                  "ref": 1,
+                  "t": "class"
+                },
+                {
+                  "mod": 0,
+                  "name": "attr",
+                  "op": "=",
+                  "t": "attr",
+                  "val": "value"
+                }
+              ],
+              "type": null
+            }
+          ]
+        ],
+        "ok": true
+      },
+      "syms": [
+        "id|25",
+        "cls|25"
+      ]
+    }
+  },
+  {
+    "fn": "parseComplexSelector",
+    "src": "#id.cls[attr=value]",
+    "minify": true,
+    "out": {
+      "index": 8,
+      "msgs": [],
+      "nesting": false,
+      "out": {
+        "list": [
+          [
+            {
+              "combinator": 0,
+              "combinatorLoc": 0,
+              "nesting": [],
+              "subs": [
+                {
+                  "ref": 0,
+                  "t": "hash"
+                },
+                {
+                  "ref": 1,
+                  "t": "class"
+                },
+                {
+                  "mod": 0,
+                  "name": "attr",
+                  "op": "=",
+                  "t": "attr",
+                  "val": "value"
+                }
+              ],
+              "type": null
+            }
+          ]
+        ],
+        "ok": true
+      },
+      "syms": [
+        "id|25",
+        "cls|25"
+      ]
+    }
+  },
+  {
+    "fn": "parseCompoundSelector",
+    "src": "#id.cls[attr=value]",
+    "out": {
+      "index": 8,
+      "msgs": [],
+      "nesting": false,
+      "out": {
+        "list": [
+          [
+            {
+              "combinator": 0,
+              "combinatorLoc": 0,
+              "nesting": [],
+              "subs": [
+                {
+                  "ref": 0,
+                  "t": "hash"
+                },
+                {
+                  "ref": 1,
+                  "t": "class"
+                },
+                {
+                  "mod": 0,
+                  "name": "attr",
+                  "op": "=",
+                  "t": "attr",
+                  "val": "value"
+                }
+              ],
+              "type": null
+            }
+          ]
+        ],
+        "ok": true
+      },
+      "syms": [
+        "id|25",
+        "cls|25"
+      ]
+    }
+  },
+  {
+    "fn": "parseCompoundSelector",
+    "src": "#id.cls[attr=value]",
+    "minify": true,
+    "out": {
+      "index": 8,
+      "msgs": [],
+      "nesting": false,
+      "out": {
+        "list": [
+          [
+            {
+              "combinator": 0,
+              "combinatorLoc": 0,
+              "nesting": [],
+              "subs": [
+                {
+                  "ref": 0,
+                  "t": "hash"
+                },
+                {
+                  "ref": 1,
+                  "t": "class"
+                },
+                {
+                  "mod": 0,
+                  "name": "attr",
+                  "op": "=",
+                  "t": "attr",
+                  "val": "value"
+                }
+              ],
+              "type": null
+            }
+          ]
+        ],
+        "ok": true
+      },
+      "syms": [
+        "id|25",
+        "cls|25"
+      ]
+    }
+  },
+  {
+    "fn": "parseSelectorList",
+    "src": "a \u003e b + c",
+    "out": {
+      "index": 9,
+      "msgs": [],
+      "nesting": false,
+      "out": {
+        "list": [
+          [
+            {
+              "combinator": 0,
+              "combinatorLoc": 0,
+              "nesting": [],
+              "subs": [],
+              "type": {
+                "kind": 29,
+                "name": "a",
+                "prefix": null
+              }
+            },
+            {
+              "combinator": 62,
+              "combinatorLoc": 2,
+              "nesting": [],
+              "subs": [],
+              "type": {
+                "kind": 29,
+                "name": "b",
+                "prefix": null
+              }
+            },
+            {
+              "combinator": 43,
+              "combinatorLoc": 6,
+              "nesting": [],
+              "subs": [],
+              "type": {
+                "kind": 29,
+                "name": "c",
+                "prefix": null
+              }
+            }
+          ]
+        ],
+        "ok": true
+      },
+      "syms": null
+    }
+  },
+  {
+    "fn": "parseSelectorList",
+    "src": "a \u003e b + c",
+    "minify": true,
+    "out": {
+      "index": 9,
+      "msgs": [],
+      "nesting": false,
+      "out": {
+        "list": [
+          [
+            {
+              "combinator": 0,
+              "combinatorLoc": 0,
+              "nesting": [],
+              "subs": [],
+              "type": {
+                "kind": 29,
+                "name": "a",
+                "prefix": null
+              }
+            },
+            {
+              "combinator": 62,
+              "combinatorLoc": 2,
+              "nesting": [],
+              "subs": [],
+              "type": {
+                "kind": 29,
+                "name": "b",
+                "prefix": null
+              }
+            },
+            {
+              "combinator": 43,
+              "combinatorLoc": 6,
+              "nesting": [],
+              "subs": [],
+              "type": {
+                "kind": 29,
+                "name": "c",
+                "prefix": null
+              }
+            }
+          ]
+        ],
+        "ok": true
+      },
+      "syms": null
+    }
+  },
+  {
+    "fn": "parseComplexSelector",
+    "src": "a \u003e b + c",
+    "out": {
+      "index": 9,
+      "msgs": [],
+      "nesting": false,
+      "out": {
+        "list": [
+          [
+            {
+              "combinator": 0,
+              "combinatorLoc": 0,
+              "nesting": [],
+              "subs": [],
+              "type": {
+                "kind": 29,
+                "name": "a",
+                "prefix": null
+              }
+            },
+            {
+              "combinator": 62,
+              "combinatorLoc": 2,
+              "nesting": [],
+              "subs": [],
+              "type": {
+                "kind": 29,
+                "name": "b",
+                "prefix": null
+              }
+            },
+            {
+              "combinator": 43,
+              "combinatorLoc": 6,
+              "nesting": [],
+              "subs": [],
+              "type": {
+                "kind": 29,
+                "name": "c",
+                "prefix": null
+              }
+            }
+          ]
+        ],
+        "ok": true
+      },
+      "syms": null
+    }
+  },
+  {
+    "fn": "parseComplexSelector",
+    "src": "a \u003e b + c",
+    "minify": true,
+    "out": {
+      "index": 9,
+      "msgs": [],
+      "nesting": false,
+      "out": {
+        "list": [
+          [
+            {
+              "combinator": 0,
+              "combinatorLoc": 0,
+              "nesting": [],
+              "subs": [],
+              "type": {
+                "kind": 29,
+                "name": "a",
+                "prefix": null
+              }
+            },
+            {
+              "combinator": 62,
+              "combinatorLoc": 2,
+              "nesting": [],
+              "subs": [],
+              "type": {
+                "kind": 29,
+                "name": "b",
+                "prefix": null
+              }
+            },
+            {
+              "combinator": 43,
+              "combinatorLoc": 6,
+              "nesting": [],
+              "subs": [],
+              "type": {
+                "kind": 29,
+                "name": "c",
+                "prefix": null
+              }
+            }
+          ]
+        ],
+        "ok": true
+      },
+      "syms": null
+    }
+  },
+  {
+    "fn": "parseCompoundSelector",
+    "src": "a \u003e b + c",
+    "out": {
+      "index": 1,
+      "msgs": [],
+      "nesting": false,
+      "out": {
+        "list": [
+          [
+            {
+              "combinator": 0,
+              "combinatorLoc": 0,
+              "nesting": [],
+              "subs": [],
+              "type": {
+                "kind": 29,
+                "name": "a",
+                "prefix": null
+              }
+            }
+          ]
+        ],
+        "ok": true
+      },
+      "syms": null
+    }
+  },
+  {
+    "fn": "parseCompoundSelector",
+    "src": "a \u003e b + c",
+    "minify": true,
+    "out": {
+      "index": 1,
+      "msgs": [],
+      "nesting": false,
+      "out": {
+        "list": [
+          [
+            {
+              "combinator": 0,
+              "combinatorLoc": 0,
+              "nesting": [],
+              "subs": [],
+              "type": {
+                "kind": 29,
+                "name": "a",
+                "prefix": null
+              }
+            }
+          ]
+        ],
+        "ok": true
+      },
+      "syms": null
+    }
+  },
+  {
+    "fn": "parseSelectorList",
+    "src": "a, b, c",
+    "out": {
+      "index": 7,
+      "msgs": [],
+      "nesting": false,
+      "out": {
+        "list": [
+          [
+            {
+              "combinator": 0,
+              "combinatorLoc": 0,
+              "nesting": [],
+              "subs": [],
+              "type": {
+                "kind": 29,
+                "name": "a",
+                "prefix": null
+              }
+            }
+          ],
+          [
+            {
+              "combinator": 0,
+              "combinatorLoc": 0,
+              "nesting": [],
+              "subs": [],
+              "type": {
+                "kind": 29,
+                "name": "b",
+                "prefix": null
+              }
+            }
+          ],
+          [
+            {
+              "combinator": 0,
+              "combinatorLoc": 0,
+              "nesting": [],
+              "subs": [],
+              "type": {
+                "kind": 29,
+                "name": "c",
+                "prefix": null
+              }
+            }
+          ]
+        ],
+        "ok": true
+      },
+      "syms": null
+    }
+  },
+  {
+    "fn": "parseSelectorList",
+    "src": "a, b, c",
+    "minify": true,
+    "out": {
+      "index": 7,
+      "msgs": [],
+      "nesting": false,
+      "out": {
+        "list": [
+          [
+            {
+              "combinator": 0,
+              "combinatorLoc": 0,
+              "nesting": [],
+              "subs": [],
+              "type": {
+                "kind": 29,
+                "name": "a",
+                "prefix": null
+              }
+            }
+          ],
+          [
+            {
+              "combinator": 0,
+              "combinatorLoc": 0,
+              "nesting": [],
+              "subs": [],
+              "type": {
+                "kind": 29,
+                "name": "b",
+                "prefix": null
+              }
+            }
+          ],
+          [
+            {
+              "combinator": 0,
+              "combinatorLoc": 0,
+              "nesting": [],
+              "subs": [],
+              "type": {
+                "kind": 29,
+                "name": "c",
+                "prefix": null
+              }
+            }
+          ]
+        ],
+        "ok": true
+      },
+      "syms": null
+    }
+  },
+  {
+    "fn": "parseComplexSelector",
+    "src": "a, b, c",
+    "out": {
+      "index": 1,
+      "msgs": [],
+      "nesting": false,
+      "out": {
+        "list": [
+          [
+            {
+              "combinator": 0,
+              "combinatorLoc": 0,
+              "nesting": [],
+              "subs": [],
+              "type": {
+                "kind": 29,
+                "name": "a",
+                "prefix": null
+              }
+            }
+          ]
+        ],
+        "ok": true
+      },
+      "syms": null
+    }
+  },
+  {
+    "fn": "parseComplexSelector",
+    "src": "a, b, c",
+    "minify": true,
+    "out": {
+      "index": 1,
+      "msgs": [],
+      "nesting": false,
+      "out": {
+        "list": [
+          [
+            {
+              "combinator": 0,
+              "combinatorLoc": 0,
+              "nesting": [],
+              "subs": [],
+              "type": {
+                "kind": 29,
+                "name": "a",
+                "prefix": null
+              }
+            }
+          ]
+        ],
+        "ok": true
+      },
+      "syms": null
+    }
+  },
+  {
+    "fn": "parseCompoundSelector",
+    "src": "a, b, c",
+    "out": {
+      "index": 1,
+      "msgs": [],
+      "nesting": false,
+      "out": {
+        "list": [
+          [
+            {
+              "combinator": 0,
+              "combinatorLoc": 0,
+              "nesting": [],
+              "subs": [],
+              "type": {
+                "kind": 29,
+                "name": "a",
+                "prefix": null
+              }
+            }
+          ]
+        ],
+        "ok": true
+      },
+      "syms": null
+    }
+  },
+  {
+    "fn": "parseCompoundSelector",
+    "src": "a, b, c",
+    "minify": true,
+    "out": {
+      "index": 1,
+      "msgs": [],
+      "nesting": false,
+      "out": {
+        "list": [
+          [
+            {
+              "combinator": 0,
+              "combinatorLoc": 0,
+              "nesting": [],
+              "subs": [],
+              "type": {
+                "kind": 29,
+                "name": "a",
+                "prefix": null
+              }
+            }
+          ]
+        ],
+        "ok": true
+      },
+      "syms": null
+    }
+  },
+  {
+    "fn": "parseSelectorList",
+    "src": ":is(a, b) \u003e c",
+    "out": {
+      "index": 11,
+      "msgs": [],
+      "nesting": false,
+      "out": {
+        "list": [
+          [
+            {
+              "combinator": 0,
+              "combinatorLoc": 0,
+              "nesting": [],
+              "subs": [
+                {
+                  "a": "",
+                  "b": "",
+                  "kind": 2,
+                  "selectors": [
+                    [
+                      {
+                        "combinator": 0,
+                        "combinatorLoc": 0,
+                        "nesting": [],
+                        "subs": [],
+                        "type": {
+                          "kind": 29,
+                          "name": "a",
+                          "prefix": null
+                        }
+                      }
+                    ],
+                    [
+                      {
+                        "combinator": 0,
+                        "combinatorLoc": 0,
+                        "nesting": [],
+                        "subs": [],
+                        "type": {
+                          "kind": 29,
+                          "name": "b",
+                          "prefix": null
+                        }
+                      }
+                    ]
+                  ],
+                  "t": "plist"
+                }
+              ],
+              "type": null
+            },
+            {
+              "combinator": 62,
+              "combinatorLoc": 10,
+              "nesting": [],
+              "subs": [],
+              "type": {
+                "kind": 29,
+                "name": "c",
+                "prefix": null
+              }
+            }
+          ]
+        ],
+        "ok": true
+      },
+      "syms": null
+    }
+  },
+  {
+    "fn": "parseSelectorList",
+    "src": ":is(a, b) \u003e c",
+    "minify": true,
+    "out": {
+      "index": 11,
+      "msgs": [],
+      "nesting": false,
+      "out": {
+        "list": [
+          [
+            {
+              "combinator": 0,
+              "combinatorLoc": 0,
+              "nesting": [],
+              "subs": [
+                {
+                  "a": "",
+                  "b": "",
+                  "kind": 2,
+                  "selectors": [
+                    [
+                      {
+                        "combinator": 0,
+                        "combinatorLoc": 0,
+                        "nesting": [],
+                        "subs": [],
+                        "type": {
+                          "kind": 29,
+                          "name": "a",
+                          "prefix": null
+                        }
+                      }
+                    ],
+                    [
+                      {
+                        "combinator": 0,
+                        "combinatorLoc": 0,
+                        "nesting": [],
+                        "subs": [],
+                        "type": {
+                          "kind": 29,
+                          "name": "b",
+                          "prefix": null
+                        }
+                      }
+                    ]
+                  ],
+                  "t": "plist"
+                }
+              ],
+              "type": null
+            },
+            {
+              "combinator": 62,
+              "combinatorLoc": 10,
+              "nesting": [],
+              "subs": [],
+              "type": {
+                "kind": 29,
+                "name": "c",
+                "prefix": null
+              }
+            }
+          ]
+        ],
+        "ok": true
+      },
+      "syms": null
+    }
+  },
+  {
+    "fn": "parseComplexSelector",
+    "src": ":is(a, b) \u003e c",
+    "out": {
+      "index": 11,
+      "msgs": [],
+      "nesting": false,
+      "out": {
+        "list": [
+          [
+            {
+              "combinator": 0,
+              "combinatorLoc": 0,
+              "nesting": [],
+              "subs": [
+                {
+                  "a": "",
+                  "b": "",
+                  "kind": 2,
+                  "selectors": [
+                    [
+                      {
+                        "combinator": 0,
+                        "combinatorLoc": 0,
+                        "nesting": [],
+                        "subs": [],
+                        "type": {
+                          "kind": 29,
+                          "name": "a",
+                          "prefix": null
+                        }
+                      }
+                    ],
+                    [
+                      {
+                        "combinator": 0,
+                        "combinatorLoc": 0,
+                        "nesting": [],
+                        "subs": [],
+                        "type": {
+                          "kind": 29,
+                          "name": "b",
+                          "prefix": null
+                        }
+                      }
+                    ]
+                  ],
+                  "t": "plist"
+                }
+              ],
+              "type": null
+            },
+            {
+              "combinator": 62,
+              "combinatorLoc": 10,
+              "nesting": [],
+              "subs": [],
+              "type": {
+                "kind": 29,
+                "name": "c",
+                "prefix": null
+              }
+            }
+          ]
+        ],
+        "ok": true
+      },
+      "syms": null
+    }
+  },
+  {
+    "fn": "parseComplexSelector",
+    "src": ":is(a, b) \u003e c",
+    "minify": true,
+    "out": {
+      "index": 11,
+      "msgs": [],
+      "nesting": false,
+      "out": {
+        "list": [
+          [
+            {
+              "combinator": 0,
+              "combinatorLoc": 0,
+              "nesting": [],
+              "subs": [
+                {
+                  "a": "",
+                  "b": "",
+                  "kind": 2,
+                  "selectors": [
+                    [
+                      {
+                        "combinator": 0,
+                        "combinatorLoc": 0,
+                        "nesting": [],
+                        "subs": [],
+                        "type": {
+                          "kind": 29,
+                          "name": "a",
+                          "prefix": null
+                        }
+                      }
+                    ],
+                    [
+                      {
+                        "combinator": 0,
+                        "combinatorLoc": 0,
+                        "nesting": [],
+                        "subs": [],
+                        "type": {
+                          "kind": 29,
+                          "name": "b",
+                          "prefix": null
+                        }
+                      }
+                    ]
+                  ],
+                  "t": "plist"
+                }
+              ],
+              "type": null
+            },
+            {
+              "combinator": 62,
+              "combinatorLoc": 10,
+              "nesting": [],
+              "subs": [],
+              "type": {
+                "kind": 29,
+                "name": "c",
+                "prefix": null
+              }
+            }
+          ]
+        ],
+        "ok": true
+      },
+      "syms": null
+    }
+  },
+  {
+    "fn": "parseCompoundSelector",
+    "src": ":is(a, b) \u003e c",
+    "out": {
+      "index": 7,
+      "msgs": [],
+      "nesting": false,
+      "out": {
+        "list": [
+          [
+            {
+              "combinator": 0,
+              "combinatorLoc": 0,
+              "nesting": [],
+              "subs": [
+                {
+                  "a": "",
+                  "b": "",
+                  "kind": 2,
+                  "selectors": [
+                    [
+                      {
+                        "combinator": 0,
+                        "combinatorLoc": 0,
+                        "nesting": [],
+                        "subs": [],
+                        "type": {
+                          "kind": 29,
+                          "name": "a",
+                          "prefix": null
+                        }
+                      }
+                    ],
+                    [
+                      {
+                        "combinator": 0,
+                        "combinatorLoc": 0,
+                        "nesting": [],
+                        "subs": [],
+                        "type": {
+                          "kind": 29,
+                          "name": "b",
+                          "prefix": null
+                        }
+                      }
+                    ]
+                  ],
+                  "t": "plist"
+                }
+              ],
+              "type": null
+            }
+          ]
+        ],
+        "ok": true
+      },
+      "syms": null
+    }
+  },
+  {
+    "fn": "parseCompoundSelector",
+    "src": ":is(a, b) \u003e c",
+    "minify": true,
+    "out": {
+      "index": 7,
+      "msgs": [],
+      "nesting": false,
+      "out": {
+        "list": [
+          [
+            {
+              "combinator": 0,
+              "combinatorLoc": 0,
+              "nesting": [],
+              "subs": [
+                {
+                  "a": "",
+                  "b": "",
+                  "kind": 2,
+                  "selectors": [
+                    [
+                      {
+                        "combinator": 0,
+                        "combinatorLoc": 0,
+                        "nesting": [],
+                        "subs": [],
+                        "type": {
+                          "kind": 29,
+                          "name": "a",
+                          "prefix": null
+                        }
+                      }
+                    ],
+                    [
+                      {
+                        "combinator": 0,
+                        "combinatorLoc": 0,
+                        "nesting": [],
+                        "subs": [],
+                        "type": {
+                          "kind": 29,
+                          "name": "b",
+                          "prefix": null
+                        }
+                      }
+                    ]
+                  ],
+                  "t": "plist"
+                }
+              ],
+              "type": null
+            }
+          ]
+        ],
+        "ok": true
+      },
+      "syms": null
+    }
+  },
+  {
+    "fn": "parseSelectorList",
+    "src": ":not(.x)",
+    "out": {
+      "index": 5,
+      "msgs": [],
+      "nesting": false,
+      "out": {
+        "list": [
+          [
+            {
+              "combinator": 0,
+              "combinatorLoc": 0,
+              "nesting": [],
+              "subs": [
+                {
+                  "a": "",
+                  "b": "",
+                  "kind": 4,
+                  "selectors": [
+                    [
+                      {
+                        "combinator": 0,
+                        "combinatorLoc": 0,
+                        "nesting": [],
+                        "subs": [
+                          {
+                            "ref": 0,
+                            "t": "class"
+                          }
+                        ],
+                        "type": null
+                      }
+                    ]
+                  ],
+                  "t": "plist"
+                }
+              ],
+              "type": null
+            }
+          ]
+        ],
+        "ok": true
+      },
+      "syms": [
+        "x|25"
+      ]
+    }
+  },
+  {
+    "fn": "parseSelectorList",
+    "src": ":not(.x)",
+    "minify": true,
+    "out": {
+      "index": 5,
+      "msgs": [],
+      "nesting": false,
+      "out": {
+        "list": [
+          [
+            {
+              "combinator": 0,
+              "combinatorLoc": 0,
+              "nesting": [],
+              "subs": [
+                {
+                  "a": "",
+                  "b": "",
+                  "kind": 4,
+                  "selectors": [
+                    [
+                      {
+                        "combinator": 0,
+                        "combinatorLoc": 0,
+                        "nesting": [],
+                        "subs": [
+                          {
+                            "ref": 0,
+                            "t": "class"
+                          }
+                        ],
+                        "type": null
+                      }
+                    ]
+                  ],
+                  "t": "plist"
+                }
+              ],
+              "type": null
+            }
+          ]
+        ],
+        "ok": true
+      },
+      "syms": [
+        "x|25"
+      ]
+    }
+  },
+  {
+    "fn": "parseComplexSelector",
+    "src": ":not(.x)",
+    "out": {
+      "index": 5,
+      "msgs": [],
+      "nesting": false,
+      "out": {
+        "list": [
+          [
+            {
+              "combinator": 0,
+              "combinatorLoc": 0,
+              "nesting": [],
+              "subs": [
+                {
+                  "a": "",
+                  "b": "",
+                  "kind": 4,
+                  "selectors": [
+                    [
+                      {
+                        "combinator": 0,
+                        "combinatorLoc": 0,
+                        "nesting": [],
+                        "subs": [
+                          {
+                            "ref": 0,
+                            "t": "class"
+                          }
+                        ],
+                        "type": null
+                      }
+                    ]
+                  ],
+                  "t": "plist"
+                }
+              ],
+              "type": null
+            }
+          ]
+        ],
+        "ok": true
+      },
+      "syms": [
+        "x|25"
+      ]
+    }
+  },
+  {
+    "fn": "parseComplexSelector",
+    "src": ":not(.x)",
+    "minify": true,
+    "out": {
+      "index": 5,
+      "msgs": [],
+      "nesting": false,
+      "out": {
+        "list": [
+          [
+            {
+              "combinator": 0,
+              "combinatorLoc": 0,
+              "nesting": [],
+              "subs": [
+                {
+                  "a": "",
+                  "b": "",
+                  "kind": 4,
+                  "selectors": [
+                    [
+                      {
+                        "combinator": 0,
+                        "combinatorLoc": 0,
+                        "nesting": [],
+                        "subs": [
+                          {
+                            "ref": 0,
+                            "t": "class"
+                          }
+                        ],
+                        "type": null
+                      }
+                    ]
+                  ],
+                  "t": "plist"
+                }
+              ],
+              "type": null
+            }
+          ]
+        ],
+        "ok": true
+      },
+      "syms": [
+        "x|25"
+      ]
+    }
+  },
+  {
+    "fn": "parseCompoundSelector",
+    "src": ":not(.x)",
+    "out": {
+      "index": 5,
+      "msgs": [],
+      "nesting": false,
+      "out": {
+        "list": [
+          [
+            {
+              "combinator": 0,
+              "combinatorLoc": 0,
+              "nesting": [],
+              "subs": [
+                {
+                  "a": "",
+                  "b": "",
+                  "kind": 4,
+                  "selectors": [
+                    [
+                      {
+                        "combinator": 0,
+                        "combinatorLoc": 0,
+                        "nesting": [],
+                        "subs": [
+                          {
+                            "ref": 0,
+                            "t": "class"
+                          }
+                        ],
+                        "type": null
+                      }
+                    ]
+                  ],
+                  "t": "plist"
+                }
+              ],
+              "type": null
+            }
+          ]
+        ],
+        "ok": true
+      },
+      "syms": [
+        "x|25"
+      ]
+    }
+  },
+  {
+    "fn": "parseCompoundSelector",
+    "src": ":not(.x)",
+    "minify": true,
+    "out": {
+      "index": 5,
+      "msgs": [],
+      "nesting": false,
+      "out": {
+        "list": [
+          [
+            {
+              "combinator": 0,
+              "combinatorLoc": 0,
+              "nesting": [],
+              "subs": [
+                {
+                  "a": "",
+                  "b": "",
+                  "kind": 4,
+                  "selectors": [
+                    [
+                      {
+                        "combinator": 0,
+                        "combinatorLoc": 0,
+                        "nesting": [],
+                        "subs": [
+                          {
+                            "ref": 0,
+                            "t": "class"
+                          }
+                        ],
+                        "type": null
+                      }
+                    ]
+                  ],
+                  "t": "plist"
+                }
+              ],
+              "type": null
+            }
+          ]
+        ],
+        "ok": true
+      },
+      "syms": [
+        "x|25"
+      ]
+    }
+  },
+  {
+    "fn": "parseSelectorList",
+    "src": ":nth-child(2n+1 of .x)",
+    "out": {
+      "index": 10,
+      "msgs": [],
+      "nesting": false,
+      "out": {
+        "list": [
+          [
+            {
+              "combinator": 0,
+              "combinatorLoc": 0,
+              "nesting": [],
+              "subs": [
+                {
+                  "a": "2",
+                  "b": "1",
+                  "kind": 5,
+                  "selectors": [
+                    [
+                      {
+                        "combinator": 0,
+                        "combinatorLoc": 0,
+                        "nesting": [],
+                        "subs": [
+                          {
+                            "ref": 0,
+                            "t": "class"
+                          }
+                        ],
+                        "type": null
+                      }
+                    ]
+                  ],
+                  "t": "plist"
+                }
+              ],
+              "type": null
+            }
+          ]
+        ],
+        "ok": true
+      },
+      "syms": [
+        "x|25"
+      ]
+    }
+  },
+  {
+    "fn": "parseSelectorList",
+    "src": ":nth-child(2n+1 of .x)",
+    "minify": true,
+    "out": {
+      "index": 10,
+      "msgs": [],
+      "nesting": false,
+      "out": {
+        "list": [
+          [
+            {
+              "combinator": 0,
+              "combinatorLoc": 0,
+              "nesting": [],
+              "subs": [
+                {
+                  "a": "",
+                  "b": "odd",
+                  "kind": 5,
+                  "selectors": [
+                    [
+                      {
+                        "combinator": 0,
+                        "combinatorLoc": 0,
+                        "nesting": [],
+                        "subs": [
+                          {
+                            "ref": 0,
+                            "t": "class"
+                          }
+                        ],
+                        "type": null
+                      }
+                    ]
+                  ],
+                  "t": "plist"
+                }
+              ],
+              "type": null
+            }
+          ]
+        ],
+        "ok": true
+      },
+      "syms": [
+        "x|25"
+      ]
+    }
+  },
+  {
+    "fn": "parseComplexSelector",
+    "src": ":nth-child(2n+1 of .x)",
+    "out": {
+      "index": 10,
+      "msgs": [],
+      "nesting": false,
+      "out": {
+        "list": [
+          [
+            {
+              "combinator": 0,
+              "combinatorLoc": 0,
+              "nesting": [],
+              "subs": [
+                {
+                  "a": "2",
+                  "b": "1",
+                  "kind": 5,
+                  "selectors": [
+                    [
+                      {
+                        "combinator": 0,
+                        "combinatorLoc": 0,
+                        "nesting": [],
+                        "subs": [
+                          {
+                            "ref": 0,
+                            "t": "class"
+                          }
+                        ],
+                        "type": null
+                      }
+                    ]
+                  ],
+                  "t": "plist"
+                }
+              ],
+              "type": null
+            }
+          ]
+        ],
+        "ok": true
+      },
+      "syms": [
+        "x|25"
+      ]
+    }
+  },
+  {
+    "fn": "parseComplexSelector",
+    "src": ":nth-child(2n+1 of .x)",
+    "minify": true,
+    "out": {
+      "index": 10,
+      "msgs": [],
+      "nesting": false,
+      "out": {
+        "list": [
+          [
+            {
+              "combinator": 0,
+              "combinatorLoc": 0,
+              "nesting": [],
+              "subs": [
+                {
+                  "a": "",
+                  "b": "odd",
+                  "kind": 5,
+                  "selectors": [
+                    [
+                      {
+                        "combinator": 0,
+                        "combinatorLoc": 0,
+                        "nesting": [],
+                        "subs": [
+                          {
+                            "ref": 0,
+                            "t": "class"
+                          }
+                        ],
+                        "type": null
+                      }
+                    ]
+                  ],
+                  "t": "plist"
+                }
+              ],
+              "type": null
+            }
+          ]
+        ],
+        "ok": true
+      },
+      "syms": [
+        "x|25"
+      ]
+    }
+  },
+  {
+    "fn": "parseCompoundSelector",
+    "src": ":nth-child(2n+1 of .x)",
+    "out": {
+      "index": 10,
+      "msgs": [],
+      "nesting": false,
+      "out": {
+        "list": [
+          [
+            {
+              "combinator": 0,
+              "combinatorLoc": 0,
+              "nesting": [],
+              "subs": [
+                {
+                  "a": "2",
+                  "b": "1",
+                  "kind": 5,
+                  "selectors": [
+                    [
+                      {
+                        "combinator": 0,
+                        "combinatorLoc": 0,
+                        "nesting": [],
+                        "subs": [
+                          {
+                            "ref": 0,
+                            "t": "class"
+                          }
+                        ],
+                        "type": null
+                      }
+                    ]
+                  ],
+                  "t": "plist"
+                }
+              ],
+              "type": null
+            }
+          ]
+        ],
+        "ok": true
+      },
+      "syms": [
+        "x|25"
+      ]
+    }
+  },
+  {
+    "fn": "parseCompoundSelector",
+    "src": ":nth-child(2n+1 of .x)",
+    "minify": true,
+    "out": {
+      "index": 10,
+      "msgs": [],
+      "nesting": false,
+      "out": {
+        "list": [
+          [
+            {
+              "combinator": 0,
+              "combinatorLoc": 0,
+              "nesting": [],
+              "subs": [
+                {
+                  "a": "",
+                  "b": "odd",
+                  "kind": 5,
+                  "selectors": [
+                    [
+                      {
+                        "combinator": 0,
+                        "combinatorLoc": 0,
+                        "nesting": [],
+                        "subs": [
+                          {
+                            "ref": 0,
+                            "t": "class"
+                          }
+                        ],
+                        "type": null
+                      }
+                    ]
+                  ],
+                  "t": "plist"
+                }
+              ],
+              "type": null
+            }
+          ]
+        ],
+        "ok": true
+      },
+      "syms": [
+        "x|25"
+      ]
+    }
+  },
+  {
+    "fn": "parseSelectorList",
+    "src": ":hover::before",
+    "out": {
+      "index": 5,
+      "msgs": [],
+      "nesting": false,
+      "out": {
+        "list": [
+          [
+            {
+              "combinator": 0,
+              "combinatorLoc": 0,
+              "nesting": [],
+              "subs": [
+                {
+                  "args": 0,
+                  "element": false,
+                  "name": "hover",
+                  "t": "pseudo"
+                },
+                {
+                  "args": 0,
+                  "element": true,
+                  "name": "before",
+                  "t": "pseudo"
+                }
+              ],
+              "type": null
+            }
+          ]
+        ],
+        "ok": true
+      },
+      "syms": null
+    }
+  },
+  {
+    "fn": "parseSelectorList",
+    "src": ":hover::before",
+    "minify": true,
+    "out": {
+      "index": 5,
+      "msgs": [],
+      "nesting": false,
+      "out": {
+        "list": [
+          [
+            {
+              "combinator": 0,
+              "combinatorLoc": 0,
+              "nesting": [],
+              "subs": [
+                {
+                  "args": 0,
+                  "element": false,
+                  "name": "hover",
+                  "t": "pseudo"
+                },
+                {
+                  "args": 0,
+                  "element": false,
+                  "name": "before",
+                  "t": "pseudo"
+                }
+              ],
+              "type": null
+            }
+          ]
+        ],
+        "ok": true
+      },
+      "syms": null
+    }
+  },
+  {
+    "fn": "parseComplexSelector",
+    "src": ":hover::before",
+    "out": {
+      "index": 5,
+      "msgs": [],
+      "nesting": false,
+      "out": {
+        "list": [
+          [
+            {
+              "combinator": 0,
+              "combinatorLoc": 0,
+              "nesting": [],
+              "subs": [
+                {
+                  "args": 0,
+                  "element": false,
+                  "name": "hover",
+                  "t": "pseudo"
+                },
+                {
+                  "args": 0,
+                  "element": true,
+                  "name": "before",
+                  "t": "pseudo"
+                }
+              ],
+              "type": null
+            }
+          ]
+        ],
+        "ok": true
+      },
+      "syms": null
+    }
+  },
+  {
+    "fn": "parseComplexSelector",
+    "src": ":hover::before",
+    "minify": true,
+    "out": {
+      "index": 5,
+      "msgs": [],
+      "nesting": false,
+      "out": {
+        "list": [
+          [
+            {
+              "combinator": 0,
+              "combinatorLoc": 0,
+              "nesting": [],
+              "subs": [
+                {
+                  "args": 0,
+                  "element": false,
+                  "name": "hover",
+                  "t": "pseudo"
+                },
+                {
+                  "args": 0,
+                  "element": false,
+                  "name": "before",
+                  "t": "pseudo"
+                }
+              ],
+              "type": null
+            }
+          ]
+        ],
+        "ok": true
+      },
+      "syms": null
+    }
+  },
+  {
+    "fn": "parseCompoundSelector",
+    "src": ":hover::before",
+    "out": {
+      "index": 5,
+      "msgs": [],
+      "nesting": false,
+      "out": {
+        "list": [
+          [
+            {
+              "combinator": 0,
+              "combinatorLoc": 0,
+              "nesting": [],
+              "subs": [
+                {
+                  "args": 0,
+                  "element": false,
+                  "name": "hover",
+                  "t": "pseudo"
+                },
+                {
+                  "args": 0,
+                  "element": true,
+                  "name": "before",
+                  "t": "pseudo"
+                }
+              ],
+              "type": null
+            }
+          ]
+        ],
+        "ok": true
+      },
+      "syms": null
+    }
+  },
+  {
+    "fn": "parseCompoundSelector",
+    "src": ":hover::before",
+    "minify": true,
+    "out": {
+      "index": 5,
+      "msgs": [],
+      "nesting": false,
+      "out": {
+        "list": [
+          [
+            {
+              "combinator": 0,
+              "combinatorLoc": 0,
+              "nesting": [],
+              "subs": [
+                {
+                  "args": 0,
+                  "element": false,
+                  "name": "hover",
+                  "t": "pseudo"
+                },
+                {
+                  "args": 0,
+                  "element": false,
+                  "name": "before",
+                  "t": "pseudo"
+                }
+              ],
+              "type": null
+            }
+          ]
+        ],
+        "ok": true
+      },
+      "syms": null
+    }
+  },
+  {
+    "fn": "parseSelectorList",
+    "src": ".a:local(.b .c):hover",
+    "out": {
+      "index": 12,
+      "msgs": [],
+      "nesting": false,
+      "out": {
+        "list": [
+          [
+            {
+              "combinator": 0,
+              "combinatorLoc": 0,
+              "nesting": [],
+              "subs": [
+                {
+                  "ref": 0,
+                  "t": "class"
+                },
+                {
+                  "ref": 1,
+                  "t": "class"
+                }
+              ],
+              "type": null
+            },
+            {
+              "combinator": 0,
+              "combinatorLoc": 0,
+              "nesting": [],
+              "subs": [
+                {
+                  "ref": 2,
+                  "t": "class"
+                },
+                {
+                  "args": 0,
+                  "element": false,
+                  "name": "hover",
+                  "t": "pseudo"
+                }
+              ],
+              "type": null
+            }
+          ]
+        ],
+        "ok": true
+      },
+      "syms": [
+        "a|25",
+        "b|26",
+        "c|26"
+      ]
+    }
+  },
+  {
+    "fn": "parseSelectorList",
+    "src": ".a:local(.b .c):hover",
+    "minify": true,
+    "out": {
+      "index": 12,
+      "msgs": [],
+      "nesting": false,
+      "out": {
+        "list": [
+          [
+            {
+              "combinator": 0,
+              "combinatorLoc": 0,
+              "nesting": [],
+              "subs": [
+                {
+                  "ref": 0,
+                  "t": "class"
+                },
+                {
+                  "ref": 1,
+                  "t": "class"
+                }
+              ],
+              "type": null
+            },
+            {
+              "combinator": 0,
+              "combinatorLoc": 0,
+              "nesting": [],
+              "subs": [
+                {
+                  "ref": 2,
+                  "t": "class"
+                },
+                {
+                  "args": 0,
+                  "element": false,
+                  "name": "hover",
+                  "t": "pseudo"
+                }
+              ],
+              "type": null
+            }
+          ]
+        ],
+        "ok": true
+      },
+      "syms": [
+        "a|25",
+        "b|26",
+        "c|26"
+      ]
+    }
+  },
+  {
+    "fn": "parseComplexSelector",
+    "src": ".a:local(.b .c):hover",
+    "out": {
+      "index": 12,
+      "msgs": [],
+      "nesting": false,
+      "out": {
+        "list": [
+          [
+            {
+              "combinator": 0,
+              "combinatorLoc": 0,
+              "nesting": [],
+              "subs": [
+                {
+                  "ref": 0,
+                  "t": "class"
+                },
+                {
+                  "a": "",
+                  "b": "",
+                  "kind": 3,
+                  "selectors": [
+                    [
+                      {
+                        "combinator": 0,
+                        "combinatorLoc": 0,
+                        "nesting": [],
+                        "subs": [
+                          {
+                            "ref": 1,
+                            "t": "class"
+                          }
+                        ],
+                        "type": null
+                      },
+                      {
+                        "combinator": 0,
+                        "combinatorLoc": 0,
+                        "nesting": [],
+                        "subs": [
+                          {
+                            "ref": 2,
+                            "t": "class"
+                          }
+                        ],
+                        "type": null
+                      }
+                    ]
+                  ],
+                  "t": "plist"
+                },
+                {
+                  "args": 0,
+                  "element": false,
+                  "name": "hover",
+                  "t": "pseudo"
+                }
+              ],
+              "type": null
+            }
+          ]
+        ],
+        "ok": true
+      },
+      "syms": [
+        "a|25",
+        "b|26",
+        "c|26"
+      ]
+    }
+  },
+  {
+    "fn": "parseComplexSelector",
+    "src": ".a:local(.b .c):hover",
+    "minify": true,
+    "out": {
+      "index": 12,
+      "msgs": [],
+      "nesting": false,
+      "out": {
+        "list": [
+          [
+            {
+              "combinator": 0,
+              "combinatorLoc": 0,
+              "nesting": [],
+              "subs": [
+                {
+                  "ref": 0,
+                  "t": "class"
+                },
+                {
+                  "a": "",
+                  "b": "",
+                  "kind": 3,
+                  "selectors": [
+                    [
+                      {
+                        "combinator": 0,
+                        "combinatorLoc": 0,
+                        "nesting": [],
+                        "subs": [
+                          {
+                            "ref": 1,
+                            "t": "class"
+                          }
+                        ],
+                        "type": null
+                      },
+                      {
+                        "combinator": 0,
+                        "combinatorLoc": 0,
+                        "nesting": [],
+                        "subs": [
+                          {
+                            "ref": 2,
+                            "t": "class"
+                          }
+                        ],
+                        "type": null
+                      }
+                    ]
+                  ],
+                  "t": "plist"
+                },
+                {
+                  "args": 0,
+                  "element": false,
+                  "name": "hover",
+                  "t": "pseudo"
+                }
+              ],
+              "type": null
+            }
+          ]
+        ],
+        "ok": true
+      },
+      "syms": [
+        "a|25",
+        "b|26",
+        "c|26"
+      ]
+    }
+  },
+  {
+    "fn": "parseCompoundSelector",
+    "src": ".a:local(.b .c):hover",
+    "out": {
+      "index": 12,
+      "msgs": [],
+      "nesting": false,
+      "out": {
+        "list": [
+          [
+            {
+              "combinator": 0,
+              "combinatorLoc": 0,
+              "nesting": [],
+              "subs": [
+                {
+                  "ref": 0,
+                  "t": "class"
+                },
+                {
+                  "a": "",
+                  "b": "",
+                  "kind": 3,
+                  "selectors": [
+                    [
+                      {
+                        "combinator": 0,
+                        "combinatorLoc": 0,
+                        "nesting": [],
+                        "subs": [
+                          {
+                            "ref": 1,
+                            "t": "class"
+                          }
+                        ],
+                        "type": null
+                      },
+                      {
+                        "combinator": 0,
+                        "combinatorLoc": 0,
+                        "nesting": [],
+                        "subs": [
+                          {
+                            "ref": 2,
+                            "t": "class"
+                          }
+                        ],
+                        "type": null
+                      }
+                    ]
+                  ],
+                  "t": "plist"
+                },
+                {
+                  "args": 0,
+                  "element": false,
+                  "name": "hover",
+                  "t": "pseudo"
+                }
+              ],
+              "type": null
+            }
+          ]
+        ],
+        "ok": true
+      },
+      "syms": [
+        "a|25",
+        "b|26",
+        "c|26"
+      ]
+    }
+  },
+  {
+    "fn": "parseCompoundSelector",
+    "src": ".a:local(.b .c):hover",
+    "minify": true,
+    "out": {
+      "index": 12,
+      "msgs": [],
+      "nesting": false,
+      "out": {
+        "list": [
+          [
+            {
+              "combinator": 0,
+              "combinatorLoc": 0,
+              "nesting": [],
+              "subs": [
+                {
+                  "ref": 0,
+                  "t": "class"
+                },
+                {
+                  "a": "",
+                  "b": "",
+                  "kind": 3,
+                  "selectors": [
+                    [
+                      {
+                        "combinator": 0,
+                        "combinatorLoc": 0,
+                        "nesting": [],
+                        "subs": [
+                          {
+                            "ref": 1,
+                            "t": "class"
+                          }
+                        ],
+                        "type": null
+                      },
+                      {
+                        "combinator": 0,
+                        "combinatorLoc": 0,
+                        "nesting": [],
+                        "subs": [
+                          {
+                            "ref": 2,
+                            "t": "class"
+                          }
+                        ],
+                        "type": null
+                      }
+                    ]
+                  ],
+                  "t": "plist"
+                },
+                {
+                  "args": 0,
+                  "element": false,
+                  "name": "hover",
+                  "t": "pseudo"
+                }
+              ],
+              "type": null
+            }
+          ]
+        ],
+        "ok": true
+      },
+      "syms": [
+        "a|25",
+        "b|26",
+        "c|26"
+      ]
+    }
+  },
+  {
+    "fn": "parseSelectorList",
+    "src": "\u0026 .foo",
+    "out": {
+      "index": 4,
+      "msgs": [],
+      "nesting": true,
+      "out": {
+        "list": [
+          [
+            {
+              "combinator": 0,
+              "combinatorLoc": 0,
+              "nesting": [
+                0
+              ],
+              "subs": [],
+              "type": null
+            },
+            {
+              "combinator": 0,
+              "combinatorLoc": 0,
+              "nesting": [],
+              "subs": [
+                {
+                  "ref": 0,
+                  "t": "class"
+                }
+              ],
+              "type": null
+            }
+          ]
+        ],
+        "ok": true
+      },
+      "syms": [
+        "foo|25"
+      ]
+    }
+  },
+  {
+    "fn": "parseSelectorList",
+    "src": "\u0026 .foo",
+    "minify": true,
+    "out": {
+      "index": 4,
+      "msgs": [],
+      "nesting": true,
+      "out": {
+        "list": [
+          [
+            {
+              "combinator": 0,
+              "combinatorLoc": 0,
+              "nesting": [],
+              "subs": [
+                {
+                  "ref": 0,
+                  "t": "class"
+                }
+              ],
+              "type": null
+            }
+          ]
+        ],
+        "ok": true
+      },
+      "syms": [
+        "foo|25"
+      ]
+    }
+  },
+  {
+    "fn": "parseComplexSelector",
+    "src": "\u0026 .foo",
+    "out": {
+      "index": 4,
+      "msgs": [],
+      "nesting": true,
+      "out": {
+        "list": [
+          [
+            {
+              "combinator": 0,
+              "combinatorLoc": 0,
+              "nesting": [
+                0
+              ],
+              "subs": [],
+              "type": null
+            },
+            {
+              "combinator": 0,
+              "combinatorLoc": 0,
+              "nesting": [],
+              "subs": [
+                {
+                  "ref": 0,
+                  "t": "class"
+                }
+              ],
+              "type": null
+            }
+          ]
+        ],
+        "ok": true
+      },
+      "syms": [
+        "foo|25"
+      ]
+    }
+  },
+  {
+    "fn": "parseComplexSelector",
+    "src": "\u0026 .foo",
+    "minify": true,
+    "out": {
+      "index": 4,
+      "msgs": [],
+      "nesting": true,
+      "out": {
+        "list": [
+          [
+            {
+              "combinator": 0,
+              "combinatorLoc": 0,
+              "nesting": [
+                0
+              ],
+              "subs": [],
+              "type": null
+            },
+            {
+              "combinator": 0,
+              "combinatorLoc": 0,
+              "nesting": [],
+              "subs": [
+                {
+                  "ref": 0,
+                  "t": "class"
+                }
+              ],
+              "type": null
+            }
+          ]
+        ],
+        "ok": true
+      },
+      "syms": [
+        "foo|25"
+      ]
+    }
+  },
+  {
+    "fn": "parseCompoundSelector",
+    "src": "\u0026 .foo",
+    "out": {
+      "index": 1,
+      "msgs": [],
+      "nesting": true,
+      "out": {
+        "list": [
+          [
+            {
+              "combinator": 0,
+              "combinatorLoc": 0,
+              "nesting": [
+                0
+              ],
+              "subs": [],
+              "type": null
+            }
+          ]
+        ],
+        "ok": true
+      },
+      "syms": null
+    }
+  },
+  {
+    "fn": "parseCompoundSelector",
+    "src": "\u0026 .foo",
+    "minify": true,
+    "out": {
+      "index": 1,
+      "msgs": [],
+      "nesting": true,
+      "out": {
+        "list": [
+          [
+            {
+              "combinator": 0,
+              "combinatorLoc": 0,
+              "nesting": [
+                0
+              ],
+              "subs": [],
+              "type": null
+            }
+          ]
+        ],
+        "ok": true
+      },
+      "syms": null
+    }
+  },
+  {
+    "fn": "parseSelectorList",
+    "src": "\u0026div",
+    "out": {
+      "index": 2,
+      "msgs": [
+        "1|Cannot use type selector \"div\" directly after nesting selector \"\u0026\""
+      ],
+      "nesting": true,
+      "out": {
+        "list": [],
+        "ok": false
+      },
+      "syms": null
+    }
+  },
+  {
+    "fn": "parseSelectorList",
+    "src": "\u0026div",
+    "minify": true,
+    "out": {
+      "index": 2,
+      "msgs": [
+        "1|Cannot use type selector \"div\" directly after nesting selector \"\u0026\""
+      ],
+      "nesting": true,
+      "out": {
+        "list": [],
+        "ok": false
+      },
+      "syms": null
+    }
+  },
+  {
+    "fn": "parseComplexSelector",
+    "src": "\u0026div",
+    "out": {
+      "index": 2,
+      "msgs": [
+        "1|Cannot use type selector \"div\" directly after nesting selector \"\u0026\""
+      ],
+      "nesting": true,
+      "out": {
+        "list": [
+          []
+        ],
+        "ok": false
+      },
+      "syms": null
+    }
+  },
+  {
+    "fn": "parseComplexSelector",
+    "src": "\u0026div",
+    "minify": true,
+    "out": {
+      "index": 2,
+      "msgs": [
+        "1|Cannot use type selector \"div\" directly after nesting selector \"\u0026\""
+      ],
+      "nesting": true,
+      "out": {
+        "list": [
+          []
+        ],
+        "ok": false
+      },
+      "syms": null
+    }
+  },
+  {
+    "fn": "parseCompoundSelector",
+    "src": "\u0026div",
+    "out": {
+      "index": 2,
+      "msgs": [
+        "1|Cannot use type selector \"div\" directly after nesting selector \"\u0026\""
+      ],
+      "nesting": true,
+      "out": {
+        "list": [
+          [
+            {
+              "combinator": 0,
+              "combinatorLoc": 0,
+              "nesting": [
+                0
+              ],
+              "subs": [],
+              "type": {
+                "kind": 29,
+                "name": "div",
+                "prefix": null
+              }
+            }
+          ]
+        ],
+        "ok": false
+      },
+      "syms": null
+    }
+  },
+  {
+    "fn": "parseCompoundSelector",
+    "src": "\u0026div",
+    "minify": true,
+    "out": {
+      "index": 2,
+      "msgs": [
+        "1|Cannot use type selector \"div\" directly after nesting selector \"\u0026\""
+      ],
+      "nesting": true,
+      "out": {
+        "list": [
+          [
+            {
+              "combinator": 0,
+              "combinatorLoc": 0,
+              "nesting": [
+                0
+              ],
+              "subs": [],
+              "type": {
+                "kind": 29,
+                "name": "div",
+                "prefix": null
+              }
+            }
+          ]
+        ],
+        "ok": false
+      },
+      "syms": null
+    }
+  },
+  {
+    "fn": "parseSelectorList",
+    "src": ":is()",
+    "out": {
+      "index": 3,
+      "msgs": [],
+      "nesting": false,
+      "out": {
+        "list": [
+          [
+            {
+              "combinator": 0,
+              "combinatorLoc": 0,
+              "nesting": [],
+              "subs": [
+                {
+                  "a": "",
+                  "b": "",
+                  "kind": 2,
+                  "selectors": [],
+                  "t": "plist"
+                }
+              ],
+              "type": null
+            }
+          ]
+        ],
+        "ok": true
+      },
+      "syms": null
+    }
+  },
+  {
+    "fn": "parseSelectorList",
+    "src": ":is()",
+    "minify": true,
+    "out": {
+      "index": 3,
+      "msgs": [],
+      "nesting": false,
+      "out": {
+        "list": [
+          [
+            {
+              "combinator": 0,
+              "combinatorLoc": 0,
+              "nesting": [],
+              "subs": [
+                {
+                  "a": "",
+                  "b": "",
+                  "kind": 2,
+                  "selectors": [],
+                  "t": "plist"
+                }
+              ],
+              "type": null
+            }
+          ]
+        ],
+        "ok": true
+      },
+      "syms": null
+    }
+  },
+  {
+    "fn": "parseComplexSelector",
+    "src": ":is()",
+    "out": {
+      "index": 3,
+      "msgs": [],
+      "nesting": false,
+      "out": {
+        "list": [
+          [
+            {
+              "combinator": 0,
+              "combinatorLoc": 0,
+              "nesting": [],
+              "subs": [
+                {
+                  "a": "",
+                  "b": "",
+                  "kind": 2,
+                  "selectors": [],
+                  "t": "plist"
+                }
+              ],
+              "type": null
+            }
+          ]
+        ],
+        "ok": true
+      },
+      "syms": null
+    }
+  },
+  {
+    "fn": "parseComplexSelector",
+    "src": ":is()",
+    "minify": true,
+    "out": {
+      "index": 3,
+      "msgs": [],
+      "nesting": false,
+      "out": {
+        "list": [
+          [
+            {
+              "combinator": 0,
+              "combinatorLoc": 0,
+              "nesting": [],
+              "subs": [
+                {
+                  "a": "",
+                  "b": "",
+                  "kind": 2,
+                  "selectors": [],
+                  "t": "plist"
+                }
+              ],
+              "type": null
+            }
+          ]
+        ],
+        "ok": true
+      },
+      "syms": null
+    }
+  },
+  {
+    "fn": "parseCompoundSelector",
+    "src": ":is()",
+    "out": {
+      "index": 3,
+      "msgs": [],
+      "nesting": false,
+      "out": {
+        "list": [
+          [
+            {
+              "combinator": 0,
+              "combinatorLoc": 0,
+              "nesting": [],
+              "subs": [
+                {
+                  "a": "",
+                  "b": "",
+                  "kind": 2,
+                  "selectors": [],
+                  "t": "plist"
+                }
+              ],
+              "type": null
+            }
+          ]
+        ],
+        "ok": true
+      },
+      "syms": null
+    }
+  },
+  {
+    "fn": "parseCompoundSelector",
+    "src": ":is()",
+    "minify": true,
+    "out": {
+      "index": 3,
+      "msgs": [],
+      "nesting": false,
+      "out": {
+        "list": [
+          [
+            {
+              "combinator": 0,
+              "combinatorLoc": 0,
+              "nesting": [],
+              "subs": [
+                {
+                  "a": "",
+                  "b": "",
+                  "kind": 2,
+                  "selectors": [],
+                  "t": "plist"
+                }
+              ],
+              "type": null
+            }
+          ]
+        ],
+        "ok": true
+      },
+      "syms": null
+    }
+  },
+  {
+    "fn": "parseSelectorList",
+    "src": ":has(a \u003e b)",
+    "out": {
+      "index": 8,
+      "msgs": [],
+      "nesting": false,
+      "out": {
+        "list": [
+          [
+            {
+              "combinator": 0,
+              "combinatorLoc": 0,
+              "nesting": [],
+              "subs": [
+                {
+                  "a": "",
+                  "b": "",
+                  "kind": 1,
+                  "selectors": [
+                    [
+                      {
+                        "combinator": 0,
+                        "combinatorLoc": 0,
+                        "nesting": [],
+                        "subs": [],
+                        "type": {
+                          "kind": 29,
+                          "name": "a",
+                          "prefix": null
+                        }
+                      },
+                      {
+                        "combinator": 62,
+                        "combinatorLoc": 7,
+                        "nesting": [],
+                        "subs": [],
+                        "type": {
+                          "kind": 29,
+                          "name": "b",
+                          "prefix": null
+                        }
+                      }
+                    ]
+                  ],
+                  "t": "plist"
+                }
+              ],
+              "type": null
+            }
+          ]
+        ],
+        "ok": true
+      },
+      "syms": null
+    }
+  },
+  {
+    "fn": "parseSelectorList",
+    "src": ":has(a \u003e b)",
+    "minify": true,
+    "out": {
+      "index": 8,
+      "msgs": [],
+      "nesting": false,
+      "out": {
+        "list": [
+          [
+            {
+              "combinator": 0,
+              "combinatorLoc": 0,
+              "nesting": [],
+              "subs": [
+                {
+                  "a": "",
+                  "b": "",
+                  "kind": 1,
+                  "selectors": [
+                    [
+                      {
+                        "combinator": 0,
+                        "combinatorLoc": 0,
+                        "nesting": [],
+                        "subs": [],
+                        "type": {
+                          "kind": 29,
+                          "name": "a",
+                          "prefix": null
+                        }
+                      },
+                      {
+                        "combinator": 62,
+                        "combinatorLoc": 7,
+                        "nesting": [],
+                        "subs": [],
+                        "type": {
+                          "kind": 29,
+                          "name": "b",
+                          "prefix": null
+                        }
+                      }
+                    ]
+                  ],
+                  "t": "plist"
+                }
+              ],
+              "type": null
+            }
+          ]
+        ],
+        "ok": true
+      },
+      "syms": null
+    }
+  },
+  {
+    "fn": "parseComplexSelector",
+    "src": ":has(a \u003e b)",
+    "out": {
+      "index": 8,
+      "msgs": [],
+      "nesting": false,
+      "out": {
+        "list": [
+          [
+            {
+              "combinator": 0,
+              "combinatorLoc": 0,
+              "nesting": [],
+              "subs": [
+                {
+                  "a": "",
+                  "b": "",
+                  "kind": 1,
+                  "selectors": [
+                    [
+                      {
+                        "combinator": 0,
+                        "combinatorLoc": 0,
+                        "nesting": [],
+                        "subs": [],
+                        "type": {
+                          "kind": 29,
+                          "name": "a",
+                          "prefix": null
+                        }
+                      },
+                      {
+                        "combinator": 62,
+                        "combinatorLoc": 7,
+                        "nesting": [],
+                        "subs": [],
+                        "type": {
+                          "kind": 29,
+                          "name": "b",
+                          "prefix": null
+                        }
+                      }
+                    ]
+                  ],
+                  "t": "plist"
+                }
+              ],
+              "type": null
+            }
+          ]
+        ],
+        "ok": true
+      },
+      "syms": null
+    }
+  },
+  {
+    "fn": "parseComplexSelector",
+    "src": ":has(a \u003e b)",
+    "minify": true,
+    "out": {
+      "index": 8,
+      "msgs": [],
+      "nesting": false,
+      "out": {
+        "list": [
+          [
+            {
+              "combinator": 0,
+              "combinatorLoc": 0,
+              "nesting": [],
+              "subs": [
+                {
+                  "a": "",
+                  "b": "",
+                  "kind": 1,
+                  "selectors": [
+                    [
+                      {
+                        "combinator": 0,
+                        "combinatorLoc": 0,
+                        "nesting": [],
+                        "subs": [],
+                        "type": {
+                          "kind": 29,
+                          "name": "a",
+                          "prefix": null
+                        }
+                      },
+                      {
+                        "combinator": 62,
+                        "combinatorLoc": 7,
+                        "nesting": [],
+                        "subs": [],
+                        "type": {
+                          "kind": 29,
+                          "name": "b",
+                          "prefix": null
+                        }
+                      }
+                    ]
+                  ],
+                  "t": "plist"
+                }
+              ],
+              "type": null
+            }
+          ]
+        ],
+        "ok": true
+      },
+      "syms": null
+    }
+  },
+  {
+    "fn": "parseCompoundSelector",
+    "src": ":has(a \u003e b)",
+    "out": {
+      "index": 8,
+      "msgs": [],
+      "nesting": false,
+      "out": {
+        "list": [
+          [
+            {
+              "combinator": 0,
+              "combinatorLoc": 0,
+              "nesting": [],
+              "subs": [
+                {
+                  "a": "",
+                  "b": "",
+                  "kind": 1,
+                  "selectors": [
+                    [
+                      {
+                        "combinator": 0,
+                        "combinatorLoc": 0,
+                        "nesting": [],
+                        "subs": [],
+                        "type": {
+                          "kind": 29,
+                          "name": "a",
+                          "prefix": null
+                        }
+                      },
+                      {
+                        "combinator": 62,
+                        "combinatorLoc": 7,
+                        "nesting": [],
+                        "subs": [],
+                        "type": {
+                          "kind": 29,
+                          "name": "b",
+                          "prefix": null
+                        }
+                      }
+                    ]
+                  ],
+                  "t": "plist"
+                }
+              ],
+              "type": null
+            }
+          ]
+        ],
+        "ok": true
+      },
+      "syms": null
+    }
+  },
+  {
+    "fn": "parseCompoundSelector",
+    "src": ":has(a \u003e b)",
+    "minify": true,
+    "out": {
+      "index": 8,
+      "msgs": [],
+      "nesting": false,
+      "out": {
+        "list": [
+          [
+            {
+              "combinator": 0,
+              "combinatorLoc": 0,
+              "nesting": [],
+              "subs": [
+                {
+                  "a": "",
+                  "b": "",
+                  "kind": 1,
+                  "selectors": [
+                    [
+                      {
+                        "combinator": 0,
+                        "combinatorLoc": 0,
+                        "nesting": [],
+                        "subs": [],
+                        "type": {
+                          "kind": 29,
+                          "name": "a",
+                          "prefix": null
+                        }
+                      },
+                      {
+                        "combinator": 62,
+                        "combinatorLoc": 7,
+                        "nesting": [],
+                        "subs": [],
+                        "type": {
+                          "kind": 29,
+                          "name": "b",
+                          "prefix": null
+                        }
+                      }
+                    ]
+                  ],
+                  "t": "plist"
+                }
+              ],
+              "type": null
+            }
+          ]
+        ],
+        "ok": true
+      },
+      "syms": null
+    }
+  },
+  {
+    "fn": "parseSelectorList",
+    "src": "div:unknown(1 2)",
+    "out": {
+      "index": 7,
+      "msgs": [],
+      "nesting": false,
+      "out": {
+        "list": [
+          [
+            {
+              "combinator": 0,
+              "combinatorLoc": 0,
+              "nesting": [],
+              "subs": [
+                {
+                  "args": 2,
+                  "element": false,
+                  "name": "unknown",
+                  "t": "pseudo"
+                }
+              ],
+              "type": {
+                "kind": 29,
+                "name": "div",
+                "prefix": null
+              }
+            }
+          ]
+        ],
+        "ok": true
+      },
+      "syms": null
+    }
+  },
+  {
+    "fn": "parseSelectorList",
+    "src": "div:unknown(1 2)",
+    "minify": true,
+    "out": {
+      "index": 7,
+      "msgs": [],
+      "nesting": false,
+      "out": {
+        "list": [
+          [
+            {
+              "combinator": 0,
+              "combinatorLoc": 0,
+              "nesting": [],
+              "subs": [
+                {
+                  "args": 2,
+                  "element": false,
+                  "name": "unknown",
+                  "t": "pseudo"
+                }
+              ],
+              "type": {
+                "kind": 29,
+                "name": "div",
+                "prefix": null
+              }
+            }
+          ]
+        ],
+        "ok": true
+      },
+      "syms": null
+    }
+  },
+  {
+    "fn": "parseComplexSelector",
+    "src": "div:unknown(1 2)",
+    "out": {
+      "index": 7,
+      "msgs": [],
+      "nesting": false,
+      "out": {
+        "list": [
+          [
+            {
+              "combinator": 0,
+              "combinatorLoc": 0,
+              "nesting": [],
+              "subs": [
+                {
+                  "args": 2,
+                  "element": false,
+                  "name": "unknown",
+                  "t": "pseudo"
+                }
+              ],
+              "type": {
+                "kind": 29,
+                "name": "div",
+                "prefix": null
+              }
+            }
+          ]
+        ],
+        "ok": true
+      },
+      "syms": null
+    }
+  },
+  {
+    "fn": "parseComplexSelector",
+    "src": "div:unknown(1 2)",
+    "minify": true,
+    "out": {
+      "index": 7,
+      "msgs": [],
+      "nesting": false,
+      "out": {
+        "list": [
+          [
+            {
+              "combinator": 0,
+              "combinatorLoc": 0,
+              "nesting": [],
+              "subs": [
+                {
+                  "args": 2,
+                  "element": false,
+                  "name": "unknown",
+                  "t": "pseudo"
+                }
+              ],
+              "type": {
+                "kind": 29,
+                "name": "div",
+                "prefix": null
+              }
+            }
+          ]
+        ],
+        "ok": true
+      },
+      "syms": null
+    }
+  },
+  {
+    "fn": "parseCompoundSelector",
+    "src": "div:unknown(1 2)",
+    "out": {
+      "index": 7,
+      "msgs": [],
+      "nesting": false,
+      "out": {
+        "list": [
+          [
+            {
+              "combinator": 0,
+              "combinatorLoc": 0,
+              "nesting": [],
+              "subs": [
+                {
+                  "args": 2,
+                  "element": false,
+                  "name": "unknown",
+                  "t": "pseudo"
+                }
+              ],
+              "type": {
+                "kind": 29,
+                "name": "div",
+                "prefix": null
+              }
+            }
+          ]
+        ],
+        "ok": true
+      },
+      "syms": null
+    }
+  },
+  {
+    "fn": "parseCompoundSelector",
+    "src": "div:unknown(1 2)",
+    "minify": true,
+    "out": {
+      "index": 7,
+      "msgs": [],
+      "nesting": false,
+      "out": {
+        "list": [
+          [
+            {
+              "combinator": 0,
+              "combinatorLoc": 0,
+              "nesting": [],
+              "subs": [
+                {
+                  "args": 2,
+                  "element": false,
+                  "name": "unknown",
+                  "t": "pseudo"
+                }
+              ],
+              "type": {
+                "kind": 29,
+                "name": "div",
+                "prefix": null
+              }
+            }
+          ]
+        ],
+        "ok": true
+      },
+      "syms": null
+    }
+  },
+  {
+    "fn": "parseSelectorList",
+    "src": "div:hover.b",
+    "out": {
+      "index": 5,
+      "msgs": [],
+      "nesting": false,
+      "out": {
+        "list": [
+          [
+            {
+              "combinator": 0,
+              "combinatorLoc": 0,
+              "nesting": [],
+              "subs": [
+                {
+                  "args": 0,
+                  "element": false,
+                  "name": "hover",
+                  "t": "pseudo"
+                },
+                {
+                  "ref": 0,
+                  "t": "class"
+                }
+              ],
+              "type": {
+                "kind": 29,
+                "name": "div",
+                "prefix": null
+              }
+            }
+          ]
+        ],
+        "ok": true
+      },
+      "syms": [
+        "b|25"
+      ]
+    }
+  },
+  {
+    "fn": "parseSelectorList",
+    "src": "div:hover.b",
+    "minify": true,
+    "out": {
+      "index": 5,
+      "msgs": [],
+      "nesting": false,
+      "out": {
+        "list": [
+          [
+            {
+              "combinator": 0,
+              "combinatorLoc": 0,
+              "nesting": [],
+              "subs": [
+                {
+                  "args": 0,
+                  "element": false,
+                  "name": "hover",
+                  "t": "pseudo"
+                },
+                {
+                  "ref": 0,
+                  "t": "class"
+                }
+              ],
+              "type": {
+                "kind": 29,
+                "name": "div",
+                "prefix": null
+              }
+            }
+          ]
+        ],
+        "ok": true
+      },
+      "syms": [
+        "b|25"
+      ]
+    }
+  },
+  {
+    "fn": "parseComplexSelector",
+    "src": "div:hover.b",
+    "out": {
+      "index": 5,
+      "msgs": [],
+      "nesting": false,
+      "out": {
+        "list": [
+          [
+            {
+              "combinator": 0,
+              "combinatorLoc": 0,
+              "nesting": [],
+              "subs": [
+                {
+                  "args": 0,
+                  "element": false,
+                  "name": "hover",
+                  "t": "pseudo"
+                },
+                {
+                  "ref": 0,
+                  "t": "class"
+                }
+              ],
+              "type": {
+                "kind": 29,
+                "name": "div",
+                "prefix": null
+              }
+            }
+          ]
+        ],
+        "ok": true
+      },
+      "syms": [
+        "b|25"
+      ]
+    }
+  },
+  {
+    "fn": "parseComplexSelector",
+    "src": "div:hover.b",
+    "minify": true,
+    "out": {
+      "index": 5,
+      "msgs": [],
+      "nesting": false,
+      "out": {
+        "list": [
+          [
+            {
+              "combinator": 0,
+              "combinatorLoc": 0,
+              "nesting": [],
+              "subs": [
+                {
+                  "args": 0,
+                  "element": false,
+                  "name": "hover",
+                  "t": "pseudo"
+                },
+                {
+                  "ref": 0,
+                  "t": "class"
+                }
+              ],
+              "type": {
+                "kind": 29,
+                "name": "div",
+                "prefix": null
+              }
+            }
+          ]
+        ],
+        "ok": true
+      },
+      "syms": [
+        "b|25"
+      ]
+    }
+  },
+  {
+    "fn": "parseCompoundSelector",
+    "src": "div:hover.b",
+    "out": {
+      "index": 5,
+      "msgs": [],
+      "nesting": false,
+      "out": {
+        "list": [
+          [
+            {
+              "combinator": 0,
+              "combinatorLoc": 0,
+              "nesting": [],
+              "subs": [
+                {
+                  "args": 0,
+                  "element": false,
+                  "name": "hover",
+                  "t": "pseudo"
+                },
+                {
+                  "ref": 0,
+                  "t": "class"
+                }
+              ],
+              "type": {
+                "kind": 29,
+                "name": "div",
+                "prefix": null
+              }
+            }
+          ]
+        ],
+        "ok": true
+      },
+      "syms": [
+        "b|25"
+      ]
+    }
+  },
+  {
+    "fn": "parseCompoundSelector",
+    "src": "div:hover.b",
+    "minify": true,
+    "out": {
+      "index": 5,
+      "msgs": [],
+      "nesting": false,
+      "out": {
+        "list": [
+          [
+            {
+              "combinator": 0,
+              "combinatorLoc": 0,
+              "nesting": [],
+              "subs": [
+                {
+                  "args": 0,
+                  "element": false,
+                  "name": "hover",
+                  "t": "pseudo"
+                },
+                {
+                  "ref": 0,
+                  "t": "class"
+                }
+              ],
+              "type": {
+                "kind": 29,
+                "name": "div",
+                "prefix": null
+              }
+            }
+          ]
+        ],
+        "ok": true
+      },
+      "syms": [
+        "b|25"
+      ]
+    }
+  },
+  {
+    "fn": "parseSelectorList",
+    "src": ":nth-of-type(odd)",
+    "out": {
+      "index": 4,
+      "msgs": [],
+      "nesting": false,
+      "out": {
+        "list": [
+          [
+            {
+              "combinator": 0,
+              "combinatorLoc": 0,
+              "nesting": [],
+              "subs": [
+                {
+                  "a": "",
+                  "b": "odd",
+                  "kind": 8,
+                  "selectors": [],
+                  "t": "plist"
+                }
+              ],
+              "type": null
+            }
+          ]
+        ],
+        "ok": true
+      },
+      "syms": null
+    }
+  },
+  {
+    "fn": "parseSelectorList",
+    "src": ":nth-of-type(odd)",
+    "minify": true,
+    "out": {
+      "index": 4,
+      "msgs": [],
+      "nesting": false,
+      "out": {
+        "list": [
+          [
+            {
+              "combinator": 0,
+              "combinatorLoc": 0,
+              "nesting": [],
+              "subs": [
+                {
+                  "a": "",
+                  "b": "odd",
+                  "kind": 8,
+                  "selectors": [],
+                  "t": "plist"
+                }
+              ],
+              "type": null
+            }
+          ]
+        ],
+        "ok": true
+      },
+      "syms": null
+    }
+  },
+  {
+    "fn": "parseComplexSelector",
+    "src": ":nth-of-type(odd)",
+    "out": {
+      "index": 4,
+      "msgs": [],
+      "nesting": false,
+      "out": {
+        "list": [
+          [
+            {
+              "combinator": 0,
+              "combinatorLoc": 0,
+              "nesting": [],
+              "subs": [
+                {
+                  "a": "",
+                  "b": "odd",
+                  "kind": 8,
+                  "selectors": [],
+                  "t": "plist"
+                }
+              ],
+              "type": null
+            }
+          ]
+        ],
+        "ok": true
+      },
+      "syms": null
+    }
+  },
+  {
+    "fn": "parseComplexSelector",
+    "src": ":nth-of-type(odd)",
+    "minify": true,
+    "out": {
+      "index": 4,
+      "msgs": [],
+      "nesting": false,
+      "out": {
+        "list": [
+          [
+            {
+              "combinator": 0,
+              "combinatorLoc": 0,
+              "nesting": [],
+              "subs": [
+                {
+                  "a": "",
+                  "b": "odd",
+                  "kind": 8,
+                  "selectors": [],
+                  "t": "plist"
+                }
+              ],
+              "type": null
+            }
+          ]
+        ],
+        "ok": true
+      },
+      "syms": null
+    }
+  },
+  {
+    "fn": "parseCompoundSelector",
+    "src": ":nth-of-type(odd)",
+    "out": {
+      "index": 4,
+      "msgs": [],
+      "nesting": false,
+      "out": {
+        "list": [
+          [
+            {
+              "combinator": 0,
+              "combinatorLoc": 0,
+              "nesting": [],
+              "subs": [
+                {
+                  "a": "",
+                  "b": "odd",
+                  "kind": 8,
+                  "selectors": [],
+                  "t": "plist"
+                }
+              ],
+              "type": null
+            }
+          ]
+        ],
+        "ok": true
+      },
+      "syms": null
+    }
+  },
+  {
+    "fn": "parseCompoundSelector",
+    "src": ":nth-of-type(odd)",
+    "minify": true,
+    "out": {
+      "index": 4,
+      "msgs": [],
+      "nesting": false,
+      "out": {
+        "list": [
+          [
+            {
+              "combinator": 0,
+              "combinatorLoc": 0,
+              "nesting": [],
+              "subs": [
+                {
+                  "a": "",
+                  "b": "odd",
+                  "kind": 8,
+                  "selectors": [],
+                  "t": "plist"
+                }
+              ],
+              "type": null
+            }
+          ]
+        ],
+        "ok": true
+      },
+      "syms": null
+    }
+  },
+  {
+    "fn": "parseSelectorList",
+    "src": "[|x]",
+    "out": {
+      "index": 4,
+      "msgs": [],
+      "nesting": false,
+      "out": {
+        "list": [
+          [
+            {
+              "combinator": 0,
+              "combinatorLoc": 0,
+              "nesting": [],
+              "subs": [
+                {
+                  "mod": 0,
+                  "name": "x",
+                  "op": "",
+                  "t": "attr",
+                  "val": ""
+                }
+              ],
+              "type": null
+            }
+          ]
+        ],
+        "ok": true
+      },
+      "syms": null
+    }
+  },
+  {
+    "fn": "parseSelectorList",
+    "src": "[|x]",
+    "minify": true,
+    "out": {
+      "index": 4,
+      "msgs": [],
+      "nesting": false,
+      "out": {
+        "list": [
+          [
+            {
+              "combinator": 0,
+              "combinatorLoc": 0,
+              "nesting": [],
+              "subs": [
+                {
+                  "mod": 0,
+                  "name": "x",
+                  "op": "",
+                  "t": "attr",
+                  "val": ""
+                }
+              ],
+              "type": null
+            }
+          ]
+        ],
+        "ok": true
+      },
+      "syms": null
+    }
+  },
+  {
+    "fn": "parseComplexSelector",
+    "src": "[|x]",
+    "out": {
+      "index": 4,
+      "msgs": [],
+      "nesting": false,
+      "out": {
+        "list": [
+          [
+            {
+              "combinator": 0,
+              "combinatorLoc": 0,
+              "nesting": [],
+              "subs": [
+                {
+                  "mod": 0,
+                  "name": "x",
+                  "op": "",
+                  "t": "attr",
+                  "val": ""
+                }
+              ],
+              "type": null
+            }
+          ]
+        ],
+        "ok": true
+      },
+      "syms": null
+    }
+  },
+  {
+    "fn": "parseComplexSelector",
+    "src": "[|x]",
+    "minify": true,
+    "out": {
+      "index": 4,
+      "msgs": [],
+      "nesting": false,
+      "out": {
+        "list": [
+          [
+            {
+              "combinator": 0,
+              "combinatorLoc": 0,
+              "nesting": [],
+              "subs": [
+                {
+                  "mod": 0,
+                  "name": "x",
+                  "op": "",
+                  "t": "attr",
+                  "val": ""
+                }
+              ],
+              "type": null
+            }
+          ]
+        ],
+        "ok": true
+      },
+      "syms": null
+    }
+  },
+  {
+    "fn": "parseCompoundSelector",
+    "src": "[|x]",
+    "out": {
+      "index": 4,
+      "msgs": [],
+      "nesting": false,
+      "out": {
+        "list": [
+          [
+            {
+              "combinator": 0,
+              "combinatorLoc": 0,
+              "nesting": [],
+              "subs": [
+                {
+                  "mod": 0,
+                  "name": "x",
+                  "op": "",
+                  "t": "attr",
+                  "val": ""
+                }
+              ],
+              "type": null
+            }
+          ]
+        ],
+        "ok": true
+      },
+      "syms": null
+    }
+  },
+  {
+    "fn": "parseCompoundSelector",
+    "src": "[|x]",
+    "minify": true,
+    "out": {
+      "index": 4,
+      "msgs": [],
+      "nesting": false,
+      "out": {
+        "list": [
+          [
+            {
+              "combinator": 0,
+              "combinatorLoc": 0,
+              "nesting": [],
+              "subs": [
+                {
+                  "mod": 0,
+                  "name": "x",
+                  "op": "",
+                  "t": "attr",
+                  "val": ""
+                }
+              ],
+              "type": null
+            }
+          ]
+        ],
+        "ok": true
+      },
+      "syms": null
+    }
+  },
+  {
+    "fn": "parseSelectorList",
+    "src": "a|b",
+    "out": {
+      "index": 3,
+      "msgs": [],
+      "nesting": false,
+      "out": {
+        "list": [
+          [
+            {
+              "combinator": 0,
+              "combinatorLoc": 0,
+              "nesting": [],
+              "subs": [],
+              "type": {
+                "kind": 29,
+                "name": "b",
+                "prefix": "a"
+              }
+            }
+          ]
+        ],
+        "ok": true
+      },
+      "syms": null
+    }
+  },
+  {
+    "fn": "parseSelectorList",
+    "src": "a|b",
+    "minify": true,
+    "out": {
+      "index": 3,
+      "msgs": [],
+      "nesting": false,
+      "out": {
+        "list": [
+          [
+            {
+              "combinator": 0,
+              "combinatorLoc": 0,
+              "nesting": [],
+              "subs": [],
+              "type": {
+                "kind": 29,
+                "name": "b",
+                "prefix": "a"
+              }
+            }
+          ]
+        ],
+        "ok": true
+      },
+      "syms": null
+    }
+  },
+  {
+    "fn": "parseComplexSelector",
+    "src": "a|b",
+    "out": {
+      "index": 3,
+      "msgs": [],
+      "nesting": false,
+      "out": {
+        "list": [
+          [
+            {
+              "combinator": 0,
+              "combinatorLoc": 0,
+              "nesting": [],
+              "subs": [],
+              "type": {
+                "kind": 29,
+                "name": "b",
+                "prefix": "a"
+              }
+            }
+          ]
+        ],
+        "ok": true
+      },
+      "syms": null
+    }
+  },
+  {
+    "fn": "parseComplexSelector",
+    "src": "a|b",
+    "minify": true,
+    "out": {
+      "index": 3,
+      "msgs": [],
+      "nesting": false,
+      "out": {
+        "list": [
+          [
+            {
+              "combinator": 0,
+              "combinatorLoc": 0,
+              "nesting": [],
+              "subs": [],
+              "type": {
+                "kind": 29,
+                "name": "b",
+                "prefix": "a"
+              }
+            }
+          ]
+        ],
+        "ok": true
+      },
+      "syms": null
+    }
+  },
+  {
+    "fn": "parseCompoundSelector",
+    "src": "a|b",
+    "out": {
+      "index": 3,
+      "msgs": [],
+      "nesting": false,
+      "out": {
+        "list": [
+          [
+            {
+              "combinator": 0,
+              "combinatorLoc": 0,
+              "nesting": [],
+              "subs": [],
+              "type": {
+                "kind": 29,
+                "name": "b",
+                "prefix": "a"
+              }
+            }
+          ]
+        ],
+        "ok": true
+      },
+      "syms": null
+    }
+  },
+  {
+    "fn": "parseCompoundSelector",
+    "src": "a|b",
+    "minify": true,
+    "out": {
+      "index": 3,
+      "msgs": [],
+      "nesting": false,
+      "out": {
+        "list": [
+          [
+            {
+              "combinator": 0,
+              "combinatorLoc": 0,
+              "nesting": [],
+              "subs": [],
+              "type": {
+                "kind": 29,
+                "name": "b",
+                "prefix": "a"
+              }
+            }
+          ]
+        ],
+        "ok": true
+      },
+      "syms": null
+    }
+  },
+  {
+    "fn": "parseSelectorList",
+    "src": ".x, .x, .y",
+    "out": {
+      "index": 10,
+      "msgs": [],
+      "nesting": false,
+      "out": {
+        "list": [
+          [
+            {
+              "combinator": 0,
+              "combinatorLoc": 0,
+              "nesting": [],
+              "subs": [
+                {
+                  "ref": 0,
+                  "t": "class"
+                }
+              ],
+              "type": null
+            }
+          ],
+          [
+            {
+              "combinator": 0,
+              "combinatorLoc": 0,
+              "nesting": [],
+              "subs": [
+                {
+                  "ref": 0,
+                  "t": "class"
+                }
+              ],
+              "type": null
+            }
+          ],
+          [
+            {
+              "combinator": 0,
+              "combinatorLoc": 0,
+              "nesting": [],
+              "subs": [
+                {
+                  "ref": 1,
+                  "t": "class"
+                }
+              ],
+              "type": null
+            }
+          ]
+        ],
+        "ok": true
+      },
+      "syms": [
+        "x|25",
+        "y|25"
+      ]
+    }
+  },
+  {
+    "fn": "parseSelectorList",
+    "src": ".x, .x, .y",
+    "minify": true,
+    "out": {
+      "index": 10,
+      "msgs": [],
+      "nesting": false,
+      "out": {
+        "list": [
+          [
+            {
+              "combinator": 0,
+              "combinatorLoc": 0,
+              "nesting": [],
+              "subs": [
+                {
+                  "ref": 0,
+                  "t": "class"
+                }
+              ],
+              "type": null
+            }
+          ],
+          [
+            {
+              "combinator": 0,
+              "combinatorLoc": 0,
+              "nesting": [],
+              "subs": [
+                {
+                  "ref": 1,
+                  "t": "class"
+                }
+              ],
+              "type": null
+            }
+          ]
+        ],
+        "ok": true
+      },
+      "syms": [
+        "x|25",
+        "y|25"
+      ]
+    }
+  },
+  {
+    "fn": "parseComplexSelector",
+    "src": ".x, .x, .y",
+    "out": {
+      "index": 2,
+      "msgs": [],
+      "nesting": false,
+      "out": {
+        "list": [
+          [
+            {
+              "combinator": 0,
+              "combinatorLoc": 0,
+              "nesting": [],
+              "subs": [
+                {
+                  "ref": 0,
+                  "t": "class"
+                }
+              ],
+              "type": null
+            }
+          ]
+        ],
+        "ok": true
+      },
+      "syms": [
+        "x|25"
+      ]
+    }
+  },
+  {
+    "fn": "parseComplexSelector",
+    "src": ".x, .x, .y",
+    "minify": true,
+    "out": {
+      "index": 2,
+      "msgs": [],
+      "nesting": false,
+      "out": {
+        "list": [
+          [
+            {
+              "combinator": 0,
+              "combinatorLoc": 0,
+              "nesting": [],
+              "subs": [
+                {
+                  "ref": 0,
+                  "t": "class"
+                }
+              ],
+              "type": null
+            }
+          ]
+        ],
+        "ok": true
+      },
+      "syms": [
+        "x|25"
+      ]
+    }
+  },
+  {
+    "fn": "parseCompoundSelector",
+    "src": ".x, .x, .y",
+    "out": {
+      "index": 2,
+      "msgs": [],
+      "nesting": false,
+      "out": {
+        "list": [
+          [
+            {
+              "combinator": 0,
+              "combinatorLoc": 0,
+              "nesting": [],
+              "subs": [
+                {
+                  "ref": 0,
+                  "t": "class"
+                }
+              ],
+              "type": null
+            }
+          ]
+        ],
+        "ok": true
+      },
+      "syms": [
+        "x|25"
+      ]
+    }
+  },
+  {
+    "fn": "parseCompoundSelector",
+    "src": ".x, .x, .y",
+    "minify": true,
+    "out": {
+      "index": 2,
+      "msgs": [],
+      "nesting": false,
+      "out": {
+        "list": [
+          [
+            {
+              "combinator": 0,
+              "combinatorLoc": 0,
+              "nesting": [],
+              "subs": [
+                {
+                  "ref": 0,
+                  "t": "class"
+                }
+              ],
+              "type": null
+            }
+          ]
+        ],
+        "ok": true
+      },
+      "syms": [
+        "x|25"
+      ]
+    }
+  }
+]

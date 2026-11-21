@@ -1,0 +1,1312 @@
+{
+  "note": "go-bytes 等价证据的 fixture 清单：每产出一条 Go 探针 byte fixture，追加一条 {fixture, pkg, note, fns?}。fns 省略时从 fixture 的 fn 字段自动提取（Class.Method.Variant 形态解析 recv+method）；fixture 用 ops/toks 等非 fn schema 时必须显式列 fns。改完跑 node tools/gen-gobytes.mjs 重新生成 tools/go-bytes-functions.json。",
+  "fixtures": [
+    {
+      "fixture": "css-ast-hash-go.json",
+      "pkg": "internal/css_ast",
+      "note": "第101批 Hash 整链，Go 包内探针 IR 逐字节"
+    },
+    {
+      "fixture": "css-ast-equal-go.json",
+      "pkg": "internal/css_ast",
+      "note": "第102批 Equal 整链，Go 包内探针 IR 逐字节（含跨文件 check）"
+    },
+    {
+      "fixture": "css-ast-clone-go.json",
+      "pkg": "internal/css_ast",
+      "note": "第103批 Clone 整链，Go 包内探针 dump 逐字节"
+    },
+    {
+      "fixture": "css-calc-go.json",
+      "pkg": "internal/css_parser",
+      "note": "第104批 calc 归约链，Go 包内探针逐字节",
+      "fns": [
+        "tryToReduceCalcExpression",
+        "floatToStringForCalc",
+        "convertToToken",
+        "partiallySimplify",
+        "tryToParseCalcTerm"
+      ]
+    },
+    {
+      "fixture": "css-font-go.json",
+      "pkg": "internal/css_parser",
+      "note": "第105批 font-family mangle，Go 探针逐字节"
+    },
+    {
+      "fixture": "css-font2-go.json",
+      "pkg": "internal/css_parser",
+      "note": "第105批 turnPercent，Go 探针逐字节"
+    },
+    {
+      "fixture": "css-sel-go.json",
+      "pkg": "internal/css_parser",
+      "note": "第106批 selector 助手，Go 探针逐字节"
+    },
+    {
+      "fixture": "css-colorspaces3-go.json",
+      "pkg": "internal/css_parser",
+      "note": "第107批 色彩空间入口，Go 探针；1-ULP known-deviation 口径(toFixed10)",
+      "fns": [
+        "xyz_to_colorSpace",
+        "colorSpace_to_xyz",
+        "gamut_mapping_xyz_to_srgb"
+      ]
+    },
+    {
+      "fixture": "css-compact-go.json",
+      "pkg": "internal/css_parser",
+      "note": "第108批 compactTokenQuad/commaToken，Go 探针逐字节"
+    },
+    {
+      "fixture": "css-box2-go.json",
+      "pkg": "internal/css_parser",
+      "note": "第109批 boxTracker，Go 探针 dump 逐字节",
+      "fns": [
+        "updateSide",
+        "mangleSides",
+        "mangleSide",
+        "compactRules"
+      ]
+    },
+    {
+      "fixture": "css-br-go.json",
+      "pkg": "internal/css_parser",
+      "note": "第110批 borderRadiusTracker，Go 探针 dump 逐字节",
+      "fns": [
+        "updateCorner",
+        "mangleCorners",
+        "mangleCorner",
+        "compactRules"
+      ]
+    },
+    {
+      "fixture": "css-grad-go.json",
+      "pkg": "internal/css_parser",
+      "note": "第111批 gradient token 助手，Go 探针逐字节",
+      "fns": [
+        "makePositionToken",
+        "makeColorToken",
+        "switchToSinglePositions",
+        "switchToDoublePositions"
+      ]
+    },
+    {
+      "fixture": "css-rmip-go.json",
+      "pkg": "internal/css_parser",
+      "note": "第112批 removeImpliedPositions，Go 探针逐字节",
+      "fns": [
+        "removeImpliedPositions"
+      ]
+    },
+    {
+      "fixture": "css-pcolor-go.json",
+      "pkg": "internal/css_parser",
+      "note": "第113批 parseColor，Go 探针；xyz 1-ULP toFixed10 口径",
+      "fns": [
+        "parseColor"
+      ]
+    },
+    {
+      "fixture": "css-llc-go.json",
+      "pkg": "internal/css_parser",
+      "note": "第113批 looksLikeColor，Go 探针逐字节",
+      "fns": [
+        "looksLikeColor"
+      ]
+    },
+    {
+      "fixture": "css-cps-go.json",
+      "pkg": "internal/css_parser",
+      "note": "第114批 tryToParseColorStops，Go 探针 20 例；xyz/rgb/alpha 1-ULP toFixed10 known-deviation",
+      "fns": [
+        "tryToParseColorStops"
+      ]
+    },
+    {
+      "fixture": "css-cps2-go.json",
+      "pkg": "internal/css_parser",
+      "note": "第115批 generateGradient + tryToExpandGradient，Go 探针 12 例；hash 颜色通道 ±1 known-deviation",
+      "fns": [
+        "generateGradient",
+        "tryToExpandGradient"
+      ]
+    },
+    {
+      "fixture": "css-pg-go.json",
+      "pkg": "internal/css_parser",
+      "note": "第116批 parseGradient，Go 探针 18 例逐字节",
+      "fns": [
+        "parseGradient"
+      ]
+    },
+    {
+      "fixture": "css-pe-go.json",
+      "pkg": "internal/css_parser",
+      "note": "第117批 expect/expectWithMatchingLoc/unexpected/parseComponentValue/parseBlock，Go 探针 16 例逐字节",
+      "fns": [
+        "expect",
+        "expectWithMatchingLoc",
+        "unexpected",
+        "parseComponentValue",
+        "parseBlock"
+      ]
+    },
+    {
+      "fixture": "css-media-go.json",
+      "pkg": "internal/css_parser",
+      "note": "第118批 media 解析链 7 函数，Go 探针 29 例逐字节",
+      "fns": [
+        "parseMediaQueryListUntil",
+        "parseMediaQuery",
+        "looksLikeMediaCondition",
+        "parseMediaCondition",
+        "appendMediaTerm",
+        "parseMediaInParens",
+        "maybeSimplifyMediaNot"
+      ]
+    },
+    {
+      "fixture": "css-u-go.json",
+      "pkg": "internal/css_parser",
+      "note": "第119批 parseURLOrString/expectURLOrString/symbolForName/recordAtLayerRule/expectValidLayerNameIdent，Go 探针 15 例逐字节",
+      "fns": [
+        "parseURLOrString",
+        "expectURLOrString",
+        "symbolForName",
+        "recordAtLayerRule",
+        "expectValidLayerNameIdent"
+      ]
+    },
+    {
+      "fixture": "css-safe-go.json",
+      "pkg": "internal/css_parser",
+      "note": "第120批 containsDeadSelectors/allSelectorsAreDead/isSafeSelectors，Go 探针 15 例逐字节",
+      "fns": [
+        "containsDeadSelectors",
+        "allSelectorsAreDead",
+        "isSafeSelectors"
+      ]
+    },
+    {
+      "fixture": "api-batch-go.json",
+      "pkg": "pkg/api",
+      "note": "第121批 api 纯助手 11 函数一次探针（Go 27 例逐字节）",
+      "fns": [
+        "convertEngineName",
+        "ContextError.Error",
+        "metafileArray.Len",
+        "metafileArray.Swap",
+        "metafileArray.Less",
+        "convertMessagesToPublic",
+        "convertMessagesToInternal",
+        "convertErrorsAndWarningsToInternal",
+        "errorsToString",
+        "validateRegex",
+        "validateKeepNames"
+      ]
+    },
+    {
+      "fixture": "linker-batch-go.json",
+      "pkg": "internal/linker",
+      "note": "第122批 linker 16 个可观测纯函数一次探针（25 例逐字节）；两个 isChunk 是无输出标记方法，只移植不计等价",
+      "fns": [
+        "crossChunkImportArray.Len",
+        "crossChunkImportArray.Swap",
+        "crossChunkImportArray.Less",
+        "crossChunkImportItemArray.Len",
+        "crossChunkImportItemArray.Swap",
+        "crossChunkImportItemArray.Less",
+        "stableRefArray.Len",
+        "stableRefArray.Swap",
+        "stableRefArray.Less",
+        "chunkOrderArray.Len",
+        "chunkOrderArray.Swap",
+        "chunkOrderArray.Less",
+        "wrappedLog",
+        "importConditionsAreEqual",
+        "isConditionalImportRedundant",
+        "hashWriteLengthPrefixed"
+      ]
+    },
+    {
+      "fixture": "resolver-batch-go.json",
+      "pkg": "internal/resolver",
+      "note": "第123批 tsconfig 纯助手（同一 fixture 分片）",
+      "fns": [
+        "isSlash",
+        "getSubstitutedPathWithConfigDirTemplate",
+        "parseMemberExpressionForJSX",
+        "isValidTSConfigPathPattern",
+        "isValidTSConfigPathNoBaseURLPattern"
+      ]
+    },
+    {
+      "fixture": "resolver-batch-go.json",
+      "pkg": "internal/resolver",
+      "note": "第123批 yarnpnp 纯助手（同一 fixture 分片）",
+      "fns": [
+        "parseBareIdentifier"
+      ]
+    },
+    {
+      "fixture": "resolver-batch-go.json",
+      "pkg": "internal/resolver",
+      "note": "第123批 package_json sort 助手（同一 fixture 分片）",
+      "fns": [
+        "expansionKeysArray.Len",
+        "expansionKeysArray.Swap",
+        "expansionKeysArray.Less"
+      ]
+    },
+    {
+      "fixture": "css-sel-leaf-go.json",
+      "pkg": "internal/css_parser",
+      "note": "第124批 selector 叶子 5 函数一次探针（23 例逐字节）",
+      "fns": [
+        "nameToken",
+        "parseCombinator",
+        "parseAnyValue",
+        "parseAttributeSelector",
+        "parseNthIndex"
+      ]
+    },
+    {
+      "fixture": "css-chain-go.json",
+      "pkg": "internal/css_parser",
+      "note": "第125批 selector 主链 4 函数+flatten，Go 探针 114 例逐字节",
+      "fns": [
+        "parseCompoundSelector",
+        "parseComplexSelector",
+        "parseSelectorList",
+        "parsePseudoClassSelector",
+        "flattenLocalAndGlobalSelectors"
+      ]
+    },
+    {
+      "fixture": "fs-batch-go.json",
+      "pkg": "internal/fs",
+      "note": "第126批 MockFS 构造+6 方法一次探针（42 例逐字节）",
+      "fns": [
+        "MockFS",
+        "ReadDirectory",
+        "ReadFile",
+        "OpenFile",
+        "ModKey",
+        "EvalSymlinks"
+      ]
+    },
+    {
+      "fixture": "rules-batch-go.json",
+      "pkg": "internal/css_parser",
+      "note": "第127批 scanForEndOfRule/mangleRules/DeadRuleRemover 一次探针（17 例逐字节）",
+      "fns": [
+        "scanForEndOfRule",
+        "mangleRules",
+        "MakeDeadRuleMangler",
+        "DeadRuleRemover.RemoveDeadRulesInPlace"
+      ]
+    },
+    {
+      "fixture": "decl-batch-go.json",
+      "pkg": "internal/css_parser",
+      "note": "第128批 parseDeclaration，Go 探针 26 例逐字节",
+      "fns": [
+        "parseDeclaration"
+      ]
+    },
+    {
+      "fixture": "nest-helpers-go.json",
+      "pkg": "internal/css_parser",
+      "note": "第129批 nesting 纯助手 4 函数一次探针（8 例逐字节）",
+      "fns": [
+        "addExpansionError",
+        "substituteAmpersandsInCompoundSelector",
+        "multipleComplexSelectorsToSingleComplexSelector",
+        "reportNestingWithGeneratedPseudoClassIs"
+      ]
+    },
+    {
+      "fixture": "nest-lower-go.json",
+      "pkg": "internal/css_parser",
+      "note": "第130批 lowerNesting 三函数一次探针（7 例逐字节）",
+      "fns": [
+        "lowerNestingInRule",
+        "lowerNestingInRulesAndReturnRemaining",
+        "lowerNestingInRuleWithContext"
+      ]
+    },
+    {
+      "fixture": "decl-helpers-go.json",
+      "pkg": "internal/css_parser",
+      "note": "第131批 processDeclarations 的 8 个依赖助手一次探针（28 例逐字节）",
+      "fns": [
+        "processAnimationShorthand",
+        "processAnimationName",
+        "handleSingleAnimationName",
+        "processContainerShorthand",
+        "processContainerName",
+        "handleSingleContainerName",
+        "processListStyleShorthand",
+        "processListStyleType"
+      ]
+    },
+    {
+      "fixture": "decl-ins-go.json",
+      "pkg": "internal/css_parser",
+      "note": "第132批 insertPrefixedDeclaration/lowerInset，Go 探针 17 例逐字节",
+      "fns": [
+        "insertPrefixedDeclaration",
+        "lowerInset"
+      ]
+    },
+    {
+      "fixture": "color-lower-go.json",
+      "pkg": "internal/css_parser",
+      "note": "第133批 tryToGenerateColor/lowerAndMinifyColor，Go 探针 44 例逐字节",
+      "fns": [
+        "tryToGenerateColor",
+        "lowerAndMinifyColor"
+      ]
+    },
+    {
+      "fixture": "grad-lower-go.json",
+      "pkg": "internal/css_parser",
+      "note": "第134批 lowerAndMinifyGradient，Go 探针 60 例逐字节",
+      "fns": [
+        "lowerAndMinifyGradient"
+      ]
+    },
+    {
+      "fixture": "main-chain-go.json",
+      "pkg": "internal/css_parser",
+      "note": "第135批 processDeclarations 本体+4 依赖，Go 探针 120 例逐字节",
+      "fns": [
+        "processDeclarations",
+        "mangleFont",
+        "mangleTransforms",
+        "lowerAndMangleBoxShadow",
+        "lowerAndMangleBoxShadows"
+      ]
+    },
+    {
+      "fixture": "composes-go.json",
+      "pkg": "internal/css_parser",
+      "note": "第135批 handleComposesPragma，Go 探针 4 例逐字节",
+      "fns": [
+        "handleComposesPragma"
+      ]
+    },
+    {
+      "fixture": "main-chain2-go.json",
+      "pkg": "internal/css_parser",
+      "note": "第136批 parseListOfDeclarations/parseAtRule/parseQualifiedRule/parseSelectorRule/parseListOfRules 五函数主链本体，Go 探针 236 例逐字节",
+      "fns": [
+        "parseListOfDeclarations",
+        "parseAtRule",
+        "parseQualifiedRule",
+        "parseSelectorRule",
+        "parseListOfRules"
+      ]
+    },
+    {
+      "fixture": "parse-entry-go.json",
+      "pkg": "internal/css_parser",
+      "note": "第137批 Parse/computeCharacterFrequency/OptionsFromConfig/Options.Equal 入口四函数，Go 探针 52 例逐字节",
+      "fns": [
+        "Parse",
+        "computeCharacterFrequency",
+        "OptionsFromConfig",
+        "Options.Equal"
+      ]
+    },
+    {
+      "fixture": "mapping-array-go.json",
+      "pkg": "internal/js_parser",
+      "note": "第138批 mappingArray.Len/Swap/Less 排序三函数，Go 探针 18 例逐字节",
+      "fns": [
+        "Len",
+        "Swap",
+        "Less"
+      ]
+    },
+    {
+      "fixture": "config-trio-go.json",
+      "pkg": "internal/config",
+      "note": "第139批 Format.String/DefineFlags.Has/mergeDefineData，Go 探针 14 例逐字节",
+      "fns": [
+        "String",
+        "Has",
+        "mergeDefineData"
+      ]
+    },
+    {
+      "fixture": "esm-resolve-go.json",
+      "pkg": "internal/resolver",
+      "note": "第140批 ESM resolution 族+resolver小助手（bundler import 路径核心），Go 探针 232 例逐字节",
+      "fns": [
+        "esmHandlePostConditions",
+        "esmPackageTargetResolve",
+        "esmPackageImportsExportsResolve",
+        "esmPackageImportsResolve",
+        "esmPackageExportsResolve",
+        "esmPackageExportsReverseResolve",
+        "esmPackageImportsExportsReverseResolve",
+        "esmPackageTargetReverseResolve",
+        "MakePrettyPaths",
+        "isExternal",
+        "flushDebugLogs",
+        "tsConfigForDir",
+        "findInvalidSegment"
+      ]
+    },
+    {
+      "fixture": "resolver-leaves-go.json",
+      "pkg": "internal/resolver",
+      "note": "第141批 resolver 剩余叶子8函数（parseImportsExportsMap/builtin/TSConfig/yarnpnp），Go 探针 37 例逐字节",
+      "fns": [
+        "parseImportsExportsMap",
+        "checkForBuiltInNodeModules",
+        "applyExtendedConfig",
+        "TSAlwaysStrictOrStrict",
+        "getDependencyTarget",
+        "getPackage",
+        "resolveViaFallback",
+        "findLocator"
+      ]
+    },
+    {
+      "fixture": "api-format-go.json",
+      "pkg": "pkg/api",
+      "note": "第142批 analyzeMetafileImpl/formatMsgsImpl/prettyPrintPath（build API 输出链），Go 探针 25 例逐字节",
+      "fns": [
+        "analyzeMetafileImpl",
+        "formatMsgsImpl",
+        "prettyPrintPath"
+      ]
+    },
+    {
+      "fixture": "graph-base-go.json",
+      "pkg": "internal/graph",
+      "note": "第143批 LinkerGraph 底座（symbol/全局分配+part→symbol+chunk 图）11函数，Go 包内构造探针 14 例逐字节",
+      "fns": [
+        "CloneLinkerGraph",
+        "EntryPoints",
+        "AddPartToFile",
+        "GenerateNewSymbol",
+        "GenerateSymbolImportAndUse",
+        "GenerateRuntimeSymbolImportAndUse",
+        "LineColumnTracker",
+        "ImportRecords",
+        "TopLevelSymbolToParts"
+      ]
+    },
+    {
+      "fixture": "treeshake-go.json",
+      "pkg": "internal/linker",
+      "note": "第144批 tree-shaking/code-splitting 簇（part 图遍历+entry bit 传播）5函数，Go 包内构造探针 5 例逐字节",
+      "fns": [
+        "treeShakingAndCodeSplitting",
+        "markFileReachableForCodeSplitting",
+        "markFileLiveForTreeShaking",
+        "isExternalDynamicImport",
+        "markPartLiveForTreeShaking"
+      ]
+    },
+    {
+      "fixture": "chunk-helpers-go.json",
+      "pkg": "internal/linker",
+      "note": "第145批 chunk 助手（findImportedCSSFilesInJSOrder/shouldIncludePart/pathBetweenChunks），Go 探针 7 例逐字节",
+      "fns": [
+        "findImportedCSSFilesInJSOrder",
+        "shouldIncludePart",
+        "pathBetweenChunks"
+      ]
+    },
+    {
+      "fixture": "merge-stmts-go.json",
+      "pkg": "internal/linker",
+      "note": "第146批 mergeAdjacentLocalStmts（chunk stmt 合并），Go 探针 8 例逐字节",
+      "fns": [
+        "mergeAdjacentLocalStmts"
+      ]
+    },
+    {
+      "fixture": "chunk-compute-go.json",
+      "pkg": "internal/linker",
+      "note": "第147批 chunk 计算底座（computeChunks/findImportedPartsInJSOrder/findImportedFilesInCSSOrder），Go 包内构造图探针 5 例逐字节，sha256 9c052721…",
+      "fns": [
+        "computeChunks",
+        "findImportedPartsInJSOrder",
+        "findImportedFilesInCSSOrder"
+      ]
+    },
+    {
+      "fixture": "chunk-compute-go.json",
+      "pkg": "internal/bundler",
+      "note": "第147批 PathRelativeToOutbase（chunk 输出路径底座），同一 Go 探针 5 例经 computeChunks 间接逐字节覆盖",
+      "fns": [
+        "PathRelativeToOutbase"
+      ]
+    },
+    {
+      "fixture": "cross-chunk-deps-go.json",
+      "pkg": "internal/linker",
+      "note": "第148批 computeCrossChunkDependencies + sortedCrossChunkImports/Exports，Go 包内构造图探针 3 例逐字节，sha256 0353a26b…",
+      "fns": [
+        "computeCrossChunkDependencies",
+        "sortedCrossChunkImports",
+        "sortedCrossChunkExportItems"
+      ]
+    },
+    {
+      "fixture": "output-pieces-go.json",
+      "pkg": "internal/linker",
+      "note": "第149批 输出装配底座（breakOutputIntoPieces/breakJoinerIntoPieces/substituteFinalPaths/accurateFinalByteCount），Go 探针 8 例逐字节，sha256 4ac8d072…",
+      "fns": [
+        "breakOutputIntoPieces",
+        "breakJoinerIntoPieces",
+        "substituteFinalPaths",
+        "accurateFinalByteCount"
+      ]
+    },
+    {
+      "fixture": "isolated-hash-go.json",
+      "pkg": "internal/linker",
+      "note": "第150批 isolated hash 簇（generateIsolatedHash/generateIsolatedHashInParallel/appendIsolatedHashesForImportedChunks），Go 探针 5 例 xxhash 摘要逐字节，sha256 ad9d0a94…",
+      "fns": [
+        "generateIsolatedHash",
+        "generateIsolatedHashInParallel",
+        "appendIsolatedHashesForImportedChunks"
+      ]
+    },
+    {
+      "fixture": "gen-helpers-go.json",
+      "pkg": "internal/linker",
+      "note": "第151批 chunk 生成链纯助手（requireOrImportMetaForSource/maybeAppendLegalComments/wrapRulesWithConditions/generateExtraDataForFileJS/maybeForbidArbitraryModuleNamespaceIdentifier），Go 探针 13 例逐字节，sha256 a0e0bf33…",
+      "fns": [
+        "requireOrImportMetaForSource",
+        "maybeAppendLegalComments",
+        "wrapRulesWithConditions",
+        "generateExtraDataForFileJS",
+        "maybeForbidArbitraryModuleNamespaceIdentifier"
+      ]
+    },
+    {
+      "fixture": "stmt-convert-go.json",
+      "pkg": "internal/linker",
+      "note": "第152批 statement 转换底座（shouldRemoveImportExportStmt/convertStmtsForChunk），Go 探针 9 例逐字节，sha256 3c87665d…",
+      "fns": [
+        "shouldRemoveImportExportStmt",
+        "convertStmtsForChunk"
+      ]
+    },
+    {
+      "fixture": "rename-chunk-go.json",
+      "pkg": "internal/linker",
+      "note": "第153批 renameSymbolsInChunk（chunk 符号重命名核心），Go 探针 3 例 NameForSymbol 逐字节，sha256 288cf9d1…（含多源 collision，修复 MinifyRenamer.RefSourceIndex 潜在 bug）",
+      "fns": [
+        "renameSymbolsInChunk"
+      ]
+    },
+    {
+      "fixture": "linker-helpers-go.json",
+      "pkg": "internal/linker",
+      "note": "第154批 linker 助手簇（enforceNoCyclicChunkImports/preventExportsFromBeingRenamed/maybeCorrectObviousTypo/advanceImportTracker/recoverInternalError），Go 探针 10 例逐字节，sha256 3113cca1…",
+      "fns": [
+        "enforceNoCyclicChunkImports",
+        "preventExportsFromBeingRenamed",
+        "maybeCorrectObviousTypo",
+        "advanceImportTracker",
+        "recoverInternalError"
+      ]
+    },
+    {
+      "fixture": "sourcemap-chunk-go.json",
+      "pkg": "internal/linker",
+      "note": "第155批 generateSourceMapForChunk（chunk sourcemap 生成），Go 探针 4 例 Prefix/Mappings/Suffix 逐字节，sha256 7b80333d…",
+      "fns": [
+        "generateSourceMapForChunk"
+      ]
+    },
+    {
+      "fixture": "chunkjs-go.json",
+      "pkg": "internal/linker",
+      "note": "第156批 generateChunkJS 本体，Go 探针 5 例最终 intermediateOutput 逐字节，sha256 5541f8cd…",
+      "fns": [
+        "generateChunkJS"
+      ]
+    },
+    {
+      "fixture": "chunkcss-go.json",
+      "pkg": "internal/linker",
+      "note": "第157批 generateChunkCSS 本体（assembly 路径），Go 探针 2 例逐字节，sha256 3296bdd8…",
+      "fns": [
+        "generateChunkCSS"
+      ]
+    },
+    {
+      "fixture": "gcip-go.json",
+      "pkg": "internal/linker",
+      "note": "第158批 generateChunksInParallel（并发生成+最终输出），Go 探针 2 例 OutputFiles 逐字节，sha256 36883163…",
+      "fns": [
+        "generateChunksInParallel"
+      ]
+    },
+    {
+      "fixture": "tsconfig-json-go.json",
+      "pkg": "internal/resolver",
+      "note": "第159批 ParseTSConfigJSON（Resolve 链 tsconfig 解析核心），Go 探针 32 例逐字节",
+      "fns": [
+        "ParseTSConfigJSON"
+      ]
+    },
+    {
+      "fixture": "pkgjson-go.json",
+      "pkg": "internal/resolver",
+      "note": "第160批 parsePackageJSON（Resolve 链核心构造器，产出 packageJSON/mainFields/moduleTypeData/browserMap/sideEffects 底座），Go 探针 24 例逐字节",
+      "fns": [
+        "parsePackageJSON"
+      ]
+    },
+    {
+      "fixture": "browser-map-go.json",
+      "pkg": "internal/resolver",
+      "note": "第161批 checkBrowserMap（Resolve 链 browser 字段 remapping + dirInfo 底座），Go 探针 11 例逐字节",
+      "fns": [
+        "checkBrowserMap"
+      ]
+    },
+    {
+      "fixture": "pnp-go.json",
+      "pkg": "internal/resolver",
+      "note": "第162批 compileYarnPnPData+resolveToUnqualified（Resolve 链 Yarn PnP 路径解析核心+pnpData 底座），Go 探针 11 例逐字节",
+      "fns": [
+        "compileYarnPnPData",
+        "resolveToUnqualified"
+      ]
+    },
+    {
+      "fixture": "load-file-go.json",
+      "pkg": "internal/resolver",
+      "note": "第163批 loadAsFile+loadAsIndex（Resolve 链文件/索引加载器+fs.Entry.Kind 底座），Go 探针 13 例逐字节",
+      "fns": [
+        "loadAsFile",
+        "loadAsIndex"
+      ]
+    },
+    {
+      "fixture": "extract-pnp-go.json",
+      "pkg": "internal/resolver",
+      "note": "第164批 extractYarnPnPDataFromJSON（PnP manifest 加载，resolveToUnqualified 搭档），Go 探针 5 例逐字节",
+      "fns": [
+        "extractYarnPnPDataFromJSON"
+      ]
+    },
+    {
+      "fixture": "dirinfo-go.json",
+      "pkg": "internal/resolver",
+      "note": "第165批 dirInfoCached+dirInfoUncached（dirInfo 深簇底座），Go 探针 11 例逐字节",
+      "fns": [
+        "dirInfoCached",
+        "dirInfoUncached"
+      ]
+    },
+    {
+      "fixture": "remap-go.json",
+      "pkg": "internal/resolver",
+      "note": "第166批 loadAsIndexWithBrowserRemapping+DebugMeta.LogErrorMsg，Go 探针 9 例逐字节",
+      "fns": [
+        "loadAsIndexWithBrowserRemapping",
+        "LogErrorMsg"
+      ]
+    },
+    {
+      "fixture": "load-dir-go.json",
+      "pkg": "internal/resolver",
+      "note": "第167批 loadAsMainField+loadAsDirectory+loadAsFileOrDirectory（Resolve 链目录加载三连），Go 探针 12 例逐字节",
+      "fns": [
+        "loadAsMainField",
+        "loadAsDirectory",
+        "loadAsFileOrDirectory"
+      ]
+    },
+    {
+      "fixture": "tsconfig-full-go.json",
+      "pkg": "internal/resolver",
+      "note": "第168批 parseTSConfig+parseTSConfigFromSource（Resolve 链 tsconfig 加载深簇，transform 模式逐字节），Go 探针 8 例",
+      "fns": [
+        "parseTSConfig",
+        "parseTSConfigFromSource"
+      ]
+    },
+    {
+      "fixture": "tspath-go.json",
+      "pkg": "internal/resolver",
+      "note": "第169批 matchTSConfigPaths（tsconfig paths 映射），Go 探针 8 例逐字节",
+      "fns": [
+        "matchTSConfigPaths"
+      ]
+    },
+    {
+      "fixture": "finalize-go.json",
+      "pkg": "internal/resolver",
+      "note": "第170批 finalizeImportsExportsResult（ESM exports 解析核心深簇），Go 探针 9 例逐字节",
+      "fns": [
+        "finalizeImportsExportsResult"
+      ]
+    },
+    {
+      "fixture": "esmalgo-go.json",
+      "pkg": "internal/resolver",
+      "note": "第171批 esmResolveAlgorithm（ESM 解析算法协调层，深簇最后一函数），Go 探针 6 例逐字节",
+      "fns": [
+        "esmResolveAlgorithm"
+      ]
+    },
+    {
+      "fixture": "pnpjs-go.json",
+      "pkg": "internal/resolver",
+      "note": "第172批 tryToExtractYarnPnPDataFromJS（PnP JS 拦截主入口，底座全链），Go 探针 11 例逐字节",
+      "fns": [
+        "tryToExtractYarnPnPDataFromJS"
+      ]
+    },
+    {
+      "fixture": "pnpjs-go.json",
+      "pkg": "internal/logger",
+      "note": "第172批 StringInJSTable 三件套（PnP 内嵌 JSON 位置重映射），Go 探针 11 例逐字节",
+      "fns": [
+        "GenerateStringInJSTable",
+        "RemapStringInJSLoc",
+        "NewStringInJSLog"
+      ]
+    },
+    {
+      "fixture": "pnpjs-go.json",
+      "pkg": "internal/js_parser",
+      "note": "第172批 OptionsForYarnPnP+remapExprLocsInJSON（PnP 拦截底座），Go 探针 11 例逐字节",
+      "fns": [
+        "OptionsForYarnPnP",
+        "remapExprLocsInJSON"
+      ]
+    },
+    {
+      "fixture": "finalize2-go.json",
+      "pkg": "internal/resolver",
+      "note": "第173批 finalizeResolve（ResolveResult 底座 + symlink/sideEffects/tsconfig/external），Go 探针 12 例逐字节",
+      "fns": [
+        "finalizeResolve"
+      ]
+    },
+    {
+      "fixture": "rescore-go.json",
+      "pkg": "internal/resolver",
+      "note": "第174批 resolver 递归核心四函数（resolveWithoutRemapping/loadNodeModules/loadPackageImports/resolveWithoutSymlinks），Go 探针 20 例逐字节",
+      "fns": [
+        "resolveWithoutRemapping",
+        "loadNodeModules",
+        "loadPackageImports",
+        "resolveWithoutSymlinks"
+      ]
+    },
+    {
+      "fixture": "respublic-go.json",
+      "pkg": "internal/resolver",
+      "note": "第175批 resolver 顶层入口三函数（Resolve/ResolveGlob/ProbeResolvePackageAsRelative），Go 探针 18 例逐字节",
+      "fns": [
+        "Resolve",
+        "ResolveGlob",
+        "ProbeResolvePackageAsRelative"
+      ]
+    },
+    {
+      "fixture": "respublic-go.json",
+      "pkg": "internal/config",
+      "note": "第175批 TSConfigJSX.ApplyTo（NewResolver JSX 应用），Go 探针 6 例逐字节",
+      "fns": [
+        "ApplyTo"
+      ]
+    },
+    {
+      "fixture": "newresolver-go.json",
+      "pkg": "internal/resolver",
+      "note": "第176批 NewResolver（Resolver 构造器底座），Go 探针 5 例逐字节",
+      "fns": [
+        "NewResolver"
+      ]
+    },
+    {
+      "fixture": "lnkexport-go.json",
+      "pkg": "internal/linker",
+      "note": "第177批 linker export/wrap 图遍历簇（recursivelyWrapDependencies/hasDynamicExportsDueToExportStar/addExportsForExportStar），Go 探针 8 例逐字节",
+      "fns": [
+        "recursivelyWrapDependencies",
+        "hasDynamicExportsDueToExportStar",
+        "addExportsForExportStar"
+      ]
+    },
+    {
+      "fixture": "lngmangle-go.json",
+      "pkg": "internal/linker",
+      "note": "第178批 mangleProps/mangleLocalCSS（属性/本地 CSS 名混淆），Go 探针 5 例逐字节",
+      "fns": [
+        "mangleProps",
+        "mangleLocalCSS"
+      ]
+    },
+    {
+      "fixture": "lnkcodegen-go.json",
+      "pkg": "internal/linker",
+      "note": "第179批 createWrapperForFile/generateCodeForLazyExport（wrapper + lazy export 代码生成），Go 探针 6 例逐字节",
+      "fns": [
+        "createWrapperForFile",
+        "generateCodeForLazyExport"
+      ]
+    },
+    {
+      "fixture": "lnkexport2-go.json",
+      "pkg": "internal/linker",
+      "note": "第180批（第75轮）linker 出口簇 createExportsForFile/matchImportWithExport/matchImportsWithExportsForFile/generateEntryPointTailJS/generateCodeForFileInChunkJS（逐字节 Go 探针 12 例）",
+      "fns": [
+        "createExportsForFile",
+        "matchImportWithExport",
+        "matchImportsWithExportsForFile",
+        "generateEntryPointTailJS",
+        "generateCodeForFileInChunkJS"
+      ]
+    },
+    {
+      "fixture": "process-defines-go.json",
+      "pkg": "internal/config",
+      "note": "第84批 knownGlobals 全表(807项)+ProcessDefines（8例 user defines 覆盖/合并/常量），Go 探针逐字节",
+      "fns": [
+        "ProcessDefines"
+      ]
+    },
+    {
+      "fixture": "logger/style-extra-go.json",
+      "pkg": "internal/logger",
+      "note": "第84批 msgToStringClang/writeMsgDataClang/msgToStringVisualStudio（含VSID表72项），Go 探针8例逐字节",
+      "fns": [
+        "msgToStringClang",
+        "writeMsgDataClang",
+        "msgToStringVisualStudio"
+      ]
+    },
+    {
+      "fixture": "service-state-go.json",
+      "pkg": "cmd/esbuild",
+      "note": "第85批 serviceType channel 状态机+dispatch 错误分支 6 方法，共享 harness 18 行逐字节（format/analyze throw-shell 已按诚信口径剔除）",
+      "fns": [
+        "getActiveBuild",
+        "createActiveBuild",
+        "destroyActiveBuild",
+        "sendPacket",
+        "sendRequest",
+        "handleIncomingPacket"
+      ]
+    },
+    {
+      "fixture": "api-chain-go.json",
+      "pkg": "cmd/esbuild",
+      "note": "第86批 api→service 链 handleFormatMessagesRequest/handleAnalyzeMetafileRequest 真接通（api.FormatMessages/AnalyzeMetafile 已移植），9 例逐字节",
+      "fns": [
+        "handleFormatMessagesRequest",
+        "handleAnalyzeMetafileRequest"
+      ]
+    },
+    {
+      "fixture": "api-validate2-go.json",
+      "pkg": "pkg/api",
+      "note": "第86批 validatePath/validateExternals/validatePathsArray 共享 harness 16 行逐字节",
+      "fns": [
+        "validatePath",
+        "validateExternals",
+        "validatePathsArray"
+      ]
+    },
+    {
+      "fixture": "api-serve-go.json",
+      "pkg": "pkg/api",
+      "note": "第86批 respondWithDirList 目录列表 HTML，共享探针 5 例逐字节",
+      "fns": [
+        "respondWithDirList"
+      ]
+    },
+    {
+      "fixture": "api-big-go.json",
+      "pkg": "pkg/api",
+      "note": "第87批 validateDefines(9)+validateFeatures(8) 共享大探针逐字节，含 CSSPrefixData 底座表",
+      "fns": [
+        "validateDefines",
+        "validateFeatures"
+      ]
+    },
+    {
+      "fixture": "bundler-light-go.json",
+      "pkg": "internal/bundler",
+      "note": "第87批 sanitizeLocation/lowestCommonAncestorDirectory 共享探针 11 例逐字节",
+      "fns": [
+        "sanitizeLocation",
+        "lowestCommonAncestorDirectory"
+      ]
+    },
+    {
+      "fixture": "bundler-opt-go.json",
+      "pkg": "internal/bundler",
+      "note": "第88批 applyOptionDefaults + fixInvalidUnsupportedJSFeatureOverrides 共享探针 7 行逐字节（config.Options duck-typed，JSFeature bigint）",
+      "fns": [
+        "applyOptionDefaults",
+        "fixInvalidUnsupportedJSFeatureOverrides"
+      ]
+    },
+    {
+      "fixture": "api-validate-chain-go.json",
+      "pkg": "pkg/api",
+      "note": "第88批 22 个已移植 validate 助手整链大探针 93 行逐字节（单函数正常路径真实现，非 throw-shell）",
+      "fns": [
+        "validatePathTemplate",
+        "validatePlatform",
+        "validateFormat",
+        "validateSourceMap",
+        "validateLegalComments",
+        "validateColor",
+        "validateLogLevel",
+        "validateLogStyle",
+        "validateASCIIOnly",
+        "validateExternalPackages",
+        "validateTreeShaking",
+        "extractPathStyle",
+        "validateLoader",
+        "validateSupported",
+        "validateGlobalName",
+        "validateAlias",
+        "validateResolveExtensions",
+        "validateLoaders",
+        "validateJSXExpr",
+        "validateLogOverrides",
+        "validateOutputExtensions",
+        "validateBannerOrFooter",
+        "isValidExtension",
+        "prettyPrintByteCount",
+        "importKindToResolveKind",
+        "resolveKindToImportKind",
+        "escapeForHTML",
+        "stripDirPrefix"
+      ]
+    },
+    {
+      "fixture": "vbo-go.json",
+      "pkg": "pkg/api",
+      "note": "第89批 validateBuildOptions 本体整函数逐字节（7 行 config.Options 全字段，128K 夹具含 ProcessDefines 全局表）",
+      "fns": [
+        "validateBuildOptions"
+      ]
+    },
+    {
+      "fixture": "bundler-chain-go.json",
+      "pkg": "internal/bundler",
+      "note": "第89批 reportExplicitPhaseImport/findReachableFiles/generateMetadataJSON 整链探针 16 行逐字节",
+      "fns": [
+        "reportExplicitPhaseImport",
+        "findReachableFiles",
+        "generateMetadataJSON"
+      ]
+    },
+    {
+      "fixture": "mangle-go.json",
+      "pkg": "pkg/cli",
+      "note": "第89批 printMangleCache 纯打印器 7 例逐字节",
+      "fns": [
+        "printMangleCache"
+      ]
+    },
+    {
+      "fixture": "cli-pure-go.json",
+      "pkg": "pkg/cli",
+      "note": "第89批 newBuildOptions/newTransformOptions/filterAnalyzeFlags 整链探针 7 例逐字节",
+      "fns": [
+        "newBuildOptions",
+        "newTransformOptions",
+        "filterAnalyzeFlags"
+      ]
+    },
+    {
+      "fixture": "targets-go.json",
+      "pkg": "pkg/cli",
+      "note": "第89批 parseTargets 逐字节 7 例（target 别名/引擎/错误注记）",
+      "fns": [
+        "parseTargets"
+      ]
+    },
+    {
+      "fixture": "bundle-scan-go.json",
+      "pkg": "internal/bundler",
+      "note": "第90批 TLA 校验链 + source-index 分配共享探针 11 行逐字节（10 例 TLA 图 + alloc）",
+      "fns": [
+        "iterativelyValidateTLA",
+        "recursivelyValidateTLA",
+        "reportInvalidTLA",
+        "allocateSourceIndex",
+        "allocateGlobSourceIndex"
+      ]
+    },
+    {
+      "fixture": "bundle-diag-go.json",
+      "pkg": "internal/bundler",
+      "note": "第90批 resolve 失败提示 + plugin 消息日志 + source map 注释提取共享探针 22 行逐字节",
+      "fns": [
+        "ResolveFailureErrorTextSuggestionNotes",
+        "logPluginMessages",
+        "extractSourceMapFromComment"
+      ]
+    },
+    {
+      "fixture": "runtime-source-go.json",
+      "pkg": "internal/runtime",
+      "note": "第91批 runtime.Source 底座：8 组 feature mask 全 Contents SHA 逐字节（含 three.js esnext mask=0）",
+      "fns": [
+        "Source"
+      ]
+    },
+    {
+      "fixture": "options-from-config-go.json",
+      "pkg": "internal/js_parser",
+      "note": "第91批 OptionsFromConfig + Equal（parseRuntime/parseFile 桥）13 行逐字节",
+      "fns": [
+        "OptionsFromConfig",
+        "Equal"
+      ]
+    },
+    {
+      "fixture": "sourcemap-parse-go.json",
+      "pkg": "internal/js_parser",
+      "note": "第104轮 ParseSourceMap 逐字节 Go 探针 17 例（合法/非法/sections/sourceRoot/file-url）",
+      "fns": [
+        "ParseSourceMap"
+      ]
+    },
+    {
+      "fixture": "linker-extra-data-go.json",
+      "pkg": "internal/linker",
+      "note": "第104轮 generateExtraDataForFileJS debugVerboseMetafile=false 恒空，Go 探针 3 例",
+      "fns": [
+        "generateExtraDataForFileJS"
+      ]
+    },
+    {
+      "fixture": "plugin-reg-go.json",
+      "pkg": "pkg/api",
+      "note": "第105轮 pluginImpl.onStart/onResolve/onLoad 注册状态机，一探针 4 场景×3 方法逐字节",
+      "fns": [
+        "onStart",
+        "onResolve",
+        "onLoad"
+      ]
+    },
+    {
+      "fixture": "load-plugins-go.json",
+      "pkg": "pkg/api",
+      "note": "第105轮 loadPlugins 整链 Setup 注册状态机，一探针 4 场景逐字节",
+      "fns": [
+        "loadPlugins"
+      ]
+    },
+    {
+      "fixture": "analyze-plugin-go.json",
+      "pkg": "pkg/cli",
+      "note": "第105轮 addAnalyzePlugin append PrintAnalysis + Metafile + OnEnd 输出 AnalyzeMetafile，一探针 4 场景逐字节",
+      "fns": [
+        "addAnalyzePlugin"
+      ]
+    },
+    {
+      "fixture": "ctx-state-go.json",
+      "pkg": "pkg/api",
+      "note": "第105轮 internalContext 生命周期状态机 Cancel/activeBuildOrRecentBuildOrRebuild/rebuild，一探针 4 场景逐字节",
+      "fns": [
+        "Cancel",
+        "activeBuildOrRecentBuildOrRebuild",
+        "rebuild"
+      ]
+    },
+    {
+      "fixture": "bundler-plugin-driver-go.json",
+      "pkg": "internal/bundler",
+      "note": "第106轮 RunOnResolvePlugins/runOnLoadPlugins 插件驱动整族，一探针8场景逐字节",
+      "fns": [
+        "RunOnResolvePlugins",
+        "runOnLoadPlugins"
+      ]
+    },
+    {
+      "fixture": "rebuild-impl-go.json",
+      "pkg": "pkg/api",
+      "note": "第106轮 rebuildImpl 确定性早退路径（warning 重复+mangle 校验+空入口），一探针4场景逐字节",
+      "fns": [
+        "rebuildImpl"
+      ]
+    },
+    {
+      "fixture": "print-summary-go.json",
+      "pkg": "pkg/api",
+      "note": "第106轮 printSummary yarn/1 去耗时确定性路径，一探针3场景逐字节",
+      "fns": [
+        "printSummary"
+      ]
+    },
+    {
+      "fixture": "watcher-state-go.json",
+      "pkg": "pkg/api",
+      "note": "第106轮 watcher.setWatchData 确定性状态（shouldLog=false），一探针4场景逐字节",
+      "fns": [
+        "setWatchData"
+      ]
+    },
+    {
+      "fixture": "eval-symlinks-go.json",
+      "pkg": "internal/fs",
+      "note": "第106轮 goFilepath.evalSymlinks 真实OS symlink解析，一探针5场景逐字节",
+      "fns": [
+        "evalSymlinks"
+      ]
+    },
+    {
+      "fixture": "watch-dirty-go.json",
+      "pkg": "pkg/api",
+      "note": "第107轮 tryToFindDirtyPath 预置itemsToScan绕开rand的确定性路径，一探针6场景逐字节",
+      "fns": [
+        "tryToFindDirtyPath"
+      ]
+    },
+    {
+      "fixture": "log-expr-go.json",
+      "pkg": "internal/js_parser",
+      "note": "第107轮 parser.logExprErrors 三分支（default值/?后/array spread feature），一探针6场景逐字节",
+      "fns": [
+        "logExprErrors"
+      ]
+    },
+    {
+      "fixture": "sym-use-go.json",
+      "pkg": "internal/js_parser",
+      "note": "第107轮 parser.convertSymbolUseToCall 符号使用转换状态机（含uint32下溢），一探针5场景逐字节",
+      "fns": [
+        "convertSymbolUseToCall"
+      ]
+    },
+    {
+      "fixture": "decl-cj-go.json",
+      "pkg": "internal/js_parser",
+      "note": "第107轮 parser.declareCommonJSSymbol（CJS符号声明/hoisted合并/shadow），一探针5场景逐字节",
+      "fns": [
+        "declareCommonJSSymbol"
+      ]
+    },
+    {
+      "fixture": "inject-dot-go.json",
+      "pkg": "internal/js_parser",
+      "note": "第107轮 parser.instantiateInjectDotName（注入符号实例化+赋值误用报错+note），一探针4场景逐字节",
+      "fns": [
+        "instantiateInjectDotName"
+      ]
+    },
+    {
+      "fixture": "warn-ns-go.json",
+      "pkg": "internal/js_parser",
+      "note": "第107轮 parser.warnAboutImportNamespaceCall（命名空间导入调用警告状态机），一探针5场景逐字节",
+      "fns": [
+        "warnAboutImportNamespaceCall"
+      ]
+    },
+    {
+      "fixture": "relocate-go.json",
+      "pkg": "internal/js_parser",
+      "note": "第107轮 parser.maybeRelocateVarsToTopLevel（bundle变量提升为赋值），一探针6场景逐字节",
+      "fns": [
+        "maybeRelocateVarsToTopLevel"
+      ]
+    },
+    {
+      "fixture": "glob-handle-go.json",
+      "pkg": "internal/js_parser",
+      "note": "第108轮 parser.handleGlobPattern（glob→符号名生成/去重），一探针3场景逐字节",
+      "fns": [
+        "handleGlobPattern"
+      ]
+    },
+    {
+      "fixture": "using-lower-go.json",
+      "pkg": "internal/js_parser",
+      "note": "第109轮 parser using 声明降级整族（shouldLowerUsingDeclarations/lowerUsingDeclarationContext/scanStmts/finalize/lowerUsingDeclarationInForOf），一探针5场景 Parse+Print target=es2015 逐字节",
+      "fns": [
+        "shouldLowerUsingDeclarations",
+        "lowerUsingDeclarationContext",
+        "lowerUsingDeclarationContext.scanStmts",
+        "lowerUsingDeclarationContext.finalize",
+        "lowerUsingDeclarationInForOf"
+      ]
+    },
+    {
+      "fixture": "min-fold-go.json",
+      "pkg": "internal/js_printer",
+      "note": "第109轮 printer minify 折叠族（simplifyUnusedExpr/lateConstantFoldUnaryOrBinaryOrIfExpr），一探针8场景 AST→AST 逐字节",
+      "fns": [
+        "simplifyUnusedExpr",
+        "lateConstantFoldUnaryOrBinaryOrIfExpr"
+      ]
+    },
+    {
+      "fixture": "import-print-go.json",
+      "pkg": "internal/js_printer",
+      "note": "第111轮 printer import-record 底座（printRequireOrImportExpr/printImportCallAssertOrWith），一探针6场景 Print 字节逐字节",
+      "fns": [
+        "printRequireOrImportExpr",
+        "printImportCallAssertOrWith"
+      ]
+    },
+    {
+      "fixture": "compwarn-go.json",
+      "pkg": "internal/linker",
+      "note": "第111轮 linker validateComposesFromProperties 跨文件 composes 属性冲突警告，一探针2场景 graph fixture 逐字节",
+      "fns": [
+        "validateComposesFromProperties"
+      ]
+    },
+    {
+      "fixture": "astbuilders-go.json",
+      "pkg": "internal/js_parser",
+      "note": "第112轮 visit-pass底座 AST构建器（prepareForVisitPass/LazyExportAST/GlobResolveAST），一探针5场景规范AST逐字节",
+      "fns": [
+        "prepareForVisitPass",
+        "LazyExportAST",
+        "GlobResolveAST"
+      ]
+    },
+    {
+      "fixture": "globresult-go.json",
+      "pkg": "internal/bundler",
+      "note": "第112轮 generateResultForGlobResolve（外部resolveResults子集，依赖GlobResolveAST底座），一探针4场景规范AST逐字节",
+      "fns": [
+        "generateResultForGlobResolve"
+      ]
+    },
+    {
+      "fixture": "srcmap-go.json",
+      "pkg": "internal/bundler",
+      "note": "第112轮 computeDataForSourceMapsInParallel（SourceMapNone+sourcesContent子集），一探针5场景逐字节",
+      "fns": [
+        "computeDataForSourceMapsInParallel"
+      ]
+    },
+    {
+      "fixture": "broadcast-go.json",
+      "pkg": "pkg/api",
+      "note": "第112轮 apiHandler.broadcastBuildResult（hash差异→SSE change事件），一探针6场景逐字节",
+      "fns": [
+        "broadcastBuildResult"
+      ]
+    }
+  ]
+}

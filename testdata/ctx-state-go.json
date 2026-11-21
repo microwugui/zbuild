@@ -1,0 +1,43 @@
+[
+  {
+    "name": "fresh-cancel",
+    "didDispose": false,
+    "activeNil": true,
+    "recentNil": true,
+    "resultFiles": []
+  },
+  {
+    "name": "disposed",
+    "didDispose": true,
+    "activeNil": true,
+    "recentNil": true,
+    "resultFiles": []
+  },
+  {
+    "name": "recent-build",
+    "didDispose": false,
+    "activeNil": true,
+    "recentNil": false,
+    "resultFiles": [
+      {
+        "path": "\u003cstdout\u003e",
+        "contents": "var x = 1;\n",
+        "hash": "abc123"
+      }
+    ]
+  },
+  {
+    "name": "dispose-clears-recent",
+    "didDispose": true,
+    "activeNil": true,
+    "recentNil": true,
+    "resultFiles": []
+  },
+  {
+    "name": "rebuild-disposed",
+    "didDispose": true,
+    "activeNil": true,
+    "recentNil": true,
+    "resultFiles": []
+  }
+]

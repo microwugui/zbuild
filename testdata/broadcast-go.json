@@ -1,0 +1,81 @@
+[
+  {
+    "name": "added",
+    "events": [
+      [
+        {
+          "event": "change",
+          "data": "{\"added\":[\"/a.js\"],\"removed\":[],\"updated\":[]}"
+        }
+      ]
+    ],
+    "newHashes": {
+      "/out/a.js": "h1"
+    }
+  },
+  {
+    "name": "updated",
+    "events": [
+      [
+        {
+          "event": "change",
+          "data": "{\"added\":[],\"removed\":[],\"updated\":[\"/a.js\"]}"
+        }
+      ]
+    ],
+    "newHashes": {
+      "/out/a.js": "h2"
+    }
+  },
+  {
+    "name": "removed",
+    "events": [
+      [
+        {
+          "event": "change",
+          "data": "{\"added\":[],\"removed\":[\"/a.js\"],\"updated\":[]}"
+        }
+      ]
+    ],
+    "newHashes": {}
+  },
+  {
+    "name": "mixed-sorted",
+    "events": [
+      [
+        {
+          "event": "change",
+          "data": "{\"added\":[\"/static/dist/a.js\"],\"removed\":[\"/static/dist/c.js\"],\"updated\":[\"/static/dist/b.js\"]}"
+        }
+      ],
+      [
+        {
+          "event": "change",
+          "data": "{\"added\":[\"/static/dist/a.js\"],\"removed\":[\"/static/dist/c.js\"],\"updated\":[\"/static/dist/b.js\"]}"
+        }
+      ]
+    ],
+    "newHashes": {
+      "/out/a.js": "n",
+      "/out/b.js": "z"
+    }
+  },
+  {
+    "name": "errors-skip",
+    "events": [
+      null
+    ],
+    "newHashes": {
+      "/out/a.js": "h1"
+    }
+  },
+  {
+    "name": "nochange",
+    "events": [
+      null
+    ],
+    "newHashes": {
+      "/out/a.js": "h1"
+    }
+  }
+]

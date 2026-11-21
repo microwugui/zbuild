@@ -1,0 +1,1 @@
+reorder { & first, second, .third { color: red } }

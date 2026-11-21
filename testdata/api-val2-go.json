@@ -1,0 +1,56 @@
+[
+  {
+    "fn": "validateResolveExtensions",
+    "arg": "[]",
+    "out": "[.tsx .ts .jsx .js .css .json]",
+    "errs": 0
+  },
+  {
+    "fn": "validateResolveExtensions",
+    "arg": "[.js .ts]",
+    "out": "[.js .ts]",
+    "errs": 0
+  },
+  {
+    "fn": "validateResolveExtensions",
+    "arg": "[bad x]",
+    "out": "[bad x]",
+    "errs": 2
+  },
+  {
+    "fn": "validateResolveExtensions",
+    "arg": "[.CSS]",
+    "out": "[.CSS]",
+    "errs": 0
+  },
+  {
+    "fn": "validateGlobalName",
+    "arg": "Foo",
+    "out": "[Foo]",
+    "errs": 0
+  },
+  {
+    "fn": "validateGlobalName",
+    "arg": "a.b.c",
+    "out": "[a b c]",
+    "errs": 0
+  },
+  {
+    "fn": "validateGlobalName",
+    "arg": "window.foo",
+    "out": "[window foo]",
+    "errs": 0
+  },
+  {
+    "fn": "validateGlobalName",
+    "arg": "",
+    "out": "[]",
+    "errs": 0
+  },
+  {
+    "fn": "validateGlobalName",
+    "arg": "bad space",
+    "out": "[]",
+    "errs": 1
+  }
+]

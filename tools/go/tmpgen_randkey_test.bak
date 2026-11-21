@@ -1,0 +1,20 @@
+package bundler
+
+// 第 107 轮 Go 探针：generateUniqueKeyPrefix 的确定性变换（固定 seed → rand.Read(12) → base64 URL）。
+import ("encoding/base64";"encoding/json";"math/rand";"os";"testing")
+type rkRow struct { Seed int64 `json:"seed"`; Bytes []int `json:"bytes"`; B64 string `json:"b64"`; Length int `json:"length"` }
+func TestTmpGenRandKey107(t *testing.T){
+  seeds:=[]int64{0,1,42,123456789,-7}
+  rows:=[]rkRow{}
+  for _,sd:=range seeds{
+    rand.Seed(sd)
+    var data [12]byte
+    rand.Read(data[:])
+    bs:=[]int{};for _,b:=range data{bs=append(bs,int(b))}
+    b64:=base64.URLEncoding.EncodeToString(data[:])
+    rows=append(rows,rkRow{sd,bs,b64,len(b64)})
+  }
+  b,_:=json.MarshalIndent(rows,"","  ")
+  if err:=os.WriteFile("/root/port/testdata/rand-key-go.json",b,0644);err!=nil{t.Fatal(err)}
+  t.Logf("wrote %d rows bytes=%d",len(rows),len(b))
+}

@@ -1,0 +1,1 @@
+return 'foo'; try { return 'bar' } catch {}

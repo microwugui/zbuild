@@ -1,0 +1,1 @@
+import defer * as foo from 'bar'

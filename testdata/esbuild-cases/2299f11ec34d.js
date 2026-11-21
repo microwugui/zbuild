@@ -1,0 +1,1 @@
+try {} catch (e) { foo() } finally { var x = bar() }

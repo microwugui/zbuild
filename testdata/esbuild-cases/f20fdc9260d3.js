@@ -1,0 +1,1 @@
+x = tag`template` + 'string'

@@ -1,0 +1,1 @@
+@x export default class {}

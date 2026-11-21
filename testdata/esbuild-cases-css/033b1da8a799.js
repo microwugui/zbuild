@@ -1,0 +1,1 @@
+div, span:hover { @layer foo { & { color: red } } }

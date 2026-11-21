@@ -1,0 +1,98 @@
+package linker
+
+// 第 145 批 Go 探针：chunk 助手（findImportedCSSFilesInJSOrder / shouldIncludePart / pathBetweenChunks）。
+import (
+	"encoding/json"
+	"os"
+	"testing"
+
+	"github.com/evanw/esbuild/internal/ast"
+	"github.com/evanw/esbuild/internal/config"
+	"github.com/evanw/esbuild/internal/fs"
+	"github.com/evanw/esbuild/internal/graph"
+	"github.com/evanw/esbuild/internal/js_ast"
+	"github.com/evanw/esbuild/internal/logger"
+)
+
+func chRef(s uint32) ast.Ref { return ast.Ref{SourceIndex: s, InnerIndex: 0} }
+
+// build a JS file graph: parts with ImportRecordIndices, records with source indices, CSS source indices
+func chBuild(specs []struct{ parts [][]int; imports []int; cssSource int }, entry uint32) *linkerContext {
+	inputs := make([]graph.InputFile, len(specs))
+	for si, sp := range specs {
+		repr := &graph.JSRepr{}
+		repr.AST.ModuleScope = &js_ast.Scope{}
+		for _, recIdx := range sp.parts {
+			p := js_ast.Part{ImportRecordIndices: []uint32{}}
+			for _, ri := range recIdx { p.ImportRecordIndices = append(p.ImportRecordIndices, uint32(ri)) }
+			repr.AST.Parts = append(repr.AST.Parts, p)
+		}
+		for _, imp := range sp.imports {
+			rec := ast.ImportRecord{Kind: ast.ImportStmt}
+			if imp >= 0 { rec.SourceIndex = ast.MakeIndex32(uint32(imp)) }
+			repr.AST.ImportRecords = append(repr.AST.ImportRecords, rec)
+		}
+		if sp.cssSource >= 0 { repr.CSSSourceIndex = ast.MakeIndex32(uint32(sp.cssSource)) }
+		f := graph.InputFile{Repr: repr, Source: logger.Source{Contents: ""}}
+		inputs[si] = f
+	}
+	reaches := make([]uint32, len(specs)); for i := range reaches { reaches[i] = uint32(i) }
+	eps := []graph.EntryPoint{{SourceIndex: entry, OutputPath: "e.js"}}
+	g := graph.CloneLinkerGraph(inputs, reaches, eps, false)
+	log := logger.NewDeferLog(logger.DeferLogNoVerboseOrDebug, nil)
+	return &linkerContext{graph: g, options: &config.Options{}, log: log}
+}
+
+type chRow struct { Fn string `json:"fn"`; Arg map[string]interface{} `json:"arg"`; Out interface{} `json:"out"` }
+
+func TestTmpGenChunkHelpers(t *testing.T) {
+	var out []chRow
+	add := func(fn string, arg map[string]interface{}, o interface{}) { out = append(out, chRow{fn, arg, o}) }
+
+	type spec = struct{ parts [][]int; imports []int; cssSource int }
+	// DFS postorder: 0 -> (1 -> css2), (3 -> css4), css5
+	specs := []spec{
+		{parts: [][]int{{0, 1}}, imports: []int{1, 3}, cssSource: 5},
+		{parts: [][]int{{0}}, imports: []int{2}, cssSource: 2},
+		{parts: [][]int{}, imports: []int{}, cssSource: -1},
+		{parts: [][]int{{0}}, imports: []int{2}, cssSource: 4},
+		{parts: [][]int{}, imports: []int{}, cssSource: -1},
+		{parts: [][]int{}, imports: []int{}, cssSource: -1},
+	}
+	{
+		c := chBuild(specs, 0)
+		order := c.findImportedCSSFilesInJSOrder(0)
+		add("findImportedCSSFilesInJSOrder", map[string]interface{}{"entry": 0}, order)
+	}
+
+	// shouldIncludePart: part with single SImport to non-wrapped internal file => false; wrapped => true; normal => true
+	{
+		c := chBuild(specs, 0)
+		repr := c.graph.Files[0].InputFile.Repr.(*graph.JSRepr)
+		// a part with a single import statement
+		pImport := js_ast.Part{Stmts: []js_ast.Stmt{{Data: &js_ast.SImport{ImportRecordIndex: 0}}}}
+		v := c.shouldIncludePart(repr, pImport)
+		add("shouldIncludePart", map[string]interface{}{"case": "single-import"}, v)
+		pNormal := js_ast.Part{Stmts: []js_ast.Stmt{{Data: &js_ast.SExpr{}}}}
+		add("shouldIncludePart", map[string]interface{}{"case": "normal"}, c.shouldIncludePart(repr, pNormal))
+		pEmpty := js_ast.Part{}
+		add("shouldIncludePart", map[string]interface{}{"case": "empty"}, c.shouldIncludePart(repr, pEmpty))
+	}
+
+	// pathBetweenChunks: publicPath set / relative
+	{
+		mfs := fs.MockFS(map[string]string{}, fs.MockUnix, "/out")
+		c := chBuild(specs, 0)
+		c.fs = mfs
+		c.options.PublicPath = ""
+		add("pathBetweenChunks", map[string]interface{}{"from": "/out/js", "to": "/out/css/a.css", "public": ""}, c.pathBetweenChunks("/out/js", "/out/css/a.css"))
+		c.options.PublicPath = "https://cdn.example/"
+		add("pathBetweenChunks", map[string]interface{}{"from": "/out/js", "to": "/out/css/a.css", "public": "https://cdn.example/"}, c.pathBetweenChunks("/out/js", "/out/css/a.css"))
+		add("pathBetweenChunks", map[string]interface{}{"from": "/out", "to": "/out/a.js", "public": "https://cdn.example"}, c.pathBetweenChunks("/out", "/out/a.js"))
+	}
+
+	b, err := json.MarshalIndent(out, "", "  ")
+	if err != nil { t.Fatal(err) }
+	if err := os.WriteFile("/root/port/testdata/chunk-helpers-go.json", b, 0644); err != nil { t.Fatal(err) }
+	t.Logf("wrote %d rows", len(out))
+}

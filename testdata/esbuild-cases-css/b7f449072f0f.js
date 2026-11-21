@@ -1,0 +1,1 @@
+div { :where([href]&) { color: red } }

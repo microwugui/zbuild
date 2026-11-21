@@ -1,0 +1,1 @@
+@media screen and (min-width: 480px) screen and (device-width: 768px) {}

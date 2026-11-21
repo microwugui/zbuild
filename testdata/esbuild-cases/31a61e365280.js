@@ -1,0 +1,1 @@
+function f(a) { let c = a.b; return c`${x}` }

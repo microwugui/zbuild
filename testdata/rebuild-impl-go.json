@@ -1,0 +1,40 @@
+[
+  {
+    "name": "empty-entrypoints",
+    "errCount": 0,
+    "errTexts": [],
+    "files": [],
+    "hashCount": 0,
+    "stderr": "",
+    "warnRepeated": 0
+  },
+  {
+    "name": "with-warning",
+    "errCount": 0,
+    "errTexts": [],
+    "files": [],
+    "hashCount": 0,
+    "stderr": "▲ [WARNING] repeat-warn\n\n1 warning\n",
+    "warnRepeated": 0
+  },
+  {
+    "name": "mangle-bad-value",
+    "errCount": 1,
+    "errTexts": [
+      "Expected \"foo\" in mangle cache to map to either a string or false"
+    ],
+    "files": [],
+    "hashCount": 0,
+    "stderr": "✘ [ERROR] Expected \"foo\" in mangle cache to map to either a string or false\n\n1 error\n",
+    "warnRepeated": 0
+  },
+  {
+    "name": "mangle-valid",
+    "errCount": 0,
+    "errTexts": [],
+    "files": [],
+    "hashCount": 0,
+    "stderr": "",
+    "warnRepeated": 0
+  }
+]

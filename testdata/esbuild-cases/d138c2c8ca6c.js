@@ -1,0 +1,1 @@
+switch (1) { case 0: x(); case 1: case 2: y() }

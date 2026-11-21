@@ -1,0 +1,130 @@
+[
+  {
+    "fn": "enforceNoCyclicChunkImports",
+    "arg": {
+      "case": "acyclic"
+    },
+    "out": []
+  },
+  {
+    "fn": "enforceNoCyclicChunkImports",
+    "arg": {
+      "case": "cycle"
+    },
+    "out": [
+      "Internal error: generated chunks contain a circular import"
+    ]
+  },
+  {
+    "fn": "enforceNoCyclicChunkImports",
+    "arg": {
+      "case": "dynamic-cycle"
+    },
+    "out": []
+  },
+  {
+    "fn": "preventExportsFromBeingRenamed",
+    "arg": {
+      "case": "module"
+    },
+    "out": {
+      "flags": [
+        1,
+        0
+      ],
+      "kinds": [
+        0,
+        0
+      ]
+    }
+  },
+  {
+    "fn": "preventExportsFromBeingRenamed",
+    "arg": {
+      "case": "script"
+    },
+    "out": {
+      "flags": [
+        1,
+        1
+      ],
+      "kinds": [
+        0,
+        0
+      ]
+    }
+  },
+  {
+    "fn": "maybeCorrectObviousTypo",
+    "arg": {
+      "typo": "expot"
+    },
+    "out": {
+      "notes": [
+        "Did you mean to import \"export\" instead?"
+      ],
+      "suggestion": "export"
+    }
+  },
+  {
+    "fn": "advanceImportTracker",
+    "arg": {
+      "case": "external"
+    },
+    "out": {
+      "data": 0,
+      "inner": 0,
+      "src": 0,
+      "status": 6
+    }
+  },
+  {
+    "fn": "advanceImportTracker",
+    "arg": {
+      "case": "found"
+    },
+    "out": {
+      "data": 0,
+      "inner": 9,
+      "src": 1,
+      "status": 1
+    }
+  },
+  {
+    "fn": "advanceImportTracker",
+    "arg": {
+      "case": "noMatch"
+    },
+    "out": {
+      "data": 0,
+      "inner": 0,
+      "src": 1,
+      "status": 0
+    }
+  },
+  {
+    "fn": "recoverInternalError",
+    "arg": {
+      "case": "nopanic"
+    },
+    "out": []
+  },
+  {
+    "fn": "recoverInternalError",
+    "arg": {
+      "case": "panic-runtime"
+    },
+    "out": [
+      "panic: boom"
+    ]
+  },
+  {
+    "fn": "recoverInternalError",
+    "arg": {
+      "case": "panic-source"
+    },
+    "out": [
+      "panic: bad (while printing \"src/a.js\")"
+    ]
+  }
+]

@@ -1,0 +1,49 @@
+[
+  {
+    "name": "tmpl-part",
+    "src": "import(`./src/${dir}/*.js`)",
+    "parts": [
+      "./src/",
+      "\u003cW\u003e",
+      "/*.js"
+    ]
+  },
+  {
+    "name": "concat",
+    "src": "import(\"./a/\" + name + \".js\")",
+    "parts": [
+      "./a/",
+      "\u003cW\u003e",
+      ".js"
+    ]
+  },
+  {
+    "name": "tmpl-multi",
+    "src": "import(`x/${a}/y/${b}/z`)",
+    "parts": [
+      "x/",
+      "\u003cW\u003e",
+      "/y/",
+      "\u003cW\u003e",
+      "/z"
+    ]
+  },
+  {
+    "name": "concat-call",
+    "src": "import(\"./\" + getName() + \".js\")",
+    "parts": [
+      "./",
+      "\u003cW\u003e",
+      ".js"
+    ]
+  },
+  {
+    "name": "tmpl-globstar",
+    "src": "import(`./src/${d}/**/*.js`)",
+    "parts": [
+      "./src/",
+      "\u003cW\u003e",
+      "/**/*.js"
+    ]
+  }
+]

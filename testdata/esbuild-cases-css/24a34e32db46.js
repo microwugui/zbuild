@@ -1,0 +1,1 @@
+div { .x, & a { color: red } }

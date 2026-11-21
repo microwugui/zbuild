@@ -1,0 +1,1 @@
+@media not ((not (a)) and (not (b))) { a { color: red } }

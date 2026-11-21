@@ -1,0 +1,1 @@
+a { inset: 1px auto 3px 4px; left: auto }

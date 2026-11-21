@@ -1,0 +1,177 @@
+[
+  {
+    "fn": "hslToRgb",
+    "arg": "0.000000000000,100.000000000000,50.000000000000",
+    "out": "-4850.000000000000,4950.000000000000,4950.000000000000"
+  },
+  {
+    "fn": "hslToRgb",
+    "arg": "120.000000000000,100.000000000000,50.000000000000",
+    "out": "4950.000000000000,-4850.000000000000,4950.000000000000"
+  },
+  {
+    "fn": "hslToRgb",
+    "arg": "240.000000000000,50.000000000000,60.000000000000",
+    "out": "3010.000000000000,3010.000000000000,-2890.000000000000"
+  },
+  {
+    "fn": "hslToRgb",
+    "arg": "60.000000000000,80.000000000000,5.000000000000",
+    "out": "-315.000000000000,-315.000000000000,325.000000000000"
+  },
+  {
+    "fn": "hslToRgb",
+    "arg": "30.000000000000,60.000000000000,50.000000000000",
+    "out": "-2890.000000000000,50.000000000000,2990.000000000000"
+  },
+  {
+    "fn": "parseAlphaByte",
+    "arg": "0||0",
+    "out": "255|true"
+  },
+  {
+    "fn": "parseAlphaByte",
+    "arg": "30|0.5|0",
+    "out": "128|true"
+  },
+  {
+    "fn": "parseAlphaByte",
+    "arg": "34|50%|0",
+    "out": "127|true"
+  },
+  {
+    "fn": "parseAlphaByte",
+    "arg": "30|2|0",
+    "out": "255|true"
+  },
+  {
+    "fn": "parseAlphaByte",
+    "arg": "29|foo|0",
+    "out": "0|false"
+  },
+  {
+    "fn": "tryToConvertToHexWithoutClipping",
+    "arg": "0.5,0.5,0.5,255",
+    "out": "3434591487|true"
+  },
+  {
+    "fn": "tryToConvertToHexWithoutClipping",
+    "arg": "0,0,0,0",
+    "out": "0|true"
+  },
+  {
+    "fn": "tryToConvertToHexWithoutClipping",
+    "arg": "1,1,1,128",
+    "out": "0|false"
+  },
+  {
+    "fn": "tryToConvertToHexWithoutClipping",
+    "arg": "2,-1,0.3,64",
+    "out": "0|false"
+  },
+  {
+    "fn": "makeDimensionOrPercentToken",
+    "arg": "5|12|px",
+    "out": "26|12px|2|5"
+  },
+  {
+    "fn": "makeDimensionOrPercentToken",
+    "arg": "0|0.5|%",
+    "out": "34|0.5%|0|0"
+  },
+  {
+    "fn": "makeDimensionOrPercentToken",
+    "arg": "10|100|deg",
+    "out": "26|100deg|3|10"
+  },
+  {
+    "fn": "makeDimensionOrPercentToken",
+    "arg": "3|3.14159|rad",
+    "out": "26|3.14rad|4|3"
+  },
+  {
+    "fn": "interpolateColors",
+    "arg": "0,50,50,120,50,50,2,0,0.5",
+    "out": "60.000000000000,50.000000000000,50.000000000000"
+  },
+  {
+    "fn": "interpolateColors",
+    "arg": "350,50,50,10,50,50,2,0,0.5",
+    "out": "360.000000000000,50.000000000000,50.000000000000"
+  },
+  {
+    "fn": "interpolateColors",
+    "arg": "10,20,30,40,50,60,10,0,0.25",
+    "out": "17.500000000000,27.500000000000,37.500000000000"
+  },
+  {
+    "fn": "interpolateColors",
+    "arg": "10,20,30,40,50,60,5,1,0.5",
+    "out": "25.000000000000,35.000000000000,225.000000000000"
+  },
+  {
+    "fn": "interpolatePositions",
+    "arg": "{\"a\":[{\"unit\":\"%\",\"value\":10}],\"b\":[{\"unit\":\"%\",\"value\":30}],\"t\":0.5}",
+    "out": "%=20.000000000000"
+  },
+  {
+    "fn": "interpolatePositions",
+    "arg": "{\"a\":[{\"unit\":\"px\",\"value\":10},{\"unit\":\"%\",\"value\":20}],\"b\":[{\"unit\":\"px\",\"value\":30}],\"t\":0.25}",
+    "out": "px=15.000000000000;%=15.000000000000"
+  },
+  {
+    "fn": "interpolatePositions",
+    "arg": "{\"a\":[{\"unit\":\"px\",\"value\":5}],\"b\":[{\"unit\":\"%\",\"value\":50}],\"t\":0}",
+    "out": "px=5.000000000000"
+  },
+  {
+    "fn": "tryToParseValue",
+    "arg": "30|0|0|0",
+    "out": "%|0.000000000000|true"
+  },
+  {
+    "fn": "tryToParseValue",
+    "arg": "26|90deg|2|2",
+    "out": "%|25.000000000000|true"
+  },
+  {
+    "fn": "tryToParseValue",
+    "arg": "34|50%|0|2",
+    "out": "%|50.000000000000|true"
+  },
+  {
+    "fn": "tryToParseValue",
+    "arg": "26|10px|2|0",
+    "out": "px|10.000000000000|true"
+  },
+  {
+    "fn": "tryToParseValue",
+    "arg": "30|5|0|0",
+    "out": "|0.000000000000|false"
+  },
+  {
+    "fn": "tryToParseValue",
+    "arg": "29|foo|0|0",
+    "out": "|0.000000000000|false"
+  },
+  {
+    "fn": "removeColorInterpolation",
+    "arg": "[{\"kind\":29,\"text\":\"red\"},{\"kind\":29,\"text\":\"in\"},{\"kind\":29,\"text\":\"hsl\"},{\"kind\":29,\"text\":\"red\"}]",
+    "out": "29:red:0;29:red:0|2|0|true"
+  },
+  {
+    "fn": "removeColorInterpolation",
+    "arg": "[{\"kind\":29,\"text\":\"red\"},{\"kind\":29,\"text\":\"in\"},{\"kind\":29,\"text\":\"lch\"},{\"kind\":29,\"text\":\"longer\"},{\"kind\":29,\"text\":\"hue\"},{\"kind\":29,\"text\":\"red\"}]",
+    "out": "29:red:0;29:red:0|5|1|true"
+  },
+  {
+    "fn": "removeColorInterpolation",
+    "arg": "[{\"kind\":29,\"text\":\"red\"},{\"kind\":29,\"text\":\"in\"},{\"kind\":29,\"text\":\"srgb\"},{\"kind\":29,\"text\":\"blue\"}]",
+    "out": "29:red:0;29:blue:0|10|0|true"
+  },
+  {
+    "fn": "removeColorInterpolation",
+    "arg": "[{\"kind\":29,\"text\":\"red\"},{\"kind\":29,\"text\":\"in\"},{\"kind\":29,\"text\":\"bogus\"},{\"kind\":29,\"text\":\"blue\"}]",
+    "out": "|0|0|false"
+  }
+]

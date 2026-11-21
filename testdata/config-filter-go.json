@@ -1,0 +1,72 @@
+[
+  {
+    "fn": "Format.String",
+    "arg": "1",
+    "out": "iife"
+  },
+  {
+    "fn": "Format.String",
+    "arg": "2",
+    "out": "cjs"
+  },
+  {
+    "fn": "Format.String",
+    "arg": "3",
+    "out": "esm"
+  },
+  {
+    "fn": "Format.String",
+    "arg": "99",
+    "out": ""
+  },
+  {
+    "fn": "CompileFilterForPlugin",
+    "arg": "p|onResolve|",
+    "out": "err:[p] \"onResolve\" is missing a filter"
+  },
+  {
+    "fn": "CompileFilterForPlugin",
+    "arg": "p|onLoad|.*\\.js$",
+    "out": "ok:.*\\.js$"
+  },
+  {
+    "fn": "CompileFilterForPlugin",
+    "arg": "p|onResolve|[",
+    "out": "err:[p] \"onResolve\" filter is not a valid Go regular expression: \"[\""
+  },
+  {
+    "fn": "CompileFilterForPlugin",
+    "arg": "plug|onResolve|^foo/bar$",
+    "out": "ok:^foo/bar$"
+  },
+  {
+    "fn": "CompileFilterForPlugin",
+    "arg": "p|onLoad|(?i)ABC",
+    "out": "ok:(?i)ABC"
+  },
+  {
+    "fn": "compileFilter",
+    "arg": "",
+    "out": "nil"
+  },
+  {
+    "fn": "compileFilter",
+    "arg": "abc",
+    "out": "ok:abc"
+  },
+  {
+    "fn": "compileFilter",
+    "arg": "[",
+    "out": "nil"
+  },
+  {
+    "fn": "compileFilter",
+    "arg": "a|b",
+    "out": "ok:a|b"
+  },
+  {
+    "fn": "compileFilter",
+    "arg": "\\d+",
+    "out": "ok:\\d+"
+  }
+]

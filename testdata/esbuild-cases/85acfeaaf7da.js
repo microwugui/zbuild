@@ -1,0 +1,1 @@
+class Foo { #foo() { return (0, this.#foo)`` } }

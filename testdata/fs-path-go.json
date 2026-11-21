@@ -1,0 +1,338 @@
+[
+  {
+    "fn": "clean",
+    "win": 0,
+    "arg": "",
+    "out": "."
+  },
+  {
+    "fn": "clean",
+    "win": 0,
+    "arg": ".",
+    "out": "."
+  },
+  {
+    "fn": "clean",
+    "win": 0,
+    "arg": "a/b",
+    "out": "a/b"
+  },
+  {
+    "fn": "clean",
+    "win": 0,
+    "arg": "a/../b",
+    "out": "b"
+  },
+  {
+    "fn": "clean",
+    "win": 0,
+    "arg": "a//b",
+    "out": "a/b"
+  },
+  {
+    "fn": "clean",
+    "win": 0,
+    "arg": "/a/../../b",
+    "out": "/b"
+  },
+  {
+    "fn": "clean",
+    "win": 0,
+    "arg": "../a",
+    "out": "../a"
+  },
+  {
+    "fn": "clean",
+    "win": 0,
+    "arg": "a/./b/",
+    "out": "a/b"
+  },
+  {
+    "fn": "clean",
+    "win": 0,
+    "arg": "C:\\foo\\..\\bar",
+    "out": "C:\\foo\\..\\bar"
+  },
+  {
+    "fn": "clean",
+    "win": 0,
+    "arg": "\\a\\b",
+    "out": "\\a\\b"
+  },
+  {
+    "fn": "clean",
+    "win": 1,
+    "arg": "",
+    "out": "."
+  },
+  {
+    "fn": "clean",
+    "win": 1,
+    "arg": ".",
+    "out": "."
+  },
+  {
+    "fn": "clean",
+    "win": 1,
+    "arg": "a/b",
+    "out": "a\\b"
+  },
+  {
+    "fn": "clean",
+    "win": 1,
+    "arg": "a/../b",
+    "out": "b"
+  },
+  {
+    "fn": "clean",
+    "win": 1,
+    "arg": "a//b",
+    "out": "a\\b"
+  },
+  {
+    "fn": "clean",
+    "win": 1,
+    "arg": "/a/../../b",
+    "out": "\\b"
+  },
+  {
+    "fn": "clean",
+    "win": 1,
+    "arg": "../a",
+    "out": "..\\a"
+  },
+  {
+    "fn": "clean",
+    "win": 1,
+    "arg": "a/./b/",
+    "out": "a\\b"
+  },
+  {
+    "fn": "clean",
+    "win": 1,
+    "arg": "C:\\foo\\..\\bar",
+    "out": "C:\\bar"
+  },
+  {
+    "fn": "clean",
+    "win": 1,
+    "arg": "\\a\\b",
+    "out": "\\a\\b"
+  },
+  {
+    "fn": "base",
+    "win": 0,
+    "arg": "",
+    "out": "."
+  },
+  {
+    "fn": "base",
+    "win": 0,
+    "arg": "a/b",
+    "out": "b"
+  },
+  {
+    "fn": "base",
+    "win": 0,
+    "arg": "a/b/",
+    "out": "b"
+  },
+  {
+    "fn": "base",
+    "win": 0,
+    "arg": "/",
+    "out": "/"
+  },
+  {
+    "fn": "base",
+    "win": 0,
+    "arg": "C:\\foo\\bar",
+    "out": "C:\\foo\\bar"
+  },
+  {
+    "fn": "base",
+    "win": 0,
+    "arg": "foo",
+    "out": "foo"
+  },
+  {
+    "fn": "base",
+    "win": 1,
+    "arg": "",
+    "out": "."
+  },
+  {
+    "fn": "base",
+    "win": 1,
+    "arg": "a/b",
+    "out": "b"
+  },
+  {
+    "fn": "base",
+    "win": 1,
+    "arg": "a/b/",
+    "out": "b"
+  },
+  {
+    "fn": "base",
+    "win": 1,
+    "arg": "/",
+    "out": "\\"
+  },
+  {
+    "fn": "base",
+    "win": 1,
+    "arg": "C:\\foo\\bar",
+    "out": "bar"
+  },
+  {
+    "fn": "base",
+    "win": 1,
+    "arg": "foo",
+    "out": "foo"
+  },
+  {
+    "fn": "dir",
+    "win": 0,
+    "arg": "",
+    "out": "."
+  },
+  {
+    "fn": "dir",
+    "win": 0,
+    "arg": "a/b",
+    "out": "a"
+  },
+  {
+    "fn": "dir",
+    "win": 0,
+    "arg": "a/b/c",
+    "out": "a/b"
+  },
+  {
+    "fn": "dir",
+    "win": 0,
+    "arg": "/a/b",
+    "out": "/a"
+  },
+  {
+    "fn": "dir",
+    "win": 0,
+    "arg": "foo",
+    "out": "."
+  },
+  {
+    "fn": "dir",
+    "win": 0,
+    "arg": "C:\\foo\\bar",
+    "out": "."
+  },
+  {
+    "fn": "dir",
+    "win": 1,
+    "arg": "",
+    "out": "."
+  },
+  {
+    "fn": "dir",
+    "win": 1,
+    "arg": "a/b",
+    "out": "a"
+  },
+  {
+    "fn": "dir",
+    "win": 1,
+    "arg": "a/b/c",
+    "out": "a\\b"
+  },
+  {
+    "fn": "dir",
+    "win": 1,
+    "arg": "/a/b",
+    "out": "\\a"
+  },
+  {
+    "fn": "dir",
+    "win": 1,
+    "arg": "foo",
+    "out": "."
+  },
+  {
+    "fn": "dir",
+    "win": 1,
+    "arg": "C:\\foo\\bar",
+    "out": "C:\\foo"
+  },
+  {
+    "fn": "isAbs",
+    "win": 0,
+    "arg": "",
+    "out": "false"
+  },
+  {
+    "fn": "isAbs",
+    "win": 0,
+    "arg": "/a",
+    "out": "true"
+  },
+  {
+    "fn": "isAbs",
+    "win": 0,
+    "arg": "a/b",
+    "out": "false"
+  },
+  {
+    "fn": "isAbs",
+    "win": 0,
+    "arg": "C:\\foo",
+    "out": "false"
+  },
+  {
+    "fn": "isAbs",
+    "win": 0,
+    "arg": "\\\\host\\share\\x",
+    "out": "false"
+  },
+  {
+    "fn": "isAbs",
+    "win": 0,
+    "arg": "C:foo",
+    "out": "false"
+  },
+  {
+    "fn": "isAbs",
+    "win": 1,
+    "arg": "",
+    "out": "false"
+  },
+  {
+    "fn": "isAbs",
+    "win": 1,
+    "arg": "/a",
+    "out": "false"
+  },
+  {
+    "fn": "isAbs",
+    "win": 1,
+    "arg": "a/b",
+    "out": "false"
+  },
+  {
+    "fn": "isAbs",
+    "win": 1,
+    "arg": "C:\\foo",
+    "out": "true"
+  },
+  {
+    "fn": "isAbs",
+    "win": 1,
+    "arg": "\\\\host\\share\\x",
+    "out": "true"
+  },
+  {
+    "fn": "isAbs",
+    "win": 1,
+    "arg": "C:foo",
+    "out": "false"
+  }
+]

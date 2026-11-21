@@ -1,0 +1,283 @@
+[
+  {
+    "arg": 0,
+    "fn": "convertEngineName",
+    "out": 0
+  },
+  {
+    "arg": 1,
+    "fn": "convertEngineName",
+    "out": 1
+  },
+  {
+    "arg": 2,
+    "fn": "convertEngineName",
+    "out": 2
+  },
+  {
+    "arg": 3,
+    "fn": "convertEngineName",
+    "out": 4
+  },
+  {
+    "arg": 4,
+    "fn": "convertEngineName",
+    "out": 5
+  },
+  {
+    "arg": 5,
+    "fn": "convertEngineName",
+    "out": 6
+  },
+  {
+    "arg": 6,
+    "fn": "convertEngineName",
+    "out": 7
+  },
+  {
+    "arg": 7,
+    "fn": "convertEngineName",
+    "out": 8
+  },
+  {
+    "arg": 8,
+    "fn": "convertEngineName",
+    "out": 9
+  },
+  {
+    "arg": 9,
+    "fn": "convertEngineName",
+    "out": 10
+  },
+  {
+    "arg": 10,
+    "fn": "convertEngineName",
+    "out": 11
+  },
+  {
+    "arg": 0,
+    "fn": "ContextError.Error",
+    "out": "Context creation failed"
+  },
+  {
+    "arg": 2,
+    "fn": "ContextError.Error",
+    "out": "first error"
+  },
+  {
+    "arg": null,
+    "fn": "metafileArray.Len",
+    "out": 3
+  },
+  {
+    "arg": null,
+    "fn": "metafileArray",
+    "out": [
+      "b.js",
+      "a.js",
+      "c.js"
+    ]
+  },
+  {
+    "arg": 0,
+    "fn": "convertMessagesToPublic",
+    "out": [
+      {
+        "detail": null,
+        "id": "package.json",
+        "loc": null,
+        "notes": [],
+        "plugin": "plug",
+        "text": "err"
+      }
+    ]
+  },
+  {
+    "arg": 1,
+    "fn": "convertMessagesToPublic",
+    "out": [
+      {
+        "detail": null,
+        "id": "css-syntax-error",
+        "loc": {
+          "col": 2,
+          "file": "a.css",
+          "len": 3,
+          "line": 3,
+          "ns": "file",
+          "sug": "sug",
+          "text": "line a.css"
+        },
+        "notes": [
+          {
+            "loc": true,
+            "text": "note1"
+          }
+        ],
+        "plugin": "plug",
+        "text": "warn"
+      }
+    ]
+  },
+  {
+    "arg": null,
+    "fn": "convertMessagesToInternal",
+    "out": [
+      {
+        "id": 34,
+        "kind": 1,
+        "loc": {
+          "abs": "x.css",
+          "col": 1,
+          "len": 4,
+          "line": 2,
+          "ns": "file",
+          "rel": "x.css",
+          "sug": "s",
+          "text": "abc"
+        },
+        "notes": [
+          {
+            "loc": true,
+            "text": "n"
+          }
+        ],
+        "plugin": "p",
+        "text": "hello"
+      },
+      {
+        "id": 0,
+        "kind": 1,
+        "loc": null,
+        "notes": [],
+        "plugin": "",
+        "text": "world"
+      }
+    ]
+  },
+  {
+    "arg": null,
+    "fn": "convertErrorsAndWarningsToInternal",
+    "out": [
+      {
+        "id": 0,
+        "kind": 0,
+        "loc": {
+          "abs": "a",
+          "col": 0,
+          "len": 0,
+          "line": 1,
+          "ns": "file",
+          "rel": "a",
+          "sug": "",
+          "text": ""
+        },
+        "notes": [],
+        "plugin": "",
+        "text": "e2"
+      },
+      {
+        "id": 0,
+        "kind": 0,
+        "loc": {
+          "abs": "a",
+          "col": 0,
+          "len": 0,
+          "line": 3,
+          "ns": "file",
+          "rel": "a",
+          "sug": "",
+          "text": ""
+        },
+        "notes": [],
+        "plugin": "",
+        "text": "e1"
+      },
+      {
+        "id": 0,
+        "kind": 1,
+        "loc": {
+          "abs": "b",
+          "col": 0,
+          "len": 0,
+          "line": 2,
+          "ns": "file",
+          "rel": "b",
+          "sug": "",
+          "text": ""
+        },
+        "notes": [],
+        "plugin": "",
+        "text": "w1"
+      }
+    ]
+  },
+  {
+    "arg": null,
+    "fn": "errorsToString",
+    "out": "✘ [ERROR] hello [plugin p] [css-syntax-error]\n\n    x.css:2:1:\n      2 │ abc\n        │  ~~\n        ╵  s\n\n  n\n\n    y.css:3:0:\n      3 │ \n        ╵ ^\n\n✘ [ERROR] world\n\n"
+  },
+  {
+    "arg": "",
+    "fn": "validateRegex",
+    "out": {
+      "errs": [],
+      "ok": false
+    }
+  },
+  {
+    "arg": "a+",
+    "fn": "validateRegex",
+    "out": {
+      "errs": [],
+      "ok": true
+    }
+  },
+  {
+    "arg": "[",
+    "fn": "validateRegex",
+    "out": {
+      "errs": [
+        "0|The \"banner\" setting is not a valid Go regular expression: ["
+      ],
+      "ok": false
+    }
+  },
+  {
+    "arg": "(?i)abc",
+    "fn": "validateRegex",
+    "out": {
+      "errs": [],
+      "ok": true
+    }
+  },
+  {
+    "arg": [
+      false,
+      "es2015",
+      0
+    ],
+    "fn": "validateKeepNames",
+    "out": []
+  },
+  {
+    "arg": [
+      true,
+      "es2015",
+      0
+    ],
+    "fn": "validateKeepNames",
+    "out": []
+  },
+  {
+    "arg": [
+      true,
+      "es2015",
+      134217728
+    ],
+    "fn": "validateKeepNames",
+    "out": [
+      "0|The \"keep names\" setting cannot be used with the configured target environment (es2015 + 1 override)"
+    ]
+  }
+]

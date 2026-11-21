@@ -1,0 +1,1 @@
+for (x of y) switch (0) { case 0: return a(); default: return b() }

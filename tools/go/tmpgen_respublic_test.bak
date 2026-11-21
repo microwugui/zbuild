@@ -1,0 +1,164 @@
+package resolver
+
+// 第 175 批 Go 探针：Resolve / ResolveGlob / ProbeResolvePackageAsRelative / TSConfigJSX.ApplyTo
+// 逐字节固化（resolver 顶层入口 + config JSX 应用）。
+import (
+	"encoding/json"
+	"os"
+	"testing"
+
+	"github.com/evanw/esbuild/internal/ast"
+	"github.com/evanw/esbuild/internal/cache"
+	"github.com/evanw/esbuild/internal/config"
+	"github.com/evanw/esbuild/internal/fs"
+	"github.com/evanw/esbuild/internal/helpers"
+	"github.com/evanw/esbuild/internal/logger"
+)
+
+type rpRow struct {
+	Fn  string                 `json:"fn"`
+	Arg map[string]interface{} `json:"arg"`
+	Out interface{}            `json:"out"`
+}
+
+func rpPath(p logger.Path) interface{} {
+	return []interface{}{p.Text, p.Namespace, int(p.Flags), p.IgnoredSuffix}
+}
+func rpPair(pp PathPair) interface{} {
+	var sec interface{} = nil
+	if pp.HasSecondary() { sec = rpPath(pp.Secondary) }
+	return []interface{}{rpPath(pp.Primary), sec, pp.IsExternal}
+}
+func rpResult(r *ResolveResult) interface{} {
+	if r == nil { return nil }
+	var side interface{} = nil
+	if r.PrimarySideEffectsData != nil && r.PrimarySideEffectsData.Source != nil { side = r.PrimarySideEffectsData.Source.KeyPath.Text }
+	return []interface{}{rpPair(r.PathPair), side, int(r.ModuleTypeData.Type)}
+}
+func rpDebug(dm DebugMeta) interface{} {
+	return []interface{}{dm.ModifiedImportPath, len(dm.notes)}
+}
+func rpMsg(m *logger.Msg) interface{} {
+	if m == nil { return nil }
+	return []interface{}{int(m.ID), int(m.Kind), m.Data.Text}
+}
+func rpConditions(v interface{}) map[string]bool {
+	m := map[string]bool{}
+	if a, ok := v.([]interface{}); ok { for _, x := range a { m[x.(string)] = true } }
+	return m
+}
+
+func rpResolver(tree map[string]string, opts *config.Options) (*Resolver, logger.Log) {
+	fsObj := fs.MockFS(tree, fs.MockUnix, "/")
+	log := logger.NewDeferLog(logger.DeferLogAll, nil)
+	return NewResolver(config.BuildCall, fsObj, log, cache.MakeCacheSet(), opts), log
+}
+
+func TestTmpGenResPublic(t *testing.T) {
+	var out []rpRow
+	tree := map[string]string{
+		"/proj/package.json":            `{"name":"root"}`,
+		"/proj/src/a.js":                "",
+		"/proj/src/style.css":           "",
+		"/proj/node_modules/dep/package.json": `{"name":"dep","main":"main.js"}`,
+		"/proj/node_modules/dep/main.js": "",
+	}
+
+	baseOpts := func() *config.Options {
+		return &config.Options{Platform: config.PlatformNode, ExtensionOrder: []string{".js"}, MainFields: []string{"main"},
+			ExternalSettings: config.ExternalSettings{PreResolve: config.ExternalMatchers{Exact: map[string]bool{}, Patterns: []config.WildcardPattern{}}, PostResolve: config.ExternalMatchers{Exact: map[string]bool{}, Patterns: []config.WildcardPattern{}}}}
+	}
+
+	// ---- Resolve ----
+	{
+		type tc struct {
+			name, sourceDir, importPath string
+			kind ast.ImportKind
+			externalPre map[string]bool
+			packageAliases map[string]string
+		}
+		cases := []tc{
+			{"relative", "/proj/src", "./a.js", ast.ImportStmt, nil, nil},
+			{"missing", "/proj/src", "./nope.js", ast.ImportStmt, nil, nil},
+			{"package", "/proj/src", "dep", ast.ImportStmt, nil, nil},
+			{"external", "/proj/src", "ext-pkg", ast.ImportStmt, map[string]bool{"ext-pkg": true}, nil},
+			{"http", "/proj/src", "http://example.com/x", ast.ImportURL, nil, nil},
+			{"dataurl", "/proj/src", "data:text/javascript,console.log(1)", ast.ImportStmt, nil, nil},
+			{"builtin", "/proj/src", "fs", ast.ImportStmt, nil, nil},
+			{"alias", "/proj/src", "alias/foo", ast.ImportStmt, nil, map[string]string{"alias": "dep"}},
+			{"no-source-dir", "", "./a.js", ast.ImportStmt, nil, nil},
+			{"wildcard", "/proj/src", "./a*.js", ast.ImportStmt, nil, nil},
+		}
+		for _, c := range cases {
+			opts := baseOpts()
+			opts.ExternalSettings.PreResolve.Exact = c.externalPre
+			opts.PackageAliases = c.packageAliases
+			res, _ := rpResolver(tree, opts)
+			result, dm := res.Resolve(c.sourceDir, c.importPath, c.kind)
+			out = append(out, rpRow{Fn: "Resolve", Arg: map[string]interface{}{"name": c.name, "sourceDir": c.sourceDir, "importPath": c.importPath, "kind": int(c.kind)},
+				Out: []interface{}{rpResult(result), rpDebug(dm)}})
+		}
+	}
+
+	// ---- ResolveGlob ----
+	{
+		type tc struct{ name, sourceDir, pretty string; pattern []helpers.GlobPart; kind ast.ImportKind }
+		cases := []tc{
+			{"simple", "/proj/src", "./a*.js", []helpers.GlobPart{{Prefix: "./a", Wildcard: helpers.GlobAllExceptSlash}, {Prefix: ".js", Wildcard: helpers.GlobNone}}, ast.ImportStmt},
+			{"exact", "/proj/src", "./a.js", []helpers.GlobPart{{Prefix: "./a.js", Wildcard: helpers.GlobNone}}, ast.ImportStmt},
+			{"empty", "/proj/src", "", []helpers.GlobPart{}, ast.ImportStmt},
+			{"no-match", "/proj/src", "./zzz*.js", []helpers.GlobPart{{Prefix: "./zzz", Wildcard: helpers.GlobAllExceptSlash}, {Prefix: ".js", Wildcard: helpers.GlobNone}}, ast.ImportStmt},
+			{"non-relative", "/proj/src", "dep/*", []helpers.GlobPart{{Prefix: "dep/", Wildcard: helpers.GlobAllExceptSlash}}, ast.ImportStmt},
+		}
+		for _, c := range cases {
+			res, _ := rpResolver(tree, baseOpts())
+			results, msg := res.ResolveGlob(c.sourceDir, c.pattern, c.kind, c.pretty)
+			keys := []string{}
+			for k := range results { keys = append(keys, k) }
+			// Sort for determinism
+			for i := 0; i < len(keys); i++ { for j := i + 1; j < len(keys); j++ { if keys[j] < keys[i] { keys[i], keys[j] = keys[j], keys[i] } } }
+			dump := []interface{}{}
+			for _, k := range keys { dump = append(dump, []interface{}{k, rpResult(func() *ResolveResult { r := results[k]; return &r }())}) }
+			out = append(out, rpRow{Fn: "ResolveGlob", Arg: map[string]interface{}{"name": c.name, "sourceDir": c.sourceDir, "pretty": c.pretty},
+				Out: []interface{}{dump, rpMsg(msg)}})
+		}
+	}
+
+	// ---- ProbeResolvePackageAsRelative ----
+	{
+		res, _ := rpResolver(tree, baseOpts())
+		r1, dm1 := res.ProbeResolvePackageAsRelative("/proj/src", "a.js", ast.ImportStmt)
+		r2, dm2 := res.ProbeResolvePackageAsRelative("/proj/src", "nope.js", ast.ImportStmt)
+		out = append(out, rpRow{Fn: "ProbeResolvePackageAsRelative", Arg: map[string]interface{}{"name": "hit"},
+			Out: []interface{}{rpResult(r1), rpDebug(dm1)}})
+		out = append(out, rpRow{Fn: "ProbeResolvePackageAsRelative", Arg: map[string]interface{}{"name": "miss"},
+			Out: []interface{}{rpResult(r2), rpDebug(dm2)}})
+	}
+
+	// ---- TSConfigJSX.ApplyTo ----
+	{
+		type tc struct{ name string; jsx config.TSJSX; factory, frag []string; importSource *string
+			auto0, dev0 bool }
+		isp := func(s string) *string { return &s }
+		cases := []tc{
+			{"none", config.TSJSXNone, nil, nil, nil, true, true},
+			{"preserve", config.TSJSXPreserve, nil, nil, nil, true, true},
+			{"react", config.TSJSXReact, nil, nil, nil, true, true},
+			{"react-jsx", config.TSJSXReactJSX, nil, nil, nil, true, true},
+			{"react-jsxdev", config.TSJSXReactJSXDev, nil, nil, nil, false, false},
+			{"factory", config.TSJSXReact, []string{"h"}, []string{"Fragment"}, isp("preact"), false, false},
+		}
+		for _, c := range cases {
+			tj := config.TSConfigJSX{JSX: c.jsx, JSXFactory: c.factory, JSXFragmentFactory: c.frag, JSXImportSource: c.importSource}
+			jo := config.JSXOptions{AutomaticRuntime: c.auto0, Development: c.dev0, Factory: config.DefineExpr{Parts: []string{"React", "createElement"}}, Fragment: config.DefineExpr{Parts: []string{"React", "Fragment"}}, ImportSource: "react"}
+			tj.ApplyTo(&jo)
+			out = append(out, rpRow{Fn: "ApplyTo", Arg: map[string]interface{}{"name": c.name},
+				Out: []interface{}{jo.AutomaticRuntime, jo.Development, jo.Factory.Parts, jo.Fragment.Parts, jo.ImportSource}})
+		}
+	}
+
+	b, err := json.Marshal(out)
+	if err != nil { t.Fatal(err) }
+	if err := os.WriteFile("/root/port/testdata/respublic-go.json", b, 0644); err != nil { t.Fatal(err) }
+	t.Logf("wrote %d cases", len(out))
+}

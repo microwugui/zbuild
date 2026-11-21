@@ -1,0 +1,1 @@
+a = Number(0n)

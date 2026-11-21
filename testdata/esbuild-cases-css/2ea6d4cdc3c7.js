@@ -1,0 +1,1 @@
+& { composes: bar; color: red }

@@ -1,0 +1,1 @@
+.cyan { color: hsl(200grad, 100%, 50%) }

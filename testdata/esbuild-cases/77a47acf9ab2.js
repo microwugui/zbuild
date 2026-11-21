@@ -1,0 +1,1 @@
+import z, * as ns from "foo";z;ns;ns.x

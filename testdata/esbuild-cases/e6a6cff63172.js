@@ -1,0 +1,1 @@
+x = class y { foo() { if (0) return y } }

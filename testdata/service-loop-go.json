@@ -1,0 +1,22 @@
+[
+  {
+    "name": "empty",
+    "stdout": "BgAAADAuMjguMg==",
+    "packets": 0
+  },
+  {
+    "name": "one-packet",
+    "stdout": "BgAAADAuMjguMgkAAAADAAAABgAAAAA=",
+    "packets": 1
+  },
+  {
+    "name": "two-packets",
+    "stdout": "BgAAADAuMjguMgkAAAADAAAABgAAAAAJAAAAAwAAAAYAAAAA",
+    "packets": 2
+  },
+  {
+    "name": "partial",
+    "stdout": "BgAAADAuMjguMg==",
+    "packets": 0
+  }
+]

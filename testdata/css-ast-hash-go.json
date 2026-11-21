@@ -1,0 +1,636 @@
+[
+  {
+    "fn": "SS.SSHash.Hash",
+    "in": {
+      "ty": "hash"
+    },
+    "out": "1"
+  },
+  {
+    "fn": "SS.SSHash.Hash",
+    "in": {
+      "ty": "hash",
+      "ref": 7
+    },
+    "out": "1"
+  },
+  {
+    "fn": "SS.SSClass.Hash",
+    "in": {
+      "ty": "class"
+    },
+    "out": "2"
+  },
+  {
+    "fn": "SS.SSAttribute.Hash",
+    "in": {
+      "ty": "attr",
+      "nn": {
+        "n": {
+          "t": "color",
+          "k": 29
+        }
+      },
+      "op": "=",
+      "val": "red",
+      "mod": 105
+    },
+    "out": "2366121533"
+  },
+  {
+    "fn": "SS.SSAttribute.Hash",
+    "in": {
+      "ty": "attr",
+      "nn": {
+        "p": {
+          "t": "svg",
+          "k": 29
+        },
+        "n": {
+          "t": "viewBox",
+          "k": 29
+        }
+      },
+      "op": "~=",
+      "val": "a b"
+    },
+    "out": "1374550727"
+  },
+  {
+    "fn": "SS.SSPseudoClass.Hash",
+    "in": {
+      "ty": "pseudo",
+      "name": "nth-child",
+      "args": [
+        {
+          "k": 30,
+          "t": "2"
+        },
+        {
+          "k": 29,
+          "t": "n"
+        }
+      ]
+    },
+    "out": "3201790159"
+  },
+  {
+    "fn": "SS.SSPseudoClass.Hash",
+    "in": {
+      "ty": "pseudo",
+      "name": "before",
+      "el": true
+    },
+    "out": "1092027984"
+  },
+  {
+    "fn": "SS.SSPseudoClassWithSelectorList.Hash",
+    "in": {
+      "ty": "pseudolist",
+      "sels": [
+        {
+          "sels": [
+            {
+              "ts": {
+                "n": {
+                  "t": "div",
+                  "k": 29
+                }
+              }
+            },
+            {
+              "sub": [
+                {
+                  "ty": "class"
+                }
+              ],
+              "cb": 32
+            }
+          ]
+        }
+      ],
+      "kind": 5,
+      "a": "2",
+      "b": "1"
+    },
+    "out": "453566254"
+  },
+  {
+    "fn": "MQ.MQType.Hash",
+    "in": {
+      "ty": "type",
+      "op": 1,
+      "text": "screen"
+    },
+    "out": "2685072670"
+  },
+  {
+    "fn": "MQ.MQType.Hash",
+    "in": {
+      "ty": "type",
+      "op": 2,
+      "text": "print",
+      "and": {
+        "ty": "plain",
+        "text": "min-width",
+        "toks": [
+          {
+            "k": 26,
+            "t": "10px"
+          }
+        ]
+      }
+    },
+    "out": "4158599106"
+  },
+  {
+    "fn": "MQ.MQNot.Hash",
+    "in": {
+      "ty": "not",
+      "inner": {
+        "ty": "plain",
+        "text": "screen"
+      }
+    },
+    "out": "3706712846"
+  },
+  {
+    "fn": "MQ.MQBinary.Hash",
+    "in": {
+      "ty": "binary",
+      "op": 1,
+      "terms": [
+        {
+          "ty": "plain",
+          "text": "a"
+        },
+        {
+          "ty": "not",
+          "inner": {
+            "ty": "plain",
+            "text": "b"
+          }
+        }
+      ]
+    },
+    "out": "3089466423"
+  },
+  {
+    "fn": "MQ.MQArbitraryTokens.Hash",
+    "in": {
+      "ty": "arb",
+      "toks": [
+        {
+          "k": 29,
+          "t": "foo"
+        },
+        {
+          "k": 10,
+          "t": ","
+        },
+        {
+          "k": 30,
+          "t": "1"
+        }
+      ]
+    },
+    "out": "384610308"
+  },
+  {
+    "fn": "MQ.MQPlainOrBoolean.Hash",
+    "in": {
+      "ty": "plain",
+      "text": "color",
+      "toks": [
+        {
+          "k": 29,
+          "t": "red"
+        }
+      ]
+    },
+    "out": "997533966"
+  },
+  {
+    "fn": "MQ.MQPlainOrBoolean.Hash",
+    "in": {
+      "ty": "plain",
+      "text": "hover"
+    },
+    "out": "3262641343"
+  },
+  {
+    "fn": "MQ.MQRange.Hash",
+    "in": {
+      "ty": "range",
+      "text": "width",
+      "before": [
+        {
+          "k": 30,
+          "t": "100"
+        }
+      ],
+      "after": [
+        {
+          "k": 30,
+          "t": "200"
+        },
+        {
+          "k": 26,
+          "t": "10px"
+        }
+      ],
+      "bc": 2,
+      "ac": 5
+    },
+    "out": "181344963"
+  },
+  {
+    "fn": "R.RAtCharset.Hash",
+    "in": {
+      "ty": "charset",
+      "enc": "utf-8"
+    },
+    "out": "3311848030|true"
+  },
+  {
+    "fn": "R.RAtImport.Hash",
+    "in": {
+      "ty": "import"
+    },
+    "out": "0|false"
+  },
+  {
+    "fn": "R.RAtKeyframes.Hash",
+    "in": {
+      "ty": "keyframes",
+      "at": "@KEYFRAMES",
+      "blocks": [
+        {
+          "sels": [
+            "from",
+            "to"
+          ],
+          "rules": [
+            {
+              "ty": "comment",
+              "text": "x"
+            }
+          ]
+        }
+      ]
+    },
+    "out": "3462869566|true"
+  },
+  {
+    "fn": "R.RKnownAt.Hash",
+    "in": {
+      "ty": "known",
+      "at": "@media",
+      "pre": [
+        {
+          "k": 29,
+          "t": "x"
+        }
+      ],
+      "rules": [
+        {
+          "ty": "comment",
+          "text": "c"
+        }
+      ]
+    },
+    "out": "989248018|true"
+  },
+  {
+    "fn": "R.RUnknownAt.Hash",
+    "in": {
+      "ty": "unknown",
+      "at": "@foo",
+      "pre": [
+        {
+          "k": 29,
+          "t": "a"
+        }
+      ],
+      "block": [
+        {
+          "k": 30,
+          "t": "1"
+        }
+      ]
+    },
+    "out": "524570989|true"
+  },
+  {
+    "fn": "R.RSelector.Hash",
+    "in": {
+      "ty": "selector",
+      "rules": [
+        {
+          "ty": "comment",
+          "text": "z"
+        }
+      ],
+      "sels": [
+        {
+          "sels": [
+            {
+              "ts": {
+                "n": {
+                  "t": "div",
+                  "k": 29
+                }
+              }
+            },
+            {
+              "sub": [
+                {
+                  "ty": "class"
+                }
+              ],
+              "cb": 62
+            }
+          ]
+        }
+      ]
+    },
+    "out": "3794379123|true"
+  },
+  {
+    "fn": "R.RQualified.Hash",
+    "in": {
+      "ty": "qualified",
+      "pre": [
+        {
+          "k": 29,
+          "t": "h1"
+        }
+      ],
+      "rules": [
+        {
+          "ty": "bad",
+          "toks": [
+            {
+              "k": 30,
+              "t": "9"
+            }
+          ]
+        }
+      ]
+    },
+    "out": "1726983728|true"
+  },
+  {
+    "fn": "R.RDeclaration.Hash",
+    "in": {
+      "ty": "declaration",
+      "kt": "color",
+      "val": [
+        {
+          "k": 29,
+          "t": "red"
+        }
+      ]
+    },
+    "out": "2949366583|true"
+  },
+  {
+    "fn": "R.RDeclaration.Hash",
+    "in": {
+      "ty": "declaration",
+      "key": 42,
+      "imp": true,
+      "val": [
+        {
+          "k": 30,
+          "t": "1"
+        },
+        {
+          "k": 26,
+          "t": "px"
+        }
+      ]
+    },
+    "out": "3639150820|true"
+  },
+  {
+    "fn": "R.RDeclaration.Hash",
+    "in": {
+      "ty": "declaration",
+      "kt": "x",
+      "imp": true
+    },
+    "out": "4227753720|true"
+  },
+  {
+    "fn": "R.RBadDeclaration.Hash",
+    "in": {
+      "ty": "bad",
+      "toks": [
+        {
+          "k": 29,
+          "t": "oops"
+        },
+        {
+          "k": 10,
+          "t": ","
+        }
+      ]
+    },
+    "out": "371638795|true"
+  },
+  {
+    "fn": "R.RComment.Hash",
+    "in": {
+      "ty": "comment",
+      "text": "hello world"
+    },
+    "out": "4022745495|true"
+  },
+  {
+    "fn": "R.RAtLayer.Hash",
+    "in": {
+      "ty": "layer",
+      "rules": [
+        {
+          "ty": "comment",
+          "text": "l"
+        }
+      ],
+      "names": [
+        [
+          "a",
+          "b"
+        ],
+        [
+          "c"
+        ]
+      ]
+    },
+    "out": "1677057457|true"
+  },
+  {
+    "fn": "R.RAtMedia.Hash",
+    "in": {
+      "ty": "media",
+      "rules": [
+        {
+          "ty": "comment",
+          "text": "m"
+        }
+      ],
+      "q": [
+        {
+          "ty": "plain",
+          "text": "screen"
+        }
+      ]
+    },
+    "out": "475455489|true"
+  },
+  {
+    "fn": "R.RAtScope.Hash",
+    "in": {
+      "ty": "scope",
+      "rules": [
+        {
+          "ty": "comment",
+          "text": "s"
+        }
+      ],
+      "start": [
+        {
+          "sels": [
+            {
+              "ts": {
+                "n": {
+                  "t": "a",
+                  "k": 29
+                }
+              }
+            }
+          ]
+        }
+      ],
+      "end": [
+        {
+          "sels": [
+            {
+              "ts": {
+                "n": {
+                  "t": "b",
+                  "k": 29
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "out": "354501104|true"
+  },
+  {
+    "fn": "HashTokens",
+    "in": [
+      {
+        "k": 29,
+        "t": "foo"
+      },
+      {
+        "k": 37,
+        "t": "url(x)"
+      },
+      {
+        "k": 27,
+        "t": "rgb(1,2,3)",
+        "c": [
+          {
+            "k": 30,
+            "t": "1"
+          },
+          {
+            "k": 10,
+            "t": ","
+          },
+          {
+            "k": 30,
+            "t": "2"
+          }
+        ]
+      }
+    ],
+    "out": "4177658016"
+  },
+  {
+    "fn": "HashRules",
+    "in": [
+      {
+        "ty": "charset",
+        "enc": "a"
+      },
+      {
+        "ty": "import"
+      },
+      {
+        "ty": "comment",
+        "text": "c"
+      }
+    ],
+    "out": "4271385709"
+  },
+  {
+    "fn": "HashMediaQueries",
+    "in": [
+      {
+        "ty": "plain",
+        "text": "screen"
+      },
+      {
+        "ty": "range",
+        "text": "x",
+        "before": [
+          {
+            "k": 30,
+            "t": "1"
+          }
+        ],
+        "bc": 4
+      }
+    ],
+    "out": "744555633"
+  },
+  {
+    "fn": "HashComplexSelectors",
+    "in": [
+      {
+        "sels": [
+          {
+            "ts": {
+              "n": {
+                "t": "div",
+                "k": 29
+              }
+            }
+          },
+          {
+            "sub": [
+              {
+                "ty": "attr",
+                "nn": {
+                  "n": {
+                    "t": "id",
+                    "k": 29
+                  }
+                },
+                "op": "=",
+                "val": "x"
+              }
+            ],
+            "cb": 32
+          }
+        ]
+      }
+    ],
+    "out": "1124901342"
+  }
+]

@@ -1,0 +1,32 @@
+{
+  "rows": [
+    {
+      "name": "defaults-browser",
+      "out": "{\"assetT\":\"./:2;-:3;\",\"chunkT\":\"./:2;-:3;\",\"cssExt\":\".css\",\"cssFeat\":0,\"cssMask\":0,\"entryT\":\"./:1;/:2;\",\"jsExt\":\".js\",\"jsFeat\":\"0\",\"jsMask\":\"0\",\"jsOverride\":\"0\",\"loader\":13,\"profiler\":true}"
+    },
+    {
+      "name": "defaults-node",
+      "out": "{\"assetT\":\"./:2;-:3;\",\"chunkT\":\"./:2;-:3;\",\"cssExt\":\".css\",\"cssFeat\":64,\"cssMask\":0,\"entryT\":\"./:1;/:2;\",\"jsExt\":\".js\",\"jsFeat\":\"68719476736\",\"jsMask\":\"0\",\"jsOverride\":\"0\",\"loader\":13,\"profiler\":true}"
+    },
+    {
+      "name": "minify",
+      "out": "{\"assetT\":\"./:2;-:3;\",\"chunkT\":\"./:2;-:3;\",\"cssExt\":\".css\",\"cssFeat\":0,\"cssMask\":0,\"entryT\":\"./:1;/:2;\",\"jsExt\":\".js\",\"jsFeat\":\"0\",\"jsMask\":\"0\",\"jsOverride\":\"0\",\"loader\":13,\"profiler\":false}"
+    },
+    {
+      "name": "with-loader",
+      "out": "{\"assetT\":\"./:2;-:3;\",\"chunkT\":\"./:2;-:3;\",\"cssExt\":\".css\",\"cssFeat\":0,\"cssMask\":0,\"entryT\":\"./:1;/:2;\",\"jsExt\":\".js\",\"jsFeat\":\"0\",\"jsMask\":\"0\",\"jsOverride\":\"0\",\"loader\":13,\"profiler\":true}"
+    },
+    {
+      "name": "async-override",
+      "out": "{\"assetT\":\"./:2;-:3;\",\"chunkT\":\"./:2;-:3;\",\"cssExt\":\".css\",\"cssFeat\":0,\"cssMask\":0,\"entryT\":\"./:1;/:2;\",\"jsExt\":\".js\",\"jsFeat\":\"144115188092633104\",\"jsMask\":\"144115188092633112\",\"jsOverride\":\"144115188092633112\",\"loader\":13,\"profiler\":true}"
+    },
+    {
+      "name": "fix:fix-noop",
+      "out": "0|0|0"
+    },
+    {
+      "name": "fix:fix-trigger",
+      "out": "144115188075855872|144115188075855880|144115188075855880"
+    }
+  ]
+}

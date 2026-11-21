@@ -1,0 +1,48 @@
+{
+  "rows": [
+    {
+      "name": "lca:empty",
+      "out": ""
+    },
+    {
+      "name": "lca:explicit-only",
+      "out": ""
+    },
+    {
+      "name": "lca:one-auto",
+      "out": "/a/b"
+    },
+    {
+      "name": "lca:two-auto",
+      "out": "/a/b"
+    },
+    {
+      "name": "lca:divergent",
+      "out": "/"
+    },
+    {
+      "name": "lca:prefix",
+      "out": "/a"
+    },
+    {
+      "name": "lca:mixed",
+      "out": "/a/b"
+    },
+    {
+      "name": "san:nil-loc",
+      "out": "nil"
+    },
+    {
+      "name": "san:empty-ns",
+      "out": "{\"abs\":\"/a/b.js\",\"ns\":\"file\",\"rel\":\"../../../a/b.js\"}"
+    },
+    {
+      "name": "san:with-ns",
+      "out": "{\"abs\":\"/a/b.js\",\"ns\":\"file\",\"rel\":\"../../../a/b.js\"}"
+    },
+    {
+      "name": "san:empty-path",
+      "out": "{\"abs\":\"\",\"ns\":\"file\",\"rel\":\"\"}"
+    }
+  ]
+}

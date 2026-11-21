@@ -1,0 +1,94 @@
+package main
+
+import (
+	"encoding/base64"
+	"encoding/json"
+	"os"
+	"testing"
+)
+
+// 第 82 轮：stdio_protocol + service 编解码纯函数 Go 探针。
+func TestTmpGenProtocol(t *testing.T) {
+	type row struct {
+		Fn  string `json:"fn"`
+		Arg string `json:"arg"`
+		Out string `json:"out"`
+	}
+	var out []row
+	b64 := func(b []byte) string { return base64.StdEncoding.EncodeToString(b) }
+
+	// encodePacket: arg = request/response + id + JSON-ish value descriptor
+	// We drive encodePacket directly with hand-built packet values.
+	enc := func(name string, p packet) {
+		out = append(out, row{"encodePacket", name, b64(encodePacket(p))})
+	}
+	enc("nil-req-0", packet{value: nil, id: 0, isRequest: true})
+	enc("bool-true-resp-3", packet{value: true, id: 3, isRequest: false})
+	enc("bool-false-req-1", packet{value: false, id: 1, isRequest: true})
+	enc("int-42-req-2", packet{value: int(42), id: 2, isRequest: true})
+	enc("int-neg-resp-0", packet{value: int(-7), id: 0, isRequest: false})
+	enc("str-hello-req-5", packet{value: "hello", id: 5, isRequest: true})
+	enc("str-empty-resp-1", packet{value: "", id: 1, isRequest: false})
+	enc("bytes-abc-req-0", packet{value: []byte("abc"), id: 0, isRequest: true})
+	enc("array-mixed-req-0", packet{value: []interface{}{nil, true, int(7), "x", []byte("y")}, id: 0, isRequest: true})
+	enc("map-sorted-req-0", packet{value: map[string]interface{}{"z": int(1), "a": "b", "m": false}, id: 0, isRequest: true})
+	enc("nested-req-9", packet{value: map[string]interface{}{
+		"arr": []interface{}{int(1), map[string]interface{}{"k": "v"}},
+		"n":   nil,
+	}, id: 9, isRequest: true})
+
+	// decodePacket: decode each encoded blob back, dump a canonical value string
+	decDump := func(name string, value interface{}) {
+		blob := encodePacket(packet{value: value, id: 0, isRequest: true})
+		p, ok := decodePacket(blob)
+		if !ok {
+			out = append(out, row{"decodePacket", name, "!ok"})
+			return
+		}
+		dumped := dumpValue(p.value)
+		out = append(out, row{"decodePacket", name, "id=" + itoa(int(p.id)) + ";req=" + boolStr(p.isRequest) + ";" + dumped})
+	}
+	decDump("nil", nil)
+	decDump("true", true)
+	decDump("false", false)
+	decDump("int42", int(42))
+	decDump("str", "hello世界")
+	decDump("bytes", []byte("abc"))
+	decDump("array", []interface{}{nil, true, int(3), "x"})
+	decDump("map", map[string]interface{}{"b": int(2), "a": "z"})
+	// decode malformed: truncated
+	_, ok := decodePacket([]byte{0, 0})
+	out = append(out, row{"decodePacket", "truncated", boolStr(ok)})
+	_, ok = decodePacket(nil)
+	out = append(out, row{"decodePacket", "empty", boolStr(ok)})
+
+	b, err := json.MarshalIndent(out, "", "  ")
+	if err != nil { t.Fatal(err) }
+	if err := os.WriteFile("/root/port/testdata/stdio-protocol2-go.json", b, 0644); err != nil { t.Fatal(err) }
+	t.Logf("wrote %d rows", len(out))
+}
+
+func boolStr(b bool) string { if b { return "true" }; return "false" }
+func itoa(n int) string { if n == 0 { return "0" }; neg := n < 0; if neg { n = -n }; var s []byte; for n > 0 { s = append([]byte{byte('0'+n%10)}, s...); n /= 10 }; if neg { s = append([]byte{'-'}, s...) }; return string(s) }
+
+func dumpValue(v interface{}) string {
+	switch x := v.(type) {
+	case nil: return "nil"
+	case bool: return "bool:" + boolStr(x)
+	case int: return "int:" + itoa(x)
+	case string: return "str:" + x
+	case []byte: return "bytes:" + string(x)
+	case []interface{}:
+		s := "["
+		for i, item := range x { if i > 0 { s += "," }; s += dumpValue(item) }
+		return s + "]"
+	case map[string]interface{}:
+		keys := make([]string, 0, len(x))
+		for k := range x { keys = append(keys, k) }
+		for i := 0; i < len(keys); i++ { for j := i+1; j < len(keys); j++ { if keys[j] < keys[i] { keys[i],keys[j]=keys[j],keys[i] } } }
+		s := "{"
+		for i, k := range keys { if i > 0 { s += "," }; s += k + "=" + dumpValue(x[k]) }
+		return s + "}"
+	default: return "?"
+	}
+}

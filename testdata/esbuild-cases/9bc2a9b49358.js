@@ -1,0 +1,1 @@
+import {arguments as x} from 'foo'

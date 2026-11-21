@@ -1,0 +1,1 @@
+for ((/* foo */ let).x of y) ;

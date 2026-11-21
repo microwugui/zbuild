@@ -1,0 +1,232 @@
+[
+  {
+    "fn": "isFontSize",
+    "arg": "26|12px",
+    "out": "true"
+  },
+  {
+    "fn": "isFontSize",
+    "arg": "34|50%",
+    "out": "true"
+  },
+  {
+    "fn": "isFontSize",
+    "arg": "29|medium",
+    "out": "true"
+  },
+  {
+    "fn": "isFontSize",
+    "arg": "29|XX-LARGE",
+    "out": "true"
+  },
+  {
+    "fn": "isFontSize",
+    "arg": "29|larger",
+    "out": "true"
+  },
+  {
+    "fn": "isFontSize",
+    "arg": "29|smaller",
+    "out": "true"
+  },
+  {
+    "fn": "isFontSize",
+    "arg": "29|foo",
+    "out": "false"
+  },
+  {
+    "fn": "isFontSize",
+    "arg": "30|12",
+    "out": "false"
+  },
+  {
+    "fn": "mangleNumber",
+    "arg": "1.0",
+    "out": "1|true"
+  },
+  {
+    "fn": "mangleNumber",
+    "arg": "1.50",
+    "out": "1.5|true"
+  },
+  {
+    "fn": "mangleNumber",
+    "arg": "0.5",
+    "out": ".5|true"
+  },
+  {
+    "fn": "mangleNumber",
+    "arg": "-0.5",
+    "out": "-.5|true"
+  },
+  {
+    "fn": "mangleNumber",
+    "arg": "1.",
+    "out": "1|true"
+  },
+  {
+    "fn": "mangleNumber",
+    "arg": "123",
+    "out": "123|false"
+  },
+  {
+    "fn": "mangleNumber",
+    "arg": "+0.5",
+    "out": "+.5|true"
+  },
+  {
+    "fn": "mangleNumber",
+    "arg": "0.0500",
+    "out": ".05|true"
+  },
+  {
+    "fn": "mangleNumber",
+    "arg": "1.000",
+    "out": "1|true"
+  },
+  {
+    "fn": "mangleNumber",
+    "arg": "0.0",
+    "out": "0|true"
+  },
+  {
+    "fn": "mangleNumber",
+    "arg": "-0.0",
+    "out": "-0|true"
+  },
+  {
+    "fn": "shiftDot",
+    "arg": "123|1",
+    "out": "1230|true"
+  },
+  {
+    "fn": "shiftDot",
+    "arg": "123.45|1",
+    "out": "1234.5|true"
+  },
+  {
+    "fn": "shiftDot",
+    "arg": "123.45|-1",
+    "out": "12.345|true"
+  },
+  {
+    "fn": "shiftDot",
+    "arg": "0.5|1",
+    "out": "5|true"
+  },
+  {
+    "fn": "shiftDot",
+    "arg": "1e3|1",
+    "out": "|false"
+  },
+  {
+    "fn": "shiftDot",
+    "arg": "-0.5|1",
+    "out": "-5|true"
+  },
+  {
+    "fn": "shiftDot",
+    "arg": "+0.05|2",
+    "out": "+5|true"
+  },
+  {
+    "fn": "shiftDot",
+    "arg": "100|-2",
+    "out": "1|true"
+  },
+  {
+    "fn": "shiftDot",
+    "arg": "0.001|2",
+    "out": ".1|true"
+  },
+  {
+    "fn": "shiftDot",
+    "arg": "5|0",
+    "out": "5|true"
+  },
+  {
+    "fn": "parseInteger",
+    "arg": "123",
+    "out": "123|true"
+  },
+  {
+    "fn": "parseInteger",
+    "arg": "00123",
+    "out": "123|true"
+  },
+  {
+    "fn": "parseInteger",
+    "arg": "000",
+    "out": "0|true"
+  },
+  {
+    "fn": "parseInteger",
+    "arg": "",
+    "out": "|false"
+  },
+  {
+    "fn": "parseInteger",
+    "arg": "12a",
+    "out": "|false"
+  },
+  {
+    "fn": "parseInteger",
+    "arg": "-1",
+    "out": "|false"
+  },
+  {
+    "fn": "parseInteger",
+    "arg": "000100",
+    "out": "100|true"
+  },
+  {
+    "fn": "parseInteger",
+    "arg": "1.5",
+    "out": "|false"
+  },
+  {
+    "fn": "floatToStringForCalc",
+    "arg": "0.5",
+    "out": ".5|true"
+  },
+  {
+    "fn": "floatToStringForCalc",
+    "arg": "1",
+    "out": "1|true"
+  },
+  {
+    "fn": "floatToStringForCalc",
+    "arg": "0.1",
+    "out": ".1|true"
+  },
+  {
+    "fn": "floatToStringForCalc",
+    "arg": "0.123456789",
+    "out": "|false"
+  },
+  {
+    "fn": "floatToStringForCalc",
+    "arg": "-0.5",
+    "out": "-.5|true"
+  },
+  {
+    "fn": "floatToStringForCalc",
+    "arg": "12.34567",
+    "out": "12.34567|true"
+  },
+  {
+    "fn": "floatToStringForCalc",
+    "arg": "1e10",
+    "out": "10000000000|true"
+  },
+  {
+    "fn": "floatToStringForCalc",
+    "arg": "nan",
+    "out": "|false"
+  },
+  {
+    "fn": "floatToStringForCalc",
+    "arg": "inf",
+    "out": "|false"
+  }
+]

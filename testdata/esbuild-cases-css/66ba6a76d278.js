@@ -1,0 +1,1 @@
+@media screen { @media (min-width: 900px) { a, b { &:hover { color: red } } } }

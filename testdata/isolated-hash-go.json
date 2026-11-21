@@ -1,0 +1,35 @@
+[
+  {
+    "fn": "generateIsolatedHash",
+    "arg": {
+      "scenario": "A"
+    },
+    "out": "f532a52024293de1"
+  },
+  {
+    "fn": "generateIsolatedHash",
+    "arg": {
+      "scenario": "B"
+    },
+    "out": "26f3bb0a8c0e441a"
+  },
+  {
+    "fn": "generateIsolatedHashInParallel",
+    "arg": {},
+    "out": "2cf610dcc299a57a"
+  },
+  {
+    "fn": "appendIsolatedHashesForImportedChunks",
+    "arg": {
+      "scenario": "chain"
+    },
+    "out": "3e45347f3f458ea8"
+  },
+  {
+    "fn": "appendIsolatedHashesForImportedChunks",
+    "arg": {
+      "scenario": "cycle"
+    },
+    "out": "fc2f33e9edde6f4a"
+  }
+]

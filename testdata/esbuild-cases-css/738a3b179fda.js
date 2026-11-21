@@ -1,0 +1,1 @@
+.foo[href] { composes: bar; color: red }

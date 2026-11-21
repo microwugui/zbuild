@@ -1,0 +1,1 @@
+.xy { :where([href]&) { color: red } }

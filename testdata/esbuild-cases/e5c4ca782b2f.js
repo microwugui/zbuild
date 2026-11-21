@@ -1,0 +1,1 @@
+switch (0) { case 0: { let x = a(); break; } case 1: b(); break }

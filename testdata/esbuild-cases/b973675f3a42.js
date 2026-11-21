@@ -1,0 +1,1 @@
+let protecte\u0064

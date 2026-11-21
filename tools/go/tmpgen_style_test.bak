@@ -1,0 +1,103 @@
+package logger
+
+import (
+	"encoding/hex"
+	"encoding/json"
+	"os"
+	"testing"
+)
+
+type stCase struct {
+	Name           string `json:"name"`
+	Kind           string `json:"kind"`
+	ID             int    `json:"id"`
+	Text           string `json:"text"`
+	Line           int    `json:"line"`
+	Column         int    `json:"column"`
+	Length         int    `json:"length"`
+	LineText       string `json:"lineText"`
+	Suggestion     string `json:"suggestion"`
+	Notes          []string `json:"notes"`
+	UseColor       bool   `json:"useColor"`
+	Width          int    `json:"width"`
+	PathStyle      string `json:"pathStyle"`
+	HasLocation    bool   `json:"hasLocation"`
+	ClangHex       string `json:"clangHex"`
+	VisualStudioHex string `json:"visualStudioHex"`
+}
+
+type stFixture struct {
+	VSIDs []int    `json:"vsids"` // index = MsgID
+	Cases []stCase `json:"cases"`
+}
+
+func stStyle(s string) LogStyle {
+	switch s {
+	case "clang": return StyleClang
+	case "visualstudio": return StyleVisualStudio
+	default: return StyleDefault
+	}
+}
+func stPathStyle(s string) PathStyle {
+	switch s {
+	case "abs": return AbsPath
+	case "rel": return RelPath
+	default: return RelPath
+	}
+}
+func stKind(s string) MsgKind {
+	switch s {
+	case "error": return Error
+	case "note": return Note
+	default: return Warning
+	}
+}
+
+func TestTmpGenStyle(t *testing.T) {
+	fx := stFixture{}
+	for id := 0; id <= int(MsgID_END); id++ {
+		fx.VSIDs = append(fx.VSIDs, int(msgIDToInfo(MsgID(id)).vsID))
+	}
+
+	specs := []struct {
+		name, kind, text, lineText, suggestion, pathStyle string
+		id, line, column, length, width int
+		notes []string
+		useColor, hasLocation bool
+	}{
+		{"plain-warning", "warning", "Unexpected token", "", "", "rel", int(MsgID_JS_SuspiciousBooleanNot), 0, 0, 0, 80, nil, false, false},
+		{"error-with-loc", "error", "Unexpected ';'", "  let x = 1;; // trailing", "", "rel", int(MsgID_JS_AssertToWith), 3, 10, 1, 80, nil, false, true},
+		{"error-suggestion", "error", "Use === instead", "if (x == y) {}", "Try using ===", "rel", int(MsgID_JS_EqualsNaN), 1, 7, 2, 80, nil, false, true},
+		{"with-notes", "warning", "Main problem", "foo bar baz", "", "abs", int(MsgID_JS_CommonJSVariableInESM), 2, 4, 3, 80, []string{"first note", "second note"}, false, true},
+		{"color-error", "error", "Colored error", "abcd", "", "rel", int(MsgID_JS_AssignToConstant), 1, 0, 2, 80, nil, true, true},
+		{"note-kind", "note", "A note kind", "", "", "rel", int(MsgID_None), 0, 0, 0, 80, nil, false, false},
+		{"no-loc-error", "error", "No location here", "", "", "rel", int(MsgID_CSS_CSSSyntaxError), 0, 0, 0, 80, nil, false, false},
+		{"narrow-width", "error", "Long line marker", "abcdefghijklmnopqrstuvwxyz 0123456789", "", "rel", int(MsgID_JS_BigInt), 1, 30, 4, 12, nil, false, true},
+	}
+
+	for _, s := range specs {
+		msg := Msg{Kind: stKind(s.kind), ID: MsgID(s.id), Data: MsgData{Text: s.text}}
+		if s.hasLocation {
+			msg.Data.Location = &MsgLocation{
+				File: PrettyPaths{Rel: "src/input.js", Abs: "/abs/src/input.js"},
+				LineText: s.lineText, Line: s.line, Column: s.column, Length: s.length, Suggestion: s.suggestion,
+			}
+		}
+		for _, nt := range s.notes { msg.Notes = append(msg.Notes, MsgData{Text: nt}) }
+		opts := OutputOptions{PathStyle: stPathStyle(s.pathStyle)}
+		ti := TerminalInfo{Width: s.width, UseColorEscapes: s.useColor}
+
+		clang := msgToStringClang(msg, opts, ti)
+		vs := msgToStringVisualStudio(msg, opts, ti)
+		fx.Cases = append(fx.Cases, stCase{
+			Name: s.name, Kind: s.kind, ID: s.id, Text: s.text, Line: s.line, Column: s.column,
+			Length: s.length, LineText: s.lineText, Suggestion: s.suggestion, Notes: s.notes,
+			UseColor: s.useColor, Width: s.width, PathStyle: s.pathStyle, HasLocation: s.hasLocation,
+			ClangHex: hex.EncodeToString([]byte(clang)), VisualStudioHex: hex.EncodeToString([]byte(vs)),
+		})
+	}
+
+	b, _ := json.MarshalIndent(fx, "", "  ")
+	if err := os.WriteFile("/root/port/testdata/logger/style-extra-go.json", b, 0644); err != nil { t.Fatal(err) }
+	t.Logf("wrote vsids=%d cases=%d bytes=%d", len(fx.VSIDs), len(fx.Cases), len(b))
+}

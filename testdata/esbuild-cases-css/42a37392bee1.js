@@ -1,0 +1,1 @@
+a { color: red } div {} b { color: red }

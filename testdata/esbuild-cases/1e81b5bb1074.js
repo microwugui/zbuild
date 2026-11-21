@@ -1,0 +1,1 @@
+let a, b; a ? b.y(c) : b.y(d)

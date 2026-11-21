@@ -1,0 +1,182 @@
+[
+  {
+    "fn": "treeShakingAndCodeSplitting",
+    "arg": {
+      "scenario": "A",
+      "treeShaking": false
+    },
+    "out": [
+      {
+        "bits": [
+          0
+        ],
+        "dist": 0,
+        "live": true,
+        "parts": [
+          true,
+          true
+        ]
+      },
+      {
+        "bits": [
+          0
+        ],
+        "dist": 1,
+        "live": true,
+        "parts": [
+          true,
+          false
+        ]
+      },
+      {
+        "bits": [],
+        "dist": 4294967295,
+        "live": false,
+        "parts": [
+          false
+        ]
+      }
+    ]
+  },
+  {
+    "fn": "treeShakingAndCodeSplitting",
+    "arg": {
+      "scenario": "A",
+      "treeShaking": true
+    },
+    "out": [
+      {
+        "bits": [
+          0
+        ],
+        "dist": 0,
+        "live": true,
+        "parts": [
+          true,
+          false
+        ]
+      },
+      {
+        "bits": [
+          0
+        ],
+        "dist": 1,
+        "live": true,
+        "parts": [
+          true,
+          false
+        ]
+      },
+      {
+        "bits": [],
+        "dist": 4294967295,
+        "live": false,
+        "parts": [
+          false
+        ]
+      }
+    ]
+  },
+  {
+    "fn": "treeShakingAndCodeSplitting",
+    "arg": {
+      "codeSplit": false,
+      "scenario": "B"
+    },
+    "out": [
+      {
+        "bits": [
+          0
+        ],
+        "dist": 0,
+        "live": true,
+        "parts": [
+          true
+        ]
+      },
+      {
+        "bits": [
+          1
+        ],
+        "dist": 0,
+        "live": true,
+        "parts": [
+          true
+        ]
+      },
+      {
+        "bits": [
+          0,
+          1
+        ],
+        "dist": 1,
+        "live": true,
+        "parts": [
+          true
+        ]
+      }
+    ]
+  },
+  {
+    "fn": "treeShakingAndCodeSplitting",
+    "arg": {
+      "codeSplit": true,
+      "scenario": "B"
+    },
+    "out": [
+      {
+        "bits": [
+          0
+        ],
+        "dist": 0,
+        "live": true,
+        "parts": [
+          true
+        ]
+      },
+      {
+        "bits": [
+          1
+        ],
+        "dist": 0,
+        "live": true,
+        "parts": [
+          true
+        ]
+      },
+      {
+        "bits": [
+          0,
+          1
+        ],
+        "dist": 1,
+        "live": true,
+        "parts": [
+          true
+        ]
+      }
+    ]
+  },
+  {
+    "fn": "markPartLiveForTreeShaking",
+    "arg": {},
+    "out": [
+      {
+        "bits": [],
+        "dist": 4294967295,
+        "live": true,
+        "parts": [
+          true
+        ]
+      },
+      {
+        "bits": [],
+        "dist": 4294967295,
+        "live": true,
+        "parts": [
+          true
+        ]
+      }
+    ]
+  }
+]

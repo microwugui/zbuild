@@ -1,0 +1,197 @@
+{
+ "assertRanges": [
+  {
+   "len": 3,
+   "loc": 0,
+   "which": 0
+  },
+  {
+   "len": 5,
+   "loc": 4,
+   "which": 1
+  },
+  {
+   "len": 9,
+   "loc": 0,
+   "which": 2
+  }
+ ],
+ "expectTokens": [
+  {
+   "input": "a<=b",
+   "which": "lt",
+   "token": 59,
+   "name": "\"=\"",
+   "start": 2,
+   "end": 3,
+   "raw": "="
+  },
+  {
+   "input": "a<<=b",
+   "which": "lt",
+   "token": 36,
+   "name": "\"<=\"",
+   "start": 2,
+   "end": 4,
+   "raw": "<="
+  },
+  {
+   "input": "a<<b",
+   "which": "lt",
+   "token": 35,
+   "name": "\"<\"",
+   "start": 2,
+   "end": 3,
+   "raw": "<"
+  },
+  {
+   "input": "a<b",
+   "which": "lt",
+   "token": 69,
+   "name": "identifier",
+   "start": 2,
+   "end": 3,
+   "raw": "b"
+  },
+  {
+   "input": "a<==b",
+   "which": "lt",
+   "token": 25,
+   "name": "\"==\"",
+   "start": 2,
+   "end": 4,
+   "raw": "=="
+  },
+  {
+   "input": "a<=>b",
+   "which": "lt",
+   "token": 27,
+   "name": "\"=>\"",
+   "start": 2,
+   "end": 4,
+   "raw": "=>"
+  },
+  {
+   "input": "a>=b",
+   "which": "gt",
+   "token": 59,
+   "name": "\"=\"",
+   "start": 2,
+   "end": 3,
+   "raw": "="
+  },
+  {
+   "input": "a>>=b",
+   "which": "gt",
+   "token": 32,
+   "name": "\">=\"",
+   "start": 2,
+   "end": 4,
+   "raw": ">="
+  },
+  {
+   "input": "a>>>b",
+   "which": "gt",
+   "token": 33,
+   "name": "\">>\"",
+   "start": 2,
+   "end": 4,
+   "raw": ">>"
+  },
+  {
+   "input": "a>>b",
+   "which": "gt",
+   "token": 31,
+   "name": "\">\"",
+   "start": 2,
+   "end": 3,
+   "raw": ">"
+  },
+  {
+   "input": "a>b",
+   "which": "gt",
+   "token": 69,
+   "name": "identifier",
+   "start": 2,
+   "end": 3,
+   "raw": "b"
+  },
+  {
+   "input": "a>>>=b",
+   "which": "gt",
+   "token": 60,
+   "name": "\">>=\"",
+   "start": 2,
+   "end": 5,
+   "raw": ">>="
+  },
+  {
+   "input": "a>==b",
+   "which": "gt",
+   "token": 25,
+   "name": "\"==\"",
+   "start": 2,
+   "end": 4,
+   "raw": "=="
+  },
+  {
+   "input": "a>=>b",
+   "which": "gt",
+   "token": 27,
+   "name": "\"=>\"",
+   "start": 2,
+   "end": 4,
+   "raw": "=>"
+  }
+ ],
+ "ranges": [
+  {
+   "contents": "abc def",
+   "len": 3,
+   "loc": 0,
+   "start": 0
+  },
+  {
+   "contents": "  abc",
+   "len": 0,
+   "loc": 2,
+   "start": 2
+  },
+  {
+   "contents": "#priv x",
+   "len": 5,
+   "loc": 0,
+   "start": 0
+  },
+  {
+   "contents": "9abc",
+   "len": 0,
+   "loc": 0,
+   "start": 0
+  },
+  {
+   "contents": "\"abc\"",
+   "len": 5,
+   "loc": 0,
+   "start": 0
+  },
+  {
+   "contents": "a\\u{10000}b",
+   "len": 0,
+   "loc": 0,
+   "start": 0
+  },
+  {
+   "contents": "x+y",
+   "len": 0,
+   "loc": 2,
+   "start": 2
+  },
+  {
+   "contents": "",
+   "len": 0,
+   "loc": 0,
+   "start": 0
+  }
+ ]
+}

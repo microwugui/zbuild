@@ -1,0 +1,1 @@
+a = Number(0xFFFF_FFFF_FFFF_FFFFn)

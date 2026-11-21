@@ -1,0 +1,1 @@
+@media (color) and (opacity) or (width) {}

@@ -1,0 +1,72 @@
+[
+  {
+    "fn": "generateGlobalNamePrefix",
+    "arg": "Zm9v|false|false|false",
+    "out": "var foo = "
+  },
+  {
+    "fn": "generateGlobalNamePrefix",
+    "arg": "Zm9vLmJhcg==|false|false|true",
+    "out": "this[\"foo.bar\"] = "
+  },
+  {
+    "fn": "generateGlobalNamePrefix",
+    "arg": "dGhpcy5mb28=|false|false|false",
+    "out": "this[\"this.foo\"] = "
+  },
+  {
+    "fn": "generateGlobalNamePrefix",
+    "arg": "Zm9vLmJhcg==|true|false|false",
+    "out": "this[\"foo.bar\"]="
+  },
+  {
+    "fn": "generateGlobalNamePrefix",
+    "arg": "YeKAlGI=|false|true|false",
+    "out": "this[\"a\\u2014b\"] = "
+  },
+  {
+    "fn": "generateGlobalNamePrefix",
+    "arg": "aW1wb3J0Lm1ldGEueA==|false|false|false",
+    "out": "this[\"import.meta.x\"] = "
+  },
+  {
+    "fn": "appendOrExtendPartRange",
+    "arg": "[]|0|5",
+    "out": "0:5:6;"
+  },
+  {
+    "fn": "appendOrExtendPartRange",
+    "arg": "[[0,0,5]]|0|5",
+    "out": "0:0:6;"
+  },
+  {
+    "fn": "appendOrExtendPartRange",
+    "arg": "[[0,0,5]]|0|4",
+    "out": "0:0:5;0:4:5;"
+  },
+  {
+    "fn": "appendOrExtendPartRange",
+    "arg": "[[0,0,5],[1,2,3]]|1|3",
+    "out": "0:0:5;1:2:4;"
+  },
+  {
+    "fn": "hashWriteUint32",
+    "arg": "0",
+    "out": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119"
+  },
+  {
+    "fn": "hashWriteUint32",
+    "arg": "1",
+    "out": "67abdd721024f0ff4e0b3f4c2fc13bc5bad42d0b7851d456d88d203d15aaa450"
+  },
+  {
+    "fn": "hashWriteUint32",
+    "arg": "16909060",
+    "out": "ee10da4aefe61a37df1dee937ca3221afa3b2351f9ea34edbbb769573c6785f7"
+  },
+  {
+    "fn": "hashWriteUint32",
+    "arg": "4294967295",
+    "out": "ad95131bc0b799c0b1af477fb14fcf26a6a9f76079e48bf090acb7e8367bfd0e"
+  }
+]

@@ -1,0 +1,121 @@
+package resolver
+
+// 第 173 批 Go 探针：finalizeResolve 逐字节固化（ResolveResult 底座 + symlink/sideEffects/tsconfig/external）。
+import (
+	"encoding/json"
+	"os"
+	"regexp"
+	"testing"
+
+	"github.com/evanw/esbuild/internal/ast"
+	"github.com/evanw/esbuild/internal/config"
+	"github.com/evanw/esbuild/internal/fs"
+	"github.com/evanw/esbuild/internal/logger"
+)
+
+type frRow struct {
+	Arg map[string]interface{} `json:"arg"`
+	Out interface{}            `json:"out"`
+}
+
+func joinDot(parts []string) string {
+	out := ""
+	for i, p := range parts {
+		if i > 0 { out += "." }
+		out += p
+	}
+	return out
+}
+
+func TestTmpGenFinalize2(t *testing.T) {
+	var out []frRow
+	type tc struct {
+		name string
+		primary, secondary string
+		primaryNS, secondaryNS string
+		primaryDisabled bool
+		kind ast.ImportKind
+		externalExact map[string]bool
+		externalPatterns []config.WildcardPattern
+		withDirInfo bool
+		sideEffects map[string]bool
+		sideGlob []string
+		withSideData bool
+		withTSConfig bool
+		jsxFactory, jsxFragment []string
+	}
+	cases := []tc{
+		{"external-exact", "/proj/a.js", "", "file", "file", false, ast.ImportStmt, map[string]bool{"/proj/a.js": true}, nil, false, nil, nil, false, false, nil, nil},
+		{"external-pattern", "/proj/vendor/x.js", "", "file", "file", false, ast.ImportStmt, nil, []config.WildcardPattern{{Prefix: "/proj/vendor/", Suffix: ""}}, false, nil, nil, false, false, nil, nil},
+		{"entry-point-not-external", "/proj/a.js", "", "file", "file", false, ast.ImportEntryPoint, map[string]bool{"/proj/a.js": true}, nil, false, nil, nil, false, false, nil, nil},
+		{"no-dirinfo", "/proj/a.js", "", "file", "file", false, ast.ImportStmt, nil, nil, false, nil, nil, false, false, nil, nil},
+		{"namespace-skip", "/proj/a.js", "", "ns", "file", false, ast.ImportStmt, nil, nil, true, nil, nil, false, false, nil, nil},
+		{"sideeffects-false", "/proj/a.js", "", "file", "file", false, ast.ImportStmt, nil, nil, true, map[string]bool{"/proj/a.js": false}, nil, true, false, nil, nil},
+		{"sideeffects-true", "/proj/a.js", "", "file", "file", false, ast.ImportStmt, nil, nil, true, map[string]bool{"/proj/a.js": true}, nil, true, false, nil, nil},
+		{"sideeffects-glob-hit", "/proj/a.js", "", "file", "file", false, ast.ImportStmt, nil, nil, true, map[string]bool{}, []string{`\.js$`}, true, false, nil, nil},
+		{"sideeffects-glob-miss", "/proj/a.js", "", "file", "file", false, ast.ImportStmt, nil, nil, true, map[string]bool{}, []string{`^zzz`}, true, false, nil, nil},
+		{"tsconfig-copy", "/proj/a.js", "", "file", "file", false, ast.ImportStmt, nil, nil, true, nil, nil, false, true, []string{"React", "createElement"}, []string{"React", "Fragment"}},
+		{"secondary-both", "/proj/a.js", "/proj/b.js", "file", "file", false, ast.ImportStmt, nil, nil, true, map[string]bool{"/proj/a.js": false}, nil, true, false, nil, nil},
+		{"primary-disabled", "/proj/a.js", "", "file", "file", true, ast.ImportStmt, nil, nil, true, map[string]bool{"/proj/a.js": false}, nil, true, false, nil, nil},
+	}
+	for _, c := range cases {
+		fsObj := fs.MockFS(map[string]string{}, fs.MockUnix, "/")
+		log := logger.NewDeferLog(logger.DeferLogAll, nil)
+		dl := &debugLogs{}
+		r := resolverQuery{Resolver: &Resolver{log: log}, debugLogs: dl}
+		r.options = config.Options{
+			Platform: config.PlatformNode,
+			ExternalSettings: config.ExternalSettings{PostResolve: config.ExternalMatchers{Exact: c.externalExact, Patterns: c.externalPatterns}},
+		}
+		r.fs = fsObj
+		r.caches = nil // dirInfoCached 命中 r.dirCache 就不会用 caches
+		r.dirCache = make(map[string]*dirInfo)
+		r.kind = c.kind
+		if c.withDirInfo {
+			info := &dirInfo{absPath: "/proj", entries: fs.MakeEmptyDirEntries("/proj")}
+			if c.sideEffects != nil || c.sideGlob != nil || c.withSideData {
+				pj := &packageJSON{}
+				pj.source = logger.Source{KeyPath: logger.Path{Text: "/proj/package.json"}}
+				if c.sideEffects != nil { pj.sideEffectsMap = c.sideEffects }
+				for _, g := range c.sideGlob { pj.sideEffectsRegexps = append(pj.sideEffectsRegexps, regexp.MustCompile(g)) }
+				if c.withSideData { pj.sideEffectsData = &SideEffectsData{Source: &pj.source} }
+				info.enclosingPackageJSON = pj
+			}
+			if c.withTSConfig {
+				tsc := &TSConfigJSON{AbsPath: "/proj/tsconfig.json"}
+				tsc.JSXSettings.JSXFactory = c.jsxFactory
+				tsc.JSXSettings.JSXFragmentFactory = c.jsxFragment
+				tsc.Settings.ExperimentalDecorators = config.True
+				tsc.TSAlwaysStrict = &config.TSAlwaysStrict{Name: "alwaysStrict"}
+				info.enclosingTSConfigJSON = tsc
+			}
+			r.dirCache["/proj"] = info
+		}
+		primaryFlags := logger.PathFlags(0)
+		if c.primaryDisabled { primaryFlags = logger.PathDisabled }
+		result := &ResolveResult{PathPair: PathPair{
+			Primary: logger.Path{Text: c.primary, Namespace: c.primaryNS, Flags: primaryFlags},
+			Secondary: logger.Path{Text: c.secondary, Namespace: c.secondaryNS},
+		}}
+		r.finalizeResolve(result)
+		notes := []string{}; for _, n := range dl.notes { notes = append(notes, n.Text) }
+		var sideOut interface{} = nil
+		if result.PrimarySideEffectsData != nil { sideOut = result.PrimarySideEffectsData.Source.KeyPath.Text }
+		tsconfigOut := false
+		if result.TSConfig != nil { tsconfigOut = result.TSConfig.ExperimentalDecorators == config.True }
+		strictOut := result.TSAlwaysStrict != nil
+		jsxFactory := joinDot(result.TSConfigJSX.JSXFactory)
+		jsxFrag := joinDot(result.TSConfigJSX.JSXFragmentFactory)
+		out = append(out, frRow{
+			Arg: map[string]interface{}{"name": c.name},
+			Out: []interface{}{
+				result.PathPair.IsExternal, sideOut, int(result.ModuleTypeData.Type),
+				tsconfigOut, strictOut, jsxFactory, jsxFrag, notes,
+			},
+		})
+	}
+	b, err := json.Marshal(out)
+	if err != nil { t.Fatal(err) }
+	if err := os.WriteFile("/root/port/testdata/finalize2-go.json", b, 0644); err != nil { t.Fatal(err) }
+	t.Logf("wrote %d cases", len(out))
+}

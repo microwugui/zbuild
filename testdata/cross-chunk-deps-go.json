@@ -1,0 +1,174 @@
+[
+  {
+    "fn": "computeCrossChunkDependencies",
+    "arg": {
+      "scenario": "A"
+    },
+    "out": [
+      {
+        "key": "TESTC00000000",
+        "crossImports": [],
+        "exports": {
+          "0:0": "shared"
+        },
+        "importGroups": [],
+        "prefix": [],
+        "suffix": [
+          {
+            "ref": [
+              0,
+              0
+            ],
+            "alias": "shared"
+          }
+        ]
+      },
+      {
+        "key": "TESTC00000001",
+        "crossImports": [
+          {
+            "kind": 1,
+            "chunkIndex": 0
+          }
+        ],
+        "exports": {},
+        "importGroups": [
+          {
+            "chunkIndex": 0,
+            "items": [
+              {
+                "ref": [
+                  0,
+                  0
+                ],
+                "alias": "shared"
+              }
+            ]
+          }
+        ],
+        "prefix": [
+          {
+            "ref": [
+              0,
+              0
+            ],
+            "alias": "shared"
+          }
+        ],
+        "suffix": []
+      }
+    ]
+  },
+  {
+    "fn": "computeCrossChunkDependencies",
+    "arg": {
+      "minify": true,
+      "scenario": "B"
+    },
+    "out": [
+      {
+        "key": "TESTC00000000",
+        "crossImports": [],
+        "exports": {
+          "0:0": "a",
+          "0:1": "b"
+        },
+        "importGroups": [],
+        "prefix": [],
+        "suffix": [
+          {
+            "ref": [
+              0,
+              0
+            ],
+            "alias": "a"
+          },
+          {
+            "ref": [
+              0,
+              1
+            ],
+            "alias": "b"
+          }
+        ]
+      },
+      {
+        "key": "TESTC00000001",
+        "crossImports": [
+          {
+            "kind": 1,
+            "chunkIndex": 0
+          }
+        ],
+        "exports": {},
+        "importGroups": [
+          {
+            "chunkIndex": 0,
+            "items": [
+              {
+                "ref": [
+                  0,
+                  0
+                ],
+                "alias": "a"
+              },
+              {
+                "ref": [
+                  0,
+                  1
+                ],
+                "alias": "b"
+              }
+            ]
+          }
+        ],
+        "prefix": [
+          {
+            "ref": [
+              0,
+              0
+            ],
+            "alias": "a"
+          },
+          {
+            "ref": [
+              0,
+              1
+            ],
+            "alias": "b"
+          }
+        ],
+        "suffix": []
+      }
+    ]
+  },
+  {
+    "fn": "computeCrossChunkDependencies",
+    "arg": {
+      "scenario": "C"
+    },
+    "out": [
+      {
+        "key": "TESTC00000000",
+        "crossImports": [
+          {
+            "kind": 3,
+            "chunkIndex": 1
+          }
+        ],
+        "exports": {},
+        "importGroups": [],
+        "prefix": [],
+        "suffix": []
+      },
+      {
+        "key": "TESTC00000001",
+        "crossImports": [],
+        "exports": {},
+        "importGroups": [],
+        "prefix": [],
+        "suffix": []
+      }
+    ]
+  }
+]

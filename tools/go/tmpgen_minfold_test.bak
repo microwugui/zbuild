@@ -1,0 +1,160 @@
+package js_printer
+
+// 第 109 轮 Go 探针：printer.simplifyUnusedExpr / lateConstantFoldUnaryOrBinaryOrIfExpr
+// 的直接 AST→AST 行为。构造受控 printer（符号带 IsEmptyFunction/IsIdentityFunction flag，
+// ConstValues 表），调目标函数后 dump 结果表达式的规范树，TS 侧同构 dump 逐字节比对。
+import (
+	"encoding/json"
+	"os"
+	"testing"
+
+	"github.com/evanw/esbuild/internal/ast"
+	"github.com/evanw/esbuild/internal/config"
+	"github.com/evanw/esbuild/internal/helpers"
+	"github.com/evanw/esbuild/internal/js_ast"
+)
+
+// 规范 AST dump：只用类型标签 + 关键字段，避开 float 文本格式化差异。
+func dumpE109(e js_ast.Expr) interface{} {
+	switch v := e.Data.(type) {
+	case nil:
+		return "nil"
+	case *js_ast.EIdentifier:
+		return []interface{}{"id", int(v.Ref.InnerIndex)}
+	case *js_ast.EImportIdentifier:
+		return []interface{}{"impid", int(v.Ref.InnerIndex)}
+	case *js_ast.ENumber:
+		return []interface{}{"num", int(v.Value)}
+	case *js_ast.EString:
+		return []interface{}{"str", string(helpers.UTF16ToString(v.Value))}
+	case *js_ast.EBoolean:
+		return []interface{}{"bool", v.Value}
+	case *js_ast.EUndefined:
+		return "undef"
+	case *js_ast.ENull:
+		return "null"
+	case *js_ast.EBinary:
+		return []interface{}{"bin", int(v.Op), dumpE109(v.Left), dumpE109(v.Right)}
+	case *js_ast.EUnary:
+		return []interface{}{"un", int(v.Op), dumpE109(v.Value)}
+	case *js_ast.ECall:
+		a := []interface{}{"call", dumpE109(v.Target)}
+		for _, x := range v.Args {
+			a = append(a, dumpE109(x))
+		}
+		return a
+	case *js_ast.EDot:
+		return []interface{}{"dot", dumpE109(v.Target), v.Name}
+	case *js_ast.EArray:
+		a := []interface{}{"arr"}
+		for _, x := range v.Items {
+			a = append(a, dumpE109(x))
+		}
+		return a
+	case *js_ast.EInlinedEnum:
+		return []interface{}{"inlineEnum", dumpE109(v.Value), v.Comment}
+	case *js_ast.EIf:
+		return []interface{}{"if", dumpE109(v.Test), dumpE109(v.Yes), dumpE109(v.No)}
+	}
+	return "other"
+}
+
+func mkPrinter109() *printer {
+	syms := ast.NewSymbolMap(1)
+	// Link 必须设为 InvalidRef，否则 FollowSymbols 会在自指链上无限递归。
+	syms.SymbolsForSource[0] = []ast.Symbol{
+		{OriginalName: "emptyFn", Link: ast.InvalidRef, Flags: ast.IsEmptyFunction},     // ref 0
+		{OriginalName: "identity", Link: ast.InvalidRef, Flags: ast.IsIdentityFunction},  // ref 1
+		{OriginalName: "mutated", Link: ast.InvalidRef, Flags: ast.IsEmptyFunction | ast.CouldPotentiallyBeMutated}, // ref 2
+		{OriginalName: "plain", Link: ast.InvalidRef}, // ref 3
+	}
+	return &printer{
+		symbols:    syms,
+		astHelpers: js_ast.MakeHelperContext(func(ref ast.Ref) bool { return false }),
+		options: Options{
+			MinifySyntax: true,
+			ConstValues: map[ast.Ref]js_ast.ConstValue{
+				{SourceIndex: 0, InnerIndex: 3}: {Kind: js_ast.ConstValueNumber, Number: 42},
+			},
+		},
+	}
+}
+
+func TestTmpGenMinFold109(t *testing.T) {
+	type row struct {
+		Name string      `json:"name"`
+		Out  interface{} `json:"out"`
+	}
+	id := func(i uint32) js_ast.Expr {
+		return js_ast.Expr{Data: &js_ast.EIdentifier{Ref: ast.Ref{SourceIndex: 0, InnerIndex: i}}}
+	}
+	impid := func(i uint32) js_ast.Expr {
+		return js_ast.Expr{Data: &js_ast.EImportIdentifier{Ref: ast.Ref{SourceIndex: 0, InnerIndex: i}}}
+	}
+	num := func(v float64) js_ast.Expr { return js_ast.Expr{Data: &js_ast.ENumber{Value: v}} }
+	call := func(target js_ast.Expr, args ...js_ast.Expr) js_ast.Expr {
+		return js_ast.Expr{Data: &js_ast.ECall{Target: target, Args: args}}
+	}
+	bin := func(op js_ast.OpCode, l, r js_ast.Expr) js_ast.Expr {
+		return js_ast.Expr{Data: &js_ast.EBinary{Op: op, Left: l, Right: r}}
+	}
+	un := func(op js_ast.OpCode, v js_ast.Expr) js_ast.Expr {
+		return js_ast.Expr{Data: &js_ast.EUnary{Op: op, Value: v}}
+	}
+
+	rows := []row{}
+	// simplifyUnusedExpr 族
+	{
+		p := mkPrinter109()
+		// (emptyFn(), 5) → 逗号链简化：emptyFn() 替换为无参 → 只剩 5
+		rows = append(rows, row{"simp-empty-comma", dumpE109(p.simplifyUnusedExpr(bin(js_ast.BinOpComma, call(id(0)), num(5))))})
+	}
+	{
+		p := mkPrinter109()
+		// identity(x) → x
+		rows = append(rows, row{"simp-identity", dumpE109(p.simplifyUnusedExpr(call(id(1), id(3))))})
+	}
+	{
+		p := mkPrinter109()
+		// mutated() 不被替换
+		rows = append(rows, row{"simp-mutated", dumpE109(p.simplifyUnusedExpr(call(id(2), id(3))))})
+	}
+	{
+		p := mkPrinter109()
+		// 嵌套逗号 (0, 1, foo) → foo（ref 3 是普通符号，调用目标不替换，但纯值 0/1 被 SimplifyUnusedExpr 去掉）
+		rows = append(rows, row{"simp-nested-comma", dumpE109(p.simplifyUnusedExpr(bin(js_ast.BinOpComma, bin(js_ast.BinOpComma, num(0), num(1)), call(id(3)))))})
+	}
+	// lateConstantFold 族
+	{
+		p := mkPrinter109()
+		// -<const=42> → -42
+		rows = append(rows, row{"fold-unary-const", dumpE109(p.lateConstantFoldUnaryOrBinaryOrIfExpr(un(js_ast.UnOpNeg, impid(3))))})
+	}
+	{
+		p := mkPrinter109()
+		// <const=42> + 1 → 43
+		rows = append(rows, row{"fold-binary-const", dumpE109(p.lateConstantFoldUnaryOrBinaryOrIfExpr(bin(js_ast.BinOpAdd, impid(3), num(1))))})
+	}
+	{
+		p := mkPrinter109()
+		// if const=42 (truthy) then 1 else 2 → 1
+		cond := js_ast.Expr{Data: &js_ast.EIf{Test: impid(3), Yes: num(1), No: num(2)}}
+		rows = append(rows, row{"fold-if-const", dumpE109(p.lateConstantFoldUnaryOrBinaryOrIfExpr(cond))})
+	}
+	{
+		p := mkPrinter109()
+		// EImportIdentifier 直接折叠成 const → 42
+		rows = append(rows, row{"fold-import-const", dumpE109(p.lateConstantFoldUnaryOrBinaryOrIfExpr(impid(3)))})
+	}
+
+	b, err := json.MarshalIndent(rows, "", "  ")
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := os.WriteFile("/root/port/testdata/min-fold-go.json", b, 0644); err != nil {
+		t.Fatal(err)
+	}
+	t.Logf("wrote %d rows bytes=%d", len(rows), len(b))
+}
+
+var _ = config.Options{}

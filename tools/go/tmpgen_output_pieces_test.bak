@@ -1,0 +1,123 @@
+package linker
+
+// 第 149 批 Go 探针：输出装配底座（breakOutputIntoPieces / breakJoinerIntoPieces /
+// substituteFinalPaths / accurateFinalByteCount），逐字节固化 intermediateOutput↔最终输出往返。
+import (
+  "encoding/json"
+  "os"
+  "testing"
+
+  "github.com/evanw/esbuild/internal/config"
+  "github.com/evanw/esbuild/internal/fs"
+  "github.com/evanw/esbuild/internal/graph"
+  "github.com/evanw/esbuild/internal/helpers"
+  "github.com/evanw/esbuild/internal/js_ast"
+)
+
+func opBuild() *linkerContext {
+  fsys := fs.MockFS(map[string]string{}, fs.MockUnix, "/")
+  c := &linkerContext{fs: fsys, uniqueKeyPrefix: "TEST", uniqueKeyPrefixBytes: []byte("TEST")}
+  c.options = &config.Options{ AbsOutputDir: "/p/out", PublicPath: "/static/" }
+  // graph.Files: 2 files; file1 has one additional asset file
+  c.graph = graph.LinkerGraph{Files: make([]graph.LinkerFile, 2)}
+  c.graph.Files[1] = graph.LinkerFile{InputFile: graph.InputFile{
+    Repr: &graph.JSRepr{AST: js_ast.AST{}},
+    AdditionalFiles: []graph.OutputFile{{AbsPath: "/p/out/assets/img.png"}},
+    UniqueKeyForAdditionalFile: "TESTA00000001",
+  }}
+  // one chunk
+  ch := chunkInfo{uniqueKey: "TESTC00000000", finalRelPath: "sub/final.js"}
+  c.chunks = []chunkInfo{ch}
+  return c
+}
+
+type opPiece struct { Data string `json:"data"`; Index uint32 `json:"index"`; Kind int `json:"kind"` }
+type opDump struct { Pieces []opPiece `json:"pieces"`; HasJoiner bool `json:"hasJoiner"`; Bytes string `json:"bytes,omitempty"`; Shifts [][4]int `json:"shifts,omitempty"`; Count int `json:"count,omitempty"` }
+func dumpIO(io intermediateOutput) opDump {
+  d := opDump{Pieces: []opPiece{}, HasJoiner: io.pieces == nil}
+  for _, p := range io.pieces { d.Pieces = append(d.Pieces, opPiece{Data: string(p.data), Index: p.index, Kind: int(p.kind)}) }
+  return d
+}
+func piecesFromRaw(ps []opPiece) []outputPiece {
+  out := []outputPiece{}
+  for _, p := range ps { out = append(out, outputPiece{data: []byte(p.Data), index: p.Index, kind: outputPieceIndexKind(p.Kind)}) }
+  return out
+}
+
+type opRow struct { Fn string `json:"fn"`; Arg map[string]interface{} `json:"arg"`; Out interface{} `json:"out"` }
+
+func TestTmpGenOutputPieces(t *testing.T) {
+  var out []opRow
+  add := func(fn string, arg map[string]interface{}, o interface{}) { out = append(out, opRow{fn, arg, o}) }
+  modify := func(s string) string { return "FINAL_" + s }
+  prefix := "TEST"
+
+  // breakOutputIntoPieces: bytes with embedded asset + chunk boundaries
+  raw1 := "abc" + prefix + "A00000001" + "MID" + prefix + "C00000000" + "END"
+  {
+    c := opBuild()
+    io := c.breakOutputIntoPieces([]byte(raw1))
+    add("breakOutputIntoPieces", map[string]interface{}{"data": raw1}, dumpIO(io))
+  }
+  // invalid boundaries (index out of range, bad digits) -> one piece
+  {
+    c := opBuild()
+    raw := "x" + prefix + "A00000099" + "y" + prefix + "Czzzzzzzz" + "z"
+    io := c.breakOutputIntoPieces([]byte(raw))
+    add("breakOutputIntoPieces.bad", map[string]interface{}{"data": raw}, dumpIO(io))
+  }
+  // no boundary -> one piece
+  {
+    c := opBuild()
+    io := c.breakOutputIntoPieces([]byte("plain output"))
+    add("breakOutputIntoPieces.none", map[string]interface{}{"data": "plain output"}, dumpIO(io))
+  }
+  // breakJoinerIntoPieces: with and without prefix
+  {
+    c := opBuild()
+    j := helpers.Joiner{}
+    j.AddString(raw1)
+    io := c.breakJoinerIntoPieces(j)
+    add("breakJoinerIntoPieces.with", map[string]interface{}{"data": raw1}, dumpIO(io))
+  }
+  {
+    c := opBuild()
+    j := helpers.Joiner{}
+    j.AddString("no boundary here")
+    io := c.breakJoinerIntoPieces(j)
+    add("breakJoinerIntoPieces.without", map[string]interface{}{"data": "no boundary here"}, dumpIO(io))
+  }
+  // substituteFinalPaths: from the pieces of raw1
+  {
+    c := opBuild()
+    io := c.breakOutputIntoPieces([]byte(raw1))
+    j, shifts := c.substituteFinalPaths(io, modify)
+    d := dumpIO(io)
+    d.Bytes = string(j.Done())
+    d.Shifts = [][4]int{}
+    for _, s := range shifts { d.Shifts = append(d.Shifts, [4]int{s.Before.Lines, s.Before.Columns, s.After.Lines, s.After.Columns}) }
+    add("substituteFinalPaths", map[string]interface{}{"data": raw1}, d)
+  }
+  // substituteFinalPaths no-substitution fast path
+  {
+    c := opBuild()
+    j0 := helpers.Joiner{}; j0.AddString("plain")
+    io := intermediateOutput{joiner: j0}
+    j, shifts := c.substituteFinalPaths(io, modify)
+    d := dumpIO(io); d.Bytes = string(j.Done()); d.Shifts = [][4]int{}
+    for _, s := range shifts { d.Shifts = append(d.Shifts, [4]int{s.Before.Lines, s.Before.Columns, s.After.Lines, s.After.Columns}) }
+    add("substituteFinalPaths.fast", map[string]interface{}{}, d)
+  }
+  // accurateFinalByteCount
+  {
+    c := opBuild()
+    io := c.breakOutputIntoPieces([]byte(raw1))
+    n := c.accurateFinalByteCount(io, "/p/out/sub")
+    add("accurateFinalByteCount", map[string]interface{}{"data": raw1, "dir": "/p/out/sub"}, map[string]int{"count": n})
+  }
+
+  b, err := json.MarshalIndent(out, "", "  ")
+  if err != nil { t.Fatal(err) }
+  if err := os.WriteFile("/root/port/testdata/output-pieces-go.json", b, 0644); err != nil { t.Fatal(err) }
+  t.Logf("wrote %d rows", len(out))
+}

@@ -1,0 +1,68 @@
+[
+  {
+    "name": "recent-hit",
+    "dirty": "b",
+    "recentItems": [
+      "a",
+      "b"
+    ],
+    "itemsToScan": [
+      "c"
+    ],
+    "itemsPerIter": 1
+  },
+  {
+    "name": "scan-hit",
+    "dirty": "C",
+    "recentItems": [
+      "a",
+      "c"
+    ],
+    "itemsToScan": [
+      "a",
+      "b"
+    ],
+    "itemsPerIter": 1
+  },
+  {
+    "name": "scan-single",
+    "dirty": "C",
+    "recentItems": [
+      "c"
+    ],
+    "itemsToScan": [],
+    "itemsPerIter": 1
+  },
+  {
+    "name": "none-dirty",
+    "dirty": "",
+    "recentItems": [
+      "a",
+      "d"
+    ],
+    "itemsToScan": [],
+    "itemsPerIter": 2
+  },
+  {
+    "name": "recent-reorder",
+    "dirty": "C",
+    "recentItems": [
+      "a",
+      "d",
+      "c"
+    ],
+    "itemsToScan": [
+      "d"
+    ],
+    "itemsPerIter": 1
+  },
+  {
+    "name": "periter-clamp",
+    "dirty": "b",
+    "recentItems": [
+      "b"
+    ],
+    "itemsToScan": [],
+    "itemsPerIter": 99
+  }
+]

@@ -1,0 +1,1 @@
+(class { static foo = super[x] })

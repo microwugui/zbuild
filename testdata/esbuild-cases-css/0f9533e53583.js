@@ -1,0 +1,1 @@
+a { color: color(prophoto-rgb 0.877 0.959 0.793) }

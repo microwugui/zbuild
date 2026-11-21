@@ -1,0 +1,100 @@
+[
+  {
+    "name": "single",
+    "files": [
+      {
+        "keyPath": "\u003cruntime\u003e",
+        "namespace": "",
+        "loader": 0,
+        "imports": []
+      },
+      {
+        "keyPath": "/p/a.js",
+        "namespace": "file",
+        "loader": 10,
+        "imports": []
+      }
+    ],
+    "entries": [
+      {
+        "outputPath": "",
+        "sourceIndex": 1,
+        "auto": false
+      }
+    ],
+    "errs": []
+  },
+  {
+    "name": "two",
+    "files": [
+      {
+        "keyPath": "\u003cruntime\u003e",
+        "namespace": "",
+        "loader": 0,
+        "imports": []
+      },
+      {
+        "keyPath": "/p/a.js",
+        "namespace": "file",
+        "loader": 10,
+        "imports": []
+      },
+      {
+        "keyPath": "/p/b.js",
+        "namespace": "file",
+        "loader": 10,
+        "imports": []
+      }
+    ],
+    "entries": [
+      {
+        "outputPath": "",
+        "sourceIndex": 1,
+        "auto": false
+      },
+      {
+        "outputPath": "",
+        "sourceIndex": 2,
+        "auto": false
+      }
+    ],
+    "errs": []
+  },
+  {
+    "name": "with-import",
+    "files": [
+      {
+        "keyPath": "\u003cruntime\u003e",
+        "namespace": "",
+        "loader": 0,
+        "imports": []
+      },
+      {
+        "keyPath": "/p/a.js",
+        "namespace": "file",
+        "loader": 10,
+        "imports": [
+          {
+            "path": "./b.js",
+            "kind": "import-statement",
+            "sourceIdx": 2
+          }
+        ]
+      },
+      {
+        "keyPath": "/p/b.js",
+        "namespace": "file",
+        "loader": 10,
+        "imports": []
+      }
+    ],
+    "entries": [
+      {
+        "outputPath": "",
+        "sourceIndex": 1,
+        "auto": false
+      }
+    ],
+    "errs": []
+  }
+]

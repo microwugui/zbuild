@@ -1,0 +1,66 @@
+package renamer_test
+
+// 第 93 轮 Go 探针：ComputeReservedNames + linker 追加保留名（require/Promise/exports/module）
+// 的契约逐字节固化。这是 renamer 层解决 document→document2 冲突的底座。
+import (
+	"encoding/json"
+	"os"
+	"sort"
+	"testing"
+
+	"github.com/evanw/esbuild/internal/config"
+	astpkg "github.com/evanw/esbuild/internal/ast"
+	"github.com/evanw/esbuild/internal/js_ast"
+	"github.com/evanw/esbuild/internal/js_parser"
+	"github.com/evanw/esbuild/internal/logger"
+	"github.com/evanw/esbuild/internal/renamer"
+)
+
+func TestTmpGenReserved(t *testing.T) {
+	// 源码：未绑定的全局 document/window + 与全局同名的局部绑定（connect(document)）
+	src := logger.Source{
+		Contents: "document.hidden = 1; window.foo = 2; function connect(document){ return document.x }",
+		KeyPath:  logger.Path{Text: "<test>", Namespace: "file"},
+		PrettyPaths: logger.PrettyPaths{Abs: "<test>", Rel: "<test>"},
+	}
+	log := logger.NewDeferLog(logger.DeferLogNoVerboseOrDebug, nil)
+	ast, ok := js_parser.Parse(log, src, js_parser.Options{})
+	if !ok { t.Fatal("parse failed") }
+
+	type row struct {
+		Name string `json:"name"`
+		Mode int `json:"mode"`
+		Format int `json:"format"`
+		Platform int `json:"platform"`
+		Reserved []string `json:"reserved"` // 只列关注的业务名（非关键字）
+	}
+	rows := []row{}
+	configs := []struct{ name string; mode config.Mode; format config.Format; platform config.Platform }{
+		{"passthrough", config.ModePassThrough, config.FormatPreserve, config.PlatformBrowser},
+		{"bundle-esm", config.ModeBundle, config.FormatESModule, config.PlatformBrowser},
+		{"bundle-cjs-node", config.ModeBundle, config.FormatCommonJS, config.PlatformNode},
+		{"bundle-iife", config.ModeBundle, config.FormatIIFE, config.PlatformBrowser},
+	}
+	for _, c := range configs {
+		sm := astpkg.NewSymbolMap(1)
+		sm.SymbolsForSource[0] = ast.Symbols
+		reserved := renamer.ComputeReservedNames([]*js_ast.Scope{ast.ModuleScope}, sm)
+		// linker.renameSymbolsInChunk 的追加逻辑
+		if c.format == config.FormatCommonJS && c.platform == config.PlatformNode {
+			reserved["exports"] = 1; reserved["module"] = 1
+		}
+		if c.mode != config.ModePassThrough {
+			reserved["require"] = 1; reserved["Promise"] = 1
+		}
+		// 只输出关注名：document/window/exports/module/require/Promise + 所有 unbound 原名
+		watch := []string{"document", "window", "exports", "module", "require", "Promise", "connect"}
+		kept := []string{}
+		for _, w := range watch { if reserved[w] != 0 { kept = append(kept, w) } }
+		sort.Strings(kept)
+		rows = append(rows, row{c.name, int(c.mode), int(c.format), int(c.platform), kept})
+	}
+	// 额外：dump 所有 unbound 符号名（验证 ComputeReservedNames 覆盖率）
+	bts, _ := json.MarshalIndent(rows, "", "  ")
+	if err := os.WriteFile("/root/port/testdata/reserved-names-go.json", bts, 0644); err != nil { t.Fatal(err) }
+	t.Logf("wrote %d rows bytes=%d", len(rows), len(bts))
+}

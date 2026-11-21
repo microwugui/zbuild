@@ -1,0 +1,1 @@
+export {'\uD800\uDC00' as x} from 'foo'

@@ -1,0 +1,1 @@
+.foo { :local { composes: bar; color: red } }

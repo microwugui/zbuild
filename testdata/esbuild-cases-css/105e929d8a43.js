@@ -1,0 +1,1 @@
+@media not (not (color) and (opacity)) {}

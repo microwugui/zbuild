@@ -1,0 +1,1 @@
+div, span:after { & { color: red } }

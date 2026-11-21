@@ -1,0 +1,62 @@
+[
+  {
+    "fn": "DecodedText",
+    "arg": "29|YVw2MiBj|0|6",
+    "out": "YWJj"
+  },
+  {
+    "fn": "DecodedText",
+    "arg": "28|I2ZcNmYgZg==|0|7",
+    "out": "Zm9m"
+  },
+  {
+    "fn": "DecodedText",
+    "arg": "1|QGltXDcwIG9ydGFudA==|0|10",
+    "out": "aW1wb3J0"
+  },
+  {
+    "fn": "DecodedText",
+    "arg": "27|Zm9vKA==|0|4",
+    "out": "Zm9v"
+  },
+  {
+    "fn": "DecodedText",
+    "arg": "36|ImFcNjIgYyI=|0|7",
+    "out": "YWI="
+  },
+  {
+    "fn": "DecodedText",
+    "arg": "37|dXJsKCAgYVw2MiBjICk=|0|13",
+    "out": "YWJj"
+  },
+  {
+    "fn": "DecodedText",
+    "arg": "30|MTIz|0|3",
+    "out": "MTIz"
+  },
+  {
+    "fn": "consumeString",
+    "arg": "ImFiYyI=",
+    "out": "36|5"
+  },
+  {
+    "fn": "consumeString",
+    "arg": "J2FcNjIgYyc=",
+    "out": "36|8"
+  },
+  {
+    "fn": "consumeString",
+    "arg": "ImFcXG5iIg==",
+    "out": "36|7"
+  },
+  {
+    "fn": "consumeString",
+    "arg": "InVudGVybWluYXRlZA==",
+    "out": "2|13"
+  },
+  {
+    "fn": "consumeString",
+    "arg": "ImFcImIi",
+    "out": "36|6"
+  }
+]

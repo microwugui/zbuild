@@ -1,0 +1,1 @@
+a { color: red } a:last-child { color: red }

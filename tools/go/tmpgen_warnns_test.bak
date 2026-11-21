@@ -1,0 +1,53 @@
+package js_parser
+
+// 第 107 轮 Go 探针：parser.warnAboutImportNamespaceCall（命名空间导入调用警告状态机）—— 全确定。
+import ("encoding/json";"os";"testing"
+ "github.com/evanw/esbuild/internal/ast"
+ "github.com/evanw/esbuild/internal/config"
+ "github.com/evanw/esbuild/internal/js_ast"
+ "github.com/evanw/esbuild/internal/logger"
+)
+
+type wnMsg struct { ID int `json:"id"`; Kind int `json:"kind"`; Text string `json:"text"`; Notes []string `json:"notes"` }
+type wnRow struct { Name string `json:"name"`; Msgs []wnMsg `json:"msgs"`; MapSize int `json:"mapSize"` }
+
+func TestTmpGenWarnNS107(t *testing.T){
+  rows:=[]wnRow{}
+  newP:=func(log logger.Log, format config.Format) *parser {
+    srcText:="import * as ns from 'x'; ns(); new ns();"
+    src:=logger.Source{Contents:srcText,KeyPath:logger.Path{Text:"main.js",Namespace:"file"}}
+    src.PrettyPaths.Rel="main.js";src.PrettyPaths.Abs="/p/main.js"
+    ref:=ast.Ref{SourceIndex:1,InnerIndex:0}
+    symbols:=[]ast.Symbol{{Kind:ast.SymbolOther,OriginalName:"ns"}}
+    return &parser{
+      source:src,log:log,symbols:symbols,
+      options:Options{optionsThatSupportStructuralEquality:optionsThatSupportStructuralEquality{outputFormat:format}},
+      moduleScope:&js_ast.Scope{Members:map[string]js_ast.ScopeMember{}},
+      tracker:logger.MakeLineColumnTracker(&src),
+      importItemsForNamespace:map[ast.Ref]namespaceImportItems{ref:{entries:map[string]ast.LocRef{"foo":{}}}},
+    }
+  }
+  ref:=ast.Ref{SourceIndex:1,InnerIndex:0}
+  target:=js_ast.Expr{Loc:logger.Loc{Start:29},Data:&js_ast.EIdentifier{Ref:ref}}
+  run:=func(name string, format config.Format, kind importNamespaceCallKind, preCall bool) wnRow {
+    log:=logger.NewDeferLog(logger.DeferLogAll,nil)
+    p:=newP(log,format)
+    if preCall { p.importNamespaceCCMap=map[importNamespaceCall]bool{{ref:ref,kind:kind}:true} }
+    p.warnAboutImportNamespaceCall(target,kind)
+    r:=wnRow{Name:name,Msgs:[]wnMsg{},MapSize:len(p.importNamespaceCCMap)}
+    for _,m:=range log.Done(){
+      im:=wnMsg{ID:int(m.ID),Kind:int(m.Kind),Text:m.Data.Text,Notes:[]string{}}
+      for _,n:=range m.Notes{im.Notes=append(im.Notes,n.Text)}
+      r.Msgs=append(r.Msgs,im)
+    }
+    return r
+  }
+  rows=append(rows,run("preserve-skip",config.FormatPreserve,exprKindCall,false))
+  rows=append(rows,run("call",config.FormatESModule,exprKindCall,false))
+  rows=append(rows,run("new",config.FormatESModule,exprKindNew,false))
+  rows=append(rows,run("jsx",config.FormatESModule,exprKindJSXTag,false))
+  rows=append(rows,run("dedup",config.FormatESModule,exprKindCall,true))
+  b,_:=json.MarshalIndent(rows,"","  ")
+  if err:=os.WriteFile("/root/port/testdata/warn-ns-go.json",b,0644);err!=nil{t.Fatal(err)}
+  t.Logf("wrote %d rows bytes=%d",len(rows),len(b))
+}

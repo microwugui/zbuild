@@ -1,0 +1,1 @@
+div { animation: 2s linear 'name 2', 3s infinite 'name 3' }

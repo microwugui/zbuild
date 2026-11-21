@@ -1,0 +1,332 @@
+[
+  {
+    "fn": "mangleFontFamily",
+    "toks": [
+      {
+        "k": 29,
+        "t": "serif"
+      }
+    ],
+    "minify": false,
+    "out": [
+      [
+        [
+          29,
+          "serif",
+          0,
+          0
+        ]
+      ],
+      true
+    ]
+  },
+  {
+    "fn": "mangleFontFamily",
+    "toks": [
+      {
+        "k": 29,
+        "t": "MyFont"
+      }
+    ],
+    "minify": false,
+    "out": [
+      [
+        [
+          29,
+          "MyFont",
+          0,
+          0
+        ]
+      ],
+      true
+    ]
+  },
+  {
+    "fn": "mangleFontFamily",
+    "toks": [
+      {
+        "k": 29,
+        "t": "Open"
+      },
+      {
+        "k": 29,
+        "t": "Sans"
+      }
+    ],
+    "minify": false,
+    "out": [
+      [
+        [
+          29,
+          "Open",
+          0,
+          0
+        ],
+        [
+          29,
+          "Sans",
+          0,
+          0
+        ]
+      ],
+      true
+    ]
+  },
+  {
+    "fn": "mangleFontFamily",
+    "toks": [
+      {
+        "k": 36,
+        "t": "Times New Roman"
+      }
+    ],
+    "minify": false,
+    "out": [
+      [
+        [
+          29,
+          "Times",
+          1,
+          0
+        ],
+        [
+          29,
+          "New",
+          1,
+          0
+        ],
+        [
+          29,
+          "Roman",
+          1,
+          0
+        ]
+      ],
+      true
+    ]
+  },
+  {
+    "fn": "mangleFontFamily",
+    "toks": [
+      {
+        "k": 36,
+        "t": "serif"
+      }
+    ],
+    "minify": false,
+    "out": [
+      [
+        [
+          36,
+          "serif",
+          0,
+          0
+        ]
+      ],
+      true
+    ]
+  },
+  {
+    "fn": "mangleFontFamily",
+    "toks": [
+      {
+        "k": 36,
+        "t": "hello!world"
+      }
+    ],
+    "minify": false,
+    "out": [
+      [
+        [
+          36,
+          "hello!world",
+          0,
+          0
+        ]
+      ],
+      true
+    ]
+  },
+  {
+    "fn": "mangleFontFamily",
+    "toks": [
+      {
+        "k": 29,
+        "t": "Arial"
+      },
+      {
+        "k": 10,
+        "t": ","
+      },
+      {
+        "k": 29,
+        "t": "sans-serif"
+      }
+    ],
+    "minify": false,
+    "out": [
+      [
+        [
+          29,
+          "Arial",
+          0,
+          0
+        ],
+        [
+          10,
+          ",",
+          0,
+          0
+        ],
+        [
+          29,
+          "sans-serif",
+          0,
+          0
+        ]
+      ],
+      true
+    ]
+  },
+  {
+    "fn": "mangleFontFamily",
+    "toks": [
+      {
+        "k": 36,
+        "t": "Foo Bar"
+      },
+      {
+        "k": 10,
+        "t": ","
+      },
+      {
+        "k": 36,
+        "t": "Baz"
+      }
+    ],
+    "minify": false,
+    "out": [
+      [
+        [
+          29,
+          "Foo",
+          1,
+          0
+        ],
+        [
+          29,
+          "Bar",
+          1,
+          0
+        ],
+        [
+          10,
+          ",",
+          0,
+          0
+        ],
+        [
+          29,
+          "Baz",
+          1,
+          0
+        ]
+      ],
+      true
+    ]
+  },
+  {
+    "fn": "mangleFontFamily",
+    "toks": [
+      {
+        "k": 30,
+        "t": "12"
+      }
+    ],
+    "minify": false,
+    "out": [
+      [],
+      false
+    ]
+  },
+  {
+    "fn": "mangleFontFamily",
+    "toks": [
+      {
+        "k": 29,
+        "t": "Arial"
+      },
+      {
+        "k": 10,
+        "t": ","
+      }
+    ],
+    "minify": false,
+    "out": [
+      [],
+      false
+    ]
+  },
+  {
+    "fn": "mangleFontFamily",
+    "toks": [
+      {
+        "k": 29,
+        "t": "inherit"
+      }
+    ],
+    "minify": false,
+    "out": [
+      [],
+      false
+    ]
+  },
+  {
+    "fn": "mangleFontFamily",
+    "toks": [
+      {
+        "k": 29,
+        "t": "字体"
+      }
+    ],
+    "minify": false,
+    "out": [
+      [
+        [
+          29,
+          "字体",
+          0,
+          0
+        ]
+      ],
+      true
+    ]
+  },
+  {
+    "fn": "mangleFontFamily.minify",
+    "toks": [
+      {
+        "k": 36,
+        "t": "Foo Bar"
+      }
+    ],
+    "minify": true,
+    "out": [
+      [
+        [
+          29,
+          "Foo",
+          0,
+          0
+        ],
+        [
+          29,
+          "Bar",
+          1,
+          0
+        ]
+      ],
+      true
+    ]
+  }
+]

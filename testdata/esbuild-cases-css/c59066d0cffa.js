@@ -1,0 +1,1 @@
+a { color: green; :is() { color: red } }

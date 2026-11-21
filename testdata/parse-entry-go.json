@@ -1,0 +1,5716 @@
+[
+  {
+    "fn": "Parse",
+    "src": "a { color: red } b { color: blue }",
+    "arg": {
+      "idents": false,
+      "mode": 0
+    },
+    "out": {
+      "charfreq": null,
+      "globalKeys": [],
+      "imports": [],
+      "lineCount": 1,
+      "localKeys": [],
+      "localSymbols": [],
+      "msgs": [],
+      "postLayers": null,
+      "preLayers": null,
+      "rules": [
+        [
+          "sel",
+          0,
+          [
+            [
+              [
+                [
+                  null,
+                  "a",
+                  0,
+                  29
+                ],
+                [],
+                [],
+                0,
+                0,
+                false
+              ]
+            ]
+          ],
+          [
+            [
+              "decl",
+              4,
+              93,
+              "color",
+              [
+                [
+                  29,
+                  "red",
+                  1,
+                  0,
+                  0,
+                  11,
+                  null
+                ]
+              ],
+              false,
+              4,
+              5
+            ]
+          ],
+          15
+        ],
+        [
+          "sel",
+          17,
+          [
+            [
+              [
+                [
+                  null,
+                  "b",
+                  17,
+                  29
+                ],
+                [],
+                [],
+                0,
+                0,
+                false
+              ]
+            ]
+          ],
+          [
+            [
+              "decl",
+              21,
+              93,
+              "color",
+              [
+                [
+                  29,
+                  "blue",
+                  1,
+                  0,
+                  0,
+                  28,
+                  null
+                ]
+              ],
+              false,
+              21,
+              5
+            ]
+          ],
+          33
+        ]
+      ],
+      "sourceMapText": "",
+      "symbols": []
+    }
+  },
+  {
+    "fn": "Parse",
+    "src": "a { color: red } b { color: blue }",
+    "arg": {
+      "idents": false,
+      "mode": 1
+    },
+    "out": {
+      "charfreq": null,
+      "globalKeys": [],
+      "imports": [],
+      "lineCount": 1,
+      "localKeys": [],
+      "localSymbols": [],
+      "msgs": [],
+      "postLayers": null,
+      "preLayers": null,
+      "rules": [
+        [
+          "sel",
+          0,
+          [
+            [
+              [
+                [
+                  null,
+                  "a",
+                  0,
+                  29
+                ],
+                [],
+                [],
+                0,
+                0,
+                false
+              ]
+            ]
+          ],
+          [
+            [
+              "decl",
+              4,
+              93,
+              "color",
+              [
+                [
+                  29,
+                  "red",
+                  1,
+                  0,
+                  0,
+                  11,
+                  null
+                ]
+              ],
+              false,
+              4,
+              5
+            ]
+          ],
+          15
+        ],
+        [
+          "sel",
+          17,
+          [
+            [
+              [
+                [
+                  null,
+                  "b",
+                  17,
+                  29
+                ],
+                [],
+                [],
+                0,
+                0,
+                false
+              ]
+            ]
+          ],
+          [
+            [
+              "decl",
+              21,
+              93,
+              "color",
+              [
+                [
+                  29,
+                  "blue",
+                  1,
+                  0,
+                  0,
+                  28,
+                  null
+                ]
+              ],
+              false,
+              21,
+              5
+            ]
+          ],
+          33
+        ]
+      ],
+      "sourceMapText": "",
+      "symbols": []
+    }
+  },
+  {
+    "fn": "Parse",
+    "src": "a { color: red } b { color: blue }",
+    "arg": {
+      "idents": false,
+      "mode": 2
+    },
+    "out": {
+      "charfreq": null,
+      "globalKeys": [],
+      "imports": [],
+      "lineCount": 1,
+      "localKeys": [],
+      "localSymbols": [],
+      "msgs": [],
+      "postLayers": null,
+      "preLayers": null,
+      "rules": [
+        [
+          "sel",
+          0,
+          [
+            [
+              [
+                [
+                  null,
+                  "a",
+                  0,
+                  29
+                ],
+                [],
+                [],
+                0,
+                0,
+                false
+              ]
+            ]
+          ],
+          [
+            [
+              "decl",
+              4,
+              93,
+              "color",
+              [
+                [
+                  29,
+                  "red",
+                  1,
+                  0,
+                  0,
+                  11,
+                  null
+                ]
+              ],
+              false,
+              4,
+              5
+            ]
+          ],
+          15
+        ],
+        [
+          "sel",
+          17,
+          [
+            [
+              [
+                [
+                  null,
+                  "b",
+                  17,
+                  29
+                ],
+                [],
+                [],
+                0,
+                0,
+                false
+              ]
+            ]
+          ],
+          [
+            [
+              "decl",
+              21,
+              93,
+              "color",
+              [
+                [
+                  29,
+                  "blue",
+                  1,
+                  0,
+                  0,
+                  28,
+                  null
+                ]
+              ],
+              false,
+              21,
+              5
+            ]
+          ],
+          33
+        ]
+      ],
+      "sourceMapText": "",
+      "symbols": []
+    }
+  },
+  {
+    "fn": "Parse",
+    "src": "a { color: red } b { color: blue }",
+    "arg": {
+      "idents": true,
+      "mode": 0
+    },
+    "out": {
+      "charfreq": [
+        1,
+        2,
+        2,
+        1,
+        2,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        3,
+        0,
+        0,
+        4,
+        0,
+        0,
+        3,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "globalKeys": [],
+      "imports": [],
+      "lineCount": 1,
+      "localKeys": [],
+      "localSymbols": [],
+      "msgs": [],
+      "postLayers": null,
+      "preLayers": null,
+      "rules": [
+        [
+          "sel",
+          0,
+          [
+            [
+              [
+                [
+                  null,
+                  "a",
+                  0,
+                  29
+                ],
+                [],
+                [],
+                0,
+                0,
+                false
+              ]
+            ]
+          ],
+          [
+            [
+              "decl",
+              4,
+              93,
+              "color",
+              [
+                [
+                  29,
+                  "red",
+                  1,
+                  0,
+                  0,
+                  11,
+                  null
+                ]
+              ],
+              false,
+              4,
+              5
+            ]
+          ],
+          15
+        ],
+        [
+          "sel",
+          17,
+          [
+            [
+              [
+                [
+                  null,
+                  "b",
+                  17,
+                  29
+                ],
+                [],
+                [],
+                0,
+                0,
+                false
+              ]
+            ]
+          ],
+          [
+            [
+              "decl",
+              21,
+              93,
+              "color",
+              [
+                [
+                  29,
+                  "blue",
+                  1,
+                  0,
+                  0,
+                  28,
+                  null
+                ]
+              ],
+              false,
+              21,
+              5
+            ]
+          ],
+          33
+        ]
+      ],
+      "sourceMapText": "",
+      "symbols": []
+    }
+  },
+  {
+    "fn": "Parse",
+    "src": "a { color: red } b { color: blue }",
+    "arg": {
+      "idents": true,
+      "mode": 1
+    },
+    "out": {
+      "charfreq": [
+        1,
+        2,
+        2,
+        1,
+        2,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        3,
+        0,
+        0,
+        4,
+        0,
+        0,
+        3,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "globalKeys": [],
+      "imports": [],
+      "lineCount": 1,
+      "localKeys": [],
+      "localSymbols": [],
+      "msgs": [],
+      "postLayers": null,
+      "preLayers": null,
+      "rules": [
+        [
+          "sel",
+          0,
+          [
+            [
+              [
+                [
+                  null,
+                  "a",
+                  0,
+                  29
+                ],
+                [],
+                [],
+                0,
+                0,
+                false
+              ]
+            ]
+          ],
+          [
+            [
+              "decl",
+              4,
+              93,
+              "color",
+              [
+                [
+                  29,
+                  "red",
+                  1,
+                  0,
+                  0,
+                  11,
+                  null
+                ]
+              ],
+              false,
+              4,
+              5
+            ]
+          ],
+          15
+        ],
+        [
+          "sel",
+          17,
+          [
+            [
+              [
+                [
+                  null,
+                  "b",
+                  17,
+                  29
+                ],
+                [],
+                [],
+                0,
+                0,
+                false
+              ]
+            ]
+          ],
+          [
+            [
+              "decl",
+              21,
+              93,
+              "color",
+              [
+                [
+                  29,
+                  "blue",
+                  1,
+                  0,
+                  0,
+                  28,
+                  null
+                ]
+              ],
+              false,
+              21,
+              5
+            ]
+          ],
+          33
+        ]
+      ],
+      "sourceMapText": "",
+      "symbols": []
+    }
+  },
+  {
+    "fn": "Parse",
+    "src": "a { color: red } b { color: blue }",
+    "arg": {
+      "idents": true,
+      "mode": 2
+    },
+    "out": {
+      "charfreq": [
+        1,
+        2,
+        2,
+        1,
+        2,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        3,
+        0,
+        0,
+        4,
+        0,
+        0,
+        3,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "globalKeys": [],
+      "imports": [],
+      "lineCount": 1,
+      "localKeys": [],
+      "localSymbols": [],
+      "msgs": [],
+      "postLayers": null,
+      "preLayers": null,
+      "rules": [
+        [
+          "sel",
+          0,
+          [
+            [
+              [
+                [
+                  null,
+                  "a",
+                  0,
+                  29
+                ],
+                [],
+                [],
+                0,
+                0,
+                false
+              ]
+            ]
+          ],
+          [
+            [
+              "decl",
+              4,
+              93,
+              "color",
+              [
+                [
+                  29,
+                  "red",
+                  1,
+                  0,
+                  0,
+                  11,
+                  null
+                ]
+              ],
+              false,
+              4,
+              5
+            ]
+          ],
+          15
+        ],
+        [
+          "sel",
+          17,
+          [
+            [
+              [
+                [
+                  null,
+                  "b",
+                  17,
+                  29
+                ],
+                [],
+                [],
+                0,
+                0,
+                false
+              ]
+            ]
+          ],
+          [
+            [
+              "decl",
+              21,
+              93,
+              "color",
+              [
+                [
+                  29,
+                  "blue",
+                  1,
+                  0,
+                  0,
+                  28,
+                  null
+                ]
+              ],
+              false,
+              21,
+              5
+            ]
+          ],
+          33
+        ]
+      ],
+      "sourceMapText": "",
+      "symbols": []
+    }
+  },
+  {
+    "fn": "Parse",
+    "src": "@charset \"UTF-8\"; @import url(a.css); .a { color: red }",
+    "arg": {
+      "idents": false,
+      "mode": 0
+    },
+    "out": {
+      "charfreq": null,
+      "globalKeys": [
+        "a"
+      ],
+      "imports": [
+        [
+          5,
+          "a.css",
+          26,
+          10
+        ]
+      ],
+      "lineCount": 1,
+      "localKeys": [],
+      "localSymbols": [],
+      "msgs": [],
+      "postLayers": null,
+      "preLayers": null,
+      "rules": [
+        [
+          "charset",
+          0,
+          "UTF-8"
+        ],
+        [
+          "import",
+          18,
+          0,
+          null
+        ],
+        [
+          "sel",
+          38,
+          [
+            [
+              [
+                null,
+                [
+                  [
+                    "class",
+                    0
+                  ]
+                ],
+                [],
+                0,
+                0,
+                false
+              ]
+            ]
+          ],
+          [
+            [
+              "decl",
+              43,
+              93,
+              "color",
+              [
+                [
+                  29,
+                  "red",
+                  1,
+                  0,
+                  0,
+                  50,
+                  null
+                ]
+              ],
+              false,
+              43,
+              5
+            ]
+          ],
+          54
+        ]
+      ],
+      "sourceMapText": "",
+      "symbols": [
+        [
+          "a",
+          25,
+          1,
+          0
+        ]
+      ]
+    }
+  },
+  {
+    "fn": "Parse",
+    "src": "@charset \"UTF-8\"; @import url(a.css); .a { color: red }",
+    "arg": {
+      "idents": false,
+      "mode": 1
+    },
+    "out": {
+      "charfreq": null,
+      "globalKeys": [
+        "a"
+      ],
+      "imports": [
+        [
+          5,
+          "a.css",
+          26,
+          10
+        ]
+      ],
+      "lineCount": 1,
+      "localKeys": [],
+      "localSymbols": [],
+      "msgs": [],
+      "postLayers": null,
+      "preLayers": null,
+      "rules": [
+        [
+          "charset",
+          0,
+          "UTF-8"
+        ],
+        [
+          "import",
+          18,
+          0,
+          null
+        ],
+        [
+          "sel",
+          38,
+          [
+            [
+              [
+                null,
+                [
+                  [
+                    "class",
+                    0
+                  ]
+                ],
+                [],
+                0,
+                0,
+                false
+              ]
+            ]
+          ],
+          [
+            [
+              "decl",
+              43,
+              93,
+              "color",
+              [
+                [
+                  29,
+                  "red",
+                  1,
+                  0,
+                  0,
+                  50,
+                  null
+                ]
+              ],
+              false,
+              43,
+              5
+            ]
+          ],
+          54
+        ]
+      ],
+      "sourceMapText": "",
+      "symbols": [
+        [
+          "a",
+          25,
+          1,
+          0
+        ]
+      ]
+    }
+  },
+  {
+    "fn": "Parse",
+    "src": "@charset \"UTF-8\"; @import url(a.css); .a { color: red }",
+    "arg": {
+      "idents": false,
+      "mode": 2
+    },
+    "out": {
+      "charfreq": null,
+      "globalKeys": [],
+      "imports": [
+        [
+          5,
+          "a.css",
+          26,
+          10
+        ]
+      ],
+      "lineCount": 1,
+      "localKeys": [
+        "a"
+      ],
+      "localSymbols": [
+        [
+          0,
+          39
+        ]
+      ],
+      "msgs": [],
+      "postLayers": null,
+      "preLayers": null,
+      "rules": [
+        [
+          "charset",
+          0,
+          "UTF-8"
+        ],
+        [
+          "import",
+          18,
+          0,
+          null
+        ],
+        [
+          "sel",
+          38,
+          [
+            [
+              [
+                null,
+                [
+                  [
+                    "class",
+                    0
+                  ]
+                ],
+                [],
+                0,
+                0,
+                false
+              ]
+            ]
+          ],
+          [
+            [
+              "decl",
+              43,
+              93,
+              "color",
+              [
+                [
+                  29,
+                  "red",
+                  1,
+                  0,
+                  0,
+                  50,
+                  null
+                ]
+              ],
+              false,
+              43,
+              5
+            ]
+          ],
+          54
+        ]
+      ],
+      "sourceMapText": "",
+      "symbols": [
+        [
+          "a",
+          26,
+          1,
+          0
+        ]
+      ]
+    }
+  },
+  {
+    "fn": "Parse",
+    "src": "@charset \"UTF-8\"; @import url(a.css); .a { color: red }",
+    "arg": {
+      "idents": true,
+      "mode": 0
+    },
+    "out": {
+      "charfreq": [
+        2,
+        0,
+        2,
+        1,
+        2,
+        0,
+        0,
+        1,
+        1,
+        0,
+        0,
+        2,
+        1,
+        0,
+        3,
+        1,
+        0,
+        5,
+        1,
+        2,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0
+      ],
+      "globalKeys": [
+        "a"
+      ],
+      "imports": [
+        [
+          5,
+          "a.css",
+          26,
+          10
+        ]
+      ],
+      "lineCount": 1,
+      "localKeys": [],
+      "localSymbols": [],
+      "msgs": [],
+      "postLayers": null,
+      "preLayers": null,
+      "rules": [
+        [
+          "charset",
+          0,
+          "UTF-8"
+        ],
+        [
+          "import",
+          18,
+          0,
+          null
+        ],
+        [
+          "sel",
+          38,
+          [
+            [
+              [
+                null,
+                [
+                  [
+                    "class",
+                    0
+                  ]
+                ],
+                [],
+                0,
+                0,
+                false
+              ]
+            ]
+          ],
+          [
+            [
+              "decl",
+              43,
+              93,
+              "color",
+              [
+                [
+                  29,
+                  "red",
+                  1,
+                  0,
+                  0,
+                  50,
+                  null
+                ]
+              ],
+              false,
+              43,
+              5
+            ]
+          ],
+          54
+        ]
+      ],
+      "sourceMapText": "",
+      "symbols": [
+        [
+          "a",
+          25,
+          1,
+          0
+        ]
+      ]
+    }
+  },
+  {
+    "fn": "Parse",
+    "src": "@charset \"UTF-8\"; @import url(a.css); .a { color: red }",
+    "arg": {
+      "idents": true,
+      "mode": 1
+    },
+    "out": {
+      "charfreq": [
+        2,
+        0,
+        2,
+        1,
+        2,
+        0,
+        0,
+        1,
+        1,
+        0,
+        0,
+        2,
+        1,
+        0,
+        3,
+        1,
+        0,
+        5,
+        1,
+        2,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0
+      ],
+      "globalKeys": [
+        "a"
+      ],
+      "imports": [
+        [
+          5,
+          "a.css",
+          26,
+          10
+        ]
+      ],
+      "lineCount": 1,
+      "localKeys": [],
+      "localSymbols": [],
+      "msgs": [],
+      "postLayers": null,
+      "preLayers": null,
+      "rules": [
+        [
+          "charset",
+          0,
+          "UTF-8"
+        ],
+        [
+          "import",
+          18,
+          0,
+          null
+        ],
+        [
+          "sel",
+          38,
+          [
+            [
+              [
+                null,
+                [
+                  [
+                    "class",
+                    0
+                  ]
+                ],
+                [],
+                0,
+                0,
+                false
+              ]
+            ]
+          ],
+          [
+            [
+              "decl",
+              43,
+              93,
+              "color",
+              [
+                [
+                  29,
+                  "red",
+                  1,
+                  0,
+                  0,
+                  50,
+                  null
+                ]
+              ],
+              false,
+              43,
+              5
+            ]
+          ],
+          54
+        ]
+      ],
+      "sourceMapText": "",
+      "symbols": [
+        [
+          "a",
+          25,
+          1,
+          0
+        ]
+      ]
+    }
+  },
+  {
+    "fn": "Parse",
+    "src": "@charset \"UTF-8\"; @import url(a.css); .a { color: red }",
+    "arg": {
+      "idents": true,
+      "mode": 2
+    },
+    "out": {
+      "charfreq": [
+        1,
+        0,
+        2,
+        1,
+        2,
+        0,
+        0,
+        1,
+        1,
+        0,
+        0,
+        2,
+        1,
+        0,
+        3,
+        1,
+        0,
+        5,
+        1,
+        2,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0
+      ],
+      "globalKeys": [],
+      "imports": [
+        [
+          5,
+          "a.css",
+          26,
+          10
+        ]
+      ],
+      "lineCount": 1,
+      "localKeys": [
+        "a"
+      ],
+      "localSymbols": [
+        [
+          0,
+          39
+        ]
+      ],
+      "msgs": [],
+      "postLayers": null,
+      "preLayers": null,
+      "rules": [
+        [
+          "charset",
+          0,
+          "UTF-8"
+        ],
+        [
+          "import",
+          18,
+          0,
+          null
+        ],
+        [
+          "sel",
+          38,
+          [
+            [
+              [
+                null,
+                [
+                  [
+                    "class",
+                    0
+                  ]
+                ],
+                [],
+                0,
+                0,
+                false
+              ]
+            ]
+          ],
+          [
+            [
+              "decl",
+              43,
+              93,
+              "color",
+              [
+                [
+                  29,
+                  "red",
+                  1,
+                  0,
+                  0,
+                  50,
+                  null
+                ]
+              ],
+              false,
+              43,
+              5
+            ]
+          ],
+          54
+        ]
+      ],
+      "sourceMapText": "",
+      "symbols": [
+        [
+          "a",
+          26,
+          1,
+          0
+        ]
+      ]
+    }
+  },
+  {
+    "fn": "Parse",
+    "src": "@layer a, b; @layer c { .x { color: red } }",
+    "arg": {
+      "idents": false,
+      "mode": 0
+    },
+    "out": {
+      "charfreq": null,
+      "globalKeys": [
+        "x"
+      ],
+      "imports": [],
+      "lineCount": 1,
+      "localKeys": [],
+      "localSymbols": [],
+      "msgs": [],
+      "postLayers": [
+        [
+          "a"
+        ],
+        [
+          "b"
+        ],
+        [
+          "c"
+        ]
+      ],
+      "preLayers": null,
+      "rules": [
+        [
+          "layer",
+          0,
+          [
+            [
+              "a"
+            ],
+            [
+              "b"
+            ]
+          ],
+          [],
+          0
+        ],
+        [
+          "layer",
+          13,
+          [
+            [
+              "c"
+            ]
+          ],
+          [
+            [
+              "sel",
+              24,
+              [
+                [
+                  [
+                    null,
+                    [
+                      [
+                        "class",
+                        0
+                      ]
+                    ],
+                    [],
+                    0,
+                    0,
+                    false
+                  ]
+                ]
+              ],
+              [
+                [
+                  "decl",
+                  29,
+                  93,
+                  "color",
+                  [
+                    [
+                      29,
+                      "red",
+                      1,
+                      0,
+                      0,
+                      36,
+                      null
+                    ]
+                  ],
+                  false,
+                  29,
+                  5
+                ]
+              ],
+              40
+            ]
+          ],
+          42
+        ]
+      ],
+      "sourceMapText": "",
+      "symbols": [
+        [
+          "x",
+          25,
+          1,
+          0
+        ]
+      ]
+    }
+  },
+  {
+    "fn": "Parse",
+    "src": "@layer a, b; @layer c { .x { color: red } }",
+    "arg": {
+      "idents": false,
+      "mode": 1
+    },
+    "out": {
+      "charfreq": null,
+      "globalKeys": [
+        "x"
+      ],
+      "imports": [],
+      "lineCount": 1,
+      "localKeys": [],
+      "localSymbols": [],
+      "msgs": [],
+      "postLayers": [
+        [
+          "a"
+        ],
+        [
+          "b"
+        ],
+        [
+          "c"
+        ]
+      ],
+      "preLayers": null,
+      "rules": [
+        [
+          "layer",
+          0,
+          [
+            [
+              "a"
+            ],
+            [
+              "b"
+            ]
+          ],
+          [],
+          0
+        ],
+        [
+          "layer",
+          13,
+          [
+            [
+              "c"
+            ]
+          ],
+          [
+            [
+              "sel",
+              24,
+              [
+                [
+                  [
+                    null,
+                    [
+                      [
+                        "class",
+                        0
+                      ]
+                    ],
+                    [],
+                    0,
+                    0,
+                    false
+                  ]
+                ]
+              ],
+              [
+                [
+                  "decl",
+                  29,
+                  93,
+                  "color",
+                  [
+                    [
+                      29,
+                      "red",
+                      1,
+                      0,
+                      0,
+                      36,
+                      null
+                    ]
+                  ],
+                  false,
+                  29,
+                  5
+                ]
+              ],
+              40
+            ]
+          ],
+          42
+        ]
+      ],
+      "sourceMapText": "",
+      "symbols": [
+        [
+          "x",
+          25,
+          1,
+          0
+        ]
+      ]
+    }
+  },
+  {
+    "fn": "Parse",
+    "src": "@layer a, b; @layer c { .x { color: red } }",
+    "arg": {
+      "idents": false,
+      "mode": 2
+    },
+    "out": {
+      "charfreq": null,
+      "globalKeys": [],
+      "imports": [],
+      "lineCount": 1,
+      "localKeys": [
+        "x"
+      ],
+      "localSymbols": [
+        [
+          0,
+          25
+        ]
+      ],
+      "msgs": [],
+      "postLayers": [
+        [
+          "a"
+        ],
+        [
+          "b"
+        ],
+        [
+          "c"
+        ]
+      ],
+      "preLayers": null,
+      "rules": [
+        [
+          "layer",
+          0,
+          [
+            [
+              "a"
+            ],
+            [
+              "b"
+            ]
+          ],
+          [],
+          0
+        ],
+        [
+          "layer",
+          13,
+          [
+            [
+              "c"
+            ]
+          ],
+          [
+            [
+              "sel",
+              24,
+              [
+                [
+                  [
+                    null,
+                    [
+                      [
+                        "class",
+                        0
+                      ]
+                    ],
+                    [],
+                    0,
+                    0,
+                    false
+                  ]
+                ]
+              ],
+              [
+                [
+                  "decl",
+                  29,
+                  93,
+                  "color",
+                  [
+                    [
+                      29,
+                      "red",
+                      1,
+                      0,
+                      0,
+                      36,
+                      null
+                    ]
+                  ],
+                  false,
+                  29,
+                  5
+                ]
+              ],
+              40
+            ]
+          ],
+          42
+        ]
+      ],
+      "sourceMapText": "",
+      "symbols": [
+        [
+          "x",
+          26,
+          1,
+          0
+        ]
+      ]
+    }
+  },
+  {
+    "fn": "Parse",
+    "src": "@layer a, b; @layer c { .x { color: red } }",
+    "arg": {
+      "idents": true,
+      "mode": 0
+    },
+    "out": {
+      "charfreq": [
+        3,
+        1,
+        2,
+        1,
+        3,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        3,
+        0,
+        0,
+        2,
+        0,
+        0,
+        4,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        2,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "globalKeys": [
+        "x"
+      ],
+      "imports": [],
+      "lineCount": 1,
+      "localKeys": [],
+      "localSymbols": [],
+      "msgs": [],
+      "postLayers": [
+        [
+          "a"
+        ],
+        [
+          "b"
+        ],
+        [
+          "c"
+        ]
+      ],
+      "preLayers": null,
+      "rules": [
+        [
+          "layer",
+          0,
+          [
+            [
+              "a"
+            ],
+            [
+              "b"
+            ]
+          ],
+          [],
+          0
+        ],
+        [
+          "layer",
+          13,
+          [
+            [
+              "c"
+            ]
+          ],
+          [
+            [
+              "sel",
+              24,
+              [
+                [
+                  [
+                    null,
+                    [
+                      [
+                        "class",
+                        0
+                      ]
+                    ],
+                    [],
+                    0,
+                    0,
+                    false
+                  ]
+                ]
+              ],
+              [
+                [
+                  "decl",
+                  29,
+                  93,
+                  "color",
+                  [
+                    [
+                      29,
+                      "red",
+                      1,
+                      0,
+                      0,
+                      36,
+                      null
+                    ]
+                  ],
+                  false,
+                  29,
+                  5
+                ]
+              ],
+              40
+            ]
+          ],
+          42
+        ]
+      ],
+      "sourceMapText": "",
+      "symbols": [
+        [
+          "x",
+          25,
+          1,
+          0
+        ]
+      ]
+    }
+  },
+  {
+    "fn": "Parse",
+    "src": "@layer a, b; @layer c { .x { color: red } }",
+    "arg": {
+      "idents": true,
+      "mode": 1
+    },
+    "out": {
+      "charfreq": [
+        3,
+        1,
+        2,
+        1,
+        3,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        3,
+        0,
+        0,
+        2,
+        0,
+        0,
+        4,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        2,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "globalKeys": [
+        "x"
+      ],
+      "imports": [],
+      "lineCount": 1,
+      "localKeys": [],
+      "localSymbols": [],
+      "msgs": [],
+      "postLayers": [
+        [
+          "a"
+        ],
+        [
+          "b"
+        ],
+        [
+          "c"
+        ]
+      ],
+      "preLayers": null,
+      "rules": [
+        [
+          "layer",
+          0,
+          [
+            [
+              "a"
+            ],
+            [
+              "b"
+            ]
+          ],
+          [],
+          0
+        ],
+        [
+          "layer",
+          13,
+          [
+            [
+              "c"
+            ]
+          ],
+          [
+            [
+              "sel",
+              24,
+              [
+                [
+                  [
+                    null,
+                    [
+                      [
+                        "class",
+                        0
+                      ]
+                    ],
+                    [],
+                    0,
+                    0,
+                    false
+                  ]
+                ]
+              ],
+              [
+                [
+                  "decl",
+                  29,
+                  93,
+                  "color",
+                  [
+                    [
+                      29,
+                      "red",
+                      1,
+                      0,
+                      0,
+                      36,
+                      null
+                    ]
+                  ],
+                  false,
+                  29,
+                  5
+                ]
+              ],
+              40
+            ]
+          ],
+          42
+        ]
+      ],
+      "sourceMapText": "",
+      "symbols": [
+        [
+          "x",
+          25,
+          1,
+          0
+        ]
+      ]
+    }
+  },
+  {
+    "fn": "Parse",
+    "src": "@layer a, b; @layer c { .x { color: red } }",
+    "arg": {
+      "idents": true,
+      "mode": 2
+    },
+    "out": {
+      "charfreq": [
+        3,
+        1,
+        2,
+        1,
+        3,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        3,
+        0,
+        0,
+        2,
+        0,
+        0,
+        4,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        2,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "globalKeys": [],
+      "imports": [],
+      "lineCount": 1,
+      "localKeys": [
+        "x"
+      ],
+      "localSymbols": [
+        [
+          0,
+          25
+        ]
+      ],
+      "msgs": [],
+      "postLayers": [
+        [
+          "a"
+        ],
+        [
+          "b"
+        ],
+        [
+          "c"
+        ]
+      ],
+      "preLayers": null,
+      "rules": [
+        [
+          "layer",
+          0,
+          [
+            [
+              "a"
+            ],
+            [
+              "b"
+            ]
+          ],
+          [],
+          0
+        ],
+        [
+          "layer",
+          13,
+          [
+            [
+              "c"
+            ]
+          ],
+          [
+            [
+              "sel",
+              24,
+              [
+                [
+                  [
+                    null,
+                    [
+                      [
+                        "class",
+                        0
+                      ]
+                    ],
+                    [],
+                    0,
+                    0,
+                    false
+                  ]
+                ]
+              ],
+              [
+                [
+                  "decl",
+                  29,
+                  93,
+                  "color",
+                  [
+                    [
+                      29,
+                      "red",
+                      1,
+                      0,
+                      0,
+                      36,
+                      null
+                    ]
+                  ],
+                  false,
+                  29,
+                  5
+                ]
+              ],
+              40
+            ]
+          ],
+          42
+        ]
+      ],
+      "sourceMapText": "",
+      "symbols": [
+        [
+          "x",
+          26,
+          1,
+          0
+        ]
+      ]
+    }
+  },
+  {
+    "fn": "Parse",
+    "src": "/* license */ .foo { background: url(x.png); color: #fff }",
+    "arg": {
+      "idents": false,
+      "mode": 0
+    },
+    "out": {
+      "charfreq": null,
+      "globalKeys": [
+        "foo"
+      ],
+      "imports": [
+        [
+          7,
+          "x.png",
+          33,
+          10
+        ]
+      ],
+      "lineCount": 1,
+      "localKeys": [],
+      "localSymbols": [],
+      "msgs": [],
+      "postLayers": null,
+      "preLayers": null,
+      "rules": [
+        [
+          "sel",
+          14,
+          [
+            [
+              [
+                null,
+                [
+                  [
+                    "class",
+                    0
+                  ]
+                ],
+                [],
+                0,
+                0,
+                false
+              ]
+            ]
+          ],
+          [
+            [
+              "decl",
+              21,
+              18,
+              "background",
+              [
+                [
+                  37,
+                  "",
+                  1,
+                  0,
+                  0,
+                  33,
+                  null
+                ]
+              ],
+              false,
+              21,
+              10
+            ],
+            [
+              "decl",
+              45,
+              93,
+              "color",
+              [
+                [
+                  28,
+                  "fff",
+                  1,
+                  0,
+                  0,
+                  52,
+                  null
+                ]
+              ],
+              false,
+              45,
+              5
+            ]
+          ],
+          57
+        ]
+      ],
+      "sourceMapText": "",
+      "symbols": [
+        [
+          "foo",
+          25,
+          1,
+          0
+        ]
+      ]
+    }
+  },
+  {
+    "fn": "Parse",
+    "src": "/* license */ .foo { background: url(x.png); color: #fff }",
+    "arg": {
+      "idents": false,
+      "mode": 1
+    },
+    "out": {
+      "charfreq": null,
+      "globalKeys": [
+        "foo"
+      ],
+      "imports": [
+        [
+          7,
+          "x.png",
+          33,
+          10
+        ]
+      ],
+      "lineCount": 1,
+      "localKeys": [],
+      "localSymbols": [],
+      "msgs": [],
+      "postLayers": null,
+      "preLayers": null,
+      "rules": [
+        [
+          "sel",
+          14,
+          [
+            [
+              [
+                null,
+                [
+                  [
+                    "class",
+                    0
+                  ]
+                ],
+                [],
+                0,
+                0,
+                false
+              ]
+            ]
+          ],
+          [
+            [
+              "decl",
+              21,
+              18,
+              "background",
+              [
+                [
+                  37,
+                  "",
+                  1,
+                  0,
+                  0,
+                  33,
+                  null
+                ]
+              ],
+              false,
+              21,
+              10
+            ],
+            [
+              "decl",
+              45,
+              93,
+              "color",
+              [
+                [
+                  28,
+                  "fff",
+                  1,
+                  0,
+                  0,
+                  52,
+                  null
+                ]
+              ],
+              false,
+              45,
+              5
+            ]
+          ],
+          57
+        ]
+      ],
+      "sourceMapText": "",
+      "symbols": [
+        [
+          "foo",
+          25,
+          1,
+          0
+        ]
+      ]
+    }
+  },
+  {
+    "fn": "Parse",
+    "src": "/* license */ .foo { background: url(x.png); color: #fff }",
+    "arg": {
+      "idents": false,
+      "mode": 2
+    },
+    "out": {
+      "charfreq": null,
+      "globalKeys": [],
+      "imports": [
+        [
+          7,
+          "x.png",
+          33,
+          10
+        ]
+      ],
+      "lineCount": 1,
+      "localKeys": [
+        "foo"
+      ],
+      "localSymbols": [
+        [
+          0,
+          15
+        ]
+      ],
+      "msgs": [],
+      "postLayers": null,
+      "preLayers": null,
+      "rules": [
+        [
+          "sel",
+          14,
+          [
+            [
+              [
+                null,
+                [
+                  [
+                    "class",
+                    0
+                  ]
+                ],
+                [],
+                0,
+                0,
+                false
+              ]
+            ]
+          ],
+          [
+            [
+              "decl",
+              21,
+              18,
+              "background",
+              [
+                [
+                  37,
+                  "",
+                  1,
+                  0,
+                  0,
+                  33,
+                  null
+                ]
+              ],
+              false,
+              21,
+              10
+            ],
+            [
+              "decl",
+              45,
+              93,
+              "color",
+              [
+                [
+                  28,
+                  "fff",
+                  1,
+                  0,
+                  0,
+                  52,
+                  null
+                ]
+              ],
+              false,
+              45,
+              5
+            ]
+          ],
+          57
+        ]
+      ],
+      "sourceMapText": "",
+      "symbols": [
+        [
+          "foo",
+          26,
+          1,
+          0
+        ]
+      ]
+    }
+  },
+  {
+    "fn": "Parse",
+    "src": "/* license */ .foo { background: url(x.png); color: #fff }",
+    "arg": {
+      "idents": true,
+      "mode": 0
+    },
+    "out": {
+      "charfreq": [
+        1,
+        1,
+        2,
+        1,
+        0,
+        4,
+        1,
+        0,
+        0,
+        0,
+        1,
+        2,
+        0,
+        1,
+        5,
+        0,
+        0,
+        3,
+        0,
+        0,
+        2,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "globalKeys": [
+        "foo"
+      ],
+      "imports": [
+        [
+          7,
+          "x.png",
+          33,
+          10
+        ]
+      ],
+      "lineCount": 1,
+      "localKeys": [],
+      "localSymbols": [],
+      "msgs": [],
+      "postLayers": null,
+      "preLayers": null,
+      "rules": [
+        [
+          "sel",
+          14,
+          [
+            [
+              [
+                null,
+                [
+                  [
+                    "class",
+                    0
+                  ]
+                ],
+                [],
+                0,
+                0,
+                false
+              ]
+            ]
+          ],
+          [
+            [
+              "decl",
+              21,
+              18,
+              "background",
+              [
+                [
+                  37,
+                  "",
+                  1,
+                  0,
+                  0,
+                  33,
+                  null
+                ]
+              ],
+              false,
+              21,
+              10
+            ],
+            [
+              "decl",
+              45,
+              93,
+              "color",
+              [
+                [
+                  28,
+                  "fff",
+                  1,
+                  0,
+                  0,
+                  52,
+                  null
+                ]
+              ],
+              false,
+              45,
+              5
+            ]
+          ],
+          57
+        ]
+      ],
+      "sourceMapText": "",
+      "symbols": [
+        [
+          "foo",
+          25,
+          1,
+          0
+        ]
+      ]
+    }
+  },
+  {
+    "fn": "Parse",
+    "src": "/* license */ .foo { background: url(x.png); color: #fff }",
+    "arg": {
+      "idents": true,
+      "mode": 1
+    },
+    "out": {
+      "charfreq": [
+        1,
+        1,
+        2,
+        1,
+        0,
+        4,
+        1,
+        0,
+        0,
+        0,
+        1,
+        2,
+        0,
+        1,
+        5,
+        0,
+        0,
+        3,
+        0,
+        0,
+        2,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "globalKeys": [
+        "foo"
+      ],
+      "imports": [
+        [
+          7,
+          "x.png",
+          33,
+          10
+        ]
+      ],
+      "lineCount": 1,
+      "localKeys": [],
+      "localSymbols": [],
+      "msgs": [],
+      "postLayers": null,
+      "preLayers": null,
+      "rules": [
+        [
+          "sel",
+          14,
+          [
+            [
+              [
+                null,
+                [
+                  [
+                    "class",
+                    0
+                  ]
+                ],
+                [],
+                0,
+                0,
+                false
+              ]
+            ]
+          ],
+          [
+            [
+              "decl",
+              21,
+              18,
+              "background",
+              [
+                [
+                  37,
+                  "",
+                  1,
+                  0,
+                  0,
+                  33,
+                  null
+                ]
+              ],
+              false,
+              21,
+              10
+            ],
+            [
+              "decl",
+              45,
+              93,
+              "color",
+              [
+                [
+                  28,
+                  "fff",
+                  1,
+                  0,
+                  0,
+                  52,
+                  null
+                ]
+              ],
+              false,
+              45,
+              5
+            ]
+          ],
+          57
+        ]
+      ],
+      "sourceMapText": "",
+      "symbols": [
+        [
+          "foo",
+          25,
+          1,
+          0
+        ]
+      ]
+    }
+  },
+  {
+    "fn": "Parse",
+    "src": "/* license */ .foo { background: url(x.png); color: #fff }",
+    "arg": {
+      "idents": true,
+      "mode": 2
+    },
+    "out": {
+      "charfreq": [
+        1,
+        1,
+        2,
+        1,
+        0,
+        3,
+        1,
+        0,
+        0,
+        0,
+        1,
+        2,
+        0,
+        1,
+        3,
+        0,
+        0,
+        3,
+        0,
+        0,
+        2,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "globalKeys": [],
+      "imports": [
+        [
+          7,
+          "x.png",
+          33,
+          10
+        ]
+      ],
+      "lineCount": 1,
+      "localKeys": [
+        "foo"
+      ],
+      "localSymbols": [
+        [
+          0,
+          15
+        ]
+      ],
+      "msgs": [],
+      "postLayers": null,
+      "preLayers": null,
+      "rules": [
+        [
+          "sel",
+          14,
+          [
+            [
+              [
+                null,
+                [
+                  [
+                    "class",
+                    0
+                  ]
+                ],
+                [],
+                0,
+                0,
+                false
+              ]
+            ]
+          ],
+          [
+            [
+              "decl",
+              21,
+              18,
+              "background",
+              [
+                [
+                  37,
+                  "",
+                  1,
+                  0,
+                  0,
+                  33,
+                  null
+                ]
+              ],
+              false,
+              21,
+              10
+            ],
+            [
+              "decl",
+              45,
+              93,
+              "color",
+              [
+                [
+                  28,
+                  "fff",
+                  1,
+                  0,
+                  0,
+                  52,
+                  null
+                ]
+              ],
+              false,
+              45,
+              5
+            ]
+          ],
+          57
+        ]
+      ],
+      "sourceMapText": "",
+      "symbols": [
+        [
+          "foo",
+          26,
+          1,
+          0
+        ]
+      ]
+    }
+  },
+  {
+    "fn": "Parse",
+    "src": "@media screen and (min-width:100px) { a { color: red } }",
+    "arg": {
+      "idents": false,
+      "mode": 0
+    },
+    "out": {
+      "charfreq": null,
+      "globalKeys": [],
+      "imports": [],
+      "lineCount": 1,
+      "localKeys": [],
+      "localSymbols": [],
+      "msgs": [],
+      "postLayers": null,
+      "preLayers": null,
+      "rules": [
+        [
+          "media",
+          0,
+          [
+            [
+              7,
+              376629307
+            ]
+          ],
+          [
+            [
+              "sel",
+              38,
+              [
+                [
+                  [
+                    [
+                      null,
+                      "a",
+                      38,
+                      29
+                    ],
+                    [],
+                    [],
+                    0,
+                    0,
+                    false
+                  ]
+                ]
+              ],
+              [
+                [
+                  "decl",
+                  42,
+                  93,
+                  "color",
+                  [
+                    [
+                      29,
+                      "red",
+                      1,
+                      0,
+                      0,
+                      49,
+                      null
+                    ]
+                  ],
+                  false,
+                  42,
+                  5
+                ]
+              ],
+              53
+            ]
+          ],
+          55
+        ]
+      ],
+      "sourceMapText": "",
+      "symbols": []
+    }
+  },
+  {
+    "fn": "Parse",
+    "src": "@media screen and (min-width:100px) { a { color: red } }",
+    "arg": {
+      "idents": false,
+      "mode": 1
+    },
+    "out": {
+      "charfreq": null,
+      "globalKeys": [],
+      "imports": [],
+      "lineCount": 1,
+      "localKeys": [],
+      "localSymbols": [],
+      "msgs": [],
+      "postLayers": null,
+      "preLayers": null,
+      "rules": [
+        [
+          "media",
+          0,
+          [
+            [
+              7,
+              376629307
+            ]
+          ],
+          [
+            [
+              "sel",
+              38,
+              [
+                [
+                  [
+                    [
+                      null,
+                      "a",
+                      38,
+                      29
+                    ],
+                    [],
+                    [],
+                    0,
+                    0,
+                    false
+                  ]
+                ]
+              ],
+              [
+                [
+                  "decl",
+                  42,
+                  93,
+                  "color",
+                  [
+                    [
+                      29,
+                      "red",
+                      1,
+                      0,
+                      0,
+                      49,
+                      null
+                    ]
+                  ],
+                  false,
+                  42,
+                  5
+                ]
+              ],
+              53
+            ]
+          ],
+          55
+        ]
+      ],
+      "sourceMapText": "",
+      "symbols": []
+    }
+  },
+  {
+    "fn": "Parse",
+    "src": "@media screen and (min-width:100px) { a { color: red } }",
+    "arg": {
+      "idents": false,
+      "mode": 2
+    },
+    "out": {
+      "charfreq": null,
+      "globalKeys": [],
+      "imports": [],
+      "lineCount": 1,
+      "localKeys": [],
+      "localSymbols": [],
+      "msgs": [],
+      "postLayers": null,
+      "preLayers": null,
+      "rules": [
+        [
+          "media",
+          0,
+          [
+            [
+              7,
+              376629307
+            ]
+          ],
+          [
+            [
+              "sel",
+              38,
+              [
+                [
+                  [
+                    [
+                      null,
+                      "a",
+                      38,
+                      29
+                    ],
+                    [],
+                    [],
+                    0,
+                    0,
+                    false
+                  ]
+                ]
+              ],
+              [
+                [
+                  "decl",
+                  42,
+                  93,
+                  "color",
+                  [
+                    [
+                      29,
+                      "red",
+                      1,
+                      0,
+                      0,
+                      49,
+                      null
+                    ]
+                  ],
+                  false,
+                  42,
+                  5
+                ]
+              ],
+              53
+            ]
+          ],
+          55
+        ]
+      ],
+      "sourceMapText": "",
+      "symbols": []
+    }
+  },
+  {
+    "fn": "Parse",
+    "src": "@media screen and (min-width:100px) { a { color: red } }",
+    "arg": {
+      "idents": true,
+      "mode": 0
+    },
+    "out": {
+      "charfreq": [
+        3,
+        0,
+        2,
+        4,
+        4,
+        0,
+        0,
+        1,
+        3,
+        0,
+        0,
+        1,
+        2,
+        3,
+        2,
+        1,
+        0,
+        3,
+        1,
+        1,
+        0,
+        0,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        2,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "globalKeys": [],
+      "imports": [],
+      "lineCount": 1,
+      "localKeys": [],
+      "localSymbols": [],
+      "msgs": [],
+      "postLayers": null,
+      "preLayers": null,
+      "rules": [
+        [
+          "media",
+          0,
+          [
+            [
+              7,
+              376629307
+            ]
+          ],
+          [
+            [
+              "sel",
+              38,
+              [
+                [
+                  [
+                    [
+                      null,
+                      "a",
+                      38,
+                      29
+                    ],
+                    [],
+                    [],
+                    0,
+                    0,
+                    false
+                  ]
+                ]
+              ],
+              [
+                [
+                  "decl",
+                  42,
+                  93,
+                  "color",
+                  [
+                    [
+                      29,
+                      "red",
+                      1,
+                      0,
+                      0,
+                      49,
+                      null
+                    ]
+                  ],
+                  false,
+                  42,
+                  5
+                ]
+              ],
+              53
+            ]
+          ],
+          55
+        ]
+      ],
+      "sourceMapText": "",
+      "symbols": []
+    }
+  },
+  {
+    "fn": "Parse",
+    "src": "@media screen and (min-width:100px) { a { color: red } }",
+    "arg": {
+      "idents": true,
+      "mode": 1
+    },
+    "out": {
+      "charfreq": [
+        3,
+        0,
+        2,
+        4,
+        4,
+        0,
+        0,
+        1,
+        3,
+        0,
+        0,
+        1,
+        2,
+        3,
+        2,
+        1,
+        0,
+        3,
+        1,
+        1,
+        0,
+        0,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        2,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "globalKeys": [],
+      "imports": [],
+      "lineCount": 1,
+      "localKeys": [],
+      "localSymbols": [],
+      "msgs": [],
+      "postLayers": null,
+      "preLayers": null,
+      "rules": [
+        [
+          "media",
+          0,
+          [
+            [
+              7,
+              376629307
+            ]
+          ],
+          [
+            [
+              "sel",
+              38,
+              [
+                [
+                  [
+                    [
+                      null,
+                      "a",
+                      38,
+                      29
+                    ],
+                    [],
+                    [],
+                    0,
+                    0,
+                    false
+                  ]
+                ]
+              ],
+              [
+                [
+                  "decl",
+                  42,
+                  93,
+                  "color",
+                  [
+                    [
+                      29,
+                      "red",
+                      1,
+                      0,
+                      0,
+                      49,
+                      null
+                    ]
+                  ],
+                  false,
+                  42,
+                  5
+                ]
+              ],
+              53
+            ]
+          ],
+          55
+        ]
+      ],
+      "sourceMapText": "",
+      "symbols": []
+    }
+  },
+  {
+    "fn": "Parse",
+    "src": "@media screen and (min-width:100px) { a { color: red } }",
+    "arg": {
+      "idents": true,
+      "mode": 2
+    },
+    "out": {
+      "charfreq": [
+        3,
+        0,
+        2,
+        4,
+        4,
+        0,
+        0,
+        1,
+        3,
+        0,
+        0,
+        1,
+        2,
+        3,
+        2,
+        1,
+        0,
+        3,
+        1,
+        1,
+        0,
+        0,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        2,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "globalKeys": [],
+      "imports": [],
+      "lineCount": 1,
+      "localKeys": [],
+      "localSymbols": [],
+      "msgs": [],
+      "postLayers": null,
+      "preLayers": null,
+      "rules": [
+        [
+          "media",
+          0,
+          [
+            [
+              7,
+              376629307
+            ]
+          ],
+          [
+            [
+              "sel",
+              38,
+              [
+                [
+                  [
+                    [
+                      null,
+                      "a",
+                      38,
+                      29
+                    ],
+                    [],
+                    [],
+                    0,
+                    0,
+                    false
+                  ]
+                ]
+              ],
+              [
+                [
+                  "decl",
+                  42,
+                  93,
+                  "color",
+                  [
+                    [
+                      29,
+                      "red",
+                      1,
+                      0,
+                      0,
+                      49,
+                      null
+                    ]
+                  ],
+                  false,
+                  42,
+                  5
+                ]
+              ],
+              53
+            ]
+          ],
+          55
+        ]
+      ],
+      "sourceMapText": "",
+      "symbols": []
+    }
+  },
+  {
+    "fn": "Parse",
+    "src": ".a { composes: b; color: red }",
+    "arg": {
+      "idents": false,
+      "mode": 0
+    },
+    "out": {
+      "charfreq": null,
+      "globalKeys": [
+        "a"
+      ],
+      "imports": [],
+      "lineCount": 1,
+      "localKeys": [],
+      "localSymbols": [],
+      "msgs": [],
+      "postLayers": null,
+      "preLayers": null,
+      "rules": [
+        [
+          "sel",
+          0,
+          [
+            [
+              [
+                null,
+                [
+                  [
+                    "class",
+                    0
+                  ]
+                ],
+                [],
+                0,
+                0,
+                false
+              ]
+            ]
+          ],
+          [
+            [
+              "decl",
+              5,
+              106,
+              "composes",
+              [
+                [
+                  29,
+                  "b",
+                  1,
+                  0,
+                  0,
+                  15,
+                  null
+                ]
+              ],
+              false,
+              5,
+              8
+            ],
+            [
+              "decl",
+              18,
+              93,
+              "color",
+              [
+                [
+                  29,
+                  "red",
+                  1,
+                  0,
+                  0,
+                  25,
+                  null
+                ]
+              ],
+              false,
+              18,
+              5
+            ]
+          ],
+          29
+        ]
+      ],
+      "sourceMapText": "",
+      "symbols": [
+        [
+          "a",
+          25,
+          1,
+          0
+        ]
+      ]
+    }
+  },
+  {
+    "fn": "Parse",
+    "src": ".a { composes: b; color: red }",
+    "arg": {
+      "idents": false,
+      "mode": 1
+    },
+    "out": {
+      "charfreq": null,
+      "globalKeys": [
+        "a",
+        "b"
+      ],
+      "imports": [],
+      "lineCount": 1,
+      "localKeys": [],
+      "localSymbols": [],
+      "msgs": [],
+      "postLayers": null,
+      "preLayers": null,
+      "rules": [
+        [
+          "sel",
+          0,
+          [
+            [
+              [
+                null,
+                [
+                  [
+                    "class",
+                    0
+                  ]
+                ],
+                [],
+                0,
+                0,
+                false
+              ]
+            ]
+          ],
+          [
+            [
+              "decl",
+              18,
+              93,
+              "color",
+              [
+                [
+                  29,
+                  "red",
+                  1,
+                  0,
+                  0,
+                  25,
+                  null
+                ]
+              ],
+              false,
+              18,
+              5
+            ]
+          ],
+          29
+        ]
+      ],
+      "sourceMapText": "",
+      "symbols": [
+        [
+          "a",
+          25,
+          1,
+          0
+        ],
+        [
+          "b",
+          25,
+          1,
+          1
+        ]
+      ]
+    }
+  },
+  {
+    "fn": "Parse",
+    "src": ".a { composes: b; color: red }",
+    "arg": {
+      "idents": false,
+      "mode": 2
+    },
+    "out": {
+      "charfreq": null,
+      "globalKeys": [],
+      "imports": [],
+      "lineCount": 1,
+      "localKeys": [
+        "a",
+        "b"
+      ],
+      "localSymbols": [
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          15
+        ]
+      ],
+      "msgs": [],
+      "postLayers": null,
+      "preLayers": null,
+      "rules": [
+        [
+          "sel",
+          0,
+          [
+            [
+              [
+                null,
+                [
+                  [
+                    "class",
+                    0
+                  ]
+                ],
+                [],
+                0,
+                0,
+                false
+              ]
+            ]
+          ],
+          [
+            [
+              "decl",
+              18,
+              93,
+              "color",
+              [
+                [
+                  29,
+                  "red",
+                  1,
+                  0,
+                  0,
+                  25,
+                  null
+                ]
+              ],
+              false,
+              18,
+              5
+            ]
+          ],
+          29
+        ]
+      ],
+      "sourceMapText": "",
+      "symbols": [
+        [
+          "a",
+          26,
+          1,
+          0
+        ],
+        [
+          "b",
+          26,
+          1,
+          1
+        ]
+      ]
+    }
+  },
+  {
+    "fn": "Parse",
+    "src": ".a { composes: b; color: red }",
+    "arg": {
+      "idents": true,
+      "mode": 0
+    },
+    "out": {
+      "charfreq": [
+        1,
+        1,
+        2,
+        1,
+        2,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        0,
+        4,
+        1,
+        0,
+        2,
+        2,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "globalKeys": [
+        "a"
+      ],
+      "imports": [],
+      "lineCount": 1,
+      "localKeys": [],
+      "localSymbols": [],
+      "msgs": [],
+      "postLayers": null,
+      "preLayers": null,
+      "rules": [
+        [
+          "sel",
+          0,
+          [
+            [
+              [
+                null,
+                [
+                  [
+                    "class",
+                    0
+                  ]
+                ],
+                [],
+                0,
+                0,
+                false
+              ]
+            ]
+          ],
+          [
+            [
+              "decl",
+              5,
+              106,
+              "composes",
+              [
+                [
+                  29,
+                  "b",
+                  1,
+                  0,
+                  0,
+                  15,
+                  null
+                ]
+              ],
+              false,
+              5,
+              8
+            ],
+            [
+              "decl",
+              18,
+              93,
+              "color",
+              [
+                [
+                  29,
+                  "red",
+                  1,
+                  0,
+                  0,
+                  25,
+                  null
+                ]
+              ],
+              false,
+              18,
+              5
+            ]
+          ],
+          29
+        ]
+      ],
+      "sourceMapText": "",
+      "symbols": [
+        [
+          "a",
+          25,
+          1,
+          0
+        ]
+      ]
+    }
+  },
+  {
+    "fn": "Parse",
+    "src": ".a { composes: b; color: red }",
+    "arg": {
+      "idents": true,
+      "mode": 1
+    },
+    "out": {
+      "charfreq": [
+        1,
+        1,
+        2,
+        1,
+        2,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        0,
+        4,
+        1,
+        0,
+        2,
+        2,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "globalKeys": [
+        "a",
+        "b"
+      ],
+      "imports": [],
+      "lineCount": 1,
+      "localKeys": [],
+      "localSymbols": [],
+      "msgs": [],
+      "postLayers": null,
+      "preLayers": null,
+      "rules": [
+        [
+          "sel",
+          0,
+          [
+            [
+              [
+                null,
+                [
+                  [
+                    "class",
+                    0
+                  ]
+                ],
+                [],
+                0,
+                0,
+                false
+              ]
+            ]
+          ],
+          [
+            [
+              "decl",
+              18,
+              93,
+              "color",
+              [
+                [
+                  29,
+                  "red",
+                  1,
+                  0,
+                  0,
+                  25,
+                  null
+                ]
+              ],
+              false,
+              18,
+              5
+            ]
+          ],
+          29
+        ]
+      ],
+      "sourceMapText": "",
+      "symbols": [
+        [
+          "a",
+          25,
+          1,
+          0
+        ],
+        [
+          "b",
+          25,
+          1,
+          1
+        ]
+      ]
+    }
+  },
+  {
+    "fn": "Parse",
+    "src": ".a { composes: b; color: red }",
+    "arg": {
+      "idents": true,
+      "mode": 2
+    },
+    "out": {
+      "charfreq": [
+        0,
+        0,
+        2,
+        1,
+        2,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        0,
+        4,
+        1,
+        0,
+        2,
+        2,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "globalKeys": [],
+      "imports": [],
+      "lineCount": 1,
+      "localKeys": [
+        "a",
+        "b"
+      ],
+      "localSymbols": [
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          15
+        ]
+      ],
+      "msgs": [],
+      "postLayers": null,
+      "preLayers": null,
+      "rules": [
+        [
+          "sel",
+          0,
+          [
+            [
+              [
+                null,
+                [
+                  [
+                    "class",
+                    0
+                  ]
+                ],
+                [],
+                0,
+                0,
+                false
+              ]
+            ]
+          ],
+          [
+            [
+              "decl",
+              18,
+              93,
+              "color",
+              [
+                [
+                  29,
+                  "red",
+                  1,
+                  0,
+                  0,
+                  25,
+                  null
+                ]
+              ],
+              false,
+              18,
+              5
+            ]
+          ],
+          29
+        ]
+      ],
+      "sourceMapText": "",
+      "symbols": [
+        [
+          "a",
+          26,
+          1,
+          0
+        ],
+        [
+          "b",
+          26,
+          1,
+          1
+        ]
+      ]
+    }
+  },
+  {
+    "fn": "Parse",
+    "src": "a { \u0026 b { color: red } }",
+    "arg": {
+      "idents": false,
+      "mode": 0
+    },
+    "out": {
+      "charfreq": null,
+      "globalKeys": [],
+      "imports": [],
+      "lineCount": 1,
+      "localKeys": [],
+      "localSymbols": [],
+      "msgs": [],
+      "postLayers": null,
+      "preLayers": null,
+      "rules": [
+        [
+          "sel",
+          0,
+          [
+            [
+              [
+                [
+                  null,
+                  "a",
+                  0,
+                  29
+                ],
+                [],
+                [],
+                0,
+                0,
+                false
+              ]
+            ]
+          ],
+          [
+            [
+              "sel",
+              4,
+              [
+                [
+                  [
+                    null,
+                    [],
+                    [
+                      4
+                    ],
+                    0,
+                    0,
+                    false
+                  ],
+                  [
+                    [
+                      null,
+                      "b",
+                      6,
+                      29
+                    ],
+                    [],
+                    [],
+                    0,
+                    0,
+                    false
+                  ]
+                ]
+              ],
+              [
+                [
+                  "decl",
+                  10,
+                  93,
+                  "color",
+                  [
+                    [
+                      29,
+                      "red",
+                      1,
+                      0,
+                      0,
+                      17,
+                      null
+                    ]
+                  ],
+                  false,
+                  10,
+                  5
+                ]
+              ],
+              21
+            ]
+          ],
+          23
+        ]
+      ],
+      "sourceMapText": "",
+      "symbols": []
+    }
+  },
+  {
+    "fn": "Parse",
+    "src": "a { \u0026 b { color: red } }",
+    "arg": {
+      "idents": false,
+      "mode": 1
+    },
+    "out": {
+      "charfreq": null,
+      "globalKeys": [],
+      "imports": [],
+      "lineCount": 1,
+      "localKeys": [],
+      "localSymbols": [],
+      "msgs": [],
+      "postLayers": null,
+      "preLayers": null,
+      "rules": [
+        [
+          "sel",
+          0,
+          [
+            [
+              [
+                [
+                  null,
+                  "a",
+                  0,
+                  29
+                ],
+                [],
+                [],
+                0,
+                0,
+                false
+              ]
+            ]
+          ],
+          [
+            [
+              "sel",
+              4,
+              [
+                [
+                  [
+                    null,
+                    [],
+                    [
+                      4
+                    ],
+                    0,
+                    0,
+                    false
+                  ],
+                  [
+                    [
+                      null,
+                      "b",
+                      6,
+                      29
+                    ],
+                    [],
+                    [],
+                    0,
+                    0,
+                    false
+                  ]
+                ]
+              ],
+              [
+                [
+                  "decl",
+                  10,
+                  93,
+                  "color",
+                  [
+                    [
+                      29,
+                      "red",
+                      1,
+                      0,
+                      0,
+                      17,
+                      null
+                    ]
+                  ],
+                  false,
+                  10,
+                  5
+                ]
+              ],
+              21
+            ]
+          ],
+          23
+        ]
+      ],
+      "sourceMapText": "",
+      "symbols": []
+    }
+  },
+  {
+    "fn": "Parse",
+    "src": "a { \u0026 b { color: red } }",
+    "arg": {
+      "idents": false,
+      "mode": 2
+    },
+    "out": {
+      "charfreq": null,
+      "globalKeys": [],
+      "imports": [],
+      "lineCount": 1,
+      "localKeys": [],
+      "localSymbols": [],
+      "msgs": [],
+      "postLayers": null,
+      "preLayers": null,
+      "rules": [
+        [
+          "sel",
+          0,
+          [
+            [
+              [
+                [
+                  null,
+                  "a",
+                  0,
+                  29
+                ],
+                [],
+                [],
+                0,
+                0,
+                false
+              ]
+            ]
+          ],
+          [
+            [
+              "sel",
+              4,
+              [
+                [
+                  [
+                    null,
+                    [],
+                    [
+                      4
+                    ],
+                    0,
+                    0,
+                    false
+                  ],
+                  [
+                    [
+                      null,
+                      "b",
+                      6,
+                      29
+                    ],
+                    [],
+                    [],
+                    0,
+                    0,
+                    false
+                  ]
+                ]
+              ],
+              [
+                [
+                  "decl",
+                  10,
+                  93,
+                  "color",
+                  [
+                    [
+                      29,
+                      "red",
+                      1,
+                      0,
+                      0,
+                      17,
+                      null
+                    ]
+                  ],
+                  false,
+                  10,
+                  5
+                ]
+              ],
+              21
+            ]
+          ],
+          23
+        ]
+      ],
+      "sourceMapText": "",
+      "symbols": []
+    }
+  },
+  {
+    "fn": "Parse",
+    "src": "a { \u0026 b { color: red } }",
+    "arg": {
+      "idents": true,
+      "mode": 0
+    },
+    "out": {
+      "charfreq": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        2,
+        0,
+        0,
+        2,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "globalKeys": [],
+      "imports": [],
+      "lineCount": 1,
+      "localKeys": [],
+      "localSymbols": [],
+      "msgs": [],
+      "postLayers": null,
+      "preLayers": null,
+      "rules": [
+        [
+          "sel",
+          0,
+          [
+            [
+              [
+                [
+                  null,
+                  "a",
+                  0,
+                  29
+                ],
+                [],
+                [],
+                0,
+                0,
+                false
+              ]
+            ]
+          ],
+          [
+            [
+              "sel",
+              4,
+              [
+                [
+                  [
+                    null,
+                    [],
+                    [
+                      4
+                    ],
+                    0,
+                    0,
+                    false
+                  ],
+                  [
+                    [
+                      null,
+                      "b",
+                      6,
+                      29
+                    ],
+                    [],
+                    [],
+                    0,
+                    0,
+                    false
+                  ]
+                ]
+              ],
+              [
+                [
+                  "decl",
+                  10,
+                  93,
+                  "color",
+                  [
+                    [
+                      29,
+                      "red",
+                      1,
+                      0,
+                      0,
+                      17,
+                      null
+                    ]
+                  ],
+                  false,
+                  10,
+                  5
+                ]
+              ],
+              21
+            ]
+          ],
+          23
+        ]
+      ],
+      "sourceMapText": "",
+      "symbols": []
+    }
+  },
+  {
+    "fn": "Parse",
+    "src": "a { \u0026 b { color: red } }",
+    "arg": {
+      "idents": true,
+      "mode": 1
+    },
+    "out": {
+      "charfreq": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        2,
+        0,
+        0,
+        2,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "globalKeys": [],
+      "imports": [],
+      "lineCount": 1,
+      "localKeys": [],
+      "localSymbols": [],
+      "msgs": [],
+      "postLayers": null,
+      "preLayers": null,
+      "rules": [
+        [
+          "sel",
+          0,
+          [
+            [
+              [
+                [
+                  null,
+                  "a",
+                  0,
+                  29
+                ],
+                [],
+                [],
+                0,
+                0,
+                false
+              ]
+            ]
+          ],
+          [
+            [
+              "sel",
+              4,
+              [
+                [
+                  [
+                    null,
+                    [],
+                    [
+                      4
+                    ],
+                    0,
+                    0,
+                    false
+                  ],
+                  [
+                    [
+                      null,
+                      "b",
+                      6,
+                      29
+                    ],
+                    [],
+                    [],
+                    0,
+                    0,
+                    false
+                  ]
+                ]
+              ],
+              [
+                [
+                  "decl",
+                  10,
+                  93,
+                  "color",
+                  [
+                    [
+                      29,
+                      "red",
+                      1,
+                      0,
+                      0,
+                      17,
+                      null
+                    ]
+                  ],
+                  false,
+                  10,
+                  5
+                ]
+              ],
+              21
+            ]
+          ],
+          23
+        ]
+      ],
+      "sourceMapText": "",
+      "symbols": []
+    }
+  },
+  {
+    "fn": "Parse",
+    "src": "a { \u0026 b { color: red } }",
+    "arg": {
+      "idents": true,
+      "mode": 2
+    },
+    "out": {
+      "charfreq": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        2,
+        0,
+        0,
+        2,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "globalKeys": [],
+      "imports": [],
+      "lineCount": 1,
+      "localKeys": [],
+      "localSymbols": [],
+      "msgs": [],
+      "postLayers": null,
+      "preLayers": null,
+      "rules": [
+        [
+          "sel",
+          0,
+          [
+            [
+              [
+                [
+                  null,
+                  "a",
+                  0,
+                  29
+                ],
+                [],
+                [],
+                0,
+                0,
+                false
+              ]
+            ]
+          ],
+          [
+            [
+              "sel",
+              4,
+              [
+                [
+                  [
+                    null,
+                    [],
+                    [
+                      4
+                    ],
+                    0,
+                    0,
+                    false
+                  ],
+                  [
+                    [
+                      null,
+                      "b",
+                      6,
+                      29
+                    ],
+                    [],
+                    [],
+                    0,
+                    0,
+                    false
+                  ]
+                ]
+              ],
+              [
+                [
+                  "decl",
+                  10,
+                  93,
+                  "color",
+                  [
+                    [
+                      29,
+                      "red",
+                      1,
+                      0,
+                      0,
+                      17,
+                      null
+                    ]
+                  ],
+                  false,
+                  10,
+                  5
+                ]
+              ],
+              21
+            ]
+          ],
+          23
+        ]
+      ],
+      "sourceMapText": "",
+      "symbols": []
+    }
+  },
+  {
+    "fn": "computeCharacterFrequency",
+    "src": "abc /*comment*/ xyz",
+    "arg": {},
+    "out": [
+      -1,
+      -1,
+      -1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  {
+    "fn": "OptionsFromConfig",
+    "src": "",
+    "arg": {
+      "loader": 4
+    },
+    "out": {
+      "env": "es2020",
+      "feature": 2048,
+      "minifyIdentifiers": true,
+      "minifySyntax": true,
+      "minifyWhitespace": false,
+      "symbolMode": 0
+    }
+  },
+  {
+    "fn": "OptionsFromConfig",
+    "src": "",
+    "arg": {
+      "loader": 9
+    },
+    "out": {
+      "env": "es2020",
+      "feature": 2048,
+      "minifyIdentifiers": true,
+      "minifySyntax": true,
+      "minifyWhitespace": false,
+      "symbolMode": 1
+    }
+  },
+  {
+    "fn": "OptionsFromConfig",
+    "src": "",
+    "arg": {
+      "loader": 14
+    },
+    "out": {
+      "env": "es2020",
+      "feature": 2048,
+      "minifyIdentifiers": true,
+      "minifySyntax": true,
+      "minifyWhitespace": false,
+      "symbolMode": 2
+    }
+  },
+  {
+    "fn": "OptionsFromConfig",
+    "src": "",
+    "arg": {
+      "loader": 10
+    },
+    "out": {
+      "env": "es2020",
+      "feature": 2048,
+      "minifyIdentifiers": true,
+      "minifySyntax": true,
+      "minifyWhitespace": false,
+      "symbolMode": 0
+    }
+  },
+  {
+    "fn": "Options.Equal",
+    "src": "",
+    "arg": {
+      "pair": "same"
+    },
+    "out": true
+  },
+  {
+    "fn": "Options.Equal",
+    "src": "",
+    "arg": {
+      "pair": "diff-min"
+    },
+    "out": false
+  },
+  {
+    "fn": "Options.Equal",
+    "src": "",
+    "arg": {
+      "pair": "nil-vs-map"
+    },
+    "out": false
+  },
+  {
+    "fn": "Options.Equal",
+    "src": "",
+    "arg": {
+      "pair": "same-map"
+    },
+    "out": true
+  },
+  {
+    "fn": "Options.Equal",
+    "src": "",
+    "arg": {
+      "pair": "diff-map"
+    },
+    "out": false
+  }
+]

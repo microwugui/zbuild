@@ -1,0 +1,91 @@
+package linker
+
+// 第 158 批 Go 探针：generateChunksInParallel（chunk 并发生成 + 最终输出），dump OutputFiles。
+import (
+  "encoding/hex"
+  "encoding/json"
+  "os"
+  "testing"
+
+  "github.com/evanw/esbuild/internal/ast"
+  "github.com/evanw/esbuild/internal/bundler"
+  "github.com/evanw/esbuild/internal/config"
+  "github.com/evanw/esbuild/internal/fs"
+  "github.com/evanw/esbuild/internal/graph"
+  "github.com/evanw/esbuild/internal/js_ast"
+  "github.com/evanw/esbuild/internal/logger"
+)
+
+func gcRef(s, i uint32) ast.Ref { return ast.Ref{SourceIndex: s, InnerIndex: i} }
+type gcNeutralRepr struct{}
+func (*gcNeutralRepr) isChunk() {}
+
+type gcRow struct { Fn string `json:"fn"`; Arg map[string]interface{} `json:"arg"`; Out interface{} `json:"out"` }
+func dumpOutputs(fs1 fs.FS, absBase string, files []graph.OutputFile) interface{} {
+  out := []interface{}{}
+  for _, f := range files {
+    rel, _ := fs1.Rel(absBase, f.AbsPath)
+    out = append(out, map[string]interface{}{"path": rel, "contents": hex.EncodeToString(f.Contents), "exec": f.IsExecutable, "merge": f.CanBeMerged})
+  }
+  return out
+}
+
+func TestTmpGenGCIP(t *testing.T) {
+  var out []gcRow
+  add := func(fn string, arg map[string]interface{}, o interface{}) { out = append(out, gcRow{fn,arg,o}) }
+  fsys := fs.MockFS(map[string]string{}, fs.MockUnix, "/")
+
+  // Scenario A: one JS chunk, hash placeholder template, intermediateOutput pieces with embedded chunk refs
+  {
+    c := &linkerContext{fs: fsys, uniqueKeyPrefix: "TEST", uniqueKeyPrefixBytes: []byte("TEST")}
+    c.graph.Files = make([]graph.LinkerFile, 1)
+    c.graph.Symbols = ast.NewSymbolMap(1)
+    rtScope := &js_ast.Scope{Members: map[string]js_ast.ScopeMember{}}
+    rtScope.Members["__toCommonJS"] = js_ast.ScopeMember{Ref: gcRef(0,0)}
+    rtScope.Members["__esm"] = js_ast.ScopeMember{Ref: gcRef(0,1)}
+    rtScope.Members["__require"] = js_ast.ScopeMember{Ref: gcRef(0,2)}
+    c.graph.Symbols.SymbolsForSource[0] = []ast.Symbol{{OriginalName:"__toCommonJS",Link:ast.InvalidRef},{OriginalName:"__esm",Link:ast.InvalidRef},{OriginalName:"__require",Link:ast.InvalidRef}}
+    c.graph.Files[0].InputFile.Repr = &graph.JSRepr{AST: js_ast.AST{ModuleScope: rtScope}}
+    c.options = &config.Options{AbsOutputDir: "/p/out", SourceMap: config.SourceMapNone,
+      EntryPathTemplate: []config.PathTemplate{{Data:"./",Placeholder:config.DirPlaceholder},{Data:"/",Placeholder:config.NamePlaceholder}},
+      ChunkPathTemplate: []config.PathTemplate{{Data:"./",Placeholder:config.NamePlaceholder},{Data:"-",Placeholder:config.HashPlaceholder}}}
+    log := logger.NewDeferLog(logger.DeferLogNoVerboseOrDebug, nil); c.log = log
+    // one chunk with uniqueKey embedded in output
+    ch := chunkInfo{uniqueKey: "TESTC00000000", finalTemplate: []config.PathTemplate{
+      {Data:"./",Placeholder:config.DirPlaceholder},{Data:"entry",Placeholder:config.NamePlaceholder},{Data:"-",Placeholder:config.HashPlaceholder},{Data:".js"},
+    }}
+    ch.chunkRepr = &chunkReprJS{}
+    ch.waitForIsolatedHash = func() []byte { return []byte{1,2,3,4} }
+    // isolated hash
+    c.chunks = []chunkInfo{ch}
+    files := c.generateChunksInParallel(nil)
+    add("generateChunksInParallel", map[string]interface{}{"case":"hash-chunk"}, dumpOutputs(fsys, "/p/out", files))
+  }
+
+  // Scenario B: no hash placeholder -> finalRelPath static
+  {
+    c := &linkerContext{fs: fsys, uniqueKeyPrefix: "TEST", uniqueKeyPrefixBytes: []byte("TEST")}
+    c.graph.Files = make([]graph.LinkerFile, 1)
+    c.graph.Symbols = ast.NewSymbolMap(1)
+    rtScope := &js_ast.Scope{Members: map[string]js_ast.ScopeMember{}}
+    rtScope.Members["__toCommonJS"] = js_ast.ScopeMember{Ref: gcRef(0,0)}
+    rtScope.Members["__esm"] = js_ast.ScopeMember{Ref: gcRef(0,1)}
+    rtScope.Members["__require"] = js_ast.ScopeMember{Ref: gcRef(0,2)}
+    c.graph.Symbols.SymbolsForSource[0] = []ast.Symbol{{OriginalName:"__toCommonJS",Link:ast.InvalidRef},{OriginalName:"__esm",Link:ast.InvalidRef},{OriginalName:"__require",Link:ast.InvalidRef}}
+    c.graph.Files[0].InputFile.Repr = &graph.JSRepr{AST: js_ast.AST{ModuleScope: rtScope}}
+    c.options = &config.Options{AbsOutputDir: "/p/out", SourceMap: config.SourceMapNone}
+    log := logger.NewDeferLog(logger.DeferLogNoVerboseOrDebug, nil); c.log = log
+    ch := chunkInfo{uniqueKey: "TESTC00000000", finalTemplate: []config.PathTemplate{{Data:"out.js"}}}
+    ch.chunkRepr = &chunkReprJS{}
+    ch.waitForIsolatedHash = func() []byte { return []byte{1,2,3,4} }
+    c.chunks = []chunkInfo{ch}
+    files := c.generateChunksInParallel(nil)
+    add("generateChunksInParallel", map[string]interface{}{"case":"static-path"}, dumpOutputs(fsys, "/p/out", files))
+  }
+
+  b, err := json.MarshalIndent(out, "", "  ")
+  if err != nil { t.Fatal(err) }
+  if err := os.WriteFile("/root/port/testdata/gcip-go.json", b, 0644); err != nil { t.Fatal(err) }
+  t.Logf("wrote %d rows", len(out))
+  _ = bundler.HashForFileName
+}

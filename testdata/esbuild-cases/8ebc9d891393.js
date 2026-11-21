@@ -1,0 +1,1 @@
+class A extends B { x = 1; constructor() { super(); throw c } }

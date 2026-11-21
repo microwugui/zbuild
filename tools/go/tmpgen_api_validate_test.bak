@@ -1,0 +1,220 @@
+package api
+
+import (
+	"encoding/json"
+	"fmt"
+	"os"
+	"sort"
+	"testing"
+
+	"github.com/evanw/esbuild/internal/ast"
+	"github.com/evanw/esbuild/internal/fs"
+	"github.com/evanw/esbuild/internal/logger"
+)
+
+type vrow struct { Name string `json:"name"`; Data json.RawMessage `json:"data"` }
+type vfix struct { Rows []vrow `json:"rows"` }
+
+func vadd(fx *vfix, name string, m map[string]interface{}) {
+	b, _ := json.Marshal(m)
+	fx.Rows = append(fx.Rows, vrow{name, b})
+}
+func vi(fx *vfix, name string, v int) { vadd(fx, name, map[string]interface{}{"v": v}) }
+func vb(fx *vfix, name string, v bool) { vadd(fx, name, map[string]interface{}{"v": v}) }
+
+func vmapSS(m map[string]string) [][]string {
+	out := [][]string{}
+	for k, v := range m { out = append(out, []string{k, v}) }
+	sort.Slice(out, func(i, j int) bool { return out[i][0] < out[j][0] })
+	return out
+}
+func vmapII(m map[uint8]logger.LogLevel) [][]string {
+	out := [][]string{}
+	for k, v := range m { out = append(out, []string{fmt.Sprint(k), fmt.Sprint(int(v))}) }
+	sort.Slice(out, func(i, j int) bool { return out[i][0] < out[j][0] })
+	return out
+}
+func vmapSI(m map[string]int) [][]string {
+	out := [][]string{}
+	for k, v := range m { out = append(out, []string{k, fmt.Sprint(v)}) }
+	sort.Slice(out, func(i, j int) bool { return out[i][0] < out[j][0] })
+	return out
+}
+
+func TestTmpGenApiValidate(t *testing.T) {
+	fx := vfix{}
+	mockFS := fs.MockFS(nil, 0, "/home/user/project")
+	_ = mockFS
+
+	// validatePathTemplate
+	for _, c := range []struct{ name, tmpl string }{
+		{"empty", ""}, {"name", "[name]"}, {"chunk", "chunk-[name]-[hash]"},
+		{"dirext", "assets/[dir]/[name][ext]"}, {"backslash", "a\\b/[name]"}, {"literal", "out.js"},
+	} {
+		parts := validatePathTemplate(c.tmpl)
+		arr := [][]interface{}{}
+		for _, p := range parts { arr = append(arr, []interface{}{p.Data, int(p.Placeholder)}) }
+		vadd(&fx, "validatePathTemplate:"+c.name, map[string]interface{}{"parts": arr})
+	}
+
+	// enum single-value helpers
+	vi(&fx, "validatePlatform:default", int(validatePlatform(PlatformDefault)))
+	vi(&fx, "validatePlatform:browser", int(validatePlatform(PlatformBrowser)))
+	vi(&fx, "validatePlatform:node", int(validatePlatform(PlatformNode)))
+	vi(&fx, "validatePlatform:neutral", int(validatePlatform(PlatformNeutral)))
+	vi(&fx, "validateFormat:default", int(validateFormat(FormatDefault)))
+	vi(&fx, "validateFormat:iife", int(validateFormat(FormatIIFE)))
+	vi(&fx, "validateFormat:cjs", int(validateFormat(FormatCommonJS)))
+	vi(&fx, "validateFormat:esm", int(validateFormat(FormatESModule)))
+	vi(&fx, "validateSourceMap:none", int(validateSourceMap(SourceMapNone)))
+	vi(&fx, "validateSourceMap:inline", int(validateSourceMap(SourceMapInline)))
+	vi(&fx, "validateSourceMap:linked", int(validateSourceMap(SourceMapLinked)))
+	vi(&fx, "validateSourceMap:external", int(validateSourceMap(SourceMapExternal)))
+	vi(&fx, "validateSourceMap:both", int(validateSourceMap(SourceMapInlineAndExternal)))
+	vi(&fx, "validateLegalComments:default-bundle", int(validateLegalComments(LegalCommentsDefault, true)))
+	vi(&fx, "validateLegalComments:default-nobundle", int(validateLegalComments(LegalCommentsDefault, false)))
+	vi(&fx, "validateLegalComments:none", int(validateLegalComments(LegalCommentsNone, false)))
+	vi(&fx, "validateLegalComments:inline", int(validateLegalComments(LegalCommentsInline, false)))
+	vi(&fx, "validateLegalComments:eof", int(validateLegalComments(LegalCommentsEndOfFile, false)))
+	vi(&fx, "validateLegalComments:linked", int(validateLegalComments(LegalCommentsLinked, false)))
+	vi(&fx, "validateLegalComments:external", int(validateLegalComments(LegalCommentsExternal, false)))
+	vi(&fx, "validateColor:ifterminal", int(validateColor(ColorIfTerminal)))
+	vi(&fx, "validateColor:never", int(validateColor(ColorNever)))
+	vi(&fx, "validateColor:always", int(validateColor(ColorAlways)))
+	for i, nm := range []string{"silent", "verbose", "debug", "info", "warning", "error"} {
+		vi(&fx, "validateLogLevel:"+nm, int(validateLogLevel(LogLevel(i))))
+	}
+	vi(&fx, "validateLogStyle:default", int(validateLogStyle(LogStyleDefault)))
+	vi(&fx, "validateLogStyle:clang", int(validateLogStyle(LogStyleClang)))
+	vi(&fx, "validateLogStyle:vs", int(validateLogStyle(LogStyleVisualStudio)))
+	vb(&fx, "validateASCIIOnly:default", validateASCIIOnly(CharsetDefault))
+	vb(&fx, "validateASCIIOnly:ascii", validateASCIIOnly(CharsetASCII))
+	vb(&fx, "validateASCIIOnly:utf8", validateASCIIOnly(CharsetUTF8))
+	vb(&fx, "validateExternalPackages:default", validateExternalPackages(PackagesDefault))
+	vb(&fx, "validateExternalPackages:bundle", validateExternalPackages(PackagesBundle))
+	vb(&fx, "validateExternalPackages:external", validateExternalPackages(PackagesExternal))
+	vb(&fx, "validateTreeShaking:default-bundle", validateTreeShaking(TreeShakingDefault, true, FormatDefault))
+	vb(&fx, "validateTreeShaking:default-iife", validateTreeShaking(TreeShakingDefault, false, FormatIIFE))
+	vb(&fx, "validateTreeShaking:default-esm", validateTreeShaking(TreeShakingDefault, false, FormatESModule))
+	vb(&fx, "validateTreeShaking:false", validateTreeShaking(TreeShakingFalse, true, FormatDefault))
+	vb(&fx, "validateTreeShaking:true", validateTreeShaking(TreeShakingTrue, false, FormatDefault))
+	vi(&fx, "extractPathStyle:code-on", int(extractPathStyle(CodeAbsPath, CodeAbsPath)))
+	vi(&fx, "extractPathStyle:code-off", int(extractPathStyle(0, CodeAbsPath)))
+	vi(&fx, "extractPathStyle:log-on", int(extractPathStyle(LogAbsPath, LogAbsPath)))
+	vi(&fx, "extractPathStyle:log-off", int(extractPathStyle(CodeAbsPath, LogAbsPath)))
+
+	// validateLoader (all API loader values 0..16)
+	for v := 0; v <= 16; v++ { vi(&fx, fmt.Sprintf("validateLoader:%d", v), int(validateLoader(Loader(v)))) }
+
+	// validateSupported (return values only; valid feature names)
+	for _, c := range []struct{ name string; supported map[string]bool }{
+		{"empty", map[string]bool{}},
+		{"js", map[string]bool{"async-await": false, "top-level-await": true}},
+		{"css", map[string]bool{"inline-style": false, "color-functions": true}},
+		{"mixed", map[string]bool{"async-await": false, "inline-style": false, "bigint": true}},
+	} {
+		js, jsm, css, cssm := validateSupported(logger.NewDeferLog(logger.DeferLogNoVerboseOrDebug, nil), c.supported)
+		vadd(&fx, "validateSupported:"+c.name, map[string]interface{}{
+			"js": fmt.Sprint(js), "jsMask": fmt.Sprint(jsm), "css": int(css), "cssMask": int(cssm),
+		})
+	}
+
+	// validateGlobalName (return parts only)
+	for _, c := range []struct{ name, text string }{
+		{"empty", ""}, {"simple", "Foo"}, {"dotted", "Foo.Bar.Baz"},
+	} {
+		parts := validateGlobalName(logger.NewDeferLog(logger.DeferLogNoVerboseOrDebug, nil), c.text, "(global name)")
+		vadd(&fx, "validateGlobalName:"+c.name, map[string]interface{}{"parts": parts})
+	}
+
+	// validateAlias (return map only)
+	for _, c := range []struct{ name string; alias map[string]string }{
+		{"valid", map[string]string{"foo": "bar", "@scope/pkg": "x"}},
+		{"mixed", map[string]string{"ok/name": "v", "./bad": "v", "../bad": "v", "foo/": "v", "@scope/": "v", "": "v"}},
+	} {
+		m := validateAlias(logger.NewDeferLog(logger.DeferLogNoVerboseOrDebug, nil), mockFS, c.alias)
+		vadd(&fx, "validateAlias:"+c.name, map[string]interface{}{"map": vmapSS(m)})
+	}
+
+	// validateResolveExtensions (return list only)
+	for _, c := range []struct{ name string; order []string }{
+		{"nil", nil}, {"custom", []string{".tsx", ".js", ".css"}},
+	} {
+		list := validateResolveExtensions(logger.NewDeferLog(logger.DeferLogNoVerboseOrDebug, nil), c.order)
+		vadd(&fx, "validateResolveExtensions:"+c.name, map[string]interface{}{"list": list})
+	}
+
+	// validateLoaders (return map only)
+	for _, c := range []struct{ name string; loaders map[string]Loader }{
+		{"empty", map[string]Loader{}},
+		{"custom", map[string]Loader{".foo": LoaderJS, ".bar": LoaderTSX, "": LoaderText}},
+	} {
+		m := validateLoaders(logger.NewDeferLog(logger.DeferLogNoVerboseOrDebug, nil), c.loaders)
+		out := map[string]int{}
+		for k, v := range m { out[k] = int(v) }
+		vadd(&fx, "validateLoaders:"+c.name, map[string]interface{}{"map": vmapSI(out)})
+	}
+
+	// validateJSXExpr (return expr only)
+	for _, c := range []struct{ name, text, which string }{
+		{"empty", "", "factory"}, {"factory", "React.createElement", "factory"},
+		{"fragment-null", "null", "fragment"}, {"member", "Preact.h", "factory"},
+	} {
+		expr := validateJSXExpr(logger.NewDeferLog(logger.DeferLogNoVerboseOrDebug, nil), c.text, c.which)
+		vadd(&fx, "validateJSXExpr:"+c.name, map[string]interface{}{"parts": expr.Parts, "constant": expr.Constant != nil})
+	}
+
+	// validateLogOverrides
+	for _, c := range []struct{ name string; input map[string]LogLevel }{
+		{"empty", map[string]LogLevel{}},
+		{"valid", map[string]LogLevel{"bigint": LogLevelError, "direct-eval": LogLevelWarning}},
+	} {
+		m := validateLogOverrides(c.input)
+		vadd(&fx, "validateLogOverrides:"+c.name, map[string]interface{}{"map": vmapII(m)})
+	}
+
+	// validateOutputExtensions
+	for _, c := range []struct{ name string; vals map[string]string }{
+		{"both", map[string]string{".js": ".mjs", ".css": ".css2"}},
+		{"js-only", map[string]string{".js": ".cjs"}},
+	} {
+		js, css := validateOutputExtensions(logger.NewDeferLog(logger.DeferLogNoVerboseOrDebug, nil), c.vals)
+		vadd(&fx, "validateOutputExtensions:"+c.name, map[string]interface{}{"js": js, "css": css})
+	}
+
+	// validateBannerOrFooter
+	for _, c := range []struct{ name, kind string; vals map[string]string }{
+		{"banner", "banner", map[string]string{"js": "// hi", "css": "/* hi */"}},
+		{"footer", "footer", map[string]string{"js": "// bye"}},
+	} {
+		js, css := validateBannerOrFooter(logger.NewDeferLog(logger.DeferLogNoVerboseOrDebug, nil), c.kind, c.vals)
+		vadd(&fx, "validateBannerOrFooter:"+c.name, map[string]interface{}{"js": js, "css": css})
+	}
+
+	// 6 more pure helpers (第88批补充)
+	for _, c := range []struct{ name, ext string }{
+		{"ok", ".ts"}, {"dotonly", "."}, {"trailing", "foo."}, {"empty", ""},
+	} { vb(&fx, "isValidExtension:"+c.name, isValidExtension(c.ext)) }
+	for _, n := range []int{0, 512, 1024, 1536, 1048576, 1572864, 1073741824} {
+		vadd(&fx, fmt.Sprintf("prettyPrintByteCount:%d", n), map[string]interface{}{"v": prettyPrintByteCount(n)})
+	}
+	for i := 0; i <= 7; i++ {
+		vi(&fx, fmt.Sprintf("importKindToResolveKind:%d", i), int(importKindToResolveKind(ast.ImportKind(i))))
+		vi(&fx, fmt.Sprintf("resolveKindToImportKind:%d", i+1), int(resolveKindToImportKind(ResolveKind(i+1))))
+	}
+	for _, c := range []struct{ name, text string }{
+		{"amp", "a&b<c>d"}, {"plain", "plain"}, {"script", "<script>"},
+	} { vadd(&fx, "escapeForHTML:"+c.name, map[string]interface{}{"v": escapeForHTML(c.text)}) }
+	for _, c := range []struct{ name, path, prefix, slashes string }{
+		{"nofix", "foo/bar", "", "/"}, {"exact", "/foo", "/foo", "/"},
+		{"slash", "/foo/bar", "/", "/"}, {"win", "C:\\foo", "C:\\", "\\/"},
+		{"mismatch", "foo/bar", "bar", "/"},
+	} {
+		v, ok := stripDirPrefix(c.path, c.prefix, c.slashes)
+		vadd(&fx, "stripDirPrefix:"+c.name, map[string]interface{}{"value": v, "ok": ok})
+	}
+
+	bts, _ := json.MarshalIndent(fx, "", "  ")
+	if err := os.WriteFile("/root/port/testdata/api-validate-chain-go.json", bts, 0644); err != nil { t.Fatal(err) }
+	t.Logf("wrote %d rows bytes=%d", len(fx.Rows), len(bts))
+}

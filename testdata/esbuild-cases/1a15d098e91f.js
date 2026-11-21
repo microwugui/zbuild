@@ -1,0 +1,1 @@
+b: while (1) if (x) a(); else { continue b }

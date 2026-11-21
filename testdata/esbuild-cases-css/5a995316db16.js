@@ -1,0 +1,1 @@
+.card { &__header { color: red } }

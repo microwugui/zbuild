@@ -1,0 +1,1 @@
+function foo(x) { if (!x.y) {} else return x }

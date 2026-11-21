@@ -1,0 +1,1 @@
+var bound; ({x: 123, unbound, ...unbound, [unbound]: null, y: 234})

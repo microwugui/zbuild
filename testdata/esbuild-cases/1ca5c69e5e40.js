@@ -1,0 +1,2 @@
+/*@jsxRuntime automatic*/
+<a/>

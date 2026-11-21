@@ -1,0 +1,1 @@
+a { font: normal 1rem var(--var), 'aaa bbb' }

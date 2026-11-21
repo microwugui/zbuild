@@ -1,0 +1,22 @@
+[
+  {
+    "fn": "validateLoaders",
+    "arg": "{\".foo\":0}",
+    "out": "=10;.cjs=10;.css=4;.cts=17;.foo=0;.js=10;.json=11;.jsx=13;.mjs=10;.module.css=14;.mts=17;.ts=16;.tsx=18;.txt=15;"
+  },
+  {
+    "fn": "validateLoaders",
+    "arg": "{\".custom\":4}",
+    "out": "=10;.cjs=10;.css=4;.cts=17;.custom=4;.js=10;.json=11;.jsx=13;.mjs=10;.module.css=14;.mts=17;.ts=16;.tsx=18;.txt=15;"
+  },
+  {
+    "fn": "validateLoaders",
+    "arg": "{\"\":2}",
+    "out": "=2;.cjs=10;.css=4;.cts=17;.js=10;.json=11;.jsx=13;.mjs=10;.module.css=14;.mts=17;.ts=16;.tsx=18;.txt=15;"
+  },
+  {
+    "fn": "validateLoaders",
+    "arg": "{\".js\":1,\".ts\":3}",
+    "out": "=10;.cjs=10;.css=4;.cts=17;.js=1;.json=11;.jsx=13;.mjs=10;.module.css=14;.mts=17;.ts=3;.tsx=18;.txt=15;"
+  }
+]

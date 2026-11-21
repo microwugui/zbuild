@@ -1,0 +1,225 @@
+[
+  {
+    "fn": "analyzeMetafileImpl",
+    "arg": {
+      "color": false,
+      "mf": "{}",
+      "verbose": false
+    },
+    "out": ""
+  },
+  {
+    "fn": "analyzeMetafileImpl",
+    "arg": {
+      "color": false,
+      "mf": "{}",
+      "verbose": true
+    },
+    "out": ""
+  },
+  {
+    "fn": "analyzeMetafileImpl",
+    "arg": {
+      "color": true,
+      "mf": "{}",
+      "verbose": false
+    },
+    "out": ""
+  },
+  {
+    "fn": "analyzeMetafileImpl",
+    "arg": {
+      "color": true,
+      "mf": "{}",
+      "verbose": true
+    },
+    "out": ""
+  },
+  {
+    "fn": "analyzeMetafileImpl",
+    "arg": {
+      "color": false,
+      "mf": "{\"outputs\":{}}",
+      "verbose": false
+    },
+    "out": ""
+  },
+  {
+    "fn": "analyzeMetafileImpl",
+    "arg": {
+      "color": false,
+      "mf": "{\"outputs\":{}}",
+      "verbose": true
+    },
+    "out": ""
+  },
+  {
+    "fn": "analyzeMetafileImpl",
+    "arg": {
+      "color": true,
+      "mf": "{\"outputs\":{}}",
+      "verbose": false
+    },
+    "out": ""
+  },
+  {
+    "fn": "analyzeMetafileImpl",
+    "arg": {
+      "color": true,
+      "mf": "{\"outputs\":{}}",
+      "verbose": true
+    },
+    "out": ""
+  },
+  {
+    "fn": "analyzeMetafileImpl",
+    "arg": {
+      "color": false,
+      "mf": "{\"outputs\":{\"out.js\":{\"bytes\":100,\"inputs\":{\"a.js\":{\"bytesInOutput\":60},\"b.js\":{\"bytesInOutput\":40}}}}}",
+      "verbose": false
+    },
+    "out": "\n  out.js   100b   100.0%\n   ├ a.js   60b    60.0%\n   └ b.js   40b    40.0%\n"
+  },
+  {
+    "fn": "analyzeMetafileImpl",
+    "arg": {
+      "color": false,
+      "mf": "{\"outputs\":{\"out.js\":{\"bytes\":100,\"inputs\":{\"a.js\":{\"bytesInOutput\":60},\"b.js\":{\"bytesInOutput\":40}}}}}",
+      "verbose": true
+    },
+    "out": "\n  out.js ── 100b ── 100.0%\n   ├ a.js ── 60b ─── 60.0%\n   └ b.js ── 40b ─── 40.0%\n"
+  },
+  {
+    "fn": "analyzeMetafileImpl",
+    "arg": {
+      "color": true,
+      "mf": "{\"outputs\":{\"out.js\":{\"bytes\":100,\"inputs\":{\"a.js\":{\"bytesInOutput\":60},\"b.js\":{\"bytesInOutput\":40}}}}}",
+      "verbose": false
+    },
+    "out": "\n  \u001b[1mout.js\u001b[0m \u001b[37m \u001b[0m \u001b[1m100b\u001b[0m \u001b[37m \u001b[0m \u001b[1m100.0%\u001b[0m\n   ├ a.js\u001b[0m \u001b[37m \u001b[0m 60b\u001b[0m \u001b[37m  \u001b[0m 60.0%\u001b[0m\n   └ b.js\u001b[0m \u001b[37m \u001b[0m 40b\u001b[0m \u001b[37m  \u001b[0m 40.0%\u001b[0m\n"
+  },
+  {
+    "fn": "analyzeMetafileImpl",
+    "arg": {
+      "color": true,
+      "mf": "{\"outputs\":{\"out.js\":{\"bytes\":100,\"inputs\":{\"a.js\":{\"bytesInOutput\":60},\"b.js\":{\"bytesInOutput\":40}}}}}",
+      "verbose": true
+    },
+    "out": "\n  \u001b[1mout.js\u001b[0m \u001b[37m──\u001b[0m \u001b[1m100b\u001b[0m \u001b[37m──\u001b[0m \u001b[1m100.0%\u001b[0m\n   ├ a.js\u001b[0m \u001b[37m──\u001b[0m 60b\u001b[0m \u001b[37m───\u001b[0m 60.0%\u001b[0m\n   └ b.js\u001b[0m \u001b[37m──\u001b[0m 40b\u001b[0m \u001b[37m───\u001b[0m 40.0%\u001b[0m\n"
+  },
+  {
+    "fn": "analyzeMetafileImpl",
+    "arg": {
+      "color": false,
+      "mf": "{\"outputs\":{\"out.js\":{\"bytes\":1000,\"entryPoint\":\"src/index.js\",\"inputs\":{\"a.js\":{\"bytesInOutput\":900},\"b.js\":{\"bytesInOutput\":100}}},\"out.js.map\":{\"bytes\":50}}}",
+      "verbose": false
+    },
+    "out": "\n  out.js   1000b   100.0%\n   ├ a.js   900b    90.0%\n   └ b.js   100b    10.0%\n"
+  },
+  {
+    "fn": "analyzeMetafileImpl",
+    "arg": {
+      "color": false,
+      "mf": "{\"outputs\":{\"out.js\":{\"bytes\":1000,\"entryPoint\":\"src/index.js\",\"inputs\":{\"a.js\":{\"bytesInOutput\":900},\"b.js\":{\"bytesInOutput\":100}}},\"out.js.map\":{\"bytes\":50}}}",
+      "verbose": true
+    },
+    "out": "\n  out.js ── 1000b ── 100.0%\n   ├ a.js ── 900b ─── 90.0%\n   └ b.js ── 100b ─── 10.0%\n"
+  },
+  {
+    "fn": "analyzeMetafileImpl",
+    "arg": {
+      "color": true,
+      "mf": "{\"outputs\":{\"out.js\":{\"bytes\":1000,\"entryPoint\":\"src/index.js\",\"inputs\":{\"a.js\":{\"bytesInOutput\":900},\"b.js\":{\"bytesInOutput\":100}}},\"out.js.map\":{\"bytes\":50}}}",
+      "verbose": false
+    },
+    "out": "\n  \u001b[1mout.js\u001b[0m \u001b[37m \u001b[0m \u001b[1m1000b\u001b[0m \u001b[37m \u001b[0m \u001b[1m100.0%\u001b[0m\n   ├ a.js\u001b[0m \u001b[37m \u001b[0m 900b\u001b[0m \u001b[37m  \u001b[0m 90.0%\u001b[0m\n   └ b.js\u001b[0m \u001b[37m \u001b[0m 100b\u001b[0m \u001b[37m  \u001b[0m 10.0%\u001b[0m\n"
+  },
+  {
+    "fn": "analyzeMetafileImpl",
+    "arg": {
+      "color": true,
+      "mf": "{\"outputs\":{\"out.js\":{\"bytes\":1000,\"entryPoint\":\"src/index.js\",\"inputs\":{\"a.js\":{\"bytesInOutput\":900},\"b.js\":{\"bytesInOutput\":100}}},\"out.js.map\":{\"bytes\":50}}}",
+      "verbose": true
+    },
+    "out": "\n  \u001b[1mout.js\u001b[0m \u001b[37m──\u001b[0m \u001b[1m1000b\u001b[0m \u001b[37m──\u001b[0m \u001b[1m100.0%\u001b[0m\n   ├ a.js\u001b[0m \u001b[37m──\u001b[0m 900b\u001b[0m \u001b[37m───\u001b[0m 90.0%\u001b[0m\n   └ b.js\u001b[0m \u001b[37m──\u001b[0m 100b\u001b[0m \u001b[37m───\u001b[0m 10.0%\u001b[0m\n"
+  },
+  {
+    "fn": "analyzeMetafileImpl",
+    "arg": {
+      "color": false,
+      "mf": "{\"outputs\":{\"a.js\":{\"bytes\":2048,\"inputs\":{\"x.js\":{\"bytesInOutput\":1500}}},\"b.js\":{\"bytes\":512,\"inputs\":{\"y.js\":{\"bytesInOutput\":100}}}},\"inputs\":{\"src/index.js\":{\"imports\":[{\"path\":\"a.js\"},{\"path\":\"b.js\"}]},\"a.js\":{\"imports\":[{\"path\":\"x.js\"}]}}}",
+      "verbose": false
+    },
+    "out": "\n  a.js     2.0kb  100.0%\n   └ x.js  1.5kb   73.2%\n\n  b.js     512b   100.0%\n   └ y.js  100b    19.5%\n"
+  },
+  {
+    "fn": "analyzeMetafileImpl",
+    "arg": {
+      "color": false,
+      "mf": "{\"outputs\":{\"a.js\":{\"bytes\":2048,\"inputs\":{\"x.js\":{\"bytesInOutput\":1500}}},\"b.js\":{\"bytes\":512,\"inputs\":{\"y.js\":{\"bytesInOutput\":100}}}},\"inputs\":{\"src/index.js\":{\"imports\":[{\"path\":\"a.js\"},{\"path\":\"b.js\"}]},\"a.js\":{\"imports\":[{\"path\":\"x.js\"}]}}}",
+      "verbose": true
+    },
+    "out": "\n  a.js ──── 2.0kb ─ 100.0%\n   └ x.js ─ 1.5kb ── 73.2%\n\n  b.js ──── 512b ── 100.0%\n   └ y.js ─ 100b ─── 19.5%\n"
+  },
+  {
+    "fn": "analyzeMetafileImpl",
+    "arg": {
+      "color": true,
+      "mf": "{\"outputs\":{\"a.js\":{\"bytes\":2048,\"inputs\":{\"x.js\":{\"bytesInOutput\":1500}}},\"b.js\":{\"bytes\":512,\"inputs\":{\"y.js\":{\"bytesInOutput\":100}}}},\"inputs\":{\"src/index.js\":{\"imports\":[{\"path\":\"a.js\"},{\"path\":\"b.js\"}]},\"a.js\":{\"imports\":[{\"path\":\"x.js\"}]}}}",
+      "verbose": false
+    },
+    "out": "\n  \u001b[1ma.js\u001b[0m \u001b[37m   \u001b[0m \u001b[1m2.0kb\u001b[0m \u001b[37m\u001b[0m \u001b[1m100.0%\u001b[0m\n   └ x.js\u001b[0m \u001b[37m\u001b[0m 1.5kb\u001b[0m \u001b[37m \u001b[0m 73.2%\u001b[0m\n\n  \u001b[1mb.js\u001b[0m \u001b[37m   \u001b[0m \u001b[1m512b\u001b[0m \u001b[37m \u001b[0m \u001b[1m100.0%\u001b[0m\n   └ y.js\u001b[0m \u001b[37m\u001b[0m 100b\u001b[0m \u001b[37m  \u001b[0m 19.5%\u001b[0m\n"
+  },
+  {
+    "fn": "analyzeMetafileImpl",
+    "arg": {
+      "color": true,
+      "mf": "{\"outputs\":{\"a.js\":{\"bytes\":2048,\"inputs\":{\"x.js\":{\"bytesInOutput\":1500}}},\"b.js\":{\"bytes\":512,\"inputs\":{\"y.js\":{\"bytesInOutput\":100}}}},\"inputs\":{\"src/index.js\":{\"imports\":[{\"path\":\"a.js\"},{\"path\":\"b.js\"}]},\"a.js\":{\"imports\":[{\"path\":\"x.js\"}]}}}",
+      "verbose": true
+    },
+    "out": "\n  \u001b[1ma.js\u001b[0m \u001b[37m────\u001b[0m \u001b[1m2.0kb\u001b[0m \u001b[37m─\u001b[0m \u001b[1m100.0%\u001b[0m\n   └ x.js\u001b[0m \u001b[37m─\u001b[0m 1.5kb\u001b[0m \u001b[37m──\u001b[0m 73.2%\u001b[0m\n\n  \u001b[1mb.js\u001b[0m \u001b[37m────\u001b[0m \u001b[1m512b\u001b[0m \u001b[37m──\u001b[0m \u001b[1m100.0%\u001b[0m\n   └ y.js\u001b[0m \u001b[37m─\u001b[0m 100b\u001b[0m \u001b[37m───\u001b[0m 19.5%\u001b[0m\n"
+  },
+  {
+    "fn": "formatMsgsImpl",
+    "arg": {
+      "color": false,
+      "kind": 0
+    },
+    "out": [
+      "✘ [ERROR] simple error\n\n",
+      "✘ [ERROR] with note\n\n  note one\n  note two\n\n"
+    ]
+  },
+  {
+    "fn": "formatMsgsImpl",
+    "arg": {
+      "color": false,
+      "kind": 1
+    },
+    "out": [
+      "▲ [WARNING] simple error\n\n",
+      "▲ [WARNING] with note\n\n  note one\n  note two\n\n"
+    ]
+  },
+  {
+    "fn": "prettyPrintPath",
+    "arg": {
+      "path": "/root/port/src/a.js"
+    },
+    "out": "src/a.js"
+  },
+  {
+    "fn": "prettyPrintPath",
+    "arg": {
+      "path": "/other/x.js"
+    },
+    "out": "../../other/x.js"
+  },
+  {
+    "fn": "prettyPrintPath",
+    "arg": {
+      "path": "relative.js"
+    },
+    "out": "relative.js"
+  }
+]

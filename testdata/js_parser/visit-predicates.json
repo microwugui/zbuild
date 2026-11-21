@@ -1,0 +1,1487 @@
+{
+  "assignTarget": [
+    {
+      "input": "a;",
+      "ok": true
+    },
+    {
+      "input": "a.b;",
+      "ok": true
+    },
+    {
+      "input": "a[b];",
+      "ok": false
+    },
+    {
+      "input": "1;",
+      "ok": false
+    },
+    {
+      "input": "['x'][0];",
+      "ok": false
+    },
+    {
+      "input": "null;",
+      "ok": false
+    }
+  ],
+  "evalOrArguments": [
+    {
+      "input": "eval",
+      "isEvalOrArguments": true
+    },
+    {
+      "input": "arguments",
+      "isEvalOrArguments": true
+    },
+    {
+      "input": "evaluate",
+      "isEvalOrArguments": false
+    },
+    {
+      "input": "x",
+      "isEvalOrArguments": false
+    }
+  ],
+  "jsxExprsEqual": [
+    {
+      "a": "parts-eq",
+      "b": "parts-eq",
+      "equal": true
+    },
+    {
+      "a": "parts-eq",
+      "b": "parts-short",
+      "equal": false
+    },
+    {
+      "a": "parts-eq",
+      "b": "const",
+      "equal": false
+    },
+    {
+      "a": "const",
+      "b": "parts-eq",
+      "equal": false
+    },
+    {
+      "a": "const",
+      "b": "const-eq",
+      "equal": true
+    },
+    {
+      "a": "const",
+      "b": "const-diff",
+      "equal": false
+    }
+  ],
+  "locAfterOp": {
+    "afterOp": 8,
+    "leftStart": 0,
+    "rightStart": 8,
+    "transposedAfterOp": 10
+  },
+  "pairs": [
+    {
+      "i": 0,
+      "j": 0,
+      "lookTheSame": false
+    },
+    {
+      "i": 0,
+      "j": 1,
+      "lookTheSame": false
+    },
+    {
+      "i": 0,
+      "j": 2,
+      "lookTheSame": false
+    },
+    {
+      "i": 0,
+      "j": 3,
+      "lookTheSame": false
+    },
+    {
+      "i": 0,
+      "j": 4,
+      "lookTheSame": false
+    },
+    {
+      "i": 0,
+      "j": 5,
+      "lookTheSame": false
+    },
+    {
+      "i": 0,
+      "j": 6,
+      "lookTheSame": false
+    },
+    {
+      "i": 0,
+      "j": 7,
+      "lookTheSame": false
+    },
+    {
+      "i": 0,
+      "j": 8,
+      "lookTheSame": false
+    },
+    {
+      "i": 0,
+      "j": 9,
+      "lookTheSame": false
+    },
+    {
+      "i": 0,
+      "j": 10,
+      "lookTheSame": false
+    },
+    {
+      "i": 0,
+      "j": 11,
+      "lookTheSame": false
+    },
+    {
+      "i": 0,
+      "j": 12,
+      "lookTheSame": false
+    },
+    {
+      "i": 0,
+      "j": 13,
+      "lookTheSame": false
+    },
+    {
+      "i": 0,
+      "j": 14,
+      "lookTheSame": false
+    },
+    {
+      "i": 0,
+      "j": 15,
+      "lookTheSame": false
+    },
+    {
+      "i": 0,
+      "j": 16,
+      "lookTheSame": false
+    },
+    {
+      "i": 0,
+      "j": 17,
+      "lookTheSame": false
+    },
+    {
+      "i": 0,
+      "j": 18,
+      "lookTheSame": false
+    },
+    {
+      "i": 0,
+      "j": 19,
+      "lookTheSame": false
+    },
+    {
+      "i": 0,
+      "j": 20,
+      "lookTheSame": false
+    },
+    {
+      "i": 1,
+      "j": 1,
+      "lookTheSame": true
+    },
+    {
+      "i": 1,
+      "j": 2,
+      "lookTheSame": false
+    },
+    {
+      "i": 1,
+      "j": 3,
+      "lookTheSame": false
+    },
+    {
+      "i": 1,
+      "j": 4,
+      "lookTheSame": false
+    },
+    {
+      "i": 1,
+      "j": 5,
+      "lookTheSame": false
+    },
+    {
+      "i": 1,
+      "j": 6,
+      "lookTheSame": false
+    },
+    {
+      "i": 1,
+      "j": 7,
+      "lookTheSame": false
+    },
+    {
+      "i": 1,
+      "j": 8,
+      "lookTheSame": false
+    },
+    {
+      "i": 1,
+      "j": 9,
+      "lookTheSame": false
+    },
+    {
+      "i": 1,
+      "j": 10,
+      "lookTheSame": false
+    },
+    {
+      "i": 1,
+      "j": 11,
+      "lookTheSame": false
+    },
+    {
+      "i": 1,
+      "j": 12,
+      "lookTheSame": false
+    },
+    {
+      "i": 1,
+      "j": 13,
+      "lookTheSame": false
+    },
+    {
+      "i": 1,
+      "j": 14,
+      "lookTheSame": false
+    },
+    {
+      "i": 1,
+      "j": 15,
+      "lookTheSame": false
+    },
+    {
+      "i": 1,
+      "j": 16,
+      "lookTheSame": false
+    },
+    {
+      "i": 1,
+      "j": 17,
+      "lookTheSame": false
+    },
+    {
+      "i": 1,
+      "j": 18,
+      "lookTheSame": false
+    },
+    {
+      "i": 1,
+      "j": 19,
+      "lookTheSame": false
+    },
+    {
+      "i": 1,
+      "j": 20,
+      "lookTheSame": false
+    },
+    {
+      "i": 2,
+      "j": 2,
+      "lookTheSame": true
+    },
+    {
+      "i": 2,
+      "j": 3,
+      "lookTheSame": false
+    },
+    {
+      "i": 2,
+      "j": 4,
+      "lookTheSame": false
+    },
+    {
+      "i": 2,
+      "j": 5,
+      "lookTheSame": false
+    },
+    {
+      "i": 2,
+      "j": 6,
+      "lookTheSame": false
+    },
+    {
+      "i": 2,
+      "j": 7,
+      "lookTheSame": false
+    },
+    {
+      "i": 2,
+      "j": 8,
+      "lookTheSame": false
+    },
+    {
+      "i": 2,
+      "j": 9,
+      "lookTheSame": false
+    },
+    {
+      "i": 2,
+      "j": 10,
+      "lookTheSame": false
+    },
+    {
+      "i": 2,
+      "j": 11,
+      "lookTheSame": false
+    },
+    {
+      "i": 2,
+      "j": 12,
+      "lookTheSame": false
+    },
+    {
+      "i": 2,
+      "j": 13,
+      "lookTheSame": false
+    },
+    {
+      "i": 2,
+      "j": 14,
+      "lookTheSame": false
+    },
+    {
+      "i": 2,
+      "j": 15,
+      "lookTheSame": false
+    },
+    {
+      "i": 2,
+      "j": 16,
+      "lookTheSame": false
+    },
+    {
+      "i": 2,
+      "j": 17,
+      "lookTheSame": false
+    },
+    {
+      "i": 2,
+      "j": 18,
+      "lookTheSame": false
+    },
+    {
+      "i": 2,
+      "j": 19,
+      "lookTheSame": false
+    },
+    {
+      "i": 2,
+      "j": 20,
+      "lookTheSame": false
+    },
+    {
+      "i": 3,
+      "j": 3,
+      "lookTheSame": true
+    },
+    {
+      "i": 3,
+      "j": 4,
+      "lookTheSame": false
+    },
+    {
+      "i": 3,
+      "j": 5,
+      "lookTheSame": false
+    },
+    {
+      "i": 3,
+      "j": 6,
+      "lookTheSame": false
+    },
+    {
+      "i": 3,
+      "j": 7,
+      "lookTheSame": false
+    },
+    {
+      "i": 3,
+      "j": 8,
+      "lookTheSame": false
+    },
+    {
+      "i": 3,
+      "j": 9,
+      "lookTheSame": false
+    },
+    {
+      "i": 3,
+      "j": 10,
+      "lookTheSame": false
+    },
+    {
+      "i": 3,
+      "j": 11,
+      "lookTheSame": false
+    },
+    {
+      "i": 3,
+      "j": 12,
+      "lookTheSame": false
+    },
+    {
+      "i": 3,
+      "j": 13,
+      "lookTheSame": false
+    },
+    {
+      "i": 3,
+      "j": 14,
+      "lookTheSame": false
+    },
+    {
+      "i": 3,
+      "j": 15,
+      "lookTheSame": false
+    },
+    {
+      "i": 3,
+      "j": 16,
+      "lookTheSame": false
+    },
+    {
+      "i": 3,
+      "j": 17,
+      "lookTheSame": false
+    },
+    {
+      "i": 3,
+      "j": 18,
+      "lookTheSame": false
+    },
+    {
+      "i": 3,
+      "j": 19,
+      "lookTheSame": false
+    },
+    {
+      "i": 3,
+      "j": 20,
+      "lookTheSame": false
+    },
+    {
+      "i": 4,
+      "j": 4,
+      "lookTheSame": true
+    },
+    {
+      "i": 4,
+      "j": 5,
+      "lookTheSame": false
+    },
+    {
+      "i": 4,
+      "j": 6,
+      "lookTheSame": false
+    },
+    {
+      "i": 4,
+      "j": 7,
+      "lookTheSame": false
+    },
+    {
+      "i": 4,
+      "j": 8,
+      "lookTheSame": false
+    },
+    {
+      "i": 4,
+      "j": 9,
+      "lookTheSame": false
+    },
+    {
+      "i": 4,
+      "j": 10,
+      "lookTheSame": false
+    },
+    {
+      "i": 4,
+      "j": 11,
+      "lookTheSame": false
+    },
+    {
+      "i": 4,
+      "j": 12,
+      "lookTheSame": false
+    },
+    {
+      "i": 4,
+      "j": 13,
+      "lookTheSame": false
+    },
+    {
+      "i": 4,
+      "j": 14,
+      "lookTheSame": false
+    },
+    {
+      "i": 4,
+      "j": 15,
+      "lookTheSame": false
+    },
+    {
+      "i": 4,
+      "j": 16,
+      "lookTheSame": false
+    },
+    {
+      "i": 4,
+      "j": 17,
+      "lookTheSame": false
+    },
+    {
+      "i": 4,
+      "j": 18,
+      "lookTheSame": false
+    },
+    {
+      "i": 4,
+      "j": 19,
+      "lookTheSame": false
+    },
+    {
+      "i": 4,
+      "j": 20,
+      "lookTheSame": false
+    },
+    {
+      "i": 5,
+      "j": 5,
+      "lookTheSame": false
+    },
+    {
+      "i": 5,
+      "j": 6,
+      "lookTheSame": false
+    },
+    {
+      "i": 5,
+      "j": 7,
+      "lookTheSame": false
+    },
+    {
+      "i": 5,
+      "j": 8,
+      "lookTheSame": false
+    },
+    {
+      "i": 5,
+      "j": 9,
+      "lookTheSame": false
+    },
+    {
+      "i": 5,
+      "j": 10,
+      "lookTheSame": false
+    },
+    {
+      "i": 5,
+      "j": 11,
+      "lookTheSame": false
+    },
+    {
+      "i": 5,
+      "j": 12,
+      "lookTheSame": false
+    },
+    {
+      "i": 5,
+      "j": 13,
+      "lookTheSame": false
+    },
+    {
+      "i": 5,
+      "j": 14,
+      "lookTheSame": false
+    },
+    {
+      "i": 5,
+      "j": 15,
+      "lookTheSame": false
+    },
+    {
+      "i": 5,
+      "j": 16,
+      "lookTheSame": false
+    },
+    {
+      "i": 5,
+      "j": 17,
+      "lookTheSame": false
+    },
+    {
+      "i": 5,
+      "j": 18,
+      "lookTheSame": false
+    },
+    {
+      "i": 5,
+      "j": 19,
+      "lookTheSame": false
+    },
+    {
+      "i": 5,
+      "j": 20,
+      "lookTheSame": false
+    },
+    {
+      "i": 6,
+      "j": 6,
+      "lookTheSame": false
+    },
+    {
+      "i": 6,
+      "j": 7,
+      "lookTheSame": false
+    },
+    {
+      "i": 6,
+      "j": 8,
+      "lookTheSame": false
+    },
+    {
+      "i": 6,
+      "j": 9,
+      "lookTheSame": false
+    },
+    {
+      "i": 6,
+      "j": 10,
+      "lookTheSame": false
+    },
+    {
+      "i": 6,
+      "j": 11,
+      "lookTheSame": false
+    },
+    {
+      "i": 6,
+      "j": 12,
+      "lookTheSame": false
+    },
+    {
+      "i": 6,
+      "j": 13,
+      "lookTheSame": false
+    },
+    {
+      "i": 6,
+      "j": 14,
+      "lookTheSame": false
+    },
+    {
+      "i": 6,
+      "j": 15,
+      "lookTheSame": false
+    },
+    {
+      "i": 6,
+      "j": 16,
+      "lookTheSame": false
+    },
+    {
+      "i": 6,
+      "j": 17,
+      "lookTheSame": false
+    },
+    {
+      "i": 6,
+      "j": 18,
+      "lookTheSame": false
+    },
+    {
+      "i": 6,
+      "j": 19,
+      "lookTheSame": false
+    },
+    {
+      "i": 6,
+      "j": 20,
+      "lookTheSame": false
+    },
+    {
+      "i": 7,
+      "j": 7,
+      "lookTheSame": false
+    },
+    {
+      "i": 7,
+      "j": 8,
+      "lookTheSame": false
+    },
+    {
+      "i": 7,
+      "j": 9,
+      "lookTheSame": false
+    },
+    {
+      "i": 7,
+      "j": 10,
+      "lookTheSame": false
+    },
+    {
+      "i": 7,
+      "j": 11,
+      "lookTheSame": false
+    },
+    {
+      "i": 7,
+      "j": 12,
+      "lookTheSame": false
+    },
+    {
+      "i": 7,
+      "j": 13,
+      "lookTheSame": false
+    },
+    {
+      "i": 7,
+      "j": 14,
+      "lookTheSame": false
+    },
+    {
+      "i": 7,
+      "j": 15,
+      "lookTheSame": false
+    },
+    {
+      "i": 7,
+      "j": 16,
+      "lookTheSame": false
+    },
+    {
+      "i": 7,
+      "j": 17,
+      "lookTheSame": false
+    },
+    {
+      "i": 7,
+      "j": 18,
+      "lookTheSame": false
+    },
+    {
+      "i": 7,
+      "j": 19,
+      "lookTheSame": false
+    },
+    {
+      "i": 7,
+      "j": 20,
+      "lookTheSame": false
+    },
+    {
+      "i": 8,
+      "j": 8,
+      "lookTheSame": false
+    },
+    {
+      "i": 8,
+      "j": 9,
+      "lookTheSame": false
+    },
+    {
+      "i": 8,
+      "j": 10,
+      "lookTheSame": false
+    },
+    {
+      "i": 8,
+      "j": 11,
+      "lookTheSame": false
+    },
+    {
+      "i": 8,
+      "j": 12,
+      "lookTheSame": false
+    },
+    {
+      "i": 8,
+      "j": 13,
+      "lookTheSame": false
+    },
+    {
+      "i": 8,
+      "j": 14,
+      "lookTheSame": false
+    },
+    {
+      "i": 8,
+      "j": 15,
+      "lookTheSame": false
+    },
+    {
+      "i": 8,
+      "j": 16,
+      "lookTheSame": false
+    },
+    {
+      "i": 8,
+      "j": 17,
+      "lookTheSame": false
+    },
+    {
+      "i": 8,
+      "j": 18,
+      "lookTheSame": false
+    },
+    {
+      "i": 8,
+      "j": 19,
+      "lookTheSame": false
+    },
+    {
+      "i": 8,
+      "j": 20,
+      "lookTheSame": false
+    },
+    {
+      "i": 9,
+      "j": 9,
+      "lookTheSame": false
+    },
+    {
+      "i": 9,
+      "j": 10,
+      "lookTheSame": false
+    },
+    {
+      "i": 9,
+      "j": 11,
+      "lookTheSame": false
+    },
+    {
+      "i": 9,
+      "j": 12,
+      "lookTheSame": false
+    },
+    {
+      "i": 9,
+      "j": 13,
+      "lookTheSame": false
+    },
+    {
+      "i": 9,
+      "j": 14,
+      "lookTheSame": false
+    },
+    {
+      "i": 9,
+      "j": 15,
+      "lookTheSame": false
+    },
+    {
+      "i": 9,
+      "j": 16,
+      "lookTheSame": false
+    },
+    {
+      "i": 9,
+      "j": 17,
+      "lookTheSame": false
+    },
+    {
+      "i": 9,
+      "j": 18,
+      "lookTheSame": false
+    },
+    {
+      "i": 9,
+      "j": 19,
+      "lookTheSame": false
+    },
+    {
+      "i": 9,
+      "j": 20,
+      "lookTheSame": false
+    },
+    {
+      "i": 10,
+      "j": 10,
+      "lookTheSame": false
+    },
+    {
+      "i": 10,
+      "j": 11,
+      "lookTheSame": false
+    },
+    {
+      "i": 10,
+      "j": 12,
+      "lookTheSame": false
+    },
+    {
+      "i": 10,
+      "j": 13,
+      "lookTheSame": false
+    },
+    {
+      "i": 10,
+      "j": 14,
+      "lookTheSame": false
+    },
+    {
+      "i": 10,
+      "j": 15,
+      "lookTheSame": false
+    },
+    {
+      "i": 10,
+      "j": 16,
+      "lookTheSame": false
+    },
+    {
+      "i": 10,
+      "j": 17,
+      "lookTheSame": false
+    },
+    {
+      "i": 10,
+      "j": 18,
+      "lookTheSame": false
+    },
+    {
+      "i": 10,
+      "j": 19,
+      "lookTheSame": false
+    },
+    {
+      "i": 10,
+      "j": 20,
+      "lookTheSame": false
+    },
+    {
+      "i": 11,
+      "j": 11,
+      "lookTheSame": false
+    },
+    {
+      "i": 11,
+      "j": 12,
+      "lookTheSame": false
+    },
+    {
+      "i": 11,
+      "j": 13,
+      "lookTheSame": false
+    },
+    {
+      "i": 11,
+      "j": 14,
+      "lookTheSame": false
+    },
+    {
+      "i": 11,
+      "j": 15,
+      "lookTheSame": false
+    },
+    {
+      "i": 11,
+      "j": 16,
+      "lookTheSame": false
+    },
+    {
+      "i": 11,
+      "j": 17,
+      "lookTheSame": false
+    },
+    {
+      "i": 11,
+      "j": 18,
+      "lookTheSame": false
+    },
+    {
+      "i": 11,
+      "j": 19,
+      "lookTheSame": false
+    },
+    {
+      "i": 11,
+      "j": 20,
+      "lookTheSame": false
+    },
+    {
+      "i": 12,
+      "j": 12,
+      "lookTheSame": false
+    },
+    {
+      "i": 12,
+      "j": 13,
+      "lookTheSame": false
+    },
+    {
+      "i": 12,
+      "j": 14,
+      "lookTheSame": false
+    },
+    {
+      "i": 12,
+      "j": 15,
+      "lookTheSame": false
+    },
+    {
+      "i": 12,
+      "j": 16,
+      "lookTheSame": false
+    },
+    {
+      "i": 12,
+      "j": 17,
+      "lookTheSame": false
+    },
+    {
+      "i": 12,
+      "j": 18,
+      "lookTheSame": false
+    },
+    {
+      "i": 12,
+      "j": 19,
+      "lookTheSame": false
+    },
+    {
+      "i": 12,
+      "j": 20,
+      "lookTheSame": false
+    },
+    {
+      "i": 13,
+      "j": 13,
+      "lookTheSame": false
+    },
+    {
+      "i": 13,
+      "j": 14,
+      "lookTheSame": false
+    },
+    {
+      "i": 13,
+      "j": 15,
+      "lookTheSame": false
+    },
+    {
+      "i": 13,
+      "j": 16,
+      "lookTheSame": false
+    },
+    {
+      "i": 13,
+      "j": 17,
+      "lookTheSame": false
+    },
+    {
+      "i": 13,
+      "j": 18,
+      "lookTheSame": false
+    },
+    {
+      "i": 13,
+      "j": 19,
+      "lookTheSame": false
+    },
+    {
+      "i": 13,
+      "j": 20,
+      "lookTheSame": false
+    },
+    {
+      "i": 14,
+      "j": 14,
+      "lookTheSame": false
+    },
+    {
+      "i": 14,
+      "j": 15,
+      "lookTheSame": false
+    },
+    {
+      "i": 14,
+      "j": 16,
+      "lookTheSame": false
+    },
+    {
+      "i": 14,
+      "j": 17,
+      "lookTheSame": false
+    },
+    {
+      "i": 14,
+      "j": 18,
+      "lookTheSame": false
+    },
+    {
+      "i": 14,
+      "j": 19,
+      "lookTheSame": false
+    },
+    {
+      "i": 14,
+      "j": 20,
+      "lookTheSame": false
+    },
+    {
+      "i": 15,
+      "j": 15,
+      "lookTheSame": false
+    },
+    {
+      "i": 15,
+      "j": 16,
+      "lookTheSame": false
+    },
+    {
+      "i": 15,
+      "j": 17,
+      "lookTheSame": false
+    },
+    {
+      "i": 15,
+      "j": 18,
+      "lookTheSame": false
+    },
+    {
+      "i": 15,
+      "j": 19,
+      "lookTheSame": false
+    },
+    {
+      "i": 15,
+      "j": 20,
+      "lookTheSame": false
+    },
+    {
+      "i": 16,
+      "j": 16,
+      "lookTheSame": false
+    },
+    {
+      "i": 16,
+      "j": 17,
+      "lookTheSame": false
+    },
+    {
+      "i": 16,
+      "j": 18,
+      "lookTheSame": false
+    },
+    {
+      "i": 16,
+      "j": 19,
+      "lookTheSame": false
+    },
+    {
+      "i": 16,
+      "j": 20,
+      "lookTheSame": false
+    },
+    {
+      "i": 17,
+      "j": 17,
+      "lookTheSame": false
+    },
+    {
+      "i": 17,
+      "j": 18,
+      "lookTheSame": false
+    },
+    {
+      "i": 17,
+      "j": 19,
+      "lookTheSame": false
+    },
+    {
+      "i": 17,
+      "j": 20,
+      "lookTheSame": false
+    },
+    {
+      "i": 18,
+      "j": 18,
+      "lookTheSame": false
+    },
+    {
+      "i": 18,
+      "j": 19,
+      "lookTheSame": false
+    },
+    {
+      "i": 18,
+      "j": 20,
+      "lookTheSame": false
+    },
+    {
+      "i": 19,
+      "j": 19,
+      "lookTheSame": false
+    },
+    {
+      "i": 19,
+      "j": 20,
+      "lookTheSame": false
+    },
+    {
+      "i": 20,
+      "j": 20,
+      "lookTheSame": false
+    }
+  ],
+  "parentheses": [
+    {
+      "input": "",
+      "text": "( )"
+    },
+    {
+      "input": "1",
+      "text": "( )"
+    },
+    {
+      "input": "a+b",
+      "text": "( )"
+    },
+    {
+      "input": "(((x)))",
+      "text": "(     )"
+    },
+    {
+      "input": "é",
+      "text": "( )"
+    },
+    {
+      "input": "𐀀",
+      "text": "( )"
+    },
+    {
+      "input": "😀😀",
+      "text": "( )"
+    }
+  ],
+  "sameRegexp": [
+    {
+      "a": "a+",
+      "b": "a+",
+      "same": true
+    },
+    {
+      "a": "a+",
+      "b": "a*",
+      "same": false
+    },
+    {
+      "a": "nil",
+      "b": "a+",
+      "same": false
+    },
+    {
+      "a": "nil",
+      "b": "nil",
+      "same": true
+    }
+  ],
+  "stmts": [
+    {
+      "couldFallThrough": true,
+      "couldFallThroughBlock": true,
+      "input": "a;",
+      "isJumpStatement": false,
+      "kind": "*js_ast.SExpr",
+      "shouldKeepInDeadControlFlow": false,
+      "stmtCaresAboutScope": false
+    },
+    {
+      "couldFallThrough": false,
+      "couldFallThroughBlock": false,
+      "input": "return 1;",
+      "isJumpStatement": true,
+      "kind": "*js_ast.SReturn",
+      "shouldKeepInDeadControlFlow": false,
+      "stmtCaresAboutScope": false
+    },
+    {
+      "couldFallThrough": false,
+      "couldFallThroughBlock": false,
+      "input": "break;",
+      "isJumpStatement": true,
+      "kind": "*js_ast.SBreak",
+      "shouldKeepInDeadControlFlow": false,
+      "stmtCaresAboutScope": false
+    },
+    {
+      "couldFallThrough": false,
+      "couldFallThroughBlock": false,
+      "input": "continue;",
+      "isJumpStatement": true,
+      "kind": "*js_ast.SContinue",
+      "shouldKeepInDeadControlFlow": false,
+      "stmtCaresAboutScope": false
+    },
+    {
+      "couldFallThrough": false,
+      "couldFallThroughBlock": false,
+      "input": "throw x;",
+      "isJumpStatement": true,
+      "kind": "*js_ast.SThrow",
+      "shouldKeepInDeadControlFlow": false,
+      "stmtCaresAboutScope": false
+    },
+    {
+      "couldFallThrough": true,
+      "couldFallThroughBlock": true,
+      "input": "{}",
+      "isJumpStatement": false,
+      "kind": "*js_ast.SBlock",
+      "shouldKeepInDeadControlFlow": false,
+      "stmtCaresAboutScope": false
+    },
+    {
+      "couldFallThrough": true,
+      "couldFallThroughBlock": true,
+      "identifierCount": 1,
+      "input": "let a = 1;",
+      "isJumpStatement": false,
+      "kind": "*js_ast.SLocal",
+      "shouldKeepInDeadControlFlow": false,
+      "stmtCaresAboutScope": true
+    },
+    {
+      "couldFallThrough": true,
+      "couldFallThroughBlock": true,
+      "identifierCount": 2,
+      "input": "var a = 1, b;",
+      "isJumpStatement": false,
+      "kind": "*js_ast.SLocal",
+      "shouldKeepInDeadControlFlow": true,
+      "stmtCaresAboutScope": false
+    },
+    {
+      "couldFallThrough": true,
+      "couldFallThroughBlock": true,
+      "identifierCount": 1,
+      "input": "const c = 2;",
+      "isJumpStatement": false,
+      "kind": "*js_ast.SLocal",
+      "shouldKeepInDeadControlFlow": false,
+      "stmtCaresAboutScope": true
+    },
+    {
+      "couldFallThrough": true,
+      "couldFallThroughBlock": true,
+      "input": "if (a) b; else c;",
+      "isJumpStatement": false,
+      "kind": "*js_ast.SIf",
+      "shouldKeepInDeadControlFlow": false,
+      "stmtCaresAboutScope": false
+    },
+    {
+      "couldFallThrough": true,
+      "couldFallThroughBlock": true,
+      "input": "for (;;) break;",
+      "isJumpStatement": false,
+      "kind": "*js_ast.SFor",
+      "shouldKeepInDeadControlFlow": false,
+      "stmtCaresAboutScope": false
+    },
+    {
+      "couldFallThrough": true,
+      "couldFallThroughBlock": true,
+      "input": "for (var i = 0; i \u003c 2; i++) continue;",
+      "isJumpStatement": false,
+      "kind": "*js_ast.SFor",
+      "shouldKeepInDeadControlFlow": true,
+      "stmtCaresAboutScope": false
+    },
+    {
+      "couldFallThrough": true,
+      "couldFallThroughBlock": true,
+      "input": "for (var k in o) {}",
+      "isJumpStatement": false,
+      "kind": "*js_ast.SForIn",
+      "shouldKeepInDeadControlFlow": true,
+      "stmtCaresAboutScope": false
+    },
+    {
+      "couldFallThrough": true,
+      "couldFallThroughBlock": true,
+      "input": "for (var v of xs) {}",
+      "isJumpStatement": false,
+      "kind": "*js_ast.SForOf",
+      "shouldKeepInDeadControlFlow": true,
+      "stmtCaresAboutScope": false
+    },
+    {
+      "couldFallThrough": true,
+      "couldFallThroughBlock": true,
+      "input": "while (a) break;",
+      "isJumpStatement": false,
+      "kind": "*js_ast.SWhile",
+      "shouldKeepInDeadControlFlow": false,
+      "stmtCaresAboutScope": false
+    },
+    {
+      "couldFallThrough": true,
+      "couldFallThroughBlock": true,
+      "input": "do a; while (b)",
+      "isJumpStatement": false,
+      "kind": "*js_ast.SDoWhile",
+      "shouldKeepInDeadControlFlow": false,
+      "stmtCaresAboutScope": false
+    },
+    {
+      "couldFallThrough": true,
+      "couldFallThroughBlock": true,
+      "input": "try { a } catch (e) { b } finally { c }",
+      "isJumpStatement": false,
+      "kind": "*js_ast.STry",
+      "shouldKeepInDeadControlFlow": false,
+      "stmtCaresAboutScope": false
+    },
+    {
+      "couldFallThrough": true,
+      "couldFallThroughBlock": true,
+      "input": "switch (a) { case 1: b; break; default: c }",
+      "isJumpStatement": false,
+      "kind": "*js_ast.SSwitch",
+      "shouldKeepInDeadControlFlow": true,
+      "stmtCaresAboutScope": false
+    },
+    {
+      "couldFallThrough": true,
+      "couldFallThroughBlock": true,
+      "input": "debugger;",
+      "isJumpStatement": false,
+      "kind": "*js_ast.SDebugger",
+      "shouldKeepInDeadControlFlow": false,
+      "stmtCaresAboutScope": false
+    },
+    {
+      "couldFallThrough": true,
+      "couldFallThroughBlock": true,
+      "input": "class C {}",
+      "isJumpStatement": false,
+      "kind": "*js_ast.SClass",
+      "shouldKeepInDeadControlFlow": false,
+      "stmtCaresAboutScope": true
+    },
+    {
+      "couldFallThrough": true,
+      "couldFallThroughBlock": true,
+      "input": "label: while (a) break label;",
+      "isJumpStatement": false,
+      "kind": "*js_ast.SLabel",
+      "shouldKeepInDeadControlFlow": false,
+      "stmtCaresAboutScope": false
+    }
+  ]
+}

@@ -1,0 +1,120 @@
+package api
+
+// 第 115 轮 Go 探针：internalContext.Serve 的确定性参数校验分支（net.Listen 之前的全部 early-return）。
+// 成功路径需真实绑定端口（时序/端口不确定），不在夹具覆盖，按禁止验证如实登记。
+import (
+	"encoding/json"
+	"os"
+	"path"
+	"testing"
+
+	"github.com/evanw/esbuild/internal/bundler"
+	"github.com/evanw/esbuild/internal/config"
+	"github.com/evanw/esbuild/internal/fs"
+)
+
+// serveFS：在 MockFS 上覆写 Abs / Rel 以驱动校验分支
+type serveFS struct {
+	fs.FS
+	badAbs     string // 该路径 Abs 失败
+	relVal     string // overrideRel 时的返回
+	relOK      bool
+	overrideRel bool
+}
+
+func (f *serveFS) Abs(p string) (string, bool) {
+	if p == f.badAbs {
+		return "", false
+	}
+	return f.FS.Abs(p)
+}
+func (f *serveFS) Rel(base, target string) (string, bool) {
+	if f.overrideRel {
+		return f.relVal, f.relOK
+	}
+	return f.FS.Rel(base, target)
+}
+
+type serveErrRow struct {
+	Name string `json:"name"`
+	Err  string `json:"err"`
+}
+
+func TestTmpGenServe115(t *testing.T) {
+	base := fs.MockFS(map[string]string{}, fs.MockUnix, "/")
+	mkFS := func() *serveFS { return &serveFS{FS: base} }
+
+	type tc struct {
+		name     string
+		disposed bool
+		hasHandler bool
+		keyfile, certfile, servedir, fallback string
+		cors     []string
+		entryPoints int
+		writeToStdout bool
+		badServeDir bool
+		relOverride bool
+		relVal      string
+		relOK       bool
+	}
+	cases := []tc{
+		{"disposed", true, false, "", "", "", "", nil, 0, false, false, false, "", false},
+		{"already-enabled", false, true, "", "", "", "", nil, 0, false, false, false, "", false},
+		{"keyfile-only", false, false, "/k.pem", "", "", "", nil, 0, false, false, false, "", false},
+		{"certfile-only", false, false, "", "/c.pem", "", "", nil, 0, false, false, false, "", false},
+		{"bad-servedir", false, false, "", "", "/bad", "", nil, 0, false, true, false, "", false},
+		{"bad-fallback", false, false, "", "", "", "/badfb", nil, 0, false, false, false, "", false},
+		{"bad-cors", false, false, "", "", "", "", []string{"a*b*c"}, 0, false, false, false, "", false},
+		{"stdout-one-entry", false, false, "", "", "", "", nil, 1, true, false, false, "", false},
+		{"stdout-two-entries", false, false, "", "", "", "", nil, 2, true, false, false, "", false},
+		{"outdir-outside-servedir", false, false, "", "", "/serve", "", nil, 1, false, false, true, "../out", true},
+	}
+
+	rows := []serveErrRow{}
+	for _, c := range cases {
+		realFS := mkFS()
+		if c.badServeDir {
+			realFS.badAbs = "/bad"
+		}
+		if c.name == "bad-fallback" {
+			realFS.badAbs = "/badfb"
+		}
+		if c.relOverride {
+			realFS.overrideRel = true
+			realFS.relVal = c.relVal
+			realFS.relOK = c.relOK
+		}
+		ctx := &internalContext{realFS: realFS, didDispose: c.disposed}
+		if c.hasHandler {
+			ctx.handler = &apiHandler{}
+		}
+		if c.entryPoints > 0 {
+			ctx.args.entryPoints = make([]bundler.EntryPoint, c.entryPoints)
+		}
+		ctx.args.options = config.Options{
+			WriteToStdout: c.writeToStdout,
+			AbsOutputDir:  "/out",
+		}
+		if c.writeToStdout {
+			ctx.args.options.AbsOutputDir = ""
+		}
+		opts := ServeOptions{
+			Keyfile: c.keyfile, Certfile: c.certfile, Servedir: c.servedir, Fallback: c.fallback,
+			CORS: CORSOptions{Origin: c.cors},
+		}
+		_, err := ctx.Serve(opts)
+		errText := ""
+		if err != nil {
+			errText = err.Error()
+		}
+		rows = append(rows, serveErrRow{c.name, errText})
+	}
+	b, _ := json.MarshalIndent(rows, "", "  ")
+	if err := os.WriteFile("/root/port/testdata/serve-validate-go.json", b, 0644); err != nil {
+		t.Fatal(err)
+	}
+	for _, r := range rows {
+		t.Logf("%-24s => %q", r.Name, r.Err)
+	}
+	_ = path.Join
+}

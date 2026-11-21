@@ -1,0 +1,127 @@
+[
+  {
+    "name": "cors-wildcard",
+    "status": 404,
+    "headers": {
+      "Access-Control-Allow-Origin": "*",
+      "Content-Type": "text/plain; charset=utf-8"
+    },
+    "body": "NDA0IC0gTm90IEZvdW5k"
+  },
+  {
+    "name": "cors-exact",
+    "status": 404,
+    "headers": {
+      "Access-Control-Allow-Origin": "https://a.com",
+      "Content-Type": "text/plain; charset=utf-8"
+    },
+    "body": "NDA0IC0gTm90IEZvdW5k"
+  },
+  {
+    "name": "cors-prefix",
+    "status": 404,
+    "headers": {
+      "Access-Control-Allow-Origin": "https://sub.a.com",
+      "Content-Type": "text/plain; charset=utf-8"
+    },
+    "body": "NDA0IC0gTm90IEZvdW5k"
+  },
+  {
+    "name": "cors-nomatch",
+    "status": 404,
+    "headers": {
+      "Content-Type": "text/plain; charset=utf-8"
+    },
+    "body": "NDA0IC0gTm90IEZvdW5k"
+  },
+  {
+    "name": "host-forbidden",
+    "status": 403,
+    "headers": {},
+    "body": "NDAzIC0gRm9yYmlkZGVuOiBUaGUgaG9zdCAiZXZpbC5jb20iIGlzIG5vdCBhbGxvd2Vk"
+  },
+  {
+    "name": "host-strip-port",
+    "status": 404,
+    "headers": {
+      "Content-Type": "text/plain; charset=utf-8"
+    },
+    "body": "NDA0IC0gTm90IEZvdW5k"
+  },
+  {
+    "name": "backslash",
+    "status": 400,
+    "headers": {},
+    "body": "NDAwIC0gQmFkIFJlcXVlc3Q="
+  },
+  {
+    "name": "build-error",
+    "status": 503,
+    "headers": {
+      "Content-Type": "text/plain; charset=utf-8"
+    },
+    "body": "4pyYIFtFUlJPUl0gc29tZSBidWlsZCBlcnJvcgoK"
+  },
+  {
+    "name": "serve-file-js",
+    "status": 200,
+    "headers": {
+      "Content-Length": "15",
+      "Content-Type": "text/javascript; charset=utf-8"
+    },
+    "body": "Y29uc29sZS5sb2coMSkK"
+  },
+  {
+    "name": "head-omit",
+    "status": 200,
+    "headers": {
+      "Content-Length": "15",
+      "Content-Type": "text/javascript; charset=utf-8"
+    },
+    "body": ""
+  },
+  {
+    "name": "range",
+    "status": 206,
+    "headers": {
+      "Content-Length": "5",
+      "Content-Range": "bytes 0-4/15",
+      "Content-Type": "text/javascript; charset=utf-8"
+    },
+    "body": "Y29uc28="
+  },
+  {
+    "name": "dir-list",
+    "status": 200,
+    "headers": {
+      "Content-Length": "517",
+      "Content-Type": "text/html; charset=utf-8"
+    },
+    "body": "PCFkb2N0eXBlIGh0bWw+CjxtZXRhIGNoYXJzZXQ9InV0ZjgiPgo8c3R5bGU+CmJvZHkgeyBtYXJnaW46IDMwcHg7IGNvbG9yOiAjMjIyOyBiYWNrZ3JvdW5kOiAjZmZmOyBmb250OiAxNnB4LzIycHggc2Fucy1zZXJpZjsgfQphIHsgY29sb3I6IGluaGVyaXQ7IHRleHQtZGVjb3JhdGlvbjogbm9uZTsgfQphOmhvdmVyIHsgdGV4dC1kZWNvcmF0aW9uOiB1bmRlcmxpbmU7IH0KYTp2aXNpdGVkIHsgY29sb3I6ICM3Nzc7IH0KQG1lZGlhIChwcmVmZXJzLWNvbG9yLXNjaGVtZTogZGFyaykgewogIGJvZHkgeyBjb2xvcjogI2ZmZjsgYmFja2dyb3VuZDogIzIyMjsgfQogIGE6dmlzaXRlZCB7IGNvbG9yOiAjYWFhOyB9Cn0KPC9zdHlsZT4KPHRpdGxlPkRpcmVjdG9yeTogL3N1Yi88L3RpdGxlPgo8aDE+RGlyZWN0b3J5OiA8YSBocmVmPSIvIj4vPC9hPnN1Yi88L2gxPgo8ZGl2PvCfk4EgPGEgaHJlZj0iLyI+Li4vPC9hPjwvZGl2Pgo8ZGl2PvCfk4QgPGEgaHJlZj0iL3N1Yi94LmNzcyI+eC5jc3M8L2E+PC9kaXY+Cg=="
+  },
+  {
+    "name": "dir-redirect",
+    "status": 302,
+    "headers": {
+      "Location": "/sub/"
+    },
+    "body": ""
+  },
+  {
+    "name": "favicon",
+    "status": 200,
+    "headers": {
+      "Content-Encoding": "gzip",
+      "Content-Type": "image/vnd.microsoft.icon"
+    },
+    "body": "H4sIAAAAAAACA2NgYGRgYhAQYADSCgwZLAwMagwMDAoKEL6GIANDH1BMAygmABJngIgTBOf//ycJ00r/ye//WZefgatjW3LyP8OZ30Tr5ynp+S+uqALWx3TgzX8JReX/AqGpmGbgsV/IJxJuBvvsff8l5BQwzcDnf6AZwg7eYDNYNlz/zzF5839JScn//LH5ROlHtpPx2BcU9xDST5ReAvoFQlPAfoXpx9BLy/inhf6amWh4Vj35+rHoJVo/Dr1E6cejl6B+AnopABrQMsaB2HKG3PimNH2M2j9qPwH7mXc8+i/sHgym0eVY11wGyzEd+UgT+0F2ihmYgesJERtXFHtAdkuoqGOVo4X96Pbgk6N2+FPNDWSmP6q5gYL0TxU3UJj/2BYehdsBwgJxBXA5jmnbccoNdf8PZPwPZPof6Pw/0OXfQJf/o/XvqP1EYYy+DDY8p37g7J9TT9P2PzXspon9c0jrY1HV/jmk9++oZv8c8vqWVLF/Dvn9Wortn0NZn5oi++dQ3p8n2/45NBtLGM4AANrrYf22FQAA"
+  },
+  {
+    "name": "not-found",
+    "status": 404,
+    "headers": {
+      "Content-Type": "text/plain; charset=utf-8"
+    },
+    "body": "NDA0IC0gTm90IEZvdW5k"
+  }
+]

@@ -1,0 +1,1 @@
+.card { .nav &__header { color: red } }

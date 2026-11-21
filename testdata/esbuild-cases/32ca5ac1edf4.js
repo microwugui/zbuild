@@ -1,0 +1,1 @@
+let x = (false || y[z])()

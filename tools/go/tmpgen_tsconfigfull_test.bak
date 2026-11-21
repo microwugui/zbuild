@@ -1,0 +1,98 @@
+package resolver
+
+// 第 168 批 Go 探针：parseTSConfig + parseTSConfigFromSource 逐字节固化。
+// visited=nil（transform 模式）→ extends 回调返回 nil，避开深簇递归分支；
+// 主路径 = ParseTSConfigJSON（已移植）+ 尾部 paths 无 baseUrl 过滤。
+import (
+	"encoding/json"
+	"os"
+	"sort"
+	"testing"
+
+	"github.com/evanw/esbuild/internal/cache"
+	"github.com/evanw/esbuild/internal/config"
+	"github.com/evanw/esbuild/internal/fs"
+	"github.com/evanw/esbuild/internal/logger"
+)
+
+type tfRow struct {
+	Fn  string                 `json:"fn"`
+	Arg map[string]interface{} `json:"arg"`
+	Out interface{}            `json:"out"`
+}
+
+func tfRange(r logger.Range) interface{} { return []interface{}{r.Loc.Start, r.Len} }
+
+func tfDumpConfig(c *TSConfigJSON) interface{} {
+	if c == nil { return nil }
+	var paths interface{}
+	if c.Paths != nil {
+		keys := []string{}; for k := range c.Paths.Map { keys = append(keys, k) }; sort.Strings(keys)
+		arr := []interface{}{}
+		for _, k := range keys {
+			items := []interface{}{}; for _, p := range c.Paths.Map[k] { items = append(items, []interface{}{p.Text, p.Loc.Start}) }
+			arr = append(arr, []interface{}{k, items})
+		}
+		paths = map[string]interface{}{"src": c.Paths.Source.KeyPath.Text, "map": arr}
+	}
+	var baseURL interface{}; if c.BaseURL != nil { baseURL = *c.BaseURL }
+	var tsTarget interface{}
+	if c.tsTargetKey.Range.Len > 0 || c.tsTargetKey.LowerValue != "" {
+		tsTarget = []interface{}{c.tsTargetKey.LowerValue, c.tsTargetKey.Source.KeyPath.Text, tfRange(c.tsTargetKey.Range)}
+	}
+	var strict, always interface{}
+	if c.TSStrict != nil { strict = []interface{}{c.TSStrict.Name, c.TSStrict.Value, tfRange(c.TSStrict.Range)} }
+	if c.TSAlwaysStrict != nil { always = []interface{}{c.TSAlwaysStrict.Name, c.TSAlwaysStrict.Value, tfRange(c.TSAlwaysStrict.Range)} }
+	return map[string]interface{}{
+		"absPath": c.AbsPath, "baseURL": baseURL, "baseURLForPaths": c.BaseURLForPaths,
+		"paths": paths, "tsTarget": tsTarget, "strict": strict, "alwaysStrict": always,
+		"jsx": c.JSXSettings.JSX,
+		"settings": []interface{}{int(c.Settings.ExperimentalDecorators), int(c.Settings.ImportsNotUsedAsValues), int(c.Settings.PreserveValueImports), int(c.Settings.Target), int(c.Settings.UseDefineForClassFields), int(c.Settings.VerbatimModuleSyntax)},
+	}
+}
+func tfErrStr(err error) string {
+	if err == nil { return "" }
+	if err == errParseErrorImportCycle { return "cycle" }
+	if err == errParseErrorAlreadyLogged { return "already-logged" }
+	return err.Error()
+}
+
+func TestTmpGenTsconfigFull(t *testing.T) {
+	var out []tfRow
+	cases := []struct{ fn, name, path, contents string }{
+		{"parseTSConfig", "simple", "/proj/tsconfig.json", `{"compilerOptions":{"target":"es2020","strict":true}}`},
+		{"parseTSConfig", "paths-nobase", "/proj/tsconfig.json", `{"compilerOptions":{"paths":{"a":["./a"],"@/*":["../x/*"],"bad":["node_modules/x"]}}}`},
+		{"parseTSConfig", "paths-withbase", "/proj/tsconfig.json", `{"compilerOptions":{"baseUrl":".","paths":{"a":["./a"],"bad":["node_modules/x"]}}}`},
+		{"parseTSConfig", "extends-transform", "/proj/tsconfig.json", `{"extends":"./base.json","compilerOptions":{"strict":true}}`},
+		{"parseTSConfig", "bad-json", "/proj/tsconfig.json", `{ not json`},
+		{"parseTSConfig", "missing", "/proj/tsconfig.json", ""},
+		{"parseTSConfigFromSource", "src-simple", "/proj/tsconfig.json", `{"compilerOptions":{"target":"es5"}}`},
+		{"parseTSConfigFromSource", "src-paths", "/proj/tsconfig.json", `{"compilerOptions":{"paths":{"a":["./a"],"bad":["../node_modules/x"]}}}`},
+	}
+	for _, c := range cases {
+		tree := map[string]string{}
+		if c.contents != "" || c.name == "bad-json" { tree[c.path] = c.contents }
+		fsObj := fs.MockFS(tree, fs.MockUnix, "/")
+		caches := cache.MakeCacheSet()
+		log := logger.NewDeferLog(logger.DeferLogAll, nil)
+		var result *TSConfigJSON
+		var err error
+		if c.fn == "parseTSConfig" {
+			r := resolverQuery{Resolver: &Resolver{log: log}}
+			r.fs = fsObj; r.caches = caches
+			r.options = config.Options{PreserveSymlinks: false}
+			result, err = r.parseTSConfig(c.path, nil, "/proj") // visited=nil → transform 模式
+		} else {
+			source := logger.Source{Contents: c.contents, KeyPath: logger.Path{Text: c.path, Namespace: "file"}}
+			r := resolverQuery{Resolver: &Resolver{log: log}}
+			r.fs = fsObj; r.caches = caches
+			r.options = config.Options{}
+			result, err = r.parseTSConfigFromSource(source, nil, "/proj")
+		}
+		msgs := []string{}; for _, m := range log.Done() { msgs = append(msgs, m.Data.Text) }
+		out = append(out, tfRow{Fn: c.fn, Arg: map[string]interface{}{"name": c.name, "contents": c.contents}, Out: []interface{}{tfDumpConfig(result), tfErrStr(err), msgs}})
+	}
+	b, e := json.Marshal(out); if e != nil { t.Fatal(e) }
+	if e := os.WriteFile("/root/port/testdata/tsconfig-full-go.json", b, 0644); e != nil { t.Fatal(e) }
+	t.Logf("wrote %d cases", len(out))
+}

@@ -1,0 +1,1 @@
+(/* foo */ class x { static y() { foo(x) } }.y());

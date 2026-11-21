@@ -1,0 +1,62 @@
+[
+  {
+    "fn": "parsePlainOrBooleanMediaFeature",
+    "arg": "[[29,\"hover\"]]",
+    "out": "true|hover|"
+  },
+  {
+    "fn": "parsePlainOrBooleanMediaFeature",
+    "arg": "[[29,\"min-width\"],[9,\":\"],[30,\"100\"]]",
+    "out": "true|min-width|30:100;"
+  },
+  {
+    "fn": "parsePlainOrBooleanMediaFeature",
+    "arg": "[[29,\"foo\"],[29,\"bar\"]]",
+    "out": "false"
+  },
+  {
+    "fn": "parsePlainOrBooleanMediaFeature",
+    "arg": "[]",
+    "out": "false"
+  },
+  {
+    "fn": "parseRangeMediaFeature",
+    "arg": "[[29,\"width\"],[21,\"\u003e=\"],[34,\"50%\"]]",
+    "out": "false"
+  },
+  {
+    "fn": "parseRangeMediaFeature",
+    "arg": "[[30,\"100\"],[20,\"\u003c\"],[29,\"width\"],[21,\"\u003c=\"],[30,\"200\"]]",
+    "out": "false"
+  },
+  {
+    "fn": "parseRangeMediaFeature",
+    "arg": "[[29,\"width\"]]",
+    "out": "false"
+  },
+  {
+    "fn": "lowerMediaRange",
+    "arg": "width|3|[[30,\"100\"]]",
+    "out": "plain|max-width|"
+  },
+  {
+    "fn": "lowerMediaRange",
+    "arg": "width|5|[[30,\"100\"]]",
+    "out": "plain|min-width|"
+  },
+  {
+    "fn": "lowerMediaRange",
+    "arg": "width|2|[[30,\"100\"]]",
+    "out": "not|plain|min-width|"
+  },
+  {
+    "fn": "lowerMediaRange",
+    "arg": "width|4|[[30,\"100\"]]",
+    "out": "not|plain|max-width|"
+  },
+  {
+    "fn": "lowerMediaRange",
+    "arg": "width|1|[[30,\"100\"]]",
+    "out": "plain|width|"
+  }
+]

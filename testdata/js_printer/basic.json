@@ -1,0 +1,942 @@
+{
+ "cases": [
+  {
+   "name": "num",
+   "input": "const x = 1;",
+   "jsHex": "636f6e73742078203d20313b0a",
+   "minJsHex": "636f6e737420783d313b"
+  },
+  {
+   "name": "decls",
+   "input": "let x = 1, y = \"s\";",
+   "jsHex": "6c65742078203d20312c2079203d202273223b0a",
+   "minJsHex": "6c657420783d312c793d2273223b"
+  },
+  {
+   "name": "var",
+   "input": "var x;",
+   "jsHex": "76617220783b0a",
+   "minJsHex": "76617220783b"
+  },
+  {
+   "name": "binary",
+   "input": "x = 1 + 2 * 3;",
+   "jsHex": "78203d2031202b2032202a20333b0a",
+   "minJsHex": "783d312b322a333b"
+  },
+  {
+   "name": "call",
+   "input": "f(a, b);",
+   "jsHex": "6628612c2062293b0a",
+   "minJsHex": "6628612c62293b"
+  },
+  {
+   "name": "member",
+   "input": "a.b[c];",
+   "jsHex": "612e625b635d3b0a",
+   "minJsHex": "612e625b635d3b"
+  },
+  {
+   "name": "if",
+   "input": "if (a) b(); else c();",
+   "jsHex": "696620286129206228293b0a656c7365206328293b0a",
+   "minJsHex": "69662861296228293b656c7365206328293b"
+  },
+  {
+   "name": "fn",
+   "input": "function f(a, b) { return a + b; }",
+   "jsHex": "66756e6374696f6e206628612c206229207b0a202072657475726e2061202b20623b0a7d0a",
+   "minJsHex": "66756e6374696f6e206628612c62297b72657475726e20612b627d"
+  },
+  {
+   "name": "array",
+   "input": "x = [1, 2, 3];",
+   "jsHex": "78203d205b312c20322c20335d3b0a",
+   "minJsHex": "783d5b312c322c335d3b"
+  },
+  {
+   "name": "object",
+   "input": "x = { a: 1, b: \"s\" };",
+   "jsHex": "78203d207b20613a20312c20623a20227322207d3b0a",
+   "minJsHex": "783d7b613a312c623a2273227d3b"
+  },
+  {
+   "name": "neg",
+   "input": "x = -1;",
+   "jsHex": "78203d202d313b0a",
+   "minJsHex": "783d2d313b"
+  },
+  {
+   "name": "not",
+   "input": "x = !a;",
+   "jsHex": "78203d2021613b0a",
+   "minJsHex": "783d21613b"
+  },
+  {
+   "name": "concat",
+   "input": "x = \"a\" + b;",
+   "jsHex": "78203d20226122202b20623b0a",
+   "minJsHex": "783d2261222b623b"
+  },
+  {
+   "name": "comma",
+   "input": "x = (1, 2);",
+   "jsHex": "78203d2028312c2032293b0a",
+   "minJsHex": "783d28312c32293b"
+  },
+  {
+   "name": "debugger",
+   "input": "debugger;",
+   "jsHex": "64656275676765723b0a",
+   "minJsHex": "64656275676765723b"
+  },
+  {
+   "name": "block",
+   "input": "{ }",
+   "jsHex": "7b0a7d0a",
+   "minJsHex": "7b7d"
+  },
+  {
+   "name": "template",
+   "input": "x = `a${b}c`;",
+   "jsHex": "78203d206061247b627d63603b0a",
+   "minJsHex": "783d6061247b627d63603b"
+  },
+  {
+   "name": "regexp",
+   "input": "x = /a/g;",
+   "jsHex": "78203d202f612f673b0a",
+   "minJsHex": "783d2f612f673b"
+  },
+  {
+   "name": "compare",
+   "input": "x = 1 \u003c 2;",
+   "jsHex": "78203d2031203c20323b0a",
+   "minJsHex": "783d313c323b"
+  },
+  {
+   "name": "empty",
+   "input": "",
+   "jsHex": "",
+   "minJsHex": ""
+  },
+  {
+   "name": "class",
+   "input": "class C {}",
+   "jsHex": "636c6173732043207b0a7d0a",
+   "minJsHex": "636c61737320437b7d"
+  },
+  {
+   "name": "class-methods",
+   "input": "class C { m(a) { return a; } }",
+   "jsHex": "636c6173732043207b0a20206d286129207b0a2020202072657475726e20613b0a20207d0a7d0a",
+   "minJsHex": "636c61737320437b6d2861297b72657475726e20617d7d"
+  },
+  {
+   "name": "class-extends",
+   "input": "class C extends D { constructor() { x; } }",
+   "jsHex": "636c617373204320657874656e64732044207b0a2020636f6e7374727563746f722829207b0a20202020783b0a20207d0a7d0a",
+   "minJsHex": "636c617373204320657874656e647320447b636f6e7374727563746f7228297b787d7d"
+  },
+  {
+   "name": "class-static",
+   "input": "class C { static x = 1; static m() {} }",
+   "jsHex": "636c6173732043207b0a20207374617469632078203d20313b0a2020737461746963206d2829207b0a20207d0a7d0a",
+   "minJsHex": "636c61737320437b73746174696320783d313b737461746963206d28297b7d7d"
+  },
+  {
+   "name": "class-expr",
+   "input": "x = class extends D {};",
+   "jsHex": "78203d20636c61737320657874656e64732044207b0a7d3b0a",
+   "minJsHex": "783d636c61737320657874656e647320447b7d3b"
+  },
+  {
+   "name": "accessors",
+   "input": "x = { get a() { return 1; }, set a(v) {} };",
+   "jsHex": "78203d207b2067657420612829207b0a202072657475726e20313b0a7d2c207365742061287629207b0a7d207d3b0a",
+   "minJsHex": "783d7b676574206128297b72657475726e20317d2c73657420612876297b7d7d3b"
+  },
+  {
+   "name": "object-shorthand",
+   "input": "x = { a, b: 1, [c]: 2, \"d\": 3 };",
+   "jsHex": "78203d207b20612c20623a20312c205b635d3a20322c202264223a2033207d3b0a",
+   "minJsHex": "783d7b612c623a312c5b635d3a322c2264223a337d3b"
+  },
+  {
+   "name": "object-multiline",
+   "input": "x = {\n  a: 1,\n  b: 2\n};",
+   "jsHex": "78203d207b0a2020613a20312c0a2020623a20320a7d3b0a",
+   "minJsHex": "783d7b613a312c623a327d3b"
+  },
+  {
+   "name": "array-multiline",
+   "input": "x = [\n  1,\n  2\n];",
+   "jsHex": "78203d205b0a2020312c0a2020320a5d3b0a",
+   "minJsHex": "783d5b312c325d3b"
+  },
+  {
+   "name": "export-class",
+   "input": "export class C {}",
+   "jsHex": "6578706f727420636c6173732043207b0a7d0a",
+   "minJsHex": "6578706f727420636c61737320437b7d"
+  },
+  {
+   "name": "export-fn",
+   "input": "export function f() {}",
+   "jsHex": "6578706f72742066756e6374696f6e20662829207b0a7d0a",
+   "minJsHex": "6578706f72742066756e6374696f6e206628297b7d"
+  },
+  {
+   "name": "export-decls",
+   "input": "export const x = 1;\nexport let y;\n",
+   "jsHex": "6578706f727420636f6e73742078203d20313b0a6578706f7274206c657420793b0a",
+   "minJsHex": "6578706f727420636f6e737420783d313b6578706f7274206c657420793b"
+  },
+  {
+   "name": "arrow",
+   "input": "x = a =\u003e a;",
+   "jsHex": "78203d20286129203d3e20613b0a",
+   "minJsHex": "783d613d3e613b"
+  },
+  {
+   "name": "arrow-block",
+   "input": "x = (a, b) =\u003e { return a + b; };",
+   "jsHex": "78203d2028612c206229203d3e207b0a202072657475726e2061202b20623b0a7d3b0a",
+   "minJsHex": "783d28612c62293d3e7b72657475726e20612b627d3b"
+  },
+  {
+   "name": "arrow-obj",
+   "input": "x = a =\u003e ({ y: 1 });",
+   "jsHex": "78203d20286129203d3e20287b20793a2031207d293b0a",
+   "minJsHex": "783d613d3e287b793a317d293b"
+  },
+  {
+   "name": "arrow-destructure",
+   "input": "x = ({ a, b = 2 }, [c, ...d]) =\u003e a;",
+   "jsHex": "78203d20287b20612c2062203d2032207d2c205b632c202e2e2e645d29203d3e20613b0a",
+   "minJsHex": "783d287b612c623d327d2c5b632c2e2e2e645d293d3e613b"
+  },
+  {
+   "name": "arrow-nested",
+   "input": "f(a =\u003e b =\u003e a + b);",
+   "jsHex": "6628286129203d3e20286229203d3e2061202b2062293b0a",
+   "minJsHex": "6628613d3e623d3e612b62293b"
+  },
+  {
+   "name": "import-default",
+   "input": "import a from \"./a.js\";",
+   "jsHex": "696d706f727420612066726f6d20222e2f612e6a73223b0a",
+   "minJsHex": "696d706f727420612066726f6d222e2f612e6a73223b"
+  },
+  {
+   "name": "import-named",
+   "input": "import { b, c as d } from \"./b.js\";",
+   "jsHex": "696d706f7274207b20622c20632061732064207d2066726f6d20222e2f622e6a73223b0a",
+   "minJsHex": "696d706f72747b622c6320617320647d66726f6d222e2f622e6a73223b"
+  },
+  {
+   "name": "import-namespace",
+   "input": "import * as ns from \"./ns.js\";",
+   "jsHex": "696d706f7274202a206173206e732066726f6d20222e2f6e732e6a73223b0a",
+   "minJsHex": "696d706f72742a6173206e732066726f6d222e2f6e732e6a73223b"
+  },
+  {
+   "name": "import-bare",
+   "input": "import \"./side.js\";",
+   "jsHex": "696d706f727420222e2f736964652e6a73223b0a",
+   "minJsHex": "696d706f7274222e2f736964652e6a73223b"
+  },
+  {
+   "name": "import-default-named",
+   "input": "import a, { b } from \"./ab.js\";",
+   "jsHex": "696d706f727420612c207b2062207d2066726f6d20222e2f61622e6a73223b0a",
+   "minJsHex": "696d706f727420612c7b627d66726f6d222e2f61622e6a73223b"
+  },
+  {
+   "name": "import-default-ns",
+   "input": "import a, * as ns from \"./ans.js\";",
+   "jsHex": "696d706f727420612c202a206173206e732066726f6d20222e2f616e732e6a73223b0a",
+   "minJsHex": "696d706f727420612c2a6173206e732066726f6d222e2f616e732e6a73223b"
+  },
+  {
+   "name": "import-multiline",
+   "input": "import {\n  a,\n  b\n} from \"./m.js\";",
+   "jsHex": "696d706f7274207b0a2020612c0a2020620a7d2066726f6d20222e2f6d2e6a73223b0a",
+   "minJsHex": "696d706f72747b612c627d66726f6d222e2f6d2e6a73223b"
+  },
+  {
+   "name": "export-clause",
+   "input": "const a = 1, b = 2;\nexport { a, b as c };\n",
+   "jsHex": "636f6e73742061203d20312c2062203d20323b0a6578706f7274207b20612c20622061732063207d3b0a",
+   "minJsHex": "636f6e737420613d312c623d323b6578706f72747b612c6220617320637d3b"
+  },
+  {
+   "name": "export-clause-empty",
+   "input": "export {};",
+   "jsHex": "6578706f7274207b7d3b0a",
+   "minJsHex": "6578706f72747b7d3b"
+  },
+  {
+   "name": "export-from",
+   "input": "export { x as y } from \"./x.js\";",
+   "jsHex": "6578706f7274207b20782061732079207d2066726f6d20222e2f782e6a73223b0a",
+   "minJsHex": "6578706f72747b7820617320797d66726f6d222e2f782e6a73223b"
+  },
+  {
+   "name": "export-star",
+   "input": "export * from \"./all.js\";",
+   "jsHex": "6578706f7274202a2066726f6d20222e2f616c6c2e6a73223b0a",
+   "minJsHex": "6578706f72742a66726f6d222e2f616c6c2e6a73223b"
+  },
+  {
+   "name": "export-star-as",
+   "input": "export * as ns from \"./ns.js\";",
+   "jsHex": "6578706f7274202a206173206e732066726f6d20222e2f6e732e6a73223b0a",
+   "minJsHex": "6578706f72742a6173206e732066726f6d222e2f6e732e6a73223b"
+  },
+  {
+   "name": "export-default-expr",
+   "input": "export default 1 + 2;",
+   "jsHex": "6578706f72742064656661756c742031202b20323b0a",
+   "minJsHex": "6578706f72742064656661756c7420312b323b"
+  },
+  {
+   "name": "export-default-fn",
+   "input": "export default function () {}",
+   "jsHex": "6578706f72742064656661756c742066756e6374696f6e2829207b0a7d0a",
+   "minJsHex": "6578706f72742064656661756c742066756e6374696f6e28297b7d"
+  },
+  {
+   "name": "export-default-fn-named",
+   "input": "export default function foo(a) {\n  return a;\n}\n",
+   "jsHex": "6578706f72742064656661756c742066756e6374696f6e20666f6f286129207b0a202072657475726e20613b0a7d0a",
+   "minJsHex": "6578706f72742064656661756c742066756e6374696f6e20666f6f2861297b72657475726e20617d"
+  },
+  {
+   "name": "export-default-class",
+   "input": "export default class {}",
+   "jsHex": "6578706f72742064656661756c7420636c617373207b0a7d0a",
+   "minJsHex": "6578706f72742064656661756c7420636c6173737b7d"
+  },
+  {
+   "name": "export-default-async",
+   "input": "export default async function () {\n  await x();\n}\n",
+   "jsHex": "6578706f72742064656661756c74206173796e632066756e6374696f6e2829207b0a20206177616974207828293b0a7d0a",
+   "minJsHex": "6578706f72742064656661756c74206173796e632066756e6374696f6e28297b6177616974207828297d"
+  },
+  {
+   "name": "new",
+   "input": "x = new Foo();\ny = new Foo(1, 2);\nz = new a.b.C(d);\n",
+   "jsHex": "78203d206e657720466f6f28293b0a79203d206e657720466f6f28312c2032293b0a7a203d206e657720612e622e432864293b0a",
+   "minJsHex": "783d6e657720466f6f3b793d6e657720466f6f28312c32293b7a3d6e657720612e622e432864293b"
+  },
+  {
+   "name": "new-target",
+   "input": "function f() {\n  return new.target;\n}\n",
+   "jsHex": "66756e6374696f6e20662829207b0a202072657475726e206e65772e7461726765743b0a7d0a",
+   "minJsHex": "66756e6374696f6e206628297b72657475726e206e65772e7461726765747d"
+  },
+  {
+   "name": "super",
+   "input": "class A extends B {\n  constructor() {\n    super(1);\n    this.x = super.y;\n  }\n}\n",
+   "jsHex": "636c617373204120657874656e64732042207b0a2020636f6e7374727563746f722829207b0a2020202073757065722831293b0a20202020746869732e78203d2073757065722e793b0a20207d0a7d0a",
+   "minJsHex": "636c617373204120657874656e647320427b636f6e7374727563746f7228297b73757065722831293b746869732e783d73757065722e797d7d"
+  },
+  {
+   "name": "conditional",
+   "input": "x = a ? b : c ? d : e;",
+   "jsHex": "78203d2061203f2062203a2063203f2064203a20653b0a",
+   "minJsHex": "783d613f623a633f643a653b"
+  },
+  {
+   "name": "optional-chain",
+   "input": "x = a?.b;\ny = a?.[b];\nz = a?.();\nw = (a?.b).c;\n",
+   "jsHex": "78203d20613f2e623b0a79203d20613f2e5b625d3b0a7a203d20613f2e28293b0a77203d2028613f2e62292e633b0a",
+   "minJsHex": "783d613f2e623b793d613f2e5b625d3b7a3d613f2e28293b773d28613f2e62292e633b"
+  },
+  {
+   "name": "await",
+   "input": "async function f() {\n  await g();\n}\n",
+   "jsHex": "6173796e632066756e6374696f6e20662829207b0a20206177616974206728293b0a7d0a",
+   "minJsHex": "6173796e632066756e6374696f6e206628297b6177616974206728297d"
+  },
+  {
+   "name": "yield",
+   "input": "function* h() {\n  yield 1;\n  yield* i;\n}\n",
+   "jsHex": "66756e6374696f6e2a20682829207b0a20207969656c6420313b0a20207969656c642a20693b0a7d0a",
+   "minJsHex": "66756e6374696f6e2a6828297b7969656c6420313b7969656c642a697d"
+  },
+  {
+   "name": "async-arrow",
+   "input": "const j = async (a, b) =\u003e a + b;\nconst k = async x =\u003e x;\n",
+   "jsHex": "636f6e7374206a203d206173796e632028612c206229203d3e2061202b20623b0a636f6e7374206b203d206173796e6320287829203d3e20783b0a",
+   "minJsHex": "636f6e7374206a3d6173796e6328612c62293d3e612b623b636f6e7374206b3d6173796e6320783d3e783b"
+  },
+  {
+   "name": "for",
+   "input": "for (let i = 0; i \u003c 3; i++) {\n  x(i);\n}\n",
+   "jsHex": "666f7220286c65742069203d20303b2069203c20333b20692b2b29207b0a2020782869293b0a7d0a",
+   "minJsHex": "666f72286c657420693d303b693c333b692b2b297b782869297d"
+  },
+  {
+   "name": "for-in",
+   "input": "for (const k in o) y(k);\n",
+   "jsHex": "666f722028636f6e7374206b20696e206f292079286b293b0a",
+   "minJsHex": "666f7228636f6e7374206b20696e206f2979286b293b"
+  },
+  {
+   "name": "for-of",
+   "input": "for (const v of a) z(v);\n",
+   "jsHex": "666f722028636f6e73742076206f66206129207a2876293b0a",
+   "minJsHex": "666f7228636f6e73742076206f662061297a2876293b"
+  },
+  {
+   "name": "for-empty",
+   "input": "for (;;) break;\n",
+   "jsHex": "666f7220283b203b202920627265616b3b0a",
+   "minJsHex": "666f72283b3b29627265616b3b"
+  },
+  {
+   "name": "while",
+   "input": "while (a) {\n  b();\n}\n",
+   "jsHex": "7768696c6520286129207b0a20206228293b0a7d0a",
+   "minJsHex": "7768696c652861297b6228297d"
+  },
+  {
+   "name": "do-while",
+   "input": "do {\n  c();\n} while (d);\n",
+   "jsHex": "646f207b0a20206328293b0a7d207768696c65202864293b0a",
+   "minJsHex": "646f7b6328297d7768696c652864293b"
+  },
+  {
+   "name": "try-catch-finally",
+   "input": "try {\n  a();\n} catch (e) {\n  b();\n} finally {\n  c();\n}\n",
+   "jsHex": "747279207b0a20206128293b0a7d20636174636820286529207b0a20206228293b0a7d2066696e616c6c79207b0a20206328293b0a7d0a",
+   "minJsHex": "7472797b6128297d63617463682865297b6228297d66696e616c6c797b6328297d"
+  },
+  {
+   "name": "try-catch-bare",
+   "input": "try {\n  a();\n} catch {\n  b();\n}\n",
+   "jsHex": "747279207b0a20206128293b0a7d206361746368207b0a20206228293b0a7d0a",
+   "minJsHex": "7472797b6128297d63617463687b6228297d"
+  },
+  {
+   "name": "switch",
+   "input": "switch (x) {\n  case 1:\n    d();\n    break;\n  default:\n    e();\n}\n",
+   "jsHex": "73776974636820287829207b0a20206361736520313a0a202020206428293b0a20202020627265616b3b0a202064656661756c743a0a202020206528293b0a7d0a",
+   "minJsHex": "7377697463682878297b6361736520313a6428293b627265616b3b64656661756c743a6528297d"
+  },
+  {
+   "name": "throw",
+   "input": "throw new Error(\"x\");\n",
+   "jsHex": "7468726f77206e6577204572726f7228227822293b0a",
+   "minJsHex": "7468726f77206e6577204572726f7228227822293b"
+  },
+  {
+   "name": "label-break",
+   "input": "outer: for (;;) {\n  if (a) break outer;\n  continue outer;\n}\n",
+   "jsHex": "6f757465723a20666f7220283b203b2029207b0a202069662028612920627265616b206f757465723b0a2020636f6e74696e7565206f757465723b0a7d0a",
+   "minJsHex": "6f757465723a666f72283b3b297b6966286129627265616b206f757465723b636f6e74696e7565206f757465727d"
+  },
+  {
+   "name": "binding-object",
+   "input": "const { a, b: c, d = 1, ...rest } = obj;\n",
+   "jsHex": "636f6e7374207b20612c20623a20632c2064203d20312c202e2e2e72657374207d203d206f626a3b0a",
+   "minJsHex": "636f6e73747b612c623a632c643d312c2e2e2e726573747d3d6f626a3b"
+  },
+  {
+   "name": "binding-array",
+   "input": "const [x, , y = 2, ...zs] = arr;\n",
+   "jsHex": "636f6e7374205b782c202c2079203d20322c202e2e2e7a735d203d206172723b0a",
+   "minJsHex": "636f6e73745b782c2c793d322c2e2e2e7a735d3d6172723b"
+  },
+  {
+   "name": "fn-params",
+   "input": "function f({ p, q = 3 }, [r], ...more) {\n  return p;\n}\n",
+   "jsHex": "66756e6374696f6e2066287b20702c2071203d2033207d2c205b725d2c202e2e2e6d6f726529207b0a202072657475726e20703b0a7d0a",
+   "minJsHex": "66756e6374696f6e2066287b702c713d337d2c5b725d2c2e2e2e6d6f7265297b72657475726e20707d"
+  },
+  {
+   "name": "compound-assign",
+   "input": "a |= 1;\nb \u003e\u003e= 2;\nc **= 3;\nd++;\n--e;\n",
+   "jsHex": "61207c3d20313b0a62203e3e3d20323b0a63202a2a3d20333b0a642b2b3b0a2d2d653b0a",
+   "minJsHex": "617c3d313b623e3e3d323b632a2a3d333b642b2b3b2d2d653b"
+  },
+  {
+   "name": "comment-class-member",
+   "input": "class C {\n  /** doc */\n  m() {}\n}\n",
+   "jsHex": "636c6173732043207b0a20202f2a2a20646f63202a2f0a20206d2829207b0a20207d0a7d0a",
+   "minJsHex": "636c61737320437b6d28297b7d7d"
+  },
+  {
+   "name": "comment-array",
+   "input": "x = [\n  // one\n  a,\n  b\n];\n",
+   "jsHex": "78203d205b0a20202f2f206f6e650a2020612c0a2020620a5d3b0a",
+   "minJsHex": "783d5b612c625d3b"
+  },
+  {
+   "name": "comment-call-arg",
+   "input": "f(\n  a,\n  // two\n  b\n);\n",
+   "jsHex": "66280a2020612c0a20202f2f2074776f0a2020620a293b0a",
+   "minJsHex": "6628612c62293b"
+  },
+  {
+   "name": "comment-object-close",
+   "input": "x = {\n  a: 1 // trailing\n};\n",
+   "jsHex": "78203d207b0a2020613a20310a20202f2f20747261696c696e670a7d3b0a",
+   "minJsHex": "783d7b613a312f2f20747261696c696e670a7d3b"
+  },
+  {
+   "name": "comment-paren",
+   "input": "x = a \u0026\u0026 // c\n  (b);\n",
+   "jsHex": "78203d2061202626202f2f20630a623b0a",
+   "minJsHex": "783d612626623b"
+  },
+  {
+   "name": "comment-switch-case",
+   "input": "switch (x) {\n  // c\n  case 1:\n    break;\n}\n",
+   "jsHex": "73776974636820287829207b0a20202f2f20630a20206361736520313a0a20202020627265616b3b0a7d0a",
+   "minJsHex": "7377697463682878297b6361736520313a627265616b7d"
+  },
+  {
+   "name": "quote-single",
+   "input": "x = 'a\"b';\n",
+   "jsHex": "78203d2027612262273b0a",
+   "minJsHex": "783d27612262273b"
+  },
+  {
+   "name": "quote-double",
+   "input": "x = \"a'b\";\n",
+   "jsHex": "78203d2022612762223b0a",
+   "minJsHex": "783d22612762223b"
+  },
+  {
+   "name": "quote-backtick-not-allowed",
+   "input": "x = 'a`b';\n",
+   "jsHex": "78203d2022616062223b0a",
+   "minJsHex": "783d22616062223b"
+  },
+  {
+   "name": "quote-escapes",
+   "input": "x = 'a\\tb\\nc\\\\d';\n",
+   "jsHex": "78203d20226109625c6e635c5c64223b0a",
+   "minJsHex": "783d226109625c6e635c5c64223b"
+  },
+  {
+   "name": "quote-template",
+   "input": "x = `line1\nline2 ${a} tail`;\n",
+   "jsHex": "78203d20606c696e65310a6c696e653220247b617d207461696c603b0a",
+   "minJsHex": "783d606c696e65310a6c696e653220247b617d207461696c603b"
+  },
+  {
+   "name": "pure-comment-new-map",
+   "input": "const x = new Map();\n",
+   "jsHex": "636f6e73742078203d202f2a20405f5f505552455f5f202a2f206e6577204d617028293b0a",
+   "minJsHex": "636f6e737420783d6e6577204d61703b"
+  },
+  {
+   "name": "pure-comment-new-set-array",
+   "input": "const x = new Set([1, 2]);\n",
+   "jsHex": "636f6e73742078203d202f2a20405f5f505552455f5f202a2f206e657720536574285b312c20325d293b0a",
+   "minJsHex": "636f6e737420783d6e657720536574285b312c325d293b"
+  },
+  {
+   "name": "pure-comment-source",
+   "input": "x = /* @__PURE__ */ f();\n",
+   "jsHex": "78203d202f2a20405f5f505552455f5f202a2f206628293b0a",
+   "minJsHex": "783d6628293b"
+  },
+  {
+   "name": "fold-string-add",
+   "input": "x = 'a' + 'b' + c;\n",
+   "jsHex": "78203d2022616222202b20633b0a",
+   "minJsHex": "783d226162222b633b"
+  },
+  {
+   "name": "undefined-literal",
+   "input": "x = undefined;\n",
+   "jsHex": "78203d20766f696420303b0a",
+   "minJsHex": "783d766f696420303b"
+  }
+ ],
+ "numbers": [
+  {
+   "name": "i0",
+   "input": "x = 0;",
+   "jsHex": "78203d20303b0a",
+   "minJsHex": "783d303b"
+  },
+  {
+   "name": "i1",
+   "input": "x = 1;",
+   "jsHex": "78203d20313b0a",
+   "minJsHex": "783d313b"
+  },
+  {
+   "name": "i999",
+   "input": "x = 999;",
+   "jsHex": "78203d203939393b0a",
+   "minJsHex": "783d3939393b"
+  },
+  {
+   "name": "i1000",
+   "input": "x = 1000;",
+   "jsHex": "78203d203165333b0a",
+   "minJsHex": "783d3165333b"
+  },
+  {
+   "name": "i10000",
+   "input": "x = 10000;",
+   "jsHex": "78203d203165343b0a",
+   "minJsHex": "783d3165343b"
+  },
+  {
+   "name": "i100000",
+   "input": "x = 100000;",
+   "jsHex": "78203d203165353b0a",
+   "minJsHex": "783d3165353b"
+  },
+  {
+   "name": "i1e6",
+   "input": "x = 1000000;",
+   "jsHex": "78203d203165363b0a",
+   "minJsHex": "783d3165363b"
+  },
+  {
+   "name": "i123456789",
+   "input": "x = 123456789;",
+   "jsHex": "78203d203132333435363738393b0a",
+   "minJsHex": "783d3132333435363738393b"
+  },
+  {
+   "name": "i2p53",
+   "input": "x = 9007199254740992;",
+   "jsHex": "78203d20393030373139393235343734303939323b0a",
+   "minJsHex": "783d393030373139393235343734303939323b"
+  },
+  {
+   "name": "i1e18",
+   "input": "x = 1000000000000000000;",
+   "jsHex": "78203d20316531383b0a",
+   "minJsHex": "783d316531383b"
+  },
+  {
+   "name": "i1e19",
+   "input": "x = 10000000000000000000;",
+   "jsHex": "78203d20316531393b0a",
+   "minJsHex": "783d316531393b"
+  },
+  {
+   "name": "i1e20",
+   "input": "x = 100000000000000000000;",
+   "jsHex": "78203d20316532303b0a",
+   "minJsHex": "783d316532303b"
+  },
+  {
+   "name": "i1e21",
+   "input": "x = 1000000000000000000000;",
+   "jsHex": "78203d20316532313b0a",
+   "minJsHex": "783d316532313b"
+  },
+  {
+   "name": "i1e3lit",
+   "input": "x = 1e3;",
+   "jsHex": "78203d203165333b0a",
+   "minJsHex": "783d3165333b"
+  },
+  {
+   "name": "i1e6lit",
+   "input": "x = 1e6;",
+   "jsHex": "78203d203165363b0a",
+   "minJsHex": "783d3165363b"
+  },
+  {
+   "name": "i1e21lit",
+   "input": "x = 1e21;",
+   "jsHex": "78203d20316532313b0a",
+   "minJsHex": "783d316532313b"
+  },
+  {
+   "name": "f0_5",
+   "input": "x = 0.5;",
+   "jsHex": "78203d20302e353b0a",
+   "minJsHex": "783d2e353b"
+  },
+  {
+   "name": "f0_1",
+   "input": "x = 0.1;",
+   "jsHex": "78203d20302e313b0a",
+   "minJsHex": "783d2e313b"
+  },
+  {
+   "name": "f0_2",
+   "input": "x = 0.2;",
+   "jsHex": "78203d20302e323b0a",
+   "minJsHex": "783d2e323b"
+  },
+  {
+   "name": "f0_3",
+   "input": "x = 0.3;",
+   "jsHex": "78203d20302e333b0a",
+   "minJsHex": "783d2e333b"
+  },
+  {
+   "name": "f1_5",
+   "input": "x = 1.5;",
+   "jsHex": "78203d20312e353b0a",
+   "minJsHex": "783d312e353b"
+  },
+  {
+   "name": "f2_5",
+   "input": "x = 2.5;",
+   "jsHex": "78203d20322e353b0a",
+   "minJsHex": "783d322e353b"
+  },
+  {
+   "name": "f1000_5",
+   "input": "x = 1000.5;",
+   "jsHex": "78203d20313030302e353b0a",
+   "minJsHex": "783d313030302e353b"
+  },
+  {
+   "name": "f123_456",
+   "input": "x = 123.456;",
+   "jsHex": "78203d203132332e3435363b0a",
+   "minJsHex": "783d3132332e3435363b"
+  },
+  {
+   "name": "fpi",
+   "input": "x = 3.141592653589793;",
+   "jsHex": "78203d20332e3134313539323635333538393739333b0a",
+   "minJsHex": "783d332e3134313539323635333538393739333b"
+  },
+  {
+   "name": "f1_0000000000000002",
+   "input": "x = 1.0000000000000002;",
+   "jsHex": "78203d20312e303030303030303030303030303030323b0a",
+   "minJsHex": "783d312e303030303030303030303030303030323b"
+  },
+  {
+   "name": "f0_0001",
+   "input": "x = 0.0001;",
+   "jsHex": "78203d2031652d343b0a",
+   "minJsHex": "783d31652d343b"
+  },
+  {
+   "name": "f1e-5",
+   "input": "x = 0.00001;",
+   "jsHex": "78203d2031652d353b0a",
+   "minJsHex": "783d31652d353b"
+  },
+  {
+   "name": "f1e-6",
+   "input": "x = 0.000001;",
+   "jsHex": "78203d2031652d363b0a",
+   "minJsHex": "783d31652d363b"
+  },
+  {
+   "name": "f1e-7",
+   "input": "x = 0.0000001;",
+   "jsHex": "78203d2031652d373b0a",
+   "minJsHex": "783d31652d373b"
+  },
+  {
+   "name": "f1e-21",
+   "input": "x = 1e-21;",
+   "jsHex": "78203d2031652d32313b0a",
+   "minJsHex": "783d31652d32313b"
+  },
+  {
+   "name": "f1_23e-10",
+   "input": "x = 1.23e-10;",
+   "jsHex": "78203d20313233652d31323b0a",
+   "minJsHex": "783d313233652d31323b"
+  },
+  {
+   "name": "f1e-1",
+   "input": "x = 0.1;",
+   "jsHex": "78203d20302e313b0a",
+   "minJsHex": "783d2e313b"
+  },
+  {
+   "name": "f1e-2lit",
+   "input": "x = 1e-2;",
+   "jsHex": "78203d20302e30313b0a",
+   "minJsHex": "783d2e30313b"
+  },
+  {
+   "name": "f1e-3lit",
+   "input": "x = 1e-3;",
+   "jsHex": "78203d2031652d333b0a",
+   "minJsHex": "783d2e3030313b"
+  },
+  {
+   "name": "f1e-4lit",
+   "input": "x = 1e-4;",
+   "jsHex": "78203d2031652d343b0a",
+   "minJsHex": "783d31652d343b"
+  },
+  {
+   "name": "f1e-5lit",
+   "input": "x = 1e-5;",
+   "jsHex": "78203d2031652d353b0a",
+   "minJsHex": "783d31652d353b"
+  },
+  {
+   "name": "f5e-324",
+   "input": "x = 5e-324;",
+   "jsHex": "78203d2035652d3332343b0a",
+   "minJsHex": "783d35652d3332343b"
+  },
+  {
+   "name": "f1e-323",
+   "input": "x = 1e-323;",
+   "jsHex": "78203d2031652d3332333b0a",
+   "minJsHex": "783d31652d3332333b"
+  },
+  {
+   "name": "fminNormal",
+   "input": "x = 2.2250738585072014e-308;",
+   "jsHex": "78203d203232323530373338353835303732303134652d3332343b0a",
+   "minJsHex": "783d3232323530373338353835303732303134652d3332343b"
+  },
+  {
+   "name": "fmax",
+   "input": "x = 1.7976931348623157e308;",
+   "jsHex": "78203d203137393736393331333438363233313537653239323b0a",
+   "minJsHex": "783d3137393736393331333438363233313537653239323b"
+  },
+  {
+   "name": "f123456789012345678901",
+   "input": "x = 123456789012345678901;",
+   "jsHex": "78203d20313233343536373839303132333435363865343b0a",
+   "minJsHex": "783d313233343536373839303132333435363865343b"
+  },
+  {
+   "name": "f6_02e23",
+   "input": "x = 6.02e23;",
+   "jsHex": "78203d203630326532313b0a",
+   "minJsHex": "783d3630326532313b"
+  },
+  {
+   "name": "f1_2345678901234567e21",
+   "input": "x = 1.2345678901234567e21;",
+   "jsHex": "78203d20313233343536373839303132333435363865353b0a",
+   "minJsHex": "783d313233343536373839303132333435363865353b"
+  },
+  {
+   "name": "f2500000",
+   "input": "x = 2500000;",
+   "jsHex": "78203d20323565353b0a",
+   "minJsHex": "783d323565353b"
+  },
+  {
+   "name": "f2_5e-5",
+   "input": "x = 2.5e-5;",
+   "jsHex": "78203d203235652d363b0a",
+   "minJsHex": "783d3235652d363b"
+  },
+  {
+   "name": "f0_000123456",
+   "input": "x = 0.000123456;",
+   "jsHex": "78203d20313233343536652d393b0a",
+   "minJsHex": "783d313233343536652d393b"
+  },
+  {
+   "name": "f1e-8",
+   "input": "x = 1e-8;",
+   "jsHex": "78203d2031652d383b0a",
+   "minJsHex": "783d31652d383b"
+  },
+  {
+   "name": "f1e-9",
+   "input": "x = 1e-9;",
+   "jsHex": "78203d2031652d393b0a",
+   "minJsHex": "783d31652d393b"
+  },
+  {
+   "name": "f1e-10",
+   "input": "x = 1e-10;",
+   "jsHex": "78203d2031652d31303b0a",
+   "minJsHex": "783d31652d31303b"
+  },
+  {
+   "name": "f0_0000001234",
+   "input": "x = 0.0000001234;",
+   "jsHex": "78203d2031323334652d31303b0a",
+   "minJsHex": "783d31323334652d31303b"
+  },
+  {
+   "name": "neg1e3",
+   "input": "x = -1000;",
+   "jsHex": "78203d202d3165333b0a",
+   "minJsHex": "783d2d3165333b"
+  },
+  {
+   "name": "neg0",
+   "input": "x = -0;",
+   "jsHex": "78203d202d303b0a",
+   "minJsHex": "783d2d303b"
+  },
+  {
+   "name": "neg1_5",
+   "input": "x = -1.5;",
+   "jsHex": "78203d202d312e353b0a",
+   "minJsHex": "783d2d312e353b"
+  },
+  {
+   "name": "neg5e-324",
+   "input": "x = -5e-324;",
+   "jsHex": "78203d202d35652d3332343b0a",
+   "minJsHex": "783d2d35652d3332343b"
+  },
+  {
+   "name": "exprDiv",
+   "input": "x = 1 / 3;",
+   "jsHex": "78203d2031202f20333b0a",
+   "minJsHex": "783d312f333b"
+  },
+  {
+   "name": "exprMul",
+   "input": "x = 1e300 * 1e10;",
+   "jsHex": "78203d203165333030202a20316531303b0a",
+   "minJsHex": "783d31653330302a316531303b"
+  },
+  {
+   "name": "hex",
+   "input": "x = 0x1fffffffffffff;",
+   "jsHex": "78203d20393030373139393235343734303939313b0a",
+   "minJsHex": "783d393030373139393235343734303939313b"
+  },
+  {
+   "name": "oct",
+   "input": "x = 0o777;",
+   "jsHex": "78203d203531313b0a",
+   "minJsHex": "783d3531313b"
+  },
+  {
+   "name": "bin",
+   "input": "x = 0b101;",
+   "jsHex": "78203d20353b0a",
+   "minJsHex": "783d353b"
+  }
+ ],
+ "quotes": [
+  {
+   "input": "a b",
+   "hex": "612062"
+  },
+  {
+   "input": "π",
+   "hex": "5c7530334330"
+  },
+  {
+   "input": "$x",
+   "hex": "2478"
+  },
+  {
+   "input": "a-b",
+   "hex": "612d62"
+  }
+ ]
+}

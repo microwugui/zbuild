@@ -1,0 +1,1 @@
+div { :where(:hover&) { color: red } }

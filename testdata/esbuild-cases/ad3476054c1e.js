@@ -1,0 +1,1 @@
+import {} from 'x' with {x: 'y'}

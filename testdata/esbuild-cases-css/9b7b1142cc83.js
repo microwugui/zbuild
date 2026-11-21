@@ -1,0 +1,1 @@
+.foo { @layer xyz { &:hover { color: red } } }

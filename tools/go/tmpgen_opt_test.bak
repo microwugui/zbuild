@@ -1,0 +1,68 @@
+package bundler
+
+import (
+	"encoding/json"
+	"fmt"
+	"os"
+	"testing"
+
+	"github.com/evanw/esbuild/internal/compat"
+	"github.com/evanw/esbuild/internal/config"
+)
+
+type optRow struct { Name string `json:"name"`; Out string `json:"out"` }
+type optFixture struct { Rows []optRow `json:"rows"` }
+
+func dumpOpts(o *config.Options) string {
+	tmpl := func(ts []config.PathTemplate) string {
+		out := ""
+		for _, t := range ts { out += t.Data + ":" + fmt.Sprint(t.Placeholder) + ";" }
+		return out
+	}
+	m, _ := json.Marshal(map[string]interface{}{
+		"loader": len(o.ExtensionToLoader), "jsExt": o.OutputExtensionJS, "cssExt": o.OutputExtensionCSS,
+		"entryT": tmpl(o.EntryPathTemplate), "chunkT": tmpl(o.ChunkPathTemplate), "assetT": tmpl(o.AssetPathTemplate),
+		"profiler": o.ProfilerNames, "jsFeat": fmt.Sprint(o.UnsupportedJSFeatures),
+		"jsOverride": fmt.Sprint(o.UnsupportedJSFeatureOverrides), "jsMask": fmt.Sprint(o.UnsupportedJSFeatureOverridesMask),
+		"cssFeat": o.UnsupportedCSSFeatures, "cssMask": o.UnsupportedCSSFeatureOverridesMask,
+	})
+	return string(m)
+}
+
+func TestTmpGenOpt(t *testing.T) {
+	fx := optFixture{}
+	cases := []struct{ name string; platform config.Platform; minify bool; jsOverride, jsMask uint64; cssMask uint16 }{
+		{"defaults-browser", config.PlatformBrowser, false, 0, 0, 0},
+		{"defaults-node", config.PlatformNode, false, 0, 0, 0},
+		{"minify", config.PlatformBrowser, true, 0, 0, 0},
+		{"with-loader", config.PlatformBrowser, false, 0, 0, 0},
+		{"async-override", config.PlatformBrowser, false, uint64(compat.AsyncAwait), uint64(compat.AsyncAwait), 0},
+	}
+	for _, c := range cases {
+		o := config.Options{Platform: c.platform, MinifyIdentifiers: c.minify,
+			UnsupportedJSFeatureOverrides: compat.JSFeature(c.jsOverride),
+			UnsupportedJSFeatureOverridesMask: compat.JSFeature(c.jsMask),
+			UnsupportedCSSFeatureOverridesMask: compat.CSSFeature(c.cssMask)}
+		applyOptionDefaults(&o)
+		fx.Rows = append(fx.Rows, optRow{c.name, dumpOpts(&o)})
+	}
+
+	// fixInvalidUnsupportedJSFeatureOverrides standalone
+	fixCases := []struct{ name string; impl, implied uint64; override, mask uint64 }{
+		{"fix-noop", uint64(compat.AsyncAwait), uint64(compat.TopLevelAwait), 0, 0},
+		{"fix-trigger", uint64(compat.AsyncAwait), uint64(compat.TopLevelAwait), uint64(compat.AsyncAwait), uint64(compat.AsyncAwait)},
+	}
+	for _, c := range fixCases {
+		o := config.Options{
+			UnsupportedJSFeatureOverrides: compat.JSFeature(c.override),
+			UnsupportedJSFeatureOverridesMask: compat.JSFeature(c.mask),
+		}
+		fixInvalidUnsupportedJSFeatureOverrides(&o, compat.JSFeature(c.impl), compat.JSFeature(c.implied))
+		fx.Rows = append(fx.Rows, optRow{"fix:"+c.name,
+			fmt.Sprintf("%d|%d|%d", o.UnsupportedJSFeatures, o.UnsupportedJSFeatureOverrides, o.UnsupportedJSFeatureOverridesMask)})
+	}
+
+	bts, _ := json.MarshalIndent(fx, "", "  ")
+	if err := os.WriteFile("/root/port/testdata/bundler-opt-go.json", bts, 0644); err != nil { t.Fatal(err) }
+	t.Logf("wrote %d rows bytes=%d", len(fx.Rows), len(bts))
+}

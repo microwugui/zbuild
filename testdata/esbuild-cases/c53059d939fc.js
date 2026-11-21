@@ -1,0 +1,1 @@
+import 'x' with {'ty pe': 'json'}

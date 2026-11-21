@@ -1,0 +1,63 @@
+package resolver
+
+// 第 169 批 Go 探针：matchTSConfigPaths 逐字节固化（tsconfig paths 映射，three.js 关键路径）。
+import (
+	"encoding/json"
+	"os"
+	"testing"
+
+	"github.com/evanw/esbuild/internal/cache"
+	"github.com/evanw/esbuild/internal/config"
+	"github.com/evanw/esbuild/internal/fs"
+	"github.com/evanw/esbuild/internal/logger"
+)
+
+type tpRow struct {
+	Arg map[string]interface{} `json:"arg"`
+	Out interface{}            `json:"out"`
+}
+
+func TestTmpGenTsPath(t *testing.T) {
+	var out []tpRow
+	type pathCase struct {
+		name, inputPath string
+		baseURL *string
+		baseURLForPaths string
+		paths map[string][]string  // key -> []text (loc=0)
+		tree map[string]string
+	}
+	cases := []pathCase{
+		{"exact", "@/foo", strp("/proj/src"), "/proj/src", map[string][]string{"@/foo": {"./foo.ts"}}, map[string]string{"/proj/src/foo.ts": ""}},
+		{"exact-miss", "@/foo", strp("/proj/src"), "/proj/src", map[string][]string{"@/foo": {"./missing.ts"}}, map[string]string{"/proj/src/other.ts": ""}},
+		{"wildcard", "@/bar/baz", strp("/proj/src"), "/proj/src", map[string][]string{"@/*": {"/*.ts"}}, map[string]string{"/proj/src/bar/baz.ts": ""}},
+		{"wildcard-longest", "@/bar/baz", strp("/proj/src"), "/proj/src", map[string][]string{"@/*": {"/*-short.ts"}, "@/bar/*": {"/bar/*.ts"}}, map[string]string{"/proj/src/bar/baz.ts": ""}},
+		{"dts-ignored", "@/foo", strp("/proj/src"), "/proj/src", map[string][]string{"@/foo": {"./foo.d.ts", "./foo.js"}}, map[string]string{"/proj/src/foo.js": ""}},
+		{"abs-baseurl", "@/foo", strp("/proj/src"), "", map[string][]string{"@/foo": {"/abs/foo.ts"}}, map[string]string{"/abs/foo.ts": ""}},
+		{"implicit-baseurl", "@/foo", nil, "/proj/src", map[string][]string{"@/foo": {"./foo.ts"}}, map[string]string{"/proj/src/foo.ts": ""}},
+		{"no-match", "@/foo", strp("/proj/src"), "/proj/src", map[string][]string{"@/other": {"./other.ts"}}, map[string]string{"/proj/src/foo.ts": ""}},
+	}
+	for _, c := range cases {
+		fsobj := fs.MockFS(c.tree, fs.MockUnix, "/")
+		cfg := &TSConfigJSON{AbsPath: "/proj/tsconfig.json", BaseURL: c.baseURL, BaseURLForPaths: c.baseURLForPaths}
+		cfg.Paths = &TSConfigPaths{Map: map[string][]TSConfigPath{}, Source: logger.Source{KeyPath: logger.Path{Text: "/proj/tsconfig.json"}}}
+		for k, arr := range c.paths {
+			for _, text := range arr { cfg.Paths.Map[k] = append(cfg.Paths.Map[k], TSConfigPath{Text: text}) }
+		}
+		log := logger.NewDeferLog(logger.DeferLogAll, nil)
+		r := resolverQuery{Resolver: &Resolver{log: log}, debugLogs: &debugLogs{}}
+		r.options = config.Options{Platform: config.PlatformNode, ExtensionOrder: []string{".ts", ".js"}}
+		r.fs = fsobj
+		r.caches = cache.MakeCacheSet()
+		r.dirCache = make(map[string]*dirInfo)
+		r.pnpManifestWasChecked = true
+		pair, ok, dc := r.matchTSConfigPaths(cfg, c.inputPath)
+		notes := []string{}; for _, n := range r.debugLogs.notes { notes = append(notes, n.Text) }
+		var dcOut interface{}; if dc != nil { dcOut = []interface{}{dc.Dir, dc.Query, dc.Actual} }
+		out = append(out, tpRow{Arg: map[string]interface{}{"name": c.name}, Out: []interface{}{pair.Primary.Text, pair.Primary.Namespace, pair.Secondary.Text, int(pair.Primary.Flags), ok, dcOut, notes}})
+	}
+	b, e := json.Marshal(out); if e != nil { t.Fatal(e) }
+	if e := os.WriteFile("/root/port/testdata/tspath-go.json", b, 0644); e != nil { t.Fatal(e) }
+	t.Logf("wrote %d cases", len(out))
+}
+
+func strp(s string) *string { return &s }

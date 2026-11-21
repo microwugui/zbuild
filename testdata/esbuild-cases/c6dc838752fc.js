@@ -1,0 +1,1 @@
+x: try { while (true) ; break x } catch {}

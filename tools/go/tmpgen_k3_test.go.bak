@@ -1,0 +1,57 @@
+package js_parser
+
+import (
+  "encoding/json"
+  "os"
+  "testing"
+  "github.com/evanw/esbuild/internal/js_ast"
+  "github.com/evanw/esbuild/internal/js_lexer"
+  "github.com/evanw/esbuild/internal/logger"
+)
+
+// 第 35 轮 第二批：G-3 纯谓词 + K-3 skip 语句的 Go 字节证据
+func TestTmpGenK3(t *testing.T) {
+  type row struct {
+    Group string `json:"group"`
+    Input string `json:"input"`
+    FinalTok int `json:"finalTok"`
+    FinalStart int `json:"finalStart"`
+    Result bool `json:"result"`
+  }
+  var out []row
+  // --- G-3: isSafeForConstLocalPrefix (输入是类型片段，按表达式解析后取 Expr) ---
+  safeInputs := []string{"1", "'abc'", "null", "[1, 2]", "{}", "{ a: 1 }", "() => 1", "function(){}", "foo()", "/re/"}
+  for _, in := range safeInputs {
+    src := logger.Source{Index:0, KeyPath: logger.Path{Text:"<stdin>"}, Contents: in}
+    log := logger.NewDeferLog(logger.DeferLogNoVerboseOrDebug, nil)
+    ast, ok := Parse(log, src, Options{})
+    r := false
+    if ok {
+      for _,part:=range ast.Parts { for _,st:=range part.Stmts { if se,ok:=st.Data.(*js_ast.SExpr); ok { r = isSafeForConstLocalPrefix(se.Value) } } }
+    }
+    out = append(out, row{"isSafeForConstLocalPrefix", in, 0, 0, r})
+  }
+  // --- K-3: skipTypeScriptInterfaceStmt / skipTypeScriptTypeStmt ---
+  ifaceInputs := []string{
+    "interface Foo {}", "interface Foo extends A, B {}", "interface Foo<T> extends A<T> { x: number }",
+    "type Foo = string", "type Foo<T> = A | B", "type X = { a: number }",
+  }
+  for _, in := range ifaceInputs {
+    func(){
+      defer func(){ if r:=recover(); r!=nil { out=append(out,row{"tsSkipStmt",in,-1,-1,false}) } }()
+      src := logger.Source{Index:0, KeyPath: logger.Path{Text:"<stdin>"}, Contents: in}
+      log := logger.NewDeferLog(logger.DeferLogNoVerboseOrDebug, nil)
+      o:=Options{}; o.ts.Parse=true
+      lex:=js_lexer.NewLexer(log,src,o.ts)
+      p:=newParser(log,src,lex,&o)
+      opts:=parseStmtOpts{isModuleScope:true}
+      // NewLexer 已定位到 interface/type（TIdentifier）；Next 一次到名字
+      kw := string(p.lexer.Identifier.String)
+      p.lexer.Next()
+      if kw=="interface" { p.skipTypeScriptInterfaceStmt(opts) } else { p.skipTypeScriptTypeStmt(opts) }
+      out=append(out,row{"tsSkipStmt",in,int(p.lexer.Token),int(p.lexer.Loc().Start),true})
+    }()
+  }
+  raw,_:=json.Marshal(out)
+  os.WriteFile("/tmp/genk3.json",raw,0644)
+}

@@ -1,0 +1,326 @@
+{
+ "generateNonUniqueNameFromPath": [
+  {
+   "in": "\u003cstdin\u003e",
+   "out": "stdin"
+  },
+  {
+   "in": "foo/bar",
+   "out": "bar"
+  },
+  {
+   "in": "foo/bar.js",
+   "out": "bar"
+  },
+  {
+   "in": "foo/bar.min.js",
+   "out": "bar_min"
+  },
+  {
+   "in": "trailing//slashes//",
+   "out": "slashes"
+  },
+  {
+   "in": "path/with/spaces in name.js",
+   "out": "spaces_in_name"
+  },
+  {
+   "in": "path\\on\\windows.js",
+   "out": "windows"
+  },
+  {
+   "in": "node_modules/demo-pkg/index.js",
+   "out": "demo_pkg"
+  },
+  {
+   "in": "node_modules\\demo-pkg\\index.js",
+   "out": "demo_pkg"
+  },
+  {
+   "in": "123_invalid_identifier.js",
+   "out": "invalid_identifier"
+  },
+  {
+   "in": "emoji 🍕 name.js",
+   "out": "emoji_name"
+  },
+  {
+   "in": "src/constants.js",
+   "out": "constants"
+  },
+  {
+   "in": "./src/constants.js",
+   "out": "constants"
+  },
+  {
+   "in": "index.js",
+   "out": "index"
+  },
+  {
+   "in": "index",
+   "out": "index"
+  },
+  {
+   "in": "/index.js",
+   "out": "index"
+  },
+  {
+   "in": "a/index.js",
+   "out": "a"
+  },
+  {
+   "in": "a/b/index.js",
+   "out": "b"
+  },
+  {
+   "in": "C:\\dir\\file.ts",
+   "out": "file"
+  },
+  {
+   "in": "/root/a.b.c",
+   "out": "a_b"
+  },
+  {
+   "in": "",
+   "out": "_"
+  },
+  {
+   "in": ".",
+   "out": "_"
+  },
+  {
+   "in": "..",
+   "out": "_"
+  },
+  {
+   "in": "a.b.c",
+   "out": "a_b"
+  },
+  {
+   "in": "x/.hidden",
+   "out": "_"
+  },
+  {
+   "in": "mod.module.css",
+   "out": "mod"
+  },
+  {
+   "in": "a/b.module.css",
+   "out": "b"
+  },
+  {
+   "in": "dir/",
+   "out": "dir"
+  },
+  {
+   "in": "dir//",
+   "out": "dir"
+  },
+  {
+   "in": "//",
+   "out": "_"
+  },
+  {
+   "in": "\\",
+   "out": "_"
+  },
+  {
+   "in": "a\\b/c.d",
+   "out": "c"
+  }
+ ],
+ "platformIndependentPathDirBaseExt": [
+  {
+   "in": "\u003cstdin\u003e",
+   "dir": "",
+   "base": "\u003cstdin\u003e",
+   "ext": ""
+  },
+  {
+   "in": "foo/bar",
+   "dir": "foo",
+   "base": "bar",
+   "ext": ""
+  },
+  {
+   "in": "foo/bar.js",
+   "dir": "foo",
+   "base": "bar",
+   "ext": ".js"
+  },
+  {
+   "in": "foo/bar.min.js",
+   "dir": "foo",
+   "base": "bar.min",
+   "ext": ".js"
+  },
+  {
+   "in": "trailing//slashes//",
+   "dir": "trailing/",
+   "base": "slashes",
+   "ext": ""
+  },
+  {
+   "in": "path/with/spaces in name.js",
+   "dir": "path/with",
+   "base": "spaces in name",
+   "ext": ".js"
+  },
+  {
+   "in": "path\\on\\windows.js",
+   "dir": "path\\on",
+   "base": "windows",
+   "ext": ".js"
+  },
+  {
+   "in": "node_modules/demo-pkg/index.js",
+   "dir": "node_modules/demo-pkg",
+   "base": "index",
+   "ext": ".js"
+  },
+  {
+   "in": "node_modules\\demo-pkg\\index.js",
+   "dir": "node_modules\\demo-pkg",
+   "base": "index",
+   "ext": ".js"
+  },
+  {
+   "in": "123_invalid_identifier.js",
+   "dir": "",
+   "base": "123_invalid_identifier",
+   "ext": ".js"
+  },
+  {
+   "in": "emoji 🍕 name.js",
+   "dir": "",
+   "base": "emoji 🍕 name",
+   "ext": ".js"
+  },
+  {
+   "in": "src/constants.js",
+   "dir": "src",
+   "base": "constants",
+   "ext": ".js"
+  },
+  {
+   "in": "./src/constants.js",
+   "dir": "./src",
+   "base": "constants",
+   "ext": ".js"
+  },
+  {
+   "in": "index.js",
+   "dir": "",
+   "base": "index",
+   "ext": ".js"
+  },
+  {
+   "in": "index",
+   "dir": "",
+   "base": "index",
+   "ext": ""
+  },
+  {
+   "in": "/index.js",
+   "dir": "/",
+   "base": "index",
+   "ext": ".js"
+  },
+  {
+   "in": "a/index.js",
+   "dir": "a",
+   "base": "index",
+   "ext": ".js"
+  },
+  {
+   "in": "a/b/index.js",
+   "dir": "a/b",
+   "base": "index",
+   "ext": ".js"
+  },
+  {
+   "in": "C:\\dir\\file.ts",
+   "dir": "C:\\dir",
+   "base": "file",
+   "ext": ".ts"
+  },
+  {
+   "in": "/root/a.b.c",
+   "dir": "/root",
+   "base": "a.b",
+   "ext": ".c"
+  },
+  {
+   "in": "",
+   "dir": "",
+   "base": "",
+   "ext": ""
+  },
+  {
+   "in": ".",
+   "dir": "",
+   "base": "",
+   "ext": "."
+  },
+  {
+   "in": "..",
+   "dir": "",
+   "base": ".",
+   "ext": "."
+  },
+  {
+   "in": "a.b.c",
+   "dir": "",
+   "base": "a.b",
+   "ext": ".c"
+  },
+  {
+   "in": "x/.hidden",
+   "dir": "x",
+   "base": "",
+   "ext": ".hidden"
+  },
+  {
+   "in": "mod.module.css",
+   "dir": "",
+   "base": "mod",
+   "ext": ".module.css"
+  },
+  {
+   "in": "a/b.module.css",
+   "dir": "a",
+   "base": "b",
+   "ext": ".module.css"
+  },
+  {
+   "in": "dir/",
+   "dir": "",
+   "base": "dir",
+   "ext": ""
+  },
+  {
+   "in": "dir//",
+   "dir": "",
+   "base": "dir",
+   "ext": ""
+  },
+  {
+   "in": "//",
+   "dir": "/",
+   "base": "",
+   "ext": ""
+  },
+  {
+   "in": "\\",
+   "dir": "\\",
+   "base": "",
+   "ext": ""
+  },
+  {
+   "in": "a\\b/c.d",
+   "dir": "a\\b",
+   "base": "c",
+   "ext": ".d"
+  }
+ ]
+}

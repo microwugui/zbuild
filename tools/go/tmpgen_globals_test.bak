@@ -1,0 +1,110 @@
+package config
+
+import (
+	"encoding/json"
+	"math"
+	"os"
+	"sort"
+	"strconv"
+	"strings"
+	"testing"
+
+	"github.com/evanw/esbuild/internal/js_ast"
+)
+
+type gdDesc struct {
+	KeyParts string `json:"keyParts"`
+	Flags    int    `json:"flags"`
+	Expr     string `json:"expr"`
+}
+
+type gdCase struct {
+	Name        string              `json:"name"`
+	UserDefines []string            `json:"userDefines"`
+	Identifiers map[string]gdDesc   `json:"identifiers"`
+	Dots        map[string][]gdDesc `json:"dots"`
+}
+
+type gdFixture struct {
+	Table []string  `json:"table"`
+	Cases []gdCase  `json:"cases"`
+}
+
+func gdExpr(e *DefineExpr) string {
+	if e == nil { return "nil" }
+	if e.Constant != nil {
+		switch c := e.Constant.(type) {
+		case *js_ast.ENumber:
+			if math.IsNaN(c.Value) { return "const:NaN" }
+			if math.IsInf(c.Value, 1) { return "const:Infinity" }
+			if math.IsInf(c.Value, -1) { return "const:-Infinity" }
+			return "const:num:" + strconv.FormatFloat(c.Value, 'g', -1, 64)
+		case *js_ast.EUndefined:
+			return "const:undefined"
+		}
+	}
+	if len(e.Parts) > 0 { return "parts:" + strings.Join(e.Parts, ".") }
+	return "expr"
+}
+
+func gdDescOf(d DefineData) gdDesc {
+	return gdDesc{KeyParts: strings.Join(d.KeyParts, "."), Flags: int(d.Flags), Expr: gdExpr(d.DefineExpr)}
+}
+
+func gdSplit(kp string) []string {
+	if kp == "" { return nil }
+	return strings.Split(kp, ".")
+}
+
+// user define spec: "keyparts|flags|expr"
+func gdUserDefine(spec string) DefineData {
+	parts := strings.Split(spec, "|")
+	kp := gdSplit(parts[0])
+	fl, _ := strconv.Atoi(parts[1])
+	ex := parts[2]
+	var expr *DefineExpr
+	if strings.HasPrefix(ex, "parts:") {
+		expr = &DefineExpr{Parts: gdSplit(strings.TrimPrefix(ex, "parts:"))}
+	}
+	return DefineData{KeyParts: kp, DefineExpr: expr, Flags: DefineFlags(fl)}
+}
+
+func TestTmpGenGlobals(t *testing.T) {
+	fx := gdFixture{}
+	for _, parts := range knownGlobals {
+		fx.Table = append(fx.Table, strings.Join(parts, "."))
+	}
+
+	caseSpecs := []struct {
+		name string
+		user []string
+	}{
+		{"nil", nil},
+		{"empty", []string{}},
+		{"override-undefined", []string{"undefined|0|parts:custom"}},
+		{"override-dot", []string{"Array.from|2|parts:a.b"}},
+		{"new-dot", []string{"foo.bar.baz|1|nil"}},
+		{"merge-flags", []string{"console.log|4|nil"}},
+		{"new-ident", []string{"myGlobal|0|nil"}},
+		{"mixed", []string{"undefined|0|parts:x", "Array.of|2|nil", "brand.new.chain|1|nil"}},
+	}
+
+	for _, cs := range caseSpecs {
+		var uds []DefineData
+		for _, s := range cs.user { uds = append(uds, gdUserDefine(s)) }
+		pd := ProcessDefines(uds)
+
+		c := gdCase{Name: cs.name, UserDefines: cs.user,
+			Identifiers: map[string]gdDesc{}, Dots: map[string][]gdDesc{}}
+		for k, d := range pd.IdentifierDefines { c.Identifiers[k] = gdDescOf(d) }
+		for tail, arr := range pd.DotDefines {
+			for _, d := range arr { c.Dots[tail] = append(c.Dots[tail], gdDescOf(d)) }
+			sort.Slice(c.Dots[tail], func(i, j int) bool { return c.Dots[tail][i].KeyParts < c.Dots[tail][j].KeyParts })
+		}
+		fx.Cases = append(fx.Cases, c)
+	}
+
+	b, _ := json.MarshalIndent(fx, "", "  ")
+	if err := os.WriteFile("/root/port/testdata/process-defines-go.json", b, 0644); err != nil { t.Fatal(err) }
+	t.Logf("wrote table=%d cases=%d bytes=%d", len(fx.Table), len(fx.Cases), len(b))
+}

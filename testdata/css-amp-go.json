@@ -1,0 +1,22 @@
+[
+  {
+    "case": "empty",
+    "out": "false"
+  },
+  {
+    "case": "ident",
+    "out": "false"
+  },
+  {
+    "case": "amp",
+    "out": "true"
+  },
+  {
+    "case": "nested",
+    "out": "true"
+  },
+  {
+    "case": "nested-no",
+    "out": "false"
+  }
+]

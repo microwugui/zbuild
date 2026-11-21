@@ -1,0 +1,37 @@
+[
+  {
+    "fn": "iter",
+    "arg": "both",
+    "out": "2"
+  },
+  {
+    "fn": "iter",
+    "arg": "primary",
+    "out": "1"
+  },
+  {
+    "fn": "increaseIndent",
+    "arg": "2",
+    "out": "\"    \""
+  },
+  {
+    "fn": "decreaseIndent",
+    "arg": "1",
+    "out": "\"  \""
+  },
+  {
+    "fn": "addNote",
+    "arg": "hello",
+    "out": "  hello"
+  },
+  {
+    "fn": "getProperty",
+    "arg": "foo",
+    "out": "true|*js_ast.ENumber"
+  },
+  {
+    "fn": "getProperty",
+    "arg": "bar",
+    "out": "false|\u003cnil\u003e"
+  }
+]

@@ -1,0 +1,1 @@
+function f() { x() } async function f() { y() }

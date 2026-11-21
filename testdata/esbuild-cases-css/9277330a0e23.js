@@ -1,0 +1,1 @@
+a { font: 10px'foo' }

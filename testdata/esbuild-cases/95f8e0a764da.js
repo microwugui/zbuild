@@ -1,0 +1,1 @@
+foo = () => { using x = y }

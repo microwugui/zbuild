@@ -1,0 +1,1 @@
+import {eval as x} from 'foo'

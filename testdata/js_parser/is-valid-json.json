@@ -1,0 +1,107 @@
+[
+ {
+  "text": "null",
+  "ok": true,
+  "okIsValid": true
+ },
+ {
+  "text": "true",
+  "ok": true,
+  "okIsValid": true
+ },
+ {
+  "text": "false",
+  "ok": true,
+  "okIsValid": true
+ },
+ {
+  "text": "0",
+  "ok": true,
+  "okIsValid": true
+ },
+ {
+  "text": "1",
+  "ok": true,
+  "okIsValid": true
+ },
+ {
+  "text": "-1.5",
+  "ok": true,
+  "okIsValid": true
+ },
+ {
+  "text": "\"a\"",
+  "ok": true,
+  "okIsValid": true
+ },
+ {
+  "text": "\"\\u0041\"",
+  "ok": true,
+  "okIsValid": true
+ },
+ {
+  "text": "[]",
+  "ok": true,
+  "okIsValid": true
+ },
+ {
+  "text": "[1]",
+  "ok": true,
+  "okIsValid": true
+ },
+ {
+  "text": "[1,[2,[3]]]",
+  "ok": true,
+  "okIsValid": true
+ },
+ {
+  "text": "[[[]]]",
+  "ok": true,
+  "okIsValid": true
+ },
+ {
+  "text": "{}",
+  "ok": true,
+  "okIsValid": true
+ },
+ {
+  "text": "{\"a\":1}",
+  "ok": true,
+  "okIsValid": true
+ },
+ {
+  "text": "{\"a\":{\"b\":[true,null]}}",
+  "ok": true,
+  "okIsValid": true
+ },
+ {
+  "text": "{\"__proto__\":1}",
+  "ok": true,
+  "okIsValid": false
+ },
+ {
+  "text": "{\"a\":1,\"a\":2}",
+  "ok": true,
+  "okIsValid": true
+ },
+ {
+  "text": "{\"a\":1,}",
+  "ok": true,
+  "okIsValid": true
+ },
+ {
+  "text": "{\"a\":[1,\"x\",{\"b\":false}]}",
+  "ok": true,
+  "okIsValid": true
+ },
+ {
+  "text": "1n",
+  "ok": true,
+  "okIsValid": false
+ },
+ {
+  "text": "[1n]",
+  "ok": true,
+  "okIsValid": false
+ }
+]

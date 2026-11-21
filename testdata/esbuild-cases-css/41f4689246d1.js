@@ -1,0 +1,1 @@
+div, span:hover { & { color: red } }

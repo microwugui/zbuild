@@ -1,0 +1,1 @@
+switch (1) { default: const x = 1 }

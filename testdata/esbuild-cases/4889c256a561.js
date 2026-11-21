@@ -1,0 +1,1 @@
+foo = async () => { using x = y }

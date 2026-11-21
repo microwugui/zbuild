@@ -1,0 +1,42 @@
+[
+  {
+    "fn": "HasMatchers:none",
+    "out": "false"
+  },
+  {
+    "fn": "HasMatchers:exact",
+    "out": "true"
+  },
+  {
+    "fn": "HasMatchers:pat",
+    "out": "true"
+  },
+  {
+    "fn": "DidCancel:before",
+    "out": "false"
+  },
+  {
+    "fn": "DidCancel:after",
+    "out": "true"
+  },
+  {
+    "fn": "DidCancel:nil",
+    "out": "false"
+  },
+  {
+    "fn": "Plugin:match",
+    "out": "true"
+  },
+  {
+    "fn": "Plugin:no",
+    "out": "false"
+  },
+  {
+    "fn": "Plugin:ns",
+    "out": "true"
+  },
+  {
+    "fn": "Plugin:nsbad",
+    "out": "false"
+  }
+]

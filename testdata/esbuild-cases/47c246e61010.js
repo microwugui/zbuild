@@ -1,0 +1,1 @@
+if (1) a(); else { switch (1) { case 1: case 2: var a } }

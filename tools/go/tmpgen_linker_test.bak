@@ -1,0 +1,24 @@
+package linker
+
+// Batch 58 Go probe: joinWithPublicPath pure string helper.
+import (
+	"encoding/json"
+	"os"
+	"testing"
+)
+
+func TestTmpGenLinker(t *testing.T) {
+	type row struct { Public string `json:"public"`; Rel string `json:"rel"`; Out string `json:"out"` }
+	cases := [][2]string{
+		{"", "x/y.js"}, {"/assets", "x/y.js"}, {"/assets/", "x/y.js"},
+		{"https://cdn.example.com/", "./a/b.js"}, {"https://cdn.example.com", "./a/b.js"},
+		{".", ".///././/x/y"}, {"", "./x"}, {"/p", "./"}, {"/p", ""},
+		{"", "./a/../b"}, {"/", "x"}, {"//host/p/", "./x"},
+	}
+	var out []row
+	for _, c := range cases { out = append(out, row{c[0], c[1], joinWithPublicPath(c[0], c[1])}) }
+	b, err := json.MarshalIndent(out, "", "  ")
+	if err != nil { t.Fatal(err) }
+	if err := os.WriteFile("/root/port/testdata/linker-path-go.json", b, 0644); err != nil { t.Fatal(err) }
+	t.Logf("wrote %d rows", len(out))
+}

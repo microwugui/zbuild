@@ -1,0 +1,1 @@
+let a, b, c; return a != null ? a : b != null ? b : c

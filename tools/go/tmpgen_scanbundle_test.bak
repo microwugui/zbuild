@@ -1,0 +1,176 @@
+package bundler
+
+// 第 116 轮 Go 探针：ScanBundle 的确定性 scanner 状态输出（注入 mock FS + 固定 option，
+// uniqueKeyPrefix 随机故不 dump）。dump：每 file 的 sourceIndex/keyPath/loader/import records
+// （path/kind/sourceIndex）+ entryPointMeta。这些由已端口的 preprocess/addEntry/scanDeps/process 产出。
+import (
+	"encoding/json"
+	"strings"
+	"os"
+	"testing"
+
+	"github.com/evanw/esbuild/internal/cache"
+	"github.com/evanw/esbuild/internal/config"
+	"github.com/evanw/esbuild/internal/fs"
+	"github.com/evanw/esbuild/internal/helpers"
+	"github.com/evanw/esbuild/internal/logger"
+)
+
+type sbFileRow struct {
+	KeyPath string `json:"keyPath"`
+	Namespace string `json:"namespace"`
+	Loader int `json:"loader"`
+	Imports []sbImport `json:"imports"`
+}
+type sbImport struct {
+	Path string `json:"path"`
+	Kind string `json:"kind"`
+	SourceIdx int `json:"sourceIdx"`
+}
+type sbMeta struct {
+	OutputPath string `json:"outputPath"`
+	SourceIndex uint32 `json:"sourceIndex"`
+	Auto bool `json:"auto"`
+}
+type sbRow struct {
+	Name string `json:"name"`
+	Files []sbFileRow `json:"files"`
+	Entries []sbMeta `json:"entries"`
+	Errs []string `json:"errs"`
+}
+
+// scanBundleCore116 mirrors ScanBundle's deterministic graph-scan orchestration with
+// injected parse/resolve. parse(path,index)->(keyPath,loader,imports); resolve(importPath)->absPath|"".
+// Files are emitted in source-index order (matching processScannedFiles results order).
+type pfImport116 struct{ Path, Kind string }
+type pfResult116 struct { KeyPath string; Loader int; Imports []pfImport116 }
+func scanBundleCore116(name string, entryPaths []string,
+	parse func(string, uint32) pfResult116,
+	resolve func(string) string) sbRow {
+	row := sbRow{Name: name}
+	fileByIndex := map[uint32]sbFileRow{}
+	fileByIndex[0] = sbFileRow{"<runtime>", "", 0, []sbImport{}}
+	visited := map[string]uint32{}
+	next := uint32(1)
+	type qitem struct{ path string; idx uint32 }
+	var queue []qitem
+	for _, ep := range entryPaths {
+		idx := next; next++; visited[ep] = idx
+		queue = append(queue, qitem{ep, idx})
+		row.Entries = append(row.Entries, sbMeta{"out", idx, false})
+	}
+	for len(queue) > 0 {
+		cur := queue[0]; queue = queue[1:]
+		pr := parse(cur.path, cur.idx)
+		recs := []sbImport{}
+		for _, im := range pr.Imports {
+			resolved := resolve(im.Path)
+			si := -1
+			if resolved != "" {
+				if v, ok := visited[resolved]; ok { si = int(v) } else {
+					ci := next; next++; visited[resolved] = ci; si = int(ci)
+					queue = append(queue, qitem{resolved, ci})
+				}
+			}
+			recs = append(recs, sbImport{im.Path, im.Kind, si})
+		}
+		fileByIndex[cur.idx] = sbFileRow{pr.KeyPath, "file", pr.Loader, recs}
+	}
+	for i := uint32(0); i < next; i++ {
+		if f, ok := fileByIndex[i]; ok { row.Files = append(row.Files, f) }
+	}
+	return row
+}
+
+func TestTmpGenScanBundle116(t *testing.T) {
+	cases := []struct {
+		name string
+		files map[string]string
+		entryPoints []EntryPoint
+	}{
+		{"single", map[string]string{"/p/a.js": "var a=1;"}, []EntryPoint{{InputPath: "./a.js", OutputPath: "out"}}},
+		{"two", map[string]string{"/p/a.js": "var a=1;", "/p/b.js": "var b=2;"}, []EntryPoint{{InputPath: "./a.js"}, {InputPath: "./b.js"}}},
+		{"with-import", map[string]string{"/p/a.js": "import {x} from './b.js'; console.log(x);", "/p/b.js": "export const x=1;"}, []EntryPoint{{InputPath: "./a.js", OutputPath: "out"}}},
+	}
+	rows := []sbRow{}
+	for _, c := range cases {
+		log := logger.NewDeferLog(logger.DeferLogNoVerboseOrDebug, nil)
+		fsObj := fs.MockFS(c.files, fs.MockUnix, "/p")
+		caches := cache.MakeCacheSet()
+		opts := config.Options{Mode: config.ModeBundle, AbsOutputDir: "/p/out",
+			ExtensionToLoader: map[string]config.Loader{".js": config.LoaderJS}}
+		bundle := ScanBundle(config.BuildCall, log, fsObj, caches, c.entryPoints, opts, &helpers.Timer{})
+		fr := []sbFileRow{}
+		for _, sf := range bundle.files {
+			imp := sf.inputFile.Repr.ImportRecords()
+			recs := []sbImport{}
+			if imp != nil {
+				for _, r := range *imp {
+					si := -1
+					if r.SourceIndex.IsValid() { si = int(r.SourceIndex.GetIndex()) }
+					recs = append(recs, sbImport{r.Path.Text, r.Kind.StringForMetafile(), si})
+				}
+			}
+			fr = append(fr, sbFileRow{sf.inputFile.Source.KeyPath.Text, sf.inputFile.Source.KeyPath.Namespace,
+				int(sf.inputFile.Loader), recs})
+		}
+		em := []sbMeta{}
+		for _, e := range bundle.entryPoints {
+			// 确定性缝只投影 sourceIndex（outputPath 的自动 basename 生成由 addEntryPoints 单独验）
+			em = append(em, sbMeta{"", e.SourceIndex, false})
+		}
+		errs := []string{}
+		for _, m := range log.Done() { errs = append(errs, m.Data.Text) }
+		realRow := sbRow{c.name, fr, em, errs}
+
+		// Cross-check helper with injected parse/resolve derived from mock FS source text.
+		parseFn := func(path string, idx uint32) pfResult116 {
+			content := c.files[path]
+			pr := pfResult116{KeyPath: path, Loader: 10}
+			for _, line := range strings.Split(content, ";") {
+				if i := strings.Index(line, "from '"); i >= 0 {
+					rest := line[i+6:]
+					if j := strings.Index(rest, "'"); j >= 0 {
+						pr.Imports = append(pr.Imports, pfImport116{rest[:j], "import-statement"})
+					}
+				}
+			}
+			return pr
+		}
+		resolveFn := func(imp string) string {
+			if strings.HasPrefix(imp, "./") {
+				r := "/p/" + strings.TrimPrefix(imp, "./")
+				if _, ok := c.files[r]; ok { return r }
+			}
+			return ""
+		}
+		entryPaths := []string{}
+		for _, ep := range c.entryPoints {
+			p := ep.InputPath
+			if strings.HasPrefix(p, "./") { p = "/p/" + strings.TrimPrefix(p, "./") }
+			entryPaths = append(entryPaths, p)
+		}
+		helperRow := scanBundleCore116(c.name, entryPaths, parseFn, resolveFn)
+		// helper OutputPath is fixed "out" but real uses ep.OutputPath or auto-generated basename; normalize entry check to source indices only
+		if len(helperRow.Files) != len(realRow.Files) { t.Fatalf("%s: helper files %d != real %d", c.name, len(helperRow.Files), len(realRow.Files)) }
+		for k := range realRow.Files {
+			hf, rf := helperRow.Files[k], realRow.Files[k]
+			if hf.KeyPath != rf.KeyPath || hf.Loader != rf.Loader || len(hf.Imports) != len(rf.Imports) {
+				t.Fatalf("%s: helper file[%d]=%+v != real=%+v", c.name, k, hf, rf)
+			}
+			for j := range rf.Imports {
+				if hf.Imports[j] != rf.Imports[j] { t.Fatalf("%s: import[%d] %+v != %+v", c.name, j, hf.Imports[j], rf.Imports[j]) }
+			}
+		}
+		if len(helperRow.Entries) != len(realRow.Entries) { t.Fatalf("%s: helper entries %d != real %d", c.name, len(helperRow.Entries), len(realRow.Entries)) }
+		for k := range realRow.Entries {
+			if helperRow.Entries[k].SourceIndex != realRow.Entries[k].SourceIndex {
+				t.Fatalf("%s: helper entry[%d] %+v != real %+v", c.name, k, helperRow.Entries[k], realRow.Entries[k])
+			}
+		}
+		rows = append(rows, realRow)
+	}
+	b, _ := json.MarshalIndent(rows, "", "  ")
+	if err := os.WriteFile("/root/port/testdata/scanbundle-go.json", b, 0644); err != nil { t.Fatal(err) }
+	for _, r := range rows { t.Logf("%-12s files=%d entries=%d errs=%v", r.Name, len(r.Files), len(r.Entries), r.Errs) }
+}

@@ -1,0 +1,1 @@
+.xy { :where(:hover&) { color: red } }

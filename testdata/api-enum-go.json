@@ -1,0 +1,312 @@
+[
+  {
+    "fn": "validateFormat",
+    "arg": "0",
+    "out": "0"
+  },
+  {
+    "fn": "validateFormat",
+    "arg": "1",
+    "out": "1"
+  },
+  {
+    "fn": "validateFormat",
+    "arg": "2",
+    "out": "2"
+  },
+  {
+    "fn": "validateFormat",
+    "arg": "3",
+    "out": "3"
+  },
+  {
+    "fn": "validateSourceMap",
+    "arg": "0",
+    "out": "0"
+  },
+  {
+    "fn": "validateSourceMap",
+    "arg": "2",
+    "out": "2"
+  },
+  {
+    "fn": "validateSourceMap",
+    "arg": "1",
+    "out": "1"
+  },
+  {
+    "fn": "validateSourceMap",
+    "arg": "3",
+    "out": "3"
+  },
+  {
+    "fn": "validateSourceMap",
+    "arg": "4",
+    "out": "4"
+  },
+  {
+    "fn": "validateLogLevel",
+    "arg": "0",
+    "out": "6"
+  },
+  {
+    "fn": "validateLogLevel",
+    "arg": "1",
+    "out": "1"
+  },
+  {
+    "fn": "validateLogLevel",
+    "arg": "2",
+    "out": "2"
+  },
+  {
+    "fn": "validateLogLevel",
+    "arg": "3",
+    "out": "3"
+  },
+  {
+    "fn": "validateLogLevel",
+    "arg": "4",
+    "out": "4"
+  },
+  {
+    "fn": "validateLogLevel",
+    "arg": "5",
+    "out": "5"
+  },
+  {
+    "fn": "validateTreeShaking",
+    "arg": "0|false|0",
+    "out": "false"
+  },
+  {
+    "fn": "validateTreeShaking",
+    "arg": "0|false|1",
+    "out": "true"
+  },
+  {
+    "fn": "validateTreeShaking",
+    "arg": "0|false|3",
+    "out": "false"
+  },
+  {
+    "fn": "validateTreeShaking",
+    "arg": "0|true|0",
+    "out": "true"
+  },
+  {
+    "fn": "validateTreeShaking",
+    "arg": "0|true|1",
+    "out": "true"
+  },
+  {
+    "fn": "validateTreeShaking",
+    "arg": "0|true|3",
+    "out": "true"
+  },
+  {
+    "fn": "validateTreeShaking",
+    "arg": "1|false|0",
+    "out": "false"
+  },
+  {
+    "fn": "validateTreeShaking",
+    "arg": "1|false|1",
+    "out": "false"
+  },
+  {
+    "fn": "validateTreeShaking",
+    "arg": "1|false|3",
+    "out": "false"
+  },
+  {
+    "fn": "validateTreeShaking",
+    "arg": "1|true|0",
+    "out": "false"
+  },
+  {
+    "fn": "validateTreeShaking",
+    "arg": "1|true|1",
+    "out": "false"
+  },
+  {
+    "fn": "validateTreeShaking",
+    "arg": "1|true|3",
+    "out": "false"
+  },
+  {
+    "fn": "validateTreeShaking",
+    "arg": "2|false|0",
+    "out": "true"
+  },
+  {
+    "fn": "validateTreeShaking",
+    "arg": "2|false|1",
+    "out": "true"
+  },
+  {
+    "fn": "validateTreeShaking",
+    "arg": "2|false|3",
+    "out": "true"
+  },
+  {
+    "fn": "validateTreeShaking",
+    "arg": "2|true|0",
+    "out": "true"
+  },
+  {
+    "fn": "validateTreeShaking",
+    "arg": "2|true|1",
+    "out": "true"
+  },
+  {
+    "fn": "validateTreeShaking",
+    "arg": "2|true|3",
+    "out": "true"
+  },
+  {
+    "fn": "validateLoader",
+    "arg": "0",
+    "out": "0"
+  },
+  {
+    "fn": "validateLoader",
+    "arg": "1",
+    "out": "1"
+  },
+  {
+    "fn": "validateLoader",
+    "arg": "2",
+    "out": "2"
+  },
+  {
+    "fn": "validateLoader",
+    "arg": "3",
+    "out": "3"
+  },
+  {
+    "fn": "validateLoader",
+    "arg": "4",
+    "out": "4"
+  },
+  {
+    "fn": "validateLoader",
+    "arg": "5",
+    "out": "5"
+  },
+  {
+    "fn": "validateLoader",
+    "arg": "6",
+    "out": "6"
+  },
+  {
+    "fn": "validateLoader",
+    "arg": "7",
+    "out": "7"
+  },
+  {
+    "fn": "validateLoader",
+    "arg": "8",
+    "out": "8"
+  },
+  {
+    "fn": "validateLoader",
+    "arg": "9",
+    "out": "9"
+  },
+  {
+    "fn": "validateLoader",
+    "arg": "10",
+    "out": "10"
+  },
+  {
+    "fn": "validateLoader",
+    "arg": "11",
+    "out": "11"
+  },
+  {
+    "fn": "validateLoader",
+    "arg": "12",
+    "out": "13"
+  },
+  {
+    "fn": "validateLoader",
+    "arg": "13",
+    "out": "14"
+  },
+  {
+    "fn": "validateLoader",
+    "arg": "14",
+    "out": "15"
+  },
+  {
+    "fn": "validateLoader",
+    "arg": "15",
+    "out": "16"
+  },
+  {
+    "fn": "validateLoader",
+    "arg": "16",
+    "out": "18"
+  },
+  {
+    "fn": "validateLegalComments",
+    "arg": "0|false",
+    "out": "0"
+  },
+  {
+    "fn": "validateLegalComments",
+    "arg": "0|true",
+    "out": "2"
+  },
+  {
+    "fn": "validateLegalComments",
+    "arg": "1|false",
+    "out": "1"
+  },
+  {
+    "fn": "validateLegalComments",
+    "arg": "1|true",
+    "out": "1"
+  },
+  {
+    "fn": "validateLegalComments",
+    "arg": "2|false",
+    "out": "0"
+  },
+  {
+    "fn": "validateLegalComments",
+    "arg": "2|true",
+    "out": "0"
+  },
+  {
+    "fn": "validateLegalComments",
+    "arg": "3|false",
+    "out": "2"
+  },
+  {
+    "fn": "validateLegalComments",
+    "arg": "3|true",
+    "out": "2"
+  },
+  {
+    "fn": "validateLegalComments",
+    "arg": "4|false",
+    "out": "3"
+  },
+  {
+    "fn": "validateLegalComments",
+    "arg": "4|true",
+    "out": "3"
+  },
+  {
+    "fn": "validateLegalComments",
+    "arg": "5|false",
+    "out": "4"
+  },
+  {
+    "fn": "validateLegalComments",
+    "arg": "5|true",
+    "out": "4"
+  }
+]

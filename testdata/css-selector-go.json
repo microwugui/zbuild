@@ -1,0 +1,62 @@
+[
+  {
+    "fn": "IsSingleAmpersand",
+    "case": "empty",
+    "out": "false"
+  },
+  {
+    "fn": "IsInvalidBecauseEmpty",
+    "case": "empty",
+    "out": "true"
+  },
+  {
+    "fn": "IsSingleAmpersand",
+    "case": "amp",
+    "out": "true"
+  },
+  {
+    "fn": "IsInvalidBecauseEmpty",
+    "case": "amp",
+    "out": "false"
+  },
+  {
+    "fn": "IsSingleAmpersand",
+    "case": "amp-combinator",
+    "out": "false"
+  },
+  {
+    "fn": "IsInvalidBecauseEmpty",
+    "case": "amp-combinator",
+    "out": "false"
+  },
+  {
+    "fn": "IsSingleAmpersand",
+    "case": "two-amp",
+    "out": "false"
+  },
+  {
+    "fn": "IsInvalidBecauseEmpty",
+    "case": "two-amp",
+    "out": "false"
+  },
+  {
+    "fn": "IsSingleAmpersand",
+    "case": "type",
+    "out": "false"
+  },
+  {
+    "fn": "IsInvalidBecauseEmpty",
+    "case": "type",
+    "out": "false"
+  },
+  {
+    "fn": "IsSingleAmpersand",
+    "case": "subclass",
+    "out": "false"
+  },
+  {
+    "fn": "IsInvalidBecauseEmpty",
+    "case": "subclass",
+    "out": "false"
+  }
+]

@@ -1,0 +1,89 @@
+package api
+
+import (
+	"encoding/json"
+	"os"
+	"testing"
+
+	"github.com/evanw/esbuild/internal/config"
+	"github.com/evanw/esbuild/internal/fs"
+	"github.com/evanw/esbuild/internal/logger"
+)
+
+type valRow struct {
+	Fn     string   `json:"fn"`
+	Arg    string   `json:"arg"`
+	Out    string   `json:"out"`
+	Errors []string `json:"errors"`
+}
+type valFixture struct { Rows []valRow `json:"rows"` }
+
+func externalSettingsJSON(s config.ExternalSettings) string {
+	norm := func(m config.ExternalMatchers) map[string]interface{} {
+		exact := []string{}
+		for k, v := range m.Exact { if v { exact = append(exact, k) } }
+		// Go map iteration is random -> sort for determinism
+		sortStrings(exact)
+		pats := []string{}
+		for _, p := range m.Patterns { pats = append(pats, p.Prefix+"\x00"+p.Suffix) }
+		return map[string]interface{}{"exact": exact, "patterns": pats}
+	}
+	b, _ := json.Marshal(map[string]interface{}{"pre": norm(s.PreResolve), "post": norm(s.PostResolve)})
+	return string(b)
+}
+
+func sortStrings(a []string) { for i:=1;i<len(a);i++ { for j:=i;j>0&&a[j]<a[j-1];j-- { a[j],a[j-1]=a[j-1],a[j] } } }
+
+func TestTmpGenValidate(t *testing.T) {
+	fx := valFixture{}
+	f := fs.MockFS(map[string]string{}, 0, "/home/user/project")
+
+	// validatePath: rel -> abs
+	for _, p := range []string{"", "./foo.js", "../up.js", "/abs/x.js", "a/b/c.js"} {
+		log := logger.NewDeferLog(logger.DeferLogNoVerboseOrDebug, nil)
+		got := validatePath(log, f, p, "test path")
+		errs := []string{}
+		for _, m := range log.Peek() { errs = append(errs, m.Data.Text) }
+		fx.Rows = append(fx.Rows, valRow{"validatePath", p, got, errs})
+	}
+
+	// validateExternals: [] paths -> ExternalSettings
+	extCases := []struct{ name string; paths []string }{
+		{"empty", []string{}},
+		{"package", []string{"react", "lodash/fp"}},
+		{"relative", []string{"./foo", "../bar"}},
+		{"wildcard", []string{"foo/*", "./src/*.js"}},
+		{"multi-wildcard", []string{"a*b*c"}},
+		{"absolute", []string{"/tmp/x"}},
+		{"mixed", []string{"react", "./local", "a/*", "/abs/z"}},
+	}
+	for _, c := range extCases {
+		log := logger.NewDeferLog(logger.DeferLogNoVerboseOrDebug, nil)
+		got := validateExternals(log, f, c.paths)
+		errs := []string{}
+		for _, m := range log.Peek() { errs = append(errs, m.Data.Text) }
+		fx.Rows = append(fx.Rows, valRow{"validateExternals", c.name, externalSettingsJSON(got), errs})
+	}
+
+
+	// validatePathsArray: pluginImpl method -> filtered abs paths
+	vpaCases := []struct{ name string; paths []string }{
+		{"empty", []string{}},
+		{"relative", []string{"./foo", "../bar"}},
+		{"package", []string{"react"}},
+		{"mixed", []string{"", "./x", "/abs/y"}},
+	}
+	for _, c := range vpaCases {
+		log := logger.NewDeferLog(logger.DeferLogNoVerboseOrDebug, nil)
+		impl := &pluginImpl{log: log, fs: f, plugin: config.Plugin{Name: "test-plugin"}}
+		got := impl.validatePathsArray(c.paths, "load")
+		arr, _ := json.Marshal(got)
+		errs := []string{}
+		for _, m := range log.Peek() { errs = append(errs, m.Data.Text) }
+		fx.Rows = append(fx.Rows, valRow{"validatePathsArray", c.name, string(arr), errs})
+	}
+
+	bts, _ := json.MarshalIndent(fx, "", "  ")
+	if err := os.WriteFile("/root/port/testdata/api-validate2-go.json", bts, 0644); err != nil { t.Fatal(err) }
+	t.Logf("wrote %d rows bytes=%d", len(fx.Rows), len(bts))
+}

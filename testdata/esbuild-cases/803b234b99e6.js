@@ -1,0 +1,1 @@
+class Foo { #fo\u006f; foo = this.#foo }

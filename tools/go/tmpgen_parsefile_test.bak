@@ -1,0 +1,79 @@
+package bundler
+
+// 第 120 轮 Go 探针：parseFile stdin 缝的确定性 1:1 投影（source/loader/sideEffects/AST parts
+// 结构）。符号表（arguments/React/require_* 等隐式符号）为 TS parser 骨架限制，known-deviation，
+// 不在投影覆盖。多 loader × 多源码。注入 mock FS + JSCache.Parse。
+import (
+	"encoding/json"
+	"os"
+	"testing"
+
+	"github.com/evanw/esbuild/internal/cache"
+	"github.com/evanw/esbuild/internal/config"
+	"github.com/evanw/esbuild/internal/fs"
+	"github.com/evanw/esbuild/internal/graph"
+	"github.com/evanw/esbuild/internal/js_ast"
+	"github.com/evanw/esbuild/internal/logger"
+)
+
+type pfRow struct {
+	Name string `json:"name"`
+	OK bool `json:"ok"`
+	Loader int `json:"loader"`
+	SideKind int `json:"sideKind"`
+	NumParts int `json:"numParts"`
+	StmtKinds [][]string `json:"stmtKinds"`
+	NumImports int `json:"numImports"`
+}
+
+func pfKind(s js_ast.Stmt) string {
+	switch s.Data.(type) {
+	case *js_ast.SExpr: return "Expr"
+	case *js_ast.SLocal: return "Local"
+	case *js_ast.SFunction: return "Function"
+	case *js_ast.SReturn: return "Return"
+	case *js_ast.SBlock: return "Block"
+	case *js_ast.SIf: return "If"
+	case *js_ast.SClass: return "Class"
+	}
+	return "other"
+}
+
+func TestTmpGenParseFile120(t *testing.T) {
+	cases := []struct {
+		name, contents string
+		loader config.Loader
+	}{
+		{"js-var", "var x = 1;", config.LoaderJS},
+		{"js-fn", "function f() { return 2; }", config.LoaderJS},
+		{"json", `{"a":1}`, config.LoaderJSON},
+	}
+	rows := []pfRow{}
+	for _, c := range cases {
+		log := logger.NewDeferLog(logger.DeferLogNoVerboseOrDebug, nil)
+		caches := cache.MakeCacheSet()
+		resultCh := make(chan parseResult, 4)
+		opts := config.Options{Stdin: &config.StdinInfo{Contents: c.contents, SourceFile: "<stdin>", Loader: c.loader},
+			ExtensionToLoader: map[string]config.Loader{".js": config.LoaderJS}}
+		args := parseArgs{fs: fs.MockFS(map[string]string{}, fs.MockUnix, "/"), log: log, caches: caches,
+			results: resultCh, keyPath: logger.Path{Text: "<stdin>"},
+			prettyPaths: logger.PrettyPaths{Abs: "<stdin>", Rel: "<stdin>"}, options: opts, sourceIndex: 0}
+		parseFile(args)
+		res := <-resultCh
+		inp := res.file.inputFile
+		kinds := [][]string{}
+		numImp := 0
+		if repr, ok := inp.Repr.(*graph.JSRepr); ok {
+			for _, p := range repr.AST.Parts {
+				ks := []string{}
+				for _, st := range p.Stmts { ks = append(ks, pfKind(st)) }
+				kinds = append(kinds, ks)
+			}
+			numImp = len(repr.AST.ImportRecords)
+		}
+		rows = append(rows, pfRow{c.name, res.ok, int(inp.Loader), int(inp.SideEffects.Kind), len(kinds), kinds, numImp})
+	}
+	b, _ := json.MarshalIndent(rows, "", "  ")
+	if err := os.WriteFile("/root/port/testdata/parsefile-go.json", b, 0644); err != nil { t.Fatal(err) }
+	for _, r := range rows { t.Logf("%-10s ok=%v loader=%d side=%d parts=%d", r.Name, r.OK, r.Loader, r.SideKind, r.NumParts) }
+}

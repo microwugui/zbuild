@@ -1,0 +1,212 @@
+[
+  {
+    "fn": "NthIndex.Minify",
+    "arg": "|even",
+    "out": "2|"
+  },
+  {
+    "fn": "NthIndex.Minify",
+    "arg": "2|1",
+    "out": "|odd"
+  },
+  {
+    "fn": "NthIndex.Minify",
+    "arg": "0|",
+    "out": "|0"
+  },
+  {
+    "fn": "NthIndex.Minify",
+    "arg": "0|1",
+    "out": "|1"
+  },
+  {
+    "fn": "NthIndex.Minify",
+    "arg": "1|0",
+    "out": "1|"
+  },
+  {
+    "fn": "NthIndex.Minify",
+    "arg": "|0",
+    "out": "|0"
+  },
+  {
+    "fn": "NthIndex.Minify",
+    "arg": "3|4",
+    "out": "3|4"
+  },
+  {
+    "fn": "NthIndex.Minify",
+    "arg": "2|",
+    "out": "2|"
+  },
+  {
+    "fn": "NthIndex.Minify",
+    "arg": "|odd",
+    "out": "|odd"
+  },
+  {
+    "fn": "NthIndex.Minify",
+    "arg": "even|odd",
+    "out": "even|odd"
+  },
+  {
+    "fn": "MQCmp.String",
+    "arg": "0",
+    "out": "="
+  },
+  {
+    "fn": "MQCmp.String",
+    "arg": "1",
+    "out": "="
+  },
+  {
+    "fn": "MQCmp.String",
+    "arg": "2",
+    "out": "\u003c"
+  },
+  {
+    "fn": "MQCmp.String",
+    "arg": "3",
+    "out": "\u003c="
+  },
+  {
+    "fn": "MQCmp.String",
+    "arg": "4",
+    "out": "\u003e"
+  },
+  {
+    "fn": "MQCmp.String",
+    "arg": "5",
+    "out": "\u003e="
+  },
+  {
+    "fn": "PseudoClassKind.String",
+    "arg": "0",
+    "out": "global"
+  },
+  {
+    "fn": "PseudoClassKind.String",
+    "arg": "1",
+    "out": "has"
+  },
+  {
+    "fn": "PseudoClassKind.String",
+    "arg": "2",
+    "out": "is"
+  },
+  {
+    "fn": "PseudoClassKind.String",
+    "arg": "3",
+    "out": "local"
+  },
+  {
+    "fn": "PseudoClassKind.String",
+    "arg": "4",
+    "out": "not"
+  },
+  {
+    "fn": "PseudoClassKind.String",
+    "arg": "5",
+    "out": "nth-child"
+  },
+  {
+    "fn": "PseudoClassKind.String",
+    "arg": "6",
+    "out": "nth-last-child"
+  },
+  {
+    "fn": "PseudoClassKind.String",
+    "arg": "7",
+    "out": "nth-last-of-type"
+  },
+  {
+    "fn": "PseudoClassKind.String",
+    "arg": "8",
+    "out": "nth-of-type"
+  },
+  {
+    "fn": "PseudoClassKind.String",
+    "arg": "9",
+    "out": "where"
+  },
+  {
+    "fn": "UsesPseudoElement",
+    "arg": "[]",
+    "out": "false"
+  },
+  {
+    "fn": "UsesPseudoElement",
+    "arg": "[{\"name\":\"hover\",\"isElement\":false}]",
+    "out": "false"
+  },
+  {
+    "fn": "UsesPseudoElement",
+    "arg": "[{\"name\":\"before\",\"isElement\":false}]",
+    "out": "true"
+  },
+  {
+    "fn": "UsesPseudoElement",
+    "arg": "[{\"name\":\"after\",\"isElement\":false}]",
+    "out": "true"
+  },
+  {
+    "fn": "UsesPseudoElement",
+    "arg": "[{\"name\":\"first-line\",\"isElement\":false}]",
+    "out": "true"
+  },
+  {
+    "fn": "UsesPseudoElement",
+    "arg": "[{\"name\":\"first-letter\",\"isElement\":false}]",
+    "out": "true"
+  },
+  {
+    "fn": "UsesPseudoElement",
+    "arg": "[{\"name\":\"foo\",\"isElement\":true}]",
+    "out": "true"
+  },
+  {
+    "fn": "UsesPseudoElement",
+    "arg": "[{\"name\":\"hover\",\"isElement\":false},{\"name\":\"foo\",\"isElement\":true}]",
+    "out": "true"
+  },
+  {
+    "fn": "MaybeCorrectDeclarationTypo",
+    "arg": "colr",
+    "out": "color|true"
+  },
+  {
+    "fn": "MaybeCorrectDeclarationTypo",
+    "arg": "backgrund-color",
+    "out": "background-color|true"
+  },
+  {
+    "fn": "MaybeCorrectDeclarationTypo",
+    "arg": "--my-var",
+    "out": "|false"
+  },
+  {
+    "fn": "MaybeCorrectDeclarationTypo",
+    "arg": "dispaly",
+    "out": "display|true"
+  },
+  {
+    "fn": "MaybeCorrectDeclarationTypo",
+    "arg": "color",
+    "out": "color|true"
+  },
+  {
+    "fn": "MaybeCorrectDeclarationTypo",
+    "arg": "margn",
+    "out": "margin|true"
+  },
+  {
+    "fn": "MaybeCorrectDeclarationTypo",
+    "arg": "zzzz",
+    "out": "|false"
+  },
+  {
+    "fn": "MaybeCorrectDeclarationTypo",
+    "arg": "widht",
+    "out": "width|true"
+  }
+]

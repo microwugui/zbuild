@@ -1,0 +1,59 @@
+package api
+
+// 第 142 批 Go 探针：analyzeMetafileImpl / formatMsgsImpl / prettyPrintPath（build API 输出链）。
+import (
+	"encoding/json"
+	"os"
+	"testing"
+
+	"github.com/evanw/esbuild/internal/fs"
+)
+
+type afRow struct { Fn string `json:"fn"`; Arg map[string]interface{} `json:"arg"`; Out interface{} `json:"out"` }
+
+func TestTmpGenAPIFormat(t *testing.T) {
+	var out []afRow
+	add := func(fn string, arg map[string]interface{}, o interface{}) { out = append(out, afRow{fn, arg, o}) }
+
+	// analyzeMetafileImpl
+	metafiles := []string{
+		`{}`,
+		`{"outputs":{}}`,
+		`{"outputs":{"out.js":{"bytes":100,"inputs":{"a.js":{"bytesInOutput":60},"b.js":{"bytesInOutput":40}}}}}`,
+		`{"outputs":{"out.js":{"bytes":1000,"entryPoint":"src/index.js","inputs":{"a.js":{"bytesInOutput":900},"b.js":{"bytesInOutput":100}}},"out.js.map":{"bytes":50}}}`,
+		`{"outputs":{"a.js":{"bytes":2048,"inputs":{"x.js":{"bytesInOutput":1500}}},"b.js":{"bytes":512,"inputs":{"y.js":{"bytesInOutput":100}}}},"inputs":{"src/index.js":{"imports":[{"path":"a.js"},{"path":"b.js"}]},"a.js":{"imports":[{"path":"x.js"}]}}}`,
+	}
+	for _, mf := range metafiles {
+		for _, color := range []bool{false, true} {
+			for _, verbose := range []bool{false, true} {
+				s := analyzeMetafileImpl(mf, AnalyzeMetafileOptions{Color: color, Verbose: verbose})
+				add("analyzeMetafileImpl", map[string]interface{}{"mf": mf, "color": color, "verbose": verbose}, s)
+			}
+		}
+	}
+
+	// formatMsgsImpl: text-only messages (no locations) to keep schema simple
+	for _, kind := range []MessageKind{ErrorMessage, WarningMessage} {
+		for _, color := range []bool{false} {
+			msgs := []Message{
+				{Text: "simple error"},
+				{Text: "with note", Notes: []Note{{Text: "note one"}, {Text: "note two"}}},
+			}
+			strs := formatMsgsImpl(msgs, FormatMessagesOptions{TerminalWidth: 80, Kind: kind, Color: color})
+			add("formatMsgsImpl", map[string]interface{}{"kind": int(kind), "color": color}, strs)
+		}
+	}
+
+	// prettyPrintPath
+	{
+		mfs := fs.MockFS(map[string]string{}, fs.MockUnix, "/root/port")
+		for _, p := range []string{"/root/port/src/a.js", "/other/x.js", "relative.js"} {
+			add("prettyPrintPath", map[string]interface{}{"path": p}, prettyPrintPath(mfs, p))
+		}
+	}
+
+	b, err := json.MarshalIndent(out, "", "  ")
+	if err != nil { t.Fatal(err) }
+	if err := os.WriteFile("/root/port/testdata/api-format-go.json", b, 0644); err != nil { t.Fatal(err) }
+	t.Logf("wrote %d rows", len(out))
+}

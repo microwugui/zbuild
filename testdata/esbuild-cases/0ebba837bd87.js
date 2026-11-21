@@ -1,0 +1,1 @@
+var bound; ({x: 123, bound, ...bound, [bound]: foo(), y: 234})

@@ -1,0 +1,94 @@
+package resolver
+
+// 第 165 批 Go 探针：dirInfoCached + dirInfoUncached 逐字节固化（dirInfo 深簇底座）。
+// mockFS 多层目录树；pnpManifest 非 nil 跳过 PnP 扫描；不放 tsconfig.json 跳过 parseTSConfig 分支。
+import (
+	"encoding/json"
+	"os"
+	"testing"
+
+	"github.com/evanw/esbuild/internal/cache"
+	"github.com/evanw/esbuild/internal/config"
+	"github.com/evanw/esbuild/internal/fs"
+	"github.com/evanw/esbuild/internal/logger"
+)
+
+type diRow struct {
+	Arg map[string]interface{} `json:"arg"`
+	Out interface{}            `json:"out"`
+}
+
+func dumpPjLite(pj *packageJSON) interface{} {
+	if pj == nil { return nil }
+	mf := []string{}
+	for k := range pj.mainFields { mf = append(mf, k) }
+	// sorted for determinism
+	for i := 0; i < len(mf); i++ { for j := i+1; j < len(mf); j++ { if mf[j] < mf[i] { mf[i], mf[j] = mf[j], mf[i] } } }
+	return map[string]interface{}{"name": pj.name, "mainFields": mf, "hasBrowserMap": pj.browserMap != nil}
+}
+
+func dumpDI(info *dirInfo) interface{} {
+	if info == nil { return nil }
+	parentAbs := ""
+	if info.parent != nil { parentAbs = info.parent.absPath }
+	scopeAbs := ""
+	if info.enclosingBrowserScope != nil { scopeAbs = info.enclosingBrowserScope.absPath }
+	pjAbs := ""
+	if info.enclosingPackageJSON != nil { pjAbs = info.enclosingPackageJSON.source.KeyPath.Text }
+	return map[string]interface{}{
+		"absPath": info.absPath,
+		"parentAbs": parentAbs,
+		"scopeAbs": scopeAbs,
+		"absRealPath": info.absRealPath,
+		"packageJSON": dumpPjLite(info.packageJSON),
+		"enclosingPj": pjAbs,
+		"pnpManifestAbsPath": info.pnpManifestAbsPath,
+		"isNodeModules": info.isNodeModules,
+		"hasNodeModules": info.hasNodeModules,
+		"isInsideNodeModules": info.isInsideNodeModules,
+		"entryCount": info.entries.PeekEntryCount(),
+	}
+}
+
+func TestTmpGenDirInfo(t *testing.T) {
+	var out []diRow
+	// 两棵目录树
+	treeA := map[string]string{
+		"/proj/package.json": `{"name":"root","browser":{"./a":"./b"},"main":"index.js"}`,
+		"/proj/src/util.js": "",
+		"/proj/node_modules/pkg/package.json": `{"name":"pkg","main":"main.js"}`,
+		"/proj/node_modules/pkg/index.js": "",
+	}
+	treeB := map[string]string{
+		"/app/package.json": `{"name":"app"}`,
+		"/app/lib/a.js": "",
+	}
+
+	type tc struct{ name string; tree map[string]string; paths []string; fn string }
+	cases := []tc{
+		{"A-cached", treeA, []string{"/proj", "/proj/src", "/proj/src/util.js", "/proj/node_modules", "/proj/node_modules/pkg"}, "dirInfoCached"},
+		{"A-uncached", treeA, []string{"/proj", "/proj/src", "/proj/node_modules/pkg"}, "dirInfoUncached"},
+		{"B-cached", treeB, []string{"/app", "/app/lib"}, "dirInfoCached"},
+		{"B-uncached", treeB, []string{"/app/lib"}, "dirInfoUncached"},
+	}
+	for _, c := range cases {
+		fsObj := fs.MockFS(c.tree, fs.MockUnix, "/")
+		for _, path := range c.paths {
+			log := logger.NewDeferLog(logger.DeferLogAll, nil)
+			r := resolverQuery{Resolver: &Resolver{log: log}, debugLogs: &debugLogs{}}
+			r.options = config.Options{Platform: config.PlatformNode}
+			r.fs = fsObj
+			r.caches = cache.MakeCacheSet()
+			r.dirCache = make(map[string]*dirInfo)
+			r.pnpManifestWasChecked = true // skip PnP scan branch (already covered by extractYarnPnPDataFromJSON)
+			var info *dirInfo
+			if c.fn == "dirInfoCached" { info = r.dirInfoCached(path) } else { info = r.dirInfoUncached(path) }
+			notes := []string{}; for _, n := range r.debugLogs.notes { notes = append(notes, n.Text) }
+			out = append(out, diRow{Arg: map[string]interface{}{"case": c.name, "fn": c.fn, "path": path}, Out: []interface{}{dumpDI(info), notes}})
+		}
+	}
+	b, err := json.Marshal(out)
+	if err != nil { t.Fatal(err) }
+	if err := os.WriteFile("/root/port/testdata/dirinfo-go.json", b, 0644); err != nil { t.Fatal(err) }
+	t.Logf("wrote %d cases", len(out))
+}

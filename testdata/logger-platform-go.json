@@ -1,0 +1,32 @@
+{
+ "colors": {
+  "Blue": "\u001b[34m",
+  "BlueBgBlue": "\u001b[44;34m",
+  "BlueBgWhite": "\u001b[44;97m",
+  "Bold": "\u001b[1m",
+  "Cyan": "\u001b[36m",
+  "CyanBgBlack": "\u001b[46;30m",
+  "CyanBgCyan": "\u001b[46;36m",
+  "Dim": "\u001b[37m",
+  "Green": "\u001b[32m",
+  "GreenBgGreen": "\u001b[42;32m",
+  "GreenBgWhite": "\u001b[42;97m",
+  "Magenta": "\u001b[35m",
+  "MagentaBgBlack": "\u001b[45;30m",
+  "MagentaBgMagenta": "\u001b[45;35m",
+  "Red": "\u001b[31m",
+  "RedBgRed": "\u001b[41;31m",
+  "RedBgWhite": "\u001b[41;97m",
+  "Reset": "\u001b[0m",
+  "Underline": "\u001b[4m",
+  "Yellow": "\u001b[33m",
+  "YellowBgBlack": "\u001b[43;30m",
+  "YellowBgYellow": "\u001b[43;33m"
+ },
+ "zeroInfo": {
+  "IsTTY": false,
+  "UseColorEscapes": false,
+  "Width": 0,
+  "Height": 0
+ }
+}

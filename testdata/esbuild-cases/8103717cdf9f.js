@@ -1,0 +1,1 @@
+y: while (foo()) x: { break y; foo() }

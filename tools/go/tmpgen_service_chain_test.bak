@@ -1,0 +1,52 @@
+package main
+
+// 第 100 轮 Go 探针：service handler 链逐字节 oracle。真实调 serviceType.handleTransformRequest /
+// handleBuildRequest，dump encodePacket hex。flags 由真实 cli.ParseTransformOptions/ParseBuildOptions
+// 解析；覆盖 err 包 / define / minify-whitespace / format / loader / build stdin+bundle+platform。
+import (
+	"encoding/hex"
+	"encoding/json"
+	"os"
+	"testing"
+
+	"github.com/evanw/esbuild/internal/helpers"
+)
+
+type s100Row struct { Name string `json:"name"`; Out string `json:"out"` }
+
+func TestTmpGenServiceChain100(t *testing.T) {
+	rows := []s100Row{}
+	svc := &serviceType{
+		callbacks: make(map[uint32]responseCallback),
+		activeBuilds: make(map[int]*activeBuild),
+		outgoingPackets: make(chan []byte, 64),
+		keepAliveWaitGroup: helpers.MakeThreadSafeWaitGroup(),
+	}
+	add := func(name string, b []byte) { rows = append(rows, s100Row{name, hex.EncodeToString(b)}) }
+	fl := func(a ...string) []interface{} { r := make([]interface{}, len(a)); for i, f := range a { r[i] = f }; return r }
+	tx := func(id uint32, flags []interface{}, input string) []byte {
+		return svc.handleTransformRequest(id, map[string]interface{}{"inputFS": false, "input": []byte(input), "flags": flags})
+	}
+
+	add("tx-default", tx(1, fl(), "const x = 1; export {x};"))
+	add("tx-define", tx(2, fl("--define:DEBUG=false"), "if (DEBUG) foo(); export const y = 2;"))
+	add("tx-minify-ws", tx(3, fl("--minify-whitespace"), "const value = 1; export {value};"))
+	add("tx-format-esm", tx(4, fl("--format=esm"), "export const x = 1;"))
+	add("tx-loader-js", tx(5, fl("--loader=js"), "const x = 1; export {x};"))
+	add("tx-bad-flag", tx(6, fl("--no-such-flag"), "const x = 1;"))
+
+	buildReq := func(flags []interface{}, stdin string) map[string]interface{} {
+		return map[string]interface{}{
+			"context": false, "key": 0, "write": false,
+			"entries": []interface{}{}, "flags": flags,
+			"absWorkingDir": "/root/port", "nodePaths": []interface{}{},
+			"stdinContents": []byte(stdin), "stdinResolveDir": "/root/port",
+		}
+	}
+	add("bd-stdin-esm", svc.handleBuildRequest(7, buildReq(fl("--bundle", "--format=esm", "--platform=node"), "const x = 1; console.log(x);\n")))
+	add("bd-bad-flag", svc.handleBuildRequest(8, buildReq(fl("--no-such-flag"), "const x = 1;")))
+
+	out, _ := json.MarshalIndent(rows, "", "  ")
+	if err := os.WriteFile("/root/port/testdata/service-chain-go.json", out, 0644); err != nil { t.Fatal(err) }
+	t.Logf("wrote %d rows bytes=%d", len(rows), len(out))
+}

@@ -1,0 +1,1 @@
+html { @layer base { color: blue; @layer support { & body { color: red } } } }

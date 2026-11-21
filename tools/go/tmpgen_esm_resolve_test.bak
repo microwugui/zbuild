@@ -1,0 +1,194 @@
+package resolver
+
+// 第 140 批 Go 探针：ESM resolution 族 + resolver 小助手（bundler import 路径核心）。
+import (
+	"encoding/json"
+	"os"
+	"sort"
+	"testing"
+
+	"github.com/evanw/esbuild/internal/ast"
+	"github.com/evanw/esbuild/internal/config"
+	"github.com/evanw/esbuild/internal/fs"
+	"github.com/evanw/esbuild/internal/logger"
+)
+
+func erNum(v interface{}) int { switch x := v.(type) { case float64: return int(x); case int: return x }; return 0 }
+func erRange(a []int) logger.Range {
+	if len(a) >= 2 { return logger.Range{Loc: logger.Loc{Start: int32(a[0])}, Len: int32(a[1])} }
+	return logger.Range{}
+}
+func erEntry(v interface{}) pjEntry {
+	m, ok := v.(map[string]interface{})
+	if !ok { return pjEntry{kind: pjInvalid} }
+	k := erNum(m["k"])
+	e := pjEntry{kind: pjKind(k)}
+	if s, ok := m["s"].(string); ok { e.strData = s }
+	if t, ok := m["t"].([]interface{}); ok { e.firstToken = erRange([]int{erNum(t[0]), erNum(t[1])}) }
+	if a, ok := m["a"].([]interface{}); ok {
+		for _, x := range a { e.arrData = append(e.arrData, erEntry(x)) }
+	}
+	if mp, ok := m["m"].([]interface{}); ok {
+		for _, pair := range mp {
+			p := pair.([]interface{})
+			me := pjMapEntry{key: p[0].(string), value: erEntry(p[1])}
+			if len(p) > 2 { if lr, ok := p[2].([]interface{}); ok { me.keyRange = erRange([]int{erNum(lr[0]), erNum(lr[1])}) } }
+			e.mapData = append(e.mapData, me)
+			if len(me.key) > 0 && (me.key[len(me.key)-1] == '/' || containsStar(me.key)) { e.expansionKeys = append(e.expansionKeys, me) }
+		}
+		sort.Stable(e.expansionKeys)
+	}
+	return e
+}
+func containsStar(s string) bool { for _, c := range s { if c == '*' { return true } }; return false }
+
+func erDebug(d pjDebug) interface{} {
+	unc := []interface{}{}
+	for _, s := range d.unmatchedConditions { unc = append(unc, []interface{}{s.Text, s.Range.Loc.Start, s.Range.Len}) }
+	return []interface{}{d.invalidBecause, unc, d.token.Loc.Start, d.token.Len, d.isBecauseOfNullLiteral}
+}
+func erResolve(res string, st pjStatus, d pjDebug, dl *debugLogs) interface{} {
+	notes := []interface{}{}
+	if dl != nil { for _, n := range dl.notes { notes = append(notes, n.Text) } }
+	return []interface{}{res, int(st), erDebug(d), notes}
+}
+func erReverse(ok bool, sub string, tok logger.Range, dl *debugLogs) interface{} {
+	notes := []interface{}{}
+	if dl != nil { for _, n := range dl.notes { notes = append(notes, n.Text) } }
+	return []interface{}{ok, sub, tok.Loc.Start, tok.Len, notes}
+}
+func erConds(v interface{}) map[string]bool {
+	m := map[string]bool{}
+	if a, ok := v.([]interface{}); ok { for _, x := range a { m[x.(string)] = true } }
+	return m
+}
+
+type erRow struct { Fn string `json:"fn"`; Arg map[string]interface{} `json:"arg"`; Out interface{} `json:"out"` }
+
+func TestTmpGenESMResolve(t *testing.T) {
+	var out []erRow
+	rq := func() resolverQuery { return resolverQuery{debugLogs: &debugLogs{}} }
+	add := func(fn string, arg map[string]interface{}, o interface{}) { out = append(out, erRow{fn, arg, o}) }
+
+	// esmHandlePostConditions
+	for _, c := range []struct{ resolved string; st int }{
+		{"./foo", int(pjStatusExact)}, {"./a%2fb", int(pjStatusExact)}, {"./a%2Fb", int(pjStatusExact)},
+		{"./a%5cb", int(pjStatusExact)}, {"./a%5Cb", int(pjStatusExact)}, {"foo/", int(pjStatusExact)},
+		{"foo\\", int(pjStatusExact)}, {"a%20b", int(pjStatusExact)}, {"./foo", int(pjStatusNull)},
+	} {
+		r := rq(); res, st, d := r.esmHandlePostConditions(c.resolved, pjStatus(c.st), pjDebug{})
+		add("esmHandlePostConditions", map[string]interface{}{"resolved": c.resolved, "st": c.st}, erResolve(res, st, d, r.debugLogs))
+	}
+
+	// esmPackageTargetResolve over constructed targets
+	targets := []interface{}{
+		map[string]interface{}{"k":1,"s":"./foo.js","t":[]interface{}{10,3}},
+		map[string]interface{}{"k":1,"s":"pkg/sub","t":[]interface{}{20,3}},
+		map[string]interface{}{"k":1,"s":"../up","t":[]interface{}{30,3}},
+		map[string]interface{}{"k":1,"s":"./a/*/b.js","t":[]interface{}{40,3}},
+		map[string]interface{}{"k":1,"s":"./a/../b.js","t":[]interface{}{50,3}},
+		map[string]interface{}{"k":1,"s":"./node_modules/x","t":[]interface{}{60,3}},
+		map[string]interface{}{"k":0,"t":[]interface{}{70,4}},
+		map[string]interface{}{"k":3,"t":[]interface{}{80,1},"m":[]interface{}{
+			[]interface{}{"import", map[string]interface{}{"k":1,"s":"./import.js","t":[]interface{}{90,3}}},
+			[]interface{}{"require", map[string]interface{}{"k":1,"s":"./require.js","t":[]interface{}{100,3}}},
+			[]interface{}{"default", map[string]interface{}{"k":1,"s":"./default.js","t":[]interface{}{110,3}}},
+		}},
+		map[string]interface{}{"k":2,"t":[]interface{}{120,1},"a":[]interface{}{
+			map[string]interface{}{"k":0,"t":[]interface{}{121,4}},
+			map[string]interface{}{"k":1,"s":"./fallback.js","t":[]interface{}{122,3}},
+		}},
+		map[string]interface{}{"k":4,"t":[]interface{}{130,1}},
+	}
+	condSets := [][]interface{}{{}, {"import"}, {"require"}, {"import","node"}}
+	ti := 0
+	for _, tgt := range targets {
+		for _, conds := range condSets {
+			for _, pat := range []bool{false, true} {
+				for _, internal := range []bool{false, true} {
+					r := rq()
+					res, st, d := r.esmPackageTargetResolve("/pkg", erEntry(tgt), "sub/x", pat, internal, erConds(conds))
+					add("esmPackageTargetResolve", map[string]interface{}{"tgt": tgt, "sub":"sub/x", "pat":pat, "internal":internal, "conds":conds}, erResolve(res, st, d, r.debugLogs))
+					ti++
+				}
+			}
+		}
+	}
+	_ = ti
+
+	// esmPackageImportsExportsResolve
+	mapObj := map[string]interface{}{"k":3,"t":[]interface{}{200,1},"m":[]interface{}{
+		[]interface{}{"./exact.js", map[string]interface{}{"k":1,"s":"./a.js","t":[]interface{}{201,3}}, []interface{}{201,9}},
+		[]interface{}{"./wild/*", map[string]interface{}{"k":1,"s":"./w/*.js","t":[]interface{}{202,3}}, []interface{}{202,7}},
+		[]interface{}{"./dir/", map[string]interface{}{"k":1,"s":"./d/","t":[]interface{}{203,3}}, []interface{}{203,6}},
+	}}
+	for _, key := range []string{"./exact.js", "./wild/foo", "./dir/x", "./nope"} {
+		for _, isImports := range []bool{false, true} {
+			r := rq(); res, st, d := r.esmPackageImportsExportsResolve(key, erEntry(mapObj), "/pkg", isImports, erConds([]interface{}{"import"}))
+			add("esmPackageImportsExportsResolve", map[string]interface{}{"key":key,"obj":mapObj,"isImports":isImports}, erResolve(res, st, d, r.debugLogs))
+		}
+	}
+
+	// esmPackageImportsResolve / esmPackageExportsResolve
+	for _, key := range []string{"#internal", "./exact.js", "./wild/foo", "./missing"} {
+		r := rq(); res, st, d := r.esmPackageImportsResolve(key, erEntry(mapObj), erConds([]interface{}{"import"}))
+		add("esmPackageImportsResolve", map[string]interface{}{"key":key}, erResolve(res, st, d, r.debugLogs))
+	}
+	for _, sub := range []string{".", "./exact.js", "./wild/foo", "./missing"} {
+		r := rq(); res, st, d := r.esmPackageExportsResolve("/pkg", sub, erEntry(mapObj), erConds([]interface{}{"import"}))
+		add("esmPackageExportsResolve", map[string]interface{}{"sub":sub}, erResolve(res, st, d, r.debugLogs))
+	}
+
+	// reverse family
+	for _, q := range []string{"./a.js", "./w/foo.js", "./d/x", "./none.js"} {
+		r := rq(); ok, sub, tok := r.esmPackageExportsReverseResolve(q, erEntry(mapObj), erConds([]interface{}{"import"}))
+		add("esmPackageExportsReverseResolve", map[string]interface{}{"query":q}, erReverse(ok, sub, tok, r.debugLogs))
+		for _, ke := range []string{"./exact.js","./wild/*","./dir/"} {
+			var e pjEntry = erEntry(mapObj); var kv pjEntry; var found bool
+			for _, p := range e.mapData { if p.key==ke { kv=p.value; found=true; break } }
+			if !found { continue }
+			for _, kd := range []int{int(esmReverseExact),int(esmReversePattern),int(esmReversePrefix)} {
+				r := rq(); ok, sub, tok := r.esmPackageTargetReverseResolve(q, ke, kv, esmReverseKind(kd), erConds([]interface{}{"import"}))
+				var tsp interface{}
+				for _, pair := range mapObj["m"].([]interface{}) {
+					pp := pair.([]interface{})
+					if pp[0].(string)==ke { tsp = pp[1]; break }
+				}
+				add("esmPackageTargetReverseResolve", map[string]interface{}{"query":q,"key":ke,"target":tsp,"kind":kd}, erReverse(ok, sub, tok, r.debugLogs))
+			}
+		}
+	}
+
+	// MakePrettyPaths
+	{
+		pp := MakePrettyPaths(fs.MockFS(map[string]string{}, fs.MockUnix, "/root/port"), logger.Path{Text:"/root/port/src/a.js", Namespace:"file"})
+		add("MakePrettyPaths", map[string]interface{}{"text":"/root/port/src/a.js","ns":"file"}, []interface{}{pp.Abs, pp.Rel})
+		pp = MakePrettyPaths(fs.MockFS(map[string]string{}, fs.MockUnix, "/root/port"), logger.Path{Text:"/x.css", Namespace:"https", IgnoredSuffix:"?x"})
+		add("MakePrettyPaths", map[string]interface{}{"text":"/x.css","ns":"https","suffix":"?x"}, []interface{}{pp.Abs, pp.Rel})
+	}
+
+	// isExternal
+	for _, pair := range []struct{path string; kind ast.ImportKind}{
+		{"react", ast.ImportStmt}, {"react", ast.ImportEntryPoint}, {"lodash/fp", ast.ImportStmt},
+		{"other", ast.ImportStmt},
+	} {
+		m := config.ExternalMatchers{Exact: map[string]bool{"react":true}, Patterns: []config.WildcardPattern{{Prefix:"lodash/", Suffix:""}}}
+		r := rq(); v := r.isExternal(m, pair.path, pair.kind)
+		add("isExternal", map[string]interface{}{"path":pair.path,"kind":int(pair.kind)}, v)
+	}
+
+	// flushDebugLogs (mode 0 failure / 1 success with log level)
+	{
+		log := logger.NewDeferLog(logger.DeferLogNoVerboseOrDebug, nil)
+		r := resolverQuery{Resolver: &Resolver{log: log}, debugLogs: &debugLogs{what:"desc"}}
+		r.debugLogs.addNote("n1"); r.flushDebugLogs(flushDueToFailure)
+		out2 := []interface{}{}
+		for _, mm := range log.Done() { out2 = append(out2, []interface{}{int(mm.Kind), mm.Data.Text}) }
+		add("flushDebugLogs", map[string]interface{}{"mode":0}, out2)
+	}
+
+	b, err := json.MarshalIndent(out, "", "  ")
+	if err != nil { t.Fatal(err) }
+	if err := os.WriteFile("/root/port/testdata/esm-resolve-go.json", b, 0644); err != nil { t.Fatal(err) }
+	t.Logf("wrote %d rows", len(out))
+}

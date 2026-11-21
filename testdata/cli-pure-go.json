@@ -1,0 +1,74 @@
+{
+  "rows": [
+    {
+      "name": "newBuildOptions",
+      "data": {
+        "banner": 0,
+        "define": 0,
+        "footer": 0,
+        "loader": 0,
+        "logOverride": 0,
+        "supported": 0
+      }
+    },
+    {
+      "name": "newTransformOptions",
+      "data": {
+        "define": 0,
+        "logOverride": 0,
+        "supported": 0
+      }
+    },
+    {
+      "name": "filterAnalyzeFlags:none",
+      "data": {
+        "args": [
+          "--bundle",
+          "a.js",
+          "--outfile=out.js"
+        ],
+        "mode": 0
+      }
+    },
+    {
+      "name": "filterAnalyzeFlags:analyze",
+      "data": {
+        "args": [
+          "--bundle",
+          "a.js"
+        ],
+        "mode": 1
+      }
+    },
+    {
+      "name": "filterAnalyzeFlags:verbose",
+      "data": {
+        "args": [
+          "a.js",
+          "--bundle"
+        ],
+        "mode": 2
+      }
+    },
+    {
+      "name": "filterAnalyzeFlags:no-build",
+      "data": {
+        "args": [
+          "a.js"
+        ],
+        "mode": 1
+      }
+    },
+    {
+      "name": "filterAnalyzeFlags:mixed",
+      "data": {
+        "args": [
+          "--bundle",
+          "a.js",
+          "b.js"
+        ],
+        "mode": 2
+      }
+    }
+  ]
+}

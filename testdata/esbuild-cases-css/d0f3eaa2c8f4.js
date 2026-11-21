@@ -1,0 +1,1 @@
+.magenta { color: hsl(300, 100%, 50%) }

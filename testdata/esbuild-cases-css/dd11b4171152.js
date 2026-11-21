@@ -1,0 +1,1 @@
+a { color: hsla(1deg 2% 3%) }

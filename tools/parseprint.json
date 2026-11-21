@@ -1,0 +1,104 @@
+{
+  "note": "M1 Parse+Print 差分通道的钉死基准。goOk 是 Go 可解析数（N），referenceSha256 是 Go 生成器 stdout 的 sha256；每轮 --check 会重跑生成器并校验。",
+  "generator": "cd /root/esbuild && go run ./tmpgenparseprint",
+  "generatorSource": "tools/go/tmpgenparseprint/main.go",
+  "generatorSourceSha256": "af39f5975d641b4340663ce59aa93ad5d82cfd95c212c37231d3f852caf2afd7",
+  "sources": [
+    {
+      "id": "three-src",
+      "dir": "testdata/three/package/src",
+      "files": 757,
+      "sha256": "4d42a0009c407ea1dde65939a1b722e3c73bcbb4d30c6ccf7e98d3b474f934d2"
+    },
+    {
+      "id": "three-build",
+      "dir": "testdata/three/package/build",
+      "files": 5,
+      "sha256": "dfb0f7acb2cd7fcadc39287efff8e1d18a4374763757b376b2aa1ca51cf128ec"
+    },
+    {
+      "id": "esbuild-cases",
+      "dir": "testdata/esbuild-cases",
+      "files": 3488,
+      "sha256": "6c3fbf60730e3323ec05b7b53c1a6e9aa38f4406019bfdefeb3f4535f8704503"
+    }
+  ],
+  "entries": 4250,
+  "goOk": 4238,
+  "referenceSha256": "628114a5a24d492ba6c9901fbfa524b5a12e1d7e3b2def14e6cf4b653fa54b2b",
+  "equalBaseline": 4157,
+  "equalBaselineNote": "逐字节相等数基线，只许升不许降（--check 时校验）",
+  "equalBaselineBySource": {
+    "three-src": 756,
+    "three-build": 3,
+    "esbuild-cases": 3398
+  },
+  "tsErrorBaseline": 0,
+  "modes": {
+    "ts": {
+      "entries": 4250,
+      "goOk": 4250,
+      "referenceSha256": "80399822e7416d4ee2dd65da084bc365abadbdc8357fdc082ab8b354579514fa",
+      "equalBaseline": 4136,
+      "equalBaselineBySource": {
+        "three-src": 756,
+        "three-build": 3,
+        "esbuild-cases": 3377
+      },
+      "tsErrorBaseline": 0,
+      "note": "ts.Parse=1：逐字节相等基线只许升；tsError 只许降"
+    },
+    "minify": {
+      "entries": 4250,
+      "goOk": 4238,
+      "referenceSha256": "d3bff6834a6bea1cd161afdd773cf9fe2268875fa0c32d90f92c4a014d1ba538",
+      "equalBaseline": 2501,
+      "equalBaselineBySource": {
+        "three-src": 225,
+        "three-build": 0,
+        "esbuild-cases": 2276
+      },
+      "tsErrorBaseline": 30,
+      "note": "MinifyWhitespace+MinifySyntax：逐字节相等基线只许升；tsError 只许降"
+    },
+    "es2015": {
+      "entries": 4250,
+      "goOk": 4238,
+      "referenceSha256": "188b80337ec01561d11c509008ab2e05b7db86c44289de7e246cc7897f8aa270",
+      "equalBaseline": 3937,
+      "equalBaselineBySource": {
+        "three-src": 740,
+        "three-build": 1,
+        "esbuild-cases": 3196
+      },
+      "tsErrorBaseline": 0,
+      "note": "target=es2015（lower* 触发）：逐字节相等基线只许升；tsError 只许降"
+    },
+    "es2016": {
+      "entries": 4250,
+      "goOk": 4238,
+      "referenceSha256": "35e7867d14f1d990e4040128ed3640b09f0cedc7dceed93c5bf21c93ea1ccd10",
+      "equalBaseline": 3978,
+      "equalBaselineBySource": {
+        "three-src": 743,
+        "three-build": 1,
+        "esbuild-cases": 3234
+      },
+      "tsErrorBaseline": 0,
+      "note": "target=es2016（lower* 触发）：逐字节相等基线只许升；tsError 只许降"
+    },
+    "es2017": {
+      "entries": 4250,
+      "goOk": 4238,
+      "referenceSha256": "e38b4de6e253133d70e7a7052dfa31a9a507b6976e7ac2ff9585dcc52617d618",
+      "equalBaseline": 3983,
+      "equalBaselineBySource": {
+        "three-src": 748,
+        "three-build": 1,
+        "esbuild-cases": 3234
+      },
+      "tsErrorBaseline": 0,
+      "note": "target=es2017（lower* 触发）：逐字节相等基线只许升；tsError 只许降"
+    }
+  }
+}

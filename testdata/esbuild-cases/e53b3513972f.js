@@ -1,0 +1,1 @@
+import(/* webpackFoo: 1 */ 'path' /* webpackBar:2 */);

@@ -1,0 +1,992 @@
+[
+  {
+    "pkg": "internal/css_ast",
+    "fn": "Hash",
+    "recv": "SSHash",
+    "file": "css_ast.go",
+    "line": 1387,
+    "fixture": "css-ast-hash-go.json",
+    "sha": "9e62cdf9adebb84a2376579b54742e37f9af4ea013b046b32d55a42f54d0113b"
+  },
+  {
+    "pkg": "internal/css_ast",
+    "fn": "Hash",
+    "recv": "SSClass",
+    "file": "css_ast.go",
+    "line": 1406,
+    "fixture": "css-ast-hash-go.json",
+    "sha": "9e62cdf9adebb84a2376579b54742e37f9af4ea013b046b32d55a42f54d0113b"
+  },
+  {
+    "pkg": "internal/css_ast",
+    "fn": "Hash",
+    "recv": "SSAttribute",
+    "file": "css_ast.go",
+    "line": 1429,
+    "fixture": "css-ast-hash-go.json",
+    "sha": "9e62cdf9adebb84a2376579b54742e37f9af4ea013b046b32d55a42f54d0113b"
+  },
+  {
+    "pkg": "internal/css_ast",
+    "fn": "Hash",
+    "recv": "SSPseudoClass",
+    "file": "css_ast.go",
+    "line": 1454,
+    "fixture": "css-ast-hash-go.json",
+    "sha": "9e62cdf9adebb84a2376579b54742e37f9af4ea013b046b32d55a42f54d0113b"
+  },
+  {
+    "pkg": "internal/css_ast",
+    "fn": "Hash",
+    "recv": "SSPseudoClassWithSelectorList",
+    "file": "css_ast.go",
+    "line": 1564,
+    "fixture": "css-ast-hash-go.json",
+    "sha": "9e62cdf9adebb84a2376579b54742e37f9af4ea013b046b32d55a42f54d0113b"
+  },
+  {
+    "pkg": "internal/css_ast",
+    "fn": "Hash",
+    "recv": "MQType",
+    "file": "css_ast.go",
+    "line": 866,
+    "fixture": "css-ast-hash-go.json",
+    "sha": "9e62cdf9adebb84a2376579b54742e37f9af4ea013b046b32d55a42f54d0113b"
+  },
+  {
+    "pkg": "internal/css_ast",
+    "fn": "Hash",
+    "recv": "MQNot",
+    "file": "css_ast.go",
+    "line": 898,
+    "fixture": "css-ast-hash-go.json",
+    "sha": "9e62cdf9adebb84a2376579b54742e37f9af4ea013b046b32d55a42f54d0113b"
+  },
+  {
+    "pkg": "internal/css_ast",
+    "fn": "Hash",
+    "recv": "MQBinary",
+    "file": "css_ast.go",
+    "line": 931,
+    "fixture": "css-ast-hash-go.json",
+    "sha": "9e62cdf9adebb84a2376579b54742e37f9af4ea013b046b32d55a42f54d0113b"
+  },
+  {
+    "pkg": "internal/css_ast",
+    "fn": "Hash",
+    "recv": "MQArbitraryTokens",
+    "file": "css_ast.go",
+    "line": 962,
+    "fixture": "css-ast-hash-go.json",
+    "sha": "9e62cdf9adebb84a2376579b54742e37f9af4ea013b046b32d55a42f54d0113b"
+  },
+  {
+    "pkg": "internal/css_ast",
+    "fn": "Hash",
+    "recv": "MQPlainOrBoolean",
+    "file": "css_ast.go",
+    "line": 988,
+    "fixture": "css-ast-hash-go.json",
+    "sha": "9e62cdf9adebb84a2376579b54742e37f9af4ea013b046b32d55a42f54d0113b"
+  },
+  {
+    "pkg": "internal/css_ast",
+    "fn": "Hash",
+    "recv": "MQRange",
+    "file": "css_ast.go",
+    "line": 1024,
+    "fixture": "css-ast-hash-go.json",
+    "sha": "9e62cdf9adebb84a2376579b54742e37f9af4ea013b046b32d55a42f54d0113b"
+  },
+  {
+    "pkg": "internal/css_ast",
+    "fn": "Hash",
+    "recv": "RAtCharset",
+    "file": "css_ast.go",
+    "line": 494,
+    "fixture": "css-ast-hash-go.json",
+    "sha": "9e62cdf9adebb84a2376579b54742e37f9af4ea013b046b32d55a42f54d0113b"
+  },
+  {
+    "pkg": "internal/css_ast",
+    "fn": "Hash",
+    "recv": "RAtImport",
+    "file": "css_ast.go",
+    "line": 542,
+    "fixture": "css-ast-hash-go.json",
+    "sha": "9e62cdf9adebb84a2376579b54742e37f9af4ea013b046b32d55a42f54d0113b"
+  },
+  {
+    "pkg": "internal/css_ast",
+    "fn": "Hash",
+    "recv": "RAtKeyframes",
+    "file": "css_ast.go",
+    "line": 581,
+    "fixture": "css-ast-hash-go.json",
+    "sha": "9e62cdf9adebb84a2376579b54742e37f9af4ea013b046b32d55a42f54d0113b"
+  },
+  {
+    "pkg": "internal/css_ast",
+    "fn": "Hash",
+    "recv": "RKnownAt",
+    "file": "css_ast.go",
+    "line": 607,
+    "fixture": "css-ast-hash-go.json",
+    "sha": "9e62cdf9adebb84a2376579b54742e37f9af4ea013b046b32d55a42f54d0113b"
+  },
+  {
+    "pkg": "internal/css_ast",
+    "fn": "Hash",
+    "recv": "RUnknownAt",
+    "file": "css_ast.go",
+    "line": 626,
+    "fixture": "css-ast-hash-go.json",
+    "sha": "9e62cdf9adebb84a2376579b54742e37f9af4ea013b046b32d55a42f54d0113b"
+  },
+  {
+    "pkg": "internal/css_ast",
+    "fn": "Hash",
+    "recv": "RSelector",
+    "file": "css_ast.go",
+    "line": 645,
+    "fixture": "css-ast-hash-go.json",
+    "sha": "9e62cdf9adebb84a2376579b54742e37f9af4ea013b046b32d55a42f54d0113b"
+  },
+  {
+    "pkg": "internal/css_ast",
+    "fn": "Hash",
+    "recv": "RQualified",
+    "file": "css_ast.go",
+    "line": 664,
+    "fixture": "css-ast-hash-go.json",
+    "sha": "9e62cdf9adebb84a2376579b54742e37f9af4ea013b046b32d55a42f54d0113b"
+  },
+  {
+    "pkg": "internal/css_ast",
+    "fn": "Hash",
+    "recv": "RDeclaration",
+    "file": "css_ast.go",
+    "line": 684,
+    "fixture": "css-ast-hash-go.json",
+    "sha": "9e62cdf9adebb84a2376579b54742e37f9af4ea013b046b32d55a42f54d0113b"
+  },
+  {
+    "pkg": "internal/css_ast",
+    "fn": "Hash",
+    "recv": "RBadDeclaration",
+    "file": "css_ast.go",
+    "line": 714,
+    "fixture": "css-ast-hash-go.json",
+    "sha": "9e62cdf9adebb84a2376579b54742e37f9af4ea013b046b32d55a42f54d0113b"
+  },
+  {
+    "pkg": "internal/css_ast",
+    "fn": "Hash",
+    "recv": "RComment",
+    "file": "css_ast.go",
+    "line": 729,
+    "fixture": "css-ast-hash-go.json",
+    "sha": "9e62cdf9adebb84a2376579b54742e37f9af4ea013b046b32d55a42f54d0113b"
+  },
+  {
+    "pkg": "internal/css_ast",
+    "fn": "Hash",
+    "recv": "RAtLayer",
+    "file": "css_ast.go",
+    "line": 761,
+    "fixture": "css-ast-hash-go.json",
+    "sha": "9e62cdf9adebb84a2376579b54742e37f9af4ea013b046b32d55a42f54d0113b"
+  },
+  {
+    "pkg": "internal/css_ast",
+    "fn": "Hash",
+    "recv": "RAtMedia",
+    "file": "css_ast.go",
+    "line": 785,
+    "fixture": "css-ast-hash-go.json",
+    "sha": "9e62cdf9adebb84a2376579b54742e37f9af4ea013b046b32d55a42f54d0113b"
+  },
+  {
+    "pkg": "internal/css_ast",
+    "fn": "Hash",
+    "recv": "RAtScope",
+    "file": "css_ast.go",
+    "line": 1121,
+    "fixture": "css-ast-hash-go.json",
+    "sha": "9e62cdf9adebb84a2376579b54742e37f9af4ea013b046b32d55a42f54d0113b"
+  },
+  {
+    "pkg": "internal/css_ast",
+    "fn": "HashTokens",
+    "recv": "",
+    "file": "css_ast.go",
+    "line": 230,
+    "fixture": "css-ast-hash-go.json",
+    "sha": "9e62cdf9adebb84a2376579b54742e37f9af4ea013b046b32d55a42f54d0113b"
+  },
+  {
+    "pkg": "internal/css_ast",
+    "fn": "HashRules",
+    "recv": "",
+    "file": "css_ast.go",
+    "line": 473,
+    "fixture": "css-ast-hash-go.json",
+    "sha": "9e62cdf9adebb84a2376579b54742e37f9af4ea013b046b32d55a42f54d0113b"
+  },
+  {
+    "pkg": "internal/css_ast",
+    "fn": "HashMediaQueries",
+    "recv": "",
+    "file": "css_ast.go",
+    "line": 828,
+    "fixture": "css-ast-hash-go.json",
+    "sha": "9e62cdf9adebb84a2376579b54742e37f9af4ea013b046b32d55a42f54d0113b"
+  },
+  {
+    "pkg": "internal/css_ast",
+    "fn": "HashComplexSelectors",
+    "recv": "",
+    "file": "css_ast.go",
+    "line": 1145,
+    "fixture": "css-ast-hash-go.json",
+    "sha": "9e62cdf9adebb84a2376579b54742e37f9af4ea013b046b32d55a42f54d0113b"
+  },
+  {
+    "pkg": "internal/css_ast",
+    "fn": "Equal",
+    "recv": "Token",
+    "file": "css_ast.go",
+    "line": 163,
+    "fixture": "css-ast-equal-go.json",
+    "sha": "d365da98ef2c95bf8d01f20c1d4571367254e9662445d4dfb30f513f5da814b3"
+  },
+  {
+    "pkg": "internal/css_ast",
+    "fn": "TokensEqual",
+    "recv": "",
+    "file": "css_ast.go",
+    "line": 218,
+    "fixture": "css-ast-equal-go.json",
+    "sha": "d365da98ef2c95bf8d01f20c1d4571367254e9662445d4dfb30f513f5da814b3"
+  },
+  {
+    "pkg": "internal/css_ast",
+    "fn": "EqualIgnoringWhitespace",
+    "recv": "Token",
+    "file": "css_ast.go",
+    "line": 246,
+    "fixture": "css-ast-equal-go.json",
+    "sha": "d365da98ef2c95bf8d01f20c1d4571367254e9662445d4dfb30f513f5da814b3"
+  },
+  {
+    "pkg": "internal/css_ast",
+    "fn": "TokensEqualIgnoringWhitespace",
+    "recv": "",
+    "file": "css_ast.go",
+    "line": 260,
+    "fixture": "css-ast-equal-go.json",
+    "sha": "d365da98ef2c95bf8d01f20c1d4571367254e9662445d4dfb30f513f5da814b3"
+  },
+  {
+    "pkg": "internal/css_ast",
+    "fn": "RefsAreEquivalent",
+    "recv": "CrossFileEqualityCheck",
+    "file": "css_ast.go",
+    "line": 146,
+    "fixture": "css-ast-equal-go.json",
+    "sha": "d365da98ef2c95bf8d01f20c1d4571367254e9662445d4dfb30f513f5da814b3"
+  },
+  {
+    "pkg": "internal/css_ast",
+    "fn": "Equal",
+    "recv": "RAtCharset",
+    "file": "css_ast.go",
+    "line": 489,
+    "fixture": "css-ast-equal-go.json",
+    "sha": "d365da98ef2c95bf8d01f20c1d4571367254e9662445d4dfb30f513f5da814b3"
+  },
+  {
+    "pkg": "internal/css_ast",
+    "fn": "Equal",
+    "recv": "RAtImport",
+    "file": "css_ast.go",
+    "line": 538,
+    "fixture": "css-ast-equal-go.json",
+    "sha": "d365da98ef2c95bf8d01f20c1d4571367254e9662445d4dfb30f513f5da814b3"
+  },
+  {
+    "pkg": "internal/css_ast",
+    "fn": "Equal",
+    "recv": "RAtKeyframes",
+    "file": "css_ast.go",
+    "line": 560,
+    "fixture": "css-ast-equal-go.json",
+    "sha": "d365da98ef2c95bf8d01f20c1d4571367254e9662445d4dfb30f513f5da814b3"
+  },
+  {
+    "pkg": "internal/css_ast",
+    "fn": "Equal",
+    "recv": "RKnownAt",
+    "file": "css_ast.go",
+    "line": 602,
+    "fixture": "css-ast-equal-go.json",
+    "sha": "d365da98ef2c95bf8d01f20c1d4571367254e9662445d4dfb30f513f5da814b3"
+  },
+  {
+    "pkg": "internal/css_ast",
+    "fn": "Equal",
+    "recv": "RUnknownAt",
+    "file": "css_ast.go",
+    "line": 621,
+    "fixture": "css-ast-equal-go.json",
+    "sha": "d365da98ef2c95bf8d01f20c1d4571367254e9662445d4dfb30f513f5da814b3"
+  },
+  {
+    "pkg": "internal/css_ast",
+    "fn": "Equal",
+    "recv": "RSelector",
+    "file": "css_ast.go",
+    "line": 640,
+    "fixture": "css-ast-equal-go.json",
+    "sha": "d365da98ef2c95bf8d01f20c1d4571367254e9662445d4dfb30f513f5da814b3"
+  },
+  {
+    "pkg": "internal/css_ast",
+    "fn": "Equal",
+    "recv": "RQualified",
+    "file": "css_ast.go",
+    "line": 659,
+    "fixture": "css-ast-equal-go.json",
+    "sha": "d365da98ef2c95bf8d01f20c1d4571367254e9662445d4dfb30f513f5da814b3"
+  },
+  {
+    "pkg": "internal/css_ast",
+    "fn": "Equal",
+    "recv": "RDeclaration",
+    "file": "css_ast.go",
+    "line": 679,
+    "fixture": "css-ast-equal-go.json",
+    "sha": "d365da98ef2c95bf8d01f20c1d4571367254e9662445d4dfb30f513f5da814b3"
+  },
+  {
+    "pkg": "internal/css_ast",
+    "fn": "Equal",
+    "recv": "RBadDeclaration",
+    "file": "css_ast.go",
+    "line": 709,
+    "fixture": "css-ast-equal-go.json",
+    "sha": "d365da98ef2c95bf8d01f20c1d4571367254e9662445d4dfb30f513f5da814b3"
+  },
+  {
+    "pkg": "internal/css_ast",
+    "fn": "Equal",
+    "recv": "RComment",
+    "file": "css_ast.go",
+    "line": 724,
+    "fixture": "css-ast-equal-go.json",
+    "sha": "d365da98ef2c95bf8d01f20c1d4571367254e9662445d4dfb30f513f5da814b3"
+  },
+  {
+    "pkg": "internal/css_ast",
+    "fn": "Equal",
+    "recv": "RAtLayer",
+    "file": "css_ast.go",
+    "line": 741,
+    "fixture": "css-ast-equal-go.json",
+    "sha": "d365da98ef2c95bf8d01f20c1d4571367254e9662445d4dfb30f513f5da814b3"
+  },
+  {
+    "pkg": "internal/css_ast",
+    "fn": "Equal",
+    "recv": "RAtMedia",
+    "file": "css_ast.go",
+    "line": 780,
+    "fixture": "css-ast-equal-go.json",
+    "sha": "d365da98ef2c95bf8d01f20c1d4571367254e9662445d4dfb30f513f5da814b3"
+  },
+  {
+    "pkg": "internal/css_ast",
+    "fn": "Equal",
+    "recv": "RAtScope",
+    "file": "css_ast.go",
+    "line": 1116,
+    "fixture": "css-ast-equal-go.json",
+    "sha": "d365da98ef2c95bf8d01f20c1d4571367254e9662445d4dfb30f513f5da814b3"
+  },
+  {
+    "pkg": "internal/css_ast",
+    "fn": "RulesEqual",
+    "recv": "",
+    "file": "css_ast.go",
+    "line": 461,
+    "fixture": "css-ast-equal-go.json",
+    "sha": "d365da98ef2c95bf8d01f20c1d4571367254e9662445d4dfb30f513f5da814b3"
+  },
+  {
+    "pkg": "internal/css_ast",
+    "fn": "Equal",
+    "recv": "MQType",
+    "file": "css_ast.go",
+    "line": 850,
+    "fixture": "css-ast-equal-go.json",
+    "sha": "d365da98ef2c95bf8d01f20c1d4571367254e9662445d4dfb30f513f5da814b3"
+  },
+  {
+    "pkg": "internal/css_ast",
+    "fn": "Equal",
+    "recv": "MQNot",
+    "file": "css_ast.go",
+    "line": 888,
+    "fixture": "css-ast-equal-go.json",
+    "sha": "d365da98ef2c95bf8d01f20c1d4571367254e9662445d4dfb30f513f5da814b3"
+  },
+  {
+    "pkg": "internal/css_ast",
+    "fn": "Equal",
+    "recv": "MQBinary",
+    "file": "css_ast.go",
+    "line": 921,
+    "fixture": "css-ast-equal-go.json",
+    "sha": "d365da98ef2c95bf8d01f20c1d4571367254e9662445d4dfb30f513f5da814b3"
+  },
+  {
+    "pkg": "internal/css_ast",
+    "fn": "Equal",
+    "recv": "MQArbitraryTokens",
+    "file": "css_ast.go",
+    "line": 952,
+    "fixture": "css-ast-equal-go.json",
+    "sha": "d365da98ef2c95bf8d01f20c1d4571367254e9662445d4dfb30f513f5da814b3"
+  },
+  {
+    "pkg": "internal/css_ast",
+    "fn": "Equal",
+    "recv": "MQPlainOrBoolean",
+    "file": "css_ast.go",
+    "line": 978,
+    "fixture": "css-ast-equal-go.json",
+    "sha": "d365da98ef2c95bf8d01f20c1d4571367254e9662445d4dfb30f513f5da814b3"
+  },
+  {
+    "pkg": "internal/css_ast",
+    "fn": "Equal",
+    "recv": "MQRange",
+    "file": "css_ast.go",
+    "line": 1012,
+    "fixture": "css-ast-equal-go.json",
+    "sha": "d365da98ef2c95bf8d01f20c1d4571367254e9662445d4dfb30f513f5da814b3"
+  },
+  {
+    "pkg": "internal/css_ast",
+    "fn": "EqualIgnoringWhitespace",
+    "recv": "MQPlainOrBoolean",
+    "file": "css_ast.go",
+    "line": 983,
+    "fixture": "css-ast-equal-go.json",
+    "sha": "d365da98ef2c95bf8d01f20c1d4571367254e9662445d4dfb30f513f5da814b3"
+  },
+  {
+    "pkg": "internal/css_ast",
+    "fn": "EqualIgnoringWhitespace",
+    "recv": "MQRange",
+    "file": "css_ast.go",
+    "line": 1018,
+    "fixture": "css-ast-equal-go.json",
+    "sha": "d365da98ef2c95bf8d01f20c1d4571367254e9662445d4dfb30f513f5da814b3"
+  },
+  {
+    "pkg": "internal/css_ast",
+    "fn": "EqualIgnoringWhitespace",
+    "recv": "MQType",
+    "file": "css_ast.go",
+    "line": 858,
+    "fixture": "css-ast-equal-go.json",
+    "sha": "d365da98ef2c95bf8d01f20c1d4571367254e9662445d4dfb30f513f5da814b3"
+  },
+  {
+    "pkg": "internal/css_ast",
+    "fn": "EqualIgnoringWhitespace",
+    "recv": "MQNot",
+    "file": "css_ast.go",
+    "line": 893,
+    "fixture": "css-ast-equal-go.json",
+    "sha": "d365da98ef2c95bf8d01f20c1d4571367254e9662445d4dfb30f513f5da814b3"
+  },
+  {
+    "pkg": "internal/css_ast",
+    "fn": "EqualIgnoringWhitespace",
+    "recv": "MQBinary",
+    "file": "css_ast.go",
+    "line": 926,
+    "fixture": "css-ast-equal-go.json",
+    "sha": "d365da98ef2c95bf8d01f20c1d4571367254e9662445d4dfb30f513f5da814b3"
+  },
+  {
+    "pkg": "internal/css_ast",
+    "fn": "EqualIgnoringWhitespace",
+    "recv": "MQArbitraryTokens",
+    "file": "css_ast.go",
+    "line": 957,
+    "fixture": "css-ast-equal-go.json",
+    "sha": "d365da98ef2c95bf8d01f20c1d4571367254e9662445d4dfb30f513f5da814b3"
+  },
+  {
+    "pkg": "internal/css_ast",
+    "fn": "MediaQueriesEqual",
+    "recv": "",
+    "file": "css_ast.go",
+    "line": 804,
+    "fixture": "css-ast-equal-go.json",
+    "sha": "d365da98ef2c95bf8d01f20c1d4571367254e9662445d4dfb30f513f5da814b3"
+  },
+  {
+    "pkg": "internal/css_ast",
+    "fn": "MediaQueriesEqualIgnoringWhitespace",
+    "recv": "",
+    "file": "css_ast.go",
+    "line": 816,
+    "fixture": "css-ast-equal-go.json",
+    "sha": "d365da98ef2c95bf8d01f20c1d4571367254e9662445d4dfb30f513f5da814b3"
+  },
+  {
+    "pkg": "internal/css_ast",
+    "fn": "Equal",
+    "recv": "SSHash",
+    "file": "css_ast.go",
+    "line": 1382,
+    "fixture": "css-ast-equal-go.json",
+    "sha": "d365da98ef2c95bf8d01f20c1d4571367254e9662445d4dfb30f513f5da814b3"
+  },
+  {
+    "pkg": "internal/css_ast",
+    "fn": "Equal",
+    "recv": "SSClass",
+    "file": "css_ast.go",
+    "line": 1401,
+    "fixture": "css-ast-equal-go.json",
+    "sha": "d365da98ef2c95bf8d01f20c1d4571367254e9662445d4dfb30f513f5da814b3"
+  },
+  {
+    "pkg": "internal/css_ast",
+    "fn": "Equal",
+    "recv": "SSAttribute",
+    "file": "css_ast.go",
+    "line": 1423,
+    "fixture": "css-ast-equal-go.json",
+    "sha": "d365da98ef2c95bf8d01f20c1d4571367254e9662445d4dfb30f513f5da814b3"
+  },
+  {
+    "pkg": "internal/css_ast",
+    "fn": "Equal",
+    "recv": "SSPseudoClass",
+    "file": "css_ast.go",
+    "line": 1449,
+    "fixture": "css-ast-equal-go.json",
+    "sha": "d365da98ef2c95bf8d01f20c1d4571367254e9662445d4dfb30f513f5da814b3"
+  },
+  {
+    "pkg": "internal/css_ast",
+    "fn": "Equal",
+    "recv": "SSPseudoClassWithSelectorList",
+    "file": "css_ast.go",
+    "line": 1559,
+    "fixture": "css-ast-equal-go.json",
+    "sha": "d365da98ef2c95bf8d01f20c1d4571367254e9662445d4dfb30f513f5da814b3"
+  },
+  {
+    "pkg": "internal/css_ast",
+    "fn": "Equal",
+    "recv": "ComplexSelector",
+    "file": "css_ast.go",
+    "line": 1236,
+    "fixture": "css-ast-equal-go.json",
+    "sha": "d365da98ef2c95bf8d01f20c1d4571367254e9662445d4dfb30f513f5da814b3"
+  },
+  {
+    "pkg": "internal/css_ast",
+    "fn": "ComplexSelectorsEqual",
+    "recv": "",
+    "file": "css_ast.go",
+    "line": 1133,
+    "fixture": "css-ast-equal-go.json",
+    "sha": "d365da98ef2c95bf8d01f20c1d4571367254e9662445d4dfb30f513f5da814b3"
+  },
+  {
+    "pkg": "internal/css_ast",
+    "fn": "Equal",
+    "recv": "NameToken",
+    "file": "css_ast.go",
+    "line": 1333,
+    "fixture": "css-ast-equal-go.json",
+    "sha": "d365da98ef2c95bf8d01f20c1d4571367254e9662445d4dfb30f513f5da814b3"
+  },
+  {
+    "pkg": "internal/css_ast",
+    "fn": "Equal",
+    "recv": "NamespacedName",
+    "file": "css_ast.go",
+    "line": 1362,
+    "fixture": "css-ast-equal-go.json",
+    "sha": "d365da98ef2c95bf8d01f20c1d4571367254e9662445d4dfb30f513f5da814b3"
+  },
+  {
+    "pkg": "internal/css_ast",
+    "fn": "ContainsNestingCombinator",
+    "recv": "ComplexSelector",
+    "file": "css_ast.go",
+    "line": 1172,
+    "fixture": "css-ast-equal-go.json",
+    "sha": "d365da98ef2c95bf8d01f20c1d4571367254e9662445d4dfb30f513f5da814b3"
+  },
+  {
+    "pkg": "internal/css_ast",
+    "fn": "IsRelative",
+    "recv": "ComplexSelector",
+    "file": "css_ast.go",
+    "line": 1190,
+    "fixture": "css-ast-equal-go.json",
+    "sha": "d365da98ef2c95bf8d01f20c1d4571367254e9662445d4dfb30f513f5da814b3"
+  },
+  {
+    "pkg": "internal/css_ast",
+    "fn": "CloneTokensWithoutImportRecords",
+    "recv": "",
+    "file": "css_ast.go",
+    "line": 389,
+    "fixture": "css-ast-clone-go.json",
+    "sha": "2517fa9836147545052d8c1d4c494522c82a9738dc431d57dfa37574ac63e1ea"
+  },
+  {
+    "pkg": "internal/css_ast",
+    "fn": "CloneTokensWithImportRecords",
+    "recv": "",
+    "file": "css_ast.go",
+    "line": 400,
+    "fixture": "css-ast-clone-go.json",
+    "sha": "2517fa9836147545052d8c1d4c494522c82a9738dc431d57dfa37574ac63e1ea"
+  },
+  {
+    "pkg": "internal/css_ast",
+    "fn": "CloneMediaQueriesWithImportRecords",
+    "recv": "",
+    "file": "css_ast.go",
+    "line": 433,
+    "fixture": "css-ast-clone-go.json",
+    "sha": "2517fa9836147545052d8c1d4c494522c82a9738dc431d57dfa37574ac63e1ea"
+  },
+  {
+    "pkg": "internal/css_ast",
+    "fn": "CloneWithImportRecords",
+    "recv": "MQType",
+    "file": "css_ast.go",
+    "line": 876,
+    "fixture": "css-ast-clone-go.json",
+    "sha": "2517fa9836147545052d8c1d4c494522c82a9738dc431d57dfa37574ac63e1ea"
+  },
+  {
+    "pkg": "internal/css_ast",
+    "fn": "CloneWithImportRecords",
+    "recv": "MQNot",
+    "file": "css_ast.go",
+    "line": 904,
+    "fixture": "css-ast-clone-go.json",
+    "sha": "2517fa9836147545052d8c1d4c494522c82a9738dc431d57dfa37574ac63e1ea"
+  },
+  {
+    "pkg": "internal/css_ast",
+    "fn": "CloneWithImportRecords",
+    "recv": "MQBinary",
+    "file": "css_ast.go",
+    "line": 938,
+    "fixture": "css-ast-clone-go.json",
+    "sha": "2517fa9836147545052d8c1d4c494522c82a9738dc431d57dfa37574ac63e1ea"
+  },
+  {
+    "pkg": "internal/css_ast",
+    "fn": "CloneWithImportRecords",
+    "recv": "MQArbitraryTokens",
+    "file": "css_ast.go",
+    "line": 968,
+    "fixture": "css-ast-clone-go.json",
+    "sha": "2517fa9836147545052d8c1d4c494522c82a9738dc431d57dfa37574ac63e1ea"
+  },
+  {
+    "pkg": "internal/css_ast",
+    "fn": "CloneWithImportRecords",
+    "recv": "MQPlainOrBoolean",
+    "file": "css_ast.go",
+    "line": 995,
+    "fixture": "css-ast-clone-go.json",
+    "sha": "2517fa9836147545052d8c1d4c494522c82a9738dc431d57dfa37574ac63e1ea"
+  },
+  {
+    "pkg": "internal/css_ast",
+    "fn": "CloneWithImportRecords",
+    "recv": "MQRange",
+    "file": "css_ast.go",
+    "line": 1034,
+    "fixture": "css-ast-clone-go.json",
+    "sha": "2517fa9836147545052d8c1d4c494522c82a9738dc431d57dfa37574ac63e1ea"
+  },
+  {
+    "pkg": "internal/css_ast",
+    "fn": "Clone",
+    "recv": "SSHash",
+    "file": "css_ast.go",
+    "line": 1392,
+    "fixture": "css-ast-clone-go.json",
+    "sha": "2517fa9836147545052d8c1d4c494522c82a9738dc431d57dfa37574ac63e1ea"
+  },
+  {
+    "pkg": "internal/css_ast",
+    "fn": "Clone",
+    "recv": "SSClass",
+    "file": "css_ast.go",
+    "line": 1411,
+    "fixture": "css-ast-clone-go.json",
+    "sha": "2517fa9836147545052d8c1d4c494522c82a9738dc431d57dfa37574ac63e1ea"
+  },
+  {
+    "pkg": "internal/css_ast",
+    "fn": "Clone",
+    "recv": "SSAttribute",
+    "file": "css_ast.go",
+    "line": 1437,
+    "fixture": "css-ast-clone-go.json",
+    "sha": "2517fa9836147545052d8c1d4c494522c82a9738dc431d57dfa37574ac63e1ea"
+  },
+  {
+    "pkg": "internal/css_ast",
+    "fn": "Clone",
+    "recv": "SSPseudoClass",
+    "file": "css_ast.go",
+    "line": 1461,
+    "fixture": "css-ast-clone-go.json",
+    "sha": "2517fa9836147545052d8c1d4c494522c82a9738dc431d57dfa37574ac63e1ea"
+  },
+  {
+    "pkg": "internal/css_ast",
+    "fn": "Clone",
+    "recv": "SSPseudoClassWithSelectorList",
+    "file": "css_ast.go",
+    "line": 1573,
+    "fixture": "css-ast-clone-go.json",
+    "sha": "2517fa9836147545052d8c1d4c494522c82a9738dc431d57dfa37574ac63e1ea"
+  },
+  {
+    "pkg": "internal/css_ast",
+    "fn": "Clone",
+    "recv": "NamespacedName",
+    "file": "css_ast.go",
+    "line": 1353,
+    "fixture": "css-ast-clone-go.json",
+    "sha": "2517fa9836147545052d8c1d4c494522c82a9738dc431d57dfa37574ac63e1ea"
+  },
+  {
+    "pkg": "internal/css_ast",
+    "fn": "Clone",
+    "recv": "CompoundSelector",
+    "file": "css_ast.go",
+    "line": 1307,
+    "fixture": "css-ast-clone-go.json",
+    "sha": "2517fa9836147545052d8c1d4c494522c82a9738dc431d57dfa37574ac63e1ea"
+  },
+  {
+    "pkg": "internal/css_ast",
+    "fn": "Clone",
+    "recv": "ComplexSelector",
+    "file": "css_ast.go",
+    "line": 1164,
+    "fixture": "css-ast-clone-go.json",
+    "sha": "2517fa9836147545052d8c1d4c494522c82a9738dc431d57dfa37574ac63e1ea"
+  },
+  {
+    "pkg": "internal/css_parser",
+    "fn": "tryToReduceCalcExpression",
+    "recv": "parser",
+    "file": "css_reduce_calc.go",
+    "line": 14,
+    "fixture": "css-calc-go.json",
+    "sha": "ce98274bf6d6933b4c8dd1554af980487872ab1513e2ddb03caf8042b2a08bc0"
+  },
+  {
+    "pkg": "internal/css_parser",
+    "fn": "floatToStringForCalc",
+    "recv": "",
+    "file": "css_reduce_calc.go",
+    "line": 72,
+    "fixture": "css-calc-go.json",
+    "sha": "ce98274bf6d6933b4c8dd1554af980487872ab1513e2ddb03caf8042b2a08bc0"
+  },
+  {
+    "pkg": "internal/css_parser",
+    "fn": "convertToToken",
+    "recv": "calcSum",
+    "file": "css_reduce_calc.go",
+    "line": 100,
+    "fixture": "css-calc-go.json",
+    "sha": "ce98274bf6d6933b4c8dd1554af980487872ab1513e2ddb03caf8042b2a08bc0"
+  },
+  {
+    "pkg": "internal/css_parser",
+    "fn": "partiallySimplify",
+    "recv": "calcSum",
+    "file": "css_reduce_calc.go",
+    "line": 297,
+    "fixture": "css-calc-go.json",
+    "sha": "ce98274bf6d6933b4c8dd1554af980487872ab1513e2ddb03caf8042b2a08bc0"
+  },
+  {
+    "pkg": "internal/css_parser",
+    "fn": "tryToParseCalcTerm",
+    "recv": "",
+    "file": "css_reduce_calc.go",
+    "line": 469,
+    "fixture": "css-calc-go.json",
+    "sha": "ce98274bf6d6933b4c8dd1554af980487872ab1513e2ddb03caf8042b2a08bc0"
+  },
+  {
+    "pkg": "internal/css_parser",
+    "fn": "mangleFontFamily",
+    "recv": "parser",
+    "file": "css_decls_font_family.go",
+    "line": 57,
+    "fixture": "css-font-go.json",
+    "sha": "2f649cb81fc60286527753bbb5ef489178b32a0f882f5ed23adcf2d473a4e5bf"
+  },
+  {
+    "pkg": "internal/css_parser",
+    "fn": "turnPercentIntoNumberIfShorter",
+    "recv": "",
+    "file": "css_decls_transform.go",
+    "line": 10,
+    "fixture": "css-font2-go.json",
+    "sha": "1fea9b956e643b54419f23edbc7045651cbbc4ec44b0f58e01d011ecee328cb7"
+  },
+  {
+    "pkg": "internal/css_parser",
+    "fn": "containsLocalOrGlobalSelector",
+    "recv": "",
+    "file": "css_parser_selector.go",
+    "line": 148,
+    "fixture": "css-sel-go.json",
+    "sha": "f14efff202fddd6ac1bb92af350d27a26035858911aa380fb96fc00ba253f9ed"
+  },
+  {
+    "pkg": "internal/css_parser",
+    "fn": "analyzeLeadingAmpersand",
+    "recv": "",
+    "file": "css_parser_selector.go",
+    "line": 252,
+    "fixture": "css-sel-go.json",
+    "sha": "f14efff202fddd6ac1bb92af350d27a26035858911aa380fb96fc00ba253f9ed"
+  },
+  {
+    "pkg": "internal/css_parser",
+    "fn": "compoundSelectorTermCount",
+    "recv": "",
+    "file": "css_nesting.go",
+    "line": 119,
+    "fixture": "css-sel-go.json",
+    "sha": "f14efff202fddd6ac1bb92af350d27a26035858911aa380fb96fc00ba253f9ed"
+  },
+  {
+    "pkg": "internal/css_parser",
+    "fn": "complexSelectorTermCount",
+    "recv": "",
+    "file": "css_nesting.go",
+    "line": 130,
+    "fixture": "css-sel-go.json",
+    "sha": "f14efff202fddd6ac1bb92af350d27a26035858911aa380fb96fc00ba253f9ed"
+  },
+  {
+    "pkg": "internal/css_parser",
+    "fn": "mergeCompoundSelectors",
+    "recv": "",
+    "file": "css_parser_selector.go",
+    "line": 115,
+    "fixture": "css-sel-go.json",
+    "sha": "f14efff202fddd6ac1bb92af350d27a26035858911aa380fb96fc00ba253f9ed"
+  },
+  {
+    "pkg": "internal/css_parser",
+    "fn": "xyz_to_colorSpace",
+    "recv": "",
+    "file": "css_color_spaces.go",
+    "line": 524,
+    "fixture": "css-colorspaces3-go.json",
+    "sha": "08775be84694969104a41801921a0feb37c9c91cf76acc004a4d39d7b11499c6"
+  },
+  {
+    "pkg": "internal/css_parser",
+    "fn": "colorSpace_to_xyz",
+    "recv": "",
+    "file": "css_color_spaces.go",
+    "line": 573,
+    "fixture": "css-colorspaces3-go.json",
+    "sha": "08775be84694969104a41801921a0feb37c9c91cf76acc004a4d39d7b11499c6"
+  },
+  {
+    "pkg": "internal/css_parser",
+    "fn": "gamut_mapping_xyz_to_srgb",
+    "recv": "",
+    "file": "css_color_spaces.go",
+    "line": 383,
+    "fixture": "css-colorspaces3-go.json",
+    "sha": "08775be84694969104a41801921a0feb37c9c91cf76acc004a4d39d7b11499c6"
+  },
+  {
+    "pkg": "internal/css_parser",
+    "fn": "compactTokenQuad",
+    "recv": "",
+    "file": "css_decls.go",
+    "line": 58,
+    "fixture": "css-compact-go.json",
+    "sha": "d0388e8301161f37191e99e02279bc8881e27ff467ad62c3337c65de60d1fab3"
+  },
+  {
+    "pkg": "internal/css_parser",
+    "fn": "commaToken",
+    "recv": "parser",
+    "file": "css_decls.go",
+    "line": 12,
+    "fixture": "css-compact-go.json",
+    "sha": "d0388e8301161f37191e99e02279bc8881e27ff467ad62c3337c65de60d1fab3"
+  },
+  {
+    "pkg": "internal/css_parser",
+    "fn": "updateSide",
+    "recv": "boxTracker",
+    "file": "css_decls_box.go",
+    "line": 87,
+    "fixture": "css-box2-go.json",
+    "sha": "55565ecc975ba7fc74fbd627eaf7f72c58086dc9ee92d1f3b184ad30832b6df5"
+  },
+  {
+    "pkg": "internal/css_parser",
+    "fn": "mangleSides",
+    "recv": "boxTracker",
+    "file": "css_decls_box.go",
+    "line": 96,
+    "fixture": "css-box2-go.json",
+    "sha": "55565ecc975ba7fc74fbd627eaf7f72c58086dc9ee92d1f3b184ad30832b6df5"
+  },
+  {
+    "pkg": "internal/css_parser",
+    "fn": "mangleSide",
+    "recv": "boxTracker",
+    "file": "css_decls_box.go",
+    "line": 131,
+    "fixture": "css-box2-go.json",
+    "sha": "55565ecc975ba7fc74fbd627eaf7f72c58086dc9ee92d1f3b184ad30832b6df5"
+  },
+  {
+    "pkg": "internal/css_parser",
+    "fn": "compactRules",
+    "recv": "borderRadiusTracker",
+    "file": "css_decls_border_radius.go",
+    "line": 157,
+    "fixture": "css-box2-go.json",
+    "sha": "55565ecc975ba7fc74fbd627eaf7f72c58086dc9ee92d1f3b184ad30832b6df5"
+  }
+]

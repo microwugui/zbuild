@@ -1,0 +1,401 @@
+[
+  {
+    "ops": [
+      {
+        "m": "mangleSides",
+        "toks": [
+          {
+            "k": 30,
+            "t": "0"
+          }
+        ],
+        "imp": false,
+        "side": 0
+      }
+    ],
+    "minify": false,
+    "allowAuto": false,
+    "nrules": 0,
+    "out": [
+      [
+        "decl",
+        189,
+        "margin",
+        [
+          [
+            30,
+            "0",
+            1
+          ]
+        ],
+        false,
+        0
+      ]
+    ]
+  },
+  {
+    "ops": [
+      {
+        "m": "mangleSides",
+        "toks": [
+          {
+            "k": 26,
+            "t": "1px",
+            "u": 1
+          },
+          {
+            "k": 26,
+            "t": "2px",
+            "u": 1
+          }
+        ],
+        "imp": false,
+        "side": 0
+      }
+    ],
+    "minify": false,
+    "allowAuto": false,
+    "nrules": 0,
+    "out": [
+      [
+        "decl",
+        189,
+        "margin",
+        [
+          [
+            26,
+            "1px",
+            3
+          ],
+          [
+            26,
+            "2px",
+            1
+          ]
+        ],
+        false,
+        0
+      ]
+    ]
+  },
+  {
+    "ops": [
+      {
+        "m": "mangleSides",
+        "toks": [
+          {
+            "k": 30,
+            "t": "0"
+          },
+          {
+            "k": 30,
+            "t": "0"
+          },
+          {
+            "k": 30,
+            "t": "0"
+          },
+          {
+            "k": 30,
+            "t": "0"
+          }
+        ],
+        "imp": false,
+        "side": 0
+      }
+    ],
+    "minify": false,
+    "allowAuto": false,
+    "nrules": 0,
+    "out": [
+      [
+        "decl",
+        189,
+        "margin",
+        [
+          [
+            30,
+            "0",
+            1
+          ]
+        ],
+        false,
+        0
+      ]
+    ]
+  },
+  {
+    "ops": [
+      {
+        "m": "mangleSides",
+        "toks": [
+          {
+            "k": 30,
+            "t": "0"
+          }
+        ],
+        "imp": false,
+        "side": 0
+      },
+      {
+        "m": "mangleSides",
+        "toks": [
+          {
+            "k": 30,
+            "t": "0"
+          }
+        ],
+        "imp": false,
+        "side": 0
+      }
+    ],
+    "minify": false,
+    "allowAuto": false,
+    "nrules": 0,
+    "out": [
+      "empty",
+      [
+        "decl",
+        189,
+        "margin",
+        [
+          [
+            30,
+            "0",
+            1
+          ]
+        ],
+        false,
+        0
+      ]
+    ]
+  },
+  {
+    "ops": [
+      {
+        "m": "mangleSides",
+        "toks": [
+          {
+            "k": 26,
+            "t": "10px",
+            "u": 2
+          },
+          {
+            "k": 26,
+            "t": "20px",
+            "u": 2
+          },
+          {
+            "k": 26,
+            "t": "30px",
+            "u": 2
+          },
+          {
+            "k": 26,
+            "t": "40px",
+            "u": 2
+          }
+        ],
+        "imp": false,
+        "side": 0
+      }
+    ],
+    "minify": true,
+    "allowAuto": false,
+    "nrules": 0,
+    "out": [
+      [
+        "decl",
+        189,
+        "margin",
+        [
+          [
+            26,
+            "10px",
+            2
+          ],
+          [
+            26,
+            "20px",
+            3
+          ],
+          [
+            26,
+            "30px",
+            3
+          ],
+          [
+            26,
+            "40px",
+            1
+          ]
+        ],
+        false,
+        0
+      ]
+    ]
+  },
+  {
+    "ops": [
+      {
+        "m": "mangleSide",
+        "toks": [
+          {
+            "k": 30,
+            "t": "0"
+          }
+        ],
+        "imp": false,
+        "side": 0
+      },
+      {
+        "m": "mangleSide",
+        "toks": [
+          {
+            "k": 30,
+            "t": "0"
+          }
+        ],
+        "imp": false,
+        "side": 1
+      },
+      {
+        "m": "mangleSide",
+        "toks": [
+          {
+            "k": 30,
+            "t": "0"
+          }
+        ],
+        "imp": false,
+        "side": 2
+      },
+      {
+        "m": "mangleSide",
+        "toks": [
+          {
+            "k": 30,
+            "t": "0"
+          }
+        ],
+        "imp": false,
+        "side": 3
+      }
+    ],
+    "minify": false,
+    "allowAuto": false,
+    "nrules": 0,
+    "out": [
+      "empty",
+      "empty",
+      "empty",
+      [
+        "decl",
+        189,
+        "margin",
+        [
+          [
+            30,
+            "0",
+            1
+          ]
+        ],
+        false,
+        0
+      ]
+    ]
+  },
+  {
+    "ops": [
+      {
+        "m": "mangleSides",
+        "toks": [
+          {
+            "k": 30,
+            "t": "0"
+          }
+        ],
+        "imp": false,
+        "side": 0
+      },
+      {
+        "m": "mangleSides",
+        "toks": [
+          {
+            "k": 30,
+            "t": "0"
+          }
+        ],
+        "imp": true,
+        "side": 0
+      }
+    ],
+    "minify": false,
+    "allowAuto": false,
+    "nrules": 0,
+    "out": [
+      [
+        "decl",
+        189,
+        "margin",
+        [
+          [
+            30,
+            "0",
+            1
+          ]
+        ],
+        false,
+        0
+      ],
+      [
+        "decl",
+        189,
+        "margin",
+        [
+          [
+            30,
+            "0",
+            1
+          ]
+        ],
+        true,
+        0
+      ]
+    ]
+  },
+  {
+    "ops": [
+      {
+        "m": "mangleSides",
+        "toks": [
+          {
+            "k": 29,
+            "t": "auto"
+          }
+        ],
+        "imp": false,
+        "side": 0
+      }
+    ],
+    "minify": false,
+    "allowAuto": true,
+    "nrules": 0,
+    "out": [
+      [
+        "decl",
+        189,
+        "margin",
+        [
+          [
+            29,
+            "auto",
+            1
+          ]
+        ],
+        false,
+        0
+      ]
+    ]
+  }
+]

@@ -1,0 +1,1 @@
+class Foo { accessor [x] = y }

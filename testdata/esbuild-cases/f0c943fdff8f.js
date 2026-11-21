@@ -1,0 +1,1 @@
+if (true) { if (a) throw b; if (c) throw d }

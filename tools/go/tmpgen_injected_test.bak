@@ -1,0 +1,96 @@
+package bundler
+
+// 第 116 轮 Go 探针：scanner.preprocessInjectedFiles 的 InjectedDefines 确定性缝。
+// dump：每个 define 的虚拟 key/sourceIndex/DefineName/IdentifierName/source.Contents/
+// Loader/SideEffects + LazyExportAST 规范结构（符号/parts/hasLazyExport）。
+// InjectPaths 留空（避开 resolver goroutine）。
+import (
+	"encoding/json"
+	"sort"
+	"os"
+	"testing"
+
+	"github.com/evanw/esbuild/internal/cache"
+	"github.com/evanw/esbuild/internal/config"
+	"github.com/evanw/esbuild/internal/fs"
+	"github.com/evanw/esbuild/internal/graph"
+	"github.com/evanw/esbuild/internal/helpers"
+	"github.com/evanw/esbuild/internal/js_ast"
+	"github.com/evanw/esbuild/internal/logger"
+)
+
+type injRow struct {
+	Name       string   `json:"name"`
+	DefineName string   `json:"defineName"`
+	KeyText    string   `json:"keyText"`
+	SourceIdx  uint32   `json:"sourceIdx"`
+	IdentName  string   `json:"identName"`
+	Contents   string   `json:"contents"`
+	Loader     int      `json:"loader"`
+	SideKind   int      `json:"sideKind"`
+	Symbols    []string `json:"symbols"`
+	NumParts   int      `json:"numParts"`
+	HasLazy    bool     `json:"hasLazy"`
+}
+
+func TestTmpGenInjected116(t *testing.T) {
+	rows := []injRow{}
+	cases := []struct {
+		name    string
+		defines []config.InjectedDefine
+	}{
+		{"empty", nil},
+		{"one-number", []config.InjectedDefine{{Name: "foo", Data: &js_ast.ENumber{Value: 42}, Source: logger.Source{Contents: "42"}}}},
+		{"two-defines", []config.InjectedDefine{
+			{Name: "a", Data: &js_ast.EString{Value: []uint16{0x68, 0x69}}, Source: logger.Source{Contents: `"hi"`}},
+			{Name: "b-c", Data: &js_ast.EBoolean{Value: true}, Source: logger.Source{Contents: "true"}},
+		}},
+	}
+	for _, c := range cases {
+		s := &scanner{
+			log:           logger.NewDeferLog(logger.DeferLogNoVerboseOrDebug, nil),
+			fs:            fs.MockFS(map[string]string{}, fs.MockUnix, "/"),
+			caches:        cache.MakeCacheSet(),
+			timer:         &helpers.Timer{},
+			visited:       make(map[logger.Path]visitedFile),
+			resultChannel: make(chan parseResult, 64),
+			options:       config.Options{InjectedDefines: c.defines},
+			results:       make([]parseResult, 32),
+		}
+		s.preprocessInjectedFiles()
+		got := []parseResult{}
+		for s.remaining > 0 {
+			got = append(got, <-s.resultChannel)
+			s.remaining--
+		}
+		// channel 接收顺序非确定：按 KeyText 排序后再与 InjectedFiles 按 key 配对
+		sort.Slice(got, func(i, j int) bool { return got[i].file.inputFile.Source.KeyPath.Text < got[j].file.inputFile.Source.KeyPath.Text })
+		byKey := map[string]config.InjectedFile{}
+		for _, f := range s.options.InjectedFiles { byKey[f.Source.KeyPath.Text] = f }
+		for _, res := range got {
+			inp := res.file.inputFile
+			syms := []string{}
+			numParts := 0
+			hasLazy := false
+			if repr, ok := inp.Repr.(*graph.JSRepr); ok {
+				for _, sy := range repr.AST.Symbols {
+					// 与 TS 侧规范 dump 对称：过滤 toAST ESM-wrap 的 require_* wrapper（既有约定，见 astbuilders）
+					if len(sy.OriginalName) >= 8 && sy.OriginalName[:8] == "require_" { continue }
+					syms = append(syms, sy.OriginalName)
+				}
+				numParts = len(repr.AST.Parts)
+				hasLazy = repr.AST.HasLazyExport
+			}
+			rows = append(rows, injRow{
+				Name: c.name, DefineName: byKey[inp.Source.KeyPath.Text].DefineName,
+				KeyText: inp.Source.KeyPath.Text, SourceIdx: inp.Source.Index,
+				IdentName: inp.Source.IdentifierName, Contents: string(inp.Source.Contents),
+				Loader: int(inp.Loader), SideKind: int(inp.SideEffects.Kind),
+				Symbols: syms, NumParts: numParts, HasLazy: hasLazy,
+			})
+		}
+	}
+	b, _ := json.MarshalIndent(rows, "", "  ")
+	if err := os.WriteFile("/root/port/testdata/injected-go.json", b, 0644); err != nil { t.Fatal(err) }
+	for _, r := range rows { t.Logf("%-12s define=%s key=%s idx=%d ident=%s loader=%d parts=%d syms=%v", r.Name, r.DefineName, r.KeyText, r.SourceIdx, r.IdentName, r.Loader, r.NumParts, r.Symbols) }
+}

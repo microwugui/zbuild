@@ -1,0 +1,48 @@
+[
+  {
+    "name": "preserve-skip",
+    "msgs": [],
+    "mapSize": 0
+  },
+  {
+    "name": "call",
+    "msgs": [
+      {
+        "id": 7,
+        "kind": 1,
+        "text": "Calling \"ns\" will crash at run-time because it's an import namespace object, not a function",
+        "notes": []
+      }
+    ],
+    "mapSize": 1
+  },
+  {
+    "name": "new",
+    "msgs": [
+      {
+        "id": 7,
+        "kind": 1,
+        "text": "Constructing \"ns\" will crash at run-time because it's an import namespace object, not a constructor",
+        "notes": []
+      }
+    ],
+    "mapSize": 1
+  },
+  {
+    "name": "jsx",
+    "msgs": [
+      {
+        "id": 7,
+        "kind": 1,
+        "text": "Using \"ns\" in a JSX expression will crash at run-time because it's an import namespace object, not a component",
+        "notes": []
+      }
+    ],
+    "mapSize": 1
+  },
+  {
+    "name": "dedup",
+    "msgs": [],
+    "mapSize": 1
+  }
+]

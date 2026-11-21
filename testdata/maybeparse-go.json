@@ -1,0 +1,46 @@
+[
+  {
+    "name": "visited-hit",
+    "returned": [
+      7
+    ],
+    "visited": [
+      "/p/a.js"
+    ],
+    "remaining": 0
+  },
+  {
+    "name": "new-path",
+    "returned": [
+      1
+    ],
+    "visited": [
+      "/p/b.js"
+    ],
+    "remaining": 0
+  },
+  {
+    "name": "dedup",
+    "returned": [
+      1,
+      1,
+      2
+    ],
+    "visited": [
+      "/p/a.js",
+      "/p/b.js"
+    ],
+    "remaining": 0
+  },
+  {
+    "name": "namespace-canonical",
+    "returned": [
+      1
+    ],
+    "visited": [
+      "/p/../p/a.js",
+      "/p/a.js"
+    ],
+    "remaining": 0
+  }
+]

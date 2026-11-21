@@ -1,0 +1,20 @@
+[
+  {
+    "name": "drain-order",
+    "slots": [
+      "A",
+      "B",
+      "C",
+      ""
+    ]
+  },
+  {
+    "name": "skip-notok",
+    "slots": [
+      "A",
+      "",
+      "C",
+      ""
+    ]
+  }
+]

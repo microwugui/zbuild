@@ -1,0 +1,855 @@
+[
+ {
+  "text": "",
+  "jsonOk": false,
+  "jsonMsgs": [
+   {
+    "kind": 0,
+    "text": "Unexpected end of file in JSON"
+   }
+  ],
+  "notDefineOk": false,
+  "notDefineMsgs": [
+   {
+    "kind": 0,
+    "text": "Unexpected end of file in JSON"
+   }
+  ]
+ },
+ {
+  "text": " ",
+  "jsonOk": false,
+  "jsonMsgs": [
+   {
+    "kind": 0,
+    "text": "Unexpected end of file in JSON"
+   }
+  ],
+  "notDefineOk": false,
+  "notDefineMsgs": [
+   {
+    "kind": 0,
+    "text": "Unexpected end of file in JSON"
+   }
+  ]
+ },
+ {
+  "text": "null",
+  "parts": [
+   "null"
+  ],
+  "jsonOk": true,
+  "jsonOut": "null;\n",
+  "jsonOutOk": true,
+  "notDefineOk": true
+ },
+ {
+  "text": "true",
+  "constant": "EBoolean",
+  "valueOut": "true;\n",
+  "valueOk": true,
+  "jsonOk": true,
+  "jsonOut": "true;\n",
+  "jsonOutOk": true,
+  "notDefineOk": true
+ },
+ {
+  "text": "false",
+  "constant": "EBoolean",
+  "valueOut": "false;\n",
+  "valueOk": true,
+  "jsonOk": true,
+  "jsonOut": "false;\n",
+  "jsonOutOk": true,
+  "notDefineOk": true
+ },
+ {
+  "text": "0",
+  "constant": "ENumber",
+  "valueOut": "0;\n",
+  "valueOk": true,
+  "jsonOk": true,
+  "jsonOut": "0;\n",
+  "jsonOutOk": true,
+  "notDefineOk": true
+ },
+ {
+  "text": "1",
+  "constant": "ENumber",
+  "valueOut": "1;\n",
+  "valueOk": true,
+  "jsonOk": true,
+  "jsonOut": "1;\n",
+  "jsonOutOk": true,
+  "notDefineOk": true
+ },
+ {
+  "text": "-1",
+  "constant": "ENumber",
+  "valueOut": "-1;\n",
+  "valueOk": true,
+  "jsonOk": true,
+  "jsonOut": "-1;\n",
+  "jsonOutOk": true,
+  "notDefineOk": true
+ },
+ {
+  "text": "1.5",
+  "constant": "ENumber",
+  "valueOut": "1.5;\n",
+  "valueOk": true,
+  "jsonOk": true,
+  "jsonOut": "1.5;\n",
+  "jsonOutOk": true,
+  "notDefineOk": true
+ },
+ {
+  "text": "-1.5",
+  "constant": "ENumber",
+  "valueOut": "-1.5;\n",
+  "valueOk": true,
+  "jsonOk": true,
+  "jsonOut": "-1.5;\n",
+  "jsonOutOk": true,
+  "notDefineOk": true
+ },
+ {
+  "text": "1e3",
+  "constant": "ENumber",
+  "valueOut": "1e3;\n",
+  "valueOk": true,
+  "jsonOk": true,
+  "jsonOut": "1e3;\n",
+  "jsonOutOk": true,
+  "notDefineOk": true
+ },
+ {
+  "text": "1E+3",
+  "constant": "ENumber",
+  "valueOut": "1e3;\n",
+  "valueOk": true,
+  "jsonOk": true,
+  "jsonOut": "1e3;\n",
+  "jsonOutOk": true,
+  "notDefineOk": true
+ },
+ {
+  "text": "0.5",
+  "constant": "ENumber",
+  "valueOut": "0.5;\n",
+  "valueOk": true,
+  "jsonOk": true,
+  "jsonOut": "0.5;\n",
+  "jsonOutOk": true,
+  "notDefineOk": true
+ },
+ {
+  "text": "\"abc\"",
+  "constant": "EString",
+  "valueOut": "\"abc\";\n",
+  "valueOk": true,
+  "jsonOk": true,
+  "jsonOut": "\"abc\";\n",
+  "jsonOutOk": true,
+  "notDefineOk": true
+ },
+ {
+  "text": "\"a\\\"b\"",
+  "constant": "EString",
+  "valueOut": "'a\"b';\n",
+  "valueOk": true,
+  "jsonOk": true,
+  "jsonOut": "'a\"b';\n",
+  "jsonOutOk": true,
+  "notDefineOk": true
+ },
+ {
+  "text": "\"\\u0041\"",
+  "constant": "EString",
+  "valueOut": "\"A\";\n",
+  "valueOk": true,
+  "jsonOk": true,
+  "jsonOut": "\"A\";\n",
+  "jsonOutOk": true,
+  "notDefineOk": true
+ },
+ {
+  "text": "\"\\n\"",
+  "constant": "EString",
+  "valueOut": "\"\\n\";\n",
+  "valueOk": true,
+  "jsonOk": true,
+  "jsonOut": "\"\\n\";\n",
+  "jsonOutOk": true,
+  "notDefineOk": true
+ },
+ {
+  "text": "\"日\"",
+  "constant": "EString",
+  "valueOut": "\"日\";\n",
+  "valueOk": true,
+  "jsonOk": true,
+  "jsonOut": "\"日\";\n",
+  "jsonOutOk": true,
+  "notDefineOk": true
+ },
+ {
+  "text": "[]",
+  "compound": true,
+  "valueOut": "[];\n",
+  "valueOk": true,
+  "jsonOk": true,
+  "jsonOut": "[];\n",
+  "jsonOutOk": true,
+  "notDefineOk": true
+ },
+ {
+  "text": "[1,2,3]",
+  "compound": true,
+  "valueOut": "[1, 2, 3];\n",
+  "valueOk": true,
+  "jsonOk": true,
+  "jsonOut": "[1, 2, 3];\n",
+  "jsonOutOk": true,
+  "notDefineOk": true
+ },
+ {
+  "text": "[1,[2,{}]]",
+  "compound": true,
+  "valueOut": "[1, [2, {}]];\n",
+  "valueOk": true,
+  "jsonOk": true,
+  "jsonOut": "[1, [2, {}]];\n",
+  "jsonOutOk": true,
+  "notDefineOk": true
+ },
+ {
+  "text": "[1,]",
+  "compound": true,
+  "valueOut": "[1];\n",
+  "valueOk": true,
+  "jsonOk": true,
+  "jsonOut": "[1];\n",
+  "jsonOutOk": true,
+  "jsonMsgs": [
+   {
+    "kind": 0,
+    "text": "JSON does not support trailing commas"
+   }
+  ],
+  "notDefineOk": true,
+  "notDefineMsgs": [
+   {
+    "kind": 0,
+    "text": "JSON does not support trailing commas"
+   }
+  ]
+ },
+ {
+  "text": "[,]",
+  "jsonOk": false,
+  "jsonMsgs": [
+   {
+    "kind": 0,
+    "text": "Unexpected \",\" in JSON"
+   }
+  ],
+  "notDefineOk": false,
+  "notDefineMsgs": [
+   {
+    "kind": 0,
+    "text": "Unexpected \",\" in JSON"
+   }
+  ]
+ },
+ {
+  "text": "{}",
+  "compound": true,
+  "valueOut": "({});\n",
+  "valueOk": true,
+  "jsonOk": true,
+  "jsonOut": "({});\n",
+  "jsonOutOk": true,
+  "notDefineOk": true
+ },
+ {
+  "text": "{\"a\":1}",
+  "compound": true,
+  "valueOut": "({ a: 1 });\n",
+  "valueOk": true,
+  "jsonOk": true,
+  "jsonOut": "({ a: 1 });\n",
+  "jsonOutOk": true,
+  "notDefineOk": true
+ },
+ {
+  "text": "{\"a\":1,\"b\":[true,null]}",
+  "compound": true,
+  "valueOut": "({ a: 1, b: [true, null] });\n",
+  "valueOk": true,
+  "jsonOk": true,
+  "jsonOut": "({ a: 1, b: [true, null] });\n",
+  "jsonOutOk": true,
+  "notDefineOk": true
+ },
+ {
+  "text": "{\"a\":1,\"a\":2}",
+  "compound": true,
+  "valueOut": "({ a: 1, a: 2 });\n",
+  "valueOk": true,
+  "jsonOk": true,
+  "jsonOut": "({ a: 1, a: 2 });\n",
+  "jsonOutOk": true,
+  "jsonMsgs": [
+   {
+    "kind": 1,
+    "text": "Duplicate key \"a\" in object literal",
+    "notes": [
+     "The original key \"a\" is here:"
+    ]
+   }
+  ],
+  "notDefineOk": true,
+  "notDefineMsgs": [
+   {
+    "kind": 1,
+    "text": "Duplicate key \"a\" in object literal",
+    "notes": [
+     "The original key \"a\" is here:"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "{\"a\":1,}",
+  "compound": true,
+  "valueOut": "({ a: 1 });\n",
+  "valueOk": true,
+  "jsonOk": true,
+  "jsonOut": "({ a: 1 });\n",
+  "jsonOutOk": true,
+  "jsonMsgs": [
+   {
+    "kind": 0,
+    "text": "JSON does not support trailing commas"
+   }
+  ],
+  "notDefineOk": true,
+  "notDefineMsgs": [
+   {
+    "kind": 0,
+    "text": "JSON does not support trailing commas"
+   }
+  ]
+ },
+ {
+  "text": "{\"__proto__\":1}",
+  "compound": true,
+  "valueOut": "({ [\"__proto__\"]: 1 });\n",
+  "valueOk": true,
+  "jsonOk": true,
+  "jsonOut": "({ [\"__proto__\"]: 1 });\n",
+  "jsonOutOk": true,
+  "notDefineOk": true
+ },
+ {
+  "text": "{\"a b\":1}",
+  "compound": true,
+  "valueOut": "({ \"a b\": 1 });\n",
+  "valueOk": true,
+  "jsonOk": true,
+  "jsonOut": "({ \"a b\": 1 });\n",
+  "jsonOutOk": true,
+  "notDefineOk": true
+ },
+ {
+  "text": "{a:1}",
+  "jsonOk": false,
+  "jsonMsgs": [
+   {
+    "kind": 0,
+    "text": "Expected string in JSON but found \"a\""
+   }
+  ],
+  "notDefineOk": false,
+  "notDefineMsgs": [
+   {
+    "kind": 0,
+    "text": "Expected string in JSON but found \"a\""
+   }
+  ]
+ },
+ {
+  "text": "{\"a\":}",
+  "jsonOk": false,
+  "jsonMsgs": [
+   {
+    "kind": 0,
+    "text": "Unexpected \"}\" in JSON"
+   }
+  ],
+  "notDefineOk": false,
+  "notDefineMsgs": [
+   {
+    "kind": 0,
+    "text": "Unexpected \"}\" in JSON"
+   }
+  ]
+ },
+ {
+  "text": "{\"a\" 1}",
+  "jsonOk": false,
+  "jsonMsgs": [
+   {
+    "kind": 0,
+    "text": "Expected \":\" in JSON but found \"1\""
+   }
+  ],
+  "notDefineOk": false,
+  "notDefineMsgs": [
+   {
+    "kind": 0,
+    "text": "Expected \":\" in JSON but found \"1\""
+   }
+  ]
+ },
+ {
+  "text": "{1:2}",
+  "jsonOk": false,
+  "jsonMsgs": [
+   {
+    "kind": 0,
+    "text": "Expected string in JSON but found \"1\""
+   }
+  ],
+  "notDefineOk": false,
+  "notDefineMsgs": [
+   {
+    "kind": 0,
+    "text": "Expected string in JSON but found \"1\""
+   }
+  ]
+ },
+ {
+  "text": "'x'",
+  "constant": "EString",
+  "valueOut": "\"x\";\n",
+  "valueOk": true,
+  "jsonOk": true,
+  "jsonOut": "\"x\";\n",
+  "jsonOutOk": true,
+  "jsonMsgs": [
+   {
+    "kind": 0,
+    "text": "JSON strings must use double quotes"
+   }
+  ],
+  "notDefineOk": true,
+  "notDefineMsgs": [
+   {
+    "kind": 0,
+    "text": "JSON strings must use double quotes"
+   }
+  ]
+ },
+ {
+  "text": "1n",
+  "constant": "EBigInt",
+  "valueOut": "1n;\n",
+  "valueOk": true,
+  "jsonOk": true,
+  "jsonOut": "1n;\n",
+  "jsonOutOk": true,
+  "notDefineOk": false,
+  "notDefineMsgs": [
+   {
+    "kind": 0,
+    "text": "Unexpected \"1n\" in JSON"
+   }
+  ]
+ },
+ {
+  "text": "[1n]",
+  "compound": true,
+  "valueOut": "[1n];\n",
+  "valueOk": true,
+  "jsonOk": true,
+  "jsonOut": "[1n];\n",
+  "jsonOutOk": true,
+  "notDefineOk": false,
+  "notDefineMsgs": [
+   {
+    "kind": 0,
+    "text": "Unexpected \"1n\" in JSON"
+   }
+  ]
+ },
+ {
+  "text": "//c\n1",
+  "constant": "ENumber",
+  "valueOut": "1;\n",
+  "valueOk": true,
+  "jsonOk": true,
+  "jsonOut": "1;\n",
+  "jsonOutOk": true,
+  "jsonMsgs": [
+   {
+    "kind": 0,
+    "text": "JSON does not support comments"
+   }
+  ],
+  "notDefineOk": true,
+  "notDefineMsgs": [
+   {
+    "kind": 0,
+    "text": "JSON does not support comments"
+   }
+  ]
+ },
+ {
+  "text": "/*c*/1",
+  "constant": "ENumber",
+  "valueOut": "1;\n",
+  "valueOk": true,
+  "jsonOk": true,
+  "jsonOut": "1;\n",
+  "jsonOutOk": true,
+  "jsonMsgs": [
+   {
+    "kind": 0,
+    "text": "JSON does not support comments"
+   }
+  ],
+  "notDefineOk": true,
+  "notDefineMsgs": [
+   {
+    "kind": 0,
+    "text": "JSON does not support comments"
+   }
+  ]
+ },
+ {
+  "text": "- 1",
+  "jsonOk": false,
+  "jsonMsgs": [
+   {
+    "kind": 0,
+    "text": "Unexpected \"-\" in JSON"
+   }
+  ],
+  "notDefineOk": false,
+  "notDefineMsgs": [
+   {
+    "kind": 0,
+    "text": "Unexpected \"-\" in JSON"
+   }
+  ]
+ },
+ {
+  "text": "[1 2]",
+  "jsonOk": false,
+  "jsonMsgs": [
+   {
+    "kind": 0,
+    "text": "Expected \",\" in JSON but found \"2\""
+   }
+  ],
+  "notDefineOk": false,
+  "notDefineMsgs": [
+   {
+    "kind": 0,
+    "text": "Expected \",\" in JSON but found \"2\""
+   }
+  ]
+ },
+ {
+  "text": "tru",
+  "parts": [
+   "tru"
+  ],
+  "jsonOk": false,
+  "jsonMsgs": [
+   {
+    "kind": 0,
+    "text": "Unexpected \"tru\" in JSON"
+   }
+  ],
+  "notDefineOk": false,
+  "notDefineMsgs": [
+   {
+    "kind": 0,
+    "text": "Unexpected \"tru\" in JSON"
+   }
+  ]
+ },
+ {
+  "text": "\"unterminated",
+  "jsonOk": false,
+  "jsonMsgs": [
+   {
+    "kind": 0,
+    "text": "Unterminated string literal"
+   }
+  ],
+  "notDefineOk": false,
+  "notDefineMsgs": [
+   {
+    "kind": 0,
+    "text": "Unterminated string literal"
+   }
+  ]
+ },
+ {
+  "text": "x",
+  "parts": [
+   "x"
+  ],
+  "jsonOk": false,
+  "jsonMsgs": [
+   {
+    "kind": 0,
+    "text": "Unexpected \"x\" in JSON"
+   }
+  ],
+  "notDefineOk": false,
+  "notDefineMsgs": [
+   {
+    "kind": 0,
+    "text": "Unexpected \"x\" in JSON"
+   }
+  ]
+ },
+ {
+  "text": "1 2",
+  "jsonOk": false,
+  "jsonMsgs": [
+   {
+    "kind": 0,
+    "text": "Expected end of file in JSON but found \"2\""
+   }
+  ],
+  "notDefineOk": false,
+  "notDefineMsgs": [
+   {
+    "kind": 0,
+    "text": "Expected end of file in JSON but found \"2\""
+   }
+  ]
+ },
+ {
+  "text": "a",
+  "parts": [
+   "a"
+  ],
+  "jsonOk": false,
+  "jsonMsgs": [
+   {
+    "kind": 0,
+    "text": "Unexpected \"a\" in JSON"
+   }
+  ],
+  "notDefineOk": false,
+  "notDefineMsgs": [
+   {
+    "kind": 0,
+    "text": "Unexpected \"a\" in JSON"
+   }
+  ]
+ },
+ {
+  "text": "a.b",
+  "parts": [
+   "a",
+   "b"
+  ],
+  "jsonOk": false,
+  "jsonMsgs": [
+   {
+    "kind": 0,
+    "text": "Unexpected \"a\" in JSON"
+   }
+  ],
+  "notDefineOk": false,
+  "notDefineMsgs": [
+   {
+    "kind": 0,
+    "text": "Unexpected \"a\" in JSON"
+   }
+  ]
+ },
+ {
+  "text": "a.b.c",
+  "parts": [
+   "a",
+   "b",
+   "c"
+  ],
+  "jsonOk": false,
+  "jsonMsgs": [
+   {
+    "kind": 0,
+    "text": "Unexpected \"a\" in JSON"
+   }
+  ],
+  "notDefineOk": false,
+  "notDefineMsgs": [
+   {
+    "kind": 0,
+    "text": "Unexpected \"a\" in JSON"
+   }
+  ]
+ },
+ {
+  "text": "null.x",
+  "parts": [
+   "null",
+   "x"
+  ],
+  "jsonOk": false,
+  "jsonMsgs": [
+   {
+    "kind": 0,
+    "text": "Expected end of file in JSON but found \".\""
+   }
+  ],
+  "notDefineOk": false,
+  "notDefineMsgs": [
+   {
+    "kind": 0,
+    "text": "Expected end of file in JSON but found \".\""
+   }
+  ]
+ },
+ {
+  "text": "this.x",
+  "parts": [
+   "this",
+   "x"
+  ],
+  "jsonOk": false,
+  "jsonMsgs": [
+   {
+    "kind": 0,
+    "text": "Unexpected \"this\" in JSON"
+   }
+  ],
+  "notDefineOk": false,
+  "notDefineMsgs": [
+   {
+    "kind": 0,
+    "text": "Unexpected \"this\" in JSON"
+   }
+  ]
+ },
+ {
+  "text": "import.meta",
+  "parts": [
+   "import",
+   "meta"
+  ],
+  "jsonOk": false,
+  "jsonMsgs": [
+   {
+    "kind": 0,
+    "text": "Unexpected \"import\" in JSON"
+   }
+  ],
+  "notDefineOk": false,
+  "notDefineMsgs": [
+   {
+    "kind": 0,
+    "text": "Unexpected \"import\" in JSON"
+   }
+  ]
+ },
+ {
+  "text": "import.meta.url",
+  "parts": [
+   "import",
+   "meta",
+   "url"
+  ],
+  "jsonOk": false,
+  "jsonMsgs": [
+   {
+    "kind": 0,
+    "text": "Unexpected \"import\" in JSON"
+   }
+  ],
+  "notDefineOk": false,
+  "notDefineMsgs": [
+   {
+    "kind": 0,
+    "text": "Unexpected \"import\" in JSON"
+   }
+  ]
+ },
+ {
+  "text": "import.x",
+  "jsonOk": false,
+  "jsonMsgs": [
+   {
+    "kind": 0,
+    "text": "Unexpected \"import\" in JSON"
+   }
+  ],
+  "notDefineOk": false,
+  "notDefineMsgs": [
+   {
+    "kind": 0,
+    "text": "Unexpected \"import\" in JSON"
+   }
+  ]
+ },
+ {
+  "text": "if.x",
+  "jsonOk": false,
+  "jsonMsgs": [
+   {
+    "kind": 0,
+    "text": "Unexpected \"if\" in JSON"
+   }
+  ],
+  "notDefineOk": false,
+  "notDefineMsgs": [
+   {
+    "kind": 0,
+    "text": "Unexpected \"if\" in JSON"
+   }
+  ]
+ },
+ {
+  "text": "1.a",
+  "jsonOk": false,
+  "jsonMsgs": [
+   {
+    "kind": 0,
+    "text": "Syntax error \"a\""
+   }
+  ],
+  "notDefineOk": false,
+  "notDefineMsgs": [
+   {
+    "kind": 0,
+    "text": "Syntax error \"a\""
+   }
+  ]
+ },
+ {
+  "text": "a..b",
+  "jsonOk": false,
+  "jsonMsgs": [
+   {
+    "kind": 0,
+    "text": "Unexpected \"a\" in JSON"
+   }
+  ],
+  "notDefineOk": false,
+  "notDefineMsgs": [
+   {
+    "kind": 0,
+    "text": "Unexpected \"a\" in JSON"
+   }
+  ]
+ }
+]

@@ -1,0 +1,1 @@
+video { color: red } a { color: red }

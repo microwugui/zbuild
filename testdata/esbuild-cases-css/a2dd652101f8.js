@@ -1,0 +1,1 @@
+a { font: oblique 1px 'aaa bbb' }

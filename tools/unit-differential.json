@@ -1,0 +1,115 @@
+[
+  {
+    "name": "js_lexer-token-differential",
+    "package": "internal/js_lexer",
+    "note": "V1 166 例 + V2 1738 例（15886 token / 73 log / 63 panic / 8 停机）+ lex-err 116 例 + 单元探针；期望值全部是 Go 适配器/探针产物",
+    "tests": [
+      "src/internal/js_lexer/js_lexer.test.ts",
+      "src/internal/js_lexer/js_lexer_unit.test.ts"
+    ],
+    "fixtures": [
+      {
+        "path": "testdata/lexer/tokens.jsonl",
+        "sha256": "c2ce1c2beb2b434bbfd74fc5225ee0a38ae2730c53b99db4d7c47dcd4ad54f91"
+      },
+      {
+        "path": "testdata/lexer/tokens-from-esbuild-cases.part-00.jsonl",
+        "sha256": "dde2be009225b64a1ea1d4f6d7ddd576023f46fd61fdbab80f52443c9c61e2e8"
+      },
+      {
+        "path": "testdata/lexer/tokens-from-esbuild-cases.part-01.jsonl",
+        "sha256": "c7a9be3ebd3f2990012bc4cf928df4b0899e5128b6caa8c1c6fbd06f54b3ee86"
+      },
+      {
+        "path": "testdata/lexer/tokens-from-esbuild-cases.part-02.jsonl",
+        "sha256": "0b727cc33892cbaefbd3a20e5699cf65e7077b2331484e49e7ef8d32c9b8dc10"
+      },
+      {
+        "path": "testdata/lexer/tokens-from-esbuild-cases.part-03.jsonl",
+        "sha256": "459b00b3d5ac036e0b0dd03f7a99a54cfcb3880d2413baab3540004ef53451f5"
+      },
+      {
+        "path": "testdata/lexer/tokens-lex-err.jsonl",
+        "sha256": "985f31867d7faae8b15887abad9379bfc9641dd3f510a0b5cbb8dcd16fe87b7d"
+      },
+      {
+        "path": "testdata/lexer/unit-probe.json",
+        "sha256": "c0dee860344771b9771b35b4fc6fe48a988fb78e491236a371a4c7a9b37fc772"
+      }
+    ]
+  },
+  {
+    "name": "js_ast-types-differential",
+    "package": "internal/js_ast",
+    "note": "枚举名↔值、OpCode 6 个判定、8×8 Has 真值表、Expr/Stmt/Binding 类型集合、EnsureValidIdentifier、OpTable 全部来自 Go 探针 tmpastdump；第 13 次推进追加 helpers.json（js_ast_helpers.go 56 个 + js_ident 剩余 6 个），期望值来自包内探针 internal/js_ast/tmphelpers_test.go 当场调用真实 Go 函数",
+    "tests": [
+      "src/internal/js_ast/js_ast.test.ts",
+      "src/internal/js_ast/js_ast_helpers.test.ts",
+      "src/internal/js_ast/js_ast_constval.test.ts"
+    ],
+    "fixtures": [
+      {
+        "path": "testdata/js_ast/enums.json",
+        "sha256": "7fe16162b01c0992260be423f710827d4eb5fe31351e97cbd4fea7a2d205ff6a"
+      },
+      {
+        "path": "testdata/js_ast/helpers.json",
+        "sha256": "0be030d62559ae518d343e50a94ae31d2ec96531e2fd8febafe6f9018dad9170"
+      },
+      {
+        "path": "testdata/js_ast-constval-go.json",
+        "sha256": "8aafcad9831a90d91c135b13f31bb501969ae7ede5f79455e3eed8bc340efcfa"
+      }
+    ]
+  },
+  {
+    "name": "js_parser-skeleton-differential",
+    "package": "internal/js_parser",
+    "note": "81 个输入的 AST（第 17 次推进新增 7 个 exprComments 用例，dump schema 增加 exprComments 字段）（含 JSX preserve / 模板 / 正则 / 对象字面量与简写与计算属性 / class（方法·getter·setter·static·extends·class 表达式）/ 箭头函数（含解构与 rest）/ spread / import/export 子句全形态（default·named·namespace·bare·default+named·default+ns / export 子句·export from·export *·export * as·export default 表达式·函数·class·async 函数）/ new·new.target·super（含 super() 与 super.x）/ 条件表达式 / 可选链（?. ?.[ ?.( 与括号化）/ for·for-in·for-of·while·do-while / try-catch-finally·switch·throw·break/continue 与标签 / 解构绑定（对象·数组·默认值·rest·函数参数）/ await·yield·yield*·async 箭头 / 复合赋值与自增自减）+ ParseGlobalName，期望值来自真实 Go js_parser.Parse",
+    "tests": [
+      "src/internal/js_parser/js_parser.test.ts"
+    ],
+    "fixtures": [
+      {
+        "path": "testdata/js_parser/cases.json",
+        "sha256": "67d3e7a6c0b16a97790c949ec3d20243a634ea0fae20c5ceb569bd26d2a2d714"
+      },
+      {
+        "path": "testdata/js_parser/ast-dump.json",
+        "sha256": "4d275c5041bae2e52e3cf984dd624dd432d4573b31dd99615f93f3987502c61a"
+      },
+      {
+        "path": "testdata/js_parser/global-names.json",
+        "sha256": "bf9fdfa17c0b74963a19bfd51384c829d2c81b69b9a5675365d3d7e3ee15dd70"
+      }
+    ]
+  },
+  {
+    "name": "test-fs-batch-differential",
+    "package": "internal/test",
+    "note": "第79批 internal/test diff 三函数 + fs 平台变体/modKey/MkdirAll/fs_mock 两法；Go 包内探针 test-diff-go.json + fs-modkey-go.json 逐字节",
+    "tests": [
+      "src/internal/test/diff.test.ts",
+      "src/internal/fs/fs_zip.test.ts",
+      "src/internal/fs/fs_real.test.ts"
+    ],
+    "fixtures": [
+      {
+        "path": "testdata/fs-modkey-go.json",
+        "sha256": "c17e7af7484b5e90f93ae6655b219370feb41e8ea18a3ebe2c02c60309106b58"
+      },
+      {
+        "path": "testdata/fs-real79-go.json",
+        "sha256": "45610f92464e818dd61e80759d6333e7d7747e868ea9e7ec53acd492585f0d61"
+      },
+      {
+        "path": "testdata/fs-zip79-go.json",
+        "sha256": "679b8c0c1c9d9e8817e7121fa311b2bea9b8254eb813930d06aa5b6cde62ccab"
+      },
+      {
+        "path": "testdata/test-diff-go.json",
+        "sha256": "23693260c77086a2595ad6e0057ff9df6af6389116c62458221e58ce74a0f3ca"
+      }
+    ]
+  }
+]

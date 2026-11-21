@@ -1,0 +1,305 @@
+{
+  "rows": [
+    {
+      "name": "tla:empty",
+      "data": {
+        "checks": [],
+        "errors": [],
+        "hasTLA": false
+      }
+    },
+    {
+      "name": "tla:single-no-tla",
+      "data": {
+        "checks": [
+          {
+            "depth": 4294967295,
+            "depthValid": false,
+            "importRecordIndex": 0,
+            "parent": 4294967295,
+            "parentValid": false,
+            "pass": 1
+          }
+        ],
+        "errors": [],
+        "hasTLA": false
+      }
+    },
+    {
+      "name": "tla:single-tla",
+      "data": {
+        "checks": [
+          {
+            "depth": 1,
+            "depthValid": true,
+            "importRecordIndex": 0,
+            "parent": 0,
+            "parentValid": true,
+            "pass": 2
+          }
+        ],
+        "errors": [],
+        "hasTLA": true
+      }
+    },
+    {
+      "name": "tla:import-tla",
+      "data": {
+        "checks": [
+          {
+            "depth": 2,
+            "depthValid": true,
+            "importRecordIndex": 0,
+            "parent": 1,
+            "parentValid": true,
+            "pass": 2
+          },
+          {
+            "depth": 1,
+            "depthValid": true,
+            "importRecordIndex": 0,
+            "parent": 1,
+            "parentValid": true,
+            "pass": 2
+          }
+        ],
+        "errors": [],
+        "hasTLA": true
+      }
+    },
+    {
+      "name": "tla:require-tla",
+      "data": {
+        "checks": [
+          {
+            "depth": 2,
+            "depthValid": true,
+            "importRecordIndex": 0,
+            "parent": 1,
+            "parentValid": true,
+            "pass": 2
+          },
+          {
+            "depth": 1,
+            "depthValid": true,
+            "importRecordIndex": 0,
+            "parent": 1,
+            "parentValid": true,
+            "pass": 2
+          },
+          {
+            "depth": 1,
+            "depthValid": true,
+            "importRecordIndex": 0,
+            "parent": 2,
+            "parentValid": true,
+            "pass": 2
+          }
+        ],
+        "errors": [
+          {
+            "notes": [
+              "The top-level await in \"c.js\" is here:"
+            ],
+            "text": "This require call is not allowed because the imported file \"c.js\" contains a top-level await"
+          }
+        ],
+        "hasTLA": true
+      }
+    },
+    {
+      "name": "tla:require-transitive-tla",
+      "data": {
+        "checks": [
+          {
+            "depth": 4294967295,
+            "depthValid": false,
+            "importRecordIndex": 0,
+            "parent": 4294967295,
+            "parentValid": false,
+            "pass": 2
+          },
+          {
+            "depth": 4294967295,
+            "depthValid": false,
+            "importRecordIndex": 0,
+            "parent": 4294967295,
+            "parentValid": false,
+            "pass": 2
+          },
+          {
+            "depth": 4294967295,
+            "depthValid": false,
+            "importRecordIndex": 0,
+            "parent": 4294967295,
+            "parentValid": false,
+            "pass": 2
+          },
+          {
+            "depth": 1,
+            "depthValid": true,
+            "importRecordIndex": 0,
+            "parent": 3,
+            "parentValid": true,
+            "pass": 2
+          }
+        ],
+        "errors": [],
+        "hasTLA": true
+      }
+    },
+    {
+      "name": "tla:dynamic-tla",
+      "data": {
+        "checks": [
+          {
+            "depth": 4294967295,
+            "depthValid": false,
+            "importRecordIndex": 0,
+            "parent": 4294967295,
+            "parentValid": false,
+            "pass": 2
+          },
+          {
+            "depth": 1,
+            "depthValid": true,
+            "importRecordIndex": 0,
+            "parent": 1,
+            "parentValid": true,
+            "pass": 2
+          }
+        ],
+        "errors": [],
+        "hasTLA": true
+      }
+    },
+    {
+      "name": "tla:chain-tla",
+      "data": {
+        "checks": [
+          {
+            "depth": 3,
+            "depthValid": true,
+            "importRecordIndex": 0,
+            "parent": 1,
+            "parentValid": true,
+            "pass": 2
+          },
+          {
+            "depth": 2,
+            "depthValid": true,
+            "importRecordIndex": 0,
+            "parent": 2,
+            "parentValid": true,
+            "pass": 2
+          },
+          {
+            "depth": 1,
+            "depthValid": true,
+            "importRecordIndex": 0,
+            "parent": 2,
+            "parentValid": true,
+            "pass": 2
+          }
+        ],
+        "errors": [],
+        "hasTLA": true
+      }
+    },
+    {
+      "name": "tla:cycle-tla",
+      "data": {
+        "checks": [
+          {
+            "depth": 2,
+            "depthValid": true,
+            "importRecordIndex": 0,
+            "parent": 1,
+            "parentValid": true,
+            "pass": 2
+          },
+          {
+            "depth": 1,
+            "depthValid": true,
+            "importRecordIndex": 0,
+            "parent": 1,
+            "parentValid": true,
+            "pass": 2
+          }
+        ],
+        "errors": [],
+        "hasTLA": true
+      }
+    },
+    {
+      "name": "tla:mixed-kinds",
+      "data": {
+        "checks": [
+          {
+            "depth": 2,
+            "depthValid": true,
+            "importRecordIndex": 0,
+            "parent": 1,
+            "parentValid": true,
+            "pass": 2
+          },
+          {
+            "depth": 1,
+            "depthValid": true,
+            "importRecordIndex": 0,
+            "parent": 1,
+            "parentValid": true,
+            "pass": 2
+          },
+          {
+            "depth": 4294967295,
+            "depthValid": false,
+            "importRecordIndex": 0,
+            "parent": 4294967295,
+            "parentValid": false,
+            "pass": 2
+          }
+        ],
+        "errors": [],
+        "hasTLA": true
+      }
+    },
+    {
+      "name": "alloc:source-index",
+      "data": {
+        "glob": [
+          4,
+          4,
+          5
+        ],
+        "resultsLen": 6,
+        "seq": [
+          {
+            "idx": 1,
+            "kind": 0,
+            "path": "/p/a.js",
+            "resultsLen": 2
+          },
+          {
+            "idx": 1,
+            "kind": 0,
+            "path": "/p/a.js",
+            "resultsLen": 2
+          },
+          {
+            "idx": 2,
+            "kind": 0,
+            "path": "/p/b.js",
+            "resultsLen": 3
+          },
+          {
+            "idx": 3,
+            "kind": 1,
+            "path": "/p/a.js",
+            "resultsLen": 4
+          }
+        ]
+      }
+    }
+  ]
+}

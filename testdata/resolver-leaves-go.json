@@ -1,0 +1,814 @@
+[
+  {
+    "fn": "parseImportsExportsMap",
+    "arg": {
+      "src": "{\"import\":\"./a.js\",\"require\":\"./b.js\"}"
+    },
+    "out": {
+      "key": "exports",
+      "msgs": [],
+      "root": {
+        "a": [],
+        "e": [],
+        "k": 3,
+        "m": [
+          [
+            "import",
+            {
+              "a": [],
+              "e": [],
+              "k": 1,
+              "m": [],
+              "s": "./a.js",
+              "tok": [
+                10,
+                8
+              ]
+            },
+            [
+              1,
+              8
+            ]
+          ],
+          [
+            "require",
+            {
+              "a": [],
+              "e": [],
+              "k": 1,
+              "m": [],
+              "s": "./b.js",
+              "tok": [
+                29,
+                8
+              ]
+            },
+            [
+              19,
+              9
+            ]
+          ]
+        ],
+        "s": "",
+        "tok": [
+          0,
+          1
+        ]
+      }
+    }
+  },
+  {
+    "fn": "parseImportsExportsMap",
+    "arg": {
+      "src": "{\"./a\":\"./x.js\",\"./b/*\":\"./y/*.js\",\"./dir/\":\"./d/\"}"
+    },
+    "out": {
+      "key": "exports",
+      "msgs": [],
+      "root": {
+        "a": [],
+        "e": [
+          "./dir/",
+          "./b/*"
+        ],
+        "k": 3,
+        "m": [
+          [
+            "./a",
+            {
+              "a": [],
+              "e": [],
+              "k": 1,
+              "m": [],
+              "s": "./x.js",
+              "tok": [
+                7,
+                8
+              ]
+            },
+            [
+              1,
+              5
+            ]
+          ],
+          [
+            "./b/*",
+            {
+              "a": [],
+              "e": [],
+              "k": 1,
+              "m": [],
+              "s": "./y/*.js",
+              "tok": [
+                24,
+                10
+              ]
+            },
+            [
+              16,
+              7
+            ]
+          ],
+          [
+            "./dir/",
+            {
+              "a": [],
+              "e": [],
+              "k": 1,
+              "m": [],
+              "s": "./d/",
+              "tok": [
+                44,
+                6
+              ]
+            },
+            [
+              35,
+              8
+            ]
+          ]
+        ],
+        "s": "",
+        "tok": [
+          0,
+          1
+        ]
+      }
+    }
+  },
+  {
+    "fn": "parseImportsExportsMap",
+    "arg": {
+      "src": "[\"./a.js\",null]"
+    },
+    "out": {
+      "key": "exports",
+      "msgs": [],
+      "root": {
+        "a": [
+          {
+            "a": [],
+            "e": [],
+            "k": 1,
+            "m": [],
+            "s": "./a.js",
+            "tok": [
+              1,
+              8
+            ]
+          },
+          {
+            "a": [],
+            "e": [],
+            "k": 0,
+            "m": [],
+            "s": "",
+            "tok": [
+              10,
+              4
+            ]
+          }
+        ],
+        "e": [],
+        "k": 2,
+        "m": [],
+        "s": "",
+        "tok": [
+          0,
+          1
+        ]
+      }
+    }
+  },
+  {
+    "fn": "parseImportsExportsMap",
+    "arg": {
+      "src": "\"main.js\""
+    },
+    "out": {
+      "key": "exports",
+      "msgs": [],
+      "root": {
+        "a": [],
+        "e": [],
+        "k": 1,
+        "m": [],
+        "s": "main.js",
+        "tok": [
+          0,
+          9
+        ]
+      }
+    }
+  },
+  {
+    "fn": "parseImportsExportsMap",
+    "arg": {
+      "src": "null"
+    },
+    "out": {
+      "msgs": [],
+      "nil": true
+    }
+  },
+  {
+    "fn": "parseImportsExportsMap",
+    "arg": {
+      "src": "{\"./a\":{\"import\":\"./i.js\",\"default\":\"./d.js\"}}"
+    },
+    "out": {
+      "key": "exports",
+      "msgs": [],
+      "root": {
+        "a": [],
+        "e": [],
+        "k": 3,
+        "m": [
+          [
+            "./a",
+            {
+              "a": [],
+              "e": [],
+              "k": 3,
+              "m": [
+                [
+                  "import",
+                  {
+                    "a": [],
+                    "e": [],
+                    "k": 1,
+                    "m": [],
+                    "s": "./i.js",
+                    "tok": [
+                      17,
+                      8
+                    ]
+                  },
+                  [
+                    8,
+                    8
+                  ]
+                ],
+                [
+                  "default",
+                  {
+                    "a": [],
+                    "e": [],
+                    "k": 1,
+                    "m": [],
+                    "s": "./d.js",
+                    "tok": [
+                      36,
+                      8
+                    ]
+                  },
+                  [
+                    26,
+                    9
+                  ]
+                ]
+              ],
+              "s": "",
+              "tok": [
+                7,
+                1
+              ]
+            },
+            [
+              1,
+              5
+            ]
+          ]
+        ],
+        "s": "",
+        "tok": [
+          0,
+          1
+        ]
+      }
+    }
+  },
+  {
+    "fn": "parseImportsExportsMap",
+    "arg": {
+      "src": "[[\"a\",\"./x.js\"],null]"
+    },
+    "out": {
+      "key": "exports",
+      "msgs": [],
+      "root": {
+        "a": [
+          {
+            "a": [
+              {
+                "a": [],
+                "e": [],
+                "k": 1,
+                "m": [],
+                "s": "a",
+                "tok": [
+                  2,
+                  3
+                ]
+              },
+              {
+                "a": [],
+                "e": [],
+                "k": 1,
+                "m": [],
+                "s": "./x.js",
+                "tok": [
+                  6,
+                  8
+                ]
+              }
+            ],
+            "e": [],
+            "k": 2,
+            "m": [],
+            "s": "",
+            "tok": [
+              1,
+              1
+            ]
+          },
+          {
+            "a": [],
+            "e": [],
+            "k": 0,
+            "m": [],
+            "s": "",
+            "tok": [
+              16,
+              4
+            ]
+          }
+        ],
+        "e": [],
+        "k": 2,
+        "m": [],
+        "s": "",
+        "tok": [
+          0,
+          1
+        ]
+      }
+    }
+  },
+  {
+    "fn": "parseImportsExportsMap",
+    "arg": {
+      "src": "{\"./a/\":\"./x/\",\"./a/*\":\"./y/*\"}"
+    },
+    "out": {
+      "key": "exports",
+      "msgs": [],
+      "root": {
+        "a": [],
+        "e": [
+          "./a/*",
+          "./a/"
+        ],
+        "k": 3,
+        "m": [
+          [
+            "./a/",
+            {
+              "a": [],
+              "e": [],
+              "k": 1,
+              "m": [],
+              "s": "./x/",
+              "tok": [
+                8,
+                6
+              ]
+            },
+            [
+              1,
+              6
+            ]
+          ],
+          [
+            "./a/*",
+            {
+              "a": [],
+              "e": [],
+              "k": 1,
+              "m": [],
+              "s": "./y/*",
+              "tok": [
+                23,
+                7
+              ]
+            },
+            [
+              15,
+              7
+            ]
+          ]
+        ],
+        "s": "",
+        "tok": [
+          0,
+          1
+        ]
+      }
+    }
+  },
+  {
+    "fn": "parseImportsExportsMap",
+    "arg": {
+      "src": "{\"./x\":true}"
+    },
+    "out": {
+      "key": "exports",
+      "msgs": [
+        "This value must be a string, an object, an array, or null"
+      ],
+      "root": {
+        "a": [],
+        "e": [],
+        "k": 3,
+        "m": [
+          [
+            "./x",
+            {
+              "a": [],
+              "e": [],
+              "k": 4,
+              "m": [],
+              "s": "",
+              "tok": [
+                7,
+                4
+              ]
+            },
+            [
+              1,
+              5
+            ]
+          ]
+        ],
+        "s": "",
+        "tok": [
+          0,
+          1
+        ]
+      }
+    }
+  },
+  {
+    "fn": "checkForBuiltInNodeModules",
+    "arg": {
+      "feat": 0,
+      "format": 0,
+      "kind": 1,
+      "path": "fs",
+      "platform": 1
+    },
+    "out": [
+      "fs",
+      true,
+      true,
+      true
+    ]
+  },
+  {
+    "fn": "checkForBuiltInNodeModules",
+    "arg": {
+      "feat": 0,
+      "format": 0,
+      "kind": 1,
+      "path": "node:fs",
+      "platform": 1
+    },
+    "out": [
+      "node:fs",
+      true,
+      true,
+      true
+    ]
+  },
+  {
+    "fn": "checkForBuiltInNodeModules",
+    "arg": {
+      "feat": 0,
+      "format": 2,
+      "kind": 1,
+      "path": "node:fs",
+      "platform": 1
+    },
+    "out": [
+      "node:fs",
+      true,
+      true,
+      true
+    ]
+  },
+  {
+    "fn": "checkForBuiltInNodeModules",
+    "arg": {
+      "feat": 1099511627776,
+      "format": 0,
+      "kind": 1,
+      "path": "node:fs",
+      "platform": 1
+    },
+    "out": [
+      "fs",
+      true,
+      true,
+      true
+    ]
+  },
+  {
+    "fn": "checkForBuiltInNodeModules",
+    "arg": {
+      "feat": 2199023255552,
+      "format": 2,
+      "kind": 2,
+      "path": "node:fs",
+      "platform": 1
+    },
+    "out": [
+      "fs",
+      true,
+      true,
+      true
+    ]
+  },
+  {
+    "fn": "checkForBuiltInNodeModules",
+    "arg": {
+      "feat": 0,
+      "format": 0,
+      "kind": 1,
+      "path": "node:unknown",
+      "platform": 1
+    },
+    "out": [
+      "node:unknown",
+      true,
+      true,
+      false
+    ]
+  },
+  {
+    "fn": "checkForBuiltInNodeModules",
+    "arg": {
+      "feat": 0,
+      "format": 0,
+      "kind": 1,
+      "path": "fs",
+      "platform": 0
+    },
+    "out": [
+      "",
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "fn": "checkForBuiltInNodeModules",
+    "arg": {
+      "feat": 0,
+      "format": 0,
+      "kind": 1,
+      "path": "unknown",
+      "platform": 1
+    },
+    "out": [
+      "",
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "fn": "applyExtendedConfig",
+    "arg": {},
+    "out": [
+      "/base",
+      "",
+      "es2020",
+      1,
+      true,
+      false
+    ]
+  },
+  {
+    "fn": "TSAlwaysStrictOrStrict",
+    "arg": {
+      "which": "strict"
+    },
+    "out": false
+  },
+  {
+    "fn": "TSAlwaysStrictOrStrict",
+    "arg": {
+      "which": "alwaysStrict"
+    },
+    "out": true
+  },
+  {
+    "fn": "TSAlwaysStrictOrStrict",
+    "arg": {
+      "which": "none"
+    },
+    "out": true
+  },
+  {
+    "fn": "getDependencyTarget",
+    "arg": {
+      "json": "null"
+    },
+    "out": [
+      true,
+      "",
+      "",
+      0,
+      4
+    ]
+  },
+  {
+    "fn": "getDependencyTarget",
+    "arg": {
+      "json": "\"ref\""
+    },
+    "out": [
+      true,
+      "",
+      "ref",
+      0,
+      0
+    ]
+  },
+  {
+    "fn": "getDependencyTarget",
+    "arg": {
+      "json": "[\"ident\",\"ref\"]"
+    },
+    "out": [
+      true,
+      "ident",
+      "ref",
+      0,
+      15
+    ]
+  },
+  {
+    "fn": "getDependencyTarget",
+    "arg": {
+      "json": "[\"ident\"]"
+    },
+    "out": [
+      false,
+      "",
+      "",
+      0,
+      0
+    ]
+  },
+  {
+    "fn": "getDependencyTarget",
+    "arg": {
+      "json": "123"
+    },
+    "out": [
+      false,
+      "",
+      "",
+      0,
+      0
+    ]
+  },
+  {
+    "fn": "getDependencyTarget",
+    "arg": {
+      "json": "{}"
+    },
+    "out": [
+      false,
+      "",
+      "",
+      0,
+      0
+    ]
+  },
+  {
+    "fn": "getPackage",
+    "arg": {
+      "ident": "",
+      "ref": ""
+    },
+    "out": [
+      true,
+      "",
+      1
+    ]
+  },
+  {
+    "fn": "getPackage",
+    "arg": {
+      "ident": "react",
+      "ref": "18.0.0"
+    },
+    "out": [
+      true,
+      "./node_modules/react",
+      0
+    ]
+  },
+  {
+    "fn": "getPackage",
+    "arg": {
+      "ident": "react",
+      "ref": "nope"
+    },
+    "out": [
+      false,
+      "",
+      0
+    ]
+  },
+  {
+    "fn": "getPackage",
+    "arg": {
+      "ident": "missing",
+      "ref": "x"
+    },
+    "out": [
+      false,
+      "",
+      0
+    ]
+  },
+  {
+    "fn": "resolveViaFallback",
+    "arg": {
+      "ident": "react"
+    },
+    "out": [
+      true,
+      "react",
+      "18.0.0"
+    ]
+  },
+  {
+    "fn": "resolveViaFallback",
+    "arg": {
+      "ident": "lodash"
+    },
+    "out": [
+      true,
+      "lodash",
+      "4.0.0"
+    ]
+  },
+  {
+    "fn": "resolveViaFallback",
+    "arg": {
+      "ident": "unknown"
+    },
+    "out": [
+      false,
+      "",
+      ""
+    ]
+  },
+  {
+    "fn": "findLocator",
+    "arg": {
+      "url": "/repo/node_modules/react/index.js"
+    },
+    "out": [
+      true,
+      "react",
+      "18.0.0"
+    ]
+  },
+  {
+    "fn": "findLocator",
+    "arg": {
+      "url": "/repo/node_modules/old/x.js"
+    },
+    "out": [
+      false,
+      "",
+      ""
+    ]
+  },
+  {
+    "fn": "findLocator",
+    "arg": {
+      "url": "/repo/other/x.js"
+    },
+    "out": [
+      false,
+      "",
+      ""
+    ]
+  }
+]

@@ -1,0 +1,105 @@
+[
+  {
+    "fn": "prettyPrintPath",
+    "arg": "rel",
+    "out": "src/a.js"
+  },
+  {
+    "fn": "matchQueryPathToResult",
+    "arg": "",
+    "out": [
+      2,
+      "\u003chtml\u003e",
+      "/out/dist/index.html",
+      true,
+      0,
+      0
+    ]
+  },
+  {
+    "fn": "matchQueryPathToResult",
+    "arg": "index.html",
+    "out": [
+      2,
+      "\u003chtml\u003e",
+      "/out/dist/index.html",
+      false,
+      0,
+      0
+    ]
+  },
+  {
+    "fn": "matchQueryPathToResult",
+    "arg": "js/main.js",
+    "out": [
+      2,
+      "js",
+      "/out/dist/js/main.js",
+      false,
+      0,
+      0
+    ]
+  },
+  {
+    "fn": "matchQueryPathToResult",
+    "arg": "js",
+    "out": [
+      1,
+      "",
+      "",
+      false,
+      0,
+      1
+    ]
+  },
+  {
+    "fn": "matchQueryPathToResult",
+    "arg": "nope",
+    "out": [
+      0,
+      "",
+      "",
+      false,
+      0,
+      0
+    ]
+  },
+  {
+    "fn": "matchQueryPathToResult",
+    "arg": "style.css",
+    "out": [
+      2,
+      "css",
+      "/out/dist/style.css",
+      false,
+      0,
+      0
+    ]
+  },
+  {
+    "fn": "notifyRequest",
+    "arg": "args",
+    "out": [
+      "1.2.3.4:5678",
+      "GET",
+      "/foo",
+      200,
+      12
+    ]
+  },
+  {
+    "fn": "notifyRequest",
+    "arg": "nil-cb-ok",
+    "out": true
+  },
+  {
+    "fn": "printURLs",
+    "arg": "hosts",
+    "out": "\n \u003e Local:   http://127.0.0.1:8080/\n \u003e Local:   http://[::1]:8080/\n \u003e Network: http://192.168.1.5:8080/\n\n"
+  },
+  {
+    "fn": "printURLs",
+    "arg": "https",
+    "out": "\n \u003e Network: https://0.0.0.0:443/\n\n"
+  }
+]

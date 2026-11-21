@@ -1,0 +1,1 @@
+switch (1) { case 0: const x = 0; case 1: return x }

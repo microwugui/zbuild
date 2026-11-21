@@ -1,0 +1,1 @@
+let x; export {x as y} from "foo"

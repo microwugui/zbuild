@@ -1,0 +1,79 @@
+[
+  {
+    "tok": {
+      "k": 29,
+      "t": "red"
+    },
+    "out": true
+  },
+  {
+    "tok": {
+      "k": 29,
+      "t": "BLUE"
+    },
+    "out": true
+  },
+  {
+    "tok": {
+      "k": 29,
+      "t": "notacolor"
+    },
+    "out": false
+  },
+  {
+    "tok": {
+      "k": 28,
+      "t": "123"
+    },
+    "out": true
+  },
+  {
+    "tok": {
+      "k": 28,
+      "t": "112233"
+    },
+    "out": true
+  },
+  {
+    "tok": {
+      "k": 28,
+      "t": "12"
+    },
+    "out": false
+  },
+  {
+    "tok": {
+      "k": 28,
+      "t": "gg0000"
+    },
+    "out": false
+  },
+  {
+    "tok": {
+      "k": 27,
+      "t": "rgb"
+    },
+    "out": true
+  },
+  {
+    "tok": {
+      "k": 27,
+      "t": "color-mix"
+    },
+    "out": true
+  },
+  {
+    "tok": {
+      "k": 27,
+      "t": "foo"
+    },
+    "out": false
+  },
+  {
+    "tok": {
+      "k": 30,
+      "t": "1"
+    },
+    "out": false
+  }
+]

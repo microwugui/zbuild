@@ -1,0 +1,107 @@
+[
+  {
+    "fn": "parseHex",
+    "arg": "ff",
+    "out": "255|true"
+  },
+  {
+    "fn": "parseHex",
+    "arg": "0A",
+    "out": "10|true"
+  },
+  {
+    "fn": "parseHex",
+    "arg": "123456",
+    "out": "1193046|true"
+  },
+  {
+    "fn": "parseHex",
+    "arg": "abcdef12",
+    "out": "2882400018|true"
+  },
+  {
+    "fn": "parseHex",
+    "arg": "xyz",
+    "out": "0|false"
+  },
+  {
+    "fn": "parseHex",
+    "arg": "",
+    "out": "0|true"
+  },
+  {
+    "fn": "parseHex",
+    "arg": "1",
+    "out": "1|true"
+  },
+  {
+    "fn": "floatToStringForColor",
+    "arg": "0",
+    "out": "0"
+  },
+  {
+    "fn": "floatToStringForColor",
+    "arg": "0.5",
+    "out": "0.5"
+  },
+  {
+    "fn": "floatToStringForColor",
+    "arg": "1",
+    "out": "1"
+  },
+  {
+    "fn": "floatToStringForColor",
+    "arg": "0.12345",
+    "out": "0.123"
+  },
+  {
+    "fn": "floatToStringForColor",
+    "arg": "0.3333333333333333",
+    "out": "0.333"
+  },
+  {
+    "fn": "floatToStringForColor",
+    "arg": "255.999",
+    "out": "255.999"
+  },
+  {
+    "fn": "floatToByte",
+    "arg": "0",
+    "out": "0"
+  },
+  {
+    "fn": "floatToByte",
+    "arg": "0.5",
+    "out": "128"
+  },
+  {
+    "fn": "floatToByte",
+    "arg": "1",
+    "out": "255"
+  },
+  {
+    "fn": "floatToByte",
+    "arg": "-0.5",
+    "out": "0"
+  },
+  {
+    "fn": "floatToByte",
+    "arg": "2",
+    "out": "255"
+  },
+  {
+    "fn": "degreesForAngle",
+    "arg": "90",
+    "out": "0.000000|false"
+  },
+  {
+    "fn": "degreesForAngle",
+    "arg": "1.5rad",
+    "out": "0.000000|false"
+  },
+  {
+    "fn": "degreesForAngle",
+    "arg": "100grad",
+    "out": "0.000000|false"
+  }
+]

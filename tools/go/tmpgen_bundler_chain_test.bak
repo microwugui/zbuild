@@ -1,0 +1,106 @@
+package bundler
+
+import (
+	"encoding/json"
+	"fmt"
+	"os"
+	"testing"
+
+	"github.com/evanw/esbuild/internal/ast"
+	"github.com/evanw/esbuild/internal/config"
+	"github.com/evanw/esbuild/internal/fs"
+	"github.com/evanw/esbuild/internal/graph"
+	"github.com/evanw/esbuild/internal/js_ast"
+	"github.com/evanw/esbuild/internal/logger"
+	"github.com/evanw/esbuild/internal/runtime"
+	"github.com/evanw/esbuild/internal/resolver"
+)
+
+type bcrow struct { Name string `json:"name"`; Data json.RawMessage `json:"data"` }
+type bcfix struct { Rows []bcrow `json:"rows"` }
+func bcadd(fx *bcfix, name string, m map[string]interface{}) { b,_:=json.Marshal(m); fx.Rows=append(fx.Rows,bcrow{name,b}) }
+
+func TestTmpGenBundlerChain(t *testing.T) {
+	fx := bcfix{}
+
+	// reportExplicitPhaseImport — errors emitted to log
+	for _, c := range []struct{name string; phase ast.ImportPhase; external bool; format config.Format}{
+		{"defer-cjs", ast.DeferPhase, false, config.FormatCommonJS},
+		{"defer-esm-internal", ast.DeferPhase, false, config.FormatESModule},
+		{"defer-esm-external", ast.DeferPhase, true, config.FormatESModule},
+		{"source-iife", ast.SourcePhase, false, config.FormatIIFE},
+		{"source-esm-external", ast.SourcePhase, true, config.FormatESModule},
+		{"eval-ignored", ast.EvaluationPhase, false, config.FormatCommonJS},
+	} {
+		log := logger.NewDeferLog(logger.DeferLogNoVerboseOrDebug, nil)
+		reportExplicitPhaseImport(log, nil, logger.Range{}, c.phase, c.external, c.format)
+		errs := []string{}
+		for _, m := range log.Peek() { errs = append(errs, m.Data.Text) }
+		bcadd(&fx, "report:"+c.name, map[string]interface{}{"errors": errs})
+	}
+
+	// findReachableFiles — build a small graph. Index 0 = runtime (always included).
+	// files[i] Repr with ImportRecords. We use JSRepr with AST.ImportRecords.
+	mkJS := func(records ...ast.ImportRecord) *graph.JSRepr {
+		r := &graph.JSRepr{}
+		r.AST.ImportRecords = records
+		return r
+	}
+	imp := func(idx uint32) ast.ImportRecord { return ast.ImportRecord{SourceIndex: ast.MakeIndex32(idx)} }
+	copyImp := func(idx uint32) ast.ImportRecord { return ast.ImportRecord{CopySourceIndex: ast.MakeIndex32(idx)} }
+	files := []graph.InputFile{
+		{Repr: mkJS()},                                  // 0 runtime
+		{Repr: mkJS(imp(2), imp(0))},                    // 1 -> 2, 0
+		{Repr: mkJS(imp(3))},                            // 2 -> 3
+		{Repr: mkJS()},                                  // 3
+		{Repr: mkJS(copyImp(4))},                        // 4 -> copy 4 (self)
+		{Repr: mkJS()},                                  // 5 isolated
+	}
+	for _, c := range []struct{name string; eps []graph.EntryPoint}{
+		{"empty", nil},
+		{"one", []graph.EntryPoint{{SourceIndex: 1}}},
+		{"two", []graph.EntryPoint{{SourceIndex: 1}, {SourceIndex: 3}}},
+		{"copy-cycle", []graph.EntryPoint{{SourceIndex: 4}}},
+		{"isolated", []graph.EntryPoint{{SourceIndex: 5}}},
+	} {
+		order := findReachableFiles(files, c.eps)
+		bcadd(&fx, "reachable:"+c.name, map[string]interface{}{"order": order})
+	}
+	_ = runtime.SourceIndex
+
+	// generateMetadataJSON — Bundle.files with jsonMetadataChunk + OutputFiles
+	realFS := fs.MockFS(nil, fs.MockUnix, "/home/user/project")
+	for _, c := range []struct{name string; inputs map[int]string; outputs []graph.OutputFile; minify bool; ascii bool}{
+		{"empty", map[int]string{}, nil, false, false},
+		{"one-input", map[int]string{0: `"./a.js": {"bytes": 10}`}, nil, false, false},
+		{"with-output", map[int]string{1: `"./a.js": {"bytes": 10}`},
+			[]graph.OutputFile{{AbsPath: "/dist/out.js", JSONMetadataChunk: `"./out.js": {"bytes": 20}`}}, false, false},
+		{"minified", map[int]string{1: `"./a.js": {"bytes": 10}`},
+			[]graph.OutputFile{{AbsPath: "/dist/out.js", JSONMetadataChunk: `"./out.js": {"bytes": 20}`}}, true, false},
+		{"dup-output", map[int]string{},
+			[]graph.OutputFile{{AbsPath: "/dist/out.js", JSONMetadataChunk: "A"}, {AbsPath: "/dist/out.js", JSONMetadataChunk: "B"}}, false, false},
+	} {
+		b := &Bundle{}
+		b.fs = realFS
+		b.files = make([]scannerFile, 0)
+		max := 0
+		for idx := range c.inputs { if idx > max { max = idx } }
+		for i := 0; i <= max; i++ { b.files = append(b.files, scannerFile{}) }
+		for idx, chunk := range c.inputs { b.files[idx].jsonMetadataChunk = chunk }
+		all := []uint32{}
+		for i := 0; i < len(b.files); i++ { all = append(all, uint32(i)) }
+		b.options = config.Options{}
+		if c.minify { b.options.MetafileFormat = config.MinifiedMetafile }
+		b.options.ASCIIOnly = c.ascii
+		opts := b.options
+		out := b.generateMetadataJSON(c.outputs, all, &opts)
+		bcadd(&fx, "metadata:"+c.name, map[string]interface{}{"json": out})
+	}
+	_ = resolver.IsPackagePath
+	_ = fmt.Sprint
+	_ = js_ast.ENumber{}
+
+	bts, _ := json.MarshalIndent(fx, "", "  ")
+	if err := os.WriteFile("/root/port/testdata/bundler-chain-go.json", bts, 0644); err != nil { t.Fatal(err) }
+	t.Logf("wrote %d rows bytes=%d", len(fx.Rows), len(bts))
+}

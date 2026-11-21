@@ -1,0 +1,106 @@
+{
+  "generatedAt": "2026-11-20T23:17:59.909588+00:00",
+  "method": "prewarm then N runs, wall-clock via time.perf_counter around subprocess; median + p10/p90 (nearest-rank)",
+  "flags": [
+    "--bundle",
+    "--format=esm",
+    "--platform=node",
+    "--target=esnext",
+    "--log-level=warning"
+  ],
+  "versions": {
+    "go_binary": "0.28.2",
+    "go_toolchain": "go version go1.27.3 linux/amd64",
+    "node": "v22.23.3"
+  },
+  "biases": [
+    "V8 JIT warmup curve: PREWARM runs then steady state; differs from Go static compilation.",
+    "Process startup: Go static binary vs Node + --experimental-strip-types type stripping.",
+    "GC: Go GC vs V8 GC strategies differ; byte output identical per three_verify.",
+    "TS backend via tools/ts-bundle.sh (bundle1.ts/bundle_multi.ts), not Go's per-function 1:1 chain; byte-equality proven separately by three_verify.sh (core c0fdbed2/module 2985154b)."
+  ],
+  "entries": {
+    "three.module.js": {
+      "input_bytes": 658900,
+      "input_sha256": "104f56145899722094556490d787aae0617cc2fc3382f31df02d724ea1aee341",
+      "go_single_thread": {
+        "n": 7,
+        "prewarm": 2,
+        "samples_s": [
+          0.2004,
+          0.2317,
+          0.2177,
+          0.21,
+          0.1904,
+          0.1917,
+          0.2132
+        ],
+        "median_s": 0.21,
+        "p10_s": 0.1917,
+        "p90_s": 0.2177,
+        "min_s": 0.1904,
+        "max_s": 0.2317
+      },
+      "ts_single_thread": {
+        "n": 7,
+        "prewarm": 2,
+        "samples_s": [
+          5.422,
+          5.4744,
+          5.5387,
+          5.3644,
+          5.2908,
+          5.3942,
+          5.3162
+        ],
+        "median_s": 5.3942,
+        "p10_s": 5.3162,
+        "p90_s": 5.4744,
+        "min_s": 5.2908,
+        "max_s": 5.5387
+      },
+      "ts_over_go_median": 25.69
+    },
+    "three.core.js": {
+      "input_bytes": 1474799,
+      "input_sha256": "613e370f76638fdef83926642bf256dc9615684922de1ce1f63a8583e5d78578",
+      "go_single_thread": {
+        "n": 7,
+        "prewarm": 2,
+        "samples_s": [
+          0.1614,
+          0.1466,
+          0.1717,
+          0.1501,
+          0.1397,
+          0.152,
+          0.1386
+        ],
+        "median_s": 0.1501,
+        "p10_s": 0.1397,
+        "p90_s": 0.1614,
+        "min_s": 0.1386,
+        "max_s": 0.1717
+      },
+      "ts_single_thread": {
+        "n": 7,
+        "prewarm": 2,
+        "samples_s": [
+          4.11,
+          4.0928,
+          3.9361,
+          3.5699,
+          3.7549,
+          3.6532,
+          3.2862
+        ],
+        "median_s": 3.7549,
+        "p10_s": 3.5699,
+        "p90_s": 4.0928,
+        "min_s": 3.2862,
+        "max_s": 4.11
+      },
+      "ts_over_go_median": 25.02
+    }
+  }
+}

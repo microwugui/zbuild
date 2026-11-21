@@ -1,0 +1,166 @@
+package resolver
+
+// 第 159 批 Go 探针：ParseTSConfigJSON 逐字节固化。
+// 输出 dump TSConfigJSON 全字段 + log msgs，覆盖 extends/baseUrl/jsx/strict/target/paths/顶层告警等分支。
+import (
+	"encoding/json"
+	"os"
+	"sort"
+	"testing"
+
+	"github.com/evanw/esbuild/internal/cache"
+	"github.com/evanw/esbuild/internal/fs"
+	"github.com/evanw/esbuild/internal/logger"
+)
+
+type tsjRow struct {
+	Arg map[string]interface{} `json:"arg"`
+	Out interface{}            `json:"out"`
+}
+
+func tsjRange(r logger.Range) interface{} {
+	return []interface{}{r.Loc.Start, r.Len}
+}
+
+func dumpTSConfig(c *TSConfigJSON, msgs []string) interface{} {
+	if c == nil {
+		return map[string]interface{}{"nil": true, "msgs": msgs}
+	}
+	// Paths: sorted keys, each {Text, Loc.Start}
+	var paths interface{}
+	if c.Paths != nil {
+		keys := make([]string, 0, len(c.Paths.Map))
+		for k := range c.Paths.Map {
+			keys = append(keys, k)
+		}
+		sort.Strings(keys)
+		arr := []interface{}{}
+		for _, k := range keys {
+			items := []interface{}{}
+			for _, p := range c.Paths.Map[k] {
+				items = append(items, []interface{}{p.Text, p.Loc.Start})
+			}
+			arr = append(arr, []interface{}{k, items})
+		}
+		paths = map[string]interface{}{"src": c.Paths.Source.KeyPath.Text, "map": arr}
+	}
+	var baseURL interface{}
+	if c.BaseURL != nil {
+		baseURL = *c.BaseURL
+	}
+	// target
+	var tsTarget interface{}
+	if c.tsTargetKey.Range.Len > 0 || c.tsTargetKey.LowerValue != "" {
+		tsTarget = []interface{}{c.tsTargetKey.LowerValue, c.tsTargetKey.Source.KeyPath.Text, tsjRange(c.tsTargetKey.Range)}
+	}
+	// strict / alwaysStrict (config.TSAlwaysStrict)
+	var strict, alwaysStrict interface{}
+	if c.TSStrict != nil {
+		strict = []interface{}{c.TSStrict.Name, c.TSStrict.Value, tsjRange(c.TSStrict.Range)}
+	}
+	if c.TSAlwaysStrict != nil {
+		alwaysStrict = []interface{}{c.TSAlwaysStrict.Name, c.TSAlwaysStrict.Value, tsjRange(c.TSAlwaysStrict.Range)}
+	}
+	return map[string]interface{}{
+		"absPath":        c.AbsPath,
+		"baseURL":        baseURL,
+		"baseURLForPaths": c.BaseURLForPaths,
+		"paths":          paths,
+		"tsTarget":       tsTarget,
+		"strict":         strict,
+		"alwaysStrict":   alwaysStrict,
+		"jsx": map[string]interface{}{
+			"jsx": int(c.JSXSettings.JSX),
+			"factory": c.JSXSettings.JSXFactory,
+			"fragment": c.JSXSettings.JSXFragmentFactory,
+			"importSource": c.JSXSettings.JSXImportSource,
+		},
+		"settings": map[string]interface{}{
+			"experimentalDecorators": int(c.Settings.ExperimentalDecorators),
+			"importsNotUsedAsValues": int(c.Settings.ImportsNotUsedAsValues),
+			"preserveValueImports":   int(c.Settings.PreserveValueImports),
+			"target":                 int(c.Settings.Target),
+			"useDefineForClassFields": int(c.Settings.UseDefineForClassFields),
+			"verbatimModuleSyntax":   int(c.Settings.VerbatimModuleSyntax),
+		},
+		"msgs": msgs,
+	}
+}
+
+func TestTmpGenTSConfig(t *testing.T) {
+	var out []tsjRow
+	fsObj := fs.MockFS(nil, fs.MockUnix, "/work")
+
+	type tc struct {
+		name      string
+		src       string
+		fileDir   string
+		configDir string
+		extends   bool
+	}
+
+	cases := []tc{
+		{"empty", `{}`, "/work", "/work", false},
+		{"baseurl-rel", `{"compilerOptions":{"baseUrl":"src"}}`, "/work", "/work", false},
+		{"baseurl-abs", `{"compilerOptions":{"baseUrl":"/abs/src"}}`, "/work", "/work", false},
+		{"baseurl-configdir", `{"compilerOptions":{"baseUrl":"${configDir}/pkg"}}`, "/work/proj", "/work/proj", false},
+		{"jsx-preserve", `{"compilerOptions":{"jsx":"preserve"}}`, "/work", "/work", false},
+		{"jsx-reactnative", `{"compilerOptions":{"jsx":"react-native"}}`, "/work", "/work", false},
+		{"jsx-react", `{"compilerOptions":{"jsx":"React"}}`, "/work", "/work", false},
+		{"jsx-reactjsx", `{"compilerOptions":{"jsx":"react-jsx"}}`, "/work", "/work", false},
+		{"jsx-reactjsxdev", `{"compilerOptions":{"jsx":"react-jsxdev"}}`, "/work", "/work", false},
+		{"jsx-invalid", `{"compilerOptions":{"jsx":"wat"}}`, "/work", "/work", false},
+		{"jsx-factory", `{"compilerOptions":{"jsxFactory":"React.createElement","jsxFragmentFactory":"React.Fragment","jsxImportSource":"preact"}}`, "/work", "/work", false},
+		{"jsx-factory-bad", `{"compilerOptions":{"jsxFactory":"1bad.name"}}`, "/work", "/work", false},
+		{"bools", `{"compilerOptions":{"experimentalDecorators":true,"useDefineForClassFields":false,"preserveValueImports":true,"verbatimModuleSyntax":false}}`, "/work", "/work", false},
+		{"target-es5", `{"compilerOptions":{"target":"es5"}}`, "/work", "/work", false},
+		{"target-es2022", `{"compilerOptions":{"target":"ES2022"}}`, "/work", "/work", false},
+		{"target-next", `{"compilerOptions":{"target":"esnext"}}`, "/work", "/work", false},
+		{"target-bad", `{"compilerOptions":{"target":"es1999"}}`, "/work", "/work", false},
+		{"strict", `{"compilerOptions":{"strict":true}}`, "/work", "/work", false},
+		{"alwaysstrict", `{"compilerOptions":{"alwaysStrict":false}}`, "/work", "/work", false},
+		{"strict-both", `{"compilerOptions":{"strict":true,"alwaysStrict":false}}`, "/work", "/work", false},
+		{"inu-remove", `{"compilerOptions":{"importsNotUsedAsValues":"remove"}}`, "/work", "/work", false},
+		{"inu-preserve", `{"compilerOptions":{"importsNotUsedAsValues":"preserve"}}`, "/work", "/work", false},
+		{"inu-error", `{"compilerOptions":{"importsNotUsedAsValues":"error"}}`, "/work", "/work", false},
+		{"inu-bad", `{"compilerOptions":{"importsNotUsedAsValues":"wat"}}`, "/work", "/work", false},
+		{"paths", `{"compilerOptions":{"baseUrl":".","paths":{"@/*":["src/*","gen/*"],"exact":["./x"]}}}`, "/work", "/work", false},
+		{"paths-configdir", `{"compilerOptions":{"baseUrl":"${configDir}","paths":{"~/*":["${configDir}/*"]}}}`, "/work/proj", "/work/proj", false},
+		{"paths-badpattern", `{"compilerOptions":{"paths":{"a*b*c":["./x"]}}}`, "/work", "/work", false},
+		{"paths-nonarray", `{"compilerOptions":{"paths":{"@/*":"./x"}}}`, "/work", "/work", false},
+		{"top-level", `{"target":"es5","strict":true,"jsx":"react"}`, "/work", "/work", false},
+		{"extends-str", `{"extends":"./base.json","compilerOptions":{"strict":true}}`, "/work", "/work", true},
+		{"extends-arr", `{"extends":["./a.json","./b.json"],"compilerOptions":{"baseUrl":"x"}}`, "/work", "/work", true},
+		{"bad-json", `{ not json`, "/work", "/work", false},
+	}
+
+	for _, c := range cases {
+		log := logger.NewDeferLog(logger.DeferLogAll, nil)
+		source := logger.Source{Contents: c.src, KeyPath: logger.Path{Text: "/work/tsconfig.json"}}
+		cacheSet := cache.MakeCacheSet()
+		var ext func(string, logger.Range) *TSConfigJSON
+		if c.extends {
+			ext = func(s string, r logger.Range) *TSConfigJSON {
+				base := &TSConfigJSON{BaseURL: ptr("BASE:" + s), BaseURLForPaths: "/base"}
+				base.JSXSettings.JSX = 3 // TSJSXReact
+				return base
+			}
+		}
+		res := ParseTSConfigJSON(log, source, &cacheSet.JSONCache, fsObj, c.fileDir, c.configDir, ext)
+		msgs := []string{}
+		for _, m := range log.Done() {
+			msgs = append(msgs, m.Data.Text)
+		}
+		out = append(out, tsjRow{
+			Arg: map[string]interface{}{"src": c.src, "fileDir": c.fileDir, "configDir": c.configDir, "extends": c.extends},
+			Out: dumpTSConfig(res, msgs),
+		})
+	}
+
+	b, err := json.Marshal(out)
+	if err != nil { t.Fatal(err) }
+	if err := os.WriteFile("/root/port/testdata/tsconfig-json-go.json", b, 0644); err != nil { t.Fatal(err) }
+	t.Logf("wrote %d cases", len(out))
+}
+
+func ptr(s string) *string { return &s }

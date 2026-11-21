@@ -1,0 +1,1 @@
+div { --foo:hover { color: red } zoom: 2; }

@@ -1,0 +1,76 @@
+{
+  "rows": [
+    {
+      "name": "get-empty",
+      "out": "00"
+    },
+    {
+      "name": "create-then-get",
+      "out": "01"
+    },
+    {
+      "name": "get-other-key",
+      "out": "00"
+    },
+    {
+      "name": "get-after-destroy",
+      "out": "00"
+    },
+    {
+      "name": "get-7-and-8",
+      "out": "01"
+    },
+    {
+      "name": "get-7-after-destroy-8-alive",
+      "out": "0001"
+    },
+    {
+      "name": "sendPacket-bytes",
+      "out": "deadbeef"
+    },
+    {
+      "name": "sendPacket-error-packet",
+      "out": "1b000000070000000601000000050000006572726f720304000000626f6f6d"
+    },
+    {
+      "name": "sendRequest-id-start",
+      "out": "0"
+    },
+    {
+      "name": "sendRequest-before-id",
+      "out": "0"
+    },
+    {
+      "name": "sendRequest-result",
+      "out": "ok-response"
+    },
+    {
+      "name": "sendRequest-after-id",
+      "out": "1"
+    },
+    {
+      "name": "dispatch-invalid-cmd",
+      "out": "2d0000000f0000000601000000050000006572726f720316000000496e76616c696420636f6d6d616e643a20626f677573"
+    },
+    {
+      "name": "dispatch-resolve-inactive",
+      "out": "410000000f0000000601000000050000006572726f72032a00000043616e6e6f742063616c6c20227265736f6c766522206f6e20616e20696e616374697665206275696c64"
+    },
+    {
+      "name": "dispatch-rebuild-inactive",
+      "out": "250000000f0000000601000000050000006572726f72030e00000043616e6e6f742072656275696c64"
+    },
+    {
+      "name": "dispatch-watch-inactive",
+      "out": "230000000f0000000601000000050000006572726f72030c00000043616e6e6f74207761746368"
+    },
+    {
+      "name": "dispatch-cancel-inactive",
+      "out": "090000000f0000000600000000"
+    },
+    {
+      "name": "dispatch-dispose-inactive",
+      "out": "090000000f0000000600000000"
+    }
+  ]
+}

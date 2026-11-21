@@ -1,0 +1,110 @@
+[
+  {
+    "name": "one-dynamic",
+    "ok": true,
+    "symbols": [
+      "require",
+      "exports",
+      "module",
+      "_glob",
+      "__glob",
+      "import_runtime",
+      "require_"
+    ],
+    "parts": 3,
+    "stmts": [
+      [],
+      [
+        "other"
+      ],
+      [
+        "Local"
+      ]
+    ],
+    "importPaths": [
+      "./a.js",
+      "\u003cruntime\u003e"
+    ]
+  },
+  {
+    "name": "two-sorted",
+    "ok": true,
+    "symbols": [
+      "require",
+      "exports",
+      "module",
+      "_g",
+      "__glob",
+      "import_runtime",
+      "require_"
+    ],
+    "parts": 3,
+    "stmts": [
+      [],
+      [
+        "other"
+      ],
+      [
+        "Local"
+      ]
+    ],
+    "importPaths": [
+      "./a.js",
+      "./z.js",
+      "\u003cruntime\u003e"
+    ]
+  },
+  {
+    "name": "one-require",
+    "ok": true,
+    "symbols": [
+      "require",
+      "exports",
+      "module",
+      "_glob",
+      "__glob",
+      "import_runtime",
+      "require_"
+    ],
+    "parts": 3,
+    "stmts": [
+      [],
+      [
+        "other"
+      ],
+      [
+        "Local"
+      ]
+    ],
+    "importPaths": [
+      "./a.js",
+      "\u003cruntime\u003e"
+    ]
+  },
+  {
+    "name": "empty",
+    "ok": true,
+    "symbols": [
+      "require",
+      "exports",
+      "module",
+      "_g",
+      "__glob",
+      "import_runtime",
+      "require_"
+    ],
+    "parts": 3,
+    "stmts": [
+      [],
+      [
+        "other"
+      ],
+      [
+        "Local"
+      ]
+    ],
+    "importPaths": [
+      "\u003cruntime\u003e"
+    ]
+  }
+]

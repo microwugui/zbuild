@@ -1,0 +1,67 @@
+[
+  {
+    "fn": "isBoolFlag",
+    "arg": "[--minify --minify]",
+    "out": "true"
+  },
+  {
+    "fn": "isBoolFlag",
+    "arg": "[--minify=false --minify]",
+    "out": "true"
+  },
+  {
+    "fn": "isBoolFlag",
+    "arg": "[--minifyx --minify]",
+    "out": "false"
+  },
+  {
+    "fn": "isBoolFlag",
+    "arg": "[--minify=1 --minify]",
+    "out": "true"
+  },
+  {
+    "fn": "isBoolFlag",
+    "arg": "[x --minify]",
+    "out": "false"
+  },
+  {
+    "fn": "parseBoolFlag",
+    "arg": "--flag=true",
+    "out": "true|nil"
+  },
+  {
+    "fn": "parseBoolFlag",
+    "arg": "--flag=false",
+    "out": "false|nil"
+  },
+  {
+    "fn": "parseBoolFlag",
+    "arg": "--flag",
+    "out": "true|nil"
+  },
+  {
+    "fn": "parseBoolFlag",
+    "arg": "--flag=x",
+    "out": "false|Invalid value \"x\" in \"--flag=x\""
+  },
+  {
+    "fn": "splitWithEmptyCheck",
+    "arg": "[a,b ,]",
+    "out": "[a b]"
+  },
+  {
+    "fn": "splitWithEmptyCheck",
+    "arg": "[a,,b ,]",
+    "out": "[a  b]"
+  },
+  {
+    "fn": "splitWithEmptyCheck",
+    "arg": "[ ,]",
+    "out": "[]"
+  },
+  {
+    "fn": "splitWithEmptyCheck",
+    "arg": "[a;b ;]",
+    "out": "[a b]"
+  }
+]

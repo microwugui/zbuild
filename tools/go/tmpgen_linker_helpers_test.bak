@@ -1,0 +1,181 @@
+package linker
+
+// 第 154 批 Go 探针：linker 助手簇（enforceNoCyclicChunkImports /
+// preventExportsFromBeingRenamed / maybeCorrectObviousTypo / advanceImportTracker /
+// recoverInternalError），逐字节固化。
+import (
+  "encoding/json"
+  "github.com/evanw/esbuild/internal/config"
+  "fmt"
+  "os"
+  "sync"
+  "testing"
+
+  "github.com/evanw/esbuild/internal/ast"
+  "github.com/evanw/esbuild/internal/graph"
+  "github.com/evanw/esbuild/internal/js_ast"
+  "github.com/evanw/esbuild/internal/logger"
+)
+
+func lhRef(s, i uint32) ast.Ref { return ast.Ref{SourceIndex: s, InnerIndex: i} }
+type lhRow struct { Fn string `json:"fn"`; Arg map[string]interface{} `json:"arg"`; Out interface{} `json:"out"` }
+
+func lhDumpMsgs(log logger.Log) []string {
+  out := []string{}
+  for _, m := range log.Done() { out = append(out, m.Data.Text) }
+  return out
+}
+
+func TestTmpGenLinkerHelpers(t *testing.T) {
+  var out []lhRow
+  add := func(fn string, arg map[string]interface{}, o interface{}) { out = append(out, lhRow{fn, arg, o}) }
+
+  // enforceNoCyclicChunkImports: acyclic (static only), cycle (static), dynamic cycle (ok)
+  for _, tc := range []struct{ name string; imports [][2]uint32 /* {to, kind} */ }{
+    {"acyclic", [][2]uint32{{1, uint32(ast.ImportStmt)}}},
+    {"cycle", [][2]uint32{{1, uint32(ast.ImportStmt)}}, // filled below
+    },
+  } { _ = tc }
+  {
+    c := &linkerContext{}
+    log := logger.NewDeferLog(logger.DeferLogNoVerboseOrDebug, nil); c.log = log
+    c.chunks = []chunkInfo{
+      {crossChunkImports: []chunkImport{{chunkIndex: 1, importKind: ast.ImportStmt}}},
+      {},
+    }
+    c.enforceNoCyclicChunkImports()
+    add("enforceNoCyclicChunkImports", map[string]interface{}{"case": "acyclic"}, lhDumpMsgs(log))
+  }
+  {
+    c := &linkerContext{}
+    log := logger.NewDeferLog(logger.DeferLogNoVerboseOrDebug, nil); c.log = log
+    c.chunks = []chunkInfo{
+      {crossChunkImports: []chunkImport{{chunkIndex: 1, importKind: ast.ImportStmt}}},
+      {crossChunkImports: []chunkImport{{chunkIndex: 0, importKind: ast.ImportStmt}}},
+    }
+    c.enforceNoCyclicChunkImports()
+    add("enforceNoCyclicChunkImports", map[string]interface{}{"case": "cycle"}, lhDumpMsgs(log))
+  }
+  {
+    c := &linkerContext{}
+    log := logger.NewDeferLog(logger.DeferLogNoVerboseOrDebug, nil); c.log = log
+    c.chunks = []chunkInfo{
+      {crossChunkImports: []chunkImport{{chunkIndex: 1, importKind: ast.ImportDynamic}}},
+      {crossChunkImports: []chunkImport{{chunkIndex: 0, importKind: ast.ImportDynamic}}},
+    }
+    c.enforceNoCyclicChunkImports()
+    add("enforceNoCyclicChunkImports", map[string]interface{}{"case": "dynamic-cycle"}, lhDumpMsgs(log))
+  }
+
+  // preventExportsFromBeingRenamed: module with export (only exported pinned) vs script (all pinned)
+  for _, tc := range []string{"module", "script"} {
+    c := &linkerContext{}
+    c.graph.Files = make([]graph.LinkerFile, 1)
+    sm := ast.NewSymbolMap(1)
+    sm.SymbolsForSource[0] = []ast.Symbol{
+      {OriginalName: "foo", Link: ast.InvalidRef}, {OriginalName: "bar", Link: ast.InvalidRef},
+    }
+    c.graph.Symbols = sm
+    ms := &js_ast.Scope{Members: map[string]js_ast.ScopeMember{}}
+    ms.Members["foo"] = js_ast.ScopeMember{Ref: lhRef(0, 0)}
+    ms.Members["bar"] = js_ast.ScopeMember{Ref: lhRef(0, 1)}
+    var stmts []js_ast.Stmt
+    if tc == "module" {
+      sl := &js_ast.SLocal{IsExport: true, Decls: []js_ast.Decl{{Binding: js_ast.Binding{Data: &js_ast.BIdentifier{Ref: lhRef(0, 0)}}}}}
+      stmts = []js_ast.Stmt{{Data: sl}}
+    }
+    repr := &graph.JSRepr{AST: js_ast.AST{ModuleScope: ms, Parts: []js_ast.Part{{Stmts: stmts}}}}
+    c.graph.Files[0].InputFile.Repr = repr
+    c.preventExportsFromBeingRenamed(0)
+    flags := []uint32{uint32(sm.SymbolsForSource[0][0].Flags), uint32(sm.SymbolsForSource[0][1].Flags)}
+    kinds := []int{int(sm.SymbolsForSource[0][0].Kind), int(sm.SymbolsForSource[0][1].Kind)}
+    add("preventExportsFromBeingRenamed", map[string]interface{}{"case": tc}, map[string]interface{}{"flags": flags, "kinds": kinds})
+  }
+
+  // maybeCorrectObviousTypo: "expot" -> "export"
+  {
+    c := &linkerContext{}
+    c.graph.Files = make([]graph.LinkerFile, 1)
+    repr := &graph.JSRepr{}
+    repr.Meta.ResolvedExports = map[string]graph.ExportData{"export": {SourceIndex: 0, NameLoc: logger.Loc{Start: 0}, Ref: lhRef(0, 0)}}
+    c.graph.Files[0].InputFile.Repr = repr
+    msg := &logger.Msg{}
+    msg.Data.Location = &logger.MsgLocation{}
+    c.maybeCorrectObviousTypo(repr, "expot", msg)
+    notes := []string{}
+    for _, n := range msg.Notes { notes = append(notes, n.Text) }
+    add("maybeCorrectObviousTypo", map[string]interface{}{"typo": "expot"}, map[string]interface{}{"suggestion": msg.Data.Location.Suggestion, "notes": notes})
+  }
+
+  // advanceImportTracker: external / commonJS / found / noMatch
+  {
+    c := &linkerContext{}
+    c.graph.Files = make([]graph.LinkerFile, 2)
+    // file 0 imports
+    file0 := &graph.JSRepr{AST: js_ast.AST{ImportRecords: []ast.ImportRecord{{}}, NamedImports: map[ast.Ref]js_ast.NamedImport{}}}
+    file0.AST.NamedImports[lhRef(0, 5)] = js_ast.NamedImport{Alias: "foo", ImportRecordIndex: 0}
+    c.graph.Files[0].InputFile.Repr = file0
+    // file 1 target - ESM with export foo
+    file1 := &graph.JSRepr{AST: js_ast.AST{ExportsKind: js_ast.ExportsESM, UsesExportsRef: true}}
+    file1.Meta.ResolvedExports = map[string]graph.ExportData{"foo": {SourceIndex: 1, Ref: lhRef(1, 9), NameLoc: logger.Loc{Start: 10}}}
+    c.graph.Files[1].InputFile.Repr = file1
+    // external case
+    file0.AST.ImportRecords[0].SourceIndex = ast.Index32{}
+    tr, st, data := c.advanceImportTracker(importTracker{sourceIndex: 0, importRef: lhRef(0, 5)})
+    add("advanceImportTracker", map[string]interface{}{"case": "external"}, map[string]interface{}{"status": int(st), "src": tr.sourceIndex, "inner": tr.importRef.InnerIndex, "data": len(data)})
+    // found case
+    file0.AST.ImportRecords[0].SourceIndex = ast.MakeIndex32(1)
+    tr, st, data = c.advanceImportTracker(importTracker{sourceIndex: 0, importRef: lhRef(0, 5)})
+    add("advanceImportTracker", map[string]interface{}{"case": "found"}, map[string]interface{}{"status": int(st), "src": tr.sourceIndex, "inner": tr.importRef.InnerIndex, "data": len(data)})
+    // noMatch case
+    file0.AST.NamedImports[lhRef(0, 5)] = js_ast.NamedImport{Alias: "missing", ImportRecordIndex: 0}
+    tr, st, data = c.advanceImportTracker(importTracker{sourceIndex: 0, importRef: lhRef(0, 5)})
+    add("advanceImportTracker", map[string]interface{}{"case": "noMatch"}, map[string]interface{}{"status": int(st), "src": tr.sourceIndex, "inner": tr.importRef.InnerIndex, "data": len(data)})
+  }
+
+  // recoverInternalError: non-panic (no error added)
+  {
+    c := &linkerContext{}
+    log := logger.NewDeferLog(logger.DeferLogNoVerboseOrDebug, nil); c.log = log
+    var wg sync.WaitGroup
+    c.recoverInternalError(&wg, uint32(0))
+    add("recoverInternalError", map[string]interface{}{"case": "nopanic"}, lhDumpMsgs(log))
+  }
+  // recoverInternalError: panic at runtime source (0) -> "panic: boom"
+  {
+    c := &linkerContext{}
+    log := logger.NewDeferLog(logger.DeferLogNoVerboseOrDebug, nil); c.log = log
+    var wg sync.WaitGroup; wg.Add(1)
+    func() {
+      defer c.recoverInternalError(&wg, uint32(0))
+      panic("boom")
+    }()
+    msgs := []string{}
+    for _, m := range log.Done() { msgs = append(msgs, m.Data.Text) }
+    add("recoverInternalError", map[string]interface{}{"case": "panic-runtime"}, msgs)
+  }
+  // recoverInternalError: panic at source 1 -> includes "(while printing \"src/a.js\")"
+  {
+    c := &linkerContext{}
+    log := logger.NewDeferLog(logger.DeferLogNoVerboseOrDebug, nil); c.log = log
+    c.graph.Files = make([]graph.LinkerFile, 2)
+    src := logger.Source{KeyPath: logger.Path{Text: "/p/src/a.js", Namespace: "file"}}
+    src.PrettyPaths.Rel = "src/a.js"
+    c.graph.Files[1].InputFile.Source = src
+    c.options = &config.Options{}
+    var wg sync.WaitGroup; wg.Add(1)
+    func() {
+      defer c.recoverInternalError(&wg, uint32(1))
+      panic("bad")
+    }()
+    msgs := []string{}
+    for _, m := range log.Done() { msgs = append(msgs, m.Data.Text) }
+    add("recoverInternalError", map[string]interface{}{"case": "panic-source"}, msgs)
+  }
+
+  b, err := json.MarshalIndent(out, "", "  ")
+  if err != nil { t.Fatal(err) }
+  if err := os.WriteFile("/root/port/testdata/linker-helpers-go.json", b, 0644); err != nil { t.Fatal(err) }
+  t.Logf("wrote %d rows", len(out))
+  _ = fmt.Sprint
+}

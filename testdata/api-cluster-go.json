@@ -1,0 +1,67 @@
+[
+  {
+    "fn": "validateSupported",
+    "arg": "{\"bigint\":true,\"optional-chain\":false}",
+    "out": "140737488355328|140737488355360|0|0"
+  },
+  {
+    "fn": "validateSupported",
+    "arg": "{\"hex-rgb-ha\":true,\"nesting\":false}",
+    "out": "0|0|2048|2048"
+  },
+  {
+    "fn": "validateSupported",
+    "arg": "{\"unknown-feature\":true}",
+    "out": "0|0|0|0"
+  },
+  {
+    "fn": "validateSupported",
+    "arg": "{}",
+    "out": "0|0|0|0"
+  },
+  {
+    "fn": "validateAlias",
+    "arg": "{\"foo\":\"bar\",\"@scope/pkg\":\"x\"}",
+    "out": "@scope/pkg=x;foo=bar;"
+  },
+  {
+    "fn": "validateAlias",
+    "arg": "{\"./relative\":\"x\",\"foo/../bar\":\"y\",\"/abs\":\"z\"}",
+    "out": ""
+  },
+  {
+    "fn": "validateAlias",
+    "arg": "{\"foo\":\"\"}",
+    "out": ""
+  },
+  {
+    "fn": "validateAlias",
+    "arg": "{\"has\\\\backslash\":\"x\"}",
+    "out": ""
+  },
+  {
+    "fn": "validateJSXExpr",
+    "arg": "React.createElement|factory",
+    "out": "parts"
+  },
+  {
+    "fn": "validateJSXExpr",
+    "arg": "|factory",
+    "out": "none"
+  },
+  {
+    "fn": "validateJSXExpr",
+    "arg": "foo|factory",
+    "out": "parts"
+  },
+  {
+    "fn": "validateJSXExpr",
+    "arg": "Fragment|fragment",
+    "out": "parts"
+  },
+  {
+    "fn": "validateJSXExpr",
+    "arg": "null|fragment",
+    "out": "parts"
+  }
+]

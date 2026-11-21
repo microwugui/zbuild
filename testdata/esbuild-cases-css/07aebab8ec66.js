@@ -1,0 +1,1 @@
+.demo { .lg { &.triangle, &.circle { color: red } } }

@@ -1,0 +1,1 @@
+if (1) {let a = 1} else a()

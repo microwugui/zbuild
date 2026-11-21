@@ -1,0 +1,58 @@
+[
+  {
+    "name": "xxhash",
+    "package": "internal/xxhash",
+    "test": "src/internal/xxhash/xxhash.test.ts",
+    "fixture": "testdata/xxhash.json",
+    "generator": "cd /root/esbuild && go run ./tmpgen",
+    "referenceSha256": "b1196e5431bd87227275fe2a00f7708cc8ae914b3b0d60d2e31723edc2700577"
+  },
+  {
+    "name": "helpers-utf",
+    "package": "internal/helpers",
+    "test": "src/internal/helpers/utf.test.ts",
+    "fixture": "testdata/helpers.json",
+    "generator": "cd /root/esbuild && go run ./tmpgen2",
+    "referenceSha256": "0f8bf785cb3f785450a133e8ad0e8df3bccf79a0998246fe6b3da8ed6a0428d3"
+  },
+  {
+    "name": "helpers-quote",
+    "package": "internal/helpers",
+    "test": "src/internal/helpers/quote.test.ts",
+    "fixture": "testdata/helpers.json",
+    "generator": "cd /root/esbuild && go run ./tmpgen2",
+    "referenceSha256": "0f8bf785cb3f785450a133e8ad0e8df3bccf79a0998246fe6b3da8ed6a0428d3"
+  },
+  {
+    "name": "helpers-extra",
+    "package": "internal/helpers",
+    "test": "src/internal/helpers/helpers_extra.test.ts",
+    "fixture": "testdata/helpers2.json",
+    "generator": "cd /root/esbuild && go run ./tmpgen3",
+    "referenceSha256": "59378a8572435c3eefa6a56c699af1ede5d7a79dcc8e4a580d786c1d98a1cd02"
+  },
+  {
+    "name": "js-printer-basic",
+    "package": "internal/js_printer",
+    "test": "src/internal/js_printer/js_printer.test.ts",
+    "fixture": "testdata/js_printer/basic.json",
+    "generator": "cd /root/esbuild && go run ./tmpgenprinter",
+    "referenceSha256": "29f04b4e5507c0e6d6cff3c56ecc9ccb880204528210462c032e0b908e9cfd1a"
+  },
+  {
+    "name": "js-ast-paths",
+    "package": "internal/js_ast",
+    "test": "src/internal/js_ast/js_ast.test.ts",
+    "fixture": "testdata/js_ast/paths.json",
+    "generator": "cd /root/esbuild && go run ./tmpgenpaths16",
+    "referenceSha256": "8950c2e1689051f6c114add1bd2889d46d53f8c62590c032ef09ca213db6784e"
+  },
+  {
+    "name": "helpers-path",
+    "package": "internal/helpers",
+    "test": "src/internal/helpers/path.test.ts",
+    "fixture": "testdata/helpers-path.json",
+    "generator": "cd /root/esbuild && go run ./tmpgenpath",
+    "referenceSha256": "b095ff2b2d1f6f6efeb682c65bdd0090f33c12e44389821d0b4c6d4d9b55404f"
+  }
+]

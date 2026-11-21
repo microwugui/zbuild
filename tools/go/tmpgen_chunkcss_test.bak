@@ -1,0 +1,70 @@
+package linker
+
+// 第 157 批 Go 探针：generateChunkCSS 本体，dump 最终 intermediateOutput（assembly 路径）。
+import (
+  "encoding/hex"
+  "encoding/json"
+  "os"
+  "sync"
+  "testing"
+
+  "github.com/evanw/esbuild/internal/ast"
+  "github.com/evanw/esbuild/internal/bundler"
+  "github.com/evanw/esbuild/internal/config"
+  "github.com/evanw/esbuild/internal/fs"
+  "github.com/evanw/esbuild/internal/graph"
+  "github.com/evanw/esbuild/internal/js_ast"
+  "github.com/evanw/esbuild/internal/logger"
+)
+
+func ccRef(s, i uint32) ast.Ref { return ast.Ref{SourceIndex: s, InnerIndex: i} }
+type ccjRow struct { Fn string `json:"fn"`; Arg map[string]interface{} `json:"arg"`; Out interface{} `json:"out"` }
+func ccjIO(io intermediateOutput) interface{} {
+  if io.pieces == nil { return map[string]interface{}{"bytes": hex.EncodeToString(io.joiner.Done())} }
+  ps := []interface{}{}
+  for _, p := range io.pieces { ps = append(ps, []interface{}{hex.EncodeToString(p.data), int(p.kind), p.index}) }
+  return map[string]interface{}{"pieces": ps}
+}
+
+func ccjBuild(banner, footer string, legal config.LegalComments) *linkerContext {
+  c := &linkerContext{}
+  c.graph.Files = make([]graph.LinkerFile, 1)
+  c.graph.Symbols = ast.NewSymbolMap(1)
+  rt := &graph.JSRepr{AST: js_ast.AST{ModuleScope: &js_ast.Scope{}}}
+  c.graph.Files[0].InputFile.Repr = rt
+  c.fs = fs.MockFS(map[string]string{}, fs.MockUnix, "/")
+  c.options = &config.Options{CSSBanner: banner, CSSFooter: footer, LegalComments: legal, Mode: config.ModeBundle}
+  c.uniqueKeyPrefix = "TEST"; c.uniqueKeyPrefixBytes = []byte("TEST")
+  log := logger.NewDeferLog(logger.DeferLogNoVerboseOrDebug, nil); c.log = log
+  c.dataForSourceMaps = func() []bundler.DataForSourceMap { return nil }
+  return c
+}
+
+func TestTmpGenChunkCSS(t *testing.T) {
+  var out []ccjRow
+  add := func(fn string, arg map[string]interface{}, o interface{}) { out = append(out, ccjRow{fn,arg,o}) }
+  run := func(c *linkerContext, idx int) interface{} {
+    var wg sync.WaitGroup; wg.Add(1)
+    c.generateChunkCSS(idx, &wg)
+    return ccjIO(c.chunks[idx].intermediateOutput)
+  }
+  // Case A: empty chunk, banner+footer
+  {
+    c := ccjBuild("/* css banner */", "/* css footer */", config.LegalCommentsInline)
+    ch := chunkInfo{chunkRepr: &chunkReprCSS{}, finalTemplate: []config.PathTemplate{{Data:"chunk.css"}}}
+    c.chunks = []chunkInfo{ch}
+    add("generateChunkCSS", map[string]interface{}{"case":"banner-footer"}, run(c,0))
+  }
+  // Case B: empty chunk, no banner/footer
+  {
+    c := ccjBuild("", "", config.LegalCommentsInline)
+    ch := chunkInfo{chunkRepr: &chunkReprCSS{}, finalTemplate: []config.PathTemplate{{Data:"chunk.css"}}}
+    c.chunks = []chunkInfo{ch}
+    add("generateChunkCSS", map[string]interface{}{"case":"empty"}, run(c,0))
+  }
+
+  b, err := json.MarshalIndent(out, "", "  ")
+  if err != nil { t.Fatal(err) }
+  if err := os.WriteFile("/root/port/testdata/chunkcss-go.json", b, 0644); err != nil { t.Fatal(err) }
+  t.Logf("wrote %d rows", len(out))
+}

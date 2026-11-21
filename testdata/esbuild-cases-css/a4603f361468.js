@@ -1,0 +1,1 @@
+::placeholder { opacity: 0.5; @layer base { color: green } }

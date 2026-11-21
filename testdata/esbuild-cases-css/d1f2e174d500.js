@@ -1,0 +1,1 @@
+a { margin: auto; margin-left: 1px }

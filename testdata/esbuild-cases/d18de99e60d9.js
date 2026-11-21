@@ -1,0 +1,1 @@
+import * as 𐀀 from 'path'; 𐀀

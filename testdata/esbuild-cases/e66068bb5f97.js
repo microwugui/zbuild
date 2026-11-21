@@ -1,0 +1,1 @@
+await typeof x

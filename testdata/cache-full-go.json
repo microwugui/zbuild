@@ -1,0 +1,80 @@
+[
+  {
+    "fn": "MakeCacheSet",
+    "arg": "LenHint",
+    "out": 17
+  },
+  {
+    "fn": "MakeCacheSet",
+    "arg": "Get(a)",
+    "out": 1
+  },
+  {
+    "fn": "MakeCacheSet",
+    "arg": "Get(a again)",
+    "out": 1
+  },
+  {
+    "fn": "JSCache.Parse",
+    "arg": "ok seq",
+    "out": [
+      true,
+      true,
+      false,
+      false,
+      true
+    ]
+  },
+  {
+    "fn": "JSONCache.Parse",
+    "arg": "ok seq",
+    "out": [
+      true,
+      true,
+      false,
+      false,
+      true
+    ]
+  },
+  {
+    "fn": "CSSCache.Parse",
+    "arg": "has-rules seq",
+    "out": [
+      true,
+      true,
+      false,
+      false,
+      true
+    ]
+  },
+  {
+    "fn": "FSCache.ReadFile",
+    "arg": "miss contents",
+    "out": "hello"
+  },
+  {
+    "fn": "FSCache.ReadFile",
+    "arg": "miss readCalls",
+    "out": 1
+  },
+  {
+    "fn": "FSCache.ReadFile",
+    "arg": "hit contents",
+    "out": "hello"
+  },
+  {
+    "fn": "FSCache.ReadFile",
+    "arg": "hit readCalls(still)",
+    "out": 1
+  },
+  {
+    "fn": "FSCache.ReadFile",
+    "arg": "invalidate contents",
+    "out": "world"
+  },
+  {
+    "fn": "FSCache.ReadFile",
+    "arg": "invalidate readCalls",
+    "out": 2
+  }
+]

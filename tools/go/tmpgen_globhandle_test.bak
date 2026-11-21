@@ -1,0 +1,23 @@
+package js_parser
+
+// 第 108 轮 Go 探针：parser.handleGlobPattern（glob 模式 → 唯一符号调用 + 去重 + 名称生成）—— 受控 expr 全确定。
+import ("encoding/json";"os";"testing"
+ "github.com/evanw/esbuild/internal/ast"
+ "github.com/evanw/esbuild/internal/helpers"
+ "github.com/evanw/esbuild/internal/js_ast"
+ "github.com/evanw/esbuild/internal/logger"
+)
+type ghRow struct { Name string `json:"name"`; IsCall bool `json:"isCall"`; RefName string `json:"refName"`; NumSyms int `json:"numSyms"`; NumImports int `json:"numImports"` }
+func strExpr(s string,loc logger.Loc)js_ast.Expr{return js_ast.Expr{Loc:loc,Data:&js_ast.EString{Value:helpers.StringToUTF16(s)}}}
+func tmplExpr()js_ast.Expr{e:=&js_ast.ETemplate{HeadCooked:helpers.StringToUTF16("./a/"),HeadRaw:"./a/"};e.Parts=[]js_ast.TemplatePart{{Value:js_ast.Expr{Loc:logger.Loc{Start:8},Data:&js_ast.EIdentifier{Ref:ast.Ref{SourceIndex:1,InnerIndex:9}}},TailCooked:helpers.StringToUTF16("/*.js"),TailRaw:"/*.js"}};return js_ast.Expr{Loc:logger.Loc{Start:0},Data:e}}
+func TestTmpGenGlobHandle108(t *testing.T){
+  newP:=func()*parser{src:=logger.Source{Contents:"`./a/${x}/*.js`",KeyPath:logger.Path{Text:"main.js"}};src.Index=1;return &parser{source:src,symbols:[]ast.Symbol{{}},moduleScope:&js_ast.Scope{Generated:[]ast.Ref{}},log:logger.NewDeferLog(logger.DeferLogAll,nil),globPatternImports:[]globPatternImport{},options:Options{}}}
+  dump:=func(name string,p *parser,out js_ast.Expr)ghRow{r:=ghRow{Name:name,NumSyms:len(p.symbols),NumImports:len(p.globPatternImports)};if ec,ok:=out.Data.(*js_ast.ECall);ok{r.IsCall=true;if id,ok:=ec.Target.Data.(*js_ast.EIdentifier);ok&&int(id.Ref.InnerIndex)<len(p.symbols){r.RefName=p.symbols[id.Ref.InnerIndex].OriginalName}};return r}
+  rows:=[]ghRow{}
+  {p:=newP();rows=append(rows,dump("template-glob",p,p.handleGlobPattern(tmplExpr(),ast.ImportStmt,0,"./_glob",nil)))}
+  {p:=newP();rows=append(rows,dump("string-const",p,p.handleGlobPattern(strExpr("./a.js",logger.Loc{Start:0}),ast.ImportStmt,0,"./_glob",nil)))}
+  {p:=newP();p.handleGlobPattern(tmplExpr(),ast.ImportStmt,0,"./_glob",nil);rows=append(rows,dump("duplicate",p,p.handleGlobPattern(tmplExpr(),ast.ImportStmt,0,"./_glob",nil)))}
+  b,_:=json.MarshalIndent(rows,"","  ")
+  if err:=os.WriteFile("/root/port/testdata/glob-handle-go.json",b,0644);err!=nil{t.Fatal(err)}
+  t.Logf("wrote %d rows bytes=%d",len(rows),len(b))
+}

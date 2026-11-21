@@ -1,0 +1,50 @@
+[
+  {
+    "fn": "generateSourceMapForChunk",
+    "arg": {
+      "case": "single",
+      "shifts": true
+    },
+    "out": {
+      "mappings": ";AAAAA",
+      "prefix": "{\n  \"version\": 3,\n  \"sources\": [\"../src/a.js\"],\n  \"sourcesContent\": [\"hello\"],\n  \"mappings\": \"",
+      "suffix": "\",\n  \"names\": [\"origName\"]\n}\n"
+    }
+  },
+  {
+    "fn": "generateSourceMapForChunk",
+    "arg": {
+      "case": "single",
+      "shifts": false
+    },
+    "out": {
+      "mappings": "",
+      "prefix": "{\n  \"version\": 3,\n  \"sources\": [\"../src/a.js\"],\n  \"sourcesContent\": [\"hello\"],\n  \"mappings\": \"CAAA\",\n  \"names\": []\n}\n",
+      "suffix": ""
+    }
+  },
+  {
+    "fn": "generateSourceMapForChunk",
+    "arg": {
+      "case": "multi-null",
+      "shifts": true
+    },
+    "out": {
+      "mappings": "IAAAA;A;;ICAAC",
+      "prefix": "{\n  \"version\": 3,\n  \"sources\": [\"../src/a.js\", \"../src/b.js\"],\n  \"sourceRoot\": \"webpack:///\",\n  \"mappings\": \"",
+      "suffix": "\",\n  \"names\": [\"n1\", \"n2\"]\n}\n"
+    }
+  },
+  {
+    "fn": "generateSourceMapForChunk",
+    "arg": {
+      "case": "virtual",
+      "shifts": true
+    },
+    "out": {
+      "mappings": "CAAA",
+      "prefix": "{\n  \"version\": 3,\n  \"sources\": [\"https:plugin:virtual.js\"],\n  \"sourcesContent\": [\"abc\"],\n  \"mappings\": \"",
+      "suffix": "\",\n  \"names\": []\n}\n"
+    }
+  }
+]

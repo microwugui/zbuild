@@ -1,0 +1,7 @@
+✘ [ERROR] Top-level await is currently not supported with the "cjs" output format
+
+    <stdin>:1:5:
+      1 │ (x = await y)
+        ╵      ~~~~~
+
+1 error

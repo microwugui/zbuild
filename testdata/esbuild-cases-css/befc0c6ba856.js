@@ -1,0 +1,1 @@
+b { @media screen and (x) { a { color: red } } @media print and (x) { a { color: red } } }

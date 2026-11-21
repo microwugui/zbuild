@@ -1,0 +1,284 @@
+{
+  "rows": [
+    {
+      "name": "resolve:plain-pkg",
+      "data": {
+        "notes": [
+          "You can mark the path \"some-pkg\" as external to exclude it from the bundle, which will remove this error and leave the unresolved path in the bundle."
+        ],
+        "suggestion": "",
+        "text": "Could not resolve \"some-pkg\""
+      }
+    },
+    {
+      "name": "resolve:require-pkg",
+      "data": {
+        "notes": [
+          "You can mark the path \"some-pkg\" as external to exclude it from the bundle, which will remove this error and leave the unresolved path in the bundle. You can also surround this \"require\" call with a try/catch block to handle this failure at run-time instead of bundle-time."
+        ],
+        "suggestion": "",
+        "text": "Could not resolve \"some-pkg\""
+      }
+    },
+    {
+      "name": "resolve:dynamic-pkg",
+      "data": {
+        "notes": [
+          "You can mark the path \"some-pkg\" as external to exclude it from the bundle, which will remove this error and leave the unresolved path in the bundle. You can also add \".catch()\" here to handle this failure at run-time instead of bundle-time."
+        ],
+        "suggestion": "",
+        "text": "Could not resolve \"some-pkg\""
+      }
+    },
+    {
+      "name": "resolve:node-builtin",
+      "data": {
+        "notes": [
+          "The package \"node:fs\" wasn't found on the file system but is built into node. Are you trying to bundle for node? You can use \"Platform: api.PlatformNode\" to do that, which will remove this error."
+        ],
+        "suggestion": "",
+        "text": "Could not resolve \"node:fs\""
+      }
+    },
+    {
+      "name": "resolve:node-builtin-no-prefix",
+      "data": {
+        "notes": [
+          "The package \"fs\" wasn't found on the file system but is built into node. Are you trying to bundle for node? You can use \"Platform: api.PlatformNode\" to do that, which will remove this error."
+        ],
+        "suggestion": "",
+        "text": "Could not resolve \"fs\""
+      }
+    },
+    {
+      "name": "resolve:external-rel",
+      "data": {
+        "notes": [],
+        "suggestion": "",
+        "text": "Could not resolve \"./missing.js\""
+      }
+    },
+    {
+      "name": "resolve:alias-remap",
+      "data": {
+        "notes": [
+          "The path \"alias-name\" was remapped to \"real-pkg\" using the alias feature, which then couldn't be resolved. Keep in mind that import path aliases are resolved in the current working directory.",
+          "",
+          "You can mark the path \"real-pkg\" as external to exclude it from the bundle, which will remove this error and leave the unresolved path in the bundle."
+        ],
+        "suggestion": "",
+        "text": "Could not resolve \"real-pkg\" (originally \"alias-name\")"
+      }
+    },
+    {
+      "name": "resolve:plugin-no-dir",
+      "data": {
+        "notes": [
+          "The plugin \"my-plugin\" didn't set a resolve directory for the file \"src/main.js\", so esbuild did not search for \"some-pkg\" on the file system."
+        ],
+        "suggestion": "",
+        "text": "Could not resolve \"some-pkg\""
+      }
+    },
+    {
+      "name": "logplugin:empty",
+      "data": {
+        "didLogError": false,
+        "msgs": []
+      }
+    },
+    {
+      "name": "logplugin:one-error",
+      "data": {
+        "didLogError": true,
+        "msgs": [
+          {
+            "kind": 0,
+            "notes": [],
+            "text": "build failed"
+          }
+        ]
+      }
+    },
+    {
+      "name": "logplugin:warning-with-note",
+      "data": {
+        "didLogError": false,
+        "msgs": [
+          {
+            "kind": 1,
+            "notes": [
+              "note text"
+            ],
+            "text": "a warning"
+          }
+        ]
+      }
+    },
+    {
+      "name": "logplugin:default-plugin-name",
+      "data": {
+        "didLogError": true,
+        "msgs": [
+          {
+            "kind": 0,
+            "notes": [],
+            "text": "no name"
+          }
+        ]
+      }
+    },
+    {
+      "name": "logplugin:thrown",
+      "data": {
+        "didLogError": true,
+        "msgs": [
+          {
+            "kind": 0,
+            "notes": [],
+            "text": "plugin crashed"
+          }
+        ]
+      }
+    },
+    {
+      "name": "logplugin:with-import-source",
+      "data": {
+        "didLogError": true,
+        "msgs": [
+          {
+            "kind": 0,
+            "notes": [],
+            "text": "load error"
+          }
+        ]
+      }
+    },
+    {
+      "name": "extract:data-percent",
+      "data": {
+        "contents": "{\"version\":3}",
+        "msgs": [],
+        "path": {
+          "ignoredSuffix": "#sourceMappingURL",
+          "namespace": "file",
+          "text": "/p/main.js"
+        }
+      }
+    },
+    {
+      "name": "extract:data-base64",
+      "data": {
+        "contents": "{\"version\":3}",
+        "msgs": [],
+        "path": {
+          "ignoredSuffix": "#sourceMappingURL",
+          "namespace": "file",
+          "text": "/p/main.js"
+        }
+      }
+    },
+    {
+      "name": "extract:data-bad-base64",
+      "data": {
+        "contents": null,
+        "msgs": [
+          {
+            "kind": 1,
+            "notes": [],
+            "text": "Unsupported source map comment: could not decode base64 data: illegal base64 data at input byte 0"
+          }
+        ],
+        "path": {
+          "ignoredSuffix": "",
+          "namespace": "",
+          "text": ""
+        }
+      }
+    },
+    {
+      "name": "extract:http-scheme",
+      "data": {
+        "contents": null,
+        "msgs": [
+          {
+            "kind": 4,
+            "notes": [],
+            "text": "Unsupported source map comment: Unsupported URL scheme \"http\""
+          }
+        ],
+        "path": {
+          "ignoredSuffix": "",
+          "namespace": "",
+          "text": ""
+        }
+      }
+    },
+    {
+      "name": "extract:file-host",
+      "data": {
+        "contents": null,
+        "msgs": [
+          {
+            "kind": 1,
+            "notes": [],
+            "text": "Unsupported source map comment: Unsupported host \"remotehost\" in file URL"
+          }
+        ],
+        "path": {
+          "ignoredSuffix": "",
+          "namespace": "",
+          "text": ""
+        }
+      }
+    },
+    {
+      "name": "extract:relative-no-dir",
+      "data": {
+        "contents": null,
+        "msgs": [
+          {
+            "kind": 4,
+            "notes": [],
+            "text": "Unsupported source map comment: Cannot resolve relative URL without a resolve directory"
+          }
+        ],
+        "path": {
+          "ignoredSuffix": "",
+          "namespace": "",
+          "text": ""
+        }
+      }
+    },
+    {
+      "name": "extract:relative-file",
+      "data": {
+        "contents": "{\"version\":3,\"sources\":[\"foo.js\"]}",
+        "msgs": [],
+        "path": {
+          "ignoredSuffix": "",
+          "namespace": "file",
+          "text": "/p/foo.js.map"
+        }
+      }
+    },
+    {
+      "name": "extract:missing-file",
+      "data": {
+        "contents": null,
+        "msgs": [
+          {
+            "kind": 4,
+            "notes": [],
+            "text": "Cannot read file: /p/nope.js.map"
+          }
+        ],
+        "path": {
+          "ignoredSuffix": "",
+          "namespace": "",
+          "text": ""
+        }
+      }
+    }
+  ]
+}

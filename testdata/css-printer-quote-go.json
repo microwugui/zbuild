@@ -1,0 +1,67 @@
+[
+  {
+    "fn": "printQuoted",
+    "arg": "aGVsbG8=|0|0|false|false",
+    "out": "ImhlbGxvIg=="
+  },
+  {
+    "fn": "printQuoted",
+    "arg": "YSdiImM=|0|0|false|false",
+    "out": "ImEnYlwiYyI="
+  },
+  {
+    "fn": "printQuoted",
+    "arg": "dXJsKGEgYik=|0|0|false|false",
+    "out": "InVybChhIGIpIg=="
+  },
+  {
+    "fn": "printQuoted",
+    "arg": "5pel5pys|0|0|false|true",
+    "out": "Ilw2NWU1XDY3MmMi"
+  },
+  {
+    "fn": "printQuoted",
+    "arg": "MDEyMzQ1Njc4OWFiY2RlZg==|0|8|false|false",
+    "out": "IjAxMjM0NTZcCjc4OWFiY2RlXApmIg=="
+  },
+  {
+    "fn": "printQuoted",
+    "arg": "YQpi|0|0|false|false",
+    "out": "ImFcYSBiIg=="
+  },
+  {
+    "fn": "printQuoted",
+    "arg": "PC9zdHlsZT4=|0|0|false|false",
+    "out": "IjxcL3N0eWxlPiI="
+  },
+  {
+    "fn": "printQuoted",
+    "arg": "PC9zdHlsZT4=|0|0|true|false",
+    "out": "Ijwvc3R5bGU+Ig=="
+  },
+  {
+    "fn": "printQuoted",
+    "arg": "eA==|1|8|false|false",
+    "out": "Ingi"
+  },
+  {
+    "fn": "printQuotedWithQuote",
+    "arg": "aGVsbG8=|34|0",
+    "out": "ImhlbGxvIg=="
+  },
+  {
+    "fn": "printQuotedWithQuote",
+    "arg": "YSdi|34|0",
+    "out": "ImEnYiI="
+  },
+  {
+    "fn": "printQuotedWithQuote",
+    "arg": "YSJi|39|0",
+    "out": "J2EiYic="
+  },
+  {
+    "fn": "printQuotedWithQuote",
+    "arg": "eA==|0|0",
+    "out": "eA=="
+  }
+]

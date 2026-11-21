@@ -1,0 +1,1 @@
+a { padding: inherit; padding-left: 1px }

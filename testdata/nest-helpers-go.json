@@ -1,0 +1,144 @@
+[
+  {
+    "fn": "compoundSelectorTermCount",
+    "arg": null,
+    "out": 2
+  },
+  {
+    "fn": "complexSelectorTermCount",
+    "arg": null,
+    "out": 2
+  },
+  {
+    "fn": "addExpansionError",
+    "arg": null,
+    "out": [
+      "0|CSS nesting is causing too much expansion"
+    ]
+  },
+  {
+    "fn": "substituteAmpersandsInCompoundSelector",
+    "arg": "single",
+    "out": {
+      "msgs": [],
+      "result": [
+        {
+          "comb": 0,
+          "nesting": [],
+          "subs": [
+            {
+              "kind": 2,
+              "selectors": [
+                [
+                  {
+                    "comb": 0,
+                    "nesting": [],
+                    "subs": [],
+                    "type": "div"
+                  }
+                ]
+              ],
+              "t": "plist"
+            },
+            {
+              "element": false,
+              "name": "hover",
+              "t": "pseudo"
+            }
+          ],
+          "type": ".foo"
+        }
+      ]
+    }
+  },
+  {
+    "fn": "substituteAmpersandsInCompoundSelector",
+    "arg": "multi",
+    "out": {
+      "msgs": [],
+      "result": [
+        {
+          "comb": 62,
+          "nesting": [],
+          "subs": [],
+          "type": ".a"
+        },
+        {
+          "comb": 0,
+          "nesting": [],
+          "subs": [
+            {
+              "kind": 2,
+              "selectors": [
+                [
+                  {
+                    "comb": 0,
+                    "nesting": [],
+                    "subs": [],
+                    "type": "div"
+                  }
+                ]
+              ],
+              "t": "plist"
+            },
+            {
+              "element": false,
+              "name": "hover",
+              "t": "pseudo"
+            }
+          ],
+          "type": ".b"
+        }
+      ]
+    }
+  },
+  {
+    "fn": "multipleComplexSelectorsToSingleComplexSelector",
+    "arg": null,
+    "out": [
+      [
+        {
+          "comb": 62,
+          "nesting": [],
+          "subs": [
+            {
+              "kind": 2,
+              "selectors": [
+                [
+                  {
+                    "comb": 0,
+                    "nesting": [],
+                    "subs": [],
+                    "type": "a"
+                  }
+                ],
+                [
+                  {
+                    "comb": 62,
+                    "nesting": [],
+                    "subs": [],
+                    "type": "b"
+                  }
+                ]
+              ],
+              "t": "plist"
+            }
+          ],
+          "type": null
+        }
+      ]
+    ]
+  },
+  {
+    "fn": "reportNestingWithGeneratedPseudoClassIs",
+    "arg": false,
+    "out": []
+  },
+  {
+    "fn": "reportNestingWithGeneratedPseudoClassIs",
+    "arg": true,
+    "out": [
+      "1|Transforming this CSS nesting syntax is not supported in the configured target environment (chrome100)"
+    ]
+  }
+]

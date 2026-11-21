@@ -1,0 +1,33 @@
+package compat
+
+import (
+	"encoding/json"
+	"os"
+	"testing"
+
+)
+
+type cpEntry struct {
+	Property uint16 `json:"property"`
+	Engine   int    `json:"engine"`
+	Major    int    `json:"major"`
+	Minor    int    `json:"minor"`
+	Patch    int    `json:"patch"`
+	Prefix   int    `json:"prefix"`
+}
+
+func TestTmpGenCssPrefix(t *testing.T) {
+	entries := []cpEntry{}
+	for prop, items := range cssPrefixTable {
+		for _, it := range items {
+			entries = append(entries, cpEntry{
+				Property: uint16(prop), Engine: int(it.engine),
+				Major: int(it.withoutPrefix.major), Minor: int(it.withoutPrefix.minor), Patch: int(it.withoutPrefix.patch),
+				Prefix: int(it.prefix),
+			})
+		}
+	}
+	bts, _ := json.Marshal(entries)
+	if err := os.WriteFile("/root/port/testdata/compat-cssprefix-go.json", bts, 0644); err != nil { t.Fatal(err) }
+	t.Logf("wrote %d entries bytes=%d", len(entries), len(bts))
+}

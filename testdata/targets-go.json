@@ -1,0 +1,81 @@
+{
+  "rows": [
+    {
+      "name": "esnext",
+      "data": {
+        "engines": [],
+        "errNote": "",
+        "errText": "",
+        "target": 1
+      }
+    },
+    {
+      "name": "es2015-alias",
+      "data": {
+        "engines": [],
+        "errNote": "",
+        "errText": "",
+        "target": 3
+      }
+    },
+    {
+      "name": "multi",
+      "data": {
+        "engines": [
+          {
+            "name": 7,
+            "version": "18"
+          }
+        ],
+        "errNote": "",
+        "errText": "",
+        "target": 8
+      }
+    },
+    {
+      "name": "engines",
+      "data": {
+        "engines": [
+          {
+            "name": 0,
+            "version": "90"
+          },
+          {
+            "name": 10,
+            "version": "14"
+          }
+        ],
+        "errNote": "",
+        "errText": "",
+        "target": 0
+      }
+    },
+    {
+      "name": "missing-version",
+      "data": {
+        "engines": [],
+        "errNote": "",
+        "errText": "Target \"chrome\" is missing a version number in \"--target\"",
+        "target": 0
+      }
+    },
+    {
+      "name": "invalid",
+      "data": {
+        "engines": [],
+        "errNote": "Valid values are \"chromeN\", \"denoN\", \"edgeN\", \"esN\", \"firefoxN\", \"hermesN\", \"ieN\", \"iosN\", \"nodeN\", \"operaN\", \"rhinoN\", or \"safariN\" where N is a version number.",
+        "errText": "Invalid target \"bogus\" in \"--target\"",
+        "target": 0
+      }
+    },
+    {
+      "name": "case-insensitive",
+      "data": {
+        "engines": [],
+        "errNote": "",
+        "errText": "",
+        "target": 10
+      }
+    }
+  ]
+}

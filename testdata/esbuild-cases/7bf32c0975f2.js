@@ -1,0 +1,1 @@
+switch (x) { case 0: a(); break; case 1: case 2: default: b() }

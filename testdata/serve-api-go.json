@@ -1,0 +1,68 @@
+{
+  "accept": [
+    {
+      "name": "first",
+      "done": true,
+      "waitReturned": true,
+      "connPresent": false,
+      "err": "fake-err"
+    },
+    {
+      "name": "second",
+      "done": true,
+      "waitReturned": true,
+      "connPresent": false,
+      "err": "fake-err"
+    }
+  ],
+  "sse": [
+    {
+      "name": "success",
+      "headers": {
+        "Cache-Control": "no-cache",
+        "Connection": "keep-alive",
+        "Content-Type": "text/event-stream"
+      },
+      "status": 200,
+      "body": "cmV0cnk6IDUwMApldmVudDogY2hhbmdlCmRhdGE6IHsiYWRkZWQiOlsiL2EuanMiXX0KCmV2ZW50OiB4CmRhdGE6IHkKCg==",
+      "flushes": 3,
+      "streamsAfter": 0
+    },
+    {
+      "name": "error",
+      "headers": {},
+      "status": 500,
+      "body": "NTAwIC0gRXZlbnQgc3RyZWFtIGVycm9y",
+      "flushes": 0,
+      "streamsAfter": 0
+    }
+  ],
+  "watch": [
+    {
+      "name": "disposed",
+      "err": "Cannot watch a disposed context",
+      "hasWatcher": false,
+      "watchMode": false
+    },
+    {
+      "name": "already",
+      "err": "Watch mode has already been enabled",
+      "hasWatcher": true,
+      "watchMode": false
+    }
+  ],
+  "watcher": [
+    {
+      "name": "stop-before-start",
+      "rebuilt": false,
+      "shouldStop": 1,
+      "stopReturned": true
+    },
+    {
+      "name": "start-rebuild-stop",
+      "rebuilt": true,
+      "shouldStop": 1,
+      "stopReturned": true
+    }
+  ]
+}

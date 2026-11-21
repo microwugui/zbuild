@@ -1,0 +1,316 @@
+package css_parser
+
+// 第 136 批 Go 探针：直接调用 parseListOfDeclarations / parseAtRule /
+// parseQualifiedRule / parseSelectorRule / parseListOfRules 取 oracle。
+import (
+	"encoding/json"
+	"os"
+	"testing"
+
+	"github.com/evanw/esbuild/internal/ast"
+	"github.com/evanw/esbuild/internal/compat"
+	"github.com/evanw/esbuild/internal/css_ast"
+	"github.com/evanw/esbuild/internal/css_lexer"
+	"github.com/evanw/esbuild/internal/logger"
+)
+
+func mcToks(toks []css_ast.Token) []interface{} {
+	out := []interface{}{}
+	for _, t := range toks {
+		var kids interface{} = nil
+		if t.Children != nil {
+			kids = mcToks(*t.Children)
+		}
+		out = append(out, []interface{}{int(t.Kind), t.Text, int(t.Whitespace), int(t.UnitOffset), int(t.PayloadIndex), t.Loc.Start, kids})
+	}
+	return out
+}
+
+func mcName(n css_ast.NamespacedName) interface{} {
+	var pref interface{} = nil
+	if n.NamespacePrefix != nil {
+		pref = []interface{}{n.NamespacePrefix.Text, n.NamespacePrefix.Range.Loc.Start, int(n.NamespacePrefix.Kind)}
+	}
+	return []interface{}{pref, n.Name.Text, n.Name.Range.Loc.Start, int(n.Name.Kind)}
+}
+
+func mcSS(ss css_ast.SS) interface{} {
+	switch v := ss.(type) {
+	case *css_ast.SSHash:
+		return []interface{}{"hash", int(v.Name.Ref.InnerIndex)}
+	case *css_ast.SSClass:
+		return []interface{}{"class", int(v.Name.Ref.InnerIndex)}
+	case *css_ast.SSAttribute:
+		return []interface{}{"attr", v.MatcherOp, v.MatcherValue, mcName(v.NamespacedName), int(v.MatcherModifier)}
+	case *css_ast.SSPseudoClass:
+		return []interface{}{"pc", v.Name, mcToks(v.Args), v.IsElement}
+	case *css_ast.SSPseudoClassWithSelectorList:
+		return []interface{}{"pcs", mcComplex(v.Selectors), v.Index.A, v.Index.B, int(v.Kind)}
+	}
+	return []interface{}{"?"}
+}
+
+func mcCompound(c css_ast.CompoundSelector) interface{} {
+	var ts interface{} = nil
+	if c.TypeSelector != nil {
+		ts = mcName(*c.TypeSelector)
+	}
+	sss := []interface{}{}
+	for _, ss := range c.SubclassSelectors {
+		sss = append(sss, mcSS(ss.Data))
+	}
+	nests := []int32{}
+	for _, l := range c.NestingSelectorLocs {
+		nests = append(nests, l.Start)
+	}
+	return []interface{}{ts, sss, nests, int(c.Combinator.Loc.Start), int(c.Combinator.Byte), c.WasEmptyFromLocalOrGlobal}
+}
+
+func mcComplex(cs []css_ast.ComplexSelector) interface{} {
+	out := []interface{}{}
+	for _, c := range cs {
+		parts := []interface{}{}
+		for _, p := range c.Selectors {
+			parts = append(parts, mcCompound(p))
+		}
+		out = append(out, parts)
+	}
+	return out
+}
+
+func mcMQ(q css_ast.MediaQuery) interface{} {
+	return []interface{}{q.Loc.Start, q.Data.Hash()}
+}
+
+func mcMQs(qs []css_ast.MediaQuery) interface{} {
+	out := []interface{}{}
+	for _, q := range qs {
+		out = append(out, mcMQ(q))
+	}
+	return out
+}
+
+func mcRules(rules []css_ast.Rule) []interface{} {
+	out := []interface{}{}
+	for _, r := range rules {
+		base := []interface{}{r.Loc.Start}
+		switch d := r.Data.(type) {
+		case *css_ast.RAtCharset:
+			out = append(out, append([]interface{}{"charset"}, append(base, d.Encoding)...))
+		case *css_ast.RAtImport:
+			var cond interface{} = nil
+			if d.ImportConditions != nil {
+				cond = []interface{}{mcToks(d.ImportConditions.Layers), mcToks(d.ImportConditions.Supports), mcMQs(d.ImportConditions.Queries)}
+			}
+			out = append(out, append([]interface{}{"import"}, append(base, int(d.ImportRecordIndex), cond)...))
+		case *css_ast.RAtKeyframes:
+			blocks := []interface{}{}
+			for _, b := range d.Blocks {
+				blocks = append(blocks, []interface{}{b.Selectors, mcRules(b.Rules), b.Loc.Start, b.CloseBraceLoc.Start})
+			}
+			out = append(out, append([]interface{}{"keyframes"}, append(base, d.AtToken, int(d.Name.Ref.InnerIndex), blocks, d.CloseBraceLoc.Start)...))
+		case *css_ast.RAtLayer:
+			out = append(out, append([]interface{}{"layer"}, append(base, d.Names, mcRules(d.Rules), d.CloseBraceLoc.Start)...))
+		case *css_ast.RAtMedia:
+			out = append(out, append([]interface{}{"media"}, append(base, mcMQs(d.Queries), mcRules(d.Rules), d.CloseBraceLoc.Start)...))
+		case *css_ast.RAtScope:
+			out = append(out, append([]interface{}{"scope"}, append(base, mcComplex(d.Start), mcComplex(d.End), mcRules(d.Rules), d.CloseBraceLoc.Start)...))
+		case *css_ast.RKnownAt:
+			out = append(out, append([]interface{}{"known"}, append(base, d.AtToken, mcToks(d.Prelude), mcRules(d.Rules), d.CloseBraceLoc.Start)...))
+		case *css_ast.RUnknownAt:
+			out = append(out, append([]interface{}{"unknown"}, append(base, d.AtToken, mcToks(d.Prelude), mcToks(d.Block))...))
+		case *css_ast.RSelector:
+			out = append(out, append([]interface{}{"sel"}, append(base, mcComplex(d.Selectors), mcRules(d.Rules), d.CloseBraceLoc.Start)...))
+		case *css_ast.RQualified:
+			out = append(out, append([]interface{}{"qualified"}, append(base, mcToks(d.Prelude), mcRules(d.Rules), d.CloseBraceLoc.Start)...))
+		case *css_ast.RDeclaration:
+			out = append(out, append([]interface{}{"decl"}, append(base, int(d.Key), d.KeyText, mcToks(d.Value), d.Important, d.KeyRange.Loc.Start, int(d.KeyRange.Len))...))
+		case *css_ast.RBadDeclaration:
+			out = append(out, append([]interface{}{"baddecl"}, append(base, mcToks(d.Tokens))...))
+		case *css_ast.RComment:
+			out = append(out, append([]interface{}{"comment"}, append(base, d.Text)...))
+		default:
+			out = append(out, append([]interface{}{"other"}, base...))
+		}
+	}
+	return out
+}
+
+func mcMsgs(log logger.Log) []interface{} {
+	out := []interface{}{}
+	for _, m := range log.Done() {
+		notes := []interface{}{}
+		for _, nd := range m.Notes {
+			notes = append(notes, nd.Text)
+		}
+		out = append(out, []interface{}{int(m.ID), m.Data.Text, notes})
+	}
+	return out
+}
+
+func mcParse(src string, minify bool, feature compat.CSSFeature) (*parser, logger.Log) {
+	log := logger.NewDeferLog(logger.DeferLogNoVerboseOrDebug, nil)
+	source := logger.Source{Contents: src}
+	tok := css_lexer.Tokenize(log, source, css_lexer.Options{})
+	p := &parser{
+		log: log, source: source, tracker: logger.MakeLineColumnTracker(&source),
+		options: Options{optionsThatSupportStructuralEquality: optionsThatSupportStructuralEquality{
+			minifySyntax: minify, minifyWhitespace: minify, unsupportedCSSFeatures: feature,
+		}},
+		tokens: tok.Tokens, allComments: tok.AllComments, legalComments: tok.LegalComments,
+		prevError: logger.Loc{Start: -1},
+		composes: make(map[ast.Ref]*css_ast.Composes),
+		localScope: make(map[string]ast.LocRef), globalScope: make(map[string]ast.LocRef),
+	}
+	return p, log
+}
+
+type mcRow struct {
+	Fn      string `json:"fn"`
+	Src     string `json:"src"`
+	Minify  bool   `json:"minify"`
+	Feature int    `json:"feature"`
+	Top     bool   `json:"top"`
+	DeclCtx bool   `json:"declctx"`
+	Valid   int    `json:"valid"`
+	Out     interface{}    `json:"out"`
+}
+
+func TestTmpGenMainChain2(t *testing.T) {
+	var out []mcRow
+	add := func(fn, src string, minify bool, feature int, top, decl bool, valid int, rules []css_ast.Rule, p *parser, log logger.Log) {
+		imports := []interface{}{}
+		for _, r := range p.importRecords {
+			imports = append(imports, []interface{}{int(r.Kind), r.Path.Text, r.Range.Loc.Start, int(r.Range.Len)})
+		}
+		out = append(out, mcRow{Fn: fn, Src: src, Minify: minify, Feature: feature, Top: top, DeclCtx: decl, Valid: valid,
+			Out: map[string]interface{}{
+				"rules": mcRules(rules), "msgs": mcMsgs(log), "idx": p.index,
+				"nesting": p.nestingIsPresent, "subtree": p.inSelectorSubtree,
+				"layer": p.enclosingLayer, "postLayers": p.layersPostImport,
+				"imports": imports, "seenImport": p.hasSeenAtImport,
+			}})
+	}
+
+	// ---- parseListOfDeclarations ----
+	declCases := []string{
+		"color: red;",
+		"color:red;background:blue",
+		"; ; color: red ;",
+		"--x: 1; color:red",
+		"& { color: red }",
+		"& { color: red } background: blue",
+		"a { color: red }",
+		"@media (min-width:100px) { color:red }",
+		"@supports (display:grid) { color:red }",
+		"color: red; x: ; y: 0px",
+		"margin: 0 1px 2px 3px",
+		"& { & { color: red } }",
+		":global { composes: bar }",
+		"@layer foo { color: red }",
+	}
+	for _, src := range declCases {
+		for _, minify := range []bool{false, true} {
+			p, log := mcParse(src, minify, 0)
+			rules := p.parseListOfDeclarations(listOfDeclarationsOpts{canInlineNoOpNesting: true})
+			add("parseListOfDeclarations", src, minify, 0, false, false, 0, rules, p, log)
+		}
+	}
+
+	// ---- parseQualifiedRule ----
+	qualCases := []string{
+		"foo bar { color: red }",
+		".a > .b { color: red }",
+		"a ; color:red",
+		"a {}",
+		"a { color: red }",
+		"a b c",
+	}
+	for _, src := range qualCases {
+		for _, top := range []bool{false, true} {
+			for _, decl := range []bool{false, true} {
+				p, log := mcParse(src, false, 0)
+				rules := []css_ast.Rule{p.parseQualifiedRule(parseQualifiedRuleOpts{isTopLevel: top, isDeclarationContext: decl})}
+				add("parseQualifiedRule", src, false, 0, top, decl, 0, rules, p, log)
+			}
+		}
+	}
+
+	// ---- parseSelectorRule ----
+	selCases := []string{
+		"a { color: red }",
+		"a, b::before { color: red }",
+		".foo > .bar { x: y }",
+		":global(.x) { color: red }",
+		"not a selector { color: red }",
+		"a, b { color: red }",
+		"& { color: red }",
+	}
+	for _, src := range selCases {
+		for _, top := range []bool{false, true} {
+			for _, minify := range []bool{false, true} {
+				p, log := mcParse(src, minify, 0)
+				rules := []css_ast.Rule{p.parseSelectorRule(top, parseSelectorOpts{})}
+				add("parseSelectorRule", src, minify, 0, top, false, 0, rules, p, log)
+			}
+		}
+	}
+
+	// ---- parseAtRule ----
+	atCases := []string{
+		"@charset \"UTF-8\";",
+		"@charset \"iso-8859-1\";",
+		"@import url(foo.css);",
+		"@import \"a.css\" layer(base) supports(display:grid) screen and (min-width:100px);",
+		"@keyframes fade { from { opacity: 0 } to { opacity: 1 } }",
+		"@keyframes x { 0%, 50% { color:red } 100% { color:blue } }",
+		"@layer a, b;",
+		"@layer a { .x { color: red } }",
+		"@layer { color: red }",
+		"@media screen and (min-width:100px) { .a { color:red } }",
+		"@supports (display:grid) { .a { color:red } }",
+		"@scope (.a) to (.b) { .c { color: red } }",
+		"@counter-style foo { system: cyclic; }",
+		"@container (min-width:100px) { .a { color:red } }",
+		"@namespace url(foo);",
+		"@unknown foo bar;",
+		"@unknown foo { color: red }",
+		"@font-face { font-family: x; src: url(y); }",
+	}
+	for _, src := range atCases {
+		for _, valid := range []int{int(atRuleInvalid), int(atRuleValid), int(atRuleInvalidAfter)} {
+			for _, decl := range []bool{false, true} {
+				p, log := mcParse(src, false, 0)
+				ctx := atRuleContext{charsetValidity: atRuleValidity(valid), importValidity: atRuleValidity(valid), afterLoc: logger.Loc{Start: 5}, isDeclarationList: decl, canInlineNoOpNesting: true}
+				rules := []css_ast.Rule{p.parseAtRule(ctx)}
+				add("parseAtRule", src, false, 0, false, decl, valid, rules, p, log)
+			}
+		}
+	}
+
+	// ---- parseListOfRules ----
+	listCases := []string{
+		"a { color: red } b { color: blue }",
+		"@charset \"UTF-8\"; @import url(a.css); a { color:red }",
+		"@layer a; @layer b; a { color:red }",
+		"@media screen { a { color:red } }",
+		"a { & b { color: red } }",
+		"@media print { color: red; }",
+	}
+	for _, src := range listCases {
+		for _, top := range []bool{false, true} {
+			for _, feature := range []int{0, int(compat.Nesting)} {
+				for _, minify := range []bool{false, true} {
+					p, log := mcParse(src, minify, compat.CSSFeature(feature))
+					rules := p.parseListOfRules(ruleContext{isTopLevel: top, parseSelectors: true})
+					add("parseListOfRules", src, minify, feature, top, false, 0, rules, p, log)
+				}
+			}
+		}
+	}
+
+	b, err := json.MarshalIndent(out, "", "  ")
+	if err != nil { t.Fatal(err) }
+	if err := os.WriteFile("/root/port/testdata/main-chain2-go.json", b, 0644); err != nil { t.Fatal(err) }
+	t.Logf("wrote %d rows", len(out))
+}

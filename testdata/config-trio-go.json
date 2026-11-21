@@ -1,0 +1,119 @@
+[
+  {
+    "fn": "String",
+    "arg": 0,
+    "out": ""
+  },
+  {
+    "fn": "String",
+    "arg": 1,
+    "out": "iife"
+  },
+  {
+    "fn": "String",
+    "arg": 2,
+    "out": "cjs"
+  },
+  {
+    "fn": "String",
+    "arg": 3,
+    "out": "esm"
+  },
+  {
+    "fn": "String",
+    "arg": 99,
+    "out": ""
+  },
+  {
+    "fn": "Has",
+    "arg": [
+      0,
+      1
+    ],
+    "out": false
+  },
+  {
+    "fn": "Has",
+    "arg": [
+      1,
+      1
+    ],
+    "out": true
+  },
+  {
+    "fn": "Has",
+    "arg": [
+      1,
+      2
+    ],
+    "out": false
+  },
+  {
+    "fn": "Has",
+    "arg": [
+      2,
+      2
+    ],
+    "out": true
+  },
+  {
+    "fn": "Has",
+    "arg": [
+      3,
+      1
+    ],
+    "out": true
+  },
+  {
+    "fn": "mergeDefineData",
+    "arg": [
+      0,
+      0
+    ],
+    "out": [
+      0,
+      [
+        "b"
+      ]
+    ]
+  },
+  {
+    "fn": "mergeDefineData",
+    "arg": [
+      1,
+      0
+    ],
+    "out": [
+      1,
+      [
+        "b"
+      ]
+    ]
+  },
+  {
+    "fn": "mergeDefineData",
+    "arg": [
+      2,
+      1
+    ],
+    "out": [
+      3,
+      [
+        "b"
+      ]
+    ]
+  },
+  {
+    "fn": "mergeDefineData",
+    "arg": [
+      3,
+      3
+    ],
+    "out": [
+      3,
+      [
+        "b"
+      ]
+    ]
+  }
+]

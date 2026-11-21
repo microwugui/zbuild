@@ -1,0 +1,1 @@
+export let a; for (let b;;) ;

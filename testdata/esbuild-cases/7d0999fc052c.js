@@ -1,0 +1,1 @@
+export {x, x as y};let x

@@ -1,0 +1,1 @@
+foo = async function() { await using x = y }

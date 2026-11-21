@@ -1,0 +1,1 @@
+function foo() { a = b; if (a) throw a; if (b) c = b; throw c; }

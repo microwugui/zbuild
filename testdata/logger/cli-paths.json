@@ -1,0 +1,177 @@
+{
+ "note": "真实 CLI（/tmp/esbuild-go 0.28.2）以 cwd=/root/port 跑 testdata/logger/src/*.js 的 stderr；Rel/Abs 两串由 Go 的 resolver.MakePrettyPaths 经 api.Message.Location.File 回读得到，Msg 的 start/len 由 line/column 反推并已用 MakeLineColumnTracker 回读校验。",
+ "cases": [
+  {
+   "name": "file-rel",
+   "entry": "testdata/logger/src/cli-bad.js",
+   "cliArgs": [
+    "testdata/logger/src/cli-bad.js",
+    "--color=false",
+    "--format=esm"
+   ],
+   "stderr": "testdata/logger/cli-file-rel.stderr",
+   "stderrBytes": 325,
+   "stderrSha256": "f362df8a012596f78f4d86b12c59cf5709a62baab32a664c907e8937ed9da3ca",
+   "contentsSha256": "3804b6b604bd981abfd5da9e09d6e2c2aa0ad13a9a3fb6127671577920a9cf82",
+   "relPath": "testdata/logger/src/cli-bad.js",
+   "absPath": "/root/port/testdata/logger/src/cli-bad.js",
+   "pathStyle": 0,
+   "overrides": [],
+   "msgs": [
+    {
+     "kind": 0,
+     "idName": "",
+     "id": 0,
+     "text": "The JSX syntax extension is not currently enabled",
+     "plugin": "",
+     "start": 29,
+     "len": 1,
+     "line": 2,
+     "col": 8,
+     "notes": [
+      {
+       "text": "The esbuild loader for this file is currently set to \"js\" but it must be set to \"jsx\" to be able to parse JSX syntax. You can use \"--loader:.js=jsx\" to do that.",
+       "start": 0,
+       "len": 0,
+       "hasLocation": false
+      }
+     ]
+    }
+   ],
+   "emittedKinds": [
+    0
+   ]
+  },
+  {
+   "name": "file-abs",
+   "entry": "testdata/logger/src/cli-bad.js",
+   "cliArgs": [
+    "testdata/logger/src/cli-bad.js",
+    "--color=false",
+    "--format=esm",
+    "--abs-paths=log"
+   ],
+   "stderr": "testdata/logger/cli-file-abs.stderr",
+   "stderrBytes": 336,
+   "stderrSha256": "e9cdfad975dedd5d1516133806f7f771cd09d33e9dbd43f39ed950f9dc022562",
+   "contentsSha256": "3804b6b604bd981abfd5da9e09d6e2c2aa0ad13a9a3fb6127671577920a9cf82",
+   "relPath": "testdata/logger/src/cli-bad.js",
+   "absPath": "/root/port/testdata/logger/src/cli-bad.js",
+   "pathStyle": 1,
+   "overrides": [],
+   "msgs": [
+    {
+     "kind": 0,
+     "idName": "",
+     "id": 0,
+     "text": "The JSX syntax extension is not currently enabled",
+     "plugin": "",
+     "start": 29,
+     "len": 1,
+     "line": 2,
+     "col": 8,
+     "notes": [
+      {
+       "text": "The esbuild loader for this file is currently set to \"js\" but it must be set to \"jsx\" to be able to parse JSX syntax. You can use \"--loader:.js=jsx\" to do that.",
+       "start": 0,
+       "len": 0,
+       "hasLocation": false
+      }
+     ]
+    }
+   ],
+   "emittedKinds": [
+    0
+   ]
+  },
+  {
+   "name": "warn-id",
+   "entry": "testdata/logger/src/cli-warn-id.js",
+   "cliArgs": [
+    "testdata/logger/src/cli-warn-id.js",
+    "--color=false"
+   ],
+   "stderr": "testdata/logger/cli-warn-id.stderr",
+   "stderrBytes": 375,
+   "stderrSha256": "dd6437742126d2f7446b447d95e0c2aeeda6b7cfa5133ac332e070545ff1d01f",
+   "contentsSha256": "76c922b31f821f21dd601bc473239295762622f76b0cb3b5fd320f241515426d",
+   "relPath": "testdata/logger/src/cli-warn-id.js",
+   "absPath": "/root/port/testdata/logger/src/cli-warn-id.js",
+   "pathStyle": 0,
+   "overrides": [],
+   "msgs": [
+    {
+     "kind": 1,
+     "idName": "equals-nan",
+     "id": 17,
+     "text": "Comparison with NaN using the \"==\" operator here is always false",
+     "plugin": "",
+     "start": 6,
+     "len": 2,
+     "line": 1,
+     "col": 6,
+     "notes": [
+      {
+       "text": "Floating-point equality is defined such that NaN is never equal to anything, so \"x === NaN\" always returns false. You need to use \"Number.isNaN(x)\" instead to test for NaN.",
+       "start": 0,
+       "len": 0,
+       "hasLocation": false
+      }
+     ]
+    }
+   ],
+   "emittedKinds": [
+    1
+   ]
+  },
+  {
+   "name": "warn-override",
+   "entry": "testdata/logger/src/cli-warn-id.js",
+   "cliArgs": [
+    "testdata/logger/src/cli-warn-id.js",
+    "--color=false",
+    "--log-override:equals-nan=error"
+   ],
+   "stderr": "testdata/logger/cli-warn-override.stderr",
+   "stderrBytes": 371,
+   "stderrSha256": "26682a6a82084adbf9b2fea95f5f61957ace38dbef0d2b0314dc221143137927",
+   "contentsSha256": "76c922b31f821f21dd601bc473239295762622f76b0cb3b5fd320f241515426d",
+   "relPath": "testdata/logger/src/cli-warn-id.js",
+   "absPath": "/root/port/testdata/logger/src/cli-warn-id.js",
+   "pathStyle": 0,
+   "overrides": [
+    "equals-nan=error"
+   ],
+   "msgs": [
+    {
+     "kind": 1,
+     "idName": "equals-nan",
+     "id": 17,
+     "text": "Comparison with NaN using the \"==\" operator here is always false",
+     "plugin": "",
+     "start": 6,
+     "len": 2,
+     "line": 1,
+     "col": 6,
+     "notes": [
+      {
+       "text": "Floating-point equality is defined such that NaN is never equal to anything, so \"x === NaN\" always returns false. You need to use \"Number.isNaN(x)\" instead to test for NaN.",
+       "start": 0,
+       "len": 0,
+       "hasLocation": false
+      }
+     ]
+    }
+   ],
+   "emittedKinds": [
+    0
+   ]
+  }
+ ],
+ "addMsgIDValueSemanticsNote": "调用方 Msg 是值参数：AddMsgID 之后 msg.Kind/ID 不变，只有发出的副本被改写",
+ "addMsgIDCallerKind": 1,
+ "addMsgIDCallerID": 0,
+ "addMsgIDEmittedKind": 0,
+ "addMsgIDEmittedID": 17,
+ "addMsgIDCallerDataText": "x"
+}

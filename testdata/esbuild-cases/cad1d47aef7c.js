@@ -1,0 +1,1 @@
+let b; a = b.x == null ? c : b.x

@@ -1,0 +1,1 @@
+if (false) { await using x = y }

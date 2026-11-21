@@ -1,0 +1,112 @@
+[
+  {
+    "fn": "IsAbs",
+    "arg": "/a",
+    "out": "true"
+  },
+  {
+    "fn": "IsAbs",
+    "arg": "a/b",
+    "out": "false"
+  },
+  {
+    "fn": "IsAbs",
+    "arg": "",
+    "out": "false"
+  },
+  {
+    "fn": "Abs",
+    "arg": "/a",
+    "out": "/a"
+  },
+  {
+    "fn": "Abs",
+    "arg": "a/b",
+    "out": "/a/b"
+  },
+  {
+    "fn": "Abs",
+    "arg": "",
+    "out": "/"
+  },
+  {
+    "fn": "Dir",
+    "arg": "a/b",
+    "out": "a"
+  },
+  {
+    "fn": "Dir",
+    "arg": "/a/b",
+    "out": "/a"
+  },
+  {
+    "fn": "Dir",
+    "arg": "/a/__virtual__/b/2/node_modules/x",
+    "out": "/a/__virtual__/b/2/node_modules"
+  },
+  {
+    "fn": "Dir",
+    "arg": "/a/$$virtual/b/1/pkg",
+    "out": "/a/$$virtual/b/1"
+  },
+  {
+    "fn": "Base",
+    "arg": "a/b",
+    "out": "b"
+  },
+  {
+    "fn": "Base",
+    "arg": "foo.txt",
+    "out": "foo.txt"
+  },
+  {
+    "fn": "Base",
+    "arg": "/",
+    "out": "/"
+  },
+  {
+    "fn": "Ext",
+    "arg": "foo.txt",
+    "out": ".txt"
+  },
+  {
+    "fn": "Ext",
+    "arg": "a.b.c",
+    "out": ".c"
+  },
+  {
+    "fn": "Ext",
+    "arg": "foo",
+    "out": ""
+  },
+  {
+    "fn": "Join",
+    "arg": "[\"a\",\"b\"]",
+    "out": "a/b"
+  },
+  {
+    "fn": "Join",
+    "arg": "[]",
+    "out": "."
+  },
+  {
+    "fn": "Cwd",
+    "arg": "",
+    "out": "/home/user"
+  },
+  {
+    "fn": "Rel",
+    "arg": "a|b",
+    "out": "../b|true"
+  },
+  {
+    "fn": "Rel",
+    "arg": "/a/b|/a/c",
+    "out": "../c|true"
+  },
+  {
+    "fn": "Rel",
+    "arg": "x|x",
+    "out": ".|true"
+  }
+]

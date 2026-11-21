@@ -1,0 +1,1 @@
+function foo() { if (!a) return b; return c; }

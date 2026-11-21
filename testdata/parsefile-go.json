@@ -1,0 +1,44 @@
+[
+  {
+    "name": "js-var",
+    "ok": true,
+    "loader": 10,
+    "sideKind": 0,
+    "numParts": 2,
+    "stmtKinds": [
+      [],
+      [
+        "Local"
+      ]
+    ],
+    "numImports": 0
+  },
+  {
+    "name": "js-fn",
+    "ok": true,
+    "loader": 10,
+    "sideKind": 0,
+    "numParts": 2,
+    "stmtKinds": [
+      [],
+      [
+        "Function"
+      ]
+    ],
+    "numImports": 0
+  },
+  {
+    "name": "json",
+    "ok": true,
+    "loader": 11,
+    "sideKind": 3,
+    "numParts": 2,
+    "stmtKinds": [
+      [],
+      [
+        "other"
+      ]
+    ],
+    "numImports": 0
+  }
+]

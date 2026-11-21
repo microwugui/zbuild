@@ -1,0 +1,77 @@
+[
+  {
+    "fn": "mangleFontWeight",
+    "arg": "29|normal",
+    "out": "30|400"
+  },
+  {
+    "fn": "mangleFontWeight",
+    "arg": "29|bold",
+    "out": "30|700"
+  },
+  {
+    "fn": "mangleFontWeight",
+    "arg": "29|NORMAL",
+    "out": "30|400"
+  },
+  {
+    "fn": "mangleFontWeight",
+    "arg": "29|Bold",
+    "out": "30|700"
+  },
+  {
+    "fn": "mangleFontWeight",
+    "arg": "29|100",
+    "out": "29|100"
+  },
+  {
+    "fn": "mangleFontWeight",
+    "arg": "30|normal",
+    "out": "30|normal"
+  },
+  {
+    "fn": "mangleFontWeight",
+    "arg": "29|lighter",
+    "out": "29|lighter"
+  },
+  {
+    "fn": "mangleDimension",
+    "arg": "1000|ms",
+    "out": "1|s|true"
+  },
+  {
+    "fn": "mangleDimension",
+    "arg": "100|ms",
+    "out": ".1|s|true"
+  },
+  {
+    "fn": "mangleDimension",
+    "arg": "1|s",
+    "out": "||false"
+  },
+  {
+    "fn": "mangleDimension",
+    "arg": "0.5|s",
+    "out": "||false"
+  },
+  {
+    "fn": "mangleDimension",
+    "arg": "500|MS",
+    "out": ".5|s|true"
+  },
+  {
+    "fn": "mangleDimension",
+    "arg": "2|S",
+    "out": "||false"
+  },
+  {
+    "fn": "mangleDimension",
+    "arg": "16|px",
+    "out": "||false"
+  },
+  {
+    "fn": "mangleDimension",
+    "arg": "1|ms",
+    "out": "||false"
+  }
+]

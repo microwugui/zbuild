@@ -1,0 +1,1 @@
+x = (Infinity) ** 2

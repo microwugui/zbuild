@@ -1,0 +1,1 @@
+x = 1 < /SCRIPT/.exec(y).length

@@ -1,0 +1,1 @@
+return typeof (123, x)

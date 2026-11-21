@@ -1,0 +1,1872 @@
+{
+ "enums": {
+  "AnnotationFlags": {
+   "CanBeRemovedIfUnusedFlag": 1
+  },
+  "AssignTarget": {
+   "AssignTargetNone": 0,
+   "AssignTargetReplace": 1,
+   "AssignTargetUpdate": 2
+  },
+  "CallKind": {
+   "DirectEval": 1,
+   "NormalCall": 0,
+   "TargetWasOriginallyPropertyAccess": 2
+  },
+  "ConstValueKind": {
+   "ConstValueFalse": 4,
+   "ConstValueNone": 0,
+   "ConstValueNull": 1,
+   "ConstValueNumber": 5,
+   "ConstValueString": 6,
+   "ConstValueTrue": 3,
+   "ConstValueUndefined": 2
+  },
+  "ExportsKind": {
+   "ExportsCommonJS": 1,
+   "ExportsESM": 2,
+   "ExportsESMWithDynamicFallback": 3,
+   "ExportsNone": 0
+  },
+  "L": {
+   "LAdd": 15,
+   "LAssign": 4,
+   "LBitwiseAnd": 11,
+   "LBitwiseOr": 9,
+   "LBitwiseXor": 10,
+   "LCall": 21,
+   "LComma": 1,
+   "LCompare": 13,
+   "LConditional": 5,
+   "LEquals": 12,
+   "LExponentiation": 17,
+   "LLogicalAnd": 8,
+   "LLogicalOr": 7,
+   "LLowest": 0,
+   "LMember": 22,
+   "LMultiply": 16,
+   "LNew": 20,
+   "LNullishCoalescing": 6,
+   "LPostfix": 19,
+   "LPrefix": 18,
+   "LShift": 14,
+   "LSpread": 2,
+   "LYield": 3
+  },
+  "LocalKind": {
+   "LocalAwaitUsing": 4,
+   "LocalConst": 2,
+   "LocalLet": 1,
+   "LocalUsing": 3,
+   "LocalVar": 0
+  },
+  "ModuleType": {
+   "ModuleCommonJS_CJS": 1,
+   "ModuleCommonJS_CTS": 2,
+   "ModuleCommonJS_PackageJSON": 3,
+   "ModuleESM_MJS": 4,
+   "ModuleESM_MTS": 5,
+   "ModuleESM_PackageJSON": 6,
+   "ModuleUnknown": 0
+  },
+  "OpCode": {
+   "BinOpAdd": 11,
+   "BinOpAddAssign": 38,
+   "BinOpAssign": 37,
+   "BinOpBitwiseAnd": 34,
+   "BinOpBitwiseAndAssign": 48,
+   "BinOpBitwiseOr": 33,
+   "BinOpBitwiseOrAssign": 47,
+   "BinOpBitwiseXor": 35,
+   "BinOpBitwiseXorAssign": 49,
+   "BinOpComma": 36,
+   "BinOpDiv": 14,
+   "BinOpDivAssign": 41,
+   "BinOpGe": 20,
+   "BinOpGt": 19,
+   "BinOpIn": 21,
+   "BinOpInstanceof": 22,
+   "BinOpLe": 18,
+   "BinOpLogicalAnd": 32,
+   "BinOpLogicalAndAssign": 52,
+   "BinOpLogicalOr": 31,
+   "BinOpLogicalOrAssign": 51,
+   "BinOpLooseEq": 26,
+   "BinOpLooseNe": 27,
+   "BinOpLt": 17,
+   "BinOpMul": 13,
+   "BinOpMulAssign": 40,
+   "BinOpNullishCoalescing": 30,
+   "BinOpNullishCoalescingAssign": 50,
+   "BinOpPow": 16,
+   "BinOpPowAssign": 43,
+   "BinOpRem": 15,
+   "BinOpRemAssign": 42,
+   "BinOpShl": 23,
+   "BinOpShlAssign": 44,
+   "BinOpShr": 24,
+   "BinOpShrAssign": 45,
+   "BinOpStrictEq": 28,
+   "BinOpStrictNe": 29,
+   "BinOpSub": 12,
+   "BinOpSubAssign": 39,
+   "BinOpUShr": 25,
+   "BinOpUShrAssign": 46,
+   "UnOpCpl": 2,
+   "UnOpDelete": 6,
+   "UnOpNeg": 1,
+   "UnOpNot": 3,
+   "UnOpPos": 0,
+   "UnOpPostDec": 9,
+   "UnOpPostInc": 10,
+   "UnOpPreDec": 7,
+   "UnOpPreInc": 8,
+   "UnOpTypeof": 5,
+   "UnOpVoid": 4
+  },
+  "OptionalChain": {
+   "OptionalChainContinue": 2,
+   "OptionalChainNone": 0,
+   "OptionalChainStart": 1
+  },
+  "PropertyFlags": {
+   "PropertyIsComputed": 1,
+   "PropertyIsStatic": 2,
+   "PropertyPreferQuotedKey": 8,
+   "PropertyWasShorthand": 4
+  },
+  "PropertyKind": {
+   "PropertyAutoAccessor": 4,
+   "PropertyClassStaticBlock": 7,
+   "PropertyDeclareOrAbstract": 6,
+   "PropertyField": 0,
+   "PropertyGetter": 2,
+   "PropertyMethod": 1,
+   "PropertySetter": 3,
+   "PropertySpread": 5
+  },
+  "ScopeKind": {
+   "ScopeBlock": 0,
+   "ScopeCatchBinding": 5,
+   "ScopeClassBody": 4,
+   "ScopeClassName": 3,
+   "ScopeClassStaticInit": 9,
+   "ScopeEntry": 6,
+   "ScopeFunctionArgs": 7,
+   "ScopeFunctionBody": 8,
+   "ScopeLabel": 2,
+   "ScopeWith": 1
+  },
+  "StrictModeKind": {
+   "ExplicitStrictMode": 1,
+   "ImplicitStrictModeClass": 2,
+   "ImplicitStrictModeESM": 3,
+   "ImplicitStrictModeJSXAutomaticRuntime": 5,
+   "ImplicitStrictModeTSAlwaysStrict": 4,
+   "SloppyMode": 0
+  }
+ },
+ "opBehavior": [
+  {
+   "op": 0,
+   "isPrefix": true,
+   "unaryAssignTarget": 0,
+   "isLeftAssociative": false,
+   "isRightAssociative": false,
+   "binaryAssignTarget": 0,
+   "isShortCircuit": false
+  },
+  {
+   "op": 1,
+   "isPrefix": true,
+   "unaryAssignTarget": 0,
+   "isLeftAssociative": false,
+   "isRightAssociative": false,
+   "binaryAssignTarget": 0,
+   "isShortCircuit": false
+  },
+  {
+   "op": 2,
+   "isPrefix": true,
+   "unaryAssignTarget": 0,
+   "isLeftAssociative": false,
+   "isRightAssociative": false,
+   "binaryAssignTarget": 0,
+   "isShortCircuit": false
+  },
+  {
+   "op": 3,
+   "isPrefix": true,
+   "unaryAssignTarget": 0,
+   "isLeftAssociative": false,
+   "isRightAssociative": false,
+   "binaryAssignTarget": 0,
+   "isShortCircuit": false
+  },
+  {
+   "op": 4,
+   "isPrefix": true,
+   "unaryAssignTarget": 0,
+   "isLeftAssociative": false,
+   "isRightAssociative": false,
+   "binaryAssignTarget": 0,
+   "isShortCircuit": false
+  },
+  {
+   "op": 5,
+   "isPrefix": true,
+   "unaryAssignTarget": 0,
+   "isLeftAssociative": false,
+   "isRightAssociative": false,
+   "binaryAssignTarget": 0,
+   "isShortCircuit": false
+  },
+  {
+   "op": 6,
+   "isPrefix": true,
+   "unaryAssignTarget": 0,
+   "isLeftAssociative": false,
+   "isRightAssociative": false,
+   "binaryAssignTarget": 0,
+   "isShortCircuit": false
+  },
+  {
+   "op": 7,
+   "isPrefix": true,
+   "unaryAssignTarget": 2,
+   "isLeftAssociative": false,
+   "isRightAssociative": false,
+   "binaryAssignTarget": 0,
+   "isShortCircuit": false
+  },
+  {
+   "op": 8,
+   "isPrefix": true,
+   "unaryAssignTarget": 2,
+   "isLeftAssociative": false,
+   "isRightAssociative": false,
+   "binaryAssignTarget": 0,
+   "isShortCircuit": false
+  },
+  {
+   "op": 9,
+   "isPrefix": false,
+   "unaryAssignTarget": 2,
+   "isLeftAssociative": false,
+   "isRightAssociative": false,
+   "binaryAssignTarget": 0,
+   "isShortCircuit": false
+  },
+  {
+   "op": 10,
+   "isPrefix": false,
+   "unaryAssignTarget": 2,
+   "isLeftAssociative": false,
+   "isRightAssociative": false,
+   "binaryAssignTarget": 0,
+   "isShortCircuit": false
+  },
+  {
+   "op": 11,
+   "isPrefix": false,
+   "unaryAssignTarget": 0,
+   "isLeftAssociative": true,
+   "isRightAssociative": false,
+   "binaryAssignTarget": 0,
+   "isShortCircuit": false
+  },
+  {
+   "op": 12,
+   "isPrefix": false,
+   "unaryAssignTarget": 0,
+   "isLeftAssociative": true,
+   "isRightAssociative": false,
+   "binaryAssignTarget": 0,
+   "isShortCircuit": false
+  },
+  {
+   "op": 13,
+   "isPrefix": false,
+   "unaryAssignTarget": 0,
+   "isLeftAssociative": true,
+   "isRightAssociative": false,
+   "binaryAssignTarget": 0,
+   "isShortCircuit": false
+  },
+  {
+   "op": 14,
+   "isPrefix": false,
+   "unaryAssignTarget": 0,
+   "isLeftAssociative": true,
+   "isRightAssociative": false,
+   "binaryAssignTarget": 0,
+   "isShortCircuit": false
+  },
+  {
+   "op": 15,
+   "isPrefix": false,
+   "unaryAssignTarget": 0,
+   "isLeftAssociative": true,
+   "isRightAssociative": false,
+   "binaryAssignTarget": 0,
+   "isShortCircuit": false
+  },
+  {
+   "op": 16,
+   "isPrefix": false,
+   "unaryAssignTarget": 0,
+   "isLeftAssociative": false,
+   "isRightAssociative": true,
+   "binaryAssignTarget": 0,
+   "isShortCircuit": false
+  },
+  {
+   "op": 17,
+   "isPrefix": false,
+   "unaryAssignTarget": 0,
+   "isLeftAssociative": true,
+   "isRightAssociative": false,
+   "binaryAssignTarget": 0,
+   "isShortCircuit": false
+  },
+  {
+   "op": 18,
+   "isPrefix": false,
+   "unaryAssignTarget": 0,
+   "isLeftAssociative": true,
+   "isRightAssociative": false,
+   "binaryAssignTarget": 0,
+   "isShortCircuit": false
+  },
+  {
+   "op": 19,
+   "isPrefix": false,
+   "unaryAssignTarget": 0,
+   "isLeftAssociative": true,
+   "isRightAssociative": false,
+   "binaryAssignTarget": 0,
+   "isShortCircuit": false
+  },
+  {
+   "op": 20,
+   "isPrefix": false,
+   "unaryAssignTarget": 0,
+   "isLeftAssociative": true,
+   "isRightAssociative": false,
+   "binaryAssignTarget": 0,
+   "isShortCircuit": false
+  },
+  {
+   "op": 21,
+   "isPrefix": false,
+   "unaryAssignTarget": 0,
+   "isLeftAssociative": true,
+   "isRightAssociative": false,
+   "binaryAssignTarget": 0,
+   "isShortCircuit": false
+  },
+  {
+   "op": 22,
+   "isPrefix": false,
+   "unaryAssignTarget": 0,
+   "isLeftAssociative": true,
+   "isRightAssociative": false,
+   "binaryAssignTarget": 0,
+   "isShortCircuit": false
+  },
+  {
+   "op": 23,
+   "isPrefix": false,
+   "unaryAssignTarget": 0,
+   "isLeftAssociative": true,
+   "isRightAssociative": false,
+   "binaryAssignTarget": 0,
+   "isShortCircuit": false
+  },
+  {
+   "op": 24,
+   "isPrefix": false,
+   "unaryAssignTarget": 0,
+   "isLeftAssociative": true,
+   "isRightAssociative": false,
+   "binaryAssignTarget": 0,
+   "isShortCircuit": false
+  },
+  {
+   "op": 25,
+   "isPrefix": false,
+   "unaryAssignTarget": 0,
+   "isLeftAssociative": true,
+   "isRightAssociative": false,
+   "binaryAssignTarget": 0,
+   "isShortCircuit": false
+  },
+  {
+   "op": 26,
+   "isPrefix": false,
+   "unaryAssignTarget": 0,
+   "isLeftAssociative": true,
+   "isRightAssociative": false,
+   "binaryAssignTarget": 0,
+   "isShortCircuit": false
+  },
+  {
+   "op": 27,
+   "isPrefix": false,
+   "unaryAssignTarget": 0,
+   "isLeftAssociative": true,
+   "isRightAssociative": false,
+   "binaryAssignTarget": 0,
+   "isShortCircuit": false
+  },
+  {
+   "op": 28,
+   "isPrefix": false,
+   "unaryAssignTarget": 0,
+   "isLeftAssociative": true,
+   "isRightAssociative": false,
+   "binaryAssignTarget": 0,
+   "isShortCircuit": false
+  },
+  {
+   "op": 29,
+   "isPrefix": false,
+   "unaryAssignTarget": 0,
+   "isLeftAssociative": true,
+   "isRightAssociative": false,
+   "binaryAssignTarget": 0,
+   "isShortCircuit": false
+  },
+  {
+   "op": 30,
+   "isPrefix": false,
+   "unaryAssignTarget": 0,
+   "isLeftAssociative": true,
+   "isRightAssociative": false,
+   "binaryAssignTarget": 0,
+   "isShortCircuit": true
+  },
+  {
+   "op": 31,
+   "isPrefix": false,
+   "unaryAssignTarget": 0,
+   "isLeftAssociative": true,
+   "isRightAssociative": false,
+   "binaryAssignTarget": 0,
+   "isShortCircuit": true
+  },
+  {
+   "op": 32,
+   "isPrefix": false,
+   "unaryAssignTarget": 0,
+   "isLeftAssociative": true,
+   "isRightAssociative": false,
+   "binaryAssignTarget": 0,
+   "isShortCircuit": true
+  },
+  {
+   "op": 33,
+   "isPrefix": false,
+   "unaryAssignTarget": 0,
+   "isLeftAssociative": true,
+   "isRightAssociative": false,
+   "binaryAssignTarget": 0,
+   "isShortCircuit": false
+  },
+  {
+   "op": 34,
+   "isPrefix": false,
+   "unaryAssignTarget": 0,
+   "isLeftAssociative": true,
+   "isRightAssociative": false,
+   "binaryAssignTarget": 0,
+   "isShortCircuit": false
+  },
+  {
+   "op": 35,
+   "isPrefix": false,
+   "unaryAssignTarget": 0,
+   "isLeftAssociative": true,
+   "isRightAssociative": false,
+   "binaryAssignTarget": 0,
+   "isShortCircuit": false
+  },
+  {
+   "op": 36,
+   "isPrefix": false,
+   "unaryAssignTarget": 0,
+   "isLeftAssociative": false,
+   "isRightAssociative": false,
+   "binaryAssignTarget": 0,
+   "isShortCircuit": false
+  },
+  {
+   "op": 37,
+   "isPrefix": false,
+   "unaryAssignTarget": 0,
+   "isLeftAssociative": false,
+   "isRightAssociative": true,
+   "binaryAssignTarget": 1,
+   "isShortCircuit": false
+  },
+  {
+   "op": 38,
+   "isPrefix": false,
+   "unaryAssignTarget": 0,
+   "isLeftAssociative": false,
+   "isRightAssociative": true,
+   "binaryAssignTarget": 2,
+   "isShortCircuit": false
+  },
+  {
+   "op": 39,
+   "isPrefix": false,
+   "unaryAssignTarget": 0,
+   "isLeftAssociative": false,
+   "isRightAssociative": true,
+   "binaryAssignTarget": 2,
+   "isShortCircuit": false
+  },
+  {
+   "op": 40,
+   "isPrefix": false,
+   "unaryAssignTarget": 0,
+   "isLeftAssociative": false,
+   "isRightAssociative": true,
+   "binaryAssignTarget": 2,
+   "isShortCircuit": false
+  },
+  {
+   "op": 41,
+   "isPrefix": false,
+   "unaryAssignTarget": 0,
+   "isLeftAssociative": false,
+   "isRightAssociative": true,
+   "binaryAssignTarget": 2,
+   "isShortCircuit": false
+  },
+  {
+   "op": 42,
+   "isPrefix": false,
+   "unaryAssignTarget": 0,
+   "isLeftAssociative": false,
+   "isRightAssociative": true,
+   "binaryAssignTarget": 2,
+   "isShortCircuit": false
+  },
+  {
+   "op": 43,
+   "isPrefix": false,
+   "unaryAssignTarget": 0,
+   "isLeftAssociative": false,
+   "isRightAssociative": true,
+   "binaryAssignTarget": 2,
+   "isShortCircuit": false
+  },
+  {
+   "op": 44,
+   "isPrefix": false,
+   "unaryAssignTarget": 0,
+   "isLeftAssociative": false,
+   "isRightAssociative": true,
+   "binaryAssignTarget": 2,
+   "isShortCircuit": false
+  },
+  {
+   "op": 45,
+   "isPrefix": false,
+   "unaryAssignTarget": 0,
+   "isLeftAssociative": false,
+   "isRightAssociative": true,
+   "binaryAssignTarget": 2,
+   "isShortCircuit": false
+  },
+  {
+   "op": 46,
+   "isPrefix": false,
+   "unaryAssignTarget": 0,
+   "isLeftAssociative": false,
+   "isRightAssociative": true,
+   "binaryAssignTarget": 2,
+   "isShortCircuit": false
+  },
+  {
+   "op": 47,
+   "isPrefix": false,
+   "unaryAssignTarget": 0,
+   "isLeftAssociative": false,
+   "isRightAssociative": true,
+   "binaryAssignTarget": 2,
+   "isShortCircuit": false
+  },
+  {
+   "op": 48,
+   "isPrefix": false,
+   "unaryAssignTarget": 0,
+   "isLeftAssociative": false,
+   "isRightAssociative": true,
+   "binaryAssignTarget": 2,
+   "isShortCircuit": false
+  },
+  {
+   "op": 49,
+   "isPrefix": false,
+   "unaryAssignTarget": 0,
+   "isLeftAssociative": false,
+   "isRightAssociative": true,
+   "binaryAssignTarget": 2,
+   "isShortCircuit": false
+  },
+  {
+   "op": 50,
+   "isPrefix": false,
+   "unaryAssignTarget": 0,
+   "isLeftAssociative": false,
+   "isRightAssociative": true,
+   "binaryAssignTarget": 2,
+   "isShortCircuit": true
+  },
+  {
+   "op": 51,
+   "isPrefix": false,
+   "unaryAssignTarget": 0,
+   "isLeftAssociative": false,
+   "isRightAssociative": true,
+   "binaryAssignTarget": 2,
+   "isShortCircuit": true
+  },
+  {
+   "op": 52,
+   "isPrefix": false,
+   "unaryAssignTarget": 0,
+   "isLeftAssociative": false,
+   "isRightAssociative": true,
+   "binaryAssignTarget": 2,
+   "isShortCircuit": true
+  }
+ ],
+ "propertyKind": [
+  {
+   "isMethodDefinition": false,
+   "kind": 0
+  },
+  {
+   "isMethodDefinition": true,
+   "kind": 1
+  },
+  {
+   "isMethodDefinition": true,
+   "kind": 2
+  },
+  {
+   "isMethodDefinition": true,
+   "kind": 3
+  },
+  {
+   "isMethodDefinition": false,
+   "kind": 4
+  },
+  {
+   "isMethodDefinition": false,
+   "kind": 5
+  },
+  {
+   "isMethodDefinition": false,
+   "kind": 6
+  },
+  {
+   "isMethodDefinition": false,
+   "kind": 7
+  }
+ ],
+ "hasTable": [
+  {
+   "flags": 0,
+   "flag": 0,
+   "result": false
+  },
+  {
+   "flags": 0,
+   "flag": 0,
+   "result": false
+  },
+  {
+   "flags": 0,
+   "flag": 1,
+   "result": false
+  },
+  {
+   "flags": 0,
+   "flag": 1,
+   "result": false
+  },
+  {
+   "flags": 0,
+   "flag": 2,
+   "result": false
+  },
+  {
+   "flags": 0,
+   "flag": 2,
+   "result": false
+  },
+  {
+   "flags": 0,
+   "flag": 3,
+   "result": false
+  },
+  {
+   "flags": 0,
+   "flag": 3,
+   "result": false
+  },
+  {
+   "flags": 0,
+   "flag": 4,
+   "result": false
+  },
+  {
+   "flags": 0,
+   "flag": 4,
+   "result": false
+  },
+  {
+   "flags": 0,
+   "flag": 5,
+   "result": false
+  },
+  {
+   "flags": 0,
+   "flag": 5,
+   "result": false
+  },
+  {
+   "flags": 0,
+   "flag": 6,
+   "result": false
+  },
+  {
+   "flags": 0,
+   "flag": 6,
+   "result": false
+  },
+  {
+   "flags": 0,
+   "flag": 7,
+   "result": false
+  },
+  {
+   "flags": 0,
+   "flag": 7,
+   "result": false
+  },
+  {
+   "flags": 1,
+   "flag": 0,
+   "result": false
+  },
+  {
+   "flags": 1,
+   "flag": 0,
+   "result": false
+  },
+  {
+   "flags": 1,
+   "flag": 1,
+   "result": true
+  },
+  {
+   "flags": 1,
+   "flag": 1,
+   "result": true
+  },
+  {
+   "flags": 1,
+   "flag": 2,
+   "result": false
+  },
+  {
+   "flags": 1,
+   "flag": 2,
+   "result": false
+  },
+  {
+   "flags": 1,
+   "flag": 3,
+   "result": true
+  },
+  {
+   "flags": 1,
+   "flag": 3,
+   "result": true
+  },
+  {
+   "flags": 1,
+   "flag": 4,
+   "result": false
+  },
+  {
+   "flags": 1,
+   "flag": 4,
+   "result": false
+  },
+  {
+   "flags": 1,
+   "flag": 5,
+   "result": true
+  },
+  {
+   "flags": 1,
+   "flag": 5,
+   "result": true
+  },
+  {
+   "flags": 1,
+   "flag": 6,
+   "result": false
+  },
+  {
+   "flags": 1,
+   "flag": 6,
+   "result": false
+  },
+  {
+   "flags": 1,
+   "flag": 7,
+   "result": true
+  },
+  {
+   "flags": 1,
+   "flag": 7,
+   "result": true
+  },
+  {
+   "flags": 2,
+   "flag": 0,
+   "result": false
+  },
+  {
+   "flags": 2,
+   "flag": 0,
+   "result": false
+  },
+  {
+   "flags": 2,
+   "flag": 1,
+   "result": false
+  },
+  {
+   "flags": 2,
+   "flag": 1,
+   "result": false
+  },
+  {
+   "flags": 2,
+   "flag": 2,
+   "result": true
+  },
+  {
+   "flags": 2,
+   "flag": 2,
+   "result": true
+  },
+  {
+   "flags": 2,
+   "flag": 3,
+   "result": true
+  },
+  {
+   "flags": 2,
+   "flag": 3,
+   "result": true
+  },
+  {
+   "flags": 2,
+   "flag": 4,
+   "result": false
+  },
+  {
+   "flags": 2,
+   "flag": 4,
+   "result": false
+  },
+  {
+   "flags": 2,
+   "flag": 5,
+   "result": false
+  },
+  {
+   "flags": 2,
+   "flag": 5,
+   "result": false
+  },
+  {
+   "flags": 2,
+   "flag": 6,
+   "result": true
+  },
+  {
+   "flags": 2,
+   "flag": 6,
+   "result": true
+  },
+  {
+   "flags": 2,
+   "flag": 7,
+   "result": true
+  },
+  {
+   "flags": 2,
+   "flag": 7,
+   "result": true
+  },
+  {
+   "flags": 3,
+   "flag": 0,
+   "result": false
+  },
+  {
+   "flags": 3,
+   "flag": 0,
+   "result": false
+  },
+  {
+   "flags": 3,
+   "flag": 1,
+   "result": true
+  },
+  {
+   "flags": 3,
+   "flag": 1,
+   "result": true
+  },
+  {
+   "flags": 3,
+   "flag": 2,
+   "result": true
+  },
+  {
+   "flags": 3,
+   "flag": 2,
+   "result": true
+  },
+  {
+   "flags": 3,
+   "flag": 3,
+   "result": true
+  },
+  {
+   "flags": 3,
+   "flag": 3,
+   "result": true
+  },
+  {
+   "flags": 3,
+   "flag": 4,
+   "result": false
+  },
+  {
+   "flags": 3,
+   "flag": 4,
+   "result": false
+  },
+  {
+   "flags": 3,
+   "flag": 5,
+   "result": true
+  },
+  {
+   "flags": 3,
+   "flag": 5,
+   "result": true
+  },
+  {
+   "flags": 3,
+   "flag": 6,
+   "result": true
+  },
+  {
+   "flags": 3,
+   "flag": 6,
+   "result": true
+  },
+  {
+   "flags": 3,
+   "flag": 7,
+   "result": true
+  },
+  {
+   "flags": 3,
+   "flag": 7,
+   "result": true
+  },
+  {
+   "flags": 4,
+   "flag": 0,
+   "result": false
+  },
+  {
+   "flags": 4,
+   "flag": 0,
+   "result": false
+  },
+  {
+   "flags": 4,
+   "flag": 1,
+   "result": false
+  },
+  {
+   "flags": 4,
+   "flag": 1,
+   "result": false
+  },
+  {
+   "flags": 4,
+   "flag": 2,
+   "result": false
+  },
+  {
+   "flags": 4,
+   "flag": 2,
+   "result": false
+  },
+  {
+   "flags": 4,
+   "flag": 3,
+   "result": false
+  },
+  {
+   "flags": 4,
+   "flag": 3,
+   "result": false
+  },
+  {
+   "flags": 4,
+   "flag": 4,
+   "result": true
+  },
+  {
+   "flags": 4,
+   "flag": 4,
+   "result": true
+  },
+  {
+   "flags": 4,
+   "flag": 5,
+   "result": true
+  },
+  {
+   "flags": 4,
+   "flag": 5,
+   "result": true
+  },
+  {
+   "flags": 4,
+   "flag": 6,
+   "result": true
+  },
+  {
+   "flags": 4,
+   "flag": 6,
+   "result": true
+  },
+  {
+   "flags": 4,
+   "flag": 7,
+   "result": true
+  },
+  {
+   "flags": 4,
+   "flag": 7,
+   "result": true
+  },
+  {
+   "flags": 5,
+   "flag": 0,
+   "result": false
+  },
+  {
+   "flags": 5,
+   "flag": 0,
+   "result": false
+  },
+  {
+   "flags": 5,
+   "flag": 1,
+   "result": true
+  },
+  {
+   "flags": 5,
+   "flag": 1,
+   "result": true
+  },
+  {
+   "flags": 5,
+   "flag": 2,
+   "result": false
+  },
+  {
+   "flags": 5,
+   "flag": 2,
+   "result": false
+  },
+  {
+   "flags": 5,
+   "flag": 3,
+   "result": true
+  },
+  {
+   "flags": 5,
+   "flag": 3,
+   "result": true
+  },
+  {
+   "flags": 5,
+   "flag": 4,
+   "result": true
+  },
+  {
+   "flags": 5,
+   "flag": 4,
+   "result": true
+  },
+  {
+   "flags": 5,
+   "flag": 5,
+   "result": true
+  },
+  {
+   "flags": 5,
+   "flag": 5,
+   "result": true
+  },
+  {
+   "flags": 5,
+   "flag": 6,
+   "result": true
+  },
+  {
+   "flags": 5,
+   "flag": 6,
+   "result": true
+  },
+  {
+   "flags": 5,
+   "flag": 7,
+   "result": true
+  },
+  {
+   "flags": 5,
+   "flag": 7,
+   "result": true
+  },
+  {
+   "flags": 6,
+   "flag": 0,
+   "result": false
+  },
+  {
+   "flags": 6,
+   "flag": 0,
+   "result": false
+  },
+  {
+   "flags": 6,
+   "flag": 1,
+   "result": false
+  },
+  {
+   "flags": 6,
+   "flag": 1,
+   "result": false
+  },
+  {
+   "flags": 6,
+   "flag": 2,
+   "result": true
+  },
+  {
+   "flags": 6,
+   "flag": 2,
+   "result": true
+  },
+  {
+   "flags": 6,
+   "flag": 3,
+   "result": true
+  },
+  {
+   "flags": 6,
+   "flag": 3,
+   "result": true
+  },
+  {
+   "flags": 6,
+   "flag": 4,
+   "result": true
+  },
+  {
+   "flags": 6,
+   "flag": 4,
+   "result": true
+  },
+  {
+   "flags": 6,
+   "flag": 5,
+   "result": true
+  },
+  {
+   "flags": 6,
+   "flag": 5,
+   "result": true
+  },
+  {
+   "flags": 6,
+   "flag": 6,
+   "result": true
+  },
+  {
+   "flags": 6,
+   "flag": 6,
+   "result": true
+  },
+  {
+   "flags": 6,
+   "flag": 7,
+   "result": true
+  },
+  {
+   "flags": 6,
+   "flag": 7,
+   "result": true
+  },
+  {
+   "flags": 7,
+   "flag": 0,
+   "result": false
+  },
+  {
+   "flags": 7,
+   "flag": 0,
+   "result": false
+  },
+  {
+   "flags": 7,
+   "flag": 1,
+   "result": true
+  },
+  {
+   "flags": 7,
+   "flag": 1,
+   "result": true
+  },
+  {
+   "flags": 7,
+   "flag": 2,
+   "result": true
+  },
+  {
+   "flags": 7,
+   "flag": 2,
+   "result": true
+  },
+  {
+   "flags": 7,
+   "flag": 3,
+   "result": true
+  },
+  {
+   "flags": 7,
+   "flag": 3,
+   "result": true
+  },
+  {
+   "flags": 7,
+   "flag": 4,
+   "result": true
+  },
+  {
+   "flags": 7,
+   "flag": 4,
+   "result": true
+  },
+  {
+   "flags": 7,
+   "flag": 5,
+   "result": true
+  },
+  {
+   "flags": 7,
+   "flag": 5,
+   "result": true
+  },
+  {
+   "flags": 7,
+   "flag": 6,
+   "result": true
+  },
+  {
+   "flags": 7,
+   "flag": 6,
+   "result": true
+  },
+  {
+   "flags": 7,
+   "flag": 7,
+   "result": true
+  },
+  {
+   "flags": 7,
+   "flag": 7,
+   "result": true
+  }
+ ],
+ "localKind": [
+  {
+   "isUsing": false,
+   "kind": 0
+  },
+  {
+   "isUsing": false,
+   "kind": 1
+  },
+  {
+   "isUsing": false,
+   "kind": 2
+  },
+  {
+   "isUsing": true,
+   "kind": 3
+  },
+  {
+   "isUsing": true,
+   "kind": 4
+  }
+ ],
+ "scopeKind": [
+  {
+   "kind": 0,
+   "stopsHoisting": false
+  },
+  {
+   "kind": 1,
+   "stopsHoisting": false
+  },
+  {
+   "kind": 2,
+   "stopsHoisting": false
+  },
+  {
+   "kind": 3,
+   "stopsHoisting": false
+  },
+  {
+   "kind": 4,
+   "stopsHoisting": false
+  },
+  {
+   "kind": 5,
+   "stopsHoisting": false
+  },
+  {
+   "kind": 6,
+   "stopsHoisting": true
+  },
+  {
+   "kind": 7,
+   "stopsHoisting": true
+  },
+  {
+   "kind": 8,
+   "stopsHoisting": true
+  },
+  {
+   "kind": 9,
+   "stopsHoisting": true
+  }
+ ],
+ "exportsKind": [
+  {
+   "isDynamic": false,
+   "kind": 0
+  },
+  {
+   "isDynamic": true,
+   "kind": 1
+  },
+  {
+   "isDynamic": false,
+   "kind": 2
+  },
+  {
+   "isDynamic": true,
+   "kind": 3
+  }
+ ],
+ "moduleType": [
+  {
+   "isCommonJS": false,
+   "isESM": false,
+   "kind": 0
+  },
+  {
+   "isCommonJS": true,
+   "isESM": false,
+   "kind": 1
+  },
+  {
+   "isCommonJS": true,
+   "isESM": false,
+   "kind": 2
+  },
+  {
+   "isCommonJS": true,
+   "isESM": false,
+   "kind": 3
+  },
+  {
+   "isCommonJS": false,
+   "isESM": true,
+   "kind": 4
+  },
+  {
+   "isCommonJS": false,
+   "isESM": true,
+   "kind": 5
+  },
+  {
+   "isCommonJS": false,
+   "isESM": true,
+   "kind": 6
+  }
+ ],
+ "types": {
+  "B": [
+   "BMissing",
+   "BIdentifier",
+   "BArray",
+   "BObject"
+  ],
+  "E": [
+   "EArray",
+   "EUnary",
+   "EBinary",
+   "EBoolean",
+   "ESuper",
+   "ENull",
+   "EUndefined",
+   "EThis",
+   "ENew",
+   "ENewTarget",
+   "EImportMeta",
+   "ECall",
+   "EDot",
+   "EIndex",
+   "EArrow",
+   "EFunction",
+   "EClass",
+   "EIdentifier",
+   "EImportIdentifier",
+   "EPrivateIdentifier",
+   "ENameOfSymbol",
+   "EJSXElement",
+   "EJSXText",
+   "EMissing",
+   "ENumber",
+   "EBigInt",
+   "EObject",
+   "ESpread",
+   "EString",
+   "ETemplate",
+   "ERegExp",
+   "EInlinedEnum",
+   "EAnnotation",
+   "EAwait",
+   "EYield",
+   "EIf",
+   "ERequireString",
+   "ERequireResolveString",
+   "EImportString",
+   "EImportCall"
+  ],
+  "S": [
+   "SBlock",
+   "SComment",
+   "SDebugger",
+   "SDirective",
+   "SEmpty",
+   "STypeScript",
+   "SExportClause",
+   "SExportFrom",
+   "SExportDefault",
+   "SExportStar",
+   "SExportEquals",
+   "SLazyExport",
+   "SExpr",
+   "SEnum",
+   "SNamespace",
+   "SFunction",
+   "SClass",
+   "SLabel",
+   "SIf",
+   "SFor",
+   "SForIn",
+   "SForOf",
+   "SDoWhile",
+   "SWhile",
+   "SWith",
+   "STry",
+   "SSwitch",
+   "SImport",
+   "SReturn",
+   "SThrow",
+   "SLocal",
+   "SBreak",
+   "SContinue"
+  ],
+  "TSNamespaceMemberData": [
+   "TSNamespaceMemberProperty",
+   "TSNamespaceMemberNamespace",
+   "TSNamespaceMemberEnumNumber",
+   "TSNamespaceMemberEnumString"
+  ]
+ },
+ "ensureValidIdentifier": [
+  {
+   "in": "",
+   "out": "_"
+  },
+  {
+   "in": "foo",
+   "out": "foo"
+  },
+  {
+   "in": "foo.js",
+   "out": "foo_js"
+  },
+  {
+   "in": "foo-bar",
+   "out": "foo_bar"
+  },
+  {
+   "in": "9x",
+   "out": "x"
+  },
+  {
+   "in": "_x",
+   "out": "x"
+  },
+  {
+   "in": "a_b",
+   "out": "a_b"
+  },
+  {
+   "in": "a__b",
+   "out": "a_b"
+  },
+  {
+   "in": "Ünicode",
+   "out": "nicode"
+  },
+  {
+   "in": "aÜb",
+   "out": "a_b"
+  },
+  {
+   "in": "1",
+   "out": "_"
+  },
+  {
+   "in": "12ab",
+   "out": "ab"
+  },
+  {
+   "in": "-",
+   "out": "_"
+  },
+  {
+   "in": "__",
+   "out": "_"
+  },
+  {
+   "in": "x1",
+   "out": "x1"
+  },
+  {
+   "in": "1x",
+   "out": "x"
+  },
+  {
+   "in": "日本語",
+   "out": "_"
+  }
+ ],
+ "opTableLen": 53,
+ "opTable": [
+  {
+   "isKeyword": false,
+   "level": 18,
+   "text": "+"
+  },
+  {
+   "isKeyword": false,
+   "level": 18,
+   "text": "-"
+  },
+  {
+   "isKeyword": false,
+   "level": 18,
+   "text": "~"
+  },
+  {
+   "isKeyword": false,
+   "level": 18,
+   "text": "!"
+  },
+  {
+   "isKeyword": true,
+   "level": 18,
+   "text": "void"
+  },
+  {
+   "isKeyword": true,
+   "level": 18,
+   "text": "typeof"
+  },
+  {
+   "isKeyword": true,
+   "level": 18,
+   "text": "delete"
+  },
+  {
+   "isKeyword": false,
+   "level": 18,
+   "text": "--"
+  },
+  {
+   "isKeyword": false,
+   "level": 18,
+   "text": "++"
+  },
+  {
+   "isKeyword": false,
+   "level": 19,
+   "text": "--"
+  },
+  {
+   "isKeyword": false,
+   "level": 19,
+   "text": "++"
+  },
+  {
+   "isKeyword": false,
+   "level": 15,
+   "text": "+"
+  },
+  {
+   "isKeyword": false,
+   "level": 15,
+   "text": "-"
+  },
+  {
+   "isKeyword": false,
+   "level": 16,
+   "text": "*"
+  },
+  {
+   "isKeyword": false,
+   "level": 16,
+   "text": "/"
+  },
+  {
+   "isKeyword": false,
+   "level": 16,
+   "text": "%"
+  },
+  {
+   "isKeyword": false,
+   "level": 17,
+   "text": "**"
+  },
+  {
+   "isKeyword": false,
+   "level": 13,
+   "text": "\u003c"
+  },
+  {
+   "isKeyword": false,
+   "level": 13,
+   "text": "\u003c="
+  },
+  {
+   "isKeyword": false,
+   "level": 13,
+   "text": "\u003e"
+  },
+  {
+   "isKeyword": false,
+   "level": 13,
+   "text": "\u003e="
+  },
+  {
+   "isKeyword": true,
+   "level": 13,
+   "text": "in"
+  },
+  {
+   "isKeyword": true,
+   "level": 13,
+   "text": "instanceof"
+  },
+  {
+   "isKeyword": false,
+   "level": 14,
+   "text": "\u003c\u003c"
+  },
+  {
+   "isKeyword": false,
+   "level": 14,
+   "text": "\u003e\u003e"
+  },
+  {
+   "isKeyword": false,
+   "level": 14,
+   "text": "\u003e\u003e\u003e"
+  },
+  {
+   "isKeyword": false,
+   "level": 12,
+   "text": "=="
+  },
+  {
+   "isKeyword": false,
+   "level": 12,
+   "text": "!="
+  },
+  {
+   "isKeyword": false,
+   "level": 12,
+   "text": "==="
+  },
+  {
+   "isKeyword": false,
+   "level": 12,
+   "text": "!=="
+  },
+  {
+   "isKeyword": false,
+   "level": 6,
+   "text": "??"
+  },
+  {
+   "isKeyword": false,
+   "level": 7,
+   "text": "||"
+  },
+  {
+   "isKeyword": false,
+   "level": 8,
+   "text": "\u0026\u0026"
+  },
+  {
+   "isKeyword": false,
+   "level": 9,
+   "text": "|"
+  },
+  {
+   "isKeyword": false,
+   "level": 11,
+   "text": "\u0026"
+  },
+  {
+   "isKeyword": false,
+   "level": 10,
+   "text": "^"
+  },
+  {
+   "isKeyword": false,
+   "level": 1,
+   "text": ","
+  },
+  {
+   "isKeyword": false,
+   "level": 4,
+   "text": "="
+  },
+  {
+   "isKeyword": false,
+   "level": 4,
+   "text": "+="
+  },
+  {
+   "isKeyword": false,
+   "level": 4,
+   "text": "-="
+  },
+  {
+   "isKeyword": false,
+   "level": 4,
+   "text": "*="
+  },
+  {
+   "isKeyword": false,
+   "level": 4,
+   "text": "/="
+  },
+  {
+   "isKeyword": false,
+   "level": 4,
+   "text": "%="
+  },
+  {
+   "isKeyword": false,
+   "level": 4,
+   "text": "**="
+  },
+  {
+   "isKeyword": false,
+   "level": 4,
+   "text": "\u003c\u003c="
+  },
+  {
+   "isKeyword": false,
+   "level": 4,
+   "text": "\u003e\u003e="
+  },
+  {
+   "isKeyword": false,
+   "level": 4,
+   "text": "\u003e\u003e\u003e="
+  },
+  {
+   "isKeyword": false,
+   "level": 4,
+   "text": "|="
+  },
+  {
+   "isKeyword": false,
+   "level": 4,
+   "text": "\u0026="
+  },
+  {
+   "isKeyword": false,
+   "level": 4,
+   "text": "^="
+  },
+  {
+   "isKeyword": false,
+   "level": 4,
+   "text": "??="
+  },
+  {
+   "isKeyword": false,
+   "level": 4,
+   "text": "||="
+  },
+  {
+   "isKeyword": false,
+   "level": 4,
+   "text": "\u0026\u0026="
+  }
+ ]
+}

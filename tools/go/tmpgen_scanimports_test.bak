@@ -1,0 +1,92 @@
+package linker
+
+// 第 117 轮 Go 探针：linkerContext.scanImportsAndExports 的 CSS URL inlining 缝（step1 CSSRepr）。
+// 构造 CSS 文件的 import records 指向 JSRepr(URLForCSS)/CopyRepr(URLForCode)，dump 改写后的
+// record.Path/Namespace/Flags + additionalFiles 拷贝。底座 URLForCSS 已在 js_ast.go:1566/TS:1384 移植。
+import (
+	"encoding/json"
+	"os"
+	"testing"
+
+	"github.com/evanw/esbuild/internal/ast"
+	"github.com/evanw/esbuild/internal/config"
+	"github.com/evanw/esbuild/internal/css_ast"
+	"github.com/evanw/esbuild/internal/graph"
+	"github.com/evanw/esbuild/internal/helpers"
+	"github.com/evanw/esbuild/internal/js_ast"
+	"github.com/evanw/esbuild/internal/logger"
+)
+
+type siRec struct {
+	Path string `json:"path"`
+	Namespace string `json:"namespace"`
+	Flags uint32 `json:"flags"`
+	SourceValid bool `json:"sourceValid"`
+	CopyValid bool `json:"copyValid"`
+}
+type siRow struct {
+	Name string `json:"name"`
+	Records []siRec `json:"records"`
+}
+
+func TestTmpGenScanImports117(t *testing.T) {
+	rows := []siRow{}
+	cases := []struct{
+		name string
+		urlForCSS string
+		urlForCode string
+		jsLoader config.Loader
+		uniqueKeyPrefix string
+	}{
+		{"js-to-css", "data:text/css;base64,AAAA", "", config.LoaderJS, "key"},
+		{"js-empty-loader", "data:text/plain;base64,BBBB", "", config.LoaderEmpty, "key"},
+		{"js-unique-key", "/static/key_hash.js", "", config.LoaderJS, "key"},
+		{"copy-file", "", "/static/copied.png", config.LoaderJS, "key"},
+	}
+	for _, c := range cases {
+		// index 0: CSS file with one import record
+		cssAST := css_ast.AST{}
+		cssAST.ImportRecords = []ast.ImportRecord{}
+		cssRepr := &graph.CSSRepr{AST: cssAST}
+		cssFile := graph.LinkerFile{InputFile: graph.InputFile{Repr: cssRepr}}
+
+		// index 1: JS file with URLForCSS
+		jsAST := js_ast.AST{URLForCSS: c.urlForCSS}
+		jsRepr := &graph.JSRepr{AST: jsAST}
+		jsFile := graph.LinkerFile{InputFile: graph.InputFile{Repr: jsRepr, Loader: c.jsLoader}}
+
+		// index 2: copy file with URLForCode
+		copyRepr := &graph.CopyRepr{URLForCode: c.urlForCode}
+		copyFile := graph.LinkerFile{InputFile: graph.InputFile{Repr: copyRepr}}
+
+		rec := ast.ImportRecord{}
+		if c.urlForCode != "" {
+			rec.CopySourceIndex = ast.MakeIndex32(2)
+		} else {
+			rec.SourceIndex = ast.MakeIndex32(1)
+		}
+		cssAST.ImportRecords = append(cssAST.ImportRecords, rec)
+		cssRepr.AST.ImportRecords = cssAST.ImportRecords
+
+		g := graph.LinkerGraph{
+			Files: []graph.LinkerFile{cssFile, jsFile, copyFile},
+			ReachableFiles: []uint32{0},
+		}
+		ctx := &linkerContext{
+			options: &config.Options{},
+			timer: &helpers.Timer{},
+			log: logger.NewDeferLog(logger.DeferLogNoVerboseOrDebug, nil),
+			graph: g,
+			uniqueKeyPrefix: c.uniqueKeyPrefix,
+		}
+		ctx.scanImportsAndExports()
+		out := []siRec{}
+		for _, r := range ctx.graph.Files[0].InputFile.Repr.(*graph.CSSRepr).AST.ImportRecords {
+			out = append(out, siRec{r.Path.Text, r.Path.Namespace, uint32(r.Flags), r.SourceIndex.IsValid(), r.CopySourceIndex.IsValid()})
+		}
+		rows = append(rows, siRow{c.name, out})
+	}
+	b, _ := json.MarshalIndent(rows, "", "  ")
+	if err := os.WriteFile("/root/port/testdata/scanimports-go.json", b, 0644); err != nil { t.Fatal(err) }
+	for _, r := range rows { t.Logf("%-16s records=%+v", r.Name, r.Records) }
+}

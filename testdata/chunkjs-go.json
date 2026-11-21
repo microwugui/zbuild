@@ -1,0 +1,68 @@
+[
+  {
+    "fn": "generateChunkJS",
+    "arg": {
+      "case": "empty-banner"
+    },
+    "out": {
+      "bytes": "2f2a2062616e6e6572202a2f0a2f2a20666f6f746572202a2f0a",
+      "hasJoiner": true,
+      "pieces": []
+    }
+  },
+  {
+    "fn": "generateChunkJS",
+    "arg": {
+      "case": "js-parts"
+    },
+    "out": {
+      "bytes": "2f2f206d61696e2e6a730a76617220666f6f203d20313b0a",
+      "hasJoiner": true,
+      "pieces": []
+    }
+  },
+  {
+    "fn": "generateChunkJS",
+    "arg": {
+      "case": "js-parts-minws"
+    },
+    "out": {
+      "bytes": "76617220666f6f3d313b0a",
+      "hasJoiner": true,
+      "pieces": []
+    }
+  },
+  {
+    "fn": "generateChunkJS",
+    "arg": {
+      "case": "iife"
+    },
+    "out": {
+      "bytes": "282829203d3e207b0a7d2928293b0a",
+      "hasJoiner": true,
+      "pieces": []
+    }
+  },
+  {
+    "fn": "generateChunkJS",
+    "arg": {
+      "case": "crosschunk-prefix"
+    },
+    "out": {
+      "bytes": "",
+      "hasJoiner": false,
+      "pieces": [
+        [
+          "696d706f72742022",
+          2,
+          1
+        ],
+        [
+          "223b0a",
+          0,
+          0
+        ]
+      ]
+    }
+  }
+]

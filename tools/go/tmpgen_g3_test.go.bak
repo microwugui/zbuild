@@ -1,0 +1,39 @@
+package js_parser
+import("encoding/json";"os";"testing";"github.com/evanw/esbuild/internal/js_ast";"github.com/evanw/esbuild/internal/logger")
+func TestTmpG3(t *testing.T){
+ type row struct{ Input string `json:"input"`; Safe bool `json:"safe"`; Inlined bool `json:"inlined"`; StmtCount int `json:"stmtCount"` }
+ lit:=func(d js_ast.E)js_ast.Expr{return js_ast.Expr{Loc:logger.Loc{Start:0},Data:d}}
+ var out []row
+ // isSafeForConstLocalPrefix: 直接用 AST 节点构造
+ type sc struct{name string; e js_ast.E; want bool}
+ tests:=[]sc{
+  {"null",&js_ast.ENull{},true},{"undefined",&js_ast.EUndefined{},true},
+  {"bool",&js_ast.EBoolean{},true},{"num",&js_ast.ENumber{},true},{"bigint",&js_ast.EBigInt{},true},
+  {"string",&js_ast.EString{},true},{"func",&js_ast.EFunction{},true},{"arrow",&js_ast.EArrow{},true},
+  {"array-empty",&js_ast.EArray{},true},
+  {"object-empty",&js_ast.EObject{},true},
+  {"identifier",&js_ast.EIdentifier{},false},{"call",&js_ast.ECall{},false},
+ }
+ for _,tc:=range tests{
+  // array with one unsafe item
+  if tc.name=="array-empty"{arr:=&js_ast.EArray{};arr.Items=[]js_ast.Expr{lit(&js_ast.EIdentifier{})};tc.e=arr;tc.want=false}
+  if tc.name=="object-empty"{obj:=&js_ast.EObject{};obj.Properties=[]js_ast.Property{{}};tc.e=obj;tc.want=false}
+  out=append(out,row{tc.name,isSafeForConstLocalPrefix(lit(tc.e)),false,0})
+ }
+ // tryToInlineCaseBody
+ loc:=logger.Loc{Start:0}
+ ex:=lit(&js_ast.EBoolean{})
+ cases:=[]struct{name string; stmts []js_ast.Stmt}{
+  {"expr",[]js_ast.Stmt{{Loc:loc,Data:&js_ast.SExpr{Value:ex}}}},
+  {"return",[]js_ast.Stmt{{Loc:loc,Data:&js_ast.SReturn{}}}},
+  {"break",[]js_ast.Stmt{{Loc:loc,Data:&js_ast.SBreak{}}}},
+  {"let",[]js_ast.Stmt{{Loc:loc,Data:&js_ast.SLocal{Kind:js_ast.LocalLet}}}},
+  {"var",[]js_ast.Stmt{{Loc:loc,Data:&js_ast.SLocal{Kind:js_ast.LocalVar}}}},
+  {"for",[]js_ast.Stmt{{Loc:loc,Data:&js_ast.SFor{}}}},
+ }
+ for _,c:=range cases{
+  res,ok:=tryToInlineCaseBody(loc,c.stmts,loc)
+  out=append(out,row{c.name,false,ok,len(res)})
+ }
+ raw,_:=json.Marshal(out);os.WriteFile("/tmp/g3.json",raw,0644)
+}

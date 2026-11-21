@@ -1,0 +1,24 @@
+{
+  "name": "esbuild-ts-port",
+  "private": true,
+  "type": "module",
+  "description": "esbuild 的 TypeScript 1:1 移植",
+  "scripts": {
+    "inventory": "go run tools/inventory.go ../esbuild inventory.json",
+    "test": "node --experimental-strip-types --test 'src/**/*.test.ts'",
+    "typecheck": "tsc --noEmit",
+    "typecheck:gate": "bash -c 'n=$(./node_modules/.bin/tsc --noEmit 2>&1 | grep -c \"error TS\"); echo \"tsc errors: $n (baseline 167，只许降不许升)\"; test $n -le 167'",
+    "assign:gate": "node --experimental-strip-types tools/assign-gate.ts",
+    "test:cov": "rm -rf coverage && NODE_V8_COVERAGE=coverage node --experimental-strip-types --test 'src/**/*.test.ts'",
+    "progress": "node --experimental-strip-types tools/progress.ts",
+    "unit": "node --experimental-strip-types tools/unit-oracle.ts",
+    "m1": "node --experimental-strip-types tools/m1.ts",
+    "m1:check": "node --experimental-strip-types tools/m1.ts --check",
+    "check": "node --experimental-strip-types tools/progress.ts --check",
+    "doc:check": "node --experimental-strip-types tools/plan-check.ts"
+  },
+  "devDependencies": {
+    "@types/node": "^22.20.5",
+    "typescript": "^5.7.0"
+  }
+}

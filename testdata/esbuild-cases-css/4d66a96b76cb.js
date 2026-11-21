@@ -1,0 +1,1 @@
+c { color: green } a { color: red } /*!x*/ /*!y*/ b { color: red }

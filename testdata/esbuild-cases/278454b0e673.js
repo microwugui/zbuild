@@ -1,0 +1,1 @@
+export * from 'x' with {x: 'y'}

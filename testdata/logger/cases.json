@@ -1,0 +1,118 @@
+{
+ "note": "由真实 /tmp/esbuild-go 跑语料生成（--color=false），Msg 结构取自 Go 探针 tmpmsgfmt extract 并对齐 CLI 字节",
+ "cases": [
+  {
+   "name": "jsx-unicode",
+   "source": "testdata/esbuild-cases/03b8891567a9.js",
+   "sourceSha256": "03b8891567a91bb250437f0b0b3cb7311a9f1023f7ac76ae457d0a42f5c51d87",
+   "args": [
+    "--loader=js",
+    "--format=esm"
+   ],
+   "stderr": "testdata/logger/jsx-unicode.stderr",
+   "stderrSha256": "457ee54a487561e92425247c30dbeb5af59107b7764ef2ec8bd2b6424f45fae8",
+   "stderrBytes": 323,
+   "msgs": [
+    {
+     "kind": 0,
+     "id": 0,
+     "text": "The JSX syntax extension is not currently enabled",
+     "plugin": "",
+     "start": 11,
+     "len": 1,
+     "notes": [
+      {
+       "text": "The esbuild loader for this file is currently set to \"js\" but it must be set to \"jsx\" to be able to parse JSX syntax. You can use \"--loader:.js=jsx\" to do that.",
+       "start": 0,
+       "len": 0,
+       "hasLocation": false
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "jsx-line2",
+   "source": "testdata/esbuild-cases/0d8ead125bff.js",
+   "sourceSha256": "0d8ead125bffb818e7827ddf8f16f04cc1f566caed7200b530143999c6263da1",
+   "args": [
+    "--loader=js",
+    "--format=esm"
+   ],
+   "stderr": "testdata/logger/jsx-line2.stderr",
+   "stderrSha256": "5185650aa9aa363ed50a74e40c36a2a912453e69968b4652bfa4d5b6321196c3",
+   "stderrBytes": 285,
+   "msgs": [
+    {
+     "kind": 0,
+     "id": 0,
+     "text": "The JSX syntax extension is not currently enabled",
+     "plugin": "",
+     "start": 14,
+     "len": 1,
+     "notes": [
+      {
+       "text": "The esbuild loader for this file is currently set to \"js\" but it must be set to \"jsx\" to be able to parse JSX syntax. You can use \"--loader:.js=jsx\" to do that.",
+       "start": 0,
+       "len": 0,
+       "hasLocation": false
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "jsx-line3-cr",
+   "source": "testdata/esbuild-cases/93475ad35a8e.js",
+   "sourceSha256": "93475ad35a8e960c417ffcbd081d6cac3b84ce5d430f866bf4aa4df53a12db30",
+   "args": [
+    "--loader=js",
+    "--format=esm"
+   ],
+   "stderr": "testdata/logger/jsx-line3-cr.stderr",
+   "stderrSha256": "e74771d5ae19eefc043777360370bf537be836fe6e38f951bf0406abfeb939ec",
+   "stderrBytes": 284,
+   "msgs": [
+    {
+     "kind": 0,
+     "id": 0,
+     "text": "The JSX syntax extension is not currently enabled",
+     "plugin": "",
+     "start": 2,
+     "len": 1,
+     "notes": [
+      {
+       "text": "The esbuild loader for this file is currently set to \"js\" but it must be set to \"jsx\" to be able to parse JSX syntax. You can use \"--loader:.js=jsx\" to do that.",
+       "start": 0,
+       "len": 0,
+       "hasLocation": false
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "tla-cjs-nonote",
+   "source": "testdata/esbuild-cases/00eead17c463.js",
+   "sourceSha256": "00eead17c4631aa374fdef2fe34844d870859dbe21a4dc2bf2465e0e1c8a8e55",
+   "args": [
+    "--loader=js",
+    "--format=cjs"
+   ],
+   "stderr": "testdata/logger/tla-cjs-nonote.stderr",
+   "stderrSha256": "f4c60b8da23ceb430078646c5190f7c28938485852d728c5950fd5d194ddda1b",
+   "stderrBytes": 160,
+   "msgs": [
+    {
+     "kind": 0,
+     "id": 0,
+     "text": "Top-level await is currently not supported with the \"cjs\" output format",
+     "plugin": "",
+     "start": 5,
+     "len": 5,
+     "notes": []
+    }
+   ]
+  }
+ ]
+}

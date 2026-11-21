@@ -1,0 +1,42 @@
+[
+  {
+    "fn": "TComma",
+    "arg": "",
+    "out": "10"
+  },
+  {
+    "fn": "TokensAreCommaSeparated",
+    "arg": "[identifier \",\" identifier]",
+    "out": "true"
+  },
+  {
+    "fn": "TokensAreCommaSeparated",
+    "arg": "[identifier identifier identifier]",
+    "out": "false"
+  },
+  {
+    "fn": "TokensAreCommaSeparated",
+    "arg": "[identifier]",
+    "out": "true"
+  },
+  {
+    "fn": "TokensAreCommaSeparated",
+    "arg": "[identifier \",\" identifier \",\" identifier]",
+    "out": "true"
+  },
+  {
+    "fn": "TurnLengthOrPercentageIntoNumberIfZero",
+    "arg": "0%",
+    "out": "true|30|0"
+  },
+  {
+    "fn": "TurnLengthOrPercentageIntoNumberIfZero",
+    "arg": "0px",
+    "out": "true|30|0"
+  },
+  {
+    "fn": "TurnLengthOrPercentageIntoNumberIfZero",
+    "arg": "1px",
+    "out": "false|26|1px"
+  }
+]

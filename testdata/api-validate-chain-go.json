@@ -1,0 +1,996 @@
+{
+  "rows": [
+    {
+      "name": "validatePathTemplate:empty",
+      "data": {
+        "parts": []
+      }
+    },
+    {
+      "name": "validatePathTemplate:name",
+      "data": {
+        "parts": [
+          [
+            "./",
+            2
+          ]
+        ]
+      }
+    },
+    {
+      "name": "validatePathTemplate:chunk",
+      "data": {
+        "parts": [
+          [
+            "./chunk-",
+            2
+          ],
+          [
+            "-",
+            3
+          ]
+        ]
+      }
+    },
+    {
+      "name": "validatePathTemplate:dirext",
+      "data": {
+        "parts": [
+          [
+            "./assets/",
+            1
+          ],
+          [
+            "/",
+            2
+          ],
+          [
+            "",
+            4
+          ]
+        ]
+      }
+    },
+    {
+      "name": "validatePathTemplate:backslash",
+      "data": {
+        "parts": [
+          [
+            "./a/b/",
+            2
+          ]
+        ]
+      }
+    },
+    {
+      "name": "validatePathTemplate:literal",
+      "data": {
+        "parts": [
+          [
+            "./out.js",
+            0
+          ]
+        ]
+      }
+    },
+    {
+      "name": "validatePlatform:default",
+      "data": {
+        "v": 0
+      }
+    },
+    {
+      "name": "validatePlatform:browser",
+      "data": {
+        "v": 0
+      }
+    },
+    {
+      "name": "validatePlatform:node",
+      "data": {
+        "v": 1
+      }
+    },
+    {
+      "name": "validatePlatform:neutral",
+      "data": {
+        "v": 2
+      }
+    },
+    {
+      "name": "validateFormat:default",
+      "data": {
+        "v": 0
+      }
+    },
+    {
+      "name": "validateFormat:iife",
+      "data": {
+        "v": 1
+      }
+    },
+    {
+      "name": "validateFormat:cjs",
+      "data": {
+        "v": 2
+      }
+    },
+    {
+      "name": "validateFormat:esm",
+      "data": {
+        "v": 3
+      }
+    },
+    {
+      "name": "validateSourceMap:none",
+      "data": {
+        "v": 0
+      }
+    },
+    {
+      "name": "validateSourceMap:inline",
+      "data": {
+        "v": 1
+      }
+    },
+    {
+      "name": "validateSourceMap:linked",
+      "data": {
+        "v": 2
+      }
+    },
+    {
+      "name": "validateSourceMap:external",
+      "data": {
+        "v": 3
+      }
+    },
+    {
+      "name": "validateSourceMap:both",
+      "data": {
+        "v": 4
+      }
+    },
+    {
+      "name": "validateLegalComments:default-bundle",
+      "data": {
+        "v": 2
+      }
+    },
+    {
+      "name": "validateLegalComments:default-nobundle",
+      "data": {
+        "v": 0
+      }
+    },
+    {
+      "name": "validateLegalComments:none",
+      "data": {
+        "v": 1
+      }
+    },
+    {
+      "name": "validateLegalComments:inline",
+      "data": {
+        "v": 0
+      }
+    },
+    {
+      "name": "validateLegalComments:eof",
+      "data": {
+        "v": 2
+      }
+    },
+    {
+      "name": "validateLegalComments:linked",
+      "data": {
+        "v": 3
+      }
+    },
+    {
+      "name": "validateLegalComments:external",
+      "data": {
+        "v": 4
+      }
+    },
+    {
+      "name": "validateColor:ifterminal",
+      "data": {
+        "v": 0
+      }
+    },
+    {
+      "name": "validateColor:never",
+      "data": {
+        "v": 1
+      }
+    },
+    {
+      "name": "validateColor:always",
+      "data": {
+        "v": 2
+      }
+    },
+    {
+      "name": "validateLogLevel:silent",
+      "data": {
+        "v": 6
+      }
+    },
+    {
+      "name": "validateLogLevel:verbose",
+      "data": {
+        "v": 1
+      }
+    },
+    {
+      "name": "validateLogLevel:debug",
+      "data": {
+        "v": 2
+      }
+    },
+    {
+      "name": "validateLogLevel:info",
+      "data": {
+        "v": 3
+      }
+    },
+    {
+      "name": "validateLogLevel:warning",
+      "data": {
+        "v": 4
+      }
+    },
+    {
+      "name": "validateLogLevel:error",
+      "data": {
+        "v": 5
+      }
+    },
+    {
+      "name": "validateLogStyle:default",
+      "data": {
+        "v": 0
+      }
+    },
+    {
+      "name": "validateLogStyle:clang",
+      "data": {
+        "v": 1
+      }
+    },
+    {
+      "name": "validateLogStyle:vs",
+      "data": {
+        "v": 2
+      }
+    },
+    {
+      "name": "validateASCIIOnly:default",
+      "data": {
+        "v": true
+      }
+    },
+    {
+      "name": "validateASCIIOnly:ascii",
+      "data": {
+        "v": true
+      }
+    },
+    {
+      "name": "validateASCIIOnly:utf8",
+      "data": {
+        "v": false
+      }
+    },
+    {
+      "name": "validateExternalPackages:default",
+      "data": {
+        "v": false
+      }
+    },
+    {
+      "name": "validateExternalPackages:bundle",
+      "data": {
+        "v": false
+      }
+    },
+    {
+      "name": "validateExternalPackages:external",
+      "data": {
+        "v": true
+      }
+    },
+    {
+      "name": "validateTreeShaking:default-bundle",
+      "data": {
+        "v": true
+      }
+    },
+    {
+      "name": "validateTreeShaking:default-iife",
+      "data": {
+        "v": true
+      }
+    },
+    {
+      "name": "validateTreeShaking:default-esm",
+      "data": {
+        "v": false
+      }
+    },
+    {
+      "name": "validateTreeShaking:false",
+      "data": {
+        "v": false
+      }
+    },
+    {
+      "name": "validateTreeShaking:true",
+      "data": {
+        "v": true
+      }
+    },
+    {
+      "name": "extractPathStyle:code-on",
+      "data": {
+        "v": 1
+      }
+    },
+    {
+      "name": "extractPathStyle:code-off",
+      "data": {
+        "v": 0
+      }
+    },
+    {
+      "name": "extractPathStyle:log-on",
+      "data": {
+        "v": 1
+      }
+    },
+    {
+      "name": "extractPathStyle:log-off",
+      "data": {
+        "v": 0
+      }
+    },
+    {
+      "name": "validateLoader:0",
+      "data": {
+        "v": 0
+      }
+    },
+    {
+      "name": "validateLoader:1",
+      "data": {
+        "v": 1
+      }
+    },
+    {
+      "name": "validateLoader:2",
+      "data": {
+        "v": 2
+      }
+    },
+    {
+      "name": "validateLoader:3",
+      "data": {
+        "v": 3
+      }
+    },
+    {
+      "name": "validateLoader:4",
+      "data": {
+        "v": 4
+      }
+    },
+    {
+      "name": "validateLoader:5",
+      "data": {
+        "v": 5
+      }
+    },
+    {
+      "name": "validateLoader:6",
+      "data": {
+        "v": 6
+      }
+    },
+    {
+      "name": "validateLoader:7",
+      "data": {
+        "v": 7
+      }
+    },
+    {
+      "name": "validateLoader:8",
+      "data": {
+        "v": 8
+      }
+    },
+    {
+      "name": "validateLoader:9",
+      "data": {
+        "v": 9
+      }
+    },
+    {
+      "name": "validateLoader:10",
+      "data": {
+        "v": 10
+      }
+    },
+    {
+      "name": "validateLoader:11",
+      "data": {
+        "v": 11
+      }
+    },
+    {
+      "name": "validateLoader:12",
+      "data": {
+        "v": 13
+      }
+    },
+    {
+      "name": "validateLoader:13",
+      "data": {
+        "v": 14
+      }
+    },
+    {
+      "name": "validateLoader:14",
+      "data": {
+        "v": 15
+      }
+    },
+    {
+      "name": "validateLoader:15",
+      "data": {
+        "v": 16
+      }
+    },
+    {
+      "name": "validateLoader:16",
+      "data": {
+        "v": 18
+      }
+    },
+    {
+      "name": "validateSupported:empty",
+      "data": {
+        "css": 0,
+        "cssMask": 0,
+        "js": "0",
+        "jsMask": "0"
+      }
+    },
+    {
+      "name": "validateSupported:js",
+      "data": {
+        "css": 0,
+        "cssMask": 0,
+        "js": "8",
+        "jsMask": "144115188075855880"
+      }
+    },
+    {
+      "name": "validateSupported:css",
+      "data": {
+        "css": 64,
+        "cssMask": 65,
+        "js": "0",
+        "jsMask": "0"
+      }
+    },
+    {
+      "name": "validateSupported:mixed",
+      "data": {
+        "css": 64,
+        "cssMask": 64,
+        "js": "8",
+        "jsMask": "40"
+      }
+    },
+    {
+      "name": "validateGlobalName:empty",
+      "data": {
+        "parts": null
+      }
+    },
+    {
+      "name": "validateGlobalName:simple",
+      "data": {
+        "parts": [
+          "Foo"
+        ]
+      }
+    },
+    {
+      "name": "validateGlobalName:dotted",
+      "data": {
+        "parts": [
+          "Foo",
+          "Bar",
+          "Baz"
+        ]
+      }
+    },
+    {
+      "name": "validateAlias:valid",
+      "data": {
+        "map": [
+          [
+            "@scope/pkg",
+            "x"
+          ],
+          [
+            "foo",
+            "bar"
+          ]
+        ]
+      }
+    },
+    {
+      "name": "validateAlias:mixed",
+      "data": {
+        "map": [
+          [
+            "ok/name",
+            "v"
+          ]
+        ]
+      }
+    },
+    {
+      "name": "validateResolveExtensions:nil",
+      "data": {
+        "list": [
+          ".tsx",
+          ".ts",
+          ".jsx",
+          ".js",
+          ".css",
+          ".json"
+        ]
+      }
+    },
+    {
+      "name": "validateResolveExtensions:custom",
+      "data": {
+        "list": [
+          ".tsx",
+          ".js",
+          ".css"
+        ]
+      }
+    },
+    {
+      "name": "validateLoaders:empty",
+      "data": {
+        "map": [
+          [
+            "",
+            "10"
+          ],
+          [
+            ".cjs",
+            "10"
+          ],
+          [
+            ".css",
+            "4"
+          ],
+          [
+            ".cts",
+            "17"
+          ],
+          [
+            ".js",
+            "10"
+          ],
+          [
+            ".json",
+            "11"
+          ],
+          [
+            ".jsx",
+            "13"
+          ],
+          [
+            ".mjs",
+            "10"
+          ],
+          [
+            ".module.css",
+            "14"
+          ],
+          [
+            ".mts",
+            "17"
+          ],
+          [
+            ".ts",
+            "16"
+          ],
+          [
+            ".tsx",
+            "18"
+          ],
+          [
+            ".txt",
+            "15"
+          ]
+        ]
+      }
+    },
+    {
+      "name": "validateLoaders:custom",
+      "data": {
+        "map": [
+          [
+            "",
+            "15"
+          ],
+          [
+            ".bar",
+            "18"
+          ],
+          [
+            ".cjs",
+            "10"
+          ],
+          [
+            ".css",
+            "4"
+          ],
+          [
+            ".cts",
+            "17"
+          ],
+          [
+            ".foo",
+            "10"
+          ],
+          [
+            ".js",
+            "10"
+          ],
+          [
+            ".json",
+            "11"
+          ],
+          [
+            ".jsx",
+            "13"
+          ],
+          [
+            ".mjs",
+            "10"
+          ],
+          [
+            ".module.css",
+            "14"
+          ],
+          [
+            ".mts",
+            "17"
+          ],
+          [
+            ".ts",
+            "16"
+          ],
+          [
+            ".tsx",
+            "18"
+          ],
+          [
+            ".txt",
+            "15"
+          ]
+        ]
+      }
+    },
+    {
+      "name": "validateJSXExpr:empty",
+      "data": {
+        "constant": false,
+        "parts": null
+      }
+    },
+    {
+      "name": "validateJSXExpr:factory",
+      "data": {
+        "constant": false,
+        "parts": [
+          "React",
+          "createElement"
+        ]
+      }
+    },
+    {
+      "name": "validateJSXExpr:fragment-null",
+      "data": {
+        "constant": false,
+        "parts": [
+          "null"
+        ]
+      }
+    },
+    {
+      "name": "validateJSXExpr:member",
+      "data": {
+        "constant": false,
+        "parts": [
+          "Preact",
+          "h"
+        ]
+      }
+    },
+    {
+      "name": "validateLogOverrides:empty",
+      "data": {
+        "map": []
+      }
+    },
+    {
+      "name": "validateLogOverrides:valid",
+      "data": {
+        "map": [
+          [
+            "12",
+            "4"
+          ],
+          [
+            "6",
+            "5"
+          ]
+        ]
+      }
+    },
+    {
+      "name": "validateOutputExtensions:both",
+      "data": {
+        "css": ".css2",
+        "js": ".mjs"
+      }
+    },
+    {
+      "name": "validateOutputExtensions:js-only",
+      "data": {
+        "css": "",
+        "js": ".cjs"
+      }
+    },
+    {
+      "name": "validateBannerOrFooter:banner",
+      "data": {
+        "css": "/* hi */",
+        "js": "// hi"
+      }
+    },
+    {
+      "name": "validateBannerOrFooter:footer",
+      "data": {
+        "css": "",
+        "js": "// bye"
+      }
+    },
+    {
+      "name": "isValidExtension:ok",
+      "data": {
+        "v": true
+      }
+    },
+    {
+      "name": "isValidExtension:dotonly",
+      "data": {
+        "v": false
+      }
+    },
+    {
+      "name": "isValidExtension:trailing",
+      "data": {
+        "v": false
+      }
+    },
+    {
+      "name": "isValidExtension:empty",
+      "data": {
+        "v": false
+      }
+    },
+    {
+      "name": "prettyPrintByteCount:0",
+      "data": {
+        "v": "0b "
+      }
+    },
+    {
+      "name": "prettyPrintByteCount:512",
+      "data": {
+        "v": "512b "
+      }
+    },
+    {
+      "name": "prettyPrintByteCount:1024",
+      "data": {
+        "v": "1.0kb"
+      }
+    },
+    {
+      "name": "prettyPrintByteCount:1536",
+      "data": {
+        "v": "1.5kb"
+      }
+    },
+    {
+      "name": "prettyPrintByteCount:1048576",
+      "data": {
+        "v": "1.0mb"
+      }
+    },
+    {
+      "name": "prettyPrintByteCount:1572864",
+      "data": {
+        "v": "1.5mb"
+      }
+    },
+    {
+      "name": "prettyPrintByteCount:1073741824",
+      "data": {
+        "v": "1.0gb"
+      }
+    },
+    {
+      "name": "importKindToResolveKind:0",
+      "data": {
+        "v": 1
+      }
+    },
+    {
+      "name": "resolveKindToImportKind:1",
+      "data": {
+        "v": 0
+      }
+    },
+    {
+      "name": "importKindToResolveKind:1",
+      "data": {
+        "v": 2
+      }
+    },
+    {
+      "name": "resolveKindToImportKind:2",
+      "data": {
+        "v": 1
+      }
+    },
+    {
+      "name": "importKindToResolveKind:2",
+      "data": {
+        "v": 3
+      }
+    },
+    {
+      "name": "resolveKindToImportKind:3",
+      "data": {
+        "v": 2
+      }
+    },
+    {
+      "name": "importKindToResolveKind:3",
+      "data": {
+        "v": 4
+      }
+    },
+    {
+      "name": "resolveKindToImportKind:4",
+      "data": {
+        "v": 3
+      }
+    },
+    {
+      "name": "importKindToResolveKind:4",
+      "data": {
+        "v": 5
+      }
+    },
+    {
+      "name": "resolveKindToImportKind:5",
+      "data": {
+        "v": 4
+      }
+    },
+    {
+      "name": "importKindToResolveKind:5",
+      "data": {
+        "v": 6
+      }
+    },
+    {
+      "name": "resolveKindToImportKind:6",
+      "data": {
+        "v": 5
+      }
+    },
+    {
+      "name": "importKindToResolveKind:6",
+      "data": {
+        "v": 7
+      }
+    },
+    {
+      "name": "resolveKindToImportKind:7",
+      "data": {
+        "v": 6
+      }
+    },
+    {
+      "name": "importKindToResolveKind:7",
+      "data": {
+        "v": 8
+      }
+    },
+    {
+      "name": "resolveKindToImportKind:8",
+      "data": {
+        "v": 7
+      }
+    },
+    {
+      "name": "escapeForHTML:amp",
+      "data": {
+        "v": "a\u0026amp;b\u0026lt;c\u0026gt;d"
+      }
+    },
+    {
+      "name": "escapeForHTML:plain",
+      "data": {
+        "v": "plain"
+      }
+    },
+    {
+      "name": "escapeForHTML:script",
+      "data": {
+        "v": "\u0026lt;script\u0026gt;"
+      }
+    },
+    {
+      "name": "stripDirPrefix:nofix",
+      "data": {
+        "ok": true,
+        "value": "foo/bar"
+      }
+    },
+    {
+      "name": "stripDirPrefix:exact",
+      "data": {
+        "ok": true,
+        "value": ""
+      }
+    },
+    {
+      "name": "stripDirPrefix:slash",
+      "data": {
+        "ok": true,
+        "value": "foo/bar"
+      }
+    },
+    {
+      "name": "stripDirPrefix:win",
+      "data": {
+        "ok": true,
+        "value": "foo"
+      }
+    },
+    {
+      "name": "stripDirPrefix:mismatch",
+      "data": {
+        "ok": false,
+        "value": ""
+      }
+    }
+  ]
+}

@@ -1,0 +1,1 @@
+@media not { div { color: red } }

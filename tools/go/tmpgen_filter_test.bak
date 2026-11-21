@@ -1,0 +1,49 @@
+package config
+
+import (
+	"encoding/json"
+	"os"
+	"testing"
+)
+
+func TestTmpGenFilter(t *testing.T) {
+	type row struct {
+		Fn    string `json:"fn"`
+		Arg   string `json:"arg"`
+		Out   string `json:"out"`
+	}
+	var out []row
+	// Format.String
+	for _, f := range []Format{FormatIIFE, FormatCommonJS, FormatESModule, Format(99)} {
+		out = append(out, row{"Format.String", itoa82(int(f)), f.String()})
+	}
+	// CompileFilterForPlugin: arg = plugin|kind|filter ; out = "ok:<pattern>" or "err:<msg>"
+	cases := []struct{ p, k, f string }{
+		{"p", "onResolve", ""},
+		{"p", "onLoad", ".*\\.js$"},
+		{"p", "onResolve", "["},           // invalid
+		{"plug", "onResolve", "^foo/bar$"},
+		{"p", "onLoad", "(?i)ABC"},
+	}
+	for _, c := range cases {
+		re, err := CompileFilterForPlugin(c.p, c.k, c.f)
+		if err != nil {
+			out = append(out, row{"CompileFilterForPlugin", c.p+"|"+c.k+"|"+c.f, "err:"+err.Error()})
+		} else {
+			out = append(out, row{"CompileFilterForPlugin", c.p+"|"+c.k+"|"+c.f, "ok:"+re.String()})
+		}
+	}
+	// compileFilter: valid/invalid -> "ok:pat" or "nil"
+	for _, f := range []string{"", "abc", "[", "a|b", "\\d+"} {
+		re := compileFilter(f)
+		if re == nil {
+			out = append(out, row{"compileFilter", f, "nil"})
+		} else {
+			out = append(out, row{"compileFilter", f, "ok:"+re.String()})
+		}
+	}
+	b, _ := json.MarshalIndent(out, "", "  ")
+	if err := os.WriteFile("/root/port/testdata/config-filter-go.json", b, 0644); err != nil { t.Fatal(err) }
+	t.Logf("wrote %d rows", len(out))
+}
+func itoa82(n int) string { if n==0 {return "0"}; var s []byte; for n>0 {s=append([]byte{byte('0'+n%10)},s...);n/=10}; return string(s) }

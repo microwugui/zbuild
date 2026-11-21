@@ -1,0 +1,99 @@
+package linker
+
+// 第 150 批 Go 探针：isolated hash 簇（generateIsolatedHash / generateIsolatedHashInParallel /
+// appendIsolatedHashesForImportedChunks），逐字节固化 xxhash 摘要。
+import (
+  "encoding/hex"
+  "encoding/json"
+  "os"
+  "testing"
+
+  "github.com/evanw/esbuild/internal/config"
+  "github.com/evanw/esbuild/internal/fs"
+  "github.com/evanw/esbuild/internal/graph"
+  "github.com/evanw/esbuild/internal/helpers"
+  "github.com/evanw/esbuild/internal/js_ast"
+  "github.com/evanw/esbuild/internal/logger"
+  "github.com/evanw/esbuild/internal/sourcemap"
+  "github.com/evanw/esbuild/internal/xxhash"
+)
+
+func ihBuild() *linkerContext {
+  c := &linkerContext{fs: fs.MockFS(map[string]string{}, fs.MockUnix, "/"), uniqueKeyPrefix: "TEST", uniqueKeyPrefixBytes: []byte("TEST")}
+  c.options = &config.Options{AbsOutputDir: "/p/out", PublicPath: "/static/"}
+  c.graph = graph.LinkerGraph{Files: make([]graph.LinkerFile, 2)}
+  f0 := logger.Source{KeyPath: logger.Path{Text: "/p/src/a.js", Namespace: "file"}}
+  f0.PrettyPaths.Rel = "src/a.js"
+  f1 := logger.Source{KeyPath: logger.Path{Text: "virtual:data", Namespace: "virtual"}}
+  c.graph.Files[0].InputFile = graph.InputFile{Source: f0, Repr: &graph.JSRepr{AST: js_ast.AST{}}, AdditionalFiles: []graph.OutputFile{{AbsPath: "/p/out/assets/x.png"}}}
+  c.graph.Files[1].InputFile = graph.InputFile{Source: f1, Repr: &graph.JSRepr{AST: js_ast.AST{}}}
+  return c
+}
+type ihRow struct { Fn string `json:"fn"`; Arg map[string]interface{} `json:"arg"`; Out string `json:"out"` }
+func hx(b []byte) string { return hex.EncodeToString(b) }
+
+func TestTmpGenIsolatedHash(t *testing.T) {
+  var out []ihRow
+  add := func(fn string, arg map[string]interface{}, o []byte) { out = append(out, ihRow{fn, arg, hx(o)}) }
+
+  // A: full generateIsolatedHash
+  {
+    c := ihBuild()
+    tpl := []config.PathTemplate{{Data: "./", Placeholder: config.DirPlaceholder}, {Data: "x", Placeholder: config.HashPlaceholder}}
+    ch := &chunkInfo{finalTemplate: tpl}
+    ch.chunkRepr = &chunkReprJS{partsInChunkInOrder: []partRange{{sourceIndex: 0, partIndexBegin: 0, partIndexEnd: 3}, {sourceIndex: 1, partIndexBegin: 2, partIndexEnd: 4}}}
+    ch.intermediateOutput = intermediateOutput{pieces: []outputPiece{{data: []byte("abc"), kind: outputPieceNone}, {data: []byte("def"), kind: outputPieceNone}}}
+    ch.outputSourceMap = sourcemap.SourceMapPieces{Prefix: []byte("PRE"), Mappings: []byte("MAP"), Suffix: []byte("SUF")}
+    chData := make(chan []byte, 1)
+    c.generateIsolatedHash(ch, chData)
+    add("generateIsolatedHash", map[string]interface{}{"scenario": "A"}, <-chData)
+  }
+  // B: no pieces (joiner path), no public path, CSS repr
+  {
+    c := ihBuild(); c.options.PublicPath = ""
+    j := helpers.Joiner{}; j.AddString("joined content")
+    ch := &chunkInfo{intermediateOutput: intermediateOutput{joiner: j}, chunkRepr: &chunkReprCSS{}}
+    chData := make(chan []byte, 1)
+    c.generateIsolatedHash(ch, chData)
+    add("generateIsolatedHash", map[string]interface{}{"scenario": "B"}, <-chData)
+  }
+  // C: generateIsolatedHashInParallel then waitForIsolatedHash (deterministic == direct)
+  {
+    c := ihBuild()
+    ch := &chunkInfo{finalTemplate: []config.PathTemplate{{Data: "x.js"}}, chunkRepr: &chunkReprJS{}}
+    ch.intermediateOutput = intermediateOutput{joiner: func() helpers.Joiner { j := helpers.Joiner{}; j.AddString("hello"); return j }()}
+    c.generateIsolatedHashInParallel(ch)
+    add("generateIsolatedHashInParallel", map[string]interface{}{}, ch.waitForIsolatedHash())
+  }
+  // D: appendIsolatedHashesForImportedChunks chain chunk0 -> chunk1 (+ asset path on chunk0)
+  {
+    c := ihBuild()
+    h0 := []byte{0x11, 0x22, 0x33}; h1 := []byte{0xAA, 0xBB}
+    ch0 := &chunkInfo{crossChunkImports: []chunkImport{{chunkIndex: 1, importKind: 1}},
+      intermediateOutput: intermediateOutput{pieces: []outputPiece{{data: []byte("z"), index: 0, kind: outputPieceAssetIndex}}},
+      waitForIsolatedHash: func() []byte { return h0 }}
+    ch1 := &chunkInfo{waitForIsolatedHash: func() []byte { return h1 }}
+    c.chunks = []chunkInfo{*ch0, *ch1}
+    d := xxhash.New()
+    visited := make([]uint32, 2)
+    c.appendIsolatedHashesForImportedChunks(d, 0, visited, 1)
+    add("appendIsolatedHashesForImportedChunks", map[string]interface{}{"scenario": "chain"}, d.Sum(nil))
+  }
+  // E: cycle chunk0 <-> chunk1 (each hash included once)
+  {
+    c := ihBuild()
+    h0 := []byte{0x01}; h1 := []byte{0x02}
+    ch0 := &chunkInfo{crossChunkImports: []chunkImport{{chunkIndex: 1}}, waitForIsolatedHash: func() []byte { return h0 }}
+    ch1 := &chunkInfo{crossChunkImports: []chunkImport{{chunkIndex: 0}}, waitForIsolatedHash: func() []byte { return h1 }}
+    c.chunks = []chunkInfo{*ch0, *ch1}
+    d := xxhash.New()
+    visited := make([]uint32, 2)
+    c.appendIsolatedHashesForImportedChunks(d, 0, visited, 1)
+    add("appendIsolatedHashesForImportedChunks", map[string]interface{}{"scenario": "cycle"}, d.Sum(nil))
+  }
+
+  b, err := json.MarshalIndent(out, "", "  ")
+  if err != nil { t.Fatal(err) }
+  if err := os.WriteFile("/root/port/testdata/isolated-hash-go.json", b, 0644); err != nil { t.Fatal(err) }
+  t.Logf("wrote %d rows", len(out))
+}

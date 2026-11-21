@@ -1,0 +1,1 @@
+let x = (/* @__PURE__ */ foo(bar), 2)

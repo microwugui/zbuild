@@ -1,0 +1,87 @@
+package api
+
+// 第 115 轮 Go 探针：apiHandler.ServeHTTP 的确定性分支（servedir="" 避开真实文件系统）。
+// 用 httptest.NewRecorder 捕获 status/headers/body；rebuild 注入固定 BuildResult。
+import (
+	"encoding/base64"
+	"encoding/json"
+	"net/http/httptest"
+	"os"
+	"testing"
+
+	"github.com/evanw/esbuild/internal/fs"
+)
+
+type httpRow struct {
+	Name    string            `json:"name"`
+	Status  int               `json:"status"`
+	Headers map[string]string `json:"headers"`
+	Body    string            `json:"body"`
+}
+
+func TestTmpGenServeHTTP115(t *testing.T) {
+	mock := fs.MockFS(map[string]string{}, fs.MockUnix, "/")
+	newHandler := func(rebuild BuildResult, cors, hosts []string) *apiHandler {
+		return &apiHandler{
+			fs:               mock,
+			absOutputDir:     "/out",
+			outdirPathPrefix: "",
+			rebuild:          func() BuildResult { return rebuild },
+			corsOrigin:       cors,
+			hosts:            hosts,
+		}
+	}
+	okResult := BuildResult{OutputFiles: []OutputFile{
+		{Path: "/out/a.js", Contents: []byte("console.log(1)\n"), Hash: "x"},
+		{Path: "/out/sub/x.css", Contents: []byte("body{color:red}"), Hash: "y"},
+	}}
+	errResult := BuildResult{Errors: []Message{{Text: "some build error"}}}
+
+	type tc struct {
+		name, method, path, host string
+		headers                  map[string]string
+		cors, hosts              []string
+		rebuild                  BuildResult
+	}
+	cases := []tc{
+		{"cors-wildcard", "GET", "/nope", "localhost", map[string]string{"Origin": "https://a.com"}, []string{"*"}, nil, okResult},
+		{"cors-exact", "GET", "/nope", "localhost", map[string]string{"Origin": "https://a.com"}, []string{"https://a.com"}, nil, okResult},
+		{"cors-prefix", "GET", "/nope", "localhost", map[string]string{"Origin": "https://sub.a.com"}, []string{"https://*.a.com"}, nil, okResult},
+		{"cors-nomatch", "GET", "/nope", "localhost", map[string]string{"Origin": "https://evil.com"}, []string{"https://a.com"}, nil, okResult},
+		{"host-forbidden", "GET", "/nope", "evil.com", nil, nil, []string{"localhost"}, okResult},
+		{"host-strip-port", "GET", "/nope", "localhost:8000", nil, nil, []string{"localhost"}, okResult},
+		{"backslash", "GET", "/a\\b", "localhost", nil, nil, nil, okResult},
+		{"build-error", "GET", "/a.js", "localhost", nil, nil, nil, errResult},
+		{"serve-file-js", "GET", "/a.js", "localhost", nil, nil, nil, okResult},
+		{"head-omit", "HEAD", "/a.js", "localhost", nil, nil, nil, okResult},
+		{"range", "GET", "/a.js", "localhost", map[string]string{"Range": "bytes=0-4"}, nil, nil, okResult},
+		{"dir-list", "GET", "/sub/", "localhost", nil, nil, nil, okResult},
+		{"dir-redirect", "GET", "/sub", "localhost", nil, nil, nil, okResult},
+		{"favicon", "GET", "/favicon.ico", "localhost", map[string]string{"Accept-Encoding": "gzip"}, nil, nil, okResult},
+		{"not-found", "GET", "/nope", "localhost", nil, nil, nil, okResult},
+	}
+
+	rows := []httpRow{}
+	for _, c := range cases {
+		h := newHandler(c.rebuild, c.cors, c.hosts)
+		req := httptest.NewRequest(c.method, "http://example.com"+c.path, nil)
+		req.Host = c.host
+		for k, v := range c.headers {
+			req.Header.Set(k, v)
+		}
+		res := httptest.NewRecorder()
+		h.ServeHTTP(res, req)
+		hdrs := map[string]string{}
+		for k := range res.Header() {
+			hdrs[k] = res.Header().Get(k)
+		}
+		rows = append(rows, httpRow{c.name, res.Code, hdrs, base64.StdEncoding.EncodeToString(res.Body.Bytes())})
+	}
+	b, _ := json.MarshalIndent(rows, "", "  ")
+	if err := os.WriteFile("/root/port/testdata/serve-http-go.json", b, 0644); err != nil {
+		t.Fatal(err)
+	}
+	for _, r := range rows {
+		t.Logf("%-16s status=%d hdrs=%v", r.Name, r.Status, r.Headers)
+	}
+}

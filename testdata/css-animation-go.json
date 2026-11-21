@@ -1,0 +1,67 @@
+[
+  {
+    "fn": "isInvalidAnimationName",
+    "text": "none",
+    "out": "true"
+  },
+  {
+    "fn": "isInvalidAnimationName",
+    "text": "NONE",
+    "out": "true"
+  },
+  {
+    "fn": "isInvalidAnimationName",
+    "text": "initial",
+    "out": "true"
+  },
+  {
+    "fn": "isInvalidAnimationName",
+    "text": "INHERIT",
+    "out": "true"
+  },
+  {
+    "fn": "isInvalidAnimationName",
+    "text": "unset",
+    "out": "true"
+  },
+  {
+    "fn": "isInvalidAnimationName",
+    "text": "default",
+    "out": "true"
+  },
+  {
+    "fn": "isInvalidAnimationName",
+    "text": "revert",
+    "out": "true"
+  },
+  {
+    "fn": "isInvalidAnimationName",
+    "text": "revert-layer",
+    "out": "true"
+  },
+  {
+    "fn": "isInvalidAnimationName",
+    "text": "Revert-Layer",
+    "out": "true"
+  },
+  {
+    "fn": "isInvalidAnimationName",
+    "text": "foo",
+    "out": "false"
+  },
+  {
+    "fn": "isInvalidAnimationName",
+    "text": "auto",
+    "out": "false"
+  },
+  {
+    "fn": "isInvalidAnimationName",
+    "text": "",
+    "out": "false"
+  },
+  {
+    "fn": "isInvalidAnimationName",
+    "text": "normal",
+    "out": "false"
+  }
+]

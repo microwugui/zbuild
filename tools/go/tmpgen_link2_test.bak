@@ -1,0 +1,99 @@
+package linker
+
+// 第 118 轮 Go 探针：Link 端到端确定性输出（真实 js_parser.Parse 构造 runtime+entry AST，
+// 注入 mock FS / 固定 uniqueKeyPrefix）。dump 输出文件 (absPath + contents)。
+import (
+	"encoding/json"
+	"os"
+	"testing"
+
+	"github.com/evanw/esbuild/internal/bundler"
+	"github.com/evanw/esbuild/internal/cache"
+	"github.com/evanw/esbuild/internal/compat"
+	"github.com/evanw/esbuild/internal/config"
+	"github.com/evanw/esbuild/internal/fs"
+	"github.com/evanw/esbuild/internal/graph"
+	"github.com/evanw/esbuild/internal/helpers"
+	"github.com/evanw/esbuild/internal/js_ast"
+	"github.com/evanw/esbuild/internal/js_parser"
+	"github.com/evanw/esbuild/internal/logger"
+	"github.com/evanw/esbuild/internal/resolver"
+	"github.com/evanw/esbuild/internal/runtime"
+)
+
+type lk2Row struct {
+	Name string `json:"name"`
+	Outputs []string `json:"outputs"` // base64(absPath+"\0"+contents)
+}
+
+func TestTmpGenLink2_118(t *testing.T) {
+	// parse helper
+	parseAST := func(log logger.Log, path, contents string, opts *config.Options) js_ast.AST {
+		src := logger.Source{Index: 0, KeyPath: logger.Path{Text: path, Namespace: "file"}, Contents: contents}
+		tree, _ := js_parser.Parse(log, src, js_parser.OptionsFromConfig(opts))
+		return tree
+	}
+	cases := []struct {
+		name, entrySource string
+		format config.Format
+	}{
+		{"esm-var", "var x = 1;", config.FormatESModule},
+		{"side-effect", "console.log(1);", config.FormatESModule},
+		{"multi-stmt", "var x = 1; var y = 2; console.log(x + y);", config.FormatESModule},
+	}
+	rows := []lk2Row{}
+	for _, c := range cases {
+		log := logger.NewDeferLog(logger.DeferLogNoVerboseOrDebug, nil)
+		mock := fs.MockFS(map[string]string{}, fs.MockUnix, "/p")
+		caches := cache.MakeCacheSet()
+		opts := &config.Options{Mode: config.ModeBundle, OutputFormat: c.format,
+			ExtensionToLoader: map[string]config.Loader{".js": config.LoaderJS},
+			AbsOutputDir: "/p/out",
+			OutputExtensionJS: ".js",
+			EntryPathTemplate: []config.PathTemplate{{Data: "./", Placeholder: config.NamePlaceholder}},
+			ChunkPathTemplate: []config.PathTemplate{{Data: "./", Placeholder: config.NamePlaceholder}},
+			TreeShaking: false,
+			UnsupportedJSFeatures: compat.JSFeature(0),
+		}
+		opts.ExclusiveMangleCacheUpdate = func(cb func(map[string]interface{}, map[string]bool)) {
+			cb(map[string]interface{}{}, map[string]bool{})
+		}
+		// runtime AST via real parse
+		rtSource := runtime.Source(0)
+		rtAST := parseAST(log, "<runtime>", rtSource.Contents, opts)
+		rtFile := graph.InputFile{Source: rtSource, Repr: &graph.JSRepr{AST: rtAST}, OmitFromSourceMapsAndMetafile: true}
+		// entry AST via real parse (index 1)
+		entrySource := logger.Source{Index: 1, KeyPath: logger.Path{Text: "/p/a.js", Namespace: "file"}, Contents: c.entrySource}
+		entryAST, _ := js_parser.Parse(log, entrySource, js_parser.OptionsFromConfig(opts))
+		entryFile := graph.InputFile{Source: entrySource, Repr: &graph.JSRepr{AST: entryAST}, Loader: config.LoaderJS}
+		inputFiles := []graph.InputFile{rtFile, entryFile}
+		entries := []graph.EntryPoint{{OutputPath: "a", SourceIndex: 1}}
+		res := resolver.NewResolver(config.BuildCall, mock, log, caches, opts)
+		smDataFn := func() []bundler.DataForSourceMap { return make([]bundler.DataForSourceMap, 2) }
+		outputs := Link(opts, &helpers.Timer{}, log, mock, res, inputFiles, entries, "key", []uint32{0, 1},
+			smDataFn)
+		outs := []string{}
+		for _, o := range outputs {
+			blob := append([]byte(o.AbsPath), 0)
+			blob = append(blob, o.Contents...)
+			outs = append(outs, base64Encode(blob))
+		}
+		rows = append(rows, lk2Row{c.name, outs})
+	}
+	b, _ := json.MarshalIndent(rows, "", "  ")
+	if err := os.WriteFile("/root/port/testdata/link-go.json", b, 0644); err != nil { t.Fatal(err) }
+	for _, r := range rows { t.Logf("%-12s outputs=%d", r.Name, len(r.Outputs)) }
+}
+
+func base64Encode(b []byte) string {
+	const tbl = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"
+	s := ""
+	for i := 0; i < len(b); i += 3 {
+		var n uint32
+		for j := 0; j < 3 && i+j < len(b); j++ { n |= uint32(b[i+j]) << uint(16-8*j) }
+		s += string(tbl[(n>>18)&63]) + string(tbl[(n>>12)&63])
+		if i+1 < len(b) { s += string(tbl[(n>>6)&63]) } else { s += "=" }
+		if i+2 < len(b) { s += string(tbl[n&63]) } else { s += "=" }
+	}
+	return s
+}

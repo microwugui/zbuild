@@ -1,0 +1,20 @@
+[
+ {
+  "name": "legal",
+  "source": "/** @license\n * Copyright Test\n * SPDX-License-Identifier: MIT\n */\nconst x = 1;\nexport { x };\n",
+  "path": "testdata/b1fix/legal.js",
+  "out": "// testdata/b1fix/legal.js\nvar x = 1;\nexport {\n  x\n};\n/** @license\n * Copyright Test\n * SPDX-License-Identifier: MIT\n */\n"
+ },
+ {
+  "name": "class",
+  "source": "class Foo {\n  constructor(x = Foo.DEFAULT) { this.x = x; }\n  static make() { return new Foo(); }\n}\nFoo.DEFAULT = 42;\nexport { Foo };\n",
+  "path": "testdata/b1fix/class.js",
+  "out": "// testdata/b1fix/class.js\nvar Foo = class _Foo {\n  constructor(x = _Foo.DEFAULT) {\n    this.x = x;\n  }\n  static make() {\n    return new _Foo();\n  }\n};\nFoo.DEFAULT = 42;\nexport {\n  Foo\n};\n"
+ },
+ {
+  "name": "multidecl",
+  "source": "let a, b;\na = 1; b = 2;\nexport { a, b };\n",
+  "path": "testdata/b1fix/multidecl.js",
+  "out": "// testdata/b1fix/multidecl.js\nvar a;\nvar b;\na = 1;\nb = 2;\nexport {\n  a,\n  b\n};\n"
+ }
+]

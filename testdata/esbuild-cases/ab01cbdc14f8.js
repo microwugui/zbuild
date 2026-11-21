@@ -1,0 +1,1 @@
+if (y) try { throw 1 } catch (x) {} else eval('x')

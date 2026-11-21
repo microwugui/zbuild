@@ -1,0 +1,1 @@
+.foo { :global { composes: bar; color: red } }

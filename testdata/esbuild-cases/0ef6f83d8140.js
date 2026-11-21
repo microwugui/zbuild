@@ -1,0 +1,1 @@
+class Foo extends Bar { constructor(x = () => super()) {} }

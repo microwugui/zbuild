@@ -1,0 +1,1 @@
+a = String.fromCharCode(55358, 56768)

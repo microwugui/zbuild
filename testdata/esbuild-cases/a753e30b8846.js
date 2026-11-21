@@ -1,0 +1,1 @@
+function foo() { \u0061wait }

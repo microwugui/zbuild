@@ -1,0 +1,1151 @@
+[
+  {
+    "src": "linear-gradient(red 0%, blue 100%)",
+    "feature": 0,
+    "minify": false,
+    "out": {
+      "children": [
+        "red",
+        "0%",
+        ",",
+        "blue",
+        "100%"
+      ],
+      "clip": false,
+      "kind": 27,
+      "text": "linear-gradient"
+    }
+  },
+  {
+    "src": "linear-gradient(red 0%, blue 100%)",
+    "feature": 0,
+    "minify": true,
+    "out": {
+      "children": [
+        "red",
+        ",",
+        "00f"
+      ],
+      "clip": false,
+      "kind": 27,
+      "text": "linear-gradient"
+    }
+  },
+  {
+    "src": "linear-gradient(red 0%, blue 100%)",
+    "feature": 2,
+    "minify": false,
+    "out": {
+      "children": [
+        "red",
+        "0%",
+        ",",
+        "blue",
+        "100%"
+      ],
+      "clip": false,
+      "kind": 27,
+      "text": "linear-gradient"
+    }
+  },
+  {
+    "src": "linear-gradient(red 0%, blue 100%)",
+    "feature": 2,
+    "minify": true,
+    "out": {
+      "children": [
+        "red",
+        ",",
+        "00f"
+      ],
+      "clip": false,
+      "kind": 27,
+      "text": "linear-gradient"
+    }
+  },
+  {
+    "src": "linear-gradient(red 0%, blue 100%)",
+    "feature": 8,
+    "minify": false,
+    "out": {
+      "children": [
+        "red",
+        "0%",
+        ",",
+        "blue",
+        "100%"
+      ],
+      "clip": false,
+      "kind": 27,
+      "text": "linear-gradient"
+    }
+  },
+  {
+    "src": "linear-gradient(red 0%, blue 100%)",
+    "feature": 8,
+    "minify": true,
+    "out": {
+      "children": [
+        "red",
+        ",",
+        "00f"
+      ],
+      "clip": false,
+      "kind": 27,
+      "text": "linear-gradient"
+    }
+  },
+  {
+    "src": "linear-gradient(red 0%, blue 100%)",
+    "feature": 1,
+    "minify": false,
+    "out": {
+      "children": [
+        "red",
+        "0%",
+        ",",
+        "blue",
+        "100%"
+      ],
+      "clip": false,
+      "kind": 27,
+      "text": "linear-gradient"
+    }
+  },
+  {
+    "src": "linear-gradient(red 0%, blue 100%)",
+    "feature": 1,
+    "minify": true,
+    "out": {
+      "children": [
+        "red",
+        ",",
+        "00f"
+      ],
+      "clip": false,
+      "kind": 27,
+      "text": "linear-gradient"
+    }
+  },
+  {
+    "src": "linear-gradient(red 0%, blue 100%)",
+    "feature": 4,
+    "minify": false,
+    "out": {
+      "children": [
+        "red",
+        "0%",
+        ",",
+        "blue",
+        "100%"
+      ],
+      "clip": false,
+      "kind": 27,
+      "text": "linear-gradient"
+    }
+  },
+  {
+    "src": "linear-gradient(red 0%, blue 100%)",
+    "feature": 4,
+    "minify": true,
+    "out": {
+      "children": [
+        "red",
+        ",",
+        "00f"
+      ],
+      "clip": false,
+      "kind": 27,
+      "text": "linear-gradient"
+    }
+  },
+  {
+    "src": "linear-gradient(red 10%, green 50%, blue 90%)",
+    "feature": 0,
+    "minify": false,
+    "out": {
+      "children": [
+        "red",
+        "10%",
+        ",",
+        "green",
+        "50%",
+        ",",
+        "blue",
+        "90%"
+      ],
+      "clip": false,
+      "kind": 27,
+      "text": "linear-gradient"
+    }
+  },
+  {
+    "src": "linear-gradient(red 10%, green 50%, blue 90%)",
+    "feature": 0,
+    "minify": true,
+    "out": {
+      "children": [
+        "red",
+        "10%",
+        ",",
+        "green",
+        ",",
+        "00f",
+        "90%"
+      ],
+      "clip": false,
+      "kind": 27,
+      "text": "linear-gradient"
+    }
+  },
+  {
+    "src": "linear-gradient(red 10%, green 50%, blue 90%)",
+    "feature": 2,
+    "minify": false,
+    "out": {
+      "children": [
+        "red",
+        "10%",
+        ",",
+        "green",
+        "50%",
+        ",",
+        "blue",
+        "90%"
+      ],
+      "clip": false,
+      "kind": 27,
+      "text": "linear-gradient"
+    }
+  },
+  {
+    "src": "linear-gradient(red 10%, green 50%, blue 90%)",
+    "feature": 2,
+    "minify": true,
+    "out": {
+      "children": [
+        "red",
+        "10%",
+        ",",
+        "green",
+        ",",
+        "00f",
+        "90%"
+      ],
+      "clip": false,
+      "kind": 27,
+      "text": "linear-gradient"
+    }
+  },
+  {
+    "src": "linear-gradient(red 10%, green 50%, blue 90%)",
+    "feature": 8,
+    "minify": false,
+    "out": {
+      "children": [
+        "red",
+        "10%",
+        ",",
+        "green",
+        "50%",
+        ",",
+        "blue",
+        "90%"
+      ],
+      "clip": false,
+      "kind": 27,
+      "text": "linear-gradient"
+    }
+  },
+  {
+    "src": "linear-gradient(red 10%, green 50%, blue 90%)",
+    "feature": 8,
+    "minify": true,
+    "out": {
+      "children": [
+        "red",
+        "10%",
+        ",",
+        "green",
+        ",",
+        "00f",
+        "90%"
+      ],
+      "clip": false,
+      "kind": 27,
+      "text": "linear-gradient"
+    }
+  },
+  {
+    "src": "linear-gradient(red 10%, green 50%, blue 90%)",
+    "feature": 1,
+    "minify": false,
+    "out": {
+      "children": [
+        "red",
+        "10%",
+        ",",
+        "green",
+        "50%",
+        ",",
+        "blue",
+        "90%"
+      ],
+      "clip": false,
+      "kind": 27,
+      "text": "linear-gradient"
+    }
+  },
+  {
+    "src": "linear-gradient(red 10%, green 50%, blue 90%)",
+    "feature": 1,
+    "minify": true,
+    "out": {
+      "children": [
+        "red",
+        "10%",
+        ",",
+        "green",
+        ",",
+        "00f",
+        "90%"
+      ],
+      "clip": false,
+      "kind": 27,
+      "text": "linear-gradient"
+    }
+  },
+  {
+    "src": "linear-gradient(red 10%, green 50%, blue 90%)",
+    "feature": 4,
+    "minify": false,
+    "out": {
+      "children": [
+        "red",
+        "10%",
+        ",",
+        "green",
+        "50%",
+        ",",
+        "blue",
+        "90%"
+      ],
+      "clip": false,
+      "kind": 27,
+      "text": "linear-gradient"
+    }
+  },
+  {
+    "src": "linear-gradient(red 10%, green 50%, blue 90%)",
+    "feature": 4,
+    "minify": true,
+    "out": {
+      "children": [
+        "red",
+        "10%",
+        ",",
+        "green",
+        ",",
+        "00f",
+        "90%"
+      ],
+      "clip": false,
+      "kind": 27,
+      "text": "linear-gradient"
+    }
+  },
+  {
+    "src": "linear-gradient(red 30%, blue 70%)",
+    "feature": 0,
+    "minify": false,
+    "out": {
+      "children": [
+        "red",
+        "30%",
+        ",",
+        "blue",
+        "70%"
+      ],
+      "clip": false,
+      "kind": 27,
+      "text": "linear-gradient"
+    }
+  },
+  {
+    "src": "linear-gradient(red 30%, blue 70%)",
+    "feature": 0,
+    "minify": true,
+    "out": {
+      "children": [
+        "red",
+        "30%",
+        ",",
+        "00f",
+        "70%"
+      ],
+      "clip": false,
+      "kind": 27,
+      "text": "linear-gradient"
+    }
+  },
+  {
+    "src": "linear-gradient(red 30%, blue 70%)",
+    "feature": 2,
+    "minify": false,
+    "out": {
+      "children": [
+        "red",
+        "30%",
+        ",",
+        "blue",
+        "70%"
+      ],
+      "clip": false,
+      "kind": 27,
+      "text": "linear-gradient"
+    }
+  },
+  {
+    "src": "linear-gradient(red 30%, blue 70%)",
+    "feature": 2,
+    "minify": true,
+    "out": {
+      "children": [
+        "red",
+        "30%",
+        ",",
+        "00f",
+        "70%"
+      ],
+      "clip": false,
+      "kind": 27,
+      "text": "linear-gradient"
+    }
+  },
+  {
+    "src": "linear-gradient(red 30%, blue 70%)",
+    "feature": 8,
+    "minify": false,
+    "out": {
+      "children": [
+        "red",
+        "30%",
+        ",",
+        "blue",
+        "70%"
+      ],
+      "clip": false,
+      "kind": 27,
+      "text": "linear-gradient"
+    }
+  },
+  {
+    "src": "linear-gradient(red 30%, blue 70%)",
+    "feature": 8,
+    "minify": true,
+    "out": {
+      "children": [
+        "red",
+        "30%",
+        ",",
+        "00f",
+        "70%"
+      ],
+      "clip": false,
+      "kind": 27,
+      "text": "linear-gradient"
+    }
+  },
+  {
+    "src": "linear-gradient(red 30%, blue 70%)",
+    "feature": 1,
+    "minify": false,
+    "out": {
+      "children": [
+        "red",
+        "30%",
+        ",",
+        "blue",
+        "70%"
+      ],
+      "clip": false,
+      "kind": 27,
+      "text": "linear-gradient"
+    }
+  },
+  {
+    "src": "linear-gradient(red 30%, blue 70%)",
+    "feature": 1,
+    "minify": true,
+    "out": {
+      "children": [
+        "red",
+        "30%",
+        ",",
+        "00f",
+        "70%"
+      ],
+      "clip": false,
+      "kind": 27,
+      "text": "linear-gradient"
+    }
+  },
+  {
+    "src": "linear-gradient(red 30%, blue 70%)",
+    "feature": 4,
+    "minify": false,
+    "out": {
+      "children": [
+        "red",
+        "30%",
+        ",",
+        "blue",
+        "70%"
+      ],
+      "clip": false,
+      "kind": 27,
+      "text": "linear-gradient"
+    }
+  },
+  {
+    "src": "linear-gradient(red 30%, blue 70%)",
+    "feature": 4,
+    "minify": true,
+    "out": {
+      "children": [
+        "red",
+        "30%",
+        ",",
+        "00f",
+        "70%"
+      ],
+      "clip": false,
+      "kind": 27,
+      "text": "linear-gradient"
+    }
+  },
+  {
+    "src": "linear-gradient(red 0%, red 50%, blue 100%)",
+    "feature": 0,
+    "minify": false,
+    "out": {
+      "children": [
+        "red",
+        "0%",
+        ",",
+        "red",
+        "50%",
+        ",",
+        "blue",
+        "100%"
+      ],
+      "clip": false,
+      "kind": 27,
+      "text": "linear-gradient"
+    }
+  },
+  {
+    "src": "linear-gradient(red 0%, red 50%, blue 100%)",
+    "feature": 0,
+    "minify": true,
+    "out": {
+      "children": [
+        "red",
+        "0%",
+        "50%",
+        ",",
+        "00f"
+      ],
+      "clip": false,
+      "kind": 27,
+      "text": "linear-gradient"
+    }
+  },
+  {
+    "src": "linear-gradient(red 0%, red 50%, blue 100%)",
+    "feature": 2,
+    "minify": false,
+    "out": {
+      "children": [
+        "red",
+        "0%",
+        ",",
+        "red",
+        "50%",
+        ",",
+        "blue",
+        "100%"
+      ],
+      "clip": false,
+      "kind": 27,
+      "text": "linear-gradient"
+    }
+  },
+  {
+    "src": "linear-gradient(red 0%, red 50%, blue 100%)",
+    "feature": 2,
+    "minify": true,
+    "out": {
+      "children": [
+        "red",
+        ",",
+        "red",
+        ",",
+        "00f"
+      ],
+      "clip": false,
+      "kind": 27,
+      "text": "linear-gradient"
+    }
+  },
+  {
+    "src": "linear-gradient(red 0%, red 50%, blue 100%)",
+    "feature": 8,
+    "minify": false,
+    "out": {
+      "children": [
+        "red",
+        "0%",
+        ",",
+        "red",
+        "50%",
+        ",",
+        "blue",
+        "100%"
+      ],
+      "clip": false,
+      "kind": 27,
+      "text": "linear-gradient"
+    }
+  },
+  {
+    "src": "linear-gradient(red 0%, red 50%, blue 100%)",
+    "feature": 8,
+    "minify": true,
+    "out": {
+      "children": [
+        "red",
+        "0%",
+        "50%",
+        ",",
+        "00f"
+      ],
+      "clip": false,
+      "kind": 27,
+      "text": "linear-gradient"
+    }
+  },
+  {
+    "src": "linear-gradient(red 0%, red 50%, blue 100%)",
+    "feature": 1,
+    "minify": false,
+    "out": {
+      "children": [
+        "red",
+        "0%",
+        ",",
+        "red",
+        "50%",
+        ",",
+        "blue",
+        "100%"
+      ],
+      "clip": false,
+      "kind": 27,
+      "text": "linear-gradient"
+    }
+  },
+  {
+    "src": "linear-gradient(red 0%, red 50%, blue 100%)",
+    "feature": 1,
+    "minify": true,
+    "out": {
+      "children": [
+        "red",
+        "0%",
+        "50%",
+        ",",
+        "00f"
+      ],
+      "clip": false,
+      "kind": 27,
+      "text": "linear-gradient"
+    }
+  },
+  {
+    "src": "linear-gradient(red 0%, red 50%, blue 100%)",
+    "feature": 4,
+    "minify": false,
+    "out": {
+      "children": [
+        "red",
+        "0%",
+        ",",
+        "red",
+        "50%",
+        ",",
+        "blue",
+        "100%"
+      ],
+      "clip": false,
+      "kind": 27,
+      "text": "linear-gradient"
+    }
+  },
+  {
+    "src": "linear-gradient(red 0%, red 50%, blue 100%)",
+    "feature": 4,
+    "minify": true,
+    "out": {
+      "children": [
+        "red",
+        "0%",
+        "50%",
+        ",",
+        "00f"
+      ],
+      "clip": false,
+      "kind": 27,
+      "text": "linear-gradient"
+    }
+  },
+  {
+    "src": "repeating-linear-gradient(in oklab, red 0%, blue 100%)",
+    "feature": 0,
+    "minify": false,
+    "out": {
+      "children": [
+        "in",
+        "oklab",
+        ",",
+        "red",
+        "0%",
+        ",",
+        "blue",
+        "100%"
+      ],
+      "clip": false,
+      "kind": 27,
+      "text": "repeating-linear-gradient"
+    }
+  },
+  {
+    "src": "repeating-linear-gradient(in oklab, red 0%, blue 100%)",
+    "feature": 0,
+    "minify": true,
+    "out": {
+      "children": [
+        "in",
+        "oklab",
+        ",",
+        "red",
+        ",",
+        "00f"
+      ],
+      "clip": false,
+      "kind": 27,
+      "text": "repeating-linear-gradient"
+    }
+  },
+  {
+    "src": "repeating-linear-gradient(in oklab, red 0%, blue 100%)",
+    "feature": 2,
+    "minify": false,
+    "out": {
+      "children": [
+        "in",
+        "oklab",
+        ",",
+        "red",
+        "0%",
+        ",",
+        "blue",
+        "100%"
+      ],
+      "clip": false,
+      "kind": 27,
+      "text": "repeating-linear-gradient"
+    }
+  },
+  {
+    "src": "repeating-linear-gradient(in oklab, red 0%, blue 100%)",
+    "feature": 2,
+    "minify": true,
+    "out": {
+      "children": [
+        "in",
+        "oklab",
+        ",",
+        "red",
+        ",",
+        "00f"
+      ],
+      "clip": false,
+      "kind": 27,
+      "text": "repeating-linear-gradient"
+    }
+  },
+  {
+    "src": "repeating-linear-gradient(in oklab, red 0%, blue 100%)",
+    "feature": 8,
+    "minify": false,
+    "out": {
+      "children": [
+        "in",
+        "oklab",
+        ",",
+        "red",
+        "0%",
+        ",",
+        "blue",
+        "100%"
+      ],
+      "clip": false,
+      "kind": 27,
+      "text": "repeating-linear-gradient"
+    }
+  },
+  {
+    "src": "repeating-linear-gradient(in oklab, red 0%, blue 100%)",
+    "feature": 8,
+    "minify": true,
+    "out": {
+      "children": [
+        "in",
+        "oklab",
+        ",",
+        "red",
+        ",",
+        "00f"
+      ],
+      "clip": false,
+      "kind": 27,
+      "text": "repeating-linear-gradient"
+    }
+  },
+  {
+    "src": "repeating-linear-gradient(in oklab, red 0%, blue 100%)",
+    "feature": 1,
+    "minify": false,
+    "out": {
+      "children": [
+        "in",
+        "oklab",
+        ",",
+        "red",
+        "0%",
+        ",",
+        "blue",
+        "100%"
+      ],
+      "clip": false,
+      "kind": 27,
+      "text": "repeating-linear-gradient"
+    }
+  },
+  {
+    "src": "repeating-linear-gradient(in oklab, red 0%, blue 100%)",
+    "feature": 1,
+    "minify": true,
+    "out": {
+      "children": [
+        "in",
+        "oklab",
+        ",",
+        "red",
+        ",",
+        "00f"
+      ],
+      "clip": false,
+      "kind": 27,
+      "text": "repeating-linear-gradient"
+    }
+  },
+  {
+    "src": "repeating-linear-gradient(in oklab, red 0%, blue 100%)",
+    "feature": 4,
+    "minify": false,
+    "out": {
+      "children": [
+        "ff0000",
+        ",",
+        "f81b22",
+        ",",
+        "f12833",
+        "6.25%",
+        ",",
+        "e2384b",
+        "12.5%",
+        ",",
+        "c6496d",
+        "25%",
+        ",",
+        "8c53a2",
+        ",",
+        "5147d2",
+        "75%",
+        ",",
+        "3036e8",
+        "87.5%",
+        ",",
+        "1d26f4",
+        "93.75%",
+        ",",
+        "1019f9",
+        ",",
+        "0000ff"
+      ],
+      "clip": false,
+      "kind": 27,
+      "text": "repeating-linear-gradient"
+    }
+  },
+  {
+    "src": "repeating-linear-gradient(in oklab, red 0%, blue 100%)",
+    "feature": 4,
+    "minify": true,
+    "out": {
+      "children": [
+        "red",
+        ",",
+        "f81b22",
+        ",",
+        "f12833",
+        "6.25%",
+        ",",
+        "e2384b",
+        "12.5%",
+        ",",
+        "c6496d",
+        "25%",
+        ",",
+        "8c53a2",
+        ",",
+        "5147d2",
+        "75%",
+        ",",
+        "3036e8",
+        "87.5%",
+        ",",
+        "1d26f4",
+        "93.75%",
+        ",",
+        "1019f9",
+        ",",
+        "00f"
+      ],
+      "clip": false,
+      "kind": 27,
+      "text": "repeating-linear-gradient"
+    }
+  },
+  {
+    "src": "linear-gradient(red 30%, 20%, blue 70%)",
+    "feature": 0,
+    "minify": false,
+    "out": {
+      "children": [
+        "red",
+        "30%",
+        ",",
+        "20%",
+        ",",
+        "blue",
+        "70%"
+      ],
+      "clip": false,
+      "kind": 27,
+      "text": "linear-gradient"
+    }
+  },
+  {
+    "src": "linear-gradient(red 30%, 20%, blue 70%)",
+    "feature": 0,
+    "minify": true,
+    "out": {
+      "children": [
+        "red",
+        "30%",
+        ",",
+        "20%",
+        ",",
+        "00f",
+        "70%"
+      ],
+      "clip": false,
+      "kind": 27,
+      "text": "linear-gradient"
+    }
+  },
+  {
+    "src": "linear-gradient(red 30%, 20%, blue 70%)",
+    "feature": 2,
+    "minify": false,
+    "out": {
+      "children": [
+        "red",
+        "30%",
+        ",",
+        "20%",
+        ",",
+        "blue",
+        "70%"
+      ],
+      "clip": false,
+      "kind": 27,
+      "text": "linear-gradient"
+    }
+  },
+  {
+    "src": "linear-gradient(red 30%, 20%, blue 70%)",
+    "feature": 2,
+    "minify": true,
+    "out": {
+      "children": [
+        "red",
+        "30%",
+        ",",
+        "20%",
+        ",",
+        "00f",
+        "70%"
+      ],
+      "clip": false,
+      "kind": 27,
+      "text": "linear-gradient"
+    }
+  },
+  {
+    "src": "linear-gradient(red 30%, 20%, blue 70%)",
+    "feature": 8,
+    "minify": false,
+    "out": {
+      "children": [
+        "ff0000",
+        "30%",
+        ",",
+        "0000ff",
+        ",",
+        "0000ff",
+        "32.5%",
+        ",",
+        "0000ff",
+        "35%",
+        ",",
+        "0000ff",
+        "40%",
+        ",",
+        "0000ff",
+        "50%",
+        ",",
+        "0000ff",
+        "70%"
+      ],
+      "clip": false,
+      "kind": 27,
+      "text": "linear-gradient"
+    }
+  },
+  {
+    "src": "linear-gradient(red 30%, 20%, blue 70%)",
+    "feature": 8,
+    "minify": true,
+    "out": {
+      "children": [
+        "red",
+        "30%",
+        ",",
+        "00f",
+        "31.25%",
+        "32.5%",
+        ",",
+        "00f",
+        "35%",
+        "40%",
+        ",",
+        "00f",
+        "50%",
+        "70%"
+      ],
+      "clip": false,
+      "kind": 27,
+      "text": "linear-gradient"
+    }
+  },
+  {
+    "src": "linear-gradient(red 30%, 20%, blue 70%)",
+    "feature": 1,
+    "minify": false,
+    "out": {
+      "children": [
+        "red",
+        "30%",
+        ",",
+        "20%",
+        ",",
+        "blue",
+        "70%"
+      ],
+      "clip": false,
+      "kind": 27,
+      "text": "linear-gradient"
+    }
+  },
+  {
+    "src": "linear-gradient(red 30%, 20%, blue 70%)",
+    "feature": 1,
+    "minify": true,
+    "out": {
+      "children": [
+        "red",
+        "30%",
+        ",",
+        "20%",
+        ",",
+        "00f",
+        "70%"
+      ],
+      "clip": false,
+      "kind": 27,
+      "text": "linear-gradient"
+    }
+  },
+  {
+    "src": "linear-gradient(red 30%, 20%, blue 70%)",
+    "feature": 4,
+    "minify": false,
+    "out": {
+      "children": [
+        "red",
+        "30%",
+        ",",
+        "20%",
+        ",",
+        "blue",
+        "70%"
+      ],
+      "clip": false,
+      "kind": 27,
+      "text": "linear-gradient"
+    }
+  },
+  {
+    "src": "linear-gradient(red 30%, 20%, blue 70%)",
+    "feature": 4,
+    "minify": true,
+    "out": {
+      "children": [
+        "red",
+        "30%",
+        ",",
+        "20%",
+        ",",
+        "00f",
+        "70%"
+      ],
+      "clip": false,
+      "kind": 27,
+      "text": "linear-gradient"
+    }
+  }
+]

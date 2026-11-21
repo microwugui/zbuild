@@ -1,0 +1,112 @@
+package linker
+
+// 第 111 轮 Go 探针：linkerContext.validateComposesFromProperties（跨文件 composes 属性冲突警告）。
+// 手工构造 CSSRepr 图（LocalSymbols / Composes / ImportRecords / LocalScope），
+// 调目标函数后 dump DeferLog 的 kind/text/notes，TS 侧同构构造逐字节比对。
+import (
+	"encoding/json"
+	"os"
+	"testing"
+
+	"github.com/evanw/esbuild/internal/ast"
+	"github.com/evanw/esbuild/internal/css_ast"
+	"github.com/evanw/esbuild/internal/graph"
+	"github.com/evanw/esbuild/internal/logger"
+)
+
+func cwMsgs(log logger.Log) []interface{} {
+	out := []interface{}{}
+	for _, m := range log.Peek() {
+		notes := []string{}
+		for _, n := range m.Notes {
+			notes = append(notes, n.Text)
+		}
+		out = append(out, map[string]interface{}{"kind": int(m.Kind), "text": m.Data.Text, "notes": notes})
+	}
+	return out
+}
+
+func TestTmpGenCompWarn111(t *testing.T) {
+	type row struct {
+		Name string      `json:"name"`
+		Msgs []interface{} `json:"msgs"`
+	}
+	rows := []row{}
+
+	// helper: 建一个 CSSRepr LinkerFile
+	mkFile := func(contents string, srcIndex uint32) (*graph.LinkerFile, *css_ast.AST) {
+		f := &graph.LinkerFile{}
+		f.InputFile.Source = logger.Source{Index: srcIndex, Contents: contents, KeyPath: logger.Path{Text: "file.css"}}
+		repr := &graph.CSSRepr{}
+		f.InputFile.Repr = repr
+		return f, &repr.AST
+	}
+
+	// Case 1: cross-file collision — root class composes two classes (one local, one from another file)
+	// each declaring property "color" -> warning
+	{
+		rootLog := logger.NewDeferLog(logger.DeferLogAll, nil)
+		c := &linkerContext{}
+		c.graph = graph.LinkerGraph{}
+		// file 0 = root, file 1 = other
+		f0, a0 := mkFile(".a { composes: b from \"./other.css\", c; }\n", 0)
+		f1, a1 := mkFile(".b { color: red }\n", 1)
+		c.graph.Files = []graph.LinkerFile{*f0, *f1}
+		c.log = rootLog
+
+		// symbols
+		syms := ast.NewSymbolMap(1)
+		syms.SymbolsForSource = [][]ast.Symbol{
+			{{OriginalName: "a", Link: ast.InvalidRef}}, // file 0 symbol a
+			{{OriginalName: "b", Link: ast.InvalidRef}}, // file 1 symbol b
+		}
+		c.graph.Symbols = syms
+		refA := ast.Ref{SourceIndex: 0, InnerIndex: 0}
+		refB := ast.Ref{SourceIndex: 1, InnerIndex: 0}
+
+		// root: localSymbols=[a], Composes[a] = ImportedNames[b from rec0] + Names[c]
+		// we fake "c" local too; put both as properties collision via two files
+		a0.LocalSymbols = []ast.LocRef{{Loc: logger.Loc{Start: 1}, Ref: refA}}
+		// root import record 0 -> file 1
+		rec0 := ast.ImportRecord{SourceIndex: ast.Index32{FlippedBits: 1}}
+		a0.ImportRecords = []ast.ImportRecord{rec0}
+		a0.Composes = map[ast.Ref]*css_ast.Composes{
+			refA: {
+				ImportedNames: []css_ast.ImportedComposesName{{Alias: "b", ImportRecordIndex: 0, AliasLoc: logger.Loc{Start: 20}}},
+				Properties:    map[string]logger.Loc{"color": {Start: 5}},
+			},
+		}
+		// other file: LocalScope["b"]=refB, Composes[b].Properties["color"] (second definition)
+		a1.LocalScope = map[string]ast.LocRef{"b": {Loc: logger.Loc{Start: 1}, Ref: refB}}
+		a1.Composes = map[ast.Ref]*css_ast.Composes{
+			refB: {Properties: map[string]logger.Loc{"color": {Start: 6}}},
+		}
+		c.validateComposesFromProperties(f0, &graph.CSSRepr{AST: *a0})
+		rows = append(rows, row{"cross-file-collision", cwMsgs(rootLog)})
+	}
+
+	// Case 2: no collision (single file, no imported names) -> no warnings
+	{
+		rootLog := logger.NewDeferLog(logger.DeferLogAll, nil)
+		c := &linkerContext{}
+		c.log = rootLog
+		f0, a0 := mkFile(".a { color: red }\n", 0)
+		syms := ast.NewSymbolMap(1)
+		syms.SymbolsForSource = [][]ast.Symbol{{{OriginalName: "a", Link: ast.InvalidRef}}}
+		c.graph.Symbols = syms
+		refA := ast.Ref{SourceIndex: 0, InnerIndex: 0}
+		a0.LocalSymbols = []ast.LocRef{{Loc: logger.Loc{Start: 1}, Ref: refA}}
+		a0.Composes = map[ast.Ref]*css_ast.Composes{refA: {Properties: map[string]logger.Loc{"color": {Start: 6}}}}
+		c.validateComposesFromProperties(f0, &graph.CSSRepr{AST: *a0})
+		rows = append(rows, row{"no-collision", cwMsgs(rootLog)})
+	}
+
+	b, err := json.MarshalIndent(rows, "", "  ")
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := os.WriteFile("/root/port/testdata/compwarn-go.json", b, 0644); err != nil {
+		t.Fatal(err)
+	}
+	t.Logf("wrote %d rows bytes=%d", len(rows), len(b))
+}

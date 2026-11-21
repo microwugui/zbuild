@@ -1,0 +1,1 @@
+x = {a, ...{b, get c() { return y++ }, d}, e}

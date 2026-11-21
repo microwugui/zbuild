@@ -1,0 +1,1 @@
+for (; ;) if (!x) y(); else break;

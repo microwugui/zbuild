@@ -1,0 +1,57 @@
+[
+  {
+    "fn": "parseLogLevel",
+    "arg": "verbose",
+    "out": "1|nil"
+  },
+  {
+    "fn": "parseLogLevel",
+    "arg": "debug",
+    "out": "2|nil"
+  },
+  {
+    "fn": "parseLogLevel",
+    "arg": "info",
+    "out": "3|nil"
+  },
+  {
+    "fn": "parseLogLevel",
+    "arg": "warning",
+    "out": "4|nil"
+  },
+  {
+    "fn": "parseLogLevel",
+    "arg": "error",
+    "out": "5|nil"
+  },
+  {
+    "fn": "parseLogLevel",
+    "arg": "silent",
+    "out": "0|nil"
+  },
+  {
+    "fn": "parseLogLevel",
+    "arg": "bad",
+    "out": "0|Invalid value \"bad\" in \"--log-level=bad\""
+  },
+  {
+    "fn": "parseLogStyle",
+    "arg": "default",
+    "out": "0|nil"
+  },
+  {
+    "fn": "parseLogStyle",
+    "arg": "clang",
+    "out": "1|nil"
+  },
+  {
+    "fn": "parseLogStyle",
+    "arg": "visualstudio",
+    "out": "2|nil"
+  },
+  {
+    "fn": "parseLogStyle",
+    "arg": "bad",
+    "out": "0|Invalid value \"bad\" in \"--log-style=bad\""
+  }
+]

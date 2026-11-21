@@ -1,0 +1,1 @@
+let x = () => { let y = () => { z() }; let x = y(); foo(x) }

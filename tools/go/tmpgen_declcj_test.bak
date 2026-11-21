@@ -1,0 +1,48 @@
+package js_parser
+
+// 第 107 轮 Go 探针：parser.declareCommonJSSymbol（CommonJS 符号声明/合并/shadow）—— 纯状态机，全确定。
+import ("encoding/json"
+ "fmt";"os";"testing"
+ "github.com/evanw/esbuild/internal/ast"
+ "github.com/evanw/esbuild/internal/js_ast"
+ "github.com/evanw/esbuild/internal/logger"
+)
+
+type dcRow struct { Name string `json:"name"`; Ref string `json:"ref"`; NumSymbols int `json:"numSymbols"`; LastKind int `json:"lastKind"`; MemberExists bool `json:"memberExists"`; Generated []string `json:"generated"` }
+func rkey(r ast.Ref) string { return fmt.Sprintf("%d:%d",r.SourceIndex,r.InnerIndex) }
+func TestTmpGenDeclCJ107(t *testing.T){
+  rows:=[]dcRow{}
+  run:=func(name string, kind ast.SymbolKind, symName string, preMember *ast.Ref, preMemberKind ast.SymbolKind, esm bool) dcRow {
+    scope:=&js_ast.Scope{Members:map[string]js_ast.ScopeMember{},Generated:[]ast.Ref{}}
+    symbols:=[]ast.Symbol{}
+    if preMember!=nil{
+      scope.Members[symName]=js_ast.ScopeMember{Ref:*preMember,Loc:logger.Loc{Start:-1}}
+      // ensure symbols big enough
+      for uint32(len(symbols))<=preMember.InnerIndex{symbols=append(symbols,ast.Symbol{})}
+      symbols[preMember.InnerIndex].Kind=preMemberKind
+    }
+    p:=&parser{
+      source:logger.Source{},
+      symbols:symbols,
+      moduleScope:scope,
+      isFileConsideredToHaveESMExports:esm,
+      options:Options{},
+    }
+    p.source.Index=1
+    ref:=p.declareCommonJSSymbol(kind,symName)
+    r:=dcRow{Name:name,Ref:rkey(ref),NumSymbols:len(p.symbols),LastKind:int(p.symbols[len(p.symbols)-1].Kind)}
+    _,r.MemberExists=scope.Members[symName]
+    r.Generated=[]string{}
+    for _,g:=range scope.Generated{r.Generated=append(r.Generated,rkey(g))}
+    return r
+  }
+  existing:=ast.Ref{SourceIndex:1,InnerIndex:0}
+  rows=append(rows,run("fresh",ast.SymbolOther,"foo",nil,0,false))
+  rows=append(rows,run("hoisted-merge",ast.SymbolHoisted,"exports",&existing,ast.SymbolHoisted,false))
+  rows=append(rows,run("hoisted-no-merge-esm",ast.SymbolHoisted,"exports",&existing,ast.SymbolHoisted,true))
+  rows=append(rows,run("shadow-other-kind",ast.SymbolOther,"module",&existing,ast.SymbolHoisted,false))
+  rows=append(rows,run("shadow-hoisted-existing-other",ast.SymbolHoisted,"exports",&existing,ast.SymbolOther,false))
+  b,_:=json.MarshalIndent(rows,"","  ")
+  if err:=os.WriteFile("/root/port/testdata/decl-cj-go.json",b,0644);err!=nil{t.Fatal(err)}
+  t.Logf("wrote %d rows bytes=%d",len(rows),len(b))
+}

@@ -1,0 +1,123 @@
+package js_parser
+
+// 第 91 轮 Go 探针：OptionsFromConfig + (*Options).Equal 逐字节固化。
+// 二者是 parseRuntime/parseFile 从 config.Options 到 parser.Options 的桥，主链底座。
+import (
+	"encoding/json"
+	"os"
+	"regexp"
+	"testing"
+
+	"github.com/evanw/esbuild/internal/ast"
+	"github.com/evanw/esbuild/internal/compat"
+	"github.com/evanw/esbuild/internal/config"
+	
+	"github.com/evanw/esbuild/internal/logger"
+)
+
+type ofcRow struct { Name string `json:"name"`; Data interface{} `json:"data"` }
+type ofcFix struct { Rows []ofcRow `json:"rows"` }
+func ofcAdd(fx *ofcFix, name string, data interface{}) { fx.Rows = append(fx.Rows, ofcRow{name, data}) }
+
+func exprParts(e config.DefineExpr) []string { return e.Parts }
+
+// dumpOpts 把 Options（含 embedded）投成可逐字节比对的 JSON（TS 侧按同结构构造）
+func dumpOpts(o Options) map[string]interface{} {
+	m := map[string]interface{}{
+		"tsParse": o.ts.Parse, "tsNoAmb": o.ts.NoAmbiguousLessThan,
+		"jsxParse": o.jsx.Parse, "jsxPreserve": o.jsx.Preserve,
+		"jsxAuto": o.jsx.AutomaticRuntime, "jsxDev": o.jsx.Development,
+		"jsxImportSource": o.jsx.ImportSource, "jsxSideEffects": o.jsx.SideEffects,
+		"jsxFactory": exprParts(o.jsx.Factory), "jsxFragment": exprParts(o.jsx.Fragment),
+		"unsupportedJS": uint64(o.unsupportedJSFeatures),
+		"unsupportedJSOverrides": uint64(o.unsupportedJSFeatureOverrides),
+		"unsupportedJSMask": uint64(o.unsupportedJSFeatureOverridesMask),
+		"originalTargetEnv": o.originalTargetEnv,
+		"mode": int(o.mode), "platform": int(o.platform), "outputFormat": int(o.outputFormat),
+		"moduleType": int(o.moduleTypeData.Type),
+		"asciiOnly": o.asciiOnly, "keepNames": o.keepNames,
+		"minifySyntax": o.minifySyntax, "minifyIdentifiers": o.minifyIdentifiers,
+		"minifyWhitespace": o.minifyWhitespace,
+		"omitRuntime": o.omitRuntimeForTests, "omitJSXRuntime": o.omitJSXRuntimeForTests,
+		"ignoreDCE": o.ignoreDCEAnnotations, "treeShaking": o.treeShaking,
+		"dropDebugger": o.dropDebugger, "mangleQuoted": o.mangleQuoted,
+		"logPathStyle": int(o.logPathStyle), "codePathStyle": int(o.codePathStyle),
+		"dropLabels": o.dropLabels,
+	}
+	if o.mangleProps != nil { m["mangleProps"] = o.mangleProps.String() } else { m["mangleProps"] = nil }
+	if o.reserveProps != nil { m["reserveProps"] = o.reserveProps.String() } else { m["reserveProps"] = nil }
+	if o.defines != nil {
+		m["definesIds"] = len(o.defines.IdentifierDefines)
+		m["definesDots"] = len(o.defines.DotDefines)
+	} else { m["definesIds"] = 0; m["definesDots"] = 0 }
+	if o.tsAlwaysStrict != nil { m["tsAlwaysStrict"] = []interface{}{o.tsAlwaysStrict.Name, o.tsAlwaysStrict.Value} } else { m["tsAlwaysStrict"] = nil }
+	inj := []interface{}{}
+	for _, f := range o.injectedFiles {
+		inj = append(inj, []interface{}{f.DefineName, f.Source.Contents, len(f.Exports), f.IsCopyLoader})
+	}
+	m["injectedFiles"] = inj
+	return m
+}
+
+func TestTmpGenOptionsFromConfig(t *testing.T) {
+	fx := ofcFix{}
+	mk := func(mut func(*config.Options)) config.Options {
+		o := config.Options{}
+		o.JSX.Factory = config.DefineExpr{Parts: []string{"React", "createElement"}}
+		o.JSX.Fragment = config.DefineExpr{Parts: []string{"React", "Fragment"}}
+		o.JSX.ImportSource = "react"
+		if mut != nil { mut(&o) }
+		return o
+	}
+	cases := []struct { name string; opt config.Options }{
+		{"default", mk(nil)},
+		{"esnext-three", mk(func(o *config.Options){ o.Platform = config.PlatformNode; o.OutputFormat = config.FormatESModule; o.Mode = config.ModeBundle })},
+		{"features", mk(func(o *config.Options){
+			o.UnsupportedJSFeatures = compat.ForOf | compat.ConstAndLet
+			o.UnsupportedJSFeatureOverrides = compat.ObjectAccessors
+			o.UnsupportedJSFeatureOverridesMask = compat.ObjectAccessors | compat.ObjectExtensions
+			o.OriginalTargetEnv = "es2015"
+		})},
+		{"flags", mk(func(o *config.Options){
+			o.MinifySyntax = true; o.MinifyIdentifiers = true; o.MinifyWhitespace = true
+			o.KeepNames = true; o.TreeShaking = true; o.DropDebugger = true
+			o.MangleQuoted = true; o.IgnoreDCEAnnotations = true; o.ASCIIOnly = true
+			o.OmitRuntimeForTests = true; o.OmitJSXRuntimeForTests = true
+			o.LogPathStyle = logger.AbsPath; o.CodePathStyle = logger.AbsPath
+			o.DropLabels = []string{"a", "b"}
+		})},
+		{"regexes", mk(func(o *config.Options){
+			o.MangleProps = regexp.MustCompile("^_")
+			o.ReserveProps = regexp.MustCompile("^__")
+		})},
+		{"injected", mk(func(o *config.Options){
+			o.InjectedDefines = []config.InjectedDefine{{Name: "foo", Source: logger.Source{Contents: "1+2"}}}
+			o.InjectedFiles = []config.InjectedFile{{DefineName: "bar", Source: logger.Source{Contents: "x"}}}
+		})},
+	}
+	for _, c := range cases {
+		o := OptionsFromConfig(&c.opt)
+		ofcAdd(&fx, "ofc:"+c.name, dumpOpts(o))
+	}
+
+	// ===== Equal =====
+	base := mk(nil)
+	eqCases := []struct { name string; a config.Options; b config.Options }{
+		{"identical", base, base},
+		{"diff-minify", base, mk(func(o *config.Options){ o.MinifySyntax = true })},
+		{"diff-features", base, mk(func(o *config.Options){ o.UnsupportedJSFeatures = compat.ForOf })},
+		{"same-regex-diff-inst", mk(func(o *config.Options){ o.MangleProps = regexp.MustCompile("^_") }), mk(func(o *config.Options){ o.MangleProps = regexp.MustCompile("^_") })},
+		{"diff-regex", mk(func(o *config.Options){ o.MangleProps = regexp.MustCompile("^_") }), mk(func(o *config.Options){ o.MangleProps = regexp.MustCompile("^x") })},
+		{"diff-jsx-factory", base, mk(func(o *config.Options){ o.JSX.Factory = config.DefineExpr{Parts: []string{"h"}} })},
+		{"diff-droplabels", base, mk(func(o *config.Options){ o.DropLabels = []string{"a"} })},
+	}
+	for _, c := range eqCases {
+		a := OptionsFromConfig(&c.a); b := OptionsFromConfig(&c.b)
+		ofcAdd(&fx, "equal:"+c.name, a.Equal(&b))
+	}
+	_ = ast.InvalidRef
+
+	bts, _ := json.MarshalIndent(fx, "", "  ")
+	if err := os.WriteFile("/root/port/testdata/options-from-config-go.json", bts, 0644); err != nil { t.Fatal(err) }
+	t.Logf("wrote %d rows bytes=%d", len(fx.Rows), len(bts))
+}

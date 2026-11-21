@@ -1,0 +1,1 @@
+a { padding: auto; padding-left: 1px }

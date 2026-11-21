@@ -1,0 +1,22 @@
+[
+  {
+    "fn": "HashTokens",
+    "kinds": "[]",
+    "out": "2654435769"
+  },
+  {
+    "fn": "HashTokens",
+    "kinds": "[identifier]",
+    "out": "2516394907"
+  },
+  {
+    "fn": "HashTokens",
+    "kinds": "[identifier number identifier]",
+    "out": "1418177642"
+  },
+  {
+    "fn": "HashTokens",
+    "kinds": "[URL token]",
+    "out": "3449077622"
+  }
+]

@@ -1,0 +1,68 @@
+package main
+
+// 第 119 轮 Go 探针：runService 的 stdin 帧循环确定性核心（service.go:106-160）。
+// 逐字复刻帧处理（version handshake + readLengthPrefixedSlice 循环），dispatch 注入为
+// 「回一个固定空 map response」。dump 输出字节。sendPings=false（无计时器 goroutine）。
+import (
+	"encoding/base64"
+	"encoding/json"
+	"os"
+	"testing"
+)
+
+type svcRow struct {
+	Name string `json:"name"`
+	Stdout string `json:"stdout"` // base64
+	Packets int `json:"packets"`
+}
+
+// handshake + frame-loop：逐字复刻 runService 的 version write + stdin 分帧循环。
+// dispatch(bits) 返回要写出的 packet 字节（nil 表示无响应）。
+func serviceFrameLoop(stdin []byte, dispatch func([]byte) []byte) ([]byte, int) {
+	out := []byte{}
+	// version handshake: writeUint32(len(version)) + version
+	ver := esbuildVersion
+	out = append(out, writeUint32(nil, uint32(len(ver)))...)
+	out = append(out, []byte(ver)...)
+	stream := []byte{}
+	count := 0
+	// 模拟一次 read（stdin 全量），逐字复刻 runService 的分帧 while 循环
+	buf := stdin
+	stream = append(stream, buf...)
+	bytes := stream
+	for {
+		packet, after, ok := readLengthPrefixedSlice(bytes)
+		if !ok { break }
+		bytes = after
+		count++
+		clone := append([]byte{}, packet...)
+		if resp := dispatch(clone); resp != nil { out = append(out, resp...) }
+	}
+	_ = stream
+	return out, count
+}
+
+func TestTmpGenService119(t *testing.T) {
+	// dispatch: echo a fixed empty-map response packet for any request
+	emptyResp := func(bits []byte) []byte {
+		return encodePacket(packet{id: 1, value: map[string]interface{}{}})
+	}
+	cases := []struct{ name string; stdin []byte }{
+		{"empty", []byte{}},
+		{"one-packet", func() []byte { p := encodePacket(packet{id: 1, isRequest: true, value: map[string]interface{}{"command": "ping"}}); return p }()},
+		{"two-packets", func() []byte {
+			p1 := encodePacket(packet{id: 1, isRequest: true, value: map[string]interface{}{"command": "ping"}})
+			p2 := encodePacket(packet{id: 2, isRequest: true, value: map[string]interface{}{"command": "ping"}})
+			return append(p1, p2...)
+		}()},
+		{"partial", func() []byte { p := encodePacket(packet{id: 1, isRequest: true, value: map[string]interface{}{"command": "ping"}}); return p[:len(p)-2] }()},
+	}
+	rows := []svcRow{}
+	for _, c := range cases {
+		out, n := serviceFrameLoop(c.stdin, emptyResp)
+		rows = append(rows, svcRow{c.name, base64.StdEncoding.EncodeToString(out), n})
+	}
+	b, _ := json.MarshalIndent(rows, "", "  ")
+	if err := os.WriteFile("/root/port/testdata/service-loop-go.json", b, 0644); err != nil { t.Fatal(err) }
+	for _, r := range rows { t.Logf("%-12s packets=%d stdout=%s", r.Name, r.Packets, r.Stdout) }
+}

@@ -1,0 +1,46 @@
+[
+  {
+    "name": "plain",
+    "exprRef": "1:0",
+    "exprLoc": 0,
+    "useCount": 1,
+    "msgs": []
+  },
+  {
+    "name": "assign-no-source",
+    "exprRef": "1:0",
+    "exprLoc": 0,
+    "useCount": 1,
+    "msgs": []
+  },
+  {
+    "name": "assign-with-source",
+    "exprRef": "1:0",
+    "exprLoc": 0,
+    "useCount": 1,
+    "msgs": [
+      {
+        "text": "Cannot assign to \"foo.bar\" because it's an import from an injected file",
+        "kind": 0,
+        "notes": [
+          "The symbol \"foo.bar\" was exported from \"inject.js\" here:"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "update-with-source",
+    "exprRef": "1:0",
+    "exprLoc": 0,
+    "useCount": 1,
+    "msgs": [
+      {
+        "text": "Cannot assign to \"foo.bar\" because it's an import from an injected file",
+        "kind": 0,
+        "notes": [
+          "The symbol \"foo.bar\" was exported from \"inject.js\" here:"
+        ]
+      }
+    ]
+  }
+]

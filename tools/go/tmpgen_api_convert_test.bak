@@ -1,0 +1,51 @@
+package api
+
+// Batch 86 Go probe: convertLocationToPublic/Internal helpers.
+import (
+	"encoding/json"
+	"os"
+	"strconv"
+	"testing"
+
+	"github.com/evanw/esbuild/internal/logger"
+)
+
+func TestTmpGenApiConvert(t *testing.T) {
+	type row struct { Fn string `json:"fn"`; Arg string `json:"arg"`; Out string `json:"out"` }
+	var out []row
+
+	mkLoc := func() *logger.MsgLocation {
+		return &logger.MsgLocation{
+			File: logger.PrettyPaths{Abs: "/abs/foo.js", Rel: "foo.js"},
+			Namespace: "file", LineText: "hello", Suggestion: "try x", Line: 3, Column: 7, Length: 5,
+		}
+	}
+
+	// convertLocationToPublic: arg = nil | pathStyle(0/1)  (uses fixed loc)
+	for _, s := range []string{"nil", "0", "1"} {
+		var loc *logger.MsgLocation
+		style := logger.PathStyle(0)
+		if s != "nil" { loc = mkLoc(); st, _ := strconv.Atoi(s); style = logger.PathStyle(st) }
+		v := convertLocationToPublic(loc, style)
+		b, _ := json.Marshal(v)
+		out = append(out, row{"convertLocationToPublic", s, string(b)})
+	}
+
+	// convertLocationToInternal: arg = JSON Location | nil
+	for _, s := range []string{
+		`null`,
+		`{"File":"foo.js","Namespace":"file","Line":3,"Column":7,"Length":5,"LineText":"hello","Suggestion":"try x"}`,
+		`{"File":"bar.css","Namespace":"","Line":1,"Column":0,"Length":0,"LineText":"","Suggestion":""}`,
+	} {
+		var loc *Location
+		if s != "null" { json.Unmarshal([]byte(s), &loc) }
+		v := convertLocationToInternal(loc)
+		b, _ := json.Marshal(v)
+		out = append(out, row{"convertLocationToInternal", s, string(b)})
+	}
+
+	b, err := json.MarshalIndent(out, "", "  ")
+	if err != nil { t.Fatal(err) }
+	if err := os.WriteFile("/root/port/testdata/api-convert-go.json", b, 0644); err != nil { t.Fatal(err) }
+	t.Logf("wrote %d rows", len(out))
+}

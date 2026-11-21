@@ -1,0 +1,10 @@
+[
+  { "src": "function f(){ let x = fn(); return x.y(); }", "go": "function f(){return fn().y()}" },
+  { "src": "function f(){ let x=fn(); let y=x.prop; return y; }", "go": "function f(){return fn().prop}" },
+  { "src": "function f(){ let x=fn(); return x(); }", "go": "function f(){return fn()()}" },
+  { "src": "function f(x){ switch(x){ case 1: a(); break; default: b(); } }", "go": "function f(x){x===1?a():b()}" },
+  { "src": "switch(x){ case 0: default: y() }", "go": "switch(x){default:y()}" },
+  { "src": "switch(x){ }", "go": "x;" },
+  { "src": "function f(x){ switch(x){ case 1: return 2; default: return 3; } }", "go": "function f(x){return x===1?2:3}" },
+  { "src": "switch(1){ case 1: a(); break; case 2: b(); break; default: c(); }", "go": "a();" }
+]

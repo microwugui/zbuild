@@ -1,0 +1,1 @@
+try {} catch (e) { if (0) ; else function e() {} }

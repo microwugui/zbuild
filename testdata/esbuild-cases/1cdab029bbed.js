@@ -1,0 +1,1 @@
+Foo = class { static accessor x }

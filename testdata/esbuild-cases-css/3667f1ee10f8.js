@@ -1,0 +1,1 @@
+@layer foo { div { color: red } }

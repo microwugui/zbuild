@@ -1,0 +1,42 @@
+[
+  {
+    "fn": "LenHint",
+    "arg": "init",
+    "out": "17"
+  },
+  {
+    "fn": "Get",
+    "arg": "a.js",
+    "out": "1"
+  },
+  {
+    "fn": "Get",
+    "arg": "a.js again",
+    "out": "1"
+  },
+  {
+    "fn": "Get",
+    "arg": "b.js",
+    "out": "2"
+  },
+  {
+    "fn": "GetGlob",
+    "arg": "1,0",
+    "out": "3"
+  },
+  {
+    "fn": "GetGlob",
+    "arg": "1,0 again",
+    "out": "3"
+  },
+  {
+    "fn": "GetGlob",
+    "arg": "1,1",
+    "out": "4"
+  },
+  {
+    "fn": "LenHint",
+    "arg": "final",
+    "out": "21"
+  }
+]

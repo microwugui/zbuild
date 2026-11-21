@@ -1,0 +1,1 @@
+div { :where(&, span:is(.foo &)) { color: red } }

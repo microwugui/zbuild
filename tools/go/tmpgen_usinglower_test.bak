@@ -1,0 +1,63 @@
+package js_parser_test
+
+// 第 109 轮 Go 探针：using 声明降级整族（shouldLowerUsingDeclarations /
+// lowerUsingDeclarationContext / scanStmts / finalize / lowerUsingDeclarationInForOf）
+// 的端到端输出。直接用 js_parser.Parse + js_printer.Print（不经 linker，M1 口径），
+// target=es2015 置位 compat.Using，输出即最终 JS 字节。TS 侧同口径逐字节比对。
+import (
+	"encoding/base64"
+	"encoding/json"
+	"os"
+	"testing"
+
+	"github.com/evanw/esbuild/internal/ast"
+	"github.com/evanw/esbuild/internal/compat"
+	"github.com/evanw/esbuild/internal/config"
+	"github.com/evanw/esbuild/internal/js_parser"
+	"github.com/evanw/esbuild/internal/js_printer"
+	"github.com/evanw/esbuild/internal/logger"
+	"github.com/evanw/esbuild/internal/renamer"
+)
+
+func TestTmpGenUsingLower109(t *testing.T) {
+	type row struct {
+		Name string `json:"name"`
+		Out  string `json:"out"`
+	}
+	cases := []struct{ name, src string }{
+		{"top-level", "using x = getResource();\nconsole.log(x);\n"},
+		{"block-multi", "{\n  using a = foo(), b = bar();\n  use(a, b);\n}\n"},
+		{"await-using-fn", "async function f() {\n  await using x = getResource();\n  return x;\n}\n"},
+		{"for-of-using", "for (using x of items) { use(x); }\n"},
+		{"directives-import", "\"use strict\";\nimport \"side\";\nusing x = foo();\nuse(x);\n"},
+	}
+	po := config.Options{
+		UnsupportedJSFeatures: compat.UnsupportedJSFeatures(map[compat.Engine]compat.Semver{
+			compat.ES: {Parts: []int{2015}},
+		}),
+		OriginalTargetEnv: "es2015",
+	}
+	opts := js_printer.Options{OutputFormat: config.FormatESModule}
+	rows := []row{}
+	for _, c := range cases {
+		log := logger.NewDeferLog(logger.DeferLogNoVerboseOrDebug, nil)
+		source := logger.Source{Index: 0, KeyPath: logger.Path{Text: "<stdin>"}, Contents: c.src}
+		tree, ok := js_parser.Parse(log, source, js_parser.OptionsFromConfig(&po))
+		if !ok {
+			t.Fatalf("parse failed: %s", c.name)
+		}
+		symbols := ast.NewSymbolMap(1)
+		symbols.SymbolsForSource[0] = tree.Symbols
+		r := renamer.NewNoOpRenamer(symbols)
+		js := js_printer.Print(tree, symbols, r, opts).JS
+		rows = append(rows, row{Name: c.name, Out: base64.StdEncoding.EncodeToString(js)})
+	}
+	b, err := json.MarshalIndent(rows, "", "  ")
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := os.WriteFile("/root/port/testdata/using-lower-go.json", b, 0644); err != nil {
+		t.Fatal(err)
+	}
+	t.Logf("wrote %d rows bytes=%d", len(rows), len(b))
+}

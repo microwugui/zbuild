@@ -1,0 +1,66 @@
+package bundler
+
+// 第 120 轮 Go 探针：scanner.maybeParseFile 确定性状态缝（visited 去重 + source-index 分配 +
+// file 命名空间规范化）。dump 每次返回的 sourceIndex + visited keys + remaining；不 dump AST
+// （parseFile goroutine 结果仅 drain，避免 unbound-symbol 非确定面）。注入 mock FS + 真实 resolver。
+import (
+	"encoding/json"
+	"os"
+	"testing"
+
+	"github.com/evanw/esbuild/internal/cache"
+	"github.com/evanw/esbuild/internal/config"
+	"github.com/evanw/esbuild/internal/fs"
+	"github.com/evanw/esbuild/internal/helpers"
+	"github.com/evanw/esbuild/internal/logger"
+	"github.com/evanw/esbuild/internal/resolver"
+)
+
+type mpRow struct {
+	Name string `json:"name"`
+	Returned []uint32 `json:"returned"`
+	Visited []string `json:"visited"`
+	Remaining int `json:"remaining"`
+}
+
+func TestTmpGenMaybeParse120(t *testing.T) {
+	cases := []struct{ name string; paths []string; preseed []string; preseedIdx []uint32 }{
+		{"visited-hit", []string{"/p/a.js"}, []string{"/p/a.js"}, []uint32{7}},
+		{"new-path", []string{"/p/b.js"}, nil, nil},
+		{"dedup", []string{"/p/a.js", "/p/a.js", "/p/b.js"}, nil, nil},
+		{"namespace-canonical", []string{"/p/../p/a.js"}, []string{"/p/a.js"}, []uint32{5}},
+	}
+	rows := []mpRow{}
+	for _, c := range cases {
+		log := logger.NewDeferLog(logger.DeferLogNoVerboseOrDebug, nil)
+		mock := fs.MockFS(map[string]string{"/p/a.js": "var a=1;", "/p/b.js": "var b=2;"}, fs.MockUnix, "/p")
+		caches := cache.MakeCacheSet()
+		opts := &config.Options{Mode: config.ModeBundle,
+			ExtensionToLoader: map[string]config.Loader{".js": config.LoaderJS}}
+		res := resolver.NewResolver(config.BuildCall, mock, log, caches, opts)
+		s := &scanner{log: log, fs: mock, res: res, caches: caches, timer: &helpers.Timer{},
+			visited: make(map[logger.Path]visitedFile), resultChannel: make(chan parseResult, 64),
+			options: *opts, results: make([]parseResult, 64), uniqueKeyPrefix: "key"}
+		for i, key := range c.preseed {
+			s.visited[logger.Path{Text: key, Namespace: "file"}] = visitedFile{sourceIndex: c.preseedIdx[i]}
+		}
+		ret := []uint32{}
+		for _, p := range c.paths {
+			key := logger.Path{Text: p, Namespace: "file"}
+			rr := resolver.ResolveResult{PathPair: resolver.PathPair{Primary: key}}
+			idx := s.maybeParseFile(rr, logger.PrettyPaths{Abs: p, Rel: p}, nil, logger.Range{}, nil, inputKindNormal, nil)
+			ret = append(ret, idx)
+		}
+		// drain parseFile goroutine results (do not inspect AST)
+		for s.remaining > 0 { <-s.resultChannel; s.remaining-- }
+		visitedKeys := []string{}
+		for k := range s.visited { visitedKeys = append(visitedKeys, k.Text) }
+		sortStrings(visitedKeys)
+		rows = append(rows, mpRow{c.name, ret, visitedKeys, s.remaining})
+	}
+	b, _ := json.MarshalIndent(rows, "", "  ")
+	if err := os.WriteFile("/root/port/testdata/maybeparse-go.json", b, 0644); err != nil { t.Fatal(err) }
+	for _, r := range rows { t.Logf("%-20s returned=%v visited=%v remaining=%d", r.Name, r.Returned, r.Visited, r.Remaining) }
+}
+
+func sortStrings(a []string) { for i := 1; i < len(a); i++ { for j := i; j > 0 && a[j] < a[j-1]; j-- { a[j], a[j-1] = a[j-1], a[j] } } }

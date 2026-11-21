@@ -1,0 +1,201 @@
+[
+  {
+    "name": "resolve-hit",
+    "resolve": {
+      "nil": false,
+      "stopped": false,
+      "path": "/abs/out.js",
+      "pathNS": "custom",
+      "external": false,
+      "sef": true,
+      "pluginData": "pd",
+      "msgs": null
+    },
+    "load": {
+      "ok": false,
+      "loader": 0,
+      "absResolveDir": "",
+      "pluginName": "",
+      "contents": "",
+      "pluginData": "",
+      "msgs": null
+    },
+    "logMsgs": []
+  },
+  {
+    "name": "resolve-external",
+    "resolve": {
+      "nil": false,
+      "stopped": false,
+      "path": "pkg",
+      "pathNS": "",
+      "external": true,
+      "sef": false,
+      "pluginData": "ext",
+      "msgs": null
+    },
+    "load": {
+      "ok": false,
+      "loader": 0,
+      "absResolveDir": "",
+      "pluginName": "",
+      "contents": "",
+      "pluginData": "",
+      "msgs": null
+    },
+    "logMsgs": []
+  },
+  {
+    "name": "resolve-error",
+    "resolve": {
+      "nil": true,
+      "stopped": true,
+      "path": "",
+      "pathNS": "",
+      "external": false,
+      "sef": false,
+      "pluginData": "",
+      "msgs": null
+    },
+    "load": {
+      "ok": false,
+      "loader": 0,
+      "absResolveDir": "",
+      "pluginName": "",
+      "contents": "",
+      "pluginData": "",
+      "msgs": null
+    },
+    "logMsgs": [
+      {
+        "text": "resolve fail",
+        "kind": 0
+      }
+    ]
+  },
+  {
+    "name": "resolve-relpath",
+    "resolve": {
+      "nil": true,
+      "stopped": true,
+      "path": "",
+      "pathNS": "",
+      "external": false,
+      "sef": false,
+      "pluginData": "",
+      "msgs": null
+    },
+    "load": {
+      "ok": false,
+      "loader": 0,
+      "absResolveDir": "",
+      "pluginName": "",
+      "contents": "",
+      "pluginData": "",
+      "msgs": null
+    },
+    "logMsgs": [
+      {
+        "text": "Plugin \"rp\" returned a path in the \"file\" namespace that is not an absolute path: relative.js",
+        "kind": 0
+      }
+    ]
+  },
+  {
+    "name": "load-hit",
+    "resolve": {
+      "nil": false,
+      "stopped": false,
+      "path": "",
+      "pathNS": "",
+      "external": false,
+      "sef": false,
+      "pluginData": "",
+      "msgs": null
+    },
+    "load": {
+      "ok": true,
+      "loader": 16,
+      "absResolveDir": "/r",
+      "pluginName": "lp",
+      "contents": "loaded!",
+      "pluginData": "ld",
+      "msgs": null
+    },
+    "logMsgs": []
+  },
+  {
+    "name": "load-disk",
+    "resolve": {
+      "nil": false,
+      "stopped": false,
+      "path": "",
+      "pathNS": "",
+      "external": false,
+      "sef": false,
+      "pluginData": "",
+      "msgs": null
+    },
+    "load": {
+      "ok": true,
+      "loader": 6,
+      "absResolveDir": "/p",
+      "pluginName": "",
+      "contents": "var a = 1;",
+      "pluginData": "",
+      "msgs": null
+    },
+    "logMsgs": []
+  },
+  {
+    "name": "load-disabled",
+    "resolve": {
+      "nil": false,
+      "stopped": false,
+      "path": "",
+      "pathNS": "",
+      "external": false,
+      "sef": false,
+      "pluginData": "",
+      "msgs": null
+    },
+    "load": {
+      "ok": true,
+      "loader": 0,
+      "absResolveDir": "",
+      "pluginName": "",
+      "contents": "orig",
+      "pluginData": "",
+      "msgs": null
+    },
+    "logMsgs": []
+  },
+  {
+    "name": "load-error",
+    "resolve": {
+      "nil": false,
+      "stopped": false,
+      "path": "",
+      "pathNS": "",
+      "external": false,
+      "sef": false,
+      "pluginData": "",
+      "msgs": null
+    },
+    "load": {
+      "ok": false,
+      "loader": 0,
+      "absResolveDir": "",
+      "pluginName": "",
+      "contents": "orig",
+      "pluginData": "",
+      "msgs": null
+    },
+    "logMsgs": [
+      {
+        "text": "load fail",
+        "kind": 0
+      }
+    ]
+  }
+]

@@ -1,0 +1,1 @@
+if (t) { x(); switch (y) { case z: return w; } }

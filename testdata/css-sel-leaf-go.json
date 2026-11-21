@@ -1,0 +1,365 @@
+[
+  {
+    "fn": "nameToken",
+    "src": "Foo.bar",
+    "out": {
+      "kind": 29,
+      "len": 3,
+      "loc": 0,
+      "text": "Foo"
+    }
+  },
+  {
+    "fn": "nameToken",
+    "src": "#abc",
+    "out": {
+      "kind": 28,
+      "len": 4,
+      "loc": 0,
+      "text": "abc"
+    }
+  },
+  {
+    "fn": "nameToken",
+    "src": "42%",
+    "out": {
+      "kind": 34,
+      "len": 3,
+      "loc": 0,
+      "text": "42%"
+    }
+  },
+  {
+    "fn": "parseCombinator",
+    "src": "\u003e div",
+    "out": {
+      "byte": 62,
+      "index": 1,
+      "loc": 0
+    }
+  },
+  {
+    "fn": "parseCombinator",
+    "src": "+ div",
+    "out": {
+      "byte": 43,
+      "index": 1,
+      "loc": 0
+    }
+  },
+  {
+    "fn": "parseCombinator",
+    "src": "~ div",
+    "out": {
+      "byte": 126,
+      "index": 1,
+      "loc": 0
+    }
+  },
+  {
+    "fn": "parseCombinator",
+    "src": "div",
+    "out": {
+      "byte": 0,
+      "index": 0,
+      "loc": 0
+    }
+  },
+  {
+    "fn": "parseAnyValue",
+    "src": "a (b [c]) d; rest",
+    "out": {
+      "errs": 0,
+      "index": 11,
+      "tokens": [
+        [
+          29,
+          "a",
+          0
+        ],
+        [
+          38,
+          " ",
+          1
+        ],
+        [
+          33,
+          "(",
+          2
+        ],
+        [
+          29,
+          "b",
+          3
+        ],
+        [
+          38,
+          " ",
+          4
+        ],
+        [
+          32,
+          "[",
+          5
+        ],
+        [
+          29,
+          "c",
+          6
+        ],
+        [
+          7,
+          "]",
+          7
+        ],
+        [
+          8,
+          ")",
+          8
+        ],
+        [
+          38,
+          " ",
+          9
+        ],
+        [
+          29,
+          "d",
+          10
+        ]
+      ]
+    }
+  },
+  {
+    "fn": "parseAnyValue",
+    "src": "a {b} c !important",
+    "out": {
+      "errs": 0,
+      "index": 8,
+      "tokens": [
+        [
+          29,
+          "a",
+          0
+        ],
+        [
+          38,
+          " ",
+          1
+        ],
+        [
+          31,
+          "{",
+          2
+        ],
+        [
+          29,
+          "b",
+          3
+        ],
+        [
+          6,
+          "}",
+          4
+        ],
+        [
+          38,
+          " ",
+          5
+        ],
+        [
+          29,
+          "c",
+          6
+        ],
+        [
+          38,
+          " ",
+          7
+        ]
+      ]
+    }
+  },
+  {
+    "fn": "parseAnyValue",
+    "src": ";",
+    "out": {
+      "errs": 0,
+      "index": 0,
+      "tokens": []
+    }
+  },
+  {
+    "fn": "parseAnyValue",
+    "src": "a b",
+    "out": {
+      "errs": 0,
+      "index": 3,
+      "tokens": [
+        [
+          29,
+          "a",
+          0
+        ],
+        [
+          38,
+          " ",
+          1
+        ],
+        [
+          29,
+          "b",
+          2
+        ]
+      ]
+    }
+  },
+  {
+    "fn": "parseAttributeSelector",
+    "src": "[foo] rest",
+    "out": {
+      "index": 3,
+      "len": 5,
+      "loc": 0,
+      "mod": 0,
+      "name": "foo",
+      "nameKind": 29,
+      "op": "",
+      "prefix": null,
+      "value": ""
+    }
+  },
+  {
+    "fn": "parseAttributeSelector",
+    "src": "[foo=bar] rest",
+    "out": {
+      "index": 5,
+      "len": 9,
+      "loc": 0,
+      "mod": 0,
+      "name": "foo",
+      "nameKind": 29,
+      "op": "=",
+      "prefix": null,
+      "value": "bar"
+    }
+  },
+  {
+    "fn": "parseAttributeSelector",
+    "src": "[foo~=\"bar\" i] rest",
+    "out": {
+      "index": 8,
+      "len": 14,
+      "loc": 0,
+      "mod": 105,
+      "name": "foo",
+      "nameKind": 29,
+      "op": "~=",
+      "prefix": null,
+      "value": "bar"
+    }
+  },
+  {
+    "fn": "parseAttributeSelector",
+    "src": "[*|foo|=bar] rest",
+    "out": {
+      "index": 8,
+      "len": 12,
+      "loc": 0,
+      "mod": 0,
+      "name": "foo",
+      "nameKind": 29,
+      "op": "|=",
+      "prefix": [
+        "*",
+        13
+      ],
+      "value": "bar"
+    }
+  },
+  {
+    "fn": "parseAttributeSelector",
+    "src": "[foo",
+    "out": {
+      "index": 2,
+      "len": 4,
+      "loc": 0,
+      "mod": 0,
+      "name": "foo",
+      "nameKind": 29,
+      "op": "",
+      "prefix": null,
+      "value": ""
+    }
+  },
+  {
+    "fn": "parseNthIndex",
+    "src": "even",
+    "out": {
+      "a": "",
+      "b": "even",
+      "index": 1,
+      "ok": true
+    }
+  },
+  {
+    "fn": "parseNthIndex",
+    "src": "odd",
+    "out": {
+      "a": "",
+      "b": "odd",
+      "index": 1,
+      "ok": true
+    }
+  },
+  {
+    "fn": "parseNthIndex",
+    "src": "2n+1",
+    "out": {
+      "a": "2",
+      "b": "1",
+      "index": 2,
+      "ok": true
+    }
+  },
+  {
+    "fn": "parseNthIndex",
+    "src": "-n - 3",
+    "out": {
+      "a": "-1",
+      "b": "-3",
+      "index": 5,
+      "ok": true
+    }
+  },
+  {
+    "fn": "parseNthIndex",
+    "src": "3",
+    "out": {
+      "a": "",
+      "b": "3",
+      "index": 1,
+      "ok": true
+    }
+  },
+  {
+    "fn": "parseNthIndex",
+    "src": "-2n",
+    "out": {
+      "a": "-2",
+      "b": "",
+      "index": 1,
+      "ok": true
+    }
+  },
+  {
+    "fn": "parseNthIndex",
+    "src": "banana",
+    "out": {
+      "a": "",
+      "b": "",
+      "index": 0,
+      "ok": false
+    }
+  }
+]

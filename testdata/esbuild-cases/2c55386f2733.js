@@ -1,0 +1,1 @@
+export {x};export default function x() {}

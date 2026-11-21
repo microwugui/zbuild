@@ -1,0 +1,92 @@
+[
+  {
+    "fn": "ApplyOverrides",
+    "arg": "1010|101|1100",
+    "out": "110"
+  },
+  {
+    "fn": "ApplyOverrides",
+    "arg": "1111111111111111|0|11",
+    "out": "1111111111111100"
+  },
+  {
+    "fn": "ApplyOverrides",
+    "arg": "0|11111111|11111111",
+    "out": "11111111"
+  },
+  {
+    "fn": "SemverString",
+    "arg": "[1 2 3]",
+    "out": "1.2.3"
+  },
+  {
+    "fn": "SemverString",
+    "arg": "[1 2]-alpha",
+    "out": "1.2-alpha"
+  },
+  {
+    "fn": "SemverString",
+    "arg": "[]",
+    "out": ""
+  },
+  {
+    "fn": "SemverString",
+    "arg": "[2026]",
+    "out": "2026"
+  },
+  {
+    "fn": "EngineString",
+    "arg": "0",
+    "out": "chrome"
+  },
+  {
+    "fn": "EngineString",
+    "arg": "1",
+    "out": "deno"
+  },
+  {
+    "fn": "EngineString",
+    "arg": "2",
+    "out": "edge"
+  },
+  {
+    "fn": "EngineString",
+    "arg": "3",
+    "out": "es"
+  },
+  {
+    "fn": "EngineString",
+    "arg": "4",
+    "out": "firefox"
+  },
+  {
+    "fn": "EngineString",
+    "arg": "5",
+    "out": "hermes"
+  },
+  {
+    "fn": "EngineString",
+    "arg": "6",
+    "out": "ie"
+  },
+  {
+    "fn": "EngineString",
+    "arg": "7",
+    "out": "ios"
+  },
+  {
+    "fn": "EngineString",
+    "arg": "8",
+    "out": "node"
+  },
+  {
+    "fn": "EngineString",
+    "arg": "9",
+    "out": "opera"
+  },
+  {
+    "fn": "EngineString",
+    "arg": "11",
+    "out": "safari"
+  }
+]

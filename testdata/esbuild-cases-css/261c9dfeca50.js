@@ -1,0 +1,5 @@
+@container card ( inline-size > 30em ) and style( --responsive = true ) {
+	.foo {
+		color: skyblue;
+	}
+}

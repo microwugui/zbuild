@@ -1,0 +1,77 @@
+[
+  {
+    "fn": "DirEntries.Get",
+    "arg": "foo|foo;bar;BAZ",
+    "out": "foo"
+  },
+  {
+    "fn": "DirEntries.Get",
+    "arg": "FOO|foo;bar",
+    "out": "foo|foo"
+  },
+  {
+    "fn": "DirEntries.Get",
+    "arg": "baz|foo;bar;baz",
+    "out": "baz"
+  },
+  {
+    "fn": "DirEntries.Get",
+    "arg": "qux|foo;bar",
+    "out": "nil"
+  },
+  {
+    "fn": "DirEntries.Get",
+    "arg": "Bar|foo;bar",
+    "out": "bar|bar"
+  },
+  {
+    "fn": "DirEntries.Get",
+    "arg": "|foo;bar",
+    "out": "nil"
+  },
+  {
+    "fn": "DirEntries.Get",
+    "arg": "x|",
+    "out": "nil"
+  },
+  {
+    "fn": "DirEntries.SortedKeys",
+    "arg": "foo;bar;BAZ",
+    "out": "BAZ,bar,foo"
+  },
+  {
+    "fn": "DirEntries.SortedKeys",
+    "arg": "z;a;m",
+    "out": "a,m,z"
+  },
+  {
+    "fn": "DirEntries.SortedKeys",
+    "arg": "",
+    "out": ""
+  },
+  {
+    "fn": "DirEntries.SortedKeys",
+    "arg": "single",
+    "out": "single"
+  },
+  {
+    "fn": "InMemoryOpenedFile.Len",
+    "arg": "0",
+    "out": "0"
+  },
+  {
+    "fn": "InMemoryOpenedFile.Len",
+    "arg": "1",
+    "out": "1"
+  },
+  {
+    "fn": "InMemoryOpenedFile.Len",
+    "arg": "5",
+    "out": "5"
+  },
+  {
+    "fn": "InMemoryOpenedFile.Len",
+    "arg": "100",
+    "out": "100"
+  }
+]

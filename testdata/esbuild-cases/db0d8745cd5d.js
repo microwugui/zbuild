@@ -1,0 +1,1 @@
+let a; return null == a ? undefined : a[b]

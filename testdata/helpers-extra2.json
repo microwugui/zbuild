@@ -1,0 +1,386 @@
+[
+ {
+  "fn": "EncodeStringAsShortestDataURL",
+  "args": [
+   "text/plain",
+   "hello world!"
+  ],
+  "out": "data:text/plain,hello world!",
+  "ok": true,
+  "outB64": "ZGF0YTp0ZXh0L3BsYWluLGhlbGxvIHdvcmxkIQ=="
+ },
+ {
+  "fn": "EncodeStringAsPercentEscapedDataURL",
+  "args": [
+   "text/plain",
+   "hello world!"
+  ],
+  "out": "data:text/plain,hello world!",
+  "ok": true,
+  "outB64": "ZGF0YTp0ZXh0L3BsYWluLGhlbGxvIHdvcmxkIQ=="
+ },
+ {
+  "fn": "EncodeStringAsShortestDataURL",
+  "args": [
+   "text/plain",
+   "a b\tc\n"
+  ],
+  "out": "data:text/plain,a b%09c%0A",
+  "ok": true,
+  "outB64": "ZGF0YTp0ZXh0L3BsYWluLGEgYiUwOWMlMEE="
+ },
+ {
+  "fn": "EncodeStringAsPercentEscapedDataURL",
+  "args": [
+   "text/plain",
+   "a b\tc\n"
+  ],
+  "out": "data:text/plain,a b%09c%0A",
+  "ok": true,
+  "outB64": "ZGF0YTp0ZXh0L3BsYWluLGEgYiUwOWMlMEE="
+ },
+ {
+  "fn": "EncodeStringAsShortestDataURL",
+  "args": [
+   "image/svg+xml",
+   "<svg>#</svg>"
+  ],
+  "out": "data:image/svg+xml,<svg>%23</svg>",
+  "ok": true,
+  "outB64": "ZGF0YTppbWFnZS9zdmcreG1sLDxzdmc+JTIzPC9zdmc+"
+ },
+ {
+  "fn": "EncodeStringAsPercentEscapedDataURL",
+  "args": [
+   "image/svg+xml",
+   "<svg>#</svg>"
+  ],
+  "out": "data:image/svg+xml,<svg>%23</svg>",
+  "ok": true,
+  "outB64": "ZGF0YTppbWFnZS9zdmcreG1sLDxzdmc+JTIzPC9zdmc+"
+ },
+ {
+  "fn": "EncodeStringAsShortestDataURL",
+  "args": [
+   "text/plain",
+   "100%25 %zz"
+  ],
+  "out": "data:text/plain,100%2525 %zz",
+  "ok": true,
+  "outB64": "ZGF0YTp0ZXh0L3BsYWluLDEwMCUyNTI1ICV6eg=="
+ },
+ {
+  "fn": "EncodeStringAsPercentEscapedDataURL",
+  "args": [
+   "text/plain",
+   "100%25 %zz"
+  ],
+  "out": "data:text/plain,100%2525 %zz",
+  "ok": true,
+  "outB64": "ZGF0YTp0ZXh0L3BsYWluLDEwMCUyNTI1ICV6eg=="
+ },
+ {
+  "fn": "EncodeStringAsShortestDataURL",
+  "args": [
+   "text/plain",
+   "trailing   "
+  ],
+  "out": "data:text/plain,trailing%20%20%20",
+  "ok": true,
+  "outB64": "ZGF0YTp0ZXh0L3BsYWluLHRyYWlsaW5nJTIwJTIwJTIw"
+ },
+ {
+  "fn": "EncodeStringAsPercentEscapedDataURL",
+  "args": [
+   "text/plain",
+   "trailing   "
+  ],
+  "out": "data:text/plain,trailing%20%20%20",
+  "ok": true,
+  "outB64": "ZGF0YTp0ZXh0L3BsYWluLHRyYWlsaW5nJTIwJTIwJTIw"
+ },
+ {
+  "fn": "EncodeStringAsShortestDataURL",
+  "args": [
+   "text/plain",
+   "中文 ok"
+  ],
+  "out": "data:text/plain,中文 ok",
+  "ok": true,
+  "outB64": "ZGF0YTp0ZXh0L3BsYWluLOS4reaWhyBvaw=="
+ },
+ {
+  "fn": "EncodeStringAsPercentEscapedDataURL",
+  "args": [
+   "text/plain",
+   "中文 ok"
+  ],
+  "out": "data:text/plain,中文 ok",
+  "ok": true,
+  "outB64": "ZGF0YTp0ZXh0L3BsYWluLOS4reaWhyBvaw=="
+ },
+ {
+  "fn": "EncodeStringAsShortestDataURL",
+  "args": [
+   "text/plain",
+   ""
+  ],
+  "out": "data:text/plain,",
+  "ok": true,
+  "outB64": "ZGF0YTp0ZXh0L3BsYWluLA=="
+ },
+ {
+  "fn": "EncodeStringAsPercentEscapedDataURL",
+  "args": [
+   "text/plain",
+   ""
+  ],
+  "out": "data:text/plain,",
+  "ok": true,
+  "outB64": "ZGF0YTp0ZXh0L3BsYWluLA=="
+ },
+ {
+  "fn": "EncodeStringAsShortestDataURL",
+  "args": [
+   "application/octet-stream",
+   "\u0000\u0001"
+  ],
+  "out": "data:application/octet-stream,%00%01",
+  "ok": true,
+  "outB64": "ZGF0YTphcHBsaWNhdGlvbi9vY3RldC1zdHJlYW0sJTAwJTAx"
+ },
+ {
+  "fn": "EncodeStringAsPercentEscapedDataURL",
+  "args": [
+   "application/octet-stream",
+   "\u0000\u0001"
+  ],
+  "out": "data:application/octet-stream,%00%01",
+  "ok": true,
+  "outB64": "ZGF0YTphcHBsaWNhdGlvbi9vY3RldC1zdHJlYW0sJTAwJTAx"
+ },
+ {
+  "fn": "MimeTypeByExtension",
+  "args": [
+   ".js"
+  ],
+  "out": "text/javascript; charset=utf-8",
+  "ok": true,
+  "outB64": "dGV4dC9qYXZhc2NyaXB0OyBjaGFyc2V0PXV0Zi04"
+ },
+ {
+  "fn": "MimeTypeByExtension",
+  "args": [
+   ".JS"
+  ],
+  "out": "text/javascript; charset=utf-8",
+  "ok": true,
+  "outB64": "dGV4dC9qYXZhc2NyaXB0OyBjaGFyc2V0PXV0Zi04"
+ },
+ {
+  "fn": "MimeTypeByExtension",
+  "args": [
+   ".json"
+  ],
+  "out": "application/json; charset=utf-8",
+  "ok": true,
+  "outB64": "YXBwbGljYXRpb24vanNvbjsgY2hhcnNldD11dGYtOA=="
+ },
+ {
+  "fn": "MimeTypeByExtension",
+  "args": [
+   ".wasm"
+  ],
+  "out": "application/wasm",
+  "ok": true,
+  "outB64": "YXBwbGljYXRpb24vd2FzbQ=="
+ },
+ {
+  "fn": "MimeTypeByExtension",
+  "args": [
+   ".unknown"
+  ],
+  "out": "",
+  "ok": true
+ },
+ {
+  "fn": "MimeTypeByExtension",
+  "args": [
+   ""
+  ],
+  "out": "",
+  "ok": true
+ },
+ {
+  "fn": "IsFileURL",
+  "args": [
+   "file:///a/b"
+  ],
+  "out": "true",
+  "ok": true,
+  "outB64": "dHJ1ZQ=="
+ },
+ {
+  "fn": "IsFileURL",
+  "args": [
+   "file://localhost/a"
+  ],
+  "out": "true",
+  "ok": true,
+  "outB64": "dHJ1ZQ=="
+ },
+ {
+  "fn": "IsFileURL",
+  "args": [
+   "file://host/a"
+  ],
+  "out": "false",
+  "ok": true,
+  "outB64": "ZmFsc2U="
+ },
+ {
+  "fn": "IsFileURL",
+  "args": [
+   "http://x/a"
+  ],
+  "out": "false",
+  "ok": true,
+  "outB64": "ZmFsc2U="
+ },
+ {
+  "fn": "FileURLFromFilePath",
+  "args": [
+   "/a/b"
+  ],
+  "out": "file:///a/b",
+  "ok": true,
+  "outB64": "ZmlsZTovLy9hL2I="
+ },
+ {
+  "fn": "FileURLFromFilePath",
+  "args": [
+   "C:\\a\\b"
+  ],
+  "out": "file:///C:/a/b",
+  "ok": true,
+  "outB64": "ZmlsZTovLy9DOi9hL2I="
+ },
+ {
+  "fn": "FileURLFromFilePath",
+  "args": [
+   "a/b"
+  ],
+  "out": "file:///a/b",
+  "ok": true,
+  "outB64": "ZmlsZTovLy9hL2I="
+ },
+ {
+  "fn": "FilePathFromFileURL",
+  "args": [
+   "/",
+   "file:///a/b"
+  ],
+  "out": "/a/b",
+  "ok": true,
+  "outB64": "L2EvYg=="
+ },
+ {
+  "fn": "FilePathFromFileURL",
+  "args": [
+   "C:\\",
+   "file:///C:/a/b"
+  ],
+  "out": "C:\\a\\b",
+  "ok": true,
+  "outB64": "QzpcYVxi"
+ },
+ {
+  "fn": "ParseGlobPattern",
+  "args": [
+   "src/*.js"
+  ],
+  "out": "[{src/ 1} {.js 0}]",
+  "ok": true,
+  "outB64": "W3tzcmMvIDF9IHsuanMgMH1d"
+ },
+ {
+  "fn": "GlobPatternToString",
+  "args": [
+   "src/*.js"
+  ],
+  "out": "src/*.js",
+  "ok": true,
+  "outB64": "c3JjLyouanM="
+ },
+ {
+  "fn": "ParseGlobPattern",
+  "args": [
+   "a/**/b"
+  ],
+  "out": "[{a/ 2} {/b 0}]",
+  "ok": true,
+  "outB64": "W3thLyAyfSB7L2IgMH1d"
+ },
+ {
+  "fn": "GlobPatternToString",
+  "args": [
+   "a/**/b"
+  ],
+  "out": "a/**/b",
+  "ok": true,
+  "outB64": "YS8qKi9i"
+ },
+ {
+  "fn": "ParseGlobPattern",
+  "args": [
+   "x"
+  ],
+  "out": "[{x 0}]",
+  "ok": true,
+  "outB64": "W3t4IDB9XQ=="
+ },
+ {
+  "fn": "GlobPatternToString",
+  "args": [
+   "x"
+  ],
+  "out": "x",
+  "ok": true,
+  "outB64": "eA=="
+ },
+ {
+  "fn": "ParseGlobPattern",
+  "args": [
+   "a/*/b/*.css"
+  ],
+  "out": "[{a/ 1} {/b/ 1} {.css 0}]",
+  "ok": true,
+  "outB64": "W3thLyAxfSB7L2IvIDF9IHsuY3NzIDB9XQ=="
+ },
+ {
+  "fn": "GlobPatternToString",
+  "args": [
+   "a/*/b/*.css"
+  ],
+  "out": "a/*/b/*.css",
+  "ok": true,
+  "outB64": "YS8qL2IvKi5jc3M="
+ },
+ {
+  "fn": "ParseGlobPattern",
+  "args": [
+   ""
+  ],
+  "out": "[{ 0}]",
+  "ok": true,
+  "outB64": "W3sgMH1d"
+ },
+ {
+  "fn": "GlobPatternToString",
+  "args": [
+   ""
+  ],
+  "out": "",
+  "ok": true
+ }
+]

@@ -1,0 +1,674 @@
+[
+  {
+    "fn": "looksLikeMediaCondition",
+    "out": {
+      "index": 0,
+      "out": true
+    },
+    "src": "(min-width: 1px)"
+  },
+  {
+    "fn": "looksLikeMediaCondition",
+    "out": {
+      "index": 0,
+      "out": true
+    },
+    "src": "not (color)"
+  },
+  {
+    "fn": "looksLikeMediaCondition",
+    "out": {
+      "index": 0,
+      "out": false
+    },
+    "src": "screen"
+  },
+  {
+    "fn": "parseMediaQuery",
+    "out": {
+      "index": 1,
+      "out": {
+        "ok": true,
+        "q": {
+          "and": null,
+          "loc": 0,
+          "name": "screen",
+          "op": 0,
+          "t": "type"
+        }
+      }
+    },
+    "src": "screen"
+  },
+  {
+    "fn": "parseMediaQuery",
+    "out": {
+      "index": 9,
+      "out": {
+        "ok": true,
+        "q": {
+          "and": {
+            "loc": 15,
+            "name": "color",
+            "t": "plain",
+            "val": []
+          },
+          "loc": 0,
+          "name": "screen",
+          "op": 1,
+          "t": "type"
+        }
+      }
+    },
+    "src": "not screen and (color)"
+  },
+  {
+    "fn": "parseMediaQuery",
+    "out": {
+      "index": 3,
+      "out": {
+        "ok": true,
+        "q": {
+          "and": null,
+          "loc": 0,
+          "name": "print",
+          "op": 2,
+          "t": "type"
+        }
+      }
+    },
+    "src": "only print"
+  },
+  {
+    "fn": "parseMediaQuery",
+    "out": {
+      "index": 12,
+      "out": {
+        "ok": true,
+        "q": {
+          "loc": 0,
+          "op": 0,
+          "t": "binary",
+          "terms": [
+            {
+              "loc": 0,
+              "name": "min-width",
+              "t": "plain",
+              "val": [
+                [
+                  26,
+                  "100px",
+                  0,
+                  12
+                ]
+              ]
+            },
+            {
+              "loc": 23,
+              "name": "color",
+              "t": "plain",
+              "val": []
+            }
+          ]
+        }
+      }
+    },
+    "src": "(min-width: 100px) and (color)"
+  },
+  {
+    "fn": "parseMediaQuery",
+    "out": {
+      "index": 7,
+      "out": {
+        "ok": true,
+        "q": {
+          "after": [
+            [
+              26,
+              "100px",
+              0,
+              9
+            ]
+          ],
+          "afterCmp": 4,
+          "before": [],
+          "beforeCmp": 0,
+          "loc": 0,
+          "name": "width",
+          "nameLoc": 1,
+          "t": "range"
+        }
+      }
+    },
+    "src": "(width \u003e 100px)"
+  },
+  {
+    "fn": "parseMediaQuery",
+    "out": {
+      "index": 0,
+      "out": {
+        "ok": false,
+        "q": null
+      }
+    },
+    "src": "and screen"
+  },
+  {
+    "fn": "parseMediaCondition",
+    "out": {
+      "index": 10,
+      "out": {
+        "ok": true,
+        "q": {
+          "loc": 0,
+          "op": 0,
+          "t": "binary",
+          "terms": [
+            {
+              "loc": 0,
+              "name": "a",
+              "t": "plain",
+              "val": []
+            },
+            {
+              "loc": 8,
+              "name": "b",
+              "t": "plain",
+              "val": []
+            }
+          ]
+        }
+      }
+    },
+    "src": "(a) and (b) or (c)"
+  },
+  {
+    "fn": "parseMediaCondition",
+    "or": 1,
+    "out": {
+      "index": 10,
+      "out": {
+        "ok": true,
+        "q": {
+          "loc": 0,
+          "op": 0,
+          "t": "binary",
+          "terms": [
+            {
+              "loc": 0,
+              "name": "a",
+              "t": "plain",
+              "val": []
+            },
+            {
+              "loc": 8,
+              "name": "b",
+              "t": "plain",
+              "val": []
+            }
+          ]
+        }
+      }
+    },
+    "src": "(a) and (b) or (c)"
+  },
+  {
+    "fn": "parseMediaCondition",
+    "minify": true,
+    "out": {
+      "index": 9,
+      "out": {
+        "ok": true,
+        "q": {
+          "loc": 9,
+          "name": "a",
+          "t": "plain",
+          "val": []
+        }
+      }
+    },
+    "src": "not (not (a))"
+  },
+  {
+    "fn": "parseMediaCondition",
+    "minify": true,
+    "out": {
+      "index": 21,
+      "out": {
+        "ok": true,
+        "q": {
+          "loc": 5,
+          "op": 1,
+          "t": "binary",
+          "terms": [
+            {
+              "loc": 10,
+              "name": "a",
+              "t": "plain",
+              "val": []
+            },
+            {
+              "loc": 24,
+              "name": "b",
+              "t": "plain",
+              "val": []
+            }
+          ]
+        }
+      }
+    },
+    "src": "not ((not (a)) and (not (b)))"
+  },
+  {
+    "fn": "parseMediaInParens",
+    "out": {
+      "index": 6,
+      "out": {
+        "ok": true,
+        "q": {
+          "loc": 0,
+          "name": "min-width",
+          "t": "plain",
+          "val": [
+            [
+              26,
+              "1px",
+              0,
+              12
+            ]
+          ]
+        }
+      }
+    },
+    "src": "(min-width: 1px) rest"
+  },
+  {
+    "fn": "parseMediaInParens",
+    "out": {
+      "index": 8,
+      "out": {
+        "ok": true,
+        "q": {
+          "after": [
+            [
+              26,
+              "100px",
+              0,
+              10
+            ]
+          ],
+          "afterCmp": 3,
+          "before": [],
+          "beforeCmp": 0,
+          "loc": 0,
+          "name": "width",
+          "nameLoc": 1,
+          "t": "range"
+        }
+      }
+    },
+    "src": "(width \u003c= 100px) rest"
+  },
+  {
+    "fn": "parseMediaInParens",
+    "out": {
+      "index": 3,
+      "out": {
+        "ok": true,
+        "q": {
+          "loc": 0,
+          "name": "a",
+          "t": "plain",
+          "val": []
+        }
+      }
+    },
+    "src": "(a) and (b)) rest"
+  },
+  {
+    "fn": "parseMediaQueryListUntil",
+    "out": {
+      "index": 12,
+      "out": [
+        {
+          "and": null,
+          "loc": 0,
+          "name": "screen",
+          "op": 0,
+          "t": "type"
+        },
+        {
+          "loc": 8,
+          "name": "min-width",
+          "t": "plain",
+          "val": [
+            [
+              26,
+              "100px",
+              0,
+              20
+            ]
+          ]
+        },
+        {
+          "and": null,
+          "loc": 28,
+          "name": "print",
+          "op": 0,
+          "t": "type"
+        }
+      ]
+    },
+    "src": "screen, (min-width: 100px), print"
+  },
+  {
+    "fn": "parseMediaQueryListUntil",
+    "out": {
+      "index": 14,
+      "out": [
+        {
+          "loc": 0,
+          "op": 1,
+          "t": "binary",
+          "terms": [
+            {
+              "loc": 0,
+              "name": "a",
+              "t": "plain",
+              "val": []
+            },
+            {
+              "loc": 7,
+              "name": "b",
+              "t": "plain",
+              "val": []
+            }
+          ]
+        },
+        {
+          "and": null,
+          "loc": 12,
+          "name": "screen",
+          "op": 1,
+          "t": "type"
+        }
+      ]
+    },
+    "src": "(a) or (b), not screen"
+  },
+  {
+    "fn": "parseMediaQueryListUntil",
+    "out": {
+      "index": 2,
+      "out": [
+        {
+          "and": null,
+          "loc": 0,
+          "name": "garbage",
+          "op": 0,
+          "t": "type"
+        }
+      ]
+    },
+    "src": "garbage @@@ , screen"
+  },
+  {
+    "fn": "appendMediaTerm",
+    "out": {
+      "terms": [
+        {
+          "loc": 0,
+          "op": 0,
+          "t": "binary",
+          "terms": [
+            {
+              "loc": 0,
+              "name": "a",
+              "t": "plain",
+              "val": []
+            },
+            {
+              "loc": 8,
+              "name": "b",
+              "t": "plain",
+              "val": []
+            }
+          ]
+        }
+      ]
+    },
+    "src": "(a) and (b) or (c)"
+  },
+  {
+    "fn": "maybeSimplifyMediaNot",
+    "out": {
+      "inner": {
+        "loc": 0,
+        "op": 0,
+        "t": "binary",
+        "terms": [
+          {
+            "loc": 0,
+            "name": "a",
+            "t": "plain",
+            "val": []
+          },
+          {
+            "loc": 8,
+            "name": "b",
+            "t": "plain",
+            "val": []
+          }
+        ]
+      },
+      "loc": 0,
+      "t": "not"
+    },
+    "src": "(a) and (b) or (c)"
+  },
+  {
+    "fn": "appendMediaTerm",
+    "minify": true,
+    "out": {
+      "terms": [
+        {
+          "loc": 0,
+          "name": "a",
+          "t": "plain",
+          "val": []
+        },
+        {
+          "loc": 8,
+          "name": "b",
+          "t": "plain",
+          "val": []
+        }
+      ]
+    },
+    "src": "(a) and (b) or (c)"
+  },
+  {
+    "fn": "maybeSimplifyMediaNot",
+    "minify": true,
+    "out": {
+      "inner": {
+        "loc": 0,
+        "op": 0,
+        "t": "binary",
+        "terms": [
+          {
+            "loc": 0,
+            "name": "a",
+            "t": "plain",
+            "val": []
+          },
+          {
+            "loc": 8,
+            "name": "b",
+            "t": "plain",
+            "val": []
+          }
+        ]
+      },
+      "loc": 0,
+      "t": "not"
+    },
+    "src": "(a) and (b) or (c)"
+  },
+  {
+    "fn": "maybeSimplifyMediaNot",
+    "minify": false,
+    "mode": "not",
+    "out": {
+      "inner": {
+        "inner": {
+          "loc": 0,
+          "name": "a",
+          "t": "plain",
+          "val": []
+        },
+        "loc": 0,
+        "t": "not"
+      },
+      "loc": 0,
+      "t": "not"
+    },
+    "src": ""
+  },
+  {
+    "fn": "maybeSimplifyMediaNot",
+    "minify": true,
+    "mode": "not",
+    "out": {
+      "loc": 0,
+      "name": "a",
+      "t": "plain",
+      "val": []
+    },
+    "src": ""
+  },
+  {
+    "fn": "maybeSimplifyMediaNot",
+    "minify": false,
+    "mode": "binary",
+    "out": {
+      "inner": {
+        "loc": 0,
+        "op": 0,
+        "t": "binary",
+        "terms": [
+          {
+            "inner": {
+              "inner": {
+                "loc": 0,
+                "name": "a",
+                "t": "plain",
+                "val": []
+              },
+              "loc": 0,
+              "t": "not"
+            },
+            "loc": 0,
+            "t": "not"
+          },
+          {
+            "inner": {
+              "inner": {
+                "loc": 0,
+                "name": "b",
+                "t": "plain",
+                "val": []
+              },
+              "loc": 0,
+              "t": "not"
+            },
+            "loc": 0,
+            "t": "not"
+          }
+        ]
+      },
+      "loc": 0,
+      "t": "not"
+    },
+    "src": ""
+  },
+  {
+    "fn": "maybeSimplifyMediaNot",
+    "minify": true,
+    "mode": "binary",
+    "out": {
+      "loc": 0,
+      "op": 1,
+      "t": "binary",
+      "terms": [
+        {
+          "inner": {
+            "loc": 0,
+            "name": "a",
+            "t": "plain",
+            "val": []
+          },
+          "loc": 0,
+          "t": "not"
+        },
+        {
+          "inner": {
+            "loc": 0,
+            "name": "b",
+            "t": "plain",
+            "val": []
+          },
+          "loc": 0,
+          "t": "not"
+        }
+      ]
+    },
+    "src": ""
+  },
+  {
+    "fn": "maybeSimplifyMediaNot",
+    "minify": false,
+    "mode": "range",
+    "out": {
+      "inner": {
+        "after": [
+          [
+            "TDIM",
+            "100px"
+          ]
+        ],
+        "afterCmp": 2,
+        "before": [],
+        "beforeCmp": 0,
+        "loc": 0,
+        "name": "width",
+        "nameLoc": 0,
+        "t": "range"
+      },
+      "loc": 0,
+      "t": "not"
+    },
+    "src": ""
+  },
+  {
+    "fn": "maybeSimplifyMediaNot",
+    "minify": true,
+    "mode": "range",
+    "out": {
+      "after": [
+        [
+          "TDIM",
+          "100px"
+        ]
+      ],
+      "afterCmp": 5,
+      "before": [],
+      "beforeCmp": 0,
+      "loc": 0,
+      "name": "width",
+      "nameLoc": 0,
+      "t": "range"
+    },
+    "src": ""
+  }
+]

@@ -1,0 +1,123 @@
+[
+  {
+    "name": "lazy-nohelper",
+    "symbols": [
+      "require",
+      "exports",
+      "module",
+      "require_"
+    ],
+    "parts": 2,
+    "stmtKinds": [
+      [],
+      [
+        "LazyExport"
+      ]
+    ],
+    "importPaths": [],
+    "hasLazyExport": true,
+    "numImports": 0
+  },
+  {
+    "name": "lazy-runtime-helper",
+    "symbols": [
+      "require",
+      "exports",
+      "module",
+      "__identity",
+      "import_runtime",
+      "require_"
+    ],
+    "parts": 3,
+    "stmtKinds": [
+      [],
+      [
+        "other"
+      ],
+      [
+        "LazyExport"
+      ]
+    ],
+    "importPaths": [
+      "\u003cruntime\u003e"
+    ],
+    "hasLazyExport": true,
+    "numImports": 1
+  },
+  {
+    "name": "lazy-global-helper",
+    "symbols": [
+      "require",
+      "exports",
+      "module",
+      "React",
+      "require_"
+    ],
+    "parts": 2,
+    "stmtKinds": [
+      [],
+      [
+        "LazyExport"
+      ]
+    ],
+    "importPaths": [],
+    "hasLazyExport": true,
+    "numImports": 0
+  },
+  {
+    "name": "glob-resolve",
+    "symbols": [
+      "require",
+      "exports",
+      "module",
+      "_glob",
+      "__glob",
+      "import_runtime",
+      "require_"
+    ],
+    "parts": 3,
+    "stmtKinds": [
+      [],
+      [
+        "other"
+      ],
+      [
+        "Local"
+      ]
+    ],
+    "importPaths": [
+      "./a.js",
+      "./b.js",
+      "\u003cruntime\u003e"
+    ],
+    "hasLazyExport": false,
+    "numImports": 3
+  },
+  {
+    "name": "glob-empty",
+    "symbols": [
+      "require",
+      "exports",
+      "module",
+      "_g",
+      "__glob",
+      "import_runtime",
+      "require_"
+    ],
+    "parts": 3,
+    "stmtKinds": [
+      [],
+      [
+        "other"
+      ],
+      [
+        "Local"
+      ]
+    ],
+    "importPaths": [
+      "\u003cruntime\u003e"
+    ],
+    "hasLazyExport": false,
+    "numImports": 1
+  }
+]

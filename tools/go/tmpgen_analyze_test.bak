@@ -1,0 +1,58 @@
+package cli
+
+// 第 105 轮 Go 探针：addAnalyzePlugin（append PrintAnalysis 插件 + Metafile=true + OnEnd 输出 AnalyzeMetafile）。
+// 固定 metafile + args，捕获 stderr，全确定。一探针覆盖 addAnalyzePlugin。
+import (
+  "encoding/json"
+  "io"
+  "os"
+  "testing"
+
+  "github.com/evanw/esbuild/pkg/api"
+)
+
+type anRow struct {
+  Name string `json:"name"`
+  NumPlugins int `json:"numPlugins"`
+  PluginName string `json:"pluginName"`
+  Metafile bool `json:"metafile"`
+  Stderr string `json:"stderr"`
+}
+
+func TestTmpGenAnalyze105(t *testing.T) {
+  mf := `{"outputs":{"out.js":{"entryPoint":"a.js","bytes":10,"inputs":{"a.js":{"bytesInOutput":10}}}}}`
+  cases := []struct{ name string; mode analyzeMode; args []string; metafile string }{
+    {"enabled", analyzeEnabled, []string{}, mf},
+    {"verbose", analyzeVerbose, []string{}, mf},
+    {"disabled-empty", analyzeDisabled, []string{}, ""},
+    {"enabled-cf", analyzeEnabled, []string{"--color=false"}, mf},
+  }
+  rows := []anRow{}
+  for _, c := range cases {
+    opts := &api.BuildOptions{}
+    addAnalyzePlugin(opts, c.mode, c.args)
+    r := anRow{Name:c.name, NumPlugins:len(opts.Plugins), Metafile:opts.Metafile}
+    if len(opts.Plugins)>0 {
+      r.PluginName = opts.Plugins[0].Name
+      // capture stderr while invoking Setup's OnEnd
+      pb := api.PluginBuild{InitialOptions:opts}
+      // PluginBuild fields are unexported callbacks but accessible within same module? no — use api package helper.
+      // Instead call through Setup with a real PluginBuild built by a tiny api helper.
+      stderrOut := invokeOnEnd(opts.Plugins[0], c.metafile)
+      r.Stderr = stderrOut
+      _ = pb
+    }
+    rows=append(rows,r)
+  }
+  b,err:=json.MarshalIndent(rows,"","  "); if err!=nil{t.Fatal(err)}
+  if err:=os.WriteFile("/root/port/testdata/analyze-plugin-go.json",b,0644);err!=nil{t.Fatal(err)}
+  t.Logf("wrote %d rows bytes=%d",len(rows),len(b))
+}
+
+// invokeOnEnd uses api's exported helper to run a plugin's Setup and its OnEnd callback with a fixed BuildResult, capturing stderr.
+func invokeOnEnd(p api.Plugin, metafile string) string {
+  old := os.Stderr; r,w,_ := os.Pipe(); os.Stderr=w
+  api.RunOnEndForTest(p, metafile)
+  w.Close(); os.Stderr=old
+  b,_:=io.ReadAll(r); return string(b)
+}

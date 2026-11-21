@@ -1,0 +1,60 @@
+package api_test
+
+// 第 97 轮 Go 探针：transform 链端到端字节 oracle（api.Transform → transformImpl →
+// ScanBundle/Compile）。一组 options（format/minifyWhitespace/lineLimit/charset）驱动真实
+// api.Transform，覆盖整条编排链，供 TS 侧 Transform/transformImpl wrap 逐字节对照。
+import (
+	"encoding/json"
+	"os"
+	"testing"
+
+	"github.com/evanw/esbuild/pkg/api"
+)
+
+type t97Row struct {
+	Name string `json:"name"`
+	Gear string `json:"gear"`
+	Src  string `json:"src"`
+	Code string `json:"code"`
+}
+
+func TestTmpGenTransformChain97(t *testing.T) {
+	sources := []struct{ name, src string }{
+		{"export-two", "const A=1; const B=2; const unused=3; function f(){return A+B} export {f}"},
+		{"let-counter", "let counter=0; counter++; export {counter}"},
+		{"tmp-collision", "const tmp=0; function a(){let tmp=1;return tmp} export {a}"},
+		{"comment", "// leading comment\nconst y=2; export {y}"},
+		{"export-fn", "export function f(){ return 1 }"},
+		{"export-class", "export class C { m(){} }"},
+		{"multi-export", "const a=1,b=2,c=3; export {a,b,c};"},
+		{"sibling-tmp", "function foo(){const tmp=1;return tmp} function bar(){const tmp=2;return tmp} export {foo,bar}"},
+		{"use-define", "if (DEBUG) console.log(VERSION); export const v = VERSION;"},
+		{"class-src", "export class C { constructor(){ this.x = 1 } m(){ return this.x } }"},
+	}
+	gears := []struct {
+		name string
+		opts api.TransformOptions
+	}{
+		{"default", api.TransformOptions{Format: api.FormatESModule, Target: api.ESNext}},
+		{"minify-ws", api.TransformOptions{Format: api.FormatESModule, Target: api.ESNext, MinifyWhitespace: true}},
+		{"line-limit", api.TransformOptions{Format: api.FormatESModule, Target: api.ESNext, LineLimit: 30}},
+		{"ascii", api.TransformOptions{Format: api.FormatESModule, Target: api.ESNext, Charset: api.CharsetASCII}},
+		{"defines", api.TransformOptions{Format: api.FormatESModule, Target: api.ESNext, Define: map[string]string{"DEBUG": "false", "VERSION": `"1.2.3"`}}},
+		{"target-es5", api.TransformOptions{Format: api.FormatESModule, Target: api.ES5}},
+	}
+	rows := []t97Row{}
+	for _, g := range gears {
+		for _, s := range sources {
+			o := g.opts // copy
+			res := api.Transform(s.src, o)
+			if len(res.Errors) > 0 {
+				t.Errorf("%s/%s: transform errors: %v", g.name, s.name, res.Errors)
+				continue
+			}
+			rows = append(rows, t97Row{s.name, g.name, s.src, string(res.Code)})
+		}
+	}
+	out, _ := json.MarshalIndent(rows, "", "  ")
+	if err := os.WriteFile("/root/port/testdata/transform-chain3-go.json", out, 0644); err != nil { t.Fatal(err) }
+	t.Logf("wrote %d rows bytes=%d", len(rows), len(out))
+}

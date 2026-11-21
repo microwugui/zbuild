@@ -1,0 +1,1 @@
+div { :where(:is(.foo)&) { color: red } }

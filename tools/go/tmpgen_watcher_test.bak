@@ -1,0 +1,33 @@
+package api
+
+// 第 106 轮 Go 探针：watcher.setWatchData（shouldLog=false，确定性状态：data 复制 + recentItems 过滤）。
+import ("encoding/json";"os";"testing"
+ "github.com/evanw/esbuild/internal/fs"
+)
+
+type swRow struct { Name string `json:"name"`; DataPaths []string `json:"dataPaths"`; RecentItems []string `json:"recentItems"`; ItemsToScan int `json:"itemsToScan"` }
+
+func TestTmpGenWatcher106(t *testing.T){
+  fn:=func()string{return ""}
+  rows:=[]swRow{}
+  run:=func(name string, recent []string, paths []string) swRow {
+    w:=&watcher{shouldLog:false,recentItems:append([]string{},recent...),itemsToScan:[]string{"old1","old2"}}
+    wd:=fs.WatchData{Paths:map[string]func()string{}}
+    for _,p:=range paths { wd.Paths[p]=fn }
+    w.setWatchData(wd)
+    keys:=[]string{}
+    for p:=range w.data.Paths { keys=append(keys,p) }
+    // sort for determinism
+    sortStrings(keys)
+    ri:=w.recentItems; if ri==nil{ri=[]string{}}
+    return swRow{name,keys,ri,len(w.itemsToScan)}
+  }
+  rows=append(rows,run("fresh",[]string{},[]string{"a.js","b.js"}))
+  rows=append(rows,run("filter-recent",[]string{"a.js","gone.js","b.js"},[]string{"a.js","b.js"}))
+  rows=append(rows,run("all-recent-gone",[]string{"x.js","y.js"},[]string{"a.js"}))
+  rows=append(rows,run("empty-data",[]string{"a.js"},[]string{}))
+  b,err:=json.MarshalIndent(rows,"","  ");if err!=nil{t.Fatal(err)}
+  if err:=os.WriteFile("/root/port/testdata/watcher-state-go.json",b,0644);err!=nil{t.Fatal(err)}
+  t.Logf("wrote %d rows bytes=%d",len(rows),len(b))
+}
+func sortStrings(s []string){ for i:=1;i<len(s);i++{for j:=i;j>0&&s[j]<s[j-1];j--{s[j],s[j-1]=s[j-1],s[j]}}} 

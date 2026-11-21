@@ -1,0 +1,100 @@
+package bundler
+
+// 第 106 轮 Go 探针：RunOnResolvePlugins / runOnLoadPlugins（bundler 插件驱动）整族状态机。
+// 回调固定结果 + MockFS，全确定；一探针覆盖两函数多场景。
+import (
+  "encoding/json"
+  "os"
+  "regexp"
+  "testing"
+
+  "github.com/evanw/esbuild/internal/ast"
+  "github.com/evanw/esbuild/internal/cache"
+  "github.com/evanw/esbuild/internal/config"
+  "github.com/evanw/esbuild/internal/fs"
+  "github.com/evanw/esbuild/internal/logger"
+  "github.com/evanw/esbuild/internal/resolver"
+)
+
+type pdMsg struct { Text string `json:"text"`; Kind int `json:"kind"` }
+type pdResolve struct {
+  Nil bool `json:"nil"`; Stopped bool `json:"stopped"`
+  Path string `json:"path"`; PathNS string `json:"pathNS"`; External bool `json:"external"`
+  SideEffectFree bool `json:"sef"`; PluginData string `json:"pluginData"`
+  Msgs []pdMsg `json:"msgs"`
+}
+type pdLoad struct {
+  OK bool `json:"ok"`; Loader int `json:"loader"`; AbsResolveDir string `json:"absResolveDir"`
+  PluginName string `json:"pluginName"`; Contents string `json:"contents"`; PluginData string `json:"pluginData"`
+  Msgs []pdMsg `json:"msgs"`
+}
+type pdRow struct { Name string `json:"name"`; Resolve pdResolve `json:"resolve"`; Load pdLoad `json:"load"`; LogMsgs []pdMsg `json:"logMsgs"` }
+
+func msgsOf(ms []logger.Msg) []pdMsg { out:=[]pdMsg{}; for _,m:=range ms { out=append(out,pdMsg{m.Data.Text,int(m.Kind)}) }; return out }
+func re(s string) *regexp.Regexp { return regexp.MustCompile(s) }
+func strp(s string)*string{return &s}
+
+func TestTmpGenPluginDriver106(t *testing.T) {
+  files:=map[string]string{"/p/a.js":"var a = 1;", "/p/b.js":"var b = 2;"}
+  mfs:=fs.MockFS(files, fs.MockUnix, "/")
+  logMsgs:=func(l logger.Log)[]pdMsg{ return msgsOf(l.Done()) }
+
+  resolveCase:=func(name string, plugins []config.Plugin) pdRow {
+    log:=logger.NewDeferLog(logger.DeferLogAll,nil)
+    res:=resolver.NewResolver(config.BuildCall,mfs,log,cache.MakeCacheSet(),&config.Options{ExtensionOrder:[]string{".js"}})
+    importer:=logger.Path{Text:"/p/main.js",Namespace:"file"}
+    src:=&logger.Source{KeyPath:importer,Contents:"import 'x'"}
+    result,stopped,_:=RunOnResolvePlugins(plugins,res,log,mfs,&cache.MakeCacheSet().FSCache,nil,logger.Range{},importer,"pkg",logger.ImportAttributes{},ast.ImportStmt,"/p",nil,logger.RelPath)
+    r:=pdRow{Name:name,LogMsgs:logMsgs(log)}
+    if result==nil { r.Resolve=pdResolve{Nil:true,Stopped:stopped}; return r }
+    r.Resolve=pdResolve{Nil:false,Stopped:stopped,Path:result.PathPair.Primary.Text,PathNS:result.PathPair.Primary.Namespace,External:result.PathPair.IsExternal}
+    if result.PrimarySideEffectsData!=nil{r.Resolve.SideEffectFree=true}
+    if s,ok:=result.PluginData.(string);ok{r.Resolve.PluginData=s}
+    _=src
+    return r
+  }
+  loadCase:=func(name string, plugins []config.Plugin, keyPath logger.Path) pdRow {
+    log:=logger.NewDeferLog(logger.DeferLogAll,nil)
+    src:=&logger.Source{KeyPath:keyPath,Contents:"orig"}
+    res,ok:=runOnLoadPlugins(plugins,mfs,&cache.MakeCacheSet().FSCache,log,src,nil,logger.Range{},nil,false,logger.RelPath)
+    r:=pdRow{Name:name,LogMsgs:logMsgs(log)}
+    r.Load=pdLoad{OK:ok,Loader:int(res.loader),AbsResolveDir:res.absResolveDir,PluginName:res.pluginName,Contents:string(src.Contents)}
+    if s,ok:=res.pluginData.(string);ok{r.Load.PluginData=s}
+    return r
+  }
+  rows:=[]pdRow{}
+
+  // Resolve: plugin 命中，返回带 namespace/PluginData/sideEffectFree/external
+  rows=append(rows,resolveCase("resolve-hit",[]config.Plugin{{Name:"rp",OnResolve:[]config.OnResolve{{Filter:re(`.*`),Namespace:"file",Callback:func(a config.OnResolveArgs)config.OnResolveResult{
+    return config.OnResolveResult{Path:logger.Path{Text:"/abs/out.js",Namespace:"custom"},PluginData:"pd",IsSideEffectFree:true}
+  }}}}}))
+  // Resolve: plugin 返回 external（Path 为空，external=true → path 本身）
+  rows=append(rows,resolveCase("resolve-external",[]config.Plugin{{Name:"rp",OnResolve:[]config.OnResolve{{Filter:re(`.*`),Callback:func(a config.OnResolveArgs)config.OnResolveResult{
+    return config.OnResolveResult{External:true,PluginData:"ext"}
+  }}}}}))
+  // Resolve: 回调报错 → stopped
+  rows=append(rows,resolveCase("resolve-error",[]config.Plugin{{Name:"rp",OnResolve:[]config.OnResolve{{Filter:re(`.*`),Callback:func(a config.OnResolveArgs)config.OnResolveResult{
+    return config.OnResolveResult{Msgs:[]logger.Msg{{Kind:logger.Error,Data:logger.MsgData{Text:"resolve fail"}}}}
+  }}}}}))
+  // Resolve: 非绝对路径且 file namespace → 报错 stopped
+  rows=append(rows,resolveCase("resolve-relpath",[]config.Plugin{{Name:"rp",OnResolve:[]config.OnResolve{{Filter:re(`.*`),Callback:func(a config.OnResolveArgs)config.OnResolveResult{
+    return config.OnResolveResult{Path:logger.Path{Text:"relative.js",Namespace:"file"}}
+  }}}}}))
+
+  // Load: plugin 命中，返回 contents + loader + resolveDir + pluginData
+  rows=append(rows,loadCase("load-hit",[]config.Plugin{{Name:"lp",OnLoad:[]config.OnLoad{{Filter:re(`.*`),Callback:func(a config.OnLoadArgs)config.OnLoadResult{
+    return config.OnLoadResult{Contents:strp("loaded!"),Loader:config.LoaderTS,PluginData:"ld",AbsResolveDir:"/r"}
+  }}}}},logger.Path{Text:"/p/x.js",Namespace:"file"}))
+  // Load: 回调返回 nil contents → continue → disk read
+  rows=append(rows,loadCase("load-disk",[]config.Plugin{{Name:"lp",OnLoad:[]config.OnLoad{{Filter:re(`nop`),Callback:func(a config.OnLoadArgs)config.OnLoadResult{return config.OnLoadResult{}}}}}},logger.Path{Text:"/p/a.js",Namespace:"file"}))
+  // Load: disabled namespace
+  rows=append(rows,loadCase("load-disabled",nil,logger.Path{Text:"x",Namespace:"disabled"}))
+  // Load: 回调报错 → ok=false
+  rows=append(rows,loadCase("load-error",[]config.Plugin{{Name:"lp",OnLoad:[]config.OnLoad{{Filter:re(`.*`),Callback:func(a config.OnLoadArgs)config.OnLoadResult{
+    return config.OnLoadResult{Msgs:[]logger.Msg{{Kind:logger.Error,Data:logger.MsgData{Text:"load fail"}}}}
+  }}}}},logger.Path{Text:"/p/x.js",Namespace:"file"}))
+
+  b,err:=json.MarshalIndent(rows,"","  "); if err!=nil{t.Fatal(err)}
+  if err:=os.WriteFile("/root/port/testdata/bundler-plugin-driver-go.json",b,0644);err!=nil{t.Fatal(err)}
+  t.Logf("wrote %d rows bytes=%d",len(rows),len(b))
+}

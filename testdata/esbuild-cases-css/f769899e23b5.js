@@ -1,0 +1,1 @@
+a { color: hwb(1deg 40% 80%) }

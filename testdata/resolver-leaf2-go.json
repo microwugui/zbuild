@@ -1,0 +1,87 @@
+[
+  {
+    "fn": "pjStatusUndefined",
+    "arg": "",
+    "out": "0"
+  },
+  {
+    "fn": "pjStatusUndefinedNoConditionsMatch",
+    "arg": "",
+    "out": "1"
+  },
+  {
+    "fn": "pnpSuccess",
+    "arg": "",
+    "out": "3"
+  },
+  {
+    "fn": "isUndefined",
+    "arg": "0",
+    "out": "true"
+  },
+  {
+    "fn": "isUndefined",
+    "arg": "1",
+    "out": "true"
+  },
+  {
+    "fn": "isUndefined",
+    "arg": "2",
+    "out": "false"
+  },
+  {
+    "fn": "isError",
+    "arg": "2",
+    "out": "true"
+  },
+  {
+    "fn": "isError",
+    "arg": "3",
+    "out": "false"
+  },
+  {
+    "fn": "isError",
+    "arg": "4",
+    "out": "false"
+  },
+  {
+    "fn": "getString",
+    "arg": "str",
+    "out": "true|hello"
+  },
+  {
+    "fn": "getStringOrNull",
+    "arg": "str",
+    "out": "true|hello"
+  },
+  {
+    "fn": "getString",
+    "arg": "num",
+    "out": "false|"
+  },
+  {
+    "fn": "getStringOrNull",
+    "arg": "num",
+    "out": "false|"
+  },
+  {
+    "fn": "getString",
+    "arg": "null",
+    "out": "false|"
+  },
+  {
+    "fn": "getStringOrNull",
+    "arg": "null",
+    "out": "true|"
+  },
+  {
+    "fn": "getBool",
+    "arg": "bool",
+    "out": "true|true"
+  },
+  {
+    "fn": "getBool",
+    "arg": "num",
+    "out": "false|false"
+  }
+]

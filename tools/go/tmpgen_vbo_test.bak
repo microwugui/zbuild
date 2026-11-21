@@ -1,0 +1,140 @@
+package api
+
+import (
+	"encoding/json"
+	"fmt"
+	"os"
+	"sort"
+	"testing"
+
+	"github.com/evanw/esbuild/internal/config"
+	"github.com/evanw/esbuild/internal/bundler"
+	"github.com/evanw/esbuild/internal/fs"
+	"github.com/evanw/esbuild/internal/logger"
+)
+
+type vborow struct { Name string `json:"name"`; Data json.RawMessage `json:"data"` }
+type vbofix struct { Rows []vborow `json:"rows"` }
+
+func vboExpr(e *config.DefineExpr) string {
+	if e == nil { return "empty" }
+	if e.Constant != nil { return "const" }
+	if len(e.Parts) > 0 { s := e.Parts[0]; for _, p := range e.Parts[1:] { s += "." + p }; return "parts:" + s }
+	return "empty"
+}
+func vboExprVal(e config.DefineExpr) string { return vboExpr(&e) }
+func vboTmpl(ts []config.PathTemplate) string {
+	out := ""
+	for _, t := range ts { out += t.Data + ":" + fmt.Sprint(t.Placeholder) + ";" }
+	return out
+}
+func vboStrMap(m map[string]string) [][]string {
+	out := [][]string{}
+	for k, v := range m { out = append(out, []string{k, v}) }
+	sort.Slice(out, func(i, j int) bool { return out[i][0] < out[j][0] })
+	return out
+}
+func vboLoaderMap(m map[string]config.Loader) [][]string {
+	out := [][]string{}
+	for k, v := range m { out = append(out, []string{k, fmt.Sprint(int(v))}) }
+	sort.Slice(out, func(i, j int) bool { return out[i][0] < out[j][0] })
+	return out
+}
+func vboPrefixes(m map[uint16]uint8) [][]string {
+	out := [][]string{}
+	for k, v := range m { out = append(out, []string{fmt.Sprint(k), fmt.Sprint(v)}) }
+	sort.Slice(out, func(i, j int) bool { return out[i][0] < out[j][0] })
+	return out
+}
+func vboErrs(log logger.Log) []string {
+	e := []string{}
+	for _, m := range log.Peek() { e = append(e, m.Data.Text) }
+	return e
+}
+func vboDefines(d *config.ProcessedDefines) map[string]interface{} {
+	if d == nil { return map[string]interface{}{} }
+	ids := map[string]string{}
+	for k, v := range d.IdentifierDefines {
+		s := ""
+		for _, p := range v.KeyParts { if s != "" { s += "." }; s += p }
+		ids[k] = s + "|" + fmt.Sprint(v.Flags) + "|" + vboExpr(v.DefineExpr)
+	}
+	dts := map[string][]string{}
+	for tail, arr := range d.DotDefines {
+		for _, v := range arr {
+			s := ""
+			for _, p := range v.KeyParts { if s != "" { s += "." }; s += p }
+			dts[tail] = append(dts[tail], s+"|"+fmt.Sprint(v.Flags)+"|"+vboExpr(v.DefineExpr))
+		}
+		sort.Strings(dts[tail])
+	}
+	return map[string]interface{}{"ids": ids, "dots": dts}
+}
+
+func dumpVBO(o *config.Options, eps []bundler.EntryPoint, log logger.Log) map[string]interface{} {
+	prefixes := map[uint16]uint8{}
+	for d, p := range o.CSSPrefixData { prefixes[uint16(d)] = uint8(p) }
+	pre := []string{}
+	for k, v := range o.ExternalSettings.PreResolve.Exact { if v { pre = append(pre, k) } }
+	sort.Strings(pre)
+	post := []string{}
+	for k, v := range o.ExternalSettings.PostResolve.Exact { if v { post = append(post, k) } }
+	sort.Strings(post)
+	entryPts := [][]string{}
+	for _, ep := range eps { entryPts = append(entryPts, []string{ep.InputPath, ep.OutputPath}) }
+	inj := []string{}
+	for _, d := range o.InjectedDefines { inj = append(inj, d.Name+":"+d.Source.Contents) }
+	mp, rp := "", ""
+	if o.MangleProps != nil { mp = o.MangleProps.String() }
+	if o.ReserveProps != nil { rp = o.ReserveProps.String() }
+	stdin := map[string]interface{}{}
+	if o.Stdin != nil { stdin = map[string]interface{}{"loader": int(o.Stdin.Loader), "contents": o.Stdin.Contents, "source": o.Stdin.SourceFile, "dir": o.Stdin.AbsResolveDir} } else { stdin = nil }
+	return map[string]interface{}{
+		"jsFeat": fmt.Sprint(o.UnsupportedJSFeatures), "cssFeat": int(o.UnsupportedCSSFeatures),
+		"jsOv": fmt.Sprint(o.UnsupportedJSFeatureOverrides), "jsMask": fmt.Sprint(o.UnsupportedJSFeatureOverridesMask),
+		"cssOv": int(o.UnsupportedCSSFeatureOverrides), "cssMask": int(o.UnsupportedCSSFeatureOverridesMask),
+		"targetEnv": o.OriginalTargetEnv, "platform": int(o.Platform), "format": int(o.OutputFormat), "mode": int(o.Mode),
+		"sourceMap": int(o.SourceMap), "legalComments": int(o.LegalComments),
+		"jsx": map[string]interface{}{"preserve": o.JSX.Preserve, "auto": o.JSX.AutomaticRuntime, "dev": o.JSX.Development, "import": o.JSX.ImportSource, "sideEffects": o.JSX.SideEffects, "factory": vboExprVal(o.JSX.Factory), "fragment": vboExprVal(o.JSX.Fragment)},
+		"defines": vboDefines(o.Defines), "injected": inj,
+		"minWhitespace": o.MinifyWhitespace, "minIdents": o.MinifyIdentifiers, "minSyntax": o.MinifySyntax,
+		"lineLimit": o.LineLimit, "dropLabels": o.DropLabels, "dropDebugger": o.DropDebugger,
+		"mangleProps": mp, "reserveProps": rp, "mangleQuoted": o.MangleQuoted,
+		"asciiOnly": o.ASCIIOnly, "treeShaking": o.TreeShaking, "keepNames": o.KeepNames, "ignoreDCE": o.IgnoreDCEAnnotations,
+		"globalName": o.GlobalName, "codeSplitting": o.CodeSplitting,
+		"outfile": o.AbsOutputFile, "outdir": o.AbsOutputDir, "outbase": o.AbsOutputBase, "writeStdout": o.WriteToStdout, "allowOverwrite": o.AllowOverwrite,
+		"entryT": vboTmpl(o.EntryPathTemplate), "chunkT": vboTmpl(o.ChunkPathTemplate), "assetT": vboTmpl(o.AssetPathTemplate),
+		"outJS": o.OutputExtensionJS, "outCSS": o.OutputExtensionCSS, "loaders": vboLoaderMap(o.ExtensionToLoader),
+		"extOrder": o.ExtensionOrder, "mainFields": o.MainFields, "conditions": o.Conditions, "absNodePaths": o.AbsNodePaths,
+		"extPre": pre, "extPost": post, "extPackages": o.ExternalPackages, "aliases": vboStrMap(o.PackageAliases),
+		"tsconfig": o.TSConfigPath, "tsconfigRaw": o.TSConfigRaw, "publicPath": o.PublicPath, "injectPaths": o.InjectPaths,
+		"codeStyle": int(o.CodePathStyle), "logStyle": int(o.LogPathStyle), "metaStyle": int(o.MetafilePathStyle),
+		"jsBanner": o.JSBanner, "jsFooter": o.JSFooter, "cssBanner": o.CSSBanner, "cssFooter": o.CSSFooter,
+		"preserveSymlinks": o.PreserveSymlinks, "sourceRoot": o.SourceRoot, "excludeSources": o.ExcludeSourcesContent,
+		"needsMetafile": o.NeedsMetafile, "prefixes": vboPrefixes(prefixes), "stdin": stdin,
+		"entryPoints": entryPts, "errors": vboErrs(log),
+	}
+}
+
+func TestTmpGenVBO(t *testing.T) {
+	fx := vbofix{}
+	realFS := fs.MockFS(nil, fs.MockUnix, "/home/user/project")
+	cases := []struct{ name string; opts BuildOptions }{
+		{"empty", BuildOptions{Write: false}},
+		{"bundle-basic", BuildOptions{Bundle: true, Write: true, EntryPoints: []string{"src/index.js"}, Outdir: "dist", Target: ES2020, MinifyWhitespace: true, MinifyIdentifiers: true, MinifySyntax: true, Define: map[string]string{"NODE_ENV": "\"production\""}}},
+		{"node-outfile", BuildOptions{Write: true, Platform: PlatformNode, Outfile: "out.js", Bundle: true, EntryPoints: []string{"a.js"}}},
+		{"neutral-splitting", BuildOptions{Write: true, Platform: PlatformNeutral, Splitting: true, Outdir: "dist", Format: FormatESModule, Bundle: true, EntryPoints: []string{"a.js"}}},
+		{"errors", BuildOptions{Write: true, EntryPoints: []string{"a.js", "b.js"}, External: []string{"foo"}, Splitting: true}},
+		{"jsx-stdin", BuildOptions{Write: true, JSX: JSXAutomatic, JSXFactory: "React.createElement", JSXFragment: "React.Fragment", Stdin: &StdinOptions{Contents: "let x=1", Loader: LoaderTS, Sourcefile: "in.ts", ResolveDir: "src"}, Supported: map[string]bool{"async-await": false}}},
+		{"full", BuildOptions{Write: true, Bundle: true, EntryPoints: []string{"a.js"}, Outdir: "dist", Outbase: "src", Format: FormatESModule, Target: ES2018, Charset: CharsetASCII, TreeShaking: TreeShakingTrue, GlobalName: "MyLib", Banner: map[string]string{"js": "// hi"}, Footer: map[string]string{"css": "/* f */"}, OutExtension: map[string]string{".js": ".mjs"}, EntryNames: "[dir]/[name]", ChunkNames: "chunks/[name]", PublicPath: "https://cdn/", Conditions: []string{"browser"}, MainFields: []string{"module", "main"}, NodePaths: []string{"node_modules"}, Inject: []string{"react"}, Pure: []string{"Object.assign"}, DropLabels: []string{"DEV"}, MangleProps: "^_", KeepNames: true, LegalComments: LegalCommentsNone, Sourcemap: SourceMapLinked}},
+	}
+	for _, c := range cases {
+		log := logger.NewDeferLog(logger.DeferLogNoVerboseOrDebug, nil)
+		options, eps := validateBuildOptions(c.opts, log, realFS)
+		data, _ := json.Marshal(dumpVBO(&options, eps, log))
+		fx.Rows = append(fx.Rows, vborow{c.name, data})
+	}
+	bts, _ := json.MarshalIndent(fx, "", "  ")
+	if err := os.WriteFile("/root/port/testdata/vbo-go.json", bts, 0644); err != nil { t.Fatal(err) }
+	t.Logf("wrote %d rows bytes=%d", len(fx.Rows), len(bts))
+}

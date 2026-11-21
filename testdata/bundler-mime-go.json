@@ -1,0 +1,72 @@
+[
+  {
+    "fn": "guessMimeType",
+    "arg": ".css",
+    "out": "text/css;charset=utf-8"
+  },
+  {
+    "fn": "guessMimeType",
+    "arg": ".js",
+    "out": "text/javascript;charset=utf-8"
+  },
+  {
+    "fn": "guessMimeType",
+    "arg": ".json",
+    "out": "application/json;charset=utf-8"
+  },
+  {
+    "fn": "guessMimeType",
+    "arg": ".txt",
+    "out": "text/plain;charset=utf-8"
+  },
+  {
+    "fn": "guessMimeType",
+    "arg": ".ts",
+    "out": "text/plain;charset=utf-8"
+  },
+  {
+    "fn": "guessMimeType",
+    "arg": ".html",
+    "out": "text/html;charset=utf-8"
+  },
+  {
+    "fn": "guessMimeType",
+    "arg": "",
+    "out": "text/plain;charset=utf-8"
+  },
+  {
+    "fn": "DefaultExtensionToLoaderMap",
+    "arg": "",
+    "out": "10"
+  },
+  {
+    "fn": "DefaultExtensionToLoaderMap",
+    "arg": ".js",
+    "out": "10"
+  },
+  {
+    "fn": "DefaultExtensionToLoaderMap",
+    "arg": ".tsx",
+    "out": "18"
+  },
+  {
+    "fn": "DefaultExtensionToLoaderMap",
+    "arg": ".css",
+    "out": "4"
+  },
+  {
+    "fn": "DefaultExtensionToLoaderMap",
+    "arg": ".module.css",
+    "out": "14"
+  },
+  {
+    "fn": "DefaultExtensionToLoaderMap",
+    "arg": ".json",
+    "out": "11"
+  },
+  {
+    "fn": "DefaultExtensionToLoaderMap",
+    "arg": ".xyz",
+    "out": "0"
+  }
+]

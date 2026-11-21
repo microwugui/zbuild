@@ -1,0 +1,2 @@
+//! @legal comment
+ 'use strict'

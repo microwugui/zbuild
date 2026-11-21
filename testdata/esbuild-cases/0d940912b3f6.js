@@ -1,0 +1,1 @@
+import(x ? 'y' : 'z', {assert: {'a a': 'b'}})

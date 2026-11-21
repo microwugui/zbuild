@@ -1,0 +1,194 @@
+[
+  {
+    "fn": "shouldRemoveImportExportStmt",
+    "arg": {
+      "external": false,
+      "wrap": 0
+    },
+    "out": {
+      "list": {
+        "outside": [],
+        "prefix": [
+          [
+            "local",
+            0,
+            false,
+            [
+              [
+                "require",
+                0
+              ]
+            ]
+          ]
+        ],
+        "suffix": []
+      },
+      "removed": true
+    }
+  },
+  {
+    "fn": "shouldRemoveImportExportStmt",
+    "arg": {
+      "external": true,
+      "wrap": 0
+    },
+    "out": {
+      "list": {
+        "outside": [],
+        "prefix": [],
+        "suffix": []
+      },
+      "removed": false
+    }
+  },
+  {
+    "fn": "shouldRemoveImportExportStmt",
+    "arg": {
+      "external": false,
+      "wrap": 1
+    },
+    "out": {
+      "list": {
+        "outside": [],
+        "prefix": [
+          [
+            "local",
+            0,
+            false,
+            [
+              [
+                "require",
+                0
+              ]
+            ]
+          ]
+        ],
+        "suffix": []
+      },
+      "removed": true
+    }
+  },
+  {
+    "fn": "shouldRemoveImportExportStmt",
+    "arg": {
+      "external": true,
+      "wrap": 1
+    },
+    "out": {
+      "list": {
+        "outside": [],
+        "prefix": [],
+        "suffix": []
+      },
+      "removed": false
+    }
+  },
+  {
+    "fn": "shouldRemoveImportExportStmt",
+    "arg": {
+      "external": false,
+      "wrap": 2
+    },
+    "out": {
+      "list": {
+        "outside": [],
+        "prefix": [
+          [
+            "local",
+            0,
+            false,
+            [
+              [
+                "require",
+                0
+              ]
+            ]
+          ]
+        ],
+        "suffix": []
+      },
+      "removed": true
+    }
+  },
+  {
+    "fn": "shouldRemoveImportExportStmt",
+    "arg": {
+      "external": true,
+      "wrap": 2
+    },
+    "out": {
+      "list": {
+        "outside": [],
+        "prefix": [],
+        "suffix": []
+      },
+      "removed": false
+    }
+  },
+  {
+    "fn": "convertStmtsForChunk",
+    "arg": {
+      "scenario": "stripExports"
+    },
+    "out": {
+      "outside": [],
+      "prefix": [],
+      "suffix": [
+        [
+          "function",
+          "1:10",
+          false
+        ],
+        [
+          "local",
+          2,
+          false,
+          []
+        ]
+      ]
+    }
+  },
+  {
+    "fn": "convertStmtsForChunk",
+    "arg": {
+      "scenario": "esmWrap"
+    },
+    "out": {
+      "outside": [
+        [
+          "import",
+          1,
+          3,
+          0,
+          []
+        ]
+      ],
+      "prefix": [],
+      "suffix": []
+    }
+  },
+  {
+    "fn": "convertStmtsForChunk",
+    "arg": {
+      "scenario": "exportDefault"
+    },
+    "out": {
+      "outside": [],
+      "prefix": [],
+      "suffix": [
+        [
+          "local",
+          0,
+          false,
+          [
+            [
+              "id",
+              1,
+              21
+            ]
+          ]
+        ]
+      ]
+    }
+  }
+]

@@ -1,0 +1,32 @@
+package resolver
+
+// Restore pre-existing testdata/resolver-pure-go.json (schema {name,val,out}) from Go.
+import (
+	"encoding/json"
+	"os"
+	"strconv"
+	"testing"
+)
+
+func TestTmpGenResolverRestore(t *testing.T) {
+	type row struct { Name string `json:"name"`; Val string `json:"val"`; Out string `json:"out"` }
+	var out []row
+
+	for _, s := range []string{"", "foo", "a/b", "a\\b", "a/b/c", "a/./b", "node_modules/x", "a//b", ".hidden/x", "a/../b"} {
+		out = append(out, row{"findInvalidSegment", s, findInvalidSegment(s)})
+	}
+	for _, s := range []string{"foo.js", "foo.JS", "foo", ".js", "FOO.Js", "x.jsx", "a/b.js"} {
+		out = append(out, row{"hasCaseInsensitiveSuffix(.js)", s, strconv.FormatBool(hasCaseInsensitiveSuffix(s, ".js"))})
+	}
+	for _, s := range []string{"foo", "/abs", "./rel", "../up", ".", "..", "@scope/pkg", "a/b"} {
+		out = append(out, row{"IsPackagePath", s, strconv.FormatBool(IsPackagePath(s))})
+	}
+	for _, s := range []string{"", "foo", "a b", `a"b`, "日本語"} {
+		out = append(out, row{"quoteOrNullIfEmpty", s, quoteOrNullIfEmpty(s)})
+	}
+
+	b, err := json.MarshalIndent(out, "", "  ")
+	if err != nil { t.Fatal(err) }
+	if err := os.WriteFile("/root/port/testdata/resolver-pure-go.json", b, 0644); err != nil { t.Fatal(err) }
+	t.Logf("wrote %d rows", len(out))
+}

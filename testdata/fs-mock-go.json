@@ -1,0 +1,72 @@
+[
+  {
+    "fn": "win2unix",
+    "arg": "C:\\foo\\bar",
+    "out": "/foo/bar|C"
+  },
+  {
+    "fn": "win2unix",
+    "arg": "d:\\x",
+    "out": "/x|d"
+  },
+  {
+    "fn": "win2unix",
+    "arg": "/unix/path",
+    "out": "/unix/path|"
+  },
+  {
+    "fn": "win2unix",
+    "arg": "relative\\path",
+    "out": "relative/path|"
+  },
+  {
+    "fn": "win2unix",
+    "arg": "\\",
+    "out": "/|"
+  },
+  {
+    "fn": "win2unix",
+    "arg": "",
+    "out": "|"
+  },
+  {
+    "fn": "unix2win",
+    "arg": "[/foo/bar C C]",
+    "out": "C:\\foo\\bar"
+  },
+  {
+    "fn": "unix2win",
+    "arg": "[/x  D]",
+    "out": "D:\\x"
+  },
+  {
+    "fn": "unix2win",
+    "arg": "[a/b  C]",
+    "out": "a\\b"
+  },
+  {
+    "fn": "unix2win",
+    "arg": "[\\foo Z C]",
+    "out": "Z:\\foo"
+  },
+  {
+    "fn": "splitOnSlash",
+    "arg": "a/b/c",
+    "out": "a|b/c"
+  },
+  {
+    "fn": "splitOnSlash",
+    "arg": "abc",
+    "out": "abc|"
+  },
+  {
+    "fn": "splitOnSlash",
+    "arg": "/leading",
+    "out": "|leading"
+  },
+  {
+    "fn": "splitOnSlash",
+    "arg": "a//b",
+    "out": "a|/b"
+  }
+]

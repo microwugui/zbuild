@@ -1,0 +1,85 @@
+package main
+
+// 第 119 轮 Go 探针：main 的 os.Args 预扫描确定性核心（main.go:159-240）。
+// 逐字复制 main 的 pre-scan 为 scanArgsMain helper，dump 解析出的 flags + 过滤后 osArgs +
+// 早退动作。用有区分度的参数集验证。esbuildVersion="0.28.2"（version.go:3）。
+import (
+	"encoding/json"
+	"os"
+	"strings"
+	"testing"
+)
+
+type mainScan struct {
+	HeapFile string `json:"heapFile"`
+	TraceFile string `json:"traceFile"`
+	CPUProfile string `json:"cpuProfile"`
+	IsRunningService bool `json:"isRunningService"`
+	SendPings bool `json:"sendPings"`
+	IsWatch bool `json:"isWatch"`
+	IsWatchForever bool `json:"isWatchForever"`
+	IsServe bool `json:"isServe"`
+	UseTimer bool `json:"useTimer"`
+	Args []string `json:"args"`
+	EarlyAction string `json:"earlyAction"` // "help" | "version:<v>" | "version-mismatch:<host>" | ""
+}
+
+// scanArgsMain 逐字复刻 main.go:162-240 的预扫描（不含 os.Exit 副作用，改为 EarlyAction 字段）。
+func scanArgsMain(osArgsIn []string) mainScan {
+	osArgs := append([]string{}, osArgsIn...)
+	r := mainScan{}
+	argsEnd := 0
+	for _, arg := range osArgs {
+		switch {
+		case arg == "-h", arg == "-help", arg == "--help", arg == "/?":
+			r.EarlyAction = "help"; return r
+		case arg == "--version":
+			r.EarlyAction = "version:" + esbuildVersion; return r
+		case strings.HasPrefix(arg, "--heap="):
+			r.HeapFile = arg[len("--heap="):]
+		case strings.HasPrefix(arg, "--trace="):
+			r.TraceFile = arg[len("--trace="):]
+		case strings.HasPrefix(arg, "--timing"):
+			r.UseTimer = true
+		case strings.HasPrefix(arg, "--cpuprofile="):
+			r.CPUProfile = arg[len("--cpuprofile="):]
+		case strings.HasPrefix(arg, "--service="):
+			hostVersion := arg[len("--service="):]
+			r.IsRunningService = true
+			if hostVersion != esbuildVersion { r.EarlyAction = "version-mismatch:" + hostVersion; return r }
+		case strings.HasPrefix(arg, "--ping"):
+			r.SendPings = true
+		default:
+			if arg == "--watch" || arg == "--watch=true" {
+				r.IsWatch = true
+			} else if arg == "--watch=forever" {
+				arg = "--watch"; r.IsWatch = true; r.IsWatchForever = true
+			} else if arg == "--serve" || strings.HasPrefix(arg, "--serve=") ||
+				strings.HasPrefix(arg, "--servedir=") || strings.HasPrefix(arg, "--serve-fallback=") {
+				r.IsServe = true
+			}
+			osArgs[argsEnd] = arg; argsEnd++
+		}
+	}
+	r.Args = osArgs[:argsEnd]
+	return r
+}
+
+func TestTmpGenMain119(t *testing.T) {
+	cases := [][]string{
+		{"a.js"},
+		{"--help"},
+		{"--version"},
+		{"--service=0.28.2", "--ping"},
+		{"--service=0.99.0"},
+		{"--heap=/tmp/h", "--trace=/tmp/t", "--cpuprofile=/tmp/c", "--timing", "a.js"},
+		{"--watch=forever", "a.js"},
+		{"--serve=8000", "a.js"},
+		{"--watch", "--serve", "a.js", "--minify"},
+	}
+	rows := []mainScan{}
+	for _, c := range cases { rows = append(rows, scanArgsMain(c)) }
+	b, _ := json.MarshalIndent(rows, "", "  ")
+	if err := os.WriteFile("/root/port/testdata/main-scan-go.json", b, 0644); err != nil { t.Fatal(err) }
+	for i, r := range rows { t.Logf("%v => %+v", cases[i], r) }
+}

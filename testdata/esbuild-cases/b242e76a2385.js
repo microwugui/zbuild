@@ -1,0 +1,1 @@
+class Foo { #x = @y.#x.y.#x class {} }

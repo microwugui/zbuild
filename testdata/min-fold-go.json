@@ -1,0 +1,81 @@
+[
+  {
+    "name": "simp-empty-comma",
+    "out": [
+      "num",
+      5
+    ]
+  },
+  {
+    "name": "simp-identity",
+    "out": "nil"
+  },
+  {
+    "name": "simp-mutated",
+    "out": [
+      "call",
+      [
+        "id",
+        2
+      ],
+      [
+        "id",
+        3
+      ]
+    ]
+  },
+  {
+    "name": "simp-nested-comma",
+    "out": [
+      "bin",
+      36,
+      [
+        "bin",
+        36,
+        [
+          "num",
+          0
+        ],
+        [
+          "num",
+          1
+        ]
+      ],
+      [
+        "call",
+        [
+          "id",
+          3
+        ]
+      ]
+    ]
+  },
+  {
+    "name": "fold-unary-const",
+    "out": [
+      "num",
+      -42
+    ]
+  },
+  {
+    "name": "fold-binary-const",
+    "out": [
+      "num",
+      43
+    ]
+  },
+  {
+    "name": "fold-if-const",
+    "out": [
+      "num",
+      1
+    ]
+  },
+  {
+    "name": "fold-import-const",
+    "out": [
+      "num",
+      42
+    ]
+  }
+]

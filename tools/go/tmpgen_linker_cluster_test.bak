@@ -1,0 +1,68 @@
+package linker
+
+// Batch 93 Go probe: linker helper cluster (3 functions, one oracle) — bigger batch.
+import (
+	"crypto/sha256"
+	"encoding/base64"
+	"encoding/json"
+	"os"
+	"strconv"
+	"testing"
+
+	"github.com/evanw/esbuild/internal/compat"
+	"github.com/evanw/esbuild/internal/config"
+)
+
+func TestTmpGenLinkerCluster(t *testing.T) {
+	type row struct { Fn string `json:"fn"`; Arg string `json:"arg"`; Out string `json:"out"` }
+	var out []row
+
+	// generateGlobalNamePrefix: arg = base64(globalName)|minify|ascii|logicalAssignUnsupported
+	for _, c := range [][4]string{
+		{base64.StdEncoding.EncodeToString([]byte("foo")), "false", "false", "false"},
+		{base64.StdEncoding.EncodeToString([]byte("foo.bar")), "false", "false", "true"},
+		{base64.StdEncoding.EncodeToString([]byte("this.foo")), "false", "false", "false"},
+		{base64.StdEncoding.EncodeToString([]byte("foo.bar")), "true", "false", "false"},
+		{base64.StdEncoding.EncodeToString([]byte("a—b")), "false", "true", "false"},
+		{base64.StdEncoding.EncodeToString([]byte("import.meta.x")), "false", "false", "false"},
+	} {
+		gn, _ := base64.StdEncoding.DecodeString(c[0])
+		minify := c[1] == "true"; ascii := c[2] == "true"; noLogical := c[3] == "true"
+		unsupported := compat.JSFeature(0)
+		if noLogical { unsupported |= compat.LogicalAssignment }
+		ctx := &linkerContext{options: &config.Options{GlobalName: []string{string(gn)}, MinifyWhitespace: minify, ASCIIOnly: ascii, UnsupportedJSFeatures: unsupported}}
+		out = append(out, row{"generateGlobalNamePrefix", c[0] + "|" + c[1] + "|" + c[2] + "|" + c[3], ctx.generateGlobalNamePrefix()})
+	}
+
+	// appendOrExtendPartRange: arg = "rangesJSON|src|part"
+	for _, s := range []string{
+		`[]|0|5`, `[[0,0,5]]|0|5`, `[[0,0,5]]|0|4`, `[[0,0,5],[1,2,3]]|1|3`,
+	} {
+		p1 := lastIdx(s, '|'); p2 := lastIdx(s[:p1], '|')
+		rangesJSON := s[:p2]
+		src, _ := strconv.Atoi(s[p2+1:p1]); part, _ := strconv.Atoi(s[p1+1:])
+		var raw [][3]uint32
+		json.Unmarshal([]byte(rangesJSON), &raw)
+		ranges := make([]partRange, len(raw))
+		for i, x := range raw { ranges[i] = partRange{sourceIndex: x[0], partIndexBegin: x[1], partIndexEnd: x[2]} }
+		res := appendOrExtendPartRange(ranges, uint32(src), uint32(part))
+		dump := ""
+		for _, r := range res { dump += strconv.Itoa(int(r.sourceIndex)) + ":" + strconv.Itoa(int(r.partIndexBegin)) + ":" + strconv.Itoa(int(r.partIndexEnd)) + ";" }
+		out = append(out, row{"appendOrExtendPartRange", s, dump})
+	}
+
+	// hashWriteUint32
+	for _, v := range []uint32{0, 1, 0x01020304, 0xffffffff} {
+		h := sha256.New()
+		hashWriteUint32(h, v)
+		out = append(out, row{"hashWriteUint32", strconv.FormatUint(uint64(v), 10), hexEnc(h.Sum(nil))})
+	}
+
+	b, err := json.MarshalIndent(out, "", "  ")
+	if err != nil { t.Fatal(err) }
+	if err := os.WriteFile("/root/port/testdata/linker-cluster-go.json", b, 0644); err != nil { t.Fatal(err) }
+	t.Logf("wrote %d rows", len(out))
+}
+
+func lastIdx(s string, c byte) int { for i := len(s)-1; i >= 0; i-- { if s[i]==c { return i } }; return -1 }
+func hexEnc(b []byte) string { const hx="0123456789abcdef"; o:=""; for _,x:=range b { o+=string(hx[x>>4])+string(hx[x&15]) }; return o }

@@ -1,0 +1,107 @@
+[
+  {
+    "fn": "encodePacket",
+    "arg": "nil-req-0",
+    "out": "BQAAAAAAAAAA"
+  },
+  {
+    "fn": "encodePacket",
+    "arg": "bool-true-resp-3",
+    "out": "BgAAAAcAAAABAQ=="
+  },
+  {
+    "fn": "encodePacket",
+    "arg": "bool-false-req-1",
+    "out": "BgAAAAIAAAABAA=="
+  },
+  {
+    "fn": "encodePacket",
+    "arg": "int-42-req-2",
+    "out": "CQAAAAQAAAACKgAAAA=="
+  },
+  {
+    "fn": "encodePacket",
+    "arg": "int-neg-resp-0",
+    "out": "CQAAAAEAAAAC+f///w=="
+  },
+  {
+    "fn": "encodePacket",
+    "arg": "str-hello-req-5",
+    "out": "DgAAAAoAAAADBQAAAGhlbGxv"
+  },
+  {
+    "fn": "encodePacket",
+    "arg": "str-empty-resp-1",
+    "out": "CQAAAAMAAAADAAAAAA=="
+  },
+  {
+    "fn": "encodePacket",
+    "arg": "bytes-abc-req-0",
+    "out": "DAAAAAAAAAAEAwAAAGFiYw=="
+  },
+  {
+    "fn": "encodePacket",
+    "arg": "array-mixed-req-0",
+    "out": "HQAAAAAAAAAFBQAAAAABAQIHAAAAAwEAAAB4BAEAAAB5"
+  },
+  {
+    "fn": "encodePacket",
+    "arg": "map-sorted-req-0",
+    "out": "JQAAAAAAAAAGAwAAAAEAAABhAwEAAABiAQAAAG0BAAEAAAB6AgEAAAA="
+  },
+  {
+    "fn": "encodePacket",
+    "arg": "nested-req-9",
+    "out": "MAAAABIAAAAGAgAAAAMAAABhcnIFAgAAAAIBAAAABgEAAAABAAAAawMBAAAAdgEAAABuAA=="
+  },
+  {
+    "fn": "decodePacket",
+    "arg": "nil",
+    "out": "!ok"
+  },
+  {
+    "fn": "decodePacket",
+    "arg": "true",
+    "out": "!ok"
+  },
+  {
+    "fn": "decodePacket",
+    "arg": "false",
+    "out": "!ok"
+  },
+  {
+    "fn": "decodePacket",
+    "arg": "int42",
+    "out": "!ok"
+  },
+  {
+    "fn": "decodePacket",
+    "arg": "str",
+    "out": "!ok"
+  },
+  {
+    "fn": "decodePacket",
+    "arg": "bytes",
+    "out": "!ok"
+  },
+  {
+    "fn": "decodePacket",
+    "arg": "array",
+    "out": "!ok"
+  },
+  {
+    "fn": "decodePacket",
+    "arg": "map",
+    "out": "!ok"
+  },
+  {
+    "fn": "decodePacket",
+    "arg": "truncated",
+    "out": "false"
+  },
+  {
+    "fn": "decodePacket",
+    "arg": "empty",
+    "out": "false"
+  }
+]

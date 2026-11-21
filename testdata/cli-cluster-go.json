@@ -1,0 +1,82 @@
+[
+  {
+    "fn": "isArgForBuild",
+    "arg": "foo",
+    "out": "true"
+  },
+  {
+    "fn": "isArgForBuild",
+    "arg": "--bundle",
+    "out": "true"
+  },
+  {
+    "fn": "isArgForBuild",
+    "arg": "--minify",
+    "out": "false"
+  },
+  {
+    "fn": "isArgForBuild",
+    "arg": "-x",
+    "out": "false"
+  },
+  {
+    "fn": "isArgForBuild",
+    "arg": "",
+    "out": "true"
+  },
+  {
+    "fn": "isArgForBuild",
+    "arg": "./a",
+    "out": "true"
+  },
+  {
+    "fn": "printMangleCache",
+    "arg": "{\"cache\":{},\"order\":[],\"ascii\":false}",
+    "out": "{}\n"
+  },
+  {
+    "fn": "printMangleCache",
+    "arg": "{\"cache\":{\"foo\":\"a\",\"bar\":false},\"order\":[\"bar\",\"foo\"],\"ascii\":false}",
+    "out": "{\n  \"bar\": false,\n  \"foo\": \"a\"\n}\n"
+  },
+  {
+    "fn": "printMangleCache",
+    "arg": "{\"cache\":{\"x\":\"ab\",\"y\":\"cd\"},\"order\":[],\"ascii\":false}",
+    "out": "{\n  \"x\": \"ab\",\n  \"y\": \"cd\"\n}\n"
+  },
+  {
+    "fn": "printMangleCache",
+    "arg": "{\"cache\":{\"日本\":\"x\"},\"order\":[],\"ascii\":true}",
+    "out": "{\n  \"\\u65E5\\u672C\": \"x\"\n}\n"
+  },
+  {
+    "fn": "splitWithEmptyCheck",
+    "arg": "a,b",
+    "out": "[\"a\",\"b\"]"
+  },
+  {
+    "fn": "splitWithEmptyCheck",
+    "arg": "a,,b",
+    "out": "[\"a\",\"\",\"b\"]"
+  },
+  {
+    "fn": "splitWithEmptyCheck",
+    "arg": "",
+    "out": "[]"
+  },
+  {
+    "fn": "splitWithEmptyCheck",
+    "arg": ",",
+    "out": "[\"\",\"\"]"
+  },
+  {
+    "fn": "splitWithEmptyCheck",
+    "arg": "a",
+    "out": "[\"a\"]"
+  },
+  {
+    "fn": "splitWithEmptyCheck",
+    "arg": "a,b,",
+    "out": "[\"a\",\"b\",\"\"]"
+  }
+]

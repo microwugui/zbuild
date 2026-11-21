@@ -1,0 +1,51 @@
+package api
+
+// 第 107 轮 Go 探针：watcher.tryToFindDirtyPath。
+// rand 只在 itemsToScan==0 的 refill 分支触发；预置 itemsToScan 即绕开，取确定性路径（真子集，非跳过）。
+import ("encoding/json";"os";"testing"
+ "github.com/evanw/esbuild/internal/fs"
+)
+
+type wdRow struct {
+  Name string `json:"name"`
+  Dirty string `json:"dirty"`
+  RecentItems []string `json:"recentItems"`
+  ItemsToScan []string `json:"itemsToScan"`
+  ItemsPerIter int `json:"itemsPerIter"`
+}
+
+func TestTmpGenWatchDirty107(t *testing.T){
+  // 固定各路径的返回值：a=clean, b=dirty->b, c=dirty->C, d=clean
+  mkPaths:=func() map[string]func()string {
+    return map[string]func()string{
+      "a":func()string{return ""},
+      "b":func()string{return "b"},
+      "c":func()string{return "C"},
+      "d":func()string{return ""},
+    }
+  }
+  rows:=[]wdRow{}
+  run:=func(name string, recent, scan []string, perIter int) wdRow {
+    w:=&watcher{data:fs.WatchData{Paths:mkPaths()},recentItems:append([]string{},recent...),itemsToScan:append([]string{},scan...),itemsPerIteration:perIter}
+    dirty:=w.tryToFindDirtyPath()
+    ri:=w.recentItems;if ri==nil{ri=[]string{}}
+    its:=w.itemsToScan;if its==nil{its=[]string{}}
+    return wdRow{name,dirty,ri,its,w.itemsPerIteration}
+  }
+  // recentItems 命中：不需 refill，确定性；命中项移到队尾
+  rows=append(rows,run("recent-hit",[]string{"a","b"},[]string{"c"},1))
+  // recentItems 全 clean → 落到 itemsToScan：remainingCount = len-perIter
+  rows=append(rows,run("scan-hit",[]string{"a"},[]string{"a","b","c"},1))
+  // itemsToScan 只有 1 项且命中
+  rows=append(rows,run("scan-single",[]string{},[]string{"c"},1))
+  // 全 clean → dirty=""
+  rows=append(rows,run("none-dirty",[]string{"a","d"},[]string{"a","d"},2))
+  // recent 命中改变顺序：c 在中部命中
+  rows=append(rows,run("recent-reorder",[]string{"a","c","d"},[]string{"d"},1))
+  // perIter 大于剩余 → remainingCount=0，整批扫描
+  rows=append(rows,run("periter-clamp",[]string{},[]string{"a","b"},99))
+
+  b,err:=json.MarshalIndent(rows,"","  ");if err!=nil{t.Fatal(err)}
+  if err:=os.WriteFile("/root/port/testdata/watch-dirty-go.json",b,0644);err!=nil{t.Fatal(err)}
+  t.Logf("wrote %d rows bytes=%d",len(rows),len(b))
+}

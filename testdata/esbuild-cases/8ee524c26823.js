@@ -1,0 +1,1 @@
+class Foo { get #foo() {} set #foo(x) { this.#foo } }

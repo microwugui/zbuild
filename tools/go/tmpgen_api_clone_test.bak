@@ -1,0 +1,61 @@
+package api
+
+// Batch 89 Go probe: cloneMangleCache helper.
+import (
+	"encoding/json"
+	"os"
+	"sort"
+	"testing"
+
+	"github.com/evanw/esbuild/internal/logger"
+)
+
+func TestTmpGenApiClone(t *testing.T) {
+	type row struct { Fn string `json:"fn"`; Arg string `json:"arg"`; Out string `json:"out"` }
+	var out []row
+
+	// cloneMangleCache: arg = JSON array of [key, kind] where kind: "s:<val>" | "false" | "num"
+	for _, s := range []string{
+		`[["foo","s:a"],["bar","false"],["baz","s:b"]]`,
+		`[["__proto__","s:x"]]`,
+		`[["foo","num"]]`,
+		`[]`,
+	} {
+		var pairs [][2]string
+		json.Unmarshal([]byte(s), &pairs)
+		input := map[string]interface{}{}
+		for _, p := range pairs {
+			switch {
+			case p[1] == "false": input[p[0]] = false
+			case p[1] == "num": input[p[0]] = 42
+			case len(p[1]) >= 2 && p[1][:2] == "s:": input[p[0]] = p[1][2:]
+			}
+		}
+		log := logger.NewDeferLog(logger.DeferLogNoVerboseOrDebug, nil)
+		result := cloneMangleCache(log, input)
+		keys := make([]string, 0, len(result))
+		for k := range result { keys = append(keys, k) }
+		sort.Strings(keys)
+		dump := ""
+		for _, k := range keys { dump += k + "=" + toString(result[k]) + ";" }
+		out = append(out, row{"cloneMangleCache", s, dump})
+	}
+	// nil case
+	log := logger.NewDeferLog(logger.DeferLogNoVerboseOrDebug, nil)
+	v := cloneMangleCache(log, nil)
+	out = append(out, row{"cloneMangleCache", "nil", boolPtr(v == nil)})
+
+	b, err := json.MarshalIndent(out, "", "  ")
+	if err != nil { t.Fatal(err) }
+	if err := os.WriteFile("/root/port/testdata/api-clone-go.json", b, 0644); err != nil { t.Fatal(err) }
+	t.Logf("wrote %d rows", len(out))
+}
+
+func toString(v interface{}) string {
+	switch x := v.(type) {
+	case string: return "s:" + x
+	case bool: if x { return "true" }; return "false"
+	}
+	return "other"
+}
+func boolPtr(b bool) string { if b { return "nil" }; return "notnil" }

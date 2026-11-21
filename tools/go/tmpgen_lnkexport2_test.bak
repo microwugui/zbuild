@@ -1,0 +1,303 @@
+package linker
+
+// 第 180 批 Go 探针：linker 出口簇
+// createExportsForFile / matchImportWithExport / matchImportsWithExportsForFile /
+// generateEntryPointTailJS / generateExtraDataForFileJS 逐字节固化（dump 生成 part/stmt/字节）。
+import (
+	"encoding/hex"
+	"encoding/json"
+	"fmt"
+	"os"
+	"sync"
+	"testing"
+
+	"github.com/evanw/esbuild/internal/ast"
+	"github.com/evanw/esbuild/internal/bundler"
+	"github.com/evanw/esbuild/internal/config"
+	"github.com/evanw/esbuild/internal/graph"
+	"github.com/evanw/esbuild/internal/js_ast"
+	"github.com/evanw/esbuild/internal/logger"
+	"github.com/evanw/esbuild/internal/renamer"
+)
+
+type exRow struct {
+	Fn  string                 `json:"fn"`
+	Arg map[string]interface{} `json:"arg"`
+	Out interface{}            `json:"out"`
+}
+
+func exRef(s, i uint32) ast.Ref { return ast.Ref{SourceIndex: s, InnerIndex: i} }
+func exLoc(i int32) logger.Loc  { return logger.Loc{Start: i} }
+
+// minimal graph: runtime(0) + n user files; symbols per source; named imports/exports.
+func exBuild(n int) *linkerContext {
+	c := &linkerContext{}
+	inputs := make([]graph.InputFile, n)
+	for si := 0; si < n; si++ {
+		{
+			contents := string("foo bar baz qux foo bar foo default _proto foo bar baz qux foo bar foo default _proto foo bar baz qux")
+			inputs[si] = graph.InputFile{Source: logger.Source{
+				IdentifierName: fmt.Sprintf("f%d", si),
+				Contents:       contents,
+				PrettyPaths:    logger.PrettyPaths{Rel: fmt.Sprintf("f%d.js", si)},
+			}}
+		}
+	}
+	reachable := make([]uint32, n)
+	for i := range reachable {
+		reachable[i] = uint32(i)
+	}
+	c.graph = graph.CloneLinkerGraph(inputs, reachable, nil, false)
+	for si := 0; si < n; si++ {
+		repr := &graph.JSRepr{AST: js_ast.AST{
+			ModuleScope: &js_ast.Scope{},
+		}}
+		repr.Meta.ImportsToBind = map[ast.Ref]graph.ImportData{}
+		repr.Meta.ResolvedExports = map[string]graph.ExportData{}
+		repr.Meta.IsProbablyTypeScriptType = map[ast.Ref]bool{}
+		c.graph.Files[si].InputFile.Repr = repr
+	}
+	// runtime source 0
+	rtScope := &js_ast.Scope{Members: map[string]js_ast.ScopeMember{}}
+	rtScope.Members["__export"] = js_ast.ScopeMember{Ref: exRef(0, 0)}
+	rtScope.Members["__toCommonJS"] = js_ast.ScopeMember{Ref: exRef(0, 1)}
+	c.graph.Files[0].InputFile.Repr.(*graph.JSRepr).AST.ModuleScope = rtScope
+	c.graph.Symbols.SymbolsForSource[0] = []ast.Symbol{{OriginalName: "__export", Link: ast.InvalidRef}, {OriginalName: "__toCommonJS", Link: ast.InvalidRef}}
+	c.graph.Files[0].InputFile.Repr.(*graph.JSRepr).Meta.TopLevelSymbolToPartsOverlay = map[ast.Ref][]uint32{exRef(0, 0): {0}, exRef(0, 1): {0}}
+	c.unboundModuleRef = ast.InvalidRef
+	c.cjsRuntimeRef = exRef(0, 0)
+	c.esmRuntimeRef = exRef(0, 1)
+	c.options = &config.Options{OutputFormat: config.FormatESModule}
+	c.log = logger.NewDeferLog(logger.DeferLogNoVerboseOrDebug, nil)
+	return c
+}
+
+func exSetSyms(c *linkerContext, si int, names ...string) {
+	syms := make([]ast.Symbol, len(names))
+	for i, n := range names {
+		syms[i] = ast.Symbol{OriginalName: n, Link: ast.InvalidRef}
+	}
+	c.graph.Symbols.SymbolsForSource[uint32(si)] = syms
+	c.graph.Files[si].InputFile.Repr.(*graph.JSRepr).AST.Symbols = syms
+}
+
+// dump stmt data type+key fields for createExportsForFile / entry tail
+func exDumpStmts(repr *graph.JSRepr) interface{} {
+	out := []interface{}{}
+	for _, p := range repr.AST.Parts {
+		kinds := []string{}
+		for _, st := range p.Stmts {
+			kinds = append(kinds, fmt.Sprintf("%T", st.Data))
+		}
+		out = append(out, map[string]interface{}{
+			"kinds":     kinds,
+			"canRemove": p.CanBeRemovedIfUnused,
+			"forceTree": p.ForceTreeShaking,
+			"symUses":   len(p.SymbolUses),
+			"declared":  len(p.DeclaredSymbols),
+			"deps":      len(p.Dependencies),
+		})
+	}
+	return out
+}
+
+func exDumpResult(r matchImportResult, re []js_ast.Dependency) interface{} {
+	return []interface{}{int(r.kind), r.alias, r.namespaceRef.SourceIndex, r.namespaceRef.InnerIndex,
+		r.sourceIndex, r.ref.SourceIndex, r.ref.InnerIndex, r.nameLoc.Start, r.otherSourceIndex, r.otherNameLoc.Start, len(re)}
+}
+
+func exPrintTail(c *linkerContext, si uint32, r renamer.Renamer) string {
+	res := c.generateEntryPointTailJS(r, exRef(0, 0), exRef(0, 1), si)
+	return hex.EncodeToString(res.JS)
+}
+
+func TestTmpGenLnkExport2(t *testing.T) {
+	var out []exRow
+	add := func(fn string, arg map[string]interface{}, o interface{}) { out = append(out, exRow{fn, arg, o}) }
+
+	// ===== createExportsForFile =====
+	{
+		// basic: entry has 2 named exports (foo, bar)
+		c := exBuild(2)
+		exSetSyms(c, 1, "foo", "bar")
+		repr := c.graph.Files[1].InputFile.Repr.(*graph.JSRepr)
+		repr.AST.ExportsRef = exRef(1, 0)
+		repr.Meta.SortedAndFilteredExportAliases = []string{"bar", "foo"}
+		repr.Meta.ResolvedExports = map[string]graph.ExportData{
+			"bar": {Ref: exRef(1, 1), SourceIndex: 1}, "foo": {Ref: exRef(1, 0), SourceIndex: 1},
+		}
+		repr.Meta.NeedsExportsVariable = true
+		repr.AST.Parts = make([]js_ast.Part, 1)
+		c.createExportsForFile(1)
+		add("createExportsForFile", map[string]interface{}{"name": "two-exports"}, exDumpStmts(repr))
+	}
+	{
+		// __proto__ export alias (computed property branch)
+		c := exBuild(2)
+		exSetSyms(c, 1, "p")
+		repr := c.graph.Files[1].InputFile.Repr.(*graph.JSRepr)
+		repr.AST.ExportsRef = exRef(1, 0)
+		repr.Meta.SortedAndFilteredExportAliases = []string{"__proto__"}
+		repr.Meta.ResolvedExports = map[string]graph.ExportData{"__proto__": {Ref: exRef(1, 0), SourceIndex: 1}}
+		repr.Meta.NeedsExportsVariable = false
+		repr.AST.Parts = make([]js_ast.Part, 1)
+		c.createExportsForFile(1)
+		add("createExportsForFile", map[string]interface{}{"name": "proto-alias"}, exDumpStmts(repr))
+	}
+
+	// ===== matchImportWithExport / matchImportsWithExportsForFile =====
+	{
+		// file1 imports {foo} from file2; file2 exports foo
+		c := exBuild(3)
+		exSetSyms(c, 1, "imp")
+		exSetSyms(c, 2, "foo")
+		r1 := c.graph.Files[1].InputFile.Repr.(*graph.JSRepr)
+		r2 := c.graph.Files[2].InputFile.Repr.(*graph.JSRepr)
+		r1.AST.NamedImports = map[ast.Ref]js_ast.NamedImport{
+			exRef(1, 0): {Alias: "foo", ImportRecordIndex: 0, AliasLoc: exLoc(5), NamespaceRef: ast.InvalidRef},
+		}
+		r1.AST.ImportRecords = []ast.ImportRecord{{SourceIndex: ast.MakeIndex32(2), Kind: ast.ImportStmt}}
+		r2.Meta.ResolvedExports = map[string]graph.ExportData{"foo": {Ref: exRef(2, 0), SourceIndex: 2, NameLoc: exLoc(9)}}
+		r2.AST.ExportsKind = js_ast.ExportsESM
+		r2.AST.ExportKeyword = logger.Range{Loc: exLoc(0), Len: 6}
+		tr := importTracker{sourceIndex: 1, importRef: exRef(1, 0), nameLoc: exLoc(5)}
+		res, re := c.matchImportWithExport(tr, nil)
+		add("matchImportWithExport", map[string]interface{}{"name": "found"}, exDumpResult(res, re))
+		// now the wrapper
+		c.cycleDetector = nil
+		c.matchImportsWithExportsForFile(1)
+		d := r1.Meta.ImportsToBind[exRef(1, 0)]
+		add("matchImportsWithExportsForFile", map[string]interface{}{"name": "found"},
+			[]interface{}{d.Ref.SourceIndex, d.Ref.InnerIndex, d.SourceIndex, len(d.ReExports)})
+	}
+	{
+		// import from CommonJS file -> importCommonJS status
+		c := exBuild(3)
+		exSetSyms(c, 1, "imp")
+		exSetSyms(c, 2, "x")
+		r1 := c.graph.Files[1].InputFile.Repr.(*graph.JSRepr)
+		r2 := c.graph.Files[2].InputFile.Repr.(*graph.JSRepr)
+		r1.AST.NamedImports = map[ast.Ref]js_ast.NamedImport{
+			exRef(1, 0): {Alias: "foo", ImportRecordIndex: 0, AliasLoc: exLoc(1), NamespaceRef: exRef(1, 0)},
+		}
+		r1.AST.ImportRecords = []ast.ImportRecord{{SourceIndex: ast.MakeIndex32(2), Kind: ast.ImportStmt}}
+		r2.AST.ExportsKind = js_ast.ExportsCommonJS
+		tr := importTracker{sourceIndex: 1, importRef: exRef(1, 0)}
+		res, re := c.matchImportWithExport(tr, nil)
+		add("matchImportWithExport", map[string]interface{}{"name": "commonjs"}, exDumpResult(res, re))
+	}
+	{
+		// cycle: file1 export {a as b} etc. simple self-cycle
+		c := exBuild(2)
+		exSetSyms(c, 1, "a")
+		r1 := c.graph.Files[1].InputFile.Repr.(*graph.JSRepr)
+		r1.AST.NamedImports = map[ast.Ref]js_ast.NamedImport{
+			exRef(1, 0): {Alias: "a", ImportRecordIndex: 0, AliasLoc: exLoc(1), NamespaceRef: ast.InvalidRef},
+		}
+		r1.AST.ImportRecords = []ast.ImportRecord{{SourceIndex: ast.MakeIndex32(1), Kind: ast.ImportStmt}}
+		r1.Meta.ResolvedExports = map[string]graph.ExportData{"a": {Ref: exRef(1, 0), SourceIndex: 1}}
+		r1.AST.ExportsKind = js_ast.ExportsESM
+		r1.AST.ExportKeyword = logger.Range{Loc: exLoc(0), Len: 6}
+		tr := importTracker{sourceIndex: 1, importRef: exRef(1, 0)}
+		res, re := c.matchImportWithExport(tr, nil)
+		add("matchImportWithExport", map[string]interface{}{"name": "cycle"}, exDumpResult(res, re))
+	}
+
+	// ===== generateEntryPointTailJS (byte-exact) =====
+	{
+		// ESM: entry with exports -> multi-line export clause
+		c := exBuild(2)
+		exSetSyms(c, 1, "foo", "bar")
+		repr := c.graph.Files[1].InputFile.Repr.(*graph.JSRepr)
+		repr.AST.ExportsRef = exRef(1, 0)
+		repr.Meta.SortedAndFilteredExportAliases = []string{"bar", "foo"}
+		repr.Meta.ResolvedExports = map[string]graph.ExportData{
+			"bar": {Ref: exRef(1, 1), SourceIndex: 1}, "foo": {Ref: exRef(1, 0), SourceIndex: 1},
+		}
+		r := renamer.NewNoOpRenamer(c.graph.Symbols)
+		add("generateEntryPointTailJS", map[string]interface{}{"name": "esm-two"}, exPrintTail(c, 1, r))
+	}
+	{
+		// ESM: default export
+		c := exBuild(2)
+		exSetSyms(c, 1, "default_x")
+		repr := c.graph.Files[1].InputFile.Repr.(*graph.JSRepr)
+		repr.AST.ExportsRef = exRef(1, 0)
+		repr.Meta.SortedAndFilteredExportAliases = []string{"default"}
+		repr.Meta.ResolvedExports = map[string]graph.ExportData{"default": {Ref: exRef(1, 0), SourceIndex: 1}}
+		r := renamer.NewNoOpRenamer(c.graph.Symbols)
+		add("generateEntryPointTailJS", map[string]interface{}{"name": "esm-default"}, exPrintTail(c, 1, r))
+	}
+	{
+		// ESM: no exports -> empty
+		c := exBuild(2)
+		exSetSyms(c, 1, "x")
+		r := renamer.NewNoOpRenamer(c.graph.Symbols)
+		add("generateEntryPointTailJS", map[string]interface{}{"name": "esm-empty"}, exPrintTail(c, 1, r))
+	}
+
+	// ===== generateExtraDataForFileJS (debug off -> "") =====
+	{
+		c := exBuild(2)
+		add("generateExtraDataForFileJS", map[string]interface{}{"name": "debug-off"}, c.generateExtraDataForFileJS(1))
+	}
+
+	// ===== generateCodeForFileInChunkJS (byte-exact, no-wrapper) =====
+	{
+		// no-wrap: part with a live local; print via NoOp renamer
+		c := exBuild(2)
+		exSetSyms(c, 1, "foo")
+		repr := c.graph.Files[1].InputFile.Repr.(*graph.JSRepr)
+		local := &js_ast.SLocal{Kind: js_ast.LocalVar, Decls: []js_ast.Decl{{
+			Binding:    js_ast.Binding{Data: &js_ast.BIdentifier{Ref: exRef(1, 0)}},
+			ValueOrNil: js_ast.Expr{Data: &js_ast.ENumber{Value: 1}},
+		}}}
+		part := js_ast.Part{IsLive: true, Stmts: []js_ast.Stmt{{Data: local}},
+			DeclaredSymbols: []js_ast.DeclaredSymbol{{Ref: exRef(1, 0), IsTopLevel: true}}}
+		repr.AST.Parts = []js_ast.Part{part}
+		repr.Meta.Wrap = graph.WrapNone
+		r := renamer.NewNoOpRenamer(c.graph.Symbols)
+		res := &compileResultJS{}
+		var wg sync.WaitGroup
+		wg.Add(1)
+		c.generateCodeForFileInChunkJS(r, &wg, partRange{sourceIndex: 1, partIndexBegin: 0, partIndexEnd: 1},
+			exRef(0, 0), exRef(0, 1), exRef(0, 0), res, make([]bundler.DataForSourceMap, 2))
+		wg.Wait()
+		add("generateCodeForFileInChunkJS", map[string]interface{}{"name": "no-wrap"}, hex.EncodeToString(res.JS))
+	}
+	{
+		// no-wrap: export clause statement kept (ESM), two parts
+		c := exBuild(2)
+		exSetSyms(c, 1, "foo", "bar")
+		repr := c.graph.Files[1].InputFile.Repr.(*graph.JSRepr)
+		l1 := &js_ast.SLocal{Kind: js_ast.LocalVar, Decls: []js_ast.Decl{{
+			Binding:    js_ast.Binding{Data: &js_ast.BIdentifier{Ref: exRef(1, 0)}},
+			ValueOrNil: js_ast.Expr{Data: &js_ast.ENumber{Value: 1}},
+		}}}
+		l2 := &js_ast.SLocal{Kind: js_ast.LocalVar, Decls: []js_ast.Decl{{
+			Binding:    js_ast.Binding{Data: &js_ast.BIdentifier{Ref: exRef(1, 1)}},
+			ValueOrNil: js_ast.Expr{Data: &js_ast.ENumber{Value: 2}},
+		}}}
+		repr.AST.Parts = []js_ast.Part{
+			{IsLive: true, Stmts: []js_ast.Stmt{{Data: l1}}, DeclaredSymbols: []js_ast.DeclaredSymbol{{Ref: exRef(1, 0), IsTopLevel: true}}},
+			{IsLive: true, Stmts: []js_ast.Stmt{{Data: l2}}, DeclaredSymbols: []js_ast.DeclaredSymbol{{Ref: exRef(1, 1), IsTopLevel: true}}},
+		}
+		repr.Meta.Wrap = graph.WrapNone
+		r := renamer.NewNoOpRenamer(c.graph.Symbols)
+		res := &compileResultJS{}
+		var wg sync.WaitGroup
+		wg.Add(1)
+		c.generateCodeForFileInChunkJS(r, &wg, partRange{sourceIndex: 1, partIndexBegin: 0, partIndexEnd: 2},
+			exRef(0, 0), exRef(0, 1), exRef(0, 0), res, make([]bundler.DataForSourceMap, 2))
+		wg.Wait()
+		add("generateCodeForFileInChunkJS", map[string]interface{}{"name": "two-parts"}, hex.EncodeToString(res.JS))
+	}
+
+	b, err := json.Marshal(out)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := os.WriteFile("/root/port/testdata/lnkexport2-go.json", b, 0644); err != nil {
+		t.Fatal(err)
+	}
+}

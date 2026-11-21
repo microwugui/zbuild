@@ -1,0 +1,6702 @@
+{
+  "generatedAt": "2026-11-17T08:28:20.964Z",
+  "note": "v1：oracle 只有包级 exercises，函数级证据来自 go-verified 点名 + M1/单元覆盖率；判据与回收时点见 PLAN 第 20 次推进 §4。",
+  "covM1": "coverage-m1",
+  "covUnit": "coverage",
+  "totalPorted": 665,
+  "evidenceCounts": {
+    "go-bytes": 232,
+    "m1-byte": 117,
+    "unit-only": 316,
+    "none": 0
+  },
+  "oraclePkg": [
+    {
+      "pkg": "internal/ast",
+      "applicable": 15812,
+      "equal": 2667
+    },
+    {
+      "pkg": "internal/helpers",
+      "applicable": 15815,
+      "equal": 2669
+    },
+    {
+      "pkg": "internal/js_ast",
+      "applicable": 15813,
+      "equal": 2668
+    },
+    {
+      "pkg": "internal/js_lexer",
+      "applicable": 15812,
+      "equal": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "applicable": 15812,
+      "equal": 2667
+    },
+    {
+      "pkg": "internal/js_printer",
+      "applicable": 15813,
+      "equal": 2668
+    },
+    {
+      "pkg": "internal/xxhash",
+      "applicable": 1,
+      "equal": 1
+    }
+  ],
+  "rows": [
+    {
+      "pkg": "internal/ast",
+      "file": "internal/ast/ast.go",
+      "name": "FindAssertOrWithEntry",
+      "evidence": "go-bytes",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/ast",
+      "file": "internal/ast/ast.go",
+      "name": "FollowAllSymbols",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/ast",
+      "file": "internal/ast/ast.go",
+      "name": "FollowSymbols",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/ast",
+      "file": "internal/ast/ast.go",
+      "name": "Get",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/ast",
+      "file": "internal/ast/ast.go",
+      "name": "GetIndex",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/ast",
+      "file": "internal/ast/ast.go",
+      "name": "Has",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/ast",
+      "file": "internal/ast/ast.go",
+      "name": "Has",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/ast",
+      "file": "internal/ast/ast.go",
+      "name": "Include",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/ast",
+      "file": "internal/ast/ast.go",
+      "name": "IsFromCSS",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/ast",
+      "file": "internal/ast/ast.go",
+      "name": "IsFunction",
+      "evidence": "m1-byte",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/ast",
+      "file": "internal/ast/ast.go",
+      "name": "IsHoisted",
+      "evidence": "m1-byte",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/ast",
+      "file": "internal/ast/ast.go",
+      "name": "IsHoistedOrFunction",
+      "evidence": "m1-byte",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/ast",
+      "file": "internal/ast/ast.go",
+      "name": "IsPrivate",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/ast",
+      "file": "internal/ast/ast.go",
+      "name": "IsUnboundOrInjected",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/ast",
+      "file": "internal/ast/ast.go",
+      "name": "IsValid",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/ast",
+      "file": "internal/ast/ast.go",
+      "name": "Len",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/ast",
+      "file": "internal/ast/ast.go",
+      "name": "Less",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/ast",
+      "file": "internal/ast/ast.go",
+      "name": "MakeIndex32",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/ast",
+      "file": "internal/ast/ast.go",
+      "name": "MergeContentsWith",
+      "evidence": "go-bytes",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/ast",
+      "file": "internal/ast/ast.go",
+      "name": "MergeSymbols",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/ast",
+      "file": "internal/ast/ast.go",
+      "name": "MustResolveToCSS",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/ast",
+      "file": "internal/ast/ast.go",
+      "name": "NewSymbolMap",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/ast",
+      "file": "internal/ast/ast.go",
+      "name": "NumberToMinifiedName",
+      "evidence": "m1-byte",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/ast",
+      "file": "internal/ast/ast.go",
+      "name": "Scan",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/ast",
+      "file": "internal/ast/ast.go",
+      "name": "ShuffleByCharFreq",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/ast",
+      "file": "internal/ast/ast.go",
+      "name": "SlotNamespace",
+      "evidence": "go-bytes",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/ast",
+      "file": "internal/ast/ast.go",
+      "name": "String",
+      "evidence": "m1-byte",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/ast",
+      "file": "internal/ast/ast.go",
+      "name": "StringForMetafile",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/ast",
+      "file": "internal/ast/ast.go",
+      "name": "Swap",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/ast",
+      "file": "internal/ast/ast.go",
+      "name": "UnionMax",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/helpers",
+      "file": "internal/helpers/float.go",
+      "name": "Abs",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15815,
+      "oracleEqual": 2669
+    },
+    {
+      "pkg": "internal/helpers",
+      "file": "internal/helpers/float.go",
+      "name": "Add",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15815,
+      "oracleEqual": 2669
+    },
+    {
+      "pkg": "internal/helpers",
+      "file": "internal/helpers/waitgroup.go",
+      "name": "Add",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15815,
+      "oracleEqual": 2669
+    },
+    {
+      "pkg": "internal/helpers",
+      "file": "internal/helpers/joiner.go",
+      "name": "AddBytes",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15815,
+      "oracleEqual": 2669
+    },
+    {
+      "pkg": "internal/helpers",
+      "file": "internal/helpers/float.go",
+      "name": "AddConst",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15815,
+      "oracleEqual": 2669
+    },
+    {
+      "pkg": "internal/helpers",
+      "file": "internal/helpers/joiner.go",
+      "name": "AddString",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15815,
+      "oracleEqual": 2669
+    },
+    {
+      "pkg": "internal/helpers",
+      "file": "internal/helpers/float.go",
+      "name": "Atan2",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15815,
+      "oracleEqual": 2669
+    },
+    {
+      "pkg": "internal/helpers",
+      "file": "internal/helpers/timer.go",
+      "name": "Begin",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15815,
+      "oracleEqual": 2669
+    },
+    {
+      "pkg": "internal/helpers",
+      "file": "internal/helpers/quote.go",
+      "name": "canPrintWithoutEscape",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15815,
+      "oracleEqual": 2669
+    },
+    {
+      "pkg": "internal/helpers",
+      "file": "internal/helpers/float.go",
+      "name": "Cbrt",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15815,
+      "oracleEqual": 2669
+    },
+    {
+      "pkg": "internal/helpers",
+      "file": "internal/helpers/float.go",
+      "name": "Ceil",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15815,
+      "oracleEqual": 2669
+    },
+    {
+      "pkg": "internal/helpers",
+      "file": "internal/helpers/joiner.go",
+      "name": "Contains",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15815,
+      "oracleEqual": 2669
+    },
+    {
+      "pkg": "internal/helpers",
+      "file": "internal/helpers/utf.go",
+      "name": "ContainsNonBMPCodePoint",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15815,
+      "oracleEqual": 2669
+    },
+    {
+      "pkg": "internal/helpers",
+      "file": "internal/helpers/utf.go",
+      "name": "ContainsNonBMPCodePointUTF16",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15815,
+      "oracleEqual": 2669
+    },
+    {
+      "pkg": "internal/helpers",
+      "file": "internal/helpers/float.go",
+      "name": "Cos",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15815,
+      "oracleEqual": 2669
+    },
+    {
+      "pkg": "internal/helpers",
+      "file": "internal/helpers/float.go",
+      "name": "Cubed",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15815,
+      "oracleEqual": 2669
+    },
+    {
+      "pkg": "internal/helpers",
+      "file": "internal/helpers/utf.go",
+      "name": "DecodeWTF8Rune",
+      "evidence": "m1-byte",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15815,
+      "oracleEqual": 2669
+    },
+    {
+      "pkg": "internal/helpers",
+      "file": "internal/helpers/float.go",
+      "name": "Div",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15815,
+      "oracleEqual": 2669
+    },
+    {
+      "pkg": "internal/helpers",
+      "file": "internal/helpers/float.go",
+      "name": "DivConst",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15815,
+      "oracleEqual": 2669
+    },
+    {
+      "pkg": "internal/helpers",
+      "file": "internal/helpers/joiner.go",
+      "name": "Done",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15815,
+      "oracleEqual": 2669
+    },
+    {
+      "pkg": "internal/helpers",
+      "file": "internal/helpers/waitgroup.go",
+      "name": "Done",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15815,
+      "oracleEqual": 2669
+    },
+    {
+      "pkg": "internal/helpers",
+      "file": "internal/helpers/dataurl.go",
+      "name": "EncodeStringAsPercentEscapedDataURL",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15815,
+      "oracleEqual": 2669
+    },
+    {
+      "pkg": "internal/helpers",
+      "file": "internal/helpers/dataurl.go",
+      "name": "EncodeStringAsShortestDataURL",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15815,
+      "oracleEqual": 2669
+    },
+    {
+      "pkg": "internal/helpers",
+      "file": "internal/helpers/utf.go",
+      "name": "encodeWTF8Rune",
+      "evidence": "m1-byte",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15815,
+      "oracleEqual": 2669
+    },
+    {
+      "pkg": "internal/helpers",
+      "file": "internal/helpers/timer.go",
+      "name": "End",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15815,
+      "oracleEqual": 2669
+    },
+    {
+      "pkg": "internal/helpers",
+      "file": "internal/helpers/joiner.go",
+      "name": "EnsureNewlineAtEnd",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15815,
+      "oracleEqual": 2669
+    },
+    {
+      "pkg": "internal/helpers",
+      "file": "internal/helpers/serializer.go",
+      "name": "Enter",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15815,
+      "oracleEqual": 2669
+    },
+    {
+      "pkg": "internal/helpers",
+      "file": "internal/helpers/bitset.go",
+      "name": "Equals",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15815,
+      "oracleEqual": 2669
+    },
+    {
+      "pkg": "internal/helpers",
+      "file": "internal/helpers/comment.go",
+      "name": "EscapeClosingTag",
+      "evidence": "m1-byte",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15815,
+      "oracleEqual": 2669
+    },
+    {
+      "pkg": "internal/helpers",
+      "file": "internal/helpers/path.go",
+      "name": "FilePathFromFileURL",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15815,
+      "oracleEqual": 2669
+    },
+    {
+      "pkg": "internal/helpers",
+      "file": "internal/helpers/path.go",
+      "name": "FileURLFromFilePath",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15815,
+      "oracleEqual": 2669
+    },
+    {
+      "pkg": "internal/helpers",
+      "file": "internal/helpers/float.go",
+      "name": "Floor",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15815,
+      "oracleEqual": 2669
+    },
+    {
+      "pkg": "internal/helpers",
+      "file": "internal/helpers/timer.go",
+      "name": "Fork",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15815,
+      "oracleEqual": 2669
+    },
+    {
+      "pkg": "internal/helpers",
+      "file": "internal/helpers/glob.go",
+      "name": "GlobPatternToString",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15815,
+      "oracleEqual": 2669
+    },
+    {
+      "pkg": "internal/helpers",
+      "file": "internal/helpers/bitset.go",
+      "name": "HasBit",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15815,
+      "oracleEqual": 2669
+    },
+    {
+      "pkg": "internal/helpers",
+      "file": "internal/helpers/hash.go",
+      "name": "HashCombine",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15815,
+      "oracleEqual": 2669
+    },
+    {
+      "pkg": "internal/helpers",
+      "file": "internal/helpers/hash.go",
+      "name": "HashCombineString",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15815,
+      "oracleEqual": 2669
+    },
+    {
+      "pkg": "internal/helpers",
+      "file": "internal/helpers/quote.go",
+      "name": "internalQuote",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15815,
+      "oracleEqual": 2669
+    },
+    {
+      "pkg": "internal/helpers",
+      "file": "internal/helpers/path.go",
+      "name": "IsFileURL",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15815,
+      "oracleEqual": 2669
+    },
+    {
+      "pkg": "internal/helpers",
+      "file": "internal/helpers/dataurl.go",
+      "name": "isHex",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15815,
+      "oracleEqual": 2669
+    },
+    {
+      "pkg": "internal/helpers",
+      "file": "internal/helpers/path.go",
+      "name": "IsInsideNodeModules",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15815,
+      "oracleEqual": 2669
+    },
+    {
+      "pkg": "internal/helpers",
+      "file": "internal/helpers/float.go",
+      "name": "IsNaN",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15815,
+      "oracleEqual": 2669
+    },
+    {
+      "pkg": "internal/helpers",
+      "file": "internal/helpers/timer.go",
+      "name": "Join",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15815,
+      "oracleEqual": 2669
+    },
+    {
+      "pkg": "internal/helpers",
+      "file": "internal/helpers/joiner.go",
+      "name": "LastByte",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15815,
+      "oracleEqual": 2669
+    },
+    {
+      "pkg": "internal/helpers",
+      "file": "internal/helpers/serializer.go",
+      "name": "Leave",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15815,
+      "oracleEqual": 2669
+    },
+    {
+      "pkg": "internal/helpers",
+      "file": "internal/helpers/joiner.go",
+      "name": "Length",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15815,
+      "oracleEqual": 2669
+    },
+    {
+      "pkg": "internal/helpers",
+      "file": "internal/helpers/float.go",
+      "name": "Lerp",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15815,
+      "oracleEqual": 2669
+    },
+    {
+      "pkg": "internal/helpers",
+      "file": "internal/helpers/timer.go",
+      "name": "Log",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15815,
+      "oracleEqual": 2669
+    },
+    {
+      "pkg": "internal/helpers",
+      "file": "internal/helpers/float.go",
+      "name": "Log2",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15815,
+      "oracleEqual": 2669
+    },
+    {
+      "pkg": "internal/helpers",
+      "file": "internal/helpers/serializer.go",
+      "name": "MakeSerializer",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15815,
+      "oracleEqual": 2669
+    },
+    {
+      "pkg": "internal/helpers",
+      "file": "internal/helpers/waitgroup.go",
+      "name": "MakeThreadSafeWaitGroup",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15815,
+      "oracleEqual": 2669
+    },
+    {
+      "pkg": "internal/helpers",
+      "file": "internal/helpers/typos.go",
+      "name": "MakeTypoDetector",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15815,
+      "oracleEqual": 2669
+    },
+    {
+      "pkg": "internal/helpers",
+      "file": "internal/helpers/float.go",
+      "name": "Max2",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15815,
+      "oracleEqual": 2669
+    },
+    {
+      "pkg": "internal/helpers",
+      "file": "internal/helpers/float.go",
+      "name": "Max3",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15815,
+      "oracleEqual": 2669
+    },
+    {
+      "pkg": "internal/helpers",
+      "file": "internal/helpers/typos.go",
+      "name": "MaybeCorrectTypo",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15815,
+      "oracleEqual": 2669
+    },
+    {
+      "pkg": "internal/helpers",
+      "file": "internal/helpers/mime.go",
+      "name": "MimeTypeByExtension",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15815,
+      "oracleEqual": 2669
+    },
+    {
+      "pkg": "internal/helpers",
+      "file": "internal/helpers/float.go",
+      "name": "Min2",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15815,
+      "oracleEqual": 2669
+    },
+    {
+      "pkg": "internal/helpers",
+      "file": "internal/helpers/float.go",
+      "name": "Min3",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15815,
+      "oracleEqual": 2669
+    },
+    {
+      "pkg": "internal/helpers",
+      "file": "internal/helpers/float.go",
+      "name": "Mul",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15815,
+      "oracleEqual": 2669
+    },
+    {
+      "pkg": "internal/helpers",
+      "file": "internal/helpers/float.go",
+      "name": "MulConst",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15815,
+      "oracleEqual": 2669
+    },
+    {
+      "pkg": "internal/helpers",
+      "file": "internal/helpers/float.go",
+      "name": "Neg",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15815,
+      "oracleEqual": 2669
+    },
+    {
+      "pkg": "internal/helpers",
+      "file": "internal/helpers/bitset.go",
+      "name": "NewBitSet",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15815,
+      "oracleEqual": 2669
+    },
+    {
+      "pkg": "internal/helpers",
+      "file": "internal/helpers/float.go",
+      "name": "NewF64",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15815,
+      "oracleEqual": 2669
+    },
+    {
+      "pkg": "internal/helpers",
+      "file": "internal/helpers/glob.go",
+      "name": "ParseGlobPattern",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15815,
+      "oracleEqual": 2669
+    },
+    {
+      "pkg": "internal/helpers",
+      "file": "internal/helpers/float.go",
+      "name": "Pow",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15815,
+      "oracleEqual": 2669
+    },
+    {
+      "pkg": "internal/helpers",
+      "file": "internal/helpers/float.go",
+      "name": "PowConst",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15815,
+      "oracleEqual": 2669
+    },
+    {
+      "pkg": "internal/helpers",
+      "file": "internal/helpers/stack.go",
+      "name": "PrettyPrintedStack",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15815,
+      "oracleEqual": 2669
+    },
+    {
+      "pkg": "internal/helpers",
+      "file": "internal/helpers/quote.go",
+      "name": "QuoteForJSON",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15815,
+      "oracleEqual": 2669
+    },
+    {
+      "pkg": "internal/helpers",
+      "file": "internal/helpers/quote.go",
+      "name": "QuoteSingle",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15815,
+      "oracleEqual": 2669
+    },
+    {
+      "pkg": "internal/helpers",
+      "file": "internal/helpers/float.go",
+      "name": "Round",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15815,
+      "oracleEqual": 2669
+    },
+    {
+      "pkg": "internal/helpers",
+      "file": "internal/helpers/bitset.go",
+      "name": "SetBit",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15815,
+      "oracleEqual": 2669
+    },
+    {
+      "pkg": "internal/helpers",
+      "file": "internal/helpers/float.go",
+      "name": "Sin",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15815,
+      "oracleEqual": 2669
+    },
+    {
+      "pkg": "internal/helpers",
+      "file": "internal/helpers/float.go",
+      "name": "Sqrt",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15815,
+      "oracleEqual": 2669
+    },
+    {
+      "pkg": "internal/helpers",
+      "file": "internal/helpers/float.go",
+      "name": "Squared",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15815,
+      "oracleEqual": 2669
+    },
+    {
+      "pkg": "internal/helpers",
+      "file": "internal/helpers/bitset.go",
+      "name": "String",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15815,
+      "oracleEqual": 2669
+    },
+    {
+      "pkg": "internal/helpers",
+      "file": "internal/helpers/strings.go",
+      "name": "StringArrayArraysEqual",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15815,
+      "oracleEqual": 2669
+    },
+    {
+      "pkg": "internal/helpers",
+      "file": "internal/helpers/strings.go",
+      "name": "StringArraysEqual",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15815,
+      "oracleEqual": 2669
+    },
+    {
+      "pkg": "internal/helpers",
+      "file": "internal/helpers/strings.go",
+      "name": "StringArrayToQuotedCommaSeparatedString",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15815,
+      "oracleEqual": 2669
+    },
+    {
+      "pkg": "internal/helpers",
+      "file": "internal/helpers/utf.go",
+      "name": "StringToUTF16",
+      "evidence": "m1-byte",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15815,
+      "oracleEqual": 2669
+    },
+    {
+      "pkg": "internal/helpers",
+      "file": "internal/helpers/float.go",
+      "name": "Sub",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15815,
+      "oracleEqual": 2669
+    },
+    {
+      "pkg": "internal/helpers",
+      "file": "internal/helpers/float.go",
+      "name": "SubConst",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15815,
+      "oracleEqual": 2669
+    },
+    {
+      "pkg": "internal/helpers",
+      "file": "internal/helpers/utf.go",
+      "name": "UTF16EqualsString",
+      "evidence": "m1-byte",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15815,
+      "oracleEqual": 2669
+    },
+    {
+      "pkg": "internal/helpers",
+      "file": "internal/helpers/utf.go",
+      "name": "UTF16EqualsUTF16",
+      "evidence": "m1-byte",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15815,
+      "oracleEqual": 2669
+    },
+    {
+      "pkg": "internal/helpers",
+      "file": "internal/helpers/utf.go",
+      "name": "UTF16ToString",
+      "evidence": "m1-byte",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15815,
+      "oracleEqual": 2669
+    },
+    {
+      "pkg": "internal/helpers",
+      "file": "internal/helpers/utf.go",
+      "name": "UTF16ToStringWithValidation",
+      "evidence": "m1-byte",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15815,
+      "oracleEqual": 2669
+    },
+    {
+      "pkg": "internal/helpers",
+      "file": "internal/helpers/float.go",
+      "name": "Value",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15815,
+      "oracleEqual": 2669
+    },
+    {
+      "pkg": "internal/helpers",
+      "file": "internal/helpers/waitgroup.go",
+      "name": "Wait",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15815,
+      "oracleEqual": 2669
+    },
+    {
+      "pkg": "internal/helpers",
+      "file": "internal/helpers/float.go",
+      "name": "WithSignFrom",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15815,
+      "oracleEqual": 2669
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast_helpers.go",
+      "name": "approximatePrintedIntCharCount",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast_helpers.go",
+      "name": "Assign",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast_helpers.go",
+      "name": "AssignStmt",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast.go",
+      "name": "BinaryAssignTarget",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast_helpers.go",
+      "name": "CanChangeStrictToLoose",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast_helpers.go",
+      "name": "CheckEqualityBigInt",
+      "evidence": "m1-byte",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast_helpers.go",
+      "name": "CheckEqualityIfNoSideEffects",
+      "evidence": "m1-byte",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast_helpers.go",
+      "name": "ClassCanBeRemovedIfUnused",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast_helpers.go",
+      "name": "ConvertBindingToExpr",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast.go",
+      "name": "EnsureValidIdentifier",
+      "evidence": "go-bytes",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast_helpers.go",
+      "name": "ExprCanBeRemovedIfUnused",
+      "evidence": "m1-byte",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast_helpers.go",
+      "name": "extractNumericValue",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast_helpers.go",
+      "name": "extractNumericValues",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast_helpers.go",
+      "name": "extractStringValue",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast_helpers.go",
+      "name": "extractStringValues",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast_helpers.go",
+      "name": "foldAdditionPreProcess",
+      "evidence": "m1-byte",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast_helpers.go",
+      "name": "FoldBinaryOperator",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast_helpers.go",
+      "name": "FoldStringAddition",
+      "evidence": "m1-byte",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ident.go",
+      "name": "ForceValidIdentifier",
+      "evidence": "go-bytes",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast_helpers.go",
+      "name": "ForEachIdentifierBinding",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast_helpers.go",
+      "name": "ForEachIdentifierBindingInDecls",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast.go",
+      "name": "GenerateNonUniqueNameFromPath",
+      "evidence": "go-bytes",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast.go",
+      "name": "Has",
+      "evidence": "go-bytes",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast.go",
+      "name": "Has",
+      "evidence": "go-bytes",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast.go",
+      "name": "HasSameFlagsAs",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast.go",
+      "name": "HasSameFlagsAs",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast.go",
+      "name": "HasSameFlagsAs",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast_helpers.go",
+      "name": "InlinePrimitivesIntoTemplate",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast_helpers.go",
+      "name": "InlineSpreadsOfArrayLiterals",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast_helpers.go",
+      "name": "IsBinaryNullAndUndefined",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast.go",
+      "name": "isBinding",
+      "evidence": "go-bytes",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast.go",
+      "name": "isBinding",
+      "evidence": "go-bytes",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast.go",
+      "name": "isBinding",
+      "evidence": "go-bytes",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast.go",
+      "name": "isBinding",
+      "evidence": "go-bytes",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast.go",
+      "name": "IsCommonJS",
+      "evidence": "go-bytes",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast.go",
+      "name": "IsDynamic",
+      "evidence": "go-bytes",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast.go",
+      "name": "IsESM",
+      "evidence": "go-bytes",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast.go",
+      "name": "isExpr",
+      "evidence": "go-bytes",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast.go",
+      "name": "isExpr",
+      "evidence": "go-bytes",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast.go",
+      "name": "isExpr",
+      "evidence": "go-bytes",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast.go",
+      "name": "isExpr",
+      "evidence": "go-bytes",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast.go",
+      "name": "isExpr",
+      "evidence": "go-bytes",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast.go",
+      "name": "isExpr",
+      "evidence": "go-bytes",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast.go",
+      "name": "isExpr",
+      "evidence": "go-bytes",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast.go",
+      "name": "isExpr",
+      "evidence": "go-bytes",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast.go",
+      "name": "isExpr",
+      "evidence": "go-bytes",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast.go",
+      "name": "isExpr",
+      "evidence": "go-bytes",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast.go",
+      "name": "isExpr",
+      "evidence": "go-bytes",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast.go",
+      "name": "isExpr",
+      "evidence": "go-bytes",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast.go",
+      "name": "isExpr",
+      "evidence": "go-bytes",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast.go",
+      "name": "isExpr",
+      "evidence": "go-bytes",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast.go",
+      "name": "isExpr",
+      "evidence": "go-bytes",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast.go",
+      "name": "isExpr",
+      "evidence": "go-bytes",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast.go",
+      "name": "isExpr",
+      "evidence": "go-bytes",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast.go",
+      "name": "isExpr",
+      "evidence": "go-bytes",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast.go",
+      "name": "isExpr",
+      "evidence": "go-bytes",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast.go",
+      "name": "isExpr",
+      "evidence": "go-bytes",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast.go",
+      "name": "isExpr",
+      "evidence": "go-bytes",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast.go",
+      "name": "isExpr",
+      "evidence": "go-bytes",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast.go",
+      "name": "isExpr",
+      "evidence": "go-bytes",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast.go",
+      "name": "isExpr",
+      "evidence": "go-bytes",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast.go",
+      "name": "isExpr",
+      "evidence": "go-bytes",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast.go",
+      "name": "isExpr",
+      "evidence": "go-bytes",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast.go",
+      "name": "isExpr",
+      "evidence": "go-bytes",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast.go",
+      "name": "isExpr",
+      "evidence": "go-bytes",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast.go",
+      "name": "isExpr",
+      "evidence": "go-bytes",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast.go",
+      "name": "isExpr",
+      "evidence": "go-bytes",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast.go",
+      "name": "isExpr",
+      "evidence": "go-bytes",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast.go",
+      "name": "isExpr",
+      "evidence": "go-bytes",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast.go",
+      "name": "isExpr",
+      "evidence": "go-bytes",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast.go",
+      "name": "isExpr",
+      "evidence": "go-bytes",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast.go",
+      "name": "isExpr",
+      "evidence": "go-bytes",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast.go",
+      "name": "isExpr",
+      "evidence": "go-bytes",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast.go",
+      "name": "isExpr",
+      "evidence": "go-bytes",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast.go",
+      "name": "isExpr",
+      "evidence": "go-bytes",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast.go",
+      "name": "isExpr",
+      "evidence": "go-bytes",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast.go",
+      "name": "isExpr",
+      "evidence": "go-bytes",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ident.go",
+      "name": "IsIdentifier",
+      "evidence": "go-bytes",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ident.go",
+      "name": "IsIdentifierContinue",
+      "evidence": "go-bytes",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ident.go",
+      "name": "IsIdentifierContinueES5AndESNext",
+      "evidence": "go-bytes",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ident.go",
+      "name": "IsIdentifierES5AndESNext",
+      "evidence": "go-bytes",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ident.go",
+      "name": "IsIdentifierES5AndESNextUTF16",
+      "evidence": "go-bytes",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ident.go",
+      "name": "IsIdentifierStart",
+      "evidence": "go-bytes",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ident.go",
+      "name": "IsIdentifierStartES5AndESNext",
+      "evidence": "go-bytes",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ident.go",
+      "name": "IsIdentifierUTF16",
+      "evidence": "go-bytes",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast_helpers.go",
+      "name": "isInt32OrUint32",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast.go",
+      "name": "IsLeftAssociative",
+      "evidence": "m1-byte",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast.go",
+      "name": "IsMethodDefinition",
+      "evidence": "go-bytes",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast_helpers.go",
+      "name": "IsOptionalChain",
+      "evidence": "m1-byte",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast.go",
+      "name": "IsPrefix",
+      "evidence": "m1-byte",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast_helpers.go",
+      "name": "IsPrimitiveLiteral",
+      "evidence": "m1-byte",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast_helpers.go",
+      "name": "IsPropertyAccess",
+      "evidence": "m1-byte",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast.go",
+      "name": "IsRightAssociative",
+      "evidence": "m1-byte",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast.go",
+      "name": "IsShortCircuit",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast_helpers.go",
+      "name": "isSideEffectFreeUnboundIdentifierRef",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast.go",
+      "name": "isStmt",
+      "evidence": "go-bytes",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast.go",
+      "name": "isStmt",
+      "evidence": "go-bytes",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast.go",
+      "name": "isStmt",
+      "evidence": "go-bytes",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast.go",
+      "name": "isStmt",
+      "evidence": "go-bytes",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast.go",
+      "name": "isStmt",
+      "evidence": "go-bytes",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast.go",
+      "name": "isStmt",
+      "evidence": "go-bytes",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast.go",
+      "name": "isStmt",
+      "evidence": "go-bytes",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast.go",
+      "name": "isStmt",
+      "evidence": "go-bytes",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast.go",
+      "name": "isStmt",
+      "evidence": "go-bytes",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast.go",
+      "name": "isStmt",
+      "evidence": "go-bytes",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast.go",
+      "name": "isStmt",
+      "evidence": "go-bytes",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast.go",
+      "name": "isStmt",
+      "evidence": "go-bytes",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast.go",
+      "name": "isStmt",
+      "evidence": "go-bytes",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast.go",
+      "name": "isStmt",
+      "evidence": "go-bytes",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast.go",
+      "name": "isStmt",
+      "evidence": "go-bytes",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast.go",
+      "name": "isStmt",
+      "evidence": "go-bytes",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast.go",
+      "name": "isStmt",
+      "evidence": "go-bytes",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast.go",
+      "name": "isStmt",
+      "evidence": "go-bytes",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast.go",
+      "name": "isStmt",
+      "evidence": "go-bytes",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast.go",
+      "name": "isStmt",
+      "evidence": "go-bytes",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast.go",
+      "name": "isStmt",
+      "evidence": "go-bytes",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast.go",
+      "name": "isStmt",
+      "evidence": "go-bytes",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast.go",
+      "name": "isStmt",
+      "evidence": "go-bytes",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast.go",
+      "name": "isStmt",
+      "evidence": "go-bytes",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast.go",
+      "name": "isStmt",
+      "evidence": "go-bytes",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast.go",
+      "name": "isStmt",
+      "evidence": "go-bytes",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast.go",
+      "name": "isStmt",
+      "evidence": "go-bytes",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast.go",
+      "name": "isStmt",
+      "evidence": "go-bytes",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast.go",
+      "name": "isStmt",
+      "evidence": "go-bytes",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast.go",
+      "name": "isStmt",
+      "evidence": "go-bytes",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast.go",
+      "name": "isStmt",
+      "evidence": "go-bytes",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast.go",
+      "name": "isStmt",
+      "evidence": "go-bytes",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast.go",
+      "name": "isStmt",
+      "evidence": "go-bytes",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast_helpers.go",
+      "name": "IsSymbolInstance",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast.go",
+      "name": "isTSNamespaceMember",
+      "evidence": "go-bytes",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast.go",
+      "name": "isTSNamespaceMember",
+      "evidence": "go-bytes",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast.go",
+      "name": "isTSNamespaceMember",
+      "evidence": "go-bytes",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast.go",
+      "name": "isTSNamespaceMember",
+      "evidence": "go-bytes",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast.go",
+      "name": "IsUsing",
+      "evidence": "go-bytes",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ident.go",
+      "name": "IsWhitespace",
+      "evidence": "go-bytes",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast_helpers.go",
+      "name": "JoinAllWithComma",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast_helpers.go",
+      "name": "joinStrings",
+      "evidence": "m1-byte",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast_helpers.go",
+      "name": "JoinWithComma",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast_helpers.go",
+      "name": "JoinWithLeftAssociativeOp",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast_helpers.go",
+      "name": "KnownPrimitiveType",
+      "evidence": "m1-byte",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast_helpers.go",
+      "name": "MakeHelperContext",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast_helpers.go",
+      "name": "MangleIfExpr",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast_helpers.go",
+      "name": "MangleObjectSpread",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast_helpers.go",
+      "name": "MaybeSimplifyEqualityComparison",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast_helpers.go",
+      "name": "MaybeSimplifyNot",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast_helpers.go",
+      "name": "MergedKnownPrimitiveTypes",
+      "evidence": "m1-byte",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast_helpers.go",
+      "name": "Not",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast.go",
+      "name": "RecursiveSetStrictMode",
+      "evidence": "m1-byte",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast_helpers.go",
+      "name": "ShouldFoldBinaryOperatorWhenMinifying",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast_helpers.go",
+      "name": "SimplifyBooleanExpr",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast_helpers.go",
+      "name": "SimplifyUnusedExpr",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast_helpers.go",
+      "name": "simplifyUnusedStringAdditionChain",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast_helpers.go",
+      "name": "StmtsCanBeRemovedIfUnused",
+      "evidence": "m1-byte",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast.go",
+      "name": "StopsHoisting",
+      "evidence": "go-bytes",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast_helpers.go",
+      "name": "stringCompareUCS2",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast_helpers.go",
+      "name": "StringToEquivalentNumberValue",
+      "evidence": "m1-byte",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast_helpers.go",
+      "name": "ToBooleanWithSideEffects",
+      "evidence": "m1-byte",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast_helpers.go",
+      "name": "ToInt32",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast_helpers.go",
+      "name": "ToNullOrUndefinedWithSideEffects",
+      "evidence": "m1-byte",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast_helpers.go",
+      "name": "ToNumberWithoutSideEffects",
+      "evidence": "m1-byte",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast_helpers.go",
+      "name": "ToStringWithoutSideEffects",
+      "evidence": "m1-byte",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast_helpers.go",
+      "name": "ToUint32",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast_helpers.go",
+      "name": "TryToInsertOptionalChain",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast_helpers.go",
+      "name": "TryToStringOnNumberSafely",
+      "evidence": "m1-byte",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast_helpers.go",
+      "name": "TypeofWithoutSideEffects",
+      "evidence": "m1-byte",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast.go",
+      "name": "UnaryAssignTarget",
+      "evidence": "m1-byte",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_ast",
+      "file": "internal/js_ast/js_ast_helpers.go",
+      "name": "ValuesLookTheSame",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_lexer",
+      "file": "internal/js_lexer/js_lexer.go",
+      "name": "addRangeError",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_lexer",
+      "file": "internal/js_lexer/js_lexer.go",
+      "name": "AddRangeErrorWithNotes",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_lexer",
+      "file": "internal/js_lexer/js_lexer.go",
+      "name": "addRangeErrorWithSuggestion",
+      "evidence": "go-bytes",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_lexer",
+      "file": "internal/js_lexer/js_lexer.go",
+      "name": "CookedAndRawTemplateContents",
+      "evidence": "go-bytes",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_lexer",
+      "file": "internal/js_lexer/js_lexer.go",
+      "name": "decodeJSXEntities",
+      "evidence": "go-bytes",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_lexer",
+      "file": "internal/js_lexer/js_lexer.go",
+      "name": "Expect",
+      "evidence": "go-bytes",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_lexer",
+      "file": "internal/js_lexer/js_lexer.go",
+      "name": "ExpectContextualKeyword",
+      "evidence": "go-bytes",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_lexer",
+      "file": "internal/js_lexer/js_lexer.go",
+      "name": "Expected",
+      "evidence": "go-bytes",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_lexer",
+      "file": "internal/js_lexer/js_lexer.go",
+      "name": "ExpectedString",
+      "evidence": "go-bytes",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_lexer",
+      "file": "internal/js_lexer/js_lexer.go",
+      "name": "ExpectGreaterThan",
+      "evidence": "go-bytes",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_lexer",
+      "file": "internal/js_lexer/js_lexer.go",
+      "name": "ExpectInsideJSXElement",
+      "evidence": "go-bytes",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_lexer",
+      "file": "internal/js_lexer/js_lexer.go",
+      "name": "ExpectJSXElementChild",
+      "evidence": "go-bytes",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_lexer",
+      "file": "internal/js_lexer/js_lexer.go",
+      "name": "ExpectLessThan",
+      "evidence": "go-bytes",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_lexer",
+      "file": "internal/js_lexer/js_lexer.go",
+      "name": "ExpectOrInsertSemicolon",
+      "evidence": "go-bytes",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_lexer",
+      "file": "internal/js_lexer/js_lexer.go",
+      "name": "fixWhitespaceAndDecodeJSXEntities",
+      "evidence": "go-bytes",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_lexer",
+      "file": "internal/js_lexer/js_lexer.go",
+      "name": "hasPrefixWithWordBoundary",
+      "evidence": "go-bytes",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_lexer",
+      "file": "internal/js_lexer/js_lexer.go",
+      "name": "IsAssign",
+      "evidence": "go-bytes",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_lexer",
+      "file": "internal/js_lexer/js_lexer.go",
+      "name": "IsContextualKeyword",
+      "evidence": "go-bytes",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_lexer",
+      "file": "internal/js_lexer/js_lexer.go",
+      "name": "IsIdentifierOrKeyword",
+      "evidence": "go-bytes",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_lexer",
+      "file": "internal/js_lexer/js_lexer.go",
+      "name": "isLetterASCII",
+      "evidence": "go-bytes",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_lexer",
+      "file": "internal/js_lexer/js_lexer.go",
+      "name": "isUpperASCII",
+      "evidence": "go-bytes",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_lexer",
+      "file": "internal/js_lexer/js_lexer.go",
+      "name": "Loc",
+      "evidence": "m1-byte",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_lexer",
+      "file": "internal/js_lexer/js_lexer.go",
+      "name": "maybeExpandEquals",
+      "evidence": "go-bytes",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_lexer",
+      "file": "internal/js_lexer/js_lexer.go",
+      "name": "NewLexer",
+      "evidence": "m1-byte",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_lexer",
+      "file": "internal/js_lexer/js_lexer.go",
+      "name": "NewLexerGlobalName",
+      "evidence": "go-bytes",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_lexer",
+      "file": "internal/js_lexer/js_lexer.go",
+      "name": "NewLexerJSON",
+      "evidence": "go-bytes",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_lexer",
+      "file": "internal/js_lexer/js_lexer.go",
+      "name": "Next",
+      "evidence": "m1-byte",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_lexer",
+      "file": "internal/js_lexer/js_lexer.go",
+      "name": "NextInsideJSXElement",
+      "evidence": "go-bytes",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_lexer",
+      "file": "internal/js_lexer/js_lexer.go",
+      "name": "NextJSXElementChild",
+      "evidence": "go-bytes",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_lexer",
+      "file": "internal/js_lexer/js_lexer.go",
+      "name": "parseNumericLiteralOrDot",
+      "evidence": "m1-byte",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_lexer",
+      "file": "internal/js_lexer/js_lexer.go",
+      "name": "Range",
+      "evidence": "go-bytes",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_lexer",
+      "file": "internal/js_lexer/js_lexer.go",
+      "name": "RangeOfIdentifier",
+      "evidence": "go-bytes",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_lexer",
+      "file": "internal/js_lexer/js_lexer.go",
+      "name": "RangeOfImportAssertOrWith",
+      "evidence": "go-bytes",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_lexer",
+      "file": "internal/js_lexer/js_lexer.go",
+      "name": "Raw",
+      "evidence": "m1-byte",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_lexer",
+      "file": "internal/js_lexer/js_lexer.go",
+      "name": "rawIdentifier",
+      "evidence": "m1-byte",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_lexer",
+      "file": "internal/js_lexer/js_lexer.go",
+      "name": "RescanCloseBraceAsTemplateToken",
+      "evidence": "go-bytes",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_lexer",
+      "file": "internal/js_lexer/js_lexer.go",
+      "name": "scanCommentText",
+      "evidence": "m1-byte",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_lexer",
+      "file": "internal/js_lexer/js_lexer.go",
+      "name": "scanForPragmaArg",
+      "evidence": "m1-byte",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_lexer",
+      "file": "internal/js_lexer/js_lexer.go",
+      "name": "scanIdentifierWithEscapes",
+      "evidence": "m1-byte",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_lexer",
+      "file": "internal/js_lexer/js_lexer.go",
+      "name": "ScanRegExp",
+      "evidence": "go-bytes",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_lexer",
+      "file": "internal/js_lexer/js_lexer.go",
+      "name": "step",
+      "evidence": "m1-byte",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_lexer",
+      "file": "internal/js_lexer/js_lexer.go",
+      "name": "StringLiteral",
+      "evidence": "m1-byte",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_lexer",
+      "file": "internal/js_lexer/js_lexer.go",
+      "name": "SyntaxError",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_lexer",
+      "file": "internal/js_lexer/js_lexer.go",
+      "name": "tryToDecodeEscapeSequences",
+      "evidence": "m1-byte",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_lexer",
+      "file": "internal/js_lexer/js_lexer.go",
+      "name": "Unexpected",
+      "evidence": "go-bytes",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "addImportRecord",
+      "evidence": "m1-byte",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "addSymbolAlreadyDeclaredError",
+      "evidence": "go-bytes",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "analyzeSwitchCasesForLiveness",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "appendPart",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "callRuntime",
+      "evidence": "m1-byte",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "canMergeSymbols",
+      "evidence": "go-bytes",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "caseBodyCouldHaveFallThrough",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "check",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "checkForArrowAfterTheCurrentToken",
+      "evidence": "go-bytes",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "checkForLegacyOctalLiteral",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "checkForUnrepresentableIdentifier",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "checkForUnusedTSImportEquals",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser_lower_class.go",
+      "name": "computeClassLoweringInfo",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "containsClosingScriptTag",
+      "evidence": "m1-byte",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "convertExprToBinding",
+      "evidence": "m1-byte",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "convertExprToBindingAndInitializer",
+      "evidence": "m1-byte",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "declareBinding",
+      "evidence": "go-bytes",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "declareSymbol",
+      "evidence": "m1-byte",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "defineValueCanBeUsedInAssignTarget",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "discardScopesUpTo",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "dotOrMangledPropParse",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "dotOrMangledPropVisit",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "dropFirstStatement",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "duplicateCaseEquals",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "duplicateCaseHash",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "findIdentifiers",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "findLabelSymbol",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "findSymbol",
+      "evidence": "m1-byte",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "fnBodyContainsUseStrict",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "forbidInitializers",
+      "evidence": "m1-byte",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "forbidLexicalDecl",
+      "evidence": "m1-byte",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "forbidUsingInSwitch",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "generateImportStmt",
+      "evidence": "go-bytes",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "generateTempRef",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "generateTopLevelTempRef",
+      "evidence": "m1-byte",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/ts_parser.go",
+      "name": "has",
+      "evidence": "go-bytes",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "hoistSymbols",
+      "evidence": "go-bytes",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "ignoreUsage",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "ignoreUsageOfIdentifierInDotChain",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "iifeCanBeRemovedIfUnused",
+      "evidence": "go-bytes",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "importFromRuntime",
+      "evidence": "m1-byte",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "importJSXSymbol",
+      "evidence": "go-bytes",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "instantiateDefineExpr",
+      "evidence": "go-bytes",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "isEvalOrArguments",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "isJumpStatement",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "isMangledProp",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "isSameRegexp",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "isSimpleParameterList",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser_lower.go",
+      "name": "isStrictMode",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser_lower.go",
+      "name": "isStrictModeOutputFormat",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/ts_parser.go",
+      "name": "isTSArrowFnJSX",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "isUnsightlyPrimitive",
+      "evidence": "go-bytes",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "isUnsupportedRegularExpression",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "isValidAssignmentTarget",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/json_parser.go",
+      "name": "isValidJSON",
+      "evidence": "go-bytes",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "jsxExprsEqual",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "jumpStmtsLookTheSame",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "keyNameForError",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "Len",
+      "evidence": "m1-byte",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "Less",
+      "evidence": "m1-byte",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "loadNameFromRef",
+      "evidence": "m1-byte",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "locAfterOp",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "logArrowArgErrors",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "logAssignToDefine",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "logDeferredArrowArgErrors",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "logNullishCoalescingErrorPrecedenceError",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "makeBigIntRef",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "makePromiseRef",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "makeRegExpRef",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "markExprAsParenthesized",
+      "evidence": "m1-byte",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser_lower.go",
+      "name": "markStrictModeFeature",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "maybeMarkKnownGlobalConstructorAsPure",
+      "evidence": "go-bytes",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "maybeWarnAboutAssertKeyword",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "mergeInto",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "mergeSymbols",
+      "evidence": "go-bytes",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "newParser",
+      "evidence": "m1-byte",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "newSymbol",
+      "evidence": "m1-byte",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "notesForAssertTypeJSON",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "Parse",
+      "evidence": "go-bytes",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "parseAndDeclareDecls",
+      "evidence": "m1-byte",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "parseArrowBody",
+      "evidence": "m1-byte",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "parseAsyncPrefixExpr",
+      "evidence": "m1-byte",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "parseBigIntOrStringIfUnsupported",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "parseBinding",
+      "evidence": "m1-byte",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "parseCallArgs",
+      "evidence": "m1-byte",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "parseClass",
+      "evidence": "m1-byte",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "parseClassExpr",
+      "evidence": "m1-byte",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "parseClassStmt",
+      "evidence": "m1-byte",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "parseClauseAlias",
+      "evidence": "m1-byte",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "parseDecorator",
+      "evidence": "go-bytes",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "parseDecorators",
+      "evidence": "go-bytes",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "ParseDefineExpr",
+      "evidence": "go-bytes",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "parseExportClause",
+      "evidence": "m1-byte",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "parseExpr",
+      "evidence": "go-bytes",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/json_parser.go",
+      "name": "parseExpr",
+      "evidence": "go-bytes",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "parseExprCommon",
+      "evidence": "m1-byte",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "parseExprOrBindings",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "parseExprWithFlags",
+      "evidence": "go-bytes",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "parseFn",
+      "evidence": "m1-byte",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "parseFnBody",
+      "evidence": "go-bytes",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "parseFnExpr",
+      "evidence": "go-bytes",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "parseFnStmt",
+      "evidence": "go-bytes",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "parseImportClause",
+      "evidence": "m1-byte",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "parseImportExpr",
+      "evidence": "go-bytes",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/json_parser.go",
+      "name": "ParseJSON",
+      "evidence": "go-bytes",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "parseJSXElement",
+      "evidence": "m1-byte",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "parseJSXNamespacedName",
+      "evidence": "m1-byte",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "parseJSXTag",
+      "evidence": "m1-byte",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "parseLabelName",
+      "evidence": "m1-byte",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/json_parser.go",
+      "name": "parseMaybeTrailingComma",
+      "evidence": "go-bytes",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "parseParenExpr",
+      "evidence": "m1-byte",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "parsePath",
+      "evidence": "go-bytes",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "parsePrefix",
+      "evidence": "m1-byte",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "parseProperty",
+      "evidence": "go-bytes",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "parsePropertyBinding",
+      "evidence": "m1-byte",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "parseStmt",
+      "evidence": "m1-byte",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "parseStmtsUpTo",
+      "evidence": "m1-byte",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "parseStringLiteral",
+      "evidence": "m1-byte",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "parseSuffix",
+      "evidence": "go-bytes",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "parseTemplateParts",
+      "evidence": "m1-byte",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "parseYieldExpr",
+      "evidence": "m1-byte",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "popAndDiscardScope",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "popAndFlattenScope",
+      "evidence": "m1-byte",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "popScope",
+      "evidence": "m1-byte",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser_lower_class.go",
+      "name": "privateSymbolNeedsToBeLowered",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "pushScopeForParsePass",
+      "evidence": "m1-byte",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "pushScopeForVisitPass",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "recordDeclaredSymbol",
+      "evidence": "go-bytes",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "recordExport",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "recordUsage",
+      "evidence": "go-bytes",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "reportPrivateNameUsage",
+      "evidence": "go-bytes",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "requireInitializers",
+      "evidence": "go-bytes",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "reset",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "saveExprCommentsHere",
+      "evidence": "go-bytes",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "scanForImportsAndExports",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "scanForUnusedTSImportEquals",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "selectLocalKind",
+      "evidence": "m1-byte",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "shouldKeepStmtInDeadControlFlow",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "shouldKeepStmtsInDeadControlFlow",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "sortedKeysOfMapStringLocRef",
+      "evidence": "go-bytes",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "stmtCaresAboutScope",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "stmtsCareAboutScope",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "stmtsToSingleStmt",
+      "evidence": "go-bytes",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "storeNameInRef",
+      "evidence": "m1-byte",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "Swap",
+      "evidence": "m1-byte",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "symbolForMangledProp",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "tagOrFragmentHelpText",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "textForParenthesesSuggestion",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "toAST",
+      "evidence": "go-bytes",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/ts_parser.go",
+      "name": "tsCanFollowTypeArgumentsInExpression",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/ts_parser.go",
+      "name": "tsIsBinaryOperator",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/ts_parser.go",
+      "name": "tsIsIdentifier",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/ts_parser.go",
+      "name": "tsIsStartOfExpression",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/ts_parser.go",
+      "name": "tsIsStartOfLeftHandSideExpression",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/ts_parser.go",
+      "name": "tsLookAheadNextTokenIsOpenParenOrLessThanOrDot",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "validateDeclaredSymbolName",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "validateFunctionName",
+      "evidence": "go-bytes",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "valueForImportMeta",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "valueForThis",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "valueToSubstituteForRequire",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "visitAndAppendStmt",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "visitArgs",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "visitBinding",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "visitClass",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "visitDecorators",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "visitExpr",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "visitExprInOut",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "visitFn",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "visitForLoopInit",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "visitLoopBody",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "visitSingleStmt",
+      "evidence": "go-bytes",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "visitStmts",
+      "evidence": "go-bytes",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "visitStmtsAndPrependTempRefs",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "warnAboutDuplicateProperties",
+      "evidence": "m1-byte",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "warnAboutEqualityCheck",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "warnAboutTypeofAndString",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "whyESModule",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser_lower.go",
+      "name": "whyStrictMode",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_parser",
+      "file": "internal/js_parser/js_parser.go",
+      "name": "willNeedBindingPattern",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15812,
+      "oracleEqual": 2667
+    },
+    {
+      "pkg": "internal/js_printer",
+      "file": "internal/js_printer/js_printer.go",
+      "name": "canPrintIdentifier",
+      "evidence": "go-bytes",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_printer",
+      "file": "internal/js_printer/js_printer.go",
+      "name": "canPrintIdentifierUTF16",
+      "evidence": "go-bytes",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_printer",
+      "file": "internal/js_printer/js_printer.go",
+      "name": "canUseShorthandProperty",
+      "evidence": "go-bytes",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_printer",
+      "file": "internal/js_printer/js_printer.go",
+      "name": "isUnboundEvalIdentifier",
+      "evidence": "go-bytes",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_printer",
+      "file": "internal/js_printer/js_printer.go",
+      "name": "print",
+      "evidence": "go-bytes",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_printer",
+      "file": "internal/js_printer/js_printer.go",
+      "name": "Print",
+      "evidence": "go-bytes",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_printer",
+      "file": "internal/js_printer/js_printer.go",
+      "name": "printBinding",
+      "evidence": "go-bytes",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_printer",
+      "file": "internal/js_printer/js_printer.go",
+      "name": "printBlock",
+      "evidence": "go-bytes",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_printer",
+      "file": "internal/js_printer/js_printer.go",
+      "name": "printBody",
+      "evidence": "go-bytes",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_printer",
+      "file": "internal/js_printer/js_printer.go",
+      "name": "printBytes",
+      "evidence": "m1-byte",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_printer",
+      "file": "internal/js_printer/js_printer.go",
+      "name": "printClass",
+      "evidence": "go-bytes",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_printer",
+      "file": "internal/js_printer/js_printer.go",
+      "name": "printClauseAlias",
+      "evidence": "go-bytes",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_printer",
+      "file": "internal/js_printer/js_printer.go",
+      "name": "printDecls",
+      "evidence": "go-bytes",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_printer",
+      "file": "internal/js_printer/js_printer.go",
+      "name": "printDeclStmt",
+      "evidence": "go-bytes",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_printer",
+      "file": "internal/js_printer/js_printer.go",
+      "name": "printDecorators",
+      "evidence": "go-bytes",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_printer",
+      "file": "internal/js_printer/js_printer.go",
+      "name": "printExpr",
+      "evidence": "go-bytes",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_printer",
+      "file": "internal/js_printer/js_printer.go",
+      "name": "printExprCommentsAfterCloseTokenAtLoc",
+      "evidence": "m1-byte",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_printer",
+      "file": "internal/js_printer/js_printer.go",
+      "name": "printExprCommentsAtLoc",
+      "evidence": "m1-byte",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_printer",
+      "file": "internal/js_printer/js_printer.go",
+      "name": "printExprWithoutLeadingNewline",
+      "evidence": "m1-byte",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_printer",
+      "file": "internal/js_printer/js_printer.go",
+      "name": "printFn",
+      "evidence": "go-bytes",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_printer",
+      "file": "internal/js_printer/js_printer.go",
+      "name": "printFnArgs",
+      "evidence": "go-bytes",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_printer",
+      "file": "internal/js_printer/js_printer.go",
+      "name": "printForLoopInit",
+      "evidence": "go-bytes",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_printer",
+      "file": "internal/js_printer/js_printer.go",
+      "name": "printIdentifier",
+      "evidence": "go-bytes",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_printer",
+      "file": "internal/js_printer/js_printer.go",
+      "name": "printIdentifierUTF16",
+      "evidence": "m1-byte",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_printer",
+      "file": "internal/js_printer/js_printer.go",
+      "name": "printIf",
+      "evidence": "go-bytes",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_printer",
+      "file": "internal/js_printer/js_printer.go",
+      "name": "printImportAssertOrWithClause",
+      "evidence": "go-bytes",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_printer",
+      "file": "internal/js_printer/js_printer.go",
+      "name": "printIndent",
+      "evidence": "go-bytes",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_printer",
+      "file": "internal/js_printer/js_printer.go",
+      "name": "printIndentedComment",
+      "evidence": "go-bytes",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_printer",
+      "file": "internal/js_printer/js_printer.go",
+      "name": "printJSXTag",
+      "evidence": "go-bytes",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_printer",
+      "file": "internal/js_printer/js_printer.go",
+      "name": "printNewline",
+      "evidence": "go-bytes",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_printer",
+      "file": "internal/js_printer/js_printer.go",
+      "name": "printNonNegativeFloat",
+      "evidence": "go-bytes",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_printer",
+      "file": "internal/js_printer/js_printer.go",
+      "name": "printNumber",
+      "evidence": "go-bytes",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_printer",
+      "file": "internal/js_printer/js_printer.go",
+      "name": "printPath",
+      "evidence": "go-bytes",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_printer",
+      "file": "internal/js_printer/js_printer.go",
+      "name": "printProperty",
+      "evidence": "go-bytes",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_printer",
+      "file": "internal/js_printer/js_printer.go",
+      "name": "printQuotedUTF16",
+      "evidence": "go-bytes",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_printer",
+      "file": "internal/js_printer/js_printer.go",
+      "name": "printSemicolonAfterStatement",
+      "evidence": "m1-byte",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_printer",
+      "file": "internal/js_printer/js_printer.go",
+      "name": "printSemicolonIfNeeded",
+      "evidence": "m1-byte",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_printer",
+      "file": "internal/js_printer/js_printer.go",
+      "name": "printSpace",
+      "evidence": "go-bytes",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_printer",
+      "file": "internal/js_printer/js_printer.go",
+      "name": "printSpaceBeforeIdentifier",
+      "evidence": "m1-byte",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_printer",
+      "file": "internal/js_printer/js_printer.go",
+      "name": "printSpaceBeforeOperator",
+      "evidence": "m1-byte",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_printer",
+      "file": "internal/js_printer/js_printer.go",
+      "name": "printStmt",
+      "evidence": "go-bytes",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_printer",
+      "file": "internal/js_printer/js_printer.go",
+      "name": "printUnquotedUTF16",
+      "evidence": "go-bytes",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_printer",
+      "file": "internal/js_printer/js_printer.go",
+      "name": "QuoteIdentifier",
+      "evidence": "go-bytes",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_printer",
+      "file": "internal/js_printer/js_printer.go",
+      "name": "restoreExprStartFlags",
+      "evidence": "go-bytes",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_printer",
+      "file": "internal/js_printer/js_printer.go",
+      "name": "saveExprStartFlags",
+      "evidence": "m1-byte",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_printer",
+      "file": "internal/js_printer/js_printer.go",
+      "name": "willPrintExprCommentsAtLoc",
+      "evidence": "m1-byte",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_printer",
+      "file": "internal/js_printer/js_printer.go",
+      "name": "willPrintExprCommentsForAnyOf",
+      "evidence": "m1-byte",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/js_printer",
+      "file": "internal/js_printer/js_printer.go",
+      "name": "wrapToAvoidAmbiguousElse",
+      "evidence": "go-bytes",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 15813,
+      "oracleEqual": 2668
+    },
+    {
+      "pkg": "internal/logger",
+      "file": "internal/logger/logger.go",
+      "name": "AddError",
+      "evidence": "go-bytes",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 0,
+      "oracleEqual": 0
+    },
+    {
+      "pkg": "internal/logger",
+      "file": "internal/logger/logger.go",
+      "name": "AddErrorWithNotes",
+      "evidence": "go-bytes",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 0,
+      "oracleEqual": 0
+    },
+    {
+      "pkg": "internal/logger",
+      "file": "internal/logger/logger.go",
+      "name": "AddID",
+      "evidence": "go-bytes",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 0,
+      "oracleEqual": 0
+    },
+    {
+      "pkg": "internal/logger",
+      "file": "internal/logger/logger.go",
+      "name": "AddIDWithNotes",
+      "evidence": "go-bytes",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 0,
+      "oracleEqual": 0
+    },
+    {
+      "pkg": "internal/logger",
+      "file": "internal/logger/logger.go",
+      "name": "AddMsgID",
+      "evidence": "go-bytes",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 0,
+      "oracleEqual": 0
+    },
+    {
+      "pkg": "internal/logger",
+      "file": "internal/logger/logger.go",
+      "name": "allowOverride",
+      "evidence": "go-bytes",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 0,
+      "oracleEqual": 0
+    },
+    {
+      "pkg": "internal/logger",
+      "file": "internal/logger/logger.go",
+      "name": "CommentTextWithoutIndent",
+      "evidence": "m1-byte",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 0,
+      "oracleEqual": 0
+    },
+    {
+      "pkg": "internal/logger",
+      "file": "internal/logger/logger.go",
+      "name": "computeLineAndColumn",
+      "evidence": "m1-byte",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 0,
+      "oracleEqual": 0
+    },
+    {
+      "pkg": "internal/logger",
+      "file": "internal/logger/logger.go",
+      "name": "DecodeIntoArray",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 0,
+      "oracleEqual": 0
+    },
+    {
+      "pkg": "internal/logger",
+      "file": "internal/logger/logger.go",
+      "name": "DecodeIntoMap",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 0,
+      "oracleEqual": 0
+    },
+    {
+      "pkg": "internal/logger",
+      "file": "internal/logger/style_default.go",
+      "name": "emptyMarginText",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 0,
+      "oracleEqual": 0
+    },
+    {
+      "pkg": "internal/logger",
+      "file": "internal/logger/logger.go",
+      "name": "EncodeImportAttributes",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 0,
+      "oracleEqual": 0
+    },
+    {
+      "pkg": "internal/logger",
+      "file": "internal/logger/logger.go",
+      "name": "End",
+      "evidence": "m1-byte",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 0,
+      "oracleEqual": 0
+    },
+    {
+      "pkg": "internal/logger",
+      "file": "internal/logger/logger.go",
+      "name": "errorAndWarningSummary",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 0,
+      "oracleEqual": 0
+    },
+    {
+      "pkg": "internal/logger",
+      "file": "internal/logger/style.go",
+      "name": "estimateWidthInTerminal",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 0,
+      "oracleEqual": 0
+    },
+    {
+      "pkg": "internal/logger",
+      "file": "internal/logger/logger.go",
+      "name": "ExpandBy",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 0,
+      "oracleEqual": 0
+    },
+    {
+      "pkg": "internal/logger",
+      "file": "internal/logger/style.go",
+      "name": "formatLineSpan",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 0,
+      "oracleEqual": 0
+    },
+    {
+      "pkg": "internal/logger",
+      "file": "internal/logger/logger_linux.go",
+      "name": "GetTerminalInfo",
+      "evidence": "go-bytes",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 0,
+      "oracleEqual": 0
+    },
+    {
+      "pkg": "internal/logger",
+      "file": "internal/logger/logger.go",
+      "name": "hasNoColorEnvironmentVariable",
+      "evidence": "go-bytes",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 0,
+      "oracleEqual": 0
+    },
+    {
+      "pkg": "internal/logger",
+      "file": "internal/logger/logger.go",
+      "name": "Icon",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 0,
+      "oracleEqual": 0
+    },
+    {
+      "pkg": "internal/logger",
+      "file": "internal/logger/logger.go",
+      "name": "IsDisabled",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 0,
+      "oracleEqual": 0
+    },
+    {
+      "pkg": "internal/logger",
+      "file": "internal/logger/logger.go",
+      "name": "isProbablyWindowsCommandPrompt",
+      "evidence": "go-bytes",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 0,
+      "oracleEqual": 0
+    },
+    {
+      "pkg": "internal/logger",
+      "file": "internal/logger/logger.go",
+      "name": "Len",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 0,
+      "oracleEqual": 0
+    },
+    {
+      "pkg": "internal/logger",
+      "file": "internal/logger/logger.go",
+      "name": "Len",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 0,
+      "oracleEqual": 0
+    },
+    {
+      "pkg": "internal/logger",
+      "file": "internal/logger/logger.go",
+      "name": "Less",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 0,
+      "oracleEqual": 0
+    },
+    {
+      "pkg": "internal/logger",
+      "file": "internal/logger/logger.go",
+      "name": "Less",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 0,
+      "oracleEqual": 0
+    },
+    {
+      "pkg": "internal/logger",
+      "file": "internal/logger/style.go",
+      "name": "linkifyText",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 0,
+      "oracleEqual": 0
+    },
+    {
+      "pkg": "internal/logger",
+      "file": "internal/logger/logger.go",
+      "name": "LocBeforeWhitespace",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 0,
+      "oracleEqual": 0
+    },
+    {
+      "pkg": "internal/logger",
+      "file": "internal/logger/logger.go",
+      "name": "MakeLineColumnTracker",
+      "evidence": "go-bytes",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 0,
+      "oracleEqual": 0
+    },
+    {
+      "pkg": "internal/logger",
+      "file": "internal/logger/style_default.go",
+      "name": "marginWithLineText",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 0,
+      "oracleEqual": 0
+    },
+    {
+      "pkg": "internal/logger",
+      "file": "internal/logger/logger.go",
+      "name": "MsgData",
+      "evidence": "m1-byte",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 0,
+      "oracleEqual": 0
+    },
+    {
+      "pkg": "internal/logger",
+      "file": "internal/logger/msg_ids.go",
+      "name": "msgIDToInfo",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 0,
+      "oracleEqual": 0
+    },
+    {
+      "pkg": "internal/logger",
+      "file": "internal/logger/msg_ids.go",
+      "name": "MsgIDToString",
+      "evidence": "go-bytes",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 0,
+      "oracleEqual": 0
+    },
+    {
+      "pkg": "internal/logger",
+      "file": "internal/logger/logger.go",
+      "name": "MsgLocationOrNil",
+      "evidence": "m1-byte",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 0,
+      "oracleEqual": 0
+    },
+    {
+      "pkg": "internal/logger",
+      "file": "internal/logger/style_default.go",
+      "name": "msgString",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 0,
+      "oracleEqual": 0
+    },
+    {
+      "pkg": "internal/logger",
+      "file": "internal/logger/style_default.go",
+      "name": "msgToStringDefault",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 0,
+      "oracleEqual": 0
+    },
+    {
+      "pkg": "internal/logger",
+      "file": "internal/logger/logger.go",
+      "name": "NewDeferLog",
+      "evidence": "go-bytes",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 0,
+      "oracleEqual": 0
+    },
+    {
+      "pkg": "internal/logger",
+      "file": "internal/logger/logger.go",
+      "name": "NewStderrLog",
+      "evidence": "go-bytes",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 0,
+      "oracleEqual": 0
+    },
+    {
+      "pkg": "internal/logger",
+      "file": "internal/logger/logger.go",
+      "name": "OutputOptionsForArgs",
+      "evidence": "go-bytes",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 0,
+      "oracleEqual": 0
+    },
+    {
+      "pkg": "internal/logger",
+      "file": "internal/logger/logger.go",
+      "name": "PlatformIndependentPathDirBaseExt",
+      "evidence": "go-bytes",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 0,
+      "oracleEqual": 0
+    },
+    {
+      "pkg": "internal/logger",
+      "file": "internal/logger/logger.go",
+      "name": "plural",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 0,
+      "oracleEqual": 0
+    },
+    {
+      "pkg": "internal/logger",
+      "file": "internal/logger/logger.go",
+      "name": "PrintErrorToStderr",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 0,
+      "oracleEqual": 0
+    },
+    {
+      "pkg": "internal/logger",
+      "file": "internal/logger/logger.go",
+      "name": "PrintErrorWithNoteToStderr",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 0,
+      "oracleEqual": 0
+    },
+    {
+      "pkg": "internal/logger",
+      "file": "internal/logger/logger.go",
+      "name": "PrintMessageToStderr",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 0,
+      "oracleEqual": 0
+    },
+    {
+      "pkg": "internal/logger",
+      "file": "internal/logger/logger.go",
+      "name": "PrintSummary",
+      "evidence": "go-bytes",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 0,
+      "oracleEqual": 0
+    },
+    {
+      "pkg": "internal/logger",
+      "file": "internal/logger/logger.go",
+      "name": "PrintText",
+      "evidence": "go-bytes",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 0,
+      "oracleEqual": 0
+    },
+    {
+      "pkg": "internal/logger",
+      "file": "internal/logger/logger.go",
+      "name": "PrintTextWithColor",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 0,
+      "oracleEqual": 0
+    },
+    {
+      "pkg": "internal/logger",
+      "file": "internal/logger/logger.go",
+      "name": "RangeOfLegacyOctalEscape",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 0,
+      "oracleEqual": 0
+    },
+    {
+      "pkg": "internal/logger",
+      "file": "internal/logger/logger.go",
+      "name": "RangeOfNumber",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 0,
+      "oracleEqual": 0
+    },
+    {
+      "pkg": "internal/logger",
+      "file": "internal/logger/logger.go",
+      "name": "RangeOfOperatorAfter",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 0,
+      "oracleEqual": 0
+    },
+    {
+      "pkg": "internal/logger",
+      "file": "internal/logger/logger.go",
+      "name": "RangeOfOperatorBefore",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 0,
+      "oracleEqual": 0
+    },
+    {
+      "pkg": "internal/logger",
+      "file": "internal/logger/logger.go",
+      "name": "RangeOfString",
+      "evidence": "m1-byte",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 0,
+      "oracleEqual": 0
+    },
+    {
+      "pkg": "internal/logger",
+      "file": "internal/logger/style.go",
+      "name": "renderTabStops",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 0,
+      "oracleEqual": 0
+    },
+    {
+      "pkg": "internal/logger",
+      "file": "internal/logger/logger.go",
+      "name": "scanTo",
+      "evidence": "m1-byte",
+      "m1": true,
+      "unit": true,
+      "oracleApplicable": 0,
+      "oracleEqual": 0
+    },
+    {
+      "pkg": "internal/logger",
+      "file": "internal/logger/logger.go",
+      "name": "Select",
+      "evidence": "go-bytes",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 0,
+      "oracleEqual": 0
+    },
+    {
+      "pkg": "internal/logger",
+      "file": "internal/logger/logger.go",
+      "name": "String",
+      "evidence": "go-bytes",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 0,
+      "oracleEqual": 0
+    },
+    {
+      "pkg": "internal/logger",
+      "file": "internal/logger/logger.go",
+      "name": "String",
+      "evidence": "go-bytes",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 0,
+      "oracleEqual": 0
+    },
+    {
+      "pkg": "internal/logger",
+      "file": "internal/logger/msg_ids.go",
+      "name": "StringToMaximumMsgID",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 0,
+      "oracleEqual": 0
+    },
+    {
+      "pkg": "internal/logger",
+      "file": "internal/logger/msg_ids.go",
+      "name": "StringToMsgIDs",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 0,
+      "oracleEqual": 0
+    },
+    {
+      "pkg": "internal/logger",
+      "file": "internal/logger/logger.go",
+      "name": "Swap",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 0,
+      "oracleEqual": 0
+    },
+    {
+      "pkg": "internal/logger",
+      "file": "internal/logger/logger.go",
+      "name": "Swap",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 0,
+      "oracleEqual": 0
+    },
+    {
+      "pkg": "internal/logger",
+      "file": "internal/logger/logger.go",
+      "name": "TextForRange",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 0,
+      "oracleEqual": 0
+    },
+    {
+      "pkg": "internal/logger",
+      "file": "internal/logger/style.go",
+      "name": "wrapWordsInString",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 0,
+      "oracleEqual": 0
+    },
+    {
+      "pkg": "internal/logger",
+      "file": "internal/logger/logger_linux.go",
+      "name": "writeStringWithColor",
+      "evidence": "go-bytes",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 0,
+      "oracleEqual": 0
+    },
+    {
+      "pkg": "internal/sourcemap",
+      "file": "internal/sourcemap/sourcemap.go",
+      "name": "Add",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 0,
+      "oracleEqual": 0
+    },
+    {
+      "pkg": "internal/sourcemap",
+      "file": "internal/sourcemap/sourcemap.go",
+      "name": "AddSourceMapping",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 0,
+      "oracleEqual": 0
+    },
+    {
+      "pkg": "internal/sourcemap",
+      "file": "internal/sourcemap/sourcemap.go",
+      "name": "AdvanceBytes",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 0,
+      "oracleEqual": 0
+    },
+    {
+      "pkg": "internal/sourcemap",
+      "file": "internal/sourcemap/sourcemap.go",
+      "name": "AdvanceString",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 0,
+      "oracleEqual": 0
+    },
+    {
+      "pkg": "internal/sourcemap",
+      "file": "internal/sourcemap/sourcemap.go",
+      "name": "appendMapping",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 0,
+      "oracleEqual": 0
+    },
+    {
+      "pkg": "internal/sourcemap",
+      "file": "internal/sourcemap/sourcemap.go",
+      "name": "appendMappingToBuffer",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 0,
+      "oracleEqual": 0
+    },
+    {
+      "pkg": "internal/sourcemap",
+      "file": "internal/sourcemap/sourcemap.go",
+      "name": "appendMappingWithoutRemapping",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 0,
+      "oracleEqual": 0
+    },
+    {
+      "pkg": "internal/sourcemap",
+      "file": "internal/sourcemap/sourcemap.go",
+      "name": "AppendSourceMapChunk",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 0,
+      "oracleEqual": 0
+    },
+    {
+      "pkg": "internal/sourcemap",
+      "file": "internal/sourcemap/sourcemap.go",
+      "name": "ComesBefore",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 0,
+      "oracleEqual": 0
+    },
+    {
+      "pkg": "internal/sourcemap",
+      "file": "internal/sourcemap/sourcemap.go",
+      "name": "DecodeVLQ",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 0,
+      "oracleEqual": 0
+    },
+    {
+      "pkg": "internal/sourcemap",
+      "file": "internal/sourcemap/sourcemap.go",
+      "name": "DecodeVLQUTF16",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 0,
+      "oracleEqual": 0
+    },
+    {
+      "pkg": "internal/sourcemap",
+      "file": "internal/sourcemap/sourcemap.go",
+      "name": "encodeVLQ",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 0,
+      "oracleEqual": 0
+    },
+    {
+      "pkg": "internal/sourcemap",
+      "file": "internal/sourcemap/sourcemap.go",
+      "name": "Finalize",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 0,
+      "oracleEqual": 0
+    },
+    {
+      "pkg": "internal/sourcemap",
+      "file": "internal/sourcemap/sourcemap.go",
+      "name": "Find",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 0,
+      "oracleEqual": 0
+    },
+    {
+      "pkg": "internal/sourcemap",
+      "file": "internal/sourcemap/sourcemap.go",
+      "name": "GenerateChunk",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 0,
+      "oracleEqual": 0
+    },
+    {
+      "pkg": "internal/sourcemap",
+      "file": "internal/sourcemap/sourcemap.go",
+      "name": "GenerateLineOffsetTables",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 0,
+      "oracleEqual": 0
+    },
+    {
+      "pkg": "internal/sourcemap",
+      "file": "internal/sourcemap/sourcemap.go",
+      "name": "HasContent",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 0,
+      "oracleEqual": 0
+    },
+    {
+      "pkg": "internal/sourcemap",
+      "file": "internal/sourcemap/sourcemap.go",
+      "name": "MakeChunkBuilder",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 0,
+      "oracleEqual": 0
+    },
+    {
+      "pkg": "internal/sourcemap",
+      "file": "internal/sourcemap/sourcemap.go",
+      "name": "updateGeneratedLineAndColumn",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 0,
+      "oracleEqual": 0
+    },
+    {
+      "pkg": "internal/xxhash",
+      "file": "internal/xxhash/xxhash.go",
+      "name": "appendUint64",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 1,
+      "oracleEqual": 1
+    },
+    {
+      "pkg": "internal/xxhash",
+      "file": "internal/xxhash/xxhash.go",
+      "name": "BlockSize",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 1,
+      "oracleEqual": 1
+    },
+    {
+      "pkg": "internal/xxhash",
+      "file": "internal/xxhash/xxhash.go",
+      "name": "consumeUint64",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 1,
+      "oracleEqual": 1
+    },
+    {
+      "pkg": "internal/xxhash",
+      "file": "internal/xxhash/xxhash.go",
+      "name": "MarshalBinary",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 1,
+      "oracleEqual": 1
+    },
+    {
+      "pkg": "internal/xxhash",
+      "file": "internal/xxhash/xxhash.go",
+      "name": "mergeRound",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 1,
+      "oracleEqual": 1
+    },
+    {
+      "pkg": "internal/xxhash",
+      "file": "internal/xxhash/xxhash.go",
+      "name": "New",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 1,
+      "oracleEqual": 1
+    },
+    {
+      "pkg": "internal/xxhash",
+      "file": "internal/xxhash/xxhash.go",
+      "name": "Reset",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 1,
+      "oracleEqual": 1
+    },
+    {
+      "pkg": "internal/xxhash",
+      "file": "internal/xxhash/xxhash.go",
+      "name": "rol1",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 1,
+      "oracleEqual": 1
+    },
+    {
+      "pkg": "internal/xxhash",
+      "file": "internal/xxhash/xxhash.go",
+      "name": "rol11",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 1,
+      "oracleEqual": 1
+    },
+    {
+      "pkg": "internal/xxhash",
+      "file": "internal/xxhash/xxhash.go",
+      "name": "rol12",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 1,
+      "oracleEqual": 1
+    },
+    {
+      "pkg": "internal/xxhash",
+      "file": "internal/xxhash/xxhash.go",
+      "name": "rol18",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 1,
+      "oracleEqual": 1
+    },
+    {
+      "pkg": "internal/xxhash",
+      "file": "internal/xxhash/xxhash.go",
+      "name": "rol23",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 1,
+      "oracleEqual": 1
+    },
+    {
+      "pkg": "internal/xxhash",
+      "file": "internal/xxhash/xxhash.go",
+      "name": "rol27",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 1,
+      "oracleEqual": 1
+    },
+    {
+      "pkg": "internal/xxhash",
+      "file": "internal/xxhash/xxhash.go",
+      "name": "rol31",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 1,
+      "oracleEqual": 1
+    },
+    {
+      "pkg": "internal/xxhash",
+      "file": "internal/xxhash/xxhash.go",
+      "name": "rol7",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 1,
+      "oracleEqual": 1
+    },
+    {
+      "pkg": "internal/xxhash",
+      "file": "internal/xxhash/xxhash.go",
+      "name": "round",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 1,
+      "oracleEqual": 1
+    },
+    {
+      "pkg": "internal/xxhash",
+      "file": "internal/xxhash/xxhash.go",
+      "name": "Size",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 1,
+      "oracleEqual": 1
+    },
+    {
+      "pkg": "internal/xxhash",
+      "file": "internal/xxhash/xxhash.go",
+      "name": "Sum",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 1,
+      "oracleEqual": 1
+    },
+    {
+      "pkg": "internal/xxhash",
+      "file": "internal/xxhash/xxhash.go",
+      "name": "Sum64",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 1,
+      "oracleEqual": 1
+    },
+    {
+      "pkg": "internal/xxhash",
+      "file": "internal/xxhash/xxhash_other.go",
+      "name": "Sum64",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 1,
+      "oracleEqual": 1
+    },
+    {
+      "pkg": "internal/xxhash",
+      "file": "internal/xxhash/xxhash.go",
+      "name": "u32",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 1,
+      "oracleEqual": 1
+    },
+    {
+      "pkg": "internal/xxhash",
+      "file": "internal/xxhash/xxhash.go",
+      "name": "u64",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 1,
+      "oracleEqual": 1
+    },
+    {
+      "pkg": "internal/xxhash",
+      "file": "internal/xxhash/xxhash.go",
+      "name": "UnmarshalBinary",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 1,
+      "oracleEqual": 1
+    },
+    {
+      "pkg": "internal/xxhash",
+      "file": "internal/xxhash/xxhash.go",
+      "name": "Write",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 1,
+      "oracleEqual": 1
+    },
+    {
+      "pkg": "internal/xxhash",
+      "file": "internal/xxhash/xxhash_other.go",
+      "name": "writeBlocks",
+      "evidence": "unit-only",
+      "m1": false,
+      "unit": true,
+      "oracleApplicable": 1,
+      "oracleEqual": 1
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "rows": [
+    {
+      "name": "empty",
+      "data": {
+        "out": "{}\n"
+      }
+    },
+    {
+      "name": "one-str",
+      "data": {
+        "out": "{\n  \"foo\": \"bar\"\n}\n"
+      }
+    },
+    {
+      "name": "with-false",
+      "data": {
+        "out": "{\n  \"bar\": \"baz\",\n  \"foo\": false\n}\n"
+      }
+    },
+    {
+      "name": "preserve-order",
+      "data": {
+        "out": "{\n  \"z\": \"1\",\n  \"a\": \"2\"\n}\n"
+      }
+    },
+    {
+      "name": "new-keys-sorted",
+      "data": {
+        "out": "{\n  \"a\": \"2\",\n  \"m\": \"3\",\n  \"z\": \"1\"\n}\n"
+      }
+    },
+    {
+      "name": "ascii",
+      "data": {
+        "out": "{\n  \"caf\\u00E9\": \"na\\u00EFve\"\n}\n"
+      }
+    },
+    {
+      "name": "escapes",
+      "data": {
+        "out": "{\n  \"a\\\"b\": \"x\\\\y\\nz\"\n}\n"
+      }
+    }
+  ]
+}

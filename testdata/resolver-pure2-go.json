@@ -1,0 +1,107 @@
+[
+  {
+    "fn": "globstarToEscapedRegexp",
+    "arg": "foo",
+    "out": "^foo$|false"
+  },
+  {
+    "fn": "globstarToEscapedRegexp",
+    "arg": "*.js",
+    "out": "^[^/]*\\.js$|true"
+  },
+  {
+    "fn": "globstarToEscapedRegexp",
+    "arg": "a?b",
+    "out": "^a.b$|true"
+  },
+  {
+    "fn": "globstarToEscapedRegexp",
+    "arg": "**/*.js",
+    "out": "^(?:[^/]*(?:/|$))*[^/]*\\.js$|true"
+  },
+  {
+    "fn": "globstarToEscapedRegexp",
+    "arg": "a/**/b",
+    "out": "^a/(?:[^/]*(?:/|$))*b$|true"
+  },
+  {
+    "fn": "globstarToEscapedRegexp",
+    "arg": "src/**",
+    "out": "^src/(?:[^/]*(?:/|$))*$|true"
+  },
+  {
+    "fn": "globstarToEscapedRegexp",
+    "arg": "a.b+c",
+    "out": "^a\\.b\\+c$|false"
+  },
+  {
+    "fn": "globstarToEscapedRegexp",
+    "arg": "**",
+    "out": "^(?:[^/]*(?:/|$))*$|true"
+  },
+  {
+    "fn": "globstarToEscapedRegexp",
+    "arg": "[abc]{x,y}",
+    "out": "^\\[abc\\]\\{x,y\\}$|false"
+  },
+  {
+    "fn": "globstarToEscapedRegexp",
+    "arg": "a\\b",
+    "out": "^a\\\\b$|false"
+  },
+  {
+    "fn": "globstarToEscapedRegexp",
+    "arg": "x/*/y",
+    "out": "^x/[^/]*/y$|true"
+  },
+  {
+    "fn": "esmParsePackageName",
+    "arg": "react",
+    "out": "react|.|true"
+  },
+  {
+    "fn": "esmParsePackageName",
+    "arg": "react-dom/client",
+    "out": "react-dom|./client|true"
+  },
+  {
+    "fn": "esmParsePackageName",
+    "arg": "@scope/pkg",
+    "out": "@scope/pkg|.|true"
+  },
+  {
+    "fn": "esmParsePackageName",
+    "arg": "@scope/pkg/sub",
+    "out": "@scope/pkg|./sub|true"
+  },
+  {
+    "fn": "esmParsePackageName",
+    "arg": "@scope",
+    "out": "||false"
+  },
+  {
+    "fn": "esmParsePackageName",
+    "arg": "",
+    "out": "||false"
+  },
+  {
+    "fn": "esmParsePackageName",
+    "arg": "./local",
+    "out": ".||false"
+  },
+  {
+    "fn": "esmParsePackageName",
+    "arg": "a\\b",
+    "out": "a\\b||false"
+  },
+  {
+    "fn": "esmParsePackageName",
+    "arg": "pkg%name",
+    "out": "pkg%name||false"
+  },
+  {
+    "fn": "esmParsePackageName",
+    "arg": "@scope/pkg",
+    "out": "@scope/pkg|.|true"
+  }
+]

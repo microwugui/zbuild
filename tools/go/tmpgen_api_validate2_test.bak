@@ -1,0 +1,68 @@
+package api
+
+// Batch 87 Go probe: pkg/api validate helpers (log overrides / banner-footer / output extensions).
+import (
+	"encoding/json"
+	"os"
+	"sort"
+	"strconv"
+	"testing"
+
+	"github.com/evanw/esbuild/internal/logger"
+)
+
+func TestTmpGenApiValidate2(t *testing.T) {
+	type row struct { Fn string `json:"fn"`; Arg string `json:"arg"`; Out string `json:"out"` }
+	var out []row
+
+	// validateLogOverrides: arg = JSON array of [name, logLevel] pairs
+	for _, s := range []string{
+		`[["verbose",1],["info",3],["warning",4]]`,
+		`[["bigint",5],["assert-to-with",2]]`,
+		`[["package.json",3]]`,
+	} {
+		var pairs [][2]int
+		// parse names+levels manually: names are strings, need custom
+		var raw []struct { N string; L int }
+		// reuse: the JSON has string names; unmarshal into generic
+		var generic []interface{}
+		json.Unmarshal([]byte(s), &generic)
+		input := map[string]LogLevel{}
+		for _, g := range generic {
+			arr := g.([]interface{})
+			input[arr[0].(string)] = LogLevel(arr[1].(float64))
+			_ = pairs
+			_ = raw
+		}
+		result := validateLogOverrides(input)
+		keys := make([]int, 0, len(result))
+		for k := range result { keys = append(keys, int(k)) }
+		sort.Ints(keys)
+		dump := ""
+		for _, k := range keys { dump += strconv.Itoa(k) + "=" + strconv.Itoa(int(result[logger.MsgID(k)])) + ";" }
+		out = append(out, row{"validateLogOverrides", s, dump})
+	}
+
+	// validateBannerOrFooter: arg = JSON map of type->text
+	for _, s := range []string{`{"js":"a","css":"b"}`, `{"js":"x"}`, `{"foo":"y","css":"z"}`} {
+		var vals map[string]string
+		json.Unmarshal([]byte(s), &vals)
+		log := logger.NewDeferLog(logger.DeferLogNoVerboseOrDebug, nil)
+		js, css := validateBannerOrFooter(log, "banner", vals)
+		out = append(out, row{"validateBannerOrFooter", s, js + "|" + css})
+	}
+
+	// validateOutputExtensions: arg = JSON map
+	for _, s := range []string{`{".js":".mjs",".css":".css"}`, `{".js":"bad"}`, `{"foo":".x"}`} {
+		var vals map[string]string
+		json.Unmarshal([]byte(s), &vals)
+		log := logger.NewDeferLog(logger.DeferLogNoVerboseOrDebug, nil)
+		js, css := validateOutputExtensions(log, vals)
+		out = append(out, row{"validateOutputExtensions", s, js + "|" + css})
+	}
+
+	b, err := json.MarshalIndent(out, "", "  ")
+	if err != nil { t.Fatal(err) }
+	if err := os.WriteFile("/root/port/testdata/api-validate2-go.json", b, 0644); err != nil { t.Fatal(err) }
+	t.Logf("wrote %d rows", len(out))
+}

@@ -1,0 +1,124 @@
+package linker
+
+// 第 144 批 Go 探针：tree-shaking + code-splitting 簇（part 图遍历 / entry bit 传播）。
+import (
+	"encoding/json"
+	"os"
+	"testing"
+
+	"github.com/evanw/esbuild/internal/ast"
+	"github.com/evanw/esbuild/internal/config"
+	"github.com/evanw/esbuild/internal/graph"
+	"github.com/evanw/esbuild/internal/js_ast"
+	"github.com/evanw/esbuild/internal/logger"
+)
+
+func tsRef(s, i uint32) ast.Ref { return ast.Ref{SourceIndex: s, InnerIndex: i} }
+
+// spec for a file: parts with dependencies + side-effect flags, import records with source indices
+type partSpec struct {
+  deps [][2]uint32 // {sourceIndex, partIndex}
+  removable bool
+  forceTree bool
+  importRecs []uint32 // indices of import records used by this part
+}
+type fileSpec struct {
+  parts []partSpec
+  imports []int // source index or -1 for external; kind stored separately
+  importKinds []ast.ImportKind
+  cssSource int // -1 none
+  sideEffects graph.SideEffectsKind
+  isEntry bool
+}
+
+func tsBuildGraph(specs []fileSpec, entryIdx []int, treeShaking bool, codeSplitting bool, ignoreDCE bool) (*linkerContext, *config.Options) {
+  inputs := make([]graph.InputFile, len(specs))
+  eps := []graph.EntryPoint{}
+  for i, si := range entryIdx { _ = i; e := graph.EntryPoint{SourceIndex: uint32(si), OutputPath: "e.js"}; eps = append(eps, e) }
+  for si, sp := range specs {
+    repr := &graph.JSRepr{}
+    repr.AST.ModuleScope = &js_ast.Scope{}
+    repr.AST.ExportsRef = tsRef(uint32(si), 0)
+    for _, ps := range sp.parts {
+      p := js_ast.Part{CanBeRemovedIfUnused: ps.removable, ForceTreeShaking: ps.forceTree, SymbolUses: map[ast.Ref]js_ast.SymbolUse{}}
+      for _, d := range ps.deps { p.Dependencies = append(p.Dependencies, js_ast.Dependency{SourceIndex: d[0], PartIndex: d[1]}) }
+      p.ImportRecordIndices = ps.importRecs
+      repr.AST.Parts = append(repr.AST.Parts, p)
+    }
+    for j, imp := range sp.imports {
+      rec := ast.ImportRecord{Kind: sp.importKinds[j]}
+      if imp >= 0 { rec.SourceIndex = ast.MakeIndex32(uint32(imp)) }
+      repr.AST.ImportRecords = append(repr.AST.ImportRecords, rec)
+    }
+    if sp.cssSource >= 0 { repr.CSSSourceIndex = ast.MakeIndex32(uint32(sp.cssSource)) }
+    inp := graph.InputFile{Repr: repr, Source: logger.Source{Contents: ""}}
+    inp.SideEffects.Kind = sp.sideEffects
+    inputs[si] = inp
+  }
+  reachable := make([]uint32, len(specs)); for i := range reachable { reachable[i] = uint32(i) }
+  g := graph.CloneLinkerGraph(inputs, reachable, eps, codeSplitting)
+  opts := &config.Options{TreeShaking: treeShaking, CodeSplitting: codeSplitting, IgnoreDCEAnnotations: ignoreDCE}
+  return &linkerContext{graph: g, options: opts}, opts
+}
+
+type tsRow struct { Fn string `json:"fn"`; Arg map[string]interface{} `json:"arg"`; Out interface{} `json:"out"` }
+
+func tsDump(c *linkerContext) interface{} {
+  files := []interface{}{}
+  for i := range c.graph.Files {
+    f := &c.graph.Files[i]
+    parts := []interface{}{}
+    if repr, ok := f.InputFile.Repr.(*graph.JSRepr); ok {
+      for _, p := range repr.AST.Parts { parts = append(parts, p.IsLive) }
+    }
+    bits := []int{}
+    for b := uint(0); b < 4; b++ { if b/8 < uint(len(f.EntryBits.String())) && f.EntryBits.HasBit(b) { bits = append(bits, int(b)) } }
+    files = append(files, map[string]interface{}{"live": f.IsLive, "dist": f.DistanceFromEntryPoint, "bits": bits, "parts": parts})
+  }
+  return files
+}
+
+func TestTmpGenTreeShake(t *testing.T) {
+  var out []tsRow
+  add := func(fn string, arg map[string]interface{}, o interface{}) { out = append(out, tsRow{fn, arg, o}) }
+
+  // Scenario A: entry(0) imports B(1) for side effects; B has a live part + a removable dead part
+  scenA := []fileSpec{
+    {parts: []partSpec{{importRecs: []uint32{0}}, {removable: true}}, imports: []int{1}, importKinds: []ast.ImportKind{ast.ImportStmt}, sideEffects: graph.HasSideEffects, isEntry: true, cssSource: -1},
+    {parts: []partSpec{{}, {removable: true, deps: [][2]uint32{{2, 0}}}}, sideEffects: graph.HasSideEffects, cssSource: -1},
+    {parts: []partSpec{{removable: true}}, sideEffects: graph.NoSideEffects_EmptyAST, cssSource: -1},
+  }
+  for _, shake := range []bool{false, true} {
+    c, _ := tsBuildGraph(scenA, []int{0}, shake, false, false)
+    c.treeShakingAndCodeSplitting()
+    add("treeShakingAndCodeSplitting", map[string]interface{}{"scenario":"A", "treeShaking": shake}, tsDump(c))
+  }
+
+  // Scenario B: two entries share a dependency; code splitting marks entry bits
+  scenB := []fileSpec{
+    {parts: []partSpec{{importRecs: []uint32{0}}}, imports: []int{2}, importKinds: []ast.ImportKind{ast.ImportStmt}, sideEffects: graph.HasSideEffects, cssSource: -1},
+    {parts: []partSpec{{importRecs: []uint32{0}}}, imports: []int{2}, importKinds: []ast.ImportKind{ast.ImportStmt}, sideEffects: graph.HasSideEffects, cssSource: -1},
+    {parts: []partSpec{{}}, sideEffects: graph.HasSideEffects, cssSource: -1},
+  }
+  for _, split := range []bool{false, true} {
+    c, _ := tsBuildGraph(scenB, []int{0, 1}, true, split, false)
+    c.treeShakingAndCodeSplitting()
+    add("treeShakingAndCodeSplitting", map[string]interface{}{"scenario":"B", "codeSplit": split}, tsDump(c))
+  }
+
+  // markPartLiveForTreeShaking direct: chain of deps
+  {
+    specs := []fileSpec{
+      {parts: []partSpec{{deps: [][2]uint32{{1, 0}}}}, sideEffects: graph.HasSideEffects, cssSource: -1},
+      {parts: []partSpec{{removable: true}}, sideEffects: graph.HasSideEffects, cssSource: -1},
+    }
+    c, _ := tsBuildGraph(specs, []int{0}, true, false, false)
+    c.markPartLiveForTreeShaking(0, 0)
+    add("markPartLiveForTreeShaking", map[string]interface{}{}, tsDump(c))
+  }
+
+  b, err := json.MarshalIndent(out, "", "  ")
+  if err != nil { t.Fatal(err) }
+  if err := os.WriteFile("/root/port/testdata/treeshake-go.json", b, 0644); err != nil { t.Fatal(err) }
+  t.Logf("wrote %d rows", len(out))
+}

@@ -1,0 +1,61 @@
+[
+  {
+    "fn": "findImportedCSSFilesInJSOrder",
+    "arg": {
+      "entry": 0
+    },
+    "out": [
+      2,
+      4,
+      5
+    ]
+  },
+  {
+    "fn": "shouldIncludePart",
+    "arg": {
+      "case": "single-import"
+    },
+    "out": false
+  },
+  {
+    "fn": "shouldIncludePart",
+    "arg": {
+      "case": "normal"
+    },
+    "out": true
+  },
+  {
+    "fn": "shouldIncludePart",
+    "arg": {
+      "case": "empty"
+    },
+    "out": true
+  },
+  {
+    "fn": "pathBetweenChunks",
+    "arg": {
+      "from": "/out/js",
+      "public": "",
+      "to": "/out/css/a.css"
+    },
+    "out": "../css/a.css"
+  },
+  {
+    "fn": "pathBetweenChunks",
+    "arg": {
+      "from": "/out/js",
+      "public": "https://cdn.example/",
+      "to": "/out/css/a.css"
+    },
+    "out": "https://cdn.example//out/css/a.css"
+  },
+  {
+    "fn": "pathBetweenChunks",
+    "arg": {
+      "from": "/out",
+      "public": "https://cdn.example",
+      "to": "/out/a.js"
+    },
+    "out": "https://cdn.example//out/a.js"
+  }
+]

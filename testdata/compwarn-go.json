@@ -1,0 +1,20 @@
+[
+  {
+    "name": "cross-file-collision",
+    "msgs": [
+      {
+        "kind": 1,
+        "notes": [
+          "The first definition of \"color\" is here:",
+          "The second definition of \"color\" is here:",
+          "The specification of \"composes\" does not define an order when class declarations from separate files are composed together. The value of the \"color\" property for \"a\" may change unpredictably as the code is edited. Make sure that all definitions of \"color\" for \"a\" are in a single file."
+        ],
+        "text": "The value of \"color\" in the \"a\" class is undefined"
+      }
+    ]
+  },
+  {
+    "name": "no-collision",
+    "msgs": []
+  }
+]

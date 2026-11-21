@@ -1,0 +1,1 @@
+a { color: rgb(var(--x) var(--y) var(--z)) }

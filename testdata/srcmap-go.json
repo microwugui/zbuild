@@ -1,0 +1,58 @@
+[
+  {
+    "name": "none",
+    "count": 0,
+    "lotCounts": null,
+    "quoted": null
+  },
+  {
+    "name": "simple",
+    "count": 1,
+    "lotCounts": [
+      3
+    ],
+    "quoted": [
+      [
+        "\"var x = 1;\\nvar y = 2;\\n\""
+      ]
+    ]
+  },
+  {
+    "name": "two-files",
+    "count": 2,
+    "lotCounts": [
+      3,
+      4
+    ],
+    "quoted": [
+      [
+        "\"a\\nb\\n\""
+      ],
+      [
+        "\"x\\ny\\nz\\n\""
+      ]
+    ]
+  },
+  {
+    "name": "exclude-content",
+    "count": 1,
+    "lotCounts": [
+      2
+    ],
+    "quoted": [
+      []
+    ]
+  },
+  {
+    "name": "ascii",
+    "count": 1,
+    "lotCounts": [
+      2
+    ],
+    "quoted": [
+      [
+        "\"var s = \\\"\\u00E9\\\";\\n\""
+      ]
+    ]
+  }
+]

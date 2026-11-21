@@ -1,0 +1,1 @@
+.foo, .bar { @layer xyz { color: red } }

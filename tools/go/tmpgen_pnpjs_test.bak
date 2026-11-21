@@ -1,0 +1,107 @@
+package resolver
+
+// 第 172 批 Go 探针：tryToExtractYarnPnPDataFromJS 逐字节固化（PnP JS 拦截底座全套）。
+import (
+	"encoding/json"
+	"os"
+	"sort"
+	"testing"
+
+	"github.com/evanw/esbuild/internal/cache"
+	"github.com/evanw/esbuild/internal/config"
+	"github.com/evanw/esbuild/internal/fs"
+	"github.com/evanw/esbuild/internal/helpers"
+	"github.com/evanw/esbuild/internal/js_ast"
+	"github.com/evanw/esbuild/internal/logger"
+)
+
+type pjRow struct {
+	Arg map[string]interface{} `json:"arg"`
+	Out interface{}            `json:"out"`
+}
+
+func dumpExprLocPJ(e js_ast.Expr) interface{} {
+	loc := int(e.Loc.Start)
+	switch v := e.Data.(type) {
+	case *js_ast.EString:
+		return []interface{}{"s", string(helpers.UTF16ToString(v.Value)), loc}
+	case *js_ast.EBoolean:
+		return []interface{}{"b", v.Value, loc}
+	case *js_ast.ENull:
+		return []interface{}{"null", loc}
+	case *js_ast.ENumber:
+		return []interface{}{"n", v.Value, loc}
+	case *js_ast.EArray:
+		arr := []interface{}{}
+		for _, it := range v.Items { arr = append(arr, dumpExprLocPJ(it)) }
+		return []interface{}{"a", arr, loc, int(v.CloseBracketLoc.Start)}
+	case *js_ast.EObject:
+		type kv struct{ k string; v interface{} }
+		props := []kv{}
+		for _, p := range v.Properties {
+			key := ""
+			if ks, ok := p.Key.Data.(*js_ast.EString); ok { key = string(helpers.UTF16ToString(ks.Value)) }
+			props = append(props, kv{key, dumpExprLocPJ(p.ValueOrNil)})
+		}
+		sort.Slice(props, func(i, j int) bool { return props[i].k < props[j].k })
+		arr := []interface{}{}
+		for _, p := range props { arr = append(arr, []interface{}{p.k, p.v}) }
+		return []interface{}{"o", arr, loc, int(v.CloseBraceLoc.Start)}
+	default:
+		return []interface{}{"other", loc}
+	}
+}
+
+func TestTmpGenPnpJS(t *testing.T) {
+	var out []pjRow
+	type tc struct{ name, contents string; mode pnpDataMode; path string }
+	cases := []tc{
+		{"object-literal", `hydrateRuntimeState({enableTopLevelFallback:true,fallbackPool:[["a",null]]})`, pnpIgnoreErrorsAboutMissingFiles, "/pnp/.pnp.js"},
+		{"json-parse-string", `hydrateRuntimeState(JSON.parse('{"enableTopLevelFallback":true,"fallbackPool":[["a",null]]}'))`, pnpIgnoreErrorsAboutMissingFiles, "/pnp/.pnp.js"},
+		{"json-parse-ident", "var DATA = '{\"enableTopLevelFallback\":true,\"fallbackPool\":[[\"a\",null]]}';\nhydrateRuntimeState(JSON.parse(DATA));\n", pnpIgnoreErrorsAboutMissingFiles, "/pnp/.pnp.js"},
+		{"escaped-string", `hydrateRuntimeState(JSON.parse("{\"name\":\"a\\nb\",\"enableTopLevelFallback\":false}"))`, pnpIgnoreErrorsAboutMissingFiles, "/pnp/.pnp.js"},
+		{"registry-ident", "var D = '{\"packageRegistryData\":[[\"\",[[\"\",{\"packageLocation\":\"./\",\"packageDependencies\":[]}]]]]}';\nhydrateRuntimeState(JSON.parse(D));", pnpIgnoreErrorsAboutMissingFiles, "/pnp/.pnp.js"},
+		{"bad-json-string", `hydrateRuntimeState(JSON.parse('{"a":}'))`, pnpIgnoreErrorsAboutMissingFiles, "/pnp/.pnp.js"},
+		{"bad-json-ident", "var D = '{\"a\":}';\nhydrateRuntimeState(JSON.parse(D));", pnpIgnoreErrorsAboutMissingFiles, "/pnp/.pnp.js"},
+		{"no-call", `var x = 1; hydrateNothing(2);`, pnpIgnoreErrorsAboutMissingFiles, "/pnp/.pnp.js"},
+		{"non-json-arg", `hydrateRuntimeState(foo())`, pnpIgnoreErrorsAboutMissingFiles, "/pnp/.pnp.js"},
+		{"missing-ignore", "", pnpIgnoreErrorsAboutMissingFiles, "/pnp/missing.js"},
+		{"missing-report", "", pnpReportErrorsAboutMissingFiles, "/pnp/missing.js"},
+	}
+	for _, c := range cases {
+		fsObj := fs.MockFS(map[string]string{}, fs.MockUnix, "/")
+		if c.contents != "" {
+			fsObj = fs.MockFS(map[string]string{c.path: c.contents}, fs.MockUnix, "/")
+		}
+		caches := cache.MakeCacheSet()
+		log := logger.NewDeferLog(logger.DeferLogAll, nil)
+		dl := &debugLogs{}
+		r := resolverQuery{Resolver: &Resolver{log: log}, debugLogs: dl}
+		r.options = config.Options{Platform: config.PlatformNode}
+		r.fs = fsObj
+		r.caches = caches
+		result, source := r.tryToExtractYarnPnPDataFromJS(c.path, c.mode)
+		msgs := []interface{}{}
+		for _, m := range log.Done() {
+			entry := []interface{}{m.Data.Text}
+			if m.Data.Location != nil {
+				entry = append(entry, int(m.Data.Location.Line), int(m.Data.Location.Column), int(m.Data.Location.Length))
+			} else {
+				entry = append(entry, nil)
+			}
+			msgs = append(msgs, entry)
+		}
+		notes := []string{}
+		for _, n := range dl.notes { notes = append(notes, n.Text) }
+		var exprDump interface{} = nil
+		if result.Data != nil { exprDump = dumpExprLocPJ(result) }
+		out = append(out, pjRow{
+			Arg: map[string]interface{}{"name": c.name, "contents": c.contents, "mode": int(c.mode), "path": c.path},
+			Out: []interface{}{exprDump, source.KeyPath.Text, msgs, notes},
+		})
+	}
+	b, err := json.Marshal(out)
+	if err != nil { t.Fatal(err) }
+	if err := os.WriteFile("/root/port/testdata/pnpjs-go.json", b, 0644); err != nil { t.Fatal(err) }
+	t.Logf("wrote %d cases", len(out))
+}

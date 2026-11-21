@@ -1,0 +1,243 @@
+{"r":"l","case":"testdata/esbuild-cases-lex-err/01d9879862b2.js","kind":0,"text":"Syntax error \"_\"","hasLoc":true,"line":1,"col":1}
+{"r":"c","case":"testdata/esbuild-cases-lex-err/01d9879862b2.js","contentsBytes":3,"contentsSha256":"01d9879862b2f0c1cc2b7c913a9ced8b2ab5cea0918305de952679cd4d5cd90c","tokens":0,"logs":1,"endOfFile":false,"panic":"LexerPanic","contentsHex":"305f31"}
+{"r":"l","case":"testdata/esbuild-cases-lex-err/021db8debddc.js","kind":0,"text":"Syntax error \"z\"","hasLoc":true,"line":1,"col":2}
+{"r":"c","case":"testdata/esbuild-cases-lex-err/021db8debddc.js","contentsBytes":3,"contentsSha256":"021db8debddcf1f72e553d5c1cecd9f18ab3dc16e2b0bb2611ac0c3026fb983a","tokens":0,"logs":1,"endOfFile":false,"panic":"LexerPanic","contentsHex":"312e7a"}
+{"r":"l","case":"testdata/esbuild-cases-lex-err/0317360f9994.js","kind":0,"text":"Unterminated string literal","hasLoc":true,"line":1,"col":2}
+{"r":"c","case":"testdata/esbuild-cases-lex-err/0317360f9994.js","contentsBytes":2,"contentsSha256":"0317360f9994b128446eebd943d7220aaa379cbbb5602001e2824cba797d0984","tokens":0,"logs":1,"endOfFile":false,"panic":"LexerPanic","contentsHex":"2227"}
+{"r":"l","case":"testdata/esbuild-cases-lex-err/07180d74095a.js","kind":0,"text":"Syntax error \"8\"","hasLoc":true,"line":1,"col":4}
+{"r":"c","case":"testdata/esbuild-cases-lex-err/07180d74095a.js","contentsBytes":5,"contentsSha256":"07180d74095a8fd5df58fe0afdb81db11a82f4c14d3699c0a4c68970925d1a6a","tokens":0,"logs":1,"endOfFile":false,"panic":"LexerPanic","contentsHex":"306f303138"}
+{"r":"l","case":"testdata/esbuild-cases-lex-err/0874eaa8fc26.js","kind":0,"text":"Unexpected end of file","hasLoc":true,"line":1,"col":4}
+{"r":"c","case":"testdata/esbuild-cases-lex-err/0874eaa8fc26.js","contentsBytes":4,"contentsSha256":"0874eaa8fc266b5c25ea957a794dab24d301060be84a2d7ca8f56f2fd23b1ffe","tokens":0,"logs":1,"endOfFile":false,"panic":"LexerPanic","contentsHex":"312e652d"}
+{"r":"l","case":"testdata/esbuild-cases-lex-err/09e8b6e9eedd.js","kind":0,"text":"Syntax error \"_\"","hasLoc":true,"line":1,"col":3}
+{"r":"c","case":"testdata/esbuild-cases-lex-err/09e8b6e9eedd.js","contentsBytes":4,"contentsSha256":"09e8b6e9eedda278322fd090c26663d851de41d024021da164f5b3f8d45c8576","tokens":0,"logs":1,"endOfFile":false,"panic":"LexerPanic","contentsHex":"306f315f"}
+{"r":"l","case":"testdata/esbuild-cases-lex-err/0b4c4a9ed99f.js","kind":0,"text":"Syntax error \"_\"","hasLoc":true,"line":1,"col":4}
+{"r":"c","case":"testdata/esbuild-cases-lex-err/0b4c4a9ed99f.js","contentsBytes":6,"contentsSha256":"0b4c4a9ed99f2a481e48aa0654a5ffeda681c97a90e4f60135cad0989f36e110","tokens":0,"logs":1,"endOfFile":false,"panic":"LexerPanic","contentsHex":"3062315f5f30"}
+{"r":"l","case":"testdata/esbuild-cases-lex-err/0d08d29e82fc.js","kind":0,"text":"Syntax error \"_\"","hasLoc":true,"line":1,"col":1}
+{"r":"c","case":"testdata/esbuild-cases-lex-err/0d08d29e82fc.js","contentsBytes":3,"contentsSha256":"0d08d29e82fcac4b6bd9117805d8613adc8845342aa9a1cea116e2e0f4f912dc","tokens":0,"logs":1,"endOfFile":false,"panic":"LexerPanic","contentsHex":"305f37"}
+{"r":"l","case":"testdata/esbuild-cases-lex-err/0dec251a3c0e.js","kind":0,"text":"Syntax error \"_\"","hasLoc":true,"line":1,"col":1}
+{"r":"c","case":"testdata/esbuild-cases-lex-err/0dec251a3c0e.js","contentsBytes":2,"contentsSha256":"0dec251a3c0e9653efd85f800867c8c2b5bda4b86852e9f2f8648747ba9f5768","tokens":0,"logs":1,"endOfFile":false,"panic":"LexerPanic","contentsHex":"315f"}
+{"r":"l","case":"testdata/esbuild-cases-lex-err/115d74b9e6c1.js","kind":0,"text":"Syntax error \"!\"","hasLoc":true,"line":1,"col":2}
+{"r":"c","case":"testdata/esbuild-cases-lex-err/115d74b9e6c1.js","contentsBytes":20,"contentsSha256":"115d74b9e6c1a68df5bbbb7a3724b25d3baa39fbaef833a0ba392c34973216f1","tokens":0,"logs":1,"endOfFile":false,"panic":"LexerPanic","contentsHex":"2023212f7573722f62696e2f656e76206e6f6465"}
+{"r":"l","case":"testdata/esbuild-cases-lex-err/14472545ef40.js","kind":0,"text":"Unterminated string literal","hasLoc":true,"line":1,"col":2}
+{"r":"c","case":"testdata/esbuild-cases-lex-err/14472545ef40.js","contentsBytes":2,"contentsSha256":"14472545ef40b845bc4ba3e60db158e5cc3d02e573fcee0b660ae20ac7d9ebb0","tokens":0,"logs":1,"endOfFile":false,"panic":"LexerPanic","contentsHex":"2722"}
+{"r":"l","case":"testdata/esbuild-cases-lex-err/15fde0c6d07e.js","kind":0,"text":"Unexpected end of file","hasLoc":true,"line":1,"col":3}
+{"r":"c","case":"testdata/esbuild-cases-lex-err/15fde0c6d07e.js","contentsBytes":3,"contentsSha256":"15fde0c6d07e5d6df11940ff8b319c7a64f09c3d1ed46e16355c53027a8231fd","tokens":0,"logs":1,"endOfFile":false,"panic":"LexerPanic","contentsHex":"312e65"}
+{"r":"t","case":"testdata/esbuild-cases-lex-err/19812fc27229.js","i":0,"kind":5,"kindName":"TStringLiteral","rawHex":"275c757b3131303030307d27","start":0,"len":12,"nlBefore":true,"valuePanic":true}
+{"r":"l","case":"testdata/esbuild-cases-lex-err/19812fc27229.js","kind":0,"text":"Unicode escape sequence is out of range","hasLoc":true,"line":1,"col":1,"len":10}
+{"r":"c","case":"testdata/esbuild-cases-lex-err/19812fc27229.js","contentsBytes":12,"contentsSha256":"19812fc27229d3a65860b52b8f31db0de44807a6446ddfa549b4894d0fb37597","tokens":1,"logs":1,"endOfFile":false,"contentsHex":"275c757b3131303030307d27"}
+{"r":"l","case":"testdata/esbuild-cases-lex-err/1d390f0b8303.js","kind":0,"text":"Unexpected end of file","hasLoc":true,"line":1,"col":2}
+{"r":"c","case":"testdata/esbuild-cases-lex-err/1d390f0b8303.js","contentsBytes":2,"contentsSha256":"1d390f0b8303d9a29c38041266c7db7a60677d273f083132c39a5041c4fc0f1f","tokens":0,"logs":1,"endOfFile":false,"panic":"LexerPanic","contentsHex":"3058"}
+{"r":"l","case":"testdata/esbuild-cases-lex-err/1e2cf7c46f6b.js","kind":0,"text":"Syntax error \"_\"","hasLoc":true,"line":1,"col":3}
+{"r":"c","case":"testdata/esbuild-cases-lex-err/1e2cf7c46f6b.js","contentsBytes":4,"contentsSha256":"1e2cf7c46f6b364c9171414b988dd5ff5401db96ccfe0d36b7efa0de009feada","tokens":0,"logs":1,"endOfFile":false,"panic":"LexerPanic","contentsHex":"304f315f"}
+{"r":"l","case":"testdata/esbuild-cases-lex-err/2a9846c0b63c.js","kind":0,"text":"Syntax error \"_\"","hasLoc":true,"line":1,"col":2}
+{"r":"c","case":"testdata/esbuild-cases-lex-err/2a9846c0b63c.js","contentsBytes":4,"contentsSha256":"2a9846c0b63c2c6f0eee9de1e9619359f7dc244ea0b43579002326c753155f08","tokens":0,"logs":1,"endOfFile":false,"panic":"LexerPanic","contentsHex":"30785f31"}
+{"r":"l","case":"testdata/esbuild-cases-lex-err/2b7e221b3a97.js","kind":0,"text":"Syntax error \"_\"","hasLoc":true,"line":1,"col":2}
+{"r":"c","case":"testdata/esbuild-cases-lex-err/2b7e221b3a97.js","contentsBytes":6,"contentsSha256":"2b7e221b3a974d56adc3ebd8014b86cf562942789bedcf51d7076f2ec08e7e26","tokens":0,"logs":1,"endOfFile":false,"panic":"LexerPanic","contentsHex":"30385f302e31"}
+{"r":"l","case":"testdata/esbuild-cases-lex-err/2f865f382433.js","kind":0,"text":"Syntax error \"-\"","hasLoc":true,"line":1,"col":3}
+{"r":"c","case":"testdata/esbuild-cases-lex-err/2f865f382433.js","contentsBytes":5,"contentsSha256":"2f865f382433a78d833ccc139fe1c195370cc68aa088d3136b6a30862fc6f221","tokens":0,"logs":1,"endOfFile":false,"panic":"LexerPanic","contentsHex":"31652b2d31"}
+{"r":"l","case":"testdata/esbuild-cases-lex-err/31601638b443.js","kind":0,"text":"Syntax error \"n\"","hasLoc":true,"line":1,"col":2}
+{"r":"c","case":"testdata/esbuild-cases-lex-err/31601638b443.js","contentsBytes":3,"contentsSha256":"31601638b44350b46fbef2df7f3c2d2a18b304ca713e5c056b830218467f66f1","tokens":0,"logs":1,"endOfFile":false,"panic":"LexerPanic","contentsHex":"2e316e"}
+{"r":"l","case":"testdata/esbuild-cases-lex-err/32df71d3f033.js","kind":0,"text":"Syntax error \".\"","hasLoc":true,"line":1,"col":5}
+{"r":"c","case":"testdata/esbuild-cases-lex-err/32df71d3f033.js","contentsBytes":6,"contentsSha256":"32df71d3f03325d1fc66b0d0baf47a84bbaad6fdff0861abddb39845c9a5d162","tokens":0,"logs":1,"endOfFile":false,"panic":"LexerPanic","contentsHex":"745c7530302e"}
+{"r":"l","case":"testdata/esbuild-cases-lex-err/3337be910388.js","kind":0,"text":"Syntax error \"_\"","hasLoc":true,"line":1,"col":2}
+{"r":"c","case":"testdata/esbuild-cases-lex-err/3337be910388.js","contentsBytes":4,"contentsSha256":"3337be910388f695ff17703ecb397d8f6e91867703cf0b6996424ff4a257b7db","tokens":0,"logs":1,"endOfFile":false,"panic":"LexerPanic","contentsHex":"30585f31"}
+{"r":"l","case":"testdata/esbuild-cases-lex-err/3512f2a9ca26.js","kind":0,"text":"Syntax error \"n\"","hasLoc":true,"line":1,"col":3}
+{"r":"c","case":"testdata/esbuild-cases-lex-err/3512f2a9ca26.js","contentsBytes":4,"contentsSha256":"3512f2a9ca26da269ec3ad8a1bdc5a05a2edb9c1f2a851fe7fdb90a77e15ef33","tokens":0,"logs":1,"endOfFile":false,"panic":"LexerPanic","contentsHex":"3030306e"}
+{"r":"l","case":"testdata/esbuild-cases-lex-err/3625fcf8aa8c.js","kind":0,"text":"Syntax error \"z\"","hasLoc":true,"line":1,"col":1}
+{"r":"c","case":"testdata/esbuild-cases-lex-err/3625fcf8aa8c.js","contentsBytes":2,"contentsSha256":"3625fcf8aa8c1b7f92f55952c037f15fbe9ac74950c657d1c948d3f4f21136ec","tokens":0,"logs":1,"endOfFile":false,"panic":"LexerPanic","contentsHex":"317a"}
+{"r":"l","case":"testdata/esbuild-cases-lex-err/366fc14761b4.js","kind":0,"text":"Syntax error \"z\"","hasLoc":true,"line":1,"col":3}
+{"r":"c","case":"testdata/esbuild-cases-lex-err/366fc14761b4.js","contentsBytes":4,"contentsSha256":"366fc14761b4c1747e2c8407ada69a8ee874d5613eddd34584c6025746808f1e","tokens":0,"logs":1,"endOfFile":false,"panic":"LexerPanic","contentsHex":"306f317a"}
+{"r":"l","case":"testdata/esbuild-cases-lex-err/3ac7a7948e5e.js","kind":0,"text":"Syntax error \"_\"","hasLoc":true,"line":1,"col":4}
+{"r":"c","case":"testdata/esbuild-cases-lex-err/3ac7a7948e5e.js","contentsBytes":6,"contentsSha256":"3ac7a7948e5e4970fbf0fb60c5d5b0cdc2fa8d223f0601910d06e8a27927815a","tokens":0,"logs":1,"endOfFile":false,"panic":"LexerPanic","contentsHex":"306f315f5f32"}
+{"r":"l","case":"testdata/esbuild-cases-lex-err/3cf20e290fff.js","kind":0,"text":"Syntax error \"_\"","hasLoc":true,"line":1,"col":2}
+{"r":"c","case":"testdata/esbuild-cases-lex-err/3cf20e290fff.js","contentsBytes":4,"contentsSha256":"3cf20e290fff57d00cbd06757a908282745f2317f444827a4199b96c8217058c","tokens":0,"logs":1,"endOfFile":false,"panic":"LexerPanic","contentsHex":"30385f30"}
+{"r":"l","case":"testdata/esbuild-cases-lex-err/4441b9749d42.js","kind":0,"text":"Unexpected end of file","hasLoc":true,"line":1,"col":5}
+{"r":"c","case":"testdata/esbuild-cases-lex-err/4441b9749d42.js","contentsBytes":5,"contentsSha256":"4441b9749d4202722bab2fa1fd3bcb81073c88b68a0b7ed41de1b1e99136faf2","tokens":0,"logs":1,"endOfFile":false,"panic":"LexerPanic","contentsHex":"312e31652b"}
+{"r":"l","case":"testdata/esbuild-cases-lex-err/447d6edede2b.js","kind":0,"text":"Syntax error \"_\"","hasLoc":true,"line":1,"col":2}
+{"r":"c","case":"testdata/esbuild-cases-lex-err/447d6edede2b.js","contentsBytes":6,"contentsSha256":"447d6edede2b17af178cbc4e99137866c6d199cd64a324d585322a7c5ef1d438","tokens":0,"logs":1,"endOfFile":false,"panic":"LexerPanic","contentsHex":"30395f302e31"}
+{"r":"t","case":"testdata/esbuild-cases-lex-err/45a103e39fe9.js","i":0,"kind":5,"kindName":"TStringLiteral","rawHex":"275c75303027","start":0,"len":6,"nlBefore":true,"valuePanic":true}
+{"r":"l","case":"testdata/esbuild-cases-lex-err/45a103e39fe9.js","kind":0,"text":"Syntax error \"'\"","hasLoc":true,"line":1,"col":5}
+{"r":"c","case":"testdata/esbuild-cases-lex-err/45a103e39fe9.js","contentsBytes":6,"contentsSha256":"45a103e39fe9cce4c709e3dd1267671fdd85f8c1ab87a36ad6312051477ff1cf","tokens":1,"logs":1,"endOfFile":false,"contentsHex":"275c75303027"}
+{"r":"l","case":"testdata/esbuild-cases-lex-err/47b180a8f3d6.js","kind":0,"text":"Syntax error \"_\"","hasLoc":true,"line":1,"col":2}
+{"r":"c","case":"testdata/esbuild-cases-lex-err/47b180a8f3d6.js","contentsBytes":4,"contentsSha256":"47b180a8f3d6afdac18ae73abdef13caf6589781ba6953ed1b119c14bae7e6b5","tokens":0,"logs":1,"endOfFile":false,"panic":"LexerPanic","contentsHex":"30425f31"}
+{"r":"t","case":"testdata/esbuild-cases-lex-err/4828d189acdf.js","i":0,"kind":5,"kindName":"TStringLiteral","rawHex":"275c757b46464646464646467d27","start":0,"len":14,"nlBefore":true,"valuePanic":true}
+{"r":"l","case":"testdata/esbuild-cases-lex-err/4828d189acdf.js","kind":0,"text":"Unicode escape sequence is out of range","hasLoc":true,"line":1,"col":1,"len":12}
+{"r":"c","case":"testdata/esbuild-cases-lex-err/4828d189acdf.js","contentsBytes":14,"contentsSha256":"4828d189acdf2eb2c251d8a23332ddf45148aa865591356ad7ce031d5f490a75","tokens":1,"logs":1,"endOfFile":false,"contentsHex":"275c757b46464646464646467d27"}
+{"r":"l","case":"testdata/esbuild-cases-lex-err/49ce1c870d20.js","kind":0,"text":"Syntax error \"n\"","hasLoc":true,"line":1,"col":3}
+{"r":"c","case":"testdata/esbuild-cases-lex-err/49ce1c870d20.js","contentsBytes":4,"contentsSha256":"49ce1c870d20199af057399399619bae9a0d6c0a0f6ee6334eb6ca10caa97945","tokens":0,"logs":1,"endOfFile":false,"panic":"LexerPanic","contentsHex":"3038396e"}
+{"r":"l","case":"testdata/esbuild-cases-lex-err/4c1a7f94a43f.js","kind":0,"text":"Unexpected end of file","hasLoc":true,"line":1,"col":2}
+{"r":"c","case":"testdata/esbuild-cases-lex-err/4c1a7f94a43f.js","contentsBytes":2,"contentsSha256":"4c1a7f94a43fddbdab2d283f2ad13b700d1ed9aebd492eb42be7b11820874182","tokens":0,"logs":1,"endOfFile":false,"panic":"LexerPanic","contentsHex":"306f"}
+{"r":"l","case":"testdata/esbuild-cases-lex-err/50a40e6c2bc0.js","kind":0,"text":"Syntax error \"_\"","hasLoc":true,"line":1,"col":2}
+{"r":"c","case":"testdata/esbuild-cases-lex-err/50a40e6c2bc0.js","contentsBytes":5,"contentsSha256":"50a40e6c2bc081892ca06bbf2cbab78a0a57e545e4bd3d18931229e4752f3ad1","tokens":0,"logs":1,"endOfFile":false,"panic":"LexerPanic","contentsHex":"2e315f6531"}
+{"r":"l","case":"testdata/esbuild-cases-lex-err/572e24a513e2.js","kind":0,"text":"Syntax error \"_\"","hasLoc":true,"line":1,"col":3}
+{"r":"c","case":"testdata/esbuild-cases-lex-err/572e24a513e2.js","contentsBytes":4,"contentsSha256":"572e24a513e2945d88357fc1be5961933fde24ac150dbc1daf0807addc385951","tokens":0,"logs":1,"endOfFile":false,"panic":"LexerPanic","contentsHex":"3165315f"}
+{"r":"l","case":"testdata/esbuild-cases-lex-err/5739479a9878.js","kind":0,"text":"Syntax error \"_\"","hasLoc":true,"line":1,"col":3}
+{"r":"c","case":"testdata/esbuild-cases-lex-err/5739479a9878.js","contentsBytes":5,"contentsSha256":"5739479a9878f3ef36261aebff047191ab9c777f4d9a3a9bb3bc72a6b910d26d","tokens":0,"logs":1,"endOfFile":false,"panic":"LexerPanic","contentsHex":"2e315f5f32"}
+{"r":"l","case":"testdata/esbuild-cases-lex-err/5787a54b3c55.js","kind":0,"text":"Syntax error \"_\"","hasLoc":true,"line":1,"col":3}
+{"r":"c","case":"testdata/esbuild-cases-lex-err/5787a54b3c55.js","contentsBytes":4,"contentsSha256":"5787a54b3c5526882cfd8a39a7ca622890fb147c12f6be279f7ff5529fec91b2","tokens":0,"logs":1,"endOfFile":false,"panic":"LexerPanic","contentsHex":"3058315f"}
+{"r":"l","case":"testdata/esbuild-cases-lex-err/5d0dae369d74.js","kind":0,"text":"Unexpected end of file","hasLoc":true,"line":1,"col":3}
+{"r":"c","case":"testdata/esbuild-cases-lex-err/5d0dae369d74.js","contentsBytes":3,"contentsSha256":"5d0dae369d743329a7350bd83f8d14673c41d32c843d5121bddd668e144ed32d","tokens":0,"logs":1,"endOfFile":false,"panic":"LexerPanic","contentsHex":"31652d"}
+{"r":"l","case":"testdata/esbuild-cases-lex-err/5db92390054e.js","kind":0,"text":"Syntax error \"_\"","hasLoc":true,"line":1,"col":3}
+{"r":"c","case":"testdata/esbuild-cases-lex-err/5db92390054e.js","contentsBytes":4,"contentsSha256":"5db92390054e771c8f4a382706062c611150713995211ef2ed626aeb827bed42","tokens":0,"logs":1,"endOfFile":false,"panic":"LexerPanic","contentsHex":"3062315f"}
+{"r":"l","case":"testdata/esbuild-cases-lex-err/5f67039d4664.js","kind":0,"text":"Syntax error \"_\"","hasLoc":true,"line":1,"col":2}
+{"r":"c","case":"testdata/esbuild-cases-lex-err/5f67039d4664.js","contentsBytes":4,"contentsSha256":"5f67039d46640834a866d21220354cfb3320ee6503adc686e5c37ad4103c868c","tokens":0,"logs":1,"endOfFile":false,"panic":"LexerPanic","contentsHex":"30625f31"}
+{"r":"l","case":"testdata/esbuild-cases-lex-err/635ca73d00d4.js","kind":0,"text":"Unexpected end of file","hasLoc":true,"line":1,"col":2}
+{"r":"c","case":"testdata/esbuild-cases-lex-err/635ca73d00d4.js","contentsBytes":2,"contentsSha256":"635ca73d00d4f28b5f573b16eea56e9e4579d77e561c32aa68189d9769fa1753","tokens":0,"logs":1,"endOfFile":false,"panic":"LexerPanic","contentsHex":"3062"}
+{"r":"l","case":"testdata/esbuild-cases-lex-err/648cb83cac20.js","kind":0,"text":"Syntax error \"_\"","hasLoc":true,"line":1,"col":2}
+{"r":"c","case":"testdata/esbuild-cases-lex-err/648cb83cac20.js","contentsBytes":4,"contentsSha256":"648cb83cac20543292d8c6c67b085e99dfe02adfc924fe44fec441f3faa92a5a","tokens":0,"logs":1,"endOfFile":false,"panic":"LexerPanic","contentsHex":"30375f30"}
+{"r":"l","case":"testdata/esbuild-cases-lex-err/6501f81d138e.js","kind":0,"text":"Syntax error \"n\"","hasLoc":true,"line":1,"col":3}
+{"r":"c","case":"testdata/esbuild-cases-lex-err/6501f81d138e.js","contentsBytes":4,"contentsSha256":"6501f81d138ee79db6b0714e54b617296844c232e678bc93ce0293ddf806aad9","tokens":0,"logs":1,"endOfFile":false,"panic":"LexerPanic","contentsHex":"3165326e"}
+{"r":"l","case":"testdata/esbuild-cases-lex-err/6621f8d1e5f6.js","kind":0,"text":"Syntax error \"_\"","hasLoc":true,"line":1,"col":3}
+{"r":"c","case":"testdata/esbuild-cases-lex-err/6621f8d1e5f6.js","contentsBytes":4,"contentsSha256":"6621f8d1e5f6e4188c1afb3fcd89d788c6a429de5856a47b7f61a5c1503e79f5","tokens":0,"logs":1,"endOfFile":false,"panic":"LexerPanic","contentsHex":"3042315f"}
+{"r":"l","case":"testdata/esbuild-cases-lex-err/66750dbecd16.js","kind":0,"text":"Syntax error \"_\"","hasLoc":true,"line":1,"col":2}
+{"r":"c","case":"testdata/esbuild-cases-lex-err/66750dbecd16.js","contentsBytes":3,"contentsSha256":"66750dbecd1645f35d20825bcd83b546ae644e90e6e223f77dcad6e2fa0e131a","tokens":0,"logs":1,"endOfFile":false,"panic":"LexerPanic","contentsHex":"312e5f"}
+{"r":"l","case":"testdata/esbuild-cases-lex-err/702152384603.js","kind":0,"text":"Syntax error \".\"","hasLoc":true,"line":1,"col":4}
+{"r":"c","case":"testdata/esbuild-cases-lex-err/702152384603.js","contentsBytes":5,"contentsSha256":"702152384603503f5d96522fcd13d8eb9a6e24741f696b562bcda9e4681e1c19","tokens":0,"logs":1,"endOfFile":false,"panic":"LexerPanic","contentsHex":"745c757b2e"}
+{"r":"l","case":"testdata/esbuild-cases-lex-err/71f6bb6ee37c.js","kind":0,"text":"Unterminated string literal","hasLoc":true,"line":1,"col":1}
+{"r":"c","case":"testdata/esbuild-cases-lex-err/71f6bb6ee37c.js","contentsBytes":3,"contentsSha256":"71f6bb6ee37cb1df013db8d8a675a947b8b5253d571b6533a30671ddd37243fc","tokens":0,"logs":1,"endOfFile":false,"panic":"LexerPanic","contentsHex":"220a22"}
+{"r":"l","case":"testdata/esbuild-cases-lex-err/72376de4c26a.js","kind":0,"text":"Syntax error \"a\"","hasLoc":true,"line":1,"col":4}
+{"r":"c","case":"testdata/esbuild-cases-lex-err/72376de4c26a.js","contentsBytes":5,"contentsSha256":"72376de4c26a0fb49436479895b4f142eb771adad514bb48149bfdb2d9ce26eb","tokens":0,"logs":1,"endOfFile":false,"panic":"LexerPanic","contentsHex":"3062303161"}
+{"r":"l","case":"testdata/esbuild-cases-lex-err/7392e24a5208.js","kind":0,"text":"Syntax error \"_\"","hasLoc":true,"line":1,"col":4}
+{"r":"c","case":"testdata/esbuild-cases-lex-err/7392e24a5208.js","contentsBytes":6,"contentsSha256":"7392e24a52087a036e5b8a5fe28137b84dfa0bb696af72e43e652065398bda4f","tokens":0,"logs":1,"endOfFile":false,"panic":"LexerPanic","contentsHex":"304f315f5f32"}
+{"r":"l","case":"testdata/esbuild-cases-lex-err/766e0153d3f7.js","kind":0,"text":"Expected \"*/\" to terminate multi-line comment","hasLoc":true,"line":1,"col":2}
+{"r":"c","case":"testdata/esbuild-cases-lex-err/766e0153d3f7.js","contentsBytes":2,"contentsSha256":"766e0153d3f7ec95c97e755b1ea7b1681566923b9299365fdc8399443ca20c1d","tokens":0,"logs":1,"endOfFile":false,"panic":"LexerPanic","contentsHex":"2f2a"}
+{"r":"l","case":"testdata/esbuild-cases-lex-err/7a236daca9e1.js","kind":0,"text":"Unexpected end of file","hasLoc":true,"line":1,"col":4}
+{"r":"c","case":"testdata/esbuild-cases-lex-err/7a236daca9e1.js","contentsBytes":4,"contentsSha256":"7a236daca9e1307fe9c71925bcb4c6d0dd8c16d551e4f6311893ba118293b28e","tokens":0,"logs":1,"endOfFile":false,"panic":"LexerPanic","contentsHex":"2e31652d"}
+{"r":"l","case":"testdata/esbuild-cases-lex-err/7be0a491f14a.js","kind":0,"text":"Syntax error \"_\"","hasLoc":true,"line":1,"col":2}
+{"r":"c","case":"testdata/esbuild-cases-lex-err/7be0a491f14a.js","contentsBytes":4,"contentsSha256":"7be0a491f14affb6e34a9ebf52b42766f8cf641b6d665389b6f0eb53af3470ee","tokens":0,"logs":1,"endOfFile":false,"panic":"LexerPanic","contentsHex":"30395f30"}
+{"r":"l","case":"testdata/esbuild-cases-lex-err/7d322c81f414.js","kind":0,"text":"Syntax error \"_\"","hasLoc":true,"line":1,"col":1}
+{"r":"c","case":"testdata/esbuild-cases-lex-err/7d322c81f414.js","contentsBytes":4,"contentsSha256":"7d322c81f41473f0a3bd2053af06ad64fbe9b78da728be8de0099388aa192798","tokens":0,"logs":1,"endOfFile":false,"panic":"LexerPanic","contentsHex":"315f6531"}
+{"r":"l","case":"testdata/esbuild-cases-lex-err/805a9eb6d716.js","kind":0,"text":"Unexpected end of file","hasLoc":true,"line":1,"col":3}
+{"r":"c","case":"testdata/esbuild-cases-lex-err/805a9eb6d716.js","contentsBytes":3,"contentsSha256":"805a9eb6d716aa7ad65e8b7e457fe30bfa66d3dcc60002ebab812a064c875d1c","tokens":0,"logs":1,"endOfFile":false,"panic":"LexerPanic","contentsHex":"2e3165"}
+{"r":"t","case":"testdata/esbuild-cases-lex-err/81c1f70c1d74.js","i":0,"kind":5,"kindName":"TStringLiteral","rawHex":"275c7827","start":0,"len":4,"nlBefore":true,"valuePanic":true}
+{"r":"l","case":"testdata/esbuild-cases-lex-err/81c1f70c1d74.js","kind":0,"text":"Syntax error \"'\"","hasLoc":true,"line":1,"col":3}
+{"r":"c","case":"testdata/esbuild-cases-lex-err/81c1f70c1d74.js","contentsBytes":4,"contentsSha256":"81c1f70c1d748f962bed043fff18dd3316a505cc5f5edd5ad4f9eff0d0c2ece7","tokens":1,"logs":1,"endOfFile":false,"contentsHex":"275c7827"}
+{"r":"t","case":"testdata/esbuild-cases-lex-err/847788318c46.js","i":0,"kind":5,"kindName":"TStringLiteral","rawHex":"275c784727","start":0,"len":5,"nlBefore":true,"valuePanic":true}
+{"r":"l","case":"testdata/esbuild-cases-lex-err/847788318c46.js","kind":0,"text":"Syntax error \"G\"","hasLoc":true,"line":1,"col":3}
+{"r":"c","case":"testdata/esbuild-cases-lex-err/847788318c46.js","contentsBytes":5,"contentsSha256":"847788318c461979b5f58d13925917ad392140499c95c5e3b46084179e86e5a1","tokens":1,"logs":1,"endOfFile":false,"contentsHex":"275c784727"}
+{"r":"t","case":"testdata/esbuild-cases-lex-err/84f70dadbf2f.js","i":0,"kind":5,"kindName":"TStringLiteral","rawHex":"275c784627","start":0,"len":5,"nlBefore":true,"valuePanic":true}
+{"r":"l","case":"testdata/esbuild-cases-lex-err/84f70dadbf2f.js","kind":0,"text":"Syntax error \"'\"","hasLoc":true,"line":1,"col":4}
+{"r":"c","case":"testdata/esbuild-cases-lex-err/84f70dadbf2f.js","contentsBytes":5,"contentsSha256":"84f70dadbf2f6cc436c536d59ae3941ede6766ce5816b205f5a9df64ff3358cc","tokens":1,"logs":1,"endOfFile":false,"contentsHex":"275c784627"}
+{"r":"l","case":"testdata/esbuild-cases-lex-err/84faf0ebd9a3.js","kind":0,"text":"Syntax error \"_\"","hasLoc":true,"line":1,"col":1}
+{"r":"c","case":"testdata/esbuild-cases-lex-err/84faf0ebd9a3.js","contentsBytes":4,"contentsSha256":"84faf0ebd9a3788c906e078faf476c72672b39a427be2c48659396fbb0fdf066","tokens":0,"logs":1,"endOfFile":false,"panic":"LexerPanic","contentsHex":"305f316e"}
+{"r":"l","case":"testdata/esbuild-cases-lex-err/86862dc3060b.js","kind":0,"text":"Syntax error \"_\"","hasLoc":true,"line":1,"col":1}
+{"r":"c","case":"testdata/esbuild-cases-lex-err/86862dc3060b.js","contentsBytes":3,"contentsSha256":"86862dc3060b4d31a78486bf300c4e5a6e07fade2fb59d9a9ecf91f406329a93","tokens":0,"logs":1,"endOfFile":false,"panic":"LexerPanic","contentsHex":"305f39"}
+{"r":"l","case":"testdata/esbuild-cases-lex-err/87194e113406.js","kind":0,"text":"Syntax error \"_\"","hasLoc":true,"line":1,"col":1}
+{"r":"c","case":"testdata/esbuild-cases-lex-err/87194e113406.js","contentsBytes":3,"contentsSha256":"87194e11340606118b69fc87e10a5d80edfeec6ece04969366bc291262706c97","tokens":0,"logs":1,"endOfFile":false,"panic":"LexerPanic","contentsHex":"305f30"}
+{"r":"l","case":"testdata/esbuild-cases-lex-err/8815b15347ee.js","kind":0,"text":"Syntax error \"8\"","hasLoc":true,"line":1,"col":4}
+{"r":"c","case":"testdata/esbuild-cases-lex-err/8815b15347ee.js","contentsBytes":5,"contentsSha256":"8815b15347eea4831749b8fd52700c5a738477b0d3c3cdb38e45c97d63487bc5","tokens":0,"logs":1,"endOfFile":false,"panic":"LexerPanic","contentsHex":"3062303138"}
+{"r":"l","case":"testdata/esbuild-cases-lex-err/8a4f56aa3f29.js","kind":0,"text":"Unexpected end of file","hasLoc":true,"line":1,"col":2}
+{"r":"c","case":"testdata/esbuild-cases-lex-err/8a4f56aa3f29.js","contentsBytes":2,"contentsSha256":"8a4f56aa3f296bd086ca827cdc1e68d537a5480f956faf13dcae0b14a45016c7","tokens":0,"logs":1,"endOfFile":false,"panic":"LexerPanic","contentsHex":"3042"}
+{"r":"l","case":"testdata/esbuild-cases-lex-err/8b2875205a08.js","kind":0,"text":"Syntax error \"_\"","hasLoc":true,"line":1,"col":4}
+{"r":"c","case":"testdata/esbuild-cases-lex-err/8b2875205a08.js","contentsBytes":6,"contentsSha256":"8b2875205a0835fc3fd5a876dda280fd632cc9e994e47f5b12df36126140aaf0","tokens":0,"logs":1,"endOfFile":false,"panic":"LexerPanic","contentsHex":"3058315f5f32"}
+{"r":"l","case":"testdata/esbuild-cases-lex-err/8ec5e03d2ff6.js","kind":0,"text":"Unterminated string literal","hasLoc":true,"line":1,"col":1}
+{"r":"c","case":"testdata/esbuild-cases-lex-err/8ec5e03d2ff6.js","contentsBytes":3,"contentsSha256":"8ec5e03d2ff6ce12cba27d7fc97b1c89ea11c08b2c87b3963857b8307c6b458d","tokens":0,"logs":1,"endOfFile":false,"panic":"LexerPanic","contentsHex":"220d22"}
+{"r":"l","case":"testdata/esbuild-cases-lex-err/91fcfddbc307.js","kind":0,"text":"Unterminated string literal","hasLoc":true,"line":1,"col":3}
+{"r":"c","case":"testdata/esbuild-cases-lex-err/91fcfddbc307.js","contentsBytes":3,"contentsSha256":"91fcfddbc307d822b5faf567449993eae3d9cf87d178fed92156b3b02a1577d0","tokens":0,"logs":1,"endOfFile":false,"panic":"LexerPanic","contentsHex":"275c27"}
+{"r":"l","case":"testdata/esbuild-cases-lex-err/92a52c9b3131.js","kind":0,"text":"Syntax error \"n\"","hasLoc":true,"line":1,"col":3}
+{"r":"c","case":"testdata/esbuild-cases-lex-err/92a52c9b3131.js","contentsBytes":4,"contentsSha256":"92a52c9b3131146da37b13186de1ff4ade20fa0f4b8f978acf27353f0832147d","tokens":0,"logs":1,"endOfFile":false,"panic":"LexerPanic","contentsHex":"312e306e"}
+{"r":"l","case":"testdata/esbuild-cases-lex-err/92ed8c5d2d15.js","kind":0,"text":"Unterminated string literal","hasLoc":true,"line":1,"col":3}
+{"r":"c","case":"testdata/esbuild-cases-lex-err/92ed8c5d2d15.js","contentsBytes":3,"contentsSha256":"92ed8c5d2d151ff92baea3125cf412ff865900f62318a39ae2902b2292c998c7","tokens":0,"logs":1,"endOfFile":false,"panic":"LexerPanic","contentsHex":"275c78"}
+{"r":"l","case":"testdata/esbuild-cases-lex-err/9329dce44621.js","kind":0,"text":"Expected \"*/\" to terminate multi-line comment","hasLoc":true,"line":1,"col":3}
+{"r":"c","case":"testdata/esbuild-cases-lex-err/9329dce44621.js","contentsBytes":3,"contentsSha256":"9329dce44621cdf9ee64ec640b1500e2897e93bbabc7d2ba544ffd12eea32935","tokens":0,"logs":1,"endOfFile":false,"panic":"LexerPanic","contentsHex":"2f2a2f"}
+{"r":"t","case":"testdata/esbuild-cases-lex-err/93646b0915d5.js","i":0,"kind":5,"kindName":"TStringLiteral","rawHex":"275c753027","start":0,"len":5,"nlBefore":true,"valuePanic":true}
+{"r":"l","case":"testdata/esbuild-cases-lex-err/93646b0915d5.js","kind":0,"text":"Syntax error \"'\"","hasLoc":true,"line":1,"col":4}
+{"r":"c","case":"testdata/esbuild-cases-lex-err/93646b0915d5.js","contentsBytes":5,"contentsSha256":"93646b0915d590b7fa0297e010448aac4eaa0c8e7cd151c06bcb99b26f8b3243","tokens":1,"logs":1,"endOfFile":false,"contentsHex":"275c753027"}
+{"r":"l","case":"testdata/esbuild-cases-lex-err/9db6ff56dbea.js","kind":0,"text":"Unterminated string literal","hasLoc":true,"line":1,"col":1}
+{"r":"c","case":"testdata/esbuild-cases-lex-err/9db6ff56dbea.js","contentsBytes":3,"contentsSha256":"9db6ff56dbea649911af43d7f1c005a2a3aa2d9ebc52df89f7b4863edcffa27a","tokens":0,"logs":1,"endOfFile":false,"panic":"LexerPanic","contentsHex":"270d27"}
+{"r":"l","case":"testdata/esbuild-cases-lex-err/9efe77b1b4c5.js","kind":0,"text":"Syntax error \"G\"","hasLoc":true,"line":1,"col":2}
+{"r":"c","case":"testdata/esbuild-cases-lex-err/9efe77b1b4c5.js","contentsBytes":9,"contentsSha256":"9efe77b1b4c52b1beffaecdbf8b58eb5e8478631777df61c6cab90e9d5be9d74","tokens":0,"logs":1,"endOfFile":false,"panic":"LexerPanic","contentsHex":"307847464544434241"}
+{"r":"l","case":"testdata/esbuild-cases-lex-err/9f2d9ab9ca9b.js","kind":0,"text":"Syntax error \"G\"","hasLoc":true,"line":1,"col":8}
+{"r":"c","case":"testdata/esbuild-cases-lex-err/9f2d9ab9ca9b.js","contentsBytes":9,"contentsSha256":"9f2d9ab9ca9b3ac171ab56a4ca4ecdbcb8b81b0f408b1938f4fd4cf916af62c2","tokens":0,"logs":1,"endOfFile":false,"panic":"LexerPanic","contentsHex":"307841424344454647"}
+{"r":"l","case":"testdata/esbuild-cases-lex-err/a16ea582ad08.js","kind":0,"text":"Syntax error \"A\"","hasLoc":true,"line":1,"col":4}
+{"r":"c","case":"testdata/esbuild-cases-lex-err/a16ea582ad08.js","contentsBytes":5,"contentsSha256":"a16ea582ad08c02eb45286cd1c99ea966ce45480165423b43c5bf8750f6bd0e2","tokens":0,"logs":1,"endOfFile":false,"panic":"LexerPanic","contentsHex":"306f303141"}
+{"r":"l","case":"testdata/esbuild-cases-lex-err/a2ac3259a8ab.js","kind":0,"text":"Syntax error \"2\"","hasLoc":true,"line":1,"col":4}
+{"r":"c","case":"testdata/esbuild-cases-lex-err/a2ac3259a8ab.js","contentsBytes":5,"contentsSha256":"a2ac3259a8ab113aba97b091ef99d2e303e8eb94ebc710fcacec29a1ac416add","tokens":0,"logs":1,"endOfFile":false,"panic":"LexerPanic","contentsHex":"3062303132"}
+{"r":"l","case":"testdata/esbuild-cases-lex-err/a54942c8e365.js","kind":0,"text":"Unexpected end of file","hasLoc":true,"line":1,"col":2}
+{"r":"c","case":"testdata/esbuild-cases-lex-err/a54942c8e365.js","contentsBytes":2,"contentsSha256":"a54942c8e365f3784f38b8d437f9d708290db60738b00cdcfb934c32d1be97f3","tokens":0,"logs":1,"endOfFile":false,"panic":"LexerPanic","contentsHex":"3078"}
+{"r":"l","case":"testdata/esbuild-cases-lex-err/a64a836cdfb1.js","kind":0,"text":"Syntax error \"z\"","hasLoc":true,"line":1,"col":3}
+{"r":"c","case":"testdata/esbuild-cases-lex-err/a64a836cdfb1.js","contentsBytes":4,"contentsSha256":"a64a836cdfb1cf4ebd53eca0399a7cb4a654b24bce154303467ee71e88c115d8","tokens":0,"logs":1,"endOfFile":false,"panic":"LexerPanic","contentsHex":"3062317a"}
+{"r":"l","case":"testdata/esbuild-cases-lex-err/a79329507853.js","kind":0,"text":"Syntax error \"a\"","hasLoc":true,"line":1,"col":4}
+{"r":"c","case":"testdata/esbuild-cases-lex-err/a79329507853.js","contentsBytes":5,"contentsSha256":"a79329507853db1b40c9ac4c66ac9c9c932e42f42fcb08368d60c451138fdc36","tokens":0,"logs":1,"endOfFile":false,"panic":"LexerPanic","contentsHex":"306f303161"}
+{"r":"l","case":"testdata/esbuild-cases-lex-err/a8196a36f4d7.js","kind":0,"text":"Unexpected end of file","hasLoc":true,"line":1,"col":2}
+{"r":"c","case":"testdata/esbuild-cases-lex-err/a8196a36f4d7.js","contentsBytes":2,"contentsSha256":"a8196a36f4d736a540dff9a8a00387111ff0133f9848f4e149118092ac712426","tokens":0,"logs":1,"endOfFile":false,"panic":"LexerPanic","contentsHex":"3165"}
+{"r":"l","case":"testdata/esbuild-cases-lex-err/a862f32fc644.js","kind":0,"text":"Syntax error \"_\"","hasLoc":true,"line":1,"col":4}
+{"r":"c","case":"testdata/esbuild-cases-lex-err/a862f32fc644.js","contentsBytes":6,"contentsSha256":"a862f32fc6440b2bcbebea04b9728a0e2e769f5e50346ee2496156b79d8b1942","tokens":0,"logs":1,"endOfFile":false,"panic":"LexerPanic","contentsHex":"3042315f5f30"}
+{"r":"l","case":"testdata/esbuild-cases-lex-err/abee21ae08a1.js","kind":0,"text":"Unexpected end of file","hasLoc":true,"line":1,"col":5}
+{"r":"c","case":"testdata/esbuild-cases-lex-err/abee21ae08a1.js","contentsBytes":5,"contentsSha256":"abee21ae08a1e40e16affea2df8f06a42c21ed90baebdad295413d9e5785aec9","tokens":0,"logs":1,"endOfFile":false,"panic":"LexerPanic","contentsHex":"312e31652d"}
+{"r":"l","case":"testdata/esbuild-cases-lex-err/b1b045e1732d.js","kind":0,"text":"Unterminated string literal","hasLoc":true,"line":1,"col":3}
+{"r":"c","case":"testdata/esbuild-cases-lex-err/b1b045e1732d.js","contentsBytes":3,"contentsSha256":"b1b045e1732dc36ece33fd70854878dea6ad89426dda394f8680029176ea9c23","tokens":0,"logs":1,"endOfFile":false,"panic":"LexerPanic","contentsHex":"275c75"}
+{"r":"l","case":"testdata/esbuild-cases-lex-err/b251fc33ae8f.js","kind":0,"text":"Syntax error \"_\"","hasLoc":true,"line":1,"col":1}
+{"r":"c","case":"testdata/esbuild-cases-lex-err/b251fc33ae8f.js","contentsBytes":3,"contentsSha256":"b251fc33ae8fcaf3d6132c3e36498a9d4c266bab07964bb80af690531487fe8a","tokens":0,"logs":1,"endOfFile":false,"panic":"LexerPanic","contentsHex":"315f2e"}
+{"r":"l","case":"testdata/esbuild-cases-lex-err/b2886da06551.js","kind":0,"text":"Syntax error \"_\"","hasLoc":true,"line":1,"col":2}
+{"r":"c","case":"testdata/esbuild-cases-lex-err/b2886da06551.js","contentsBytes":4,"contentsSha256":"b2886da065514c11c2f3d0937a7d3b86c266c7c1958056b6f277720f6c30f13b","tokens":0,"logs":1,"endOfFile":false,"panic":"LexerPanic","contentsHex":"30315f30"}
+{"r":"l","case":"testdata/esbuild-cases-lex-err/b42014ca3981.js","kind":0,"text":"Syntax error \".\"","hasLoc":true,"line":1,"col":5}
+{"r":"c","case":"testdata/esbuild-cases-lex-err/b42014ca3981.js","contentsBytes":6,"contentsSha256":"b42014ca3981e51f60942f0603d14ac20b1295f63cfc741e5f88397a78733f3d","tokens":0,"logs":1,"endOfFile":false,"panic":"LexerPanic","contentsHex":"745c757b302e"}
+{"r":"l","case":"testdata/esbuild-cases-lex-err/b969ca39be31.js","kind":0,"text":"Syntax error \"_\"","hasLoc":true,"line":1,"col":2}
+{"r":"c","case":"testdata/esbuild-cases-lex-err/b969ca39be31.js","contentsBytes":4,"contentsSha256":"b969ca39be318f3bd1e99f4a8bea90a67901fab277e997d9cc3b64e6b337fa85","tokens":0,"logs":1,"endOfFile":false,"panic":"LexerPanic","contentsHex":"30305f30"}
+{"r":"l","case":"testdata/esbuild-cases-lex-err/b97fb9daaf4e.js","kind":0,"text":"Syntax error \"_\"","hasLoc":true,"line":1,"col":2}
+{"r":"c","case":"testdata/esbuild-cases-lex-err/b97fb9daaf4e.js","contentsBytes":4,"contentsSha256":"b97fb9daaf4e91404a67bd6923f72261021f689b2e0290ef67f10e968f6694f4","tokens":0,"logs":1,"endOfFile":false,"panic":"LexerPanic","contentsHex":"312e5f32"}
+{"r":"l","case":"testdata/esbuild-cases-lex-err/bacada769145.js","kind":0,"text":"Syntax error \"_\"","hasLoc":true,"line":1,"col":4}
+{"r":"c","case":"testdata/esbuild-cases-lex-err/bacada769145.js","contentsBytes":6,"contentsSha256":"bacada7691457d89a7c2f28e489ddfcb1fd7cdd36391022abb351dac752eda3f","tokens":0,"logs":1,"endOfFile":false,"panic":"LexerPanic","contentsHex":"3165325f5f33"}
+{"r":"l","case":"testdata/esbuild-cases-lex-err/bb5080c2768c.js","kind":0,"text":"Syntax error \"_\"","hasLoc":true,"line":1,"col":2}
+{"r":"c","case":"testdata/esbuild-cases-lex-err/bb5080c2768c.js","contentsBytes":4,"contentsSha256":"bb5080c2768cf6bf384555e3f34157a9cedf9cef10b26a8fecf5eb821e3d7297","tokens":0,"logs":1,"endOfFile":false,"panic":"LexerPanic","contentsHex":"306f5f31"}
+{"r":"l","case":"testdata/esbuild-cases-lex-err/bbabfc2180b8.js","kind":0,"text":"Syntax error \"_\"","hasLoc":true,"line":1,"col":3}
+{"r":"c","case":"testdata/esbuild-cases-lex-err/bbabfc2180b8.js","contentsBytes":4,"contentsSha256":"bbabfc2180b8eebf3c91f1de2ebee7513cd08491b1ec86b0fc415b5de59d0aa8","tokens":0,"logs":1,"endOfFile":false,"panic":"LexerPanic","contentsHex":"3078315f"}
+{"r":"l","case":"testdata/esbuild-cases-lex-err/be52f86051ce.js","kind":0,"text":"Unterminated string literal","hasLoc":true,"line":2}
+{"r":"c","case":"testdata/esbuild-cases-lex-err/be52f86051ce.js","contentsBytes":7,"contentsSha256":"be52f86051ce960f09a51d2472550b1c5b91a9d030d064f38d5c4881b8a67c00","tokens":0,"logs":1,"endOfFile":false,"panic":"LexerPanic","contentsHex":"27315c0a0d3227"}
+{"r":"l","case":"testdata/esbuild-cases-lex-err/bf18cf6919ab.js","kind":0,"text":"Syntax error \"z\"","hasLoc":true,"line":1,"col":3}
+{"r":"c","case":"testdata/esbuild-cases-lex-err/bf18cf6919ab.js","contentsBytes":4,"contentsSha256":"bf18cf6919ab9dfd0c9dd5a437cc28b83e3be4fb56149ca9c1f8abb9fec48127","tokens":0,"logs":1,"endOfFile":false,"panic":"LexerPanic","contentsHex":"3078317a"}
+{"r":"l","case":"testdata/esbuild-cases-lex-err/c31cff13a954.js","kind":0,"text":"Syntax error \"_\"","hasLoc":true,"line":1,"col":2}
+{"r":"c","case":"testdata/esbuild-cases-lex-err/c31cff13a954.js","contentsBytes":3,"contentsSha256":"c31cff13a95447432de8c060f28edff9b560f7790a8145986ca9665c6c64f076","tokens":0,"logs":1,"endOfFile":false,"panic":"LexerPanic","contentsHex":"2e315f"}
+{"r":"l","case":"testdata/esbuild-cases-lex-err/c554f5d24197.js","kind":0,"text":"Syntax error \"_\"","hasLoc":true,"line":1,"col":2}
+{"r":"c","case":"testdata/esbuild-cases-lex-err/c554f5d24197.js","contentsBytes":3,"contentsSha256":"c554f5d241973cb2b58612f4e47f4cfa9117e4ac84982395053e263868593e5b","tokens":0,"logs":1,"endOfFile":false,"panic":"LexerPanic","contentsHex":"31655f"}
+{"r":"l","case":"testdata/esbuild-cases-lex-err/c65746d58dc8.js","kind":0,"text":"Syntax error \".\"","hasLoc":true,"line":1,"col":6}
+{"r":"c","case":"testdata/esbuild-cases-lex-err/c65746d58dc8.js","contentsBytes":7,"contentsSha256":"c65746d58dc824755911443907bf67dfe453e41f49ed1f975914739ea6928bfc","tokens":0,"logs":1,"endOfFile":false,"panic":"LexerPanic","contentsHex":"745c753030362e"}
+{"r":"l","case":"testdata/esbuild-cases-lex-err/ca71287fa341.js","kind":0,"text":"Syntax error \"f\"","hasLoc":true,"line":1,"col":3}
+{"r":"c","case":"testdata/esbuild-cases-lex-err/ca71287fa341.js","contentsBytes":4,"contentsSha256":"ca71287fa34178414c0d79267ee884ec97ce31a8be544d459465eecdd49051f0","tokens":0,"logs":1,"endOfFile":false,"panic":"LexerPanic","contentsHex":"312e3066"}
+{"r":"l","case":"testdata/esbuild-cases-lex-err/ca88ff68a72a.js","kind":0,"text":"Syntax error \"n\"","hasLoc":true,"line":1,"col":4}
+{"r":"c","case":"testdata/esbuild-cases-lex-err/ca88ff68a72a.js","contentsBytes":5,"contentsSha256":"ca88ff68a72a45cbba25e1ae42df1f547063e32965a86414c4a0ae657a4e6855","tokens":0,"logs":1,"endOfFile":false,"panic":"LexerPanic","contentsHex":"303132336e"}
+{"r":"l","case":"testdata/esbuild-cases-lex-err/cb03ad24b345.js","kind":0,"text":"Syntax error \".\"","hasLoc":true,"line":1,"col":4}
+{"r":"c","case":"testdata/esbuild-cases-lex-err/cb03ad24b345.js","contentsBytes":5,"contentsSha256":"cb03ad24b34550cb8903a3c62e43449b218a0b4a48e101aa8813c1b74318671c","tokens":0,"logs":1,"endOfFile":false,"panic":"LexerPanic","contentsHex":"745c75302e"}
+{"r":"l","case":"testdata/esbuild-cases-lex-err/d300be24f39d.js","kind":0,"text":"Syntax error \".\"","hasLoc":true,"line":1,"col":3}
+{"r":"c","case":"testdata/esbuild-cases-lex-err/d300be24f39d.js","contentsBytes":4,"contentsSha256":"d300be24f39d125c54f1234bd85dbbc1dd3938212b9c3ea31dc1c2d40fa004c0","tokens":0,"logs":1,"endOfFile":false,"panic":"LexerPanic","contentsHex":"745c752e"}
+{"r":"t","case":"testdata/esbuild-cases-lex-err/d4a63c2bfe0b.js","i":0,"kind":5,"kindName":"TStringLiteral","rawHex":"275c7527","start":0,"len":4,"nlBefore":true,"valuePanic":true}
+{"r":"l","case":"testdata/esbuild-cases-lex-err/d4a63c2bfe0b.js","kind":0,"text":"Syntax error \"'\"","hasLoc":true,"line":1,"col":3}
+{"r":"c","case":"testdata/esbuild-cases-lex-err/d4a63c2bfe0b.js","contentsBytes":4,"contentsSha256":"d4a63c2bfe0be0c446a833f7eddc34d498086460175d05fdb709406b4e6a752a","tokens":1,"logs":1,"endOfFile":false,"contentsHex":"275c7527"}
+{"r":"l","case":"testdata/esbuild-cases-lex-err/d4b427a4c244.js","kind":0,"text":"Unexpected end of file","hasLoc":true,"line":1,"col":4}
+{"r":"c","case":"testdata/esbuild-cases-lex-err/d4b427a4c244.js","contentsBytes":4,"contentsSha256":"d4b427a4c2447964534e790639aaeec383a0446e2b346e9d6402e2f790195ae9","tokens":0,"logs":1,"endOfFile":false,"panic":"LexerPanic","contentsHex":"2e31652b"}
+{"r":"l","case":"testdata/esbuild-cases-lex-err/d730abab6c2c.js","kind":0,"text":"Syntax error \"A\"","hasLoc":true,"line":1,"col":4}
+{"r":"c","case":"testdata/esbuild-cases-lex-err/d730abab6c2c.js","contentsBytes":5,"contentsSha256":"d730abab6c2c7326ea0a1568753a0f1fe98f52307d5aa98eca9973839ac2d9db","tokens":0,"logs":1,"endOfFile":false,"panic":"LexerPanic","contentsHex":"3062303141"}
+{"r":"l","case":"testdata/esbuild-cases-lex-err/d849356cc7d9.js","kind":0,"text":"Syntax error \"_\"","hasLoc":true,"line":1,"col":2}
+{"r":"c","case":"testdata/esbuild-cases-lex-err/d849356cc7d9.js","contentsBytes":4,"contentsSha256":"d849356cc7d916383529634ddc5ed888c6e5031d9e725728bcd11a27fefebd6a","tokens":0,"logs":1,"endOfFile":false,"panic":"LexerPanic","contentsHex":"304f5f31"}
+{"r":"l","case":"testdata/esbuild-cases-lex-err/dcb304c59156.js","kind":0,"text":"Unexpected end of file","hasLoc":true,"line":1,"col":2}
+{"r":"c","case":"testdata/esbuild-cases-lex-err/dcb304c59156.js","contentsBytes":2,"contentsSha256":"dcb304c591564c685111d26b9f6ab0f2a22d508fa62ec9e520336b34e77251ef","tokens":0,"logs":1,"endOfFile":false,"panic":"LexerPanic","contentsHex":"304f"}
+{"r":"t","case":"testdata/esbuild-cases-lex-err/e55239c77493.js","i":0,"kind":5,"kindName":"TStringLiteral","rawHex":"275c7530303027","start":0,"len":7,"nlBefore":true,"valuePanic":true}
+{"r":"l","case":"testdata/esbuild-cases-lex-err/e55239c77493.js","kind":0,"text":"Syntax error \"'\"","hasLoc":true,"line":1,"col":6}
+{"r":"c","case":"testdata/esbuild-cases-lex-err/e55239c77493.js","contentsBytes":7,"contentsSha256":"e55239c7749393121ebf6fa8f7144a09724f6fe6a5b30518b7e7e024559416a9","tokens":1,"logs":1,"endOfFile":false,"contentsHex":"275c7530303027"}
+{"r":"l","case":"testdata/esbuild-cases-lex-err/e5b5e7a8ff88.js","kind":0,"text":"Syntax error \"z\"","hasLoc":true,"line":1,"col":3}
+{"r":"c","case":"testdata/esbuild-cases-lex-err/e5b5e7a8ff88.js","contentsBytes":4,"contentsSha256":"e5b5e7a8ff8867220aa70b0e4ada19eb0f2eea35cfed55cdd09935c119693c47","tokens":0,"logs":1,"endOfFile":false,"panic":"LexerPanic","contentsHex":"3165317a"}
+{"r":"t","case":"testdata/esbuild-cases-lex-err/e8af99c56762.js","i":0,"kind":5,"kindName":"TStringLiteral","rawHex":"275c78464727","start":0,"len":6,"nlBefore":true,"valuePanic":true}
+{"r":"l","case":"testdata/esbuild-cases-lex-err/e8af99c56762.js","kind":0,"text":"Syntax error \"G\"","hasLoc":true,"line":1,"col":4}
+{"r":"c","case":"testdata/esbuild-cases-lex-err/e8af99c56762.js","contentsBytes":6,"contentsSha256":"e8af99c5676268a211ba26c072820b36ad5823ef12a936556afb0681ff027ef7","tokens":1,"logs":1,"endOfFile":false,"contentsHex":"275c78464727"}
+{"r":"l","case":"testdata/esbuild-cases-lex-err/ee318bf73d4f.js","kind":0,"text":"Syntax error \"+\"","hasLoc":true,"line":1,"col":3}
+{"r":"c","case":"testdata/esbuild-cases-lex-err/ee318bf73d4f.js","contentsBytes":5,"contentsSha256":"ee318bf73d4fe15924206830cff1f2084c95732e90d13b1661cfa240d7fbd4a3","tokens":0,"logs":1,"endOfFile":false,"panic":"LexerPanic","contentsHex":"31652d2b31"}
+{"r":"l","case":"testdata/esbuild-cases-lex-err/f095a5180aa2.js","kind":0,"text":"Unterminated string literal","hasLoc":true,"line":1,"col":2}
+{"r":"c","case":"testdata/esbuild-cases-lex-err/f095a5180aa2.js","contentsBytes":2,"contentsSha256":"f095a5180aa287d1bc8fc20be292d37632db1d93d43c769e3a4cd8f8a6b0d97b","tokens":0,"logs":1,"endOfFile":false,"panic":"LexerPanic","contentsHex":"275c"}
+{"r":"l","case":"testdata/esbuild-cases-lex-err/f1c6099633e9.js","kind":0,"text":"Syntax error \"_\"","hasLoc":true,"line":1,"col":4}
+{"r":"c","case":"testdata/esbuild-cases-lex-err/f1c6099633e9.js","contentsBytes":6,"contentsSha256":"f1c6099633e9c73e6c8b784c43c4aaa45bd35c2910a4ea5142af3b41402fecf1","tokens":0,"logs":1,"endOfFile":false,"panic":"LexerPanic","contentsHex":"3078315f5f32"}
+{"r":"l","case":"testdata/esbuild-cases-lex-err/f20cb7cc28e9.js","kind":0,"text":"Unexpected end of file","hasLoc":true,"line":1,"col":4}
+{"r":"c","case":"testdata/esbuild-cases-lex-err/f20cb7cc28e9.js","contentsBytes":4,"contentsSha256":"f20cb7cc28e9db60b5111ad533c2ac85b66f7ee7dc156d940785d57e87667822","tokens":0,"logs":1,"endOfFile":false,"panic":"LexerPanic","contentsHex":"312e3165"}
+{"r":"l","case":"testdata/esbuild-cases-lex-err/f894685c1150.js","kind":0,"text":"Syntax error \"_\"","hasLoc":true,"line":1,"col":1}
+{"r":"c","case":"testdata/esbuild-cases-lex-err/f894685c1150.js","contentsBytes":4,"contentsSha256":"f894685c1150474b7d185f27d3c207023806917f1152d97f46632607022d59f3","tokens":0,"logs":1,"endOfFile":false,"panic":"LexerPanic","contentsHex":"315f2e32"}
+{"r":"l","case":"testdata/esbuild-cases-lex-err/f8b98bfd0291.js","kind":0,"text":"Unterminated string literal","hasLoc":true,"line":1,"col":1}
+{"r":"c","case":"testdata/esbuild-cases-lex-err/f8b98bfd0291.js","contentsBytes":3,"contentsSha256":"f8b98bfd02918ed9c1aefcd5bd9bad462cf4e38ceaf1b19c58879d529a9345ea","tokens":0,"logs":1,"endOfFile":false,"panic":"LexerPanic","contentsHex":"270a27"}
+{"r":"l","case":"testdata/esbuild-cases-lex-err/fa2537894a1c.js","kind":0,"text":"Syntax error \"_\"","hasLoc":true,"line":1,"col":2}
+{"r":"c","case":"testdata/esbuild-cases-lex-err/fa2537894a1c.js","contentsBytes":4,"contentsSha256":"fa2537894a1cf1159c3a5cc7b8f9c7d17ef9ef0e716e38c84410bb2f0839bc2a","tokens":0,"logs":1,"endOfFile":false,"panic":"LexerPanic","contentsHex":"315f5f32"}
+{"r":"l","case":"testdata/esbuild-cases-lex-err/fae0c9b253db.js","kind":0,"text":"Syntax error \"_\"","hasLoc":true,"line":1,"col":1}
+{"r":"c","case":"testdata/esbuild-cases-lex-err/fae0c9b253db.js","contentsBytes":3,"contentsSha256":"fae0c9b253db608d248171f6a69e35e3af8b1a8bd9fbf4a9aa1b1470da4ffa70","tokens":0,"logs":1,"endOfFile":false,"panic":"LexerPanic","contentsHex":"305f38"}
+{"r":"l","case":"testdata/esbuild-cases-lex-err/fb346aaddef6.js","kind":0,"text":"Unexpected end of file","hasLoc":true,"line":1,"col":3}
+{"r":"c","case":"testdata/esbuild-cases-lex-err/fb346aaddef6.js","contentsBytes":3,"contentsSha256":"fb346aaddef670dedd5e4209580bc32df6dde4b89ba9abd9a18fe3e0779cbb9f","tokens":0,"logs":1,"endOfFile":false,"panic":"LexerPanic","contentsHex":"31652b"}
+{"r":"l","case":"testdata/esbuild-cases-lex-err/fe285bda427e.js","kind":0,"text":"Unexpected end of file","hasLoc":true,"line":1,"col":4}
+{"r":"c","case":"testdata/esbuild-cases-lex-err/fe285bda427e.js","contentsBytes":4,"contentsSha256":"fe285bda427ecdfa848056679e3e109fc89ddd6ac2e8c063d2084704b6dc4acb","tokens":0,"logs":1,"endOfFile":false,"panic":"LexerPanic","contentsHex":"312e652b"}
+{"r":"s","cases":116,"tokens":10,"distinctKinds":1,"logs":116,"skippedDuplicates":0}

@@ -1,0 +1,121 @@
+package linker
+
+// 第 179 批 Go 探针：createWrapperForFile / generateCodeForLazyExport（linker.go:2425/2110）逐字节固化。
+import (
+	"encoding/json"
+	"fmt"
+	"os"
+	"testing"
+
+	"github.com/evanw/esbuild/internal/ast"
+	"github.com/evanw/esbuild/internal/config"
+	"github.com/evanw/esbuild/internal/graph"
+	"github.com/evanw/esbuild/internal/helpers"
+	"github.com/evanw/esbuild/internal/js_ast"
+	"github.com/evanw/esbuild/internal/logger"
+)
+
+type cgRow struct {
+	Fn  string                 `json:"fn"`
+	Arg map[string]interface{} `json:"arg"`
+	Out interface{}            `json:"out"`
+}
+func cgRef(s, i uint32) ast.Ref { return ast.Ref{SourceIndex: s, InnerIndex: i} }
+
+func cgBuild(n int) *linkerContext {
+	c := &linkerContext{}
+	inputs := make([]graph.InputFile, n)
+	for si := 0; si < n; si++ { inputs[si] = graph.InputFile{Source: logger.Source{IdentifierName: fmt.Sprintf("f%d", si)}} }
+	reachable := make([]uint32, n); for i := range reachable { reachable[i] = uint32(i) }
+	c.graph = graph.CloneLinkerGraph(inputs, reachable, nil, false)
+	for si := 0; si < n; si++ {
+		repr := &graph.JSRepr{AST: js_ast.AST{ModuleScope: &js_ast.Scope{}, Parts: []js_ast.Part{}, Symbols: []ast.Symbol{{OriginalName:"sym"}}}}
+		repr.AST.ExportsRef = cgRef(uint32(si), 0); repr.AST.ModuleRef = cgRef(uint32(si), 0); repr.AST.WrapperRef = cgRef(uint32(si), 0)
+		repr.Meta.ImportsToBind = map[ast.Ref]graph.ImportData{}
+		repr.Meta.ResolvedExports = map[string]graph.ExportData{}
+		c.graph.Files[si].InputFile.Repr = repr
+	}
+	c.graph.Symbols.SymbolsForSource[0] = []ast.Symbol{{OriginalName:"runtime", Link: ast.InvalidRef}}
+	c.cjsRuntimeRef = cgRef(0,0); c.esmRuntimeRef = cgRef(0,0)
+	c.options = &config.Options{OutputFormat: config.FormatESModule}
+	return c
+}
+
+// dump parts: for each part, declared refs / dep (src,idx) / stmt kinds
+func cgDumpParts(c *linkerContext, si int) interface{} {
+	repr := c.graph.Files[si].InputFile.Repr.(*graph.JSRepr)
+	out := []interface{}{}
+	for _, p := range repr.AST.Parts {
+		decls := []string{}
+		for _, d := range p.DeclaredSymbols { decls = append(decls, fmt.Sprintf("%d:%d", d.Ref.SourceIndex, d.Ref.InnerIndex)) }
+		deps := []string{}
+		for _, d := range p.Dependencies { deps = append(deps, fmt.Sprintf("%d:%d", d.SourceIndex, d.PartIndex)) }
+		kinds := []string{}
+		for _, st := range p.Stmts { kinds = append(kinds, fmt.Sprintf("%T", st.Data)) }
+		out = append(out, []interface{}{decls, deps, kinds, p.CanBeRemovedIfUnused})
+	}
+	return out
+}
+
+func TestTmpGenLnkCodegen(t *testing.T) {
+	var out []cgRow
+	add := func(fn string, arg map[string]interface{}, o interface{}) { out = append(out, cgRow{fn, arg, o}) }
+
+	// ---- createWrapperForFile ----
+	for _, tc := range []struct{ name string; wrap graph.WrapKind }{{"cjs", graph.WrapCJS}, {"esm", graph.WrapESM}, {"none", graph.WrapNone}} {
+		c := cgBuild(2)
+		c.graph.Files[1].InputFile.Repr.(*graph.JSRepr).Meta.Wrap = tc.wrap
+		// runtime repr TopLevelSymbolToParts returns overlay for ref 0
+		rt := c.graph.Files[0].InputFile.Repr.(*graph.JSRepr)
+		rt.Meta.TopLevelSymbolToPartsOverlay = map[ast.Ref][]uint32{cgRef(0,0): {0}}
+		c.createWrapperForFile(1)
+		repr := c.graph.Files[1].InputFile.Repr.(*graph.JSRepr)
+		add("createWrapperForFile", map[string]interface{}{"name": tc.name}, []interface{}{repr.Meta.WrapperPartIndex.GetIndex(), cgDumpParts(c, 1)})
+	}
+
+	// ---- generateCodeForLazyExport (CJS) ----
+	{
+		c := cgBuild(2)
+		repr := c.graph.Files[1].InputFile.Repr.(*graph.JSRepr)
+		repr.AST.ExportsKind = js_ast.ExportsCommonJS
+		lazy := js_ast.Expr{Data: &js_ast.ENumber{Value: 42}}
+		repr.AST.Parts = []js_ast.Part{{SymbolUses: map[ast.Ref]js_ast.SymbolUse{}, Stmts: []js_ast.Stmt{{Data: &js_ast.SLazyExport{Value: lazy}}}}}
+		c.generateCodeForLazyExport(1)
+		add("generateCodeForLazyExport", map[string]interface{}{"name":"cjs"}, cgDumpParts(c, 1))
+	}
+	// ---- generateCodeForLazyExport (ESM default only) ----
+	{
+		c := cgBuild(2)
+		repr := c.graph.Files[1].InputFile.Repr.(*graph.JSRepr)
+		repr.AST.ExportsKind = js_ast.ExportsESM
+		lazy := js_ast.Expr{Data: &js_ast.ENumber{Value: 7}}
+		repr.AST.Parts = []js_ast.Part{{SymbolUses: map[ast.Ref]js_ast.SymbolUse{}, Stmts: []js_ast.Stmt{{Data: &js_ast.SLazyExport{Value: lazy}}}}}
+		c.generateCodeForLazyExport(1)
+		resolved := []interface{}{}
+		for k := range repr.Meta.ResolvedExports { resolved = append(resolved, k) }
+		sortStrings(resolved)
+		add("generateCodeForLazyExport", map[string]interface{}{"name":"esm-default"}, []interface{}{cgDumpParts(c, 1), resolved})
+	}
+	// ---- generateCodeForLazyExport (ESM object with props) ----
+	{
+		c := cgBuild(2)
+		repr := c.graph.Files[1].InputFile.Repr.(*graph.JSRepr)
+		repr.AST.ExportsKind = js_ast.ExportsESM
+		obj := &js_ast.EObject{Properties: []js_ast.Property{
+			{Key: js_ast.Expr{Data: &js_ast.EString{Value: helpers.StringToUTF16("foo")}}, ValueOrNil: js_ast.Expr{Data: &js_ast.ENumber{Value: 1}}},
+			{Key: js_ast.Expr{Data: &js_ast.EString{Value: helpers.StringToUTF16("default")}}, ValueOrNil: js_ast.Expr{Data: &js_ast.ENumber{Value: 2}}},
+		}}
+		repr.AST.Parts = []js_ast.Part{{SymbolUses: map[ast.Ref]js_ast.SymbolUse{}, Stmts: []js_ast.Stmt{{Data: &js_ast.SLazyExport{Value: js_ast.Expr{Data: obj}}}}}}
+		c.generateCodeForLazyExport(1)
+		resolved := []interface{}{}
+		for k := range repr.Meta.ResolvedExports { resolved = append(resolved, k) }
+		sortStrings(resolved)
+		add("generateCodeForLazyExport", map[string]interface{}{"name":"esm-object"}, []interface{}{cgDumpParts(c, 1), resolved})
+	}
+
+	b, err := json.Marshal(out)
+	if err != nil { t.Fatal(err) }
+	if err := os.WriteFile("/root/port/testdata/lnkcodegen-go.json", b, 0644); err != nil { t.Fatal(err) }
+	t.Logf("wrote %d cases", len(out))
+}
+func sortStrings(a []interface{}) { for i:=0;i<len(a);i++{for j:=i+1;j<len(a);j++{if a[j].(string)<a[i].(string){a[i],a[j]=a[j],a[i]}}} }

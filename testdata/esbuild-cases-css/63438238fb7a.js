@@ -1,0 +1,1 @@
+@media screen { a, a { color: red } }

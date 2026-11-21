@@ -1,0 +1,56 @@
+[
+  {
+    "name": "non-bundle",
+    "ok": false,
+    "isExpr": false,
+    "loc": 0,
+    "relocated": 0,
+    "useCount": 0,
+    "valueKind": "none"
+  },
+  {
+    "name": "top-level-depth0",
+    "ok": false,
+    "isExpr": false,
+    "loc": 0,
+    "relocated": 0,
+    "useCount": 0,
+    "valueKind": "none"
+  },
+  {
+    "name": "nested-with-init",
+    "ok": true,
+    "isExpr": true,
+    "loc": 0,
+    "relocated": 1,
+    "useCount": 1,
+    "valueKind": "binary"
+  },
+  {
+    "name": "nested-no-init-normal",
+    "ok": true,
+    "isExpr": false,
+    "loc": 0,
+    "relocated": 1,
+    "useCount": 1,
+    "valueKind": "none"
+  },
+  {
+    "name": "nested-no-init-forof",
+    "ok": true,
+    "isExpr": true,
+    "loc": 0,
+    "relocated": 1,
+    "useCount": 1,
+    "valueKind": "identifier"
+  },
+  {
+    "name": "top-level-depth1",
+    "ok": true,
+    "isExpr": true,
+    "loc": 0,
+    "relocated": 1,
+    "useCount": 1,
+    "valueKind": "binary"
+  }
+]

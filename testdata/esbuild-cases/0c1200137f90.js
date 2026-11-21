@@ -1,0 +1,1 @@
+while (x) { let y = z(); if (1) continue; z(); }

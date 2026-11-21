@@ -1,0 +1,1 @@
+class Foo { set 'prototype'(x) {} }
