@@ -46,3 +46,31 @@
 - Symbol 探针（total=440004, alias=0, link=0, dup=54.5%，已 git restore）。
 - sizeof：Scope=192 Symbol=48 Expr=24（unsafe.Sizeof，go1.26.5）。
 - V8 官方文档 URL 见上；本机 1GB / big40 594MB，不可外推 16G。
+
+## 追加（第224代）：buffer/容器类真实探针，坐实 buffer 行
+
+审计指出 buffer 格是断言未取证。补采 gen8（19MB，大量 object 字面量语料）的 alloc_space（`/tmp/alloc-gen8.prof`）
+与 big40（`/tmp/alloc-big40.prof`）对照：
+
+| 项 | big40 (8.2MB) | gen8 (19MB) |
+| --- | ---: | ---: |
+| `os.readFileContents`(源码 buffer, 1×) | 8.36MB / 1.85% | 18.62MB / 5.16% |
+| 源码文件本身 | 8.2MB | 19MB |
+| buffer/文件 比 | 1.02 | 0.98 → **1:1 线性** |
+| StringToUTF16(字符串容器) | 4.26MB / 0.94% | 3.55MB / 0.98% |
+| gzip/flate | 1.45MB inuse | 0 |
+| `parsePrefix`(AST 节点) | 74.3MB / 16.5% | **272MB / 75.4%** |
+
+**结论：buffer 严格随源码线性（≈1:1），不可约——审计要求坐实，坐实后确认原判断成立**，
+但修正措辞：不是固定 3.85%，而是"1:1 线性、占比随语料类型 1.85%~5.16% 变化"。
+`FSCache.ReadFile` cum 显示 2× 是调用图双分支（realFS/zipFS），实际只读 1 次，无重复读问题。
+**buffer 不是 16G 问题的根**：它是线性必然成本，改不动；16G 场景的内存增长来自 AST 数据结构随项目规模增长。
+
+### step-change 判断（诚实）
+V8 的 arena/去 vtable/string dedup 对我们是**增量**（死字段 ~10% + Expr ~6% + dedup 潜力），
+不是数量级 step-change。真正 step-change 是 V8 PreParser 那种"只解析不改 AST"的架构级懒解析，
+但那要重写语义、无法 1:1 保持行为。**根本局限：没有用户那个真实 16G 项目，所有合成案例只是代理，
+594MB/1GB 机器上的任何百分比都不能当成对 16G 场景的承诺。** 能确定的是：随规模线性增长的大头是
+AST 数据结构（Scope/Expr/Symbol），压它们对 16G 场景是**同比例收益**（消除的字节数随项目规模线性放大）。
+
+证据：`/tmp/alloc-gen8.prof`、`/tmp/alloc-big40.prof`（MemProfileRate=1）；FSCache.ReadFile cache_fs.go:25-52（单次读+modKey缓存）。
