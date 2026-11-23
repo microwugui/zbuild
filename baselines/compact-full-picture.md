@@ -74,3 +74,24 @@ V8 的 arena/去 vtable/string dedup 对我们是**增量**（死字段 ~10% + E
 AST 数据结构（Scope/Expr/Symbol），压它们对 16G 场景是**同比例收益**（消除的字节数随项目规模线性放大）。
 
 证据：`/tmp/alloc-gen8.prof`、`/tmp/alloc-big40.prof`（MemProfileRate=1）；FSCache.ReadFile cache_fs.go:25-52（单次读+modKey缓存）。
+
+## 追加（第224代·开工前最后一次取证）：Scope sidecar 改动面与分层策略
+
+Scope sidecar 微基准（锚定真实 Scope 192B + 32万规模，A 版 58.60MB 与真实 pprof 58.64MB 精确吻合）：
+192B→136B（去 Replaced 24B + Generated 24B + TSNamespace 8B）= **−29.2% Scope / −17.1MB**。
+
+真实使用点（grep 全 internal/*.go，排除测试/同名）：
+- `Replaced`：2 处（js_parser.go:1498 append、:1543 range）
+- `TSNamespace`：5 处（ts_parser.go:1383/1610/1642、js_parser.go:8709/11451）
+- `Generated`：**44 处**（parser 各 lowering 分支 append + renamer 5 处 + graph.go 2 处）
+- Scope 结构字面量实例化：9 处需同步
+
+分层决策：
+- **低风险层**：先移 Replaced(24B) + TSNamespace(8B) = 32B/Scope，7 处使用点 → −16.7% Scope ≈ −1.7% 整构建存活
+- **完整层**：再移 Generated(24B)，累计 56B/Scope = −29% Scope，但需改 44 处 → 中高风险
+- 二者单独都过不了 10% 整构建门；须与 Expr(−6.4%)/Symbol(−4%) 合用。
+
+按"字节门先于收益门 + 禁盲改"：开工从低风险层（Replaced+TSNamespace sidecar）起步，
+过字节门 + TotalAlloc/峰值存活堆配对 A/B n≥8 + CI 不含 1 后，再决定是否叠加 Generated 与 Expr。
+
+证据：goport-exp 临时 internal/scopebench（已删，0 dirty）；grep 使用点计数见上；/tmp/alloc-big40.prof。
