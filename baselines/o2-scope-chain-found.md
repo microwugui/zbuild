@@ -85,3 +85,34 @@ O(n²) 热点确凿（findSymbol 作用域链爬，深嵌套引用外层变量�
 
 证据：`/tmp/cpu-deep12k-o2with.prof`（最小版无效）；lookup_bench 27,000×；`/tmp/jsp_o2_base.go`（半成品备份，已弃）；
 findSymbol 按行 pprof；js_parser.go:8681-8752。全部源码改动已回滚，worktree 0 dirty。
+
+## 追加（同代）：完整路径压缩缓存实施 → 实测净亏，已回滚
+
+实施了完整方案：`map[(scope,name)]→(ref,declareLoc)` 记忆化 + 路径压缩（爬链成功后回填路径上所有 scope），
+启用条件 `!ts.Parse && !hasWithScope && name!="arguments"`。go test ./... 全绿。
+
+**配对 A/B（deep12k / big40 / gen8 / _tsc.js，GOMAXPROCS=1）：**
+
+| 语料 | base wall / RSS | cache wall / RSS |
+| --- | --- | --- |
+| deep12k (580KB) | 1.90s / 78MB | **15.31s / 861MB（慢 8×，内存 11×）** |
+| big40 (8.2MB) | 4.87s / 776MB | 4.55s / 828MB |
+| gen8 (19MB) | 3.45s / 729MB | 3.34s / 730MB |
+| _tsc.js (6MB) | 0.93s / 151MB | 0.93s / 172MB |
+
+deep12k 上缓存灾难性变差：12000 scope 的大量 name 引用使缓存条目爆炸，map 分配 + GC 成本远超省下的
+爬链；RSS 861MB 几乎打满 1GB，实测中已触发一次 OOM。big40/gen8 wall 仅边际改善但 RSS +21~52MB。
+
+**这是微基准不可外推的第三次实证**：lookup_bench（27000×）没算 map 内存/分配成本，真实 Go 构建里
+缓存自身成为新瓶颈。按纪律（双指标、字节门先于收益门、不外推、不硬凑）**不采纳，已回滚，worktree 0 dirty**。
+
+## 最终收敛（本代）
+O(n²) 热点确凿（findSymbol 作用域链爬），但三种修复全部证伪/回滚：
+- 最小短路版：无收益；
+- 完整路径压缩缓存：deep 上 wall 慢 8×、内存 11×，净亏。
+根因是 Go 的 map 缓存成本 > 爬链节省，且收益只在合成极端语料、不可外推。
+**表示层(706处重写)/Green Tea/Go arena/算法级(O(n²)缓存) 四条路全部实测证伪。**
+给定约束（1:1 字节门、1GB 本机、合成代理、不外推）下，"大幅度降内存"没有可达路径。
+本代交付的是"发现并精确定位真 O(n²) + 三种修复的机器实证",这是此前六轮盲区里最有价值的硬结论。
+
+证据：`/tmp/ab-*` O2 实测；`/tmp/esbuild-o2cache`；o2-scope-chain-found.md 各节；全部源码已回滚。
