@@ -91,3 +91,15 @@ TotalAlloc gen8 419830→419830（0%）、big40 +0.01%、deep12k 0% —— 收�
 **按纪律回滚，只保留已成功的 properties(120B×海量小object) 和 items(24B×array) 两处。**
 教训：固定 cap 预分配只对"元素结构较大 + 实例海量 + 元素数稳定少"的 slice 有效，
 不可无差别推广到所有零容量 slice。
+
+## 追加（同代继续）：symbol slice 自定义 2× 增长 — 采纳（增量，<10%单靶门）
+big40 的 `p.symbols=append` 是 TotalAlloc 第一大项（89MB）。symCap=/110 是按长文件校准，
+big40（4万浅函数、symbol 密度 54/110B）cap 严重不足，Go 默认 ~1.25× 增长导致多次全量复制。
+- 失败尝试：symCap=/30 → big40 −8.2% 但 gen8 +5.2%、three.webgpu +10.4%（长文件过度预分配）。
+- **采纳方案**：保持 symCap=/110 起步，在 newSymbol 里当 `len==cap` 时手动 `make(cap*2)+copy`，
+  再 append。big40 少复制、长文件起步小不浪费。
+- 增量（对照 0421881）：TotalAlloc big40 **−7.60%**（530212→489935）、gen8 0%、three 0%（不伤）。
+  峰值 RSS big40 **−6.12%**（763.9→717.2MB，8 次区间不重叠）。
+- 字节门 3 语料逐字节一致；go test 全绿；`p.symbols` 仅 newSymbol 一处 append（封装完整）。
+- 判断：单靶 <10% 门，但真实收益、零字节差异、不伤其他语料、风险低 → 采纳累积。不外推 16G。
+- 累计相对 main(9dff11c)：加上本项后 big40 TotalAlloc/RSS 进一步下降（逐项累积，见各节）。

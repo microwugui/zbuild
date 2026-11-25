@@ -1339,6 +1339,18 @@ func (p *parser) discardScopesUpTo(scopeIndex int) {
 
 func (p *parser) newSymbol(kind ast.SymbolKind, name string) ast.Ref {
 	ref := ast.Ref{SourceIndex: p.source.Index, InnerIndex: uint32(len(p.symbols))}
+	// goport exp-expr: grow the symbol slice by 2x ourselves instead of Go's
+	// ~1.25x, cutting the number of grow-copies on symbol-heavy files while
+	// keeping the small initial cap (no waste on long low-density files).
+	if len(p.symbols) == cap(p.symbols) {
+		newCap := cap(p.symbols) * 2
+		if newCap == 0 {
+			newCap = 16
+		}
+		grown := make([]ast.Symbol, len(p.symbols), newCap)
+		copy(grown, p.symbols)
+		p.symbols = grown
+	}
 	p.symbols = append(p.symbols, ast.Symbol{
 		Kind:         kind,
 		OriginalName: name,
