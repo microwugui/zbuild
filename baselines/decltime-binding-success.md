@@ -71,7 +71,7 @@ CPU profile（deep12k，parse-only）：
 ## 六、信源
 - 根因定位：baselines/o2-scope-chain-found.md（第227代，findSymbol O(n²)）。
 - 选型启示：baselines/treesitter-crosscompare.md（tree-sitter deep12k 快 6.1×，命中本盲区）。
-- profile：/tmp/cpu-base-deep12k.prof、/tmp/cpu-cand-deep12k.prof。
+- profile：/tmp/cpu-{base,cand}-deep12k.prof（临时取证产物，数据已归档入上表；会话收尾已清理）。
 - A/B 原始数据：本轮控制台输出（deep3k/deep12k/big4/big40/gen8 × base/cand，n=8）。
 - 代码：internal/js_parser/js_parser.go:8681 findSymbol；:8656 pushScopeForVisitPass；:1215 popScope；
   internal/js_parser/fastbind.go 全文。
@@ -93,4 +93,4 @@ CPU profile（deep12k，parse-only）：
 - cand：3k→24k → **8.56×** 时间（线性8×）；12k→24k（2×）→1.78×
 - 收益随深度单调放大：8.1× (12k) → 17.2× (24k)
 
-证据：/tmp/deep24k.js（1.16MB）、/tmp/deep3k-{with,class}.js；/tmp/pb-{base,cand} parse-only harness。
+证据：语料 /tmp/deep24k.js、/tmp/deep3k-{with,class}.js 及 /tmp/pb-{base,cand} harness 为临时取证产物，数据已归档入表，收尾已清理。
