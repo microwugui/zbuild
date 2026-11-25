@@ -58,3 +58,15 @@ gen8 海量小 object 使净收益巨大，且不引入过度预分配浪费。
 - worktree /root/goport-expr(exp-expr) @ 本代提交；改动仅 js_parser.go 4 行；main(9dff11c)未动。
 - profile /tmp/alloc-gen8.prof；A/B 原始数在本轮控制台。
 - 相关台账：mem-targeting-audit.md、expr-tagged-poc.md、compact-full-picture.md。
+
+## 追加（同代）：cap 梯度实测确认 cap=4 最优
+gen8 TotalAlloc KB/parse（parse-only n=6，同源编译仅改 cap）：
+| cap | gen8 KB/parse | 相对 base(522955) |
+| ---: | ---: | ---: |
+| 1 | 522955 | 0%（=无预分配） |
+| 2 | 492955 | −5.7% |
+| **4** | **436705** | **−16.5%（最优）** |
+| 8 | 444205 | −15.1%（略差） |
+| 16 | OOM Killed | 过量预分配反噬 |
+cap=4 是甜点：object 字面量通常 ≤4 属性，cap=8 多分配空槽浪费，cap=16 在海量 object 下直接 OOM。
+**确认已提交的 cap=4 为最优，无需改动。**
