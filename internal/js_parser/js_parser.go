@@ -3916,7 +3916,10 @@ func (p *parser) parsePrefix(level js_ast.L, errors *deferredErrors, flags exprF
 	case js_lexer.TOpenBrace:
 		p.lexer.Next()
 		isSingleLine := !p.lexer.HasNewlineBefore
-		properties := []js_ast.Property{}
+		// goport exp-expr: object literals are small; a modest inline capacity
+		// avoids the first several append-growth copies of 120B Property structs
+		// (pprof: properties=append is 196MB alloc_space on gen8).
+		properties := make([]js_ast.Property, 0, 4)
 		selfErrors := deferredErrors{}
 		commaAfterSpread := logger.Loc{}
 
