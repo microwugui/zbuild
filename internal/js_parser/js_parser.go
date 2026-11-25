@@ -167,8 +167,8 @@ type parser struct {
 	fastSymInit  bool
 	fastSymOn    bool
 	fastSymVerify bool
-	fastVis      map[string][]*js_ast.Scope // name -> scopes declaring it (innermost at end)
-	fastFrames   []fastScopeFrame            // one frame per entered visit-pass scope
+	fastVis      map[string][]*fastScopeFrame // name -> frames declaring it (innermost at end)
+	fastFrames   []*fastScopeFrame            // one frame per entered visit-pass scope
 
 	// This is internal-only data used for the implementation of Yarn PnP
 	manifestForYarnPnP     js_ast.Expr
@@ -1276,7 +1276,8 @@ func (p *parser) popScope() {
 	}
 
 	// goport exp-declbind: unwind the shadow stack in lockstep with the scope tree.
-	if p.fastSymOn {
+	// Guard against paths that pop without a matching visit-pass push.
+	if p.fastSymOn && p.fastStackIsCurrent() {
 		p.fastPop()
 	}
 
@@ -8738,23 +8739,30 @@ type findSymbolResult struct {
 
 // findSymbol is the declaration-time fast path. On safe files it resolves a
 // name in O(1) via the shadow stack instead of walking s=s.Parent (the O(n^2)
-// deep12k hotspot). It reproduces the slow path's only live side effect here,
-// recordUsage; with/TS/class side effects are excluded by fastBindFileIsSafe.
+// deep12k hotspot). With-scope side effects are reproduced exactly; "arguments"
+// and off-stack scopes (decorator jumps) fall back to the original walk.
 func (p *parser) findSymbol(loc logger.Loc, name string) findSymbolResult {
 	if !p.fastSymInit {
 		p.fastInit()
 	}
-	if p.fastSymOn {
-		if ref, declareLoc, ok := p.fastFind(name); ok {
+	// "arguments" can trigger the ForbidArguments error (set dynamically during
+	// the visit pass); off-stack currentScope means a decoratorScope jump. Both
+	// go through the original chain walk, byte-identical by construction.
+	if p.fastSymOn && name != "arguments" && p.fastStackIsCurrent() {
+		if ref, declareLoc, insideWith, ok := p.fastFind(name); ok {
 			if p.fastSymVerify {
-				sref, sloc, sok := p.findSymbolPure(name)
-				if !sok || sref.InnerIndex != ref.InnerIndex || sref.SourceIndex != ref.SourceIndex || sloc.Start != declareLoc.Start {
-					panic(fmt.Sprintf("FASTBIND MISMATCH name=%q fast=(%d,%d,%d) slow=(%d,%d,%v)",
-						name, ref.InnerIndex, ref.SourceIndex, declareLoc.Start, sref.InnerIndex, sloc.Start, sok))
+				sref, sloc, swith, sok := p.findSymbolPure(name)
+				if !sok || sref.InnerIndex != ref.InnerIndex || sref.SourceIndex != ref.SourceIndex || sloc.Start != declareLoc.Start || swith != insideWith {
+					panic(fmt.Sprintf("FASTBIND MISMATCH name=%q fast=(%d,%d,%d,%v) slow=(%d,%d,%v,%v)",
+						name, ref.InnerIndex, ref.SourceIndex, declareLoc.Start, insideWith,
+						sref.InnerIndex, sloc.Start, sok, swith))
 				}
 			}
+			if insideWith {
+				p.symbols[ref.InnerIndex].Flags |= ast.MustNotBeRenamed
+			}
 			p.recordUsage(ref)
-			return findSymbolResult{ref, declareLoc, false}
+			return findSymbolResult{ref, declareLoc, insideWith}
 		}
 	}
 	return p.findSymbolSlow(loc, name)

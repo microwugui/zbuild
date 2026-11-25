@@ -14,14 +14,22 @@ package js_parser
 // member is pushed once and popped once, and we store scope POINTERS (reading
 // Members fresh at lookup time, so later mutations are visible).
 //
-// Correctness guards:
-//   - Enabled only on files that are safe (no `with`, no class scopes whose
-//     ForbidArguments/`arguments` errors fire mid-visit, no TS namespace
-//     aliases) — see fastBindFileIsSafe. Otherwise everything falls back to
-//     the original chain walk, byte-identical by construction.
+// Correctness guards (this round widened coverage to `with` scopes):
+//   - with-scope side effects are reproduced exactly: each frame records the
+//     count of ScopeWith frames below it, so isInsideWithScope (which gates
+//     MustKeepDueToWithStmt and MustNotBeRenamed) is computed in O(1) for the
+//     currentScope..declaringScope path, matching findSymbolSlow.
+//   - "arguments" references fall back to the slow path (ForbidArguments is
+//     set dynamically during the visit pass and only affects that name).
+//   - decoratorScope jumps change p.currentScope directly off the DFS stack;
+//     a guard (currentScope == top frame scope) sends those lookups to the slow
+//     path, and the stack self-heals after the decorator visit.
+//   - Class scopes remain excluded (dynamic innerClassName members /
+//     ForbidArguments desync the snapshot stack); TS files remain excluded
+//     (namespace-alias side effects). Both stay byte-identical via fallback.
 //   - fastSymVerify (env GOPORT_FASTSYM_VERIFY=1) runs BOTH paths and panics on
-//     any ref/declareLoc mismatch, giving a machine-checked equivalence proof
-//     over the whole test suite and all corpora.
+//     any ref/declareLoc/insideWith mismatch: a machine-checked proof over the
+//     whole test suite and all corpora.
 
 import (
 	"os"
@@ -32,8 +40,10 @@ import (
 )
 
 type fastScopeFrame struct {
-	scope *js_ast.Scope
-	added []string // names pushed by this frame (for exact rollback)
+	scope     *js_ast.Scope
+	added     []string // names pushed by this frame (for exact rollback)
+	isWith    int      // 1 if scope.Kind == ScopeWith
+	withBefore int     // number of ScopeWith frames strictly below this frame
 }
 
 // Called once, lazily, on the first findSymbol of a file (visit pass, after
@@ -45,13 +55,13 @@ func (p *parser) fastInit() {
 	p.fastSymInit = true
 	p.fastSymVerify = os.Getenv("GOPORT_FASTSYM_VERIFY") != ""
 
-	// Conservative: TS files have decoratorScope jumps and more findSymbol
-	// side effects (namespace aliases). Keep them on the original path.
+	// Conservative: TS files have decoratorScope jumps and namespace-alias side
+	// effects. Keep them on the original path (widened in a later round).
 	if p.options.ts.Parse || !fastBindFileIsSafe(p.moduleScope) {
 		return
 	}
 
-	p.fastVis = make(map[string][]*js_ast.Scope)
+	p.fastVis = make(map[string][]*fastScopeFrame)
 	// Rebuild the path from the module scope down to the current scope by
 	// walking parents. This handles scopes pushed before the first findSymbol.
 	chain := make([]*js_ast.Scope, 0, 16)
@@ -64,21 +74,24 @@ func (p *parser) fastInit() {
 	p.fastSymOn = true
 }
 
-// A file is safe for the O(1) path iff no scope can trigger findSymbol's
-// side effects while walking the chain: `with`, class scopes (which set
-// ForbidArguments mid-visit and create inner-class members), or TS namespace
-// aliases. In those rare files we keep the original behavior.
+// With scopes are allowed on the fast path (isInsideWithScope is reproduced
+// exactly via per-frame with counts). Class scopes are still excluded: they
+// add members (innerClassName) and set ForbidArguments dynamically mid-visit,
+// which desyncs a snapshot stack and broke byte-exactness in testing. TS files
+// are excluded separately for namespace-alias side effects.
 func fastBindFileIsSafe(root *js_ast.Scope) bool {
 	if root == nil {
 		return false
 	}
 	var visit func(*js_ast.Scope) bool
 	visit = func(s *js_ast.Scope) bool {
+		// Class scopes add members (innerClassName) and set ForbidArguments
+		// dynamically during the visit pass, desyncing the snapshot stack.
 		switch s.Kind {
-		case js_ast.ScopeWith, js_ast.ScopeClassName, js_ast.ScopeClassBody, js_ast.ScopeClassStaticInit:
+		case js_ast.ScopeClassName, js_ast.ScopeClassBody, js_ast.ScopeClassStaticInit:
 			return false
 		}
-		if s.ForbidArguments || s.TSNamespace != nil {
+		if s.TSNamespace != nil {
 			return false
 		}
 		for _, c := range s.Children {
@@ -93,9 +106,17 @@ func fastBindFileIsSafe(root *js_ast.Scope) bool {
 
 // Push a scope's members onto the shadow stack.
 func (p *parser) fastPush(scope *js_ast.Scope) {
-	frame := fastScopeFrame{scope: scope}
+	withBefore := 0
+	if n := len(p.fastFrames); n > 0 {
+		top := p.fastFrames[n-1]
+		withBefore = top.withBefore + top.isWith
+	}
+	frame := &fastScopeFrame{scope: scope, withBefore: withBefore}
+	if scope.Kind == js_ast.ScopeWith {
+		frame.isWith = 1
+	}
 	scope.Members.ForEach(func(name string, _ js_ast.ScopeMember) {
-		p.fastVis[name] = append(p.fastVis[name], scope)
+		p.fastVis[name] = append(p.fastVis[name], frame)
 		frame.added = append(frame.added, name)
 	})
 	p.fastFrames = append(p.fastFrames, frame)
@@ -103,11 +124,11 @@ func (p *parser) fastPush(scope *js_ast.Scope) {
 
 // Pop the top scope frame, removing exactly the names it pushed.
 func (p *parser) fastPop() {
-	f := &p.fastFrames[len(p.fastFrames)-1]
+	f := p.fastFrames[len(p.fastFrames)-1]
 	for i := len(f.added) - 1; i >= 0; i-- {
 		name := f.added[i]
 		stack := p.fastVis[name]
-		stack = stack[:len(stack)-1] // top must be this frame's scope (DFS discipline)
+		stack = stack[:len(stack)-1] // top must be this frame (DFS discipline)
 		if len(stack) == 0 {
 			delete(p.fastVis, name)
 		} else {
@@ -118,28 +139,45 @@ func (p *parser) fastPop() {
 }
 
 // fastFind returns the ref/declareLoc for `name` in O(1) using the shadow
-// stack. The bool is false if the name is not visible on the current path.
-func (p *parser) fastFind(name string) (ref ast.Ref, declareLoc logger.Loc, ok bool) {
+// stack, plus whether the currentScope..declaringScope path crosses a with
+// scope. The bool ok is false if the name is not visible on the current path.
+func (p *parser) fastFind(name string) (ref ast.Ref, declareLoc logger.Loc, insideWith bool, ok bool) {
 	stack := p.fastVis[name]
 	if len(stack) == 0 {
-		return ast.Ref{}, logger.Loc{}, false
+		return ast.Ref{}, logger.Loc{}, false, false
 	}
-	top := stack[len(stack)-1]
-	member, found := top.Members.Get(name)
+	f := stack[len(stack)-1]
+	member, found := f.scope.Members.Get(name)
 	if !found {
-		return ast.Ref{}, logger.Loc{}, false
+		return ast.Ref{}, logger.Loc{}, false, false
 	}
-	return member.Ref, member.Loc, true
+	// currentScope is the top frame (guarded by the caller). The walked path in
+	// findSymbolSlow covers frames [f .. top]; count ScopeWith frames there.
+	top := p.fastFrames[len(p.fastFrames)-1]
+	insideWith = (top.withBefore + top.isWith) > f.withBefore
+	return member.Ref, member.Loc, insideWith, true
+}
+
+// findSymbolUnbound is true when a name is declared somewhere on the current
+// DFS stack — used to decide whether the fast path can serve a lookup at all.
+func (p *parser) fastStackIsCurrent() bool {
+	if len(p.fastFrames) == 0 {
+		return false
+	}
+	return p.fastFrames[len(p.fastFrames)-1].scope == p.currentScope
 }
 
 // findSymbolPure mirrors findSymbol's pure chain walk with NO side effects:
 // no error logging, no symbol creation, no recordUsage, no flags. Used only by
 // the equivalence verifier. Returns ok=false for what would be an unbound ref.
-func (p *parser) findSymbolPure(name string) (ref ast.Ref, declareLoc logger.Loc, ok bool) {
+func (p *parser) findSymbolPure(name string) (ref ast.Ref, declareLoc logger.Loc, insideWith bool, ok bool) {
 	for s := p.currentScope; s != nil; s = s.Parent {
+		if s.Kind == js_ast.ScopeWith {
+			insideWith = true
+		}
 		if member, found := s.Members.Get(name); found {
-			return member.Ref, member.Loc, true
+			return member.Ref, member.Loc, insideWith, true
 		}
 	}
-	return ast.Ref{}, logger.Loc{}, false
+	return ast.Ref{}, logger.Loc{}, false, false
 }
