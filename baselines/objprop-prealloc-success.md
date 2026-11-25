@@ -193,3 +193,38 @@ CPU 口径（旧 cpu-deep12k.prof）findSymbol 44% + ScopeMembers.Get 40% = 87%�
 但峰值驻留内存（用户 16G 痛点）几乎无改善（−0.79%，区间重叠）——此前 deepfast 宣称的
 RSS −12.86% 是 O(1) 人造语料的假象。** [42209] 的诚实答案：目前深嵌套内存问题**未解决**，
 Scope 存活堆（21%）未被任何现有改动触及。继续追 Scope，不结案。
+
+## 追加（第245代收尾）：整合 deep 修复 + 内存优化到统一分支 exp-integrated
+
+用户明确要求：把之前做的 deep 优化"加回去"，因为要测试 16G 的超深项目。
+此前 deep 修复（exp-declbind）与内存优化（exp-expr）在 9dff11c 分叉、从未合并，
+用户测试线（exp-expr）缺 deep 修复。本代合并为统一分支 exp-integrated。
+
+### 整合内容（两路优化并集，代码落在不相交区域，3 个 cherry-pick 零冲突）
+- **deep 修复**（来自 exp-declbind，3 commit）：声明期符号解析 shadow stack（fastbind.go），
+  把 findSymbol 的 O(n²) 作用域链查找压成 O(1)；随 pass 栈 push/pop，name→frames 影子栈；
+  with-scope 副作用精确复现、"arguments"/class/TS/decorator 跳栈走原 slow path 回退。
+- **内存优化**（来自 exp-expr，5 处）：symbol 2× 增长、object properties 自适应 4→5→2×、
+  array items cap4、stmts cap4 等。
+
+### 门（全部机器实测，整合后整体）
+- go build ./... 全绿；go test ./... 全绿；**GOPORT_FASTSYM_VERIFY=1 go test ./... 全绿**
+  （该模式 fast/slow 双算逐 ref 比对，是全测试集的机器证明）。
+- 字节门：big40/gen8/deep12k + tsnamespace/enum/duplicate-fn 语料，main vs integrated 逐字节一致。
+- **深嵌套实测（deep12k 578K parse-only）**：main 2033.7ms → integrated 144.6ms = **14× 加速**，
+  O(n²)→线性在整合分支上依然生效（此前 declbind 单独测 8×/17.2×）。
+- 内存优化收益见前述各节（不因合并改变，代码区域不相交）。
+
+### 诚实边界（不撤、不改，如实保留）
+- 真实 scope-chain 语料（chain_1k_150）上峰值 RSS 仍 −0.79%（区间重叠不显著）：
+  shadow stack 主要解决**深嵌套 CPU/时间**（O(n²)→线性），对峰值驻留内存帮助有限；
+  内存优化（properties/array/symbol/stmts）主要降 TotalAlloc 与 gen8/big40 的 RSS。
+  用户 16G 项目若能受益，最可能来自 deep 修复消除深度带来的时间/临时分配放大，
+  但**本机 1GB 合成语料不可外推 16G 承诺**，需用户实测。
+- Scope 冷字段 sidecar 本轮重测：chain 语料 TA −2.25%/RSS −1.28%（区间重叠不显著），
+  仍未过门，已回滚不采纳（与第224代 big40 <1% 结论一致）。
+
+### 状态
+- 统一分支 **exp-integrated**（worktree /root/goport-integrated）@ 本代提交 = 用户待测分支。
+- exp-expr(05efb40)、exp-declbind(ecdf55c) 均保留未动，main(9dff11c) 未动。
+- 用户测试 16G 项目请用 /root/goport-integrated 构建的 esbuild。
