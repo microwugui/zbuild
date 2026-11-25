@@ -8519,7 +8519,7 @@ func (p *parser) forbidUsingInSwitch(loc logger.Loc) {
 }
 
 func (p *parser) parseStmtsUpTo(end js_lexer.T, opts parseStmtOpts) []js_ast.Stmt {
-	stmts := []js_ast.Stmt{}
+	stmts := make([]js_ast.Stmt, 0, 4)
 	returnWithoutSemicolonStart := int32(-1)
 	opts.lexicalDecl = lexicalDeclAllowAll
 	isDirectivePrologue := opts.allowDirectivePrologue
