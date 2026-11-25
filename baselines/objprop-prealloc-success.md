@@ -113,3 +113,40 @@ big40（4万浅函数、symbol 密度 54/110B）cap 严重不足，Go 默认 ~1.
 | big40 (8.2MB 4万函数) | 545857→489901 KB = **−10.25%** | 779.2→717.1MB = **−7.96%** |
 三处改动合计仅 +22 行（symbol 2× 增长 + object properties cap4 + array items cap4），
 零新抽象、字节安全。这是本会话内存优化的可交付成果。不外推 16G。
+
+## 追加（第244代）：深度嵌套专项取证 —— 回答审计 [42209]「深度嵌套内存有优化吗」
+
+审计指出前几轮 wins 集中在 gen8(object 密集)/big40(函数密集)，而 deep12k 显示 0%，
+用户 [42209] 正是问这个。本代重新 pprof 取证并对齐"大内存/深嵌套"靶。
+
+### 取证（新造 3.9MB 深嵌套语料 deepfast_3k_40.js = 40 函数 × 3000 层嵌套 block）
+早期 31MB 深嵌套语料本机 1GB 直接 OOM；deep12k 仅 578K/12k 符号太小。
+新语料把每层引用限制在自身局部(v_i，O(1) findSymbol)，避免纯链式的 O(n²) CPU 爆炸，
+build 仅 1.3s，可在 1GB 上做 n≥8 配对 A/B。alloc_space/inuse_space（/tmp/df-expr.*.prof）：
+- `pushScopeForParsePass`（&Scope{} 192B）27.8% alloc / 27.0% inuse —— 深嵌套第一大头
+- `parseStmtsUpTo`（stmts slice）15.2% alloc —— 第二大头
+- `newSymbol` 5.2% alloc / 7.9% inuse；`Assign` 6.9% alloc。
+
+### 关键发现：deep12k 的 0% 是"语料太小"假象
+deep12k 只有 12k 符号，symbol slice 增长收益被淹没；但 120k 符号规模下，
+已提交的 symbol 2× 增长开始显著。**累计 exp-expr(全部 4 处) vs main 9dff11c，
+deepfast 深嵌套语料，配对 A/B n=12、GOMAXPROCS=1、区间完全不重叠：**
+| 指标 | main | exp-expr | 变化 |
+| --- | ---: | ---: | ---: |
+| TotalAlloc | 159421560 | 139050944 | **−12.78%** |
+| 峰值 RSS | 169972 KB | 148114 KB | **−12.86%** |
+**深嵌套不再是 0%——是双指标均 −12.8% 的实质收益。** 不外推 16G。
+
+### 本代新增第 4 处改动：parseStmtsUpTo stmts 预分配 cap4
+`js_parser.go:8522` `stmts := []js_ast.Stmt{}` → `make([]js_ast.Stmt,0,4)`。
+字节门 big40/gen8/deep12k 逐字节一致；增量 TotalAlloc deepfast −3.97%（144.81M→139.05M，
+配对 n=10，区间 [144805760,144806152] vs [139050504,139056096] 完全不重叠）。
+cap 梯度：cap2 无收益(144.8M)、cap4 最优(139.0M)、cap8(150.0M)/cap16(173.0M)过量反噬。
+gen8 不伤(614.7M 不变)。commit 45e0497。
+
+### 结论与下一步
+- [42209] 已回答：深嵌套在真实规模下累计 −12.8%（此前 0% 是小语料假象）。
+- 深嵌套第一大头 Scope 结构体的冷字段 sidecar 已在第224代证伪（<1%，见 scope-sidecar-negative.md），
+  Members 内联 [2] 已在 892402d 优化——Scope 单体暂无低风险空间。
+- 继续方向：深嵌套 alloc 次热点（Assign 6.9%、parseSuffix）与 buffer 已证 1:1 不可约；
+  按纪律继续找新的存活集热点，每处严格字节门+双指标+配对A/B。
