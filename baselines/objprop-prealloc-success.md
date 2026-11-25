@@ -150,3 +150,17 @@ gen8 不伤(614.7M 不变)。commit 45e0497。
   Members 内联 [2] 已在 892402d 优化——Scope 单体暂无低风险空间。
 - 继续方向：深嵌套 alloc 次热点（Assign 6.9%、parseSuffix）与 buffer 已证 1:1 不可约；
   按纪律继续找新的存活集热点，每处严格字节门+双指标+配对A/B。
+
+## 追加（第244代）：class body properties 预分配 —— 负结果，已回滚
+审计点名的 big40 次热点 `parseClass` 的 `properties = append`（line 6573, 10.92MB alloc，
+line 6538 `properties := []js_ast.Property{}` 零容量起步）。实测固定 cap 预分配：
+| cap | big40 TotalAlloc |
+| ---: | ---: |
+| 基线(零容量) | 712705912 |
+| 1 | 713033944 (+0.05%) |
+| 2 | 712869928 (+0.02%) |
+| 3 | 713118604 (+0.06%) |
+| 4 | 717390880 (+0.66%) |
+全部 ≥ 基线，**负结果，已回滚**。根因：big40 类通常只有少量属性，固定 cap 的空槽浪费
+≥ 省下的扩容复制，与第240代"批量8处小slice"负结果同类。object 字面量(line 3937)之所以成功，
+是因为 gen8 海量小 object 且属性数稳定 ≤4；class body 不具备这个分布。按纪律不采纳。
