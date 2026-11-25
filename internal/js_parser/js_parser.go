@@ -3507,6 +3507,25 @@ const (
 	exprFlagIsNewTarget
 )
 
+// appendObjectProperty grows object-literal property slices with a tuned policy:
+// cap stays 4 for small objects, but grows 4->5 on the 5th element so common
+// 5-property objects get an exact fit instead of Go's wasteful 4->8 doubling.
+// Only capacity/growth changes; element content is byte-identical.
+func appendObjectProperty(props []js_ast.Property, prop js_ast.Property) []js_ast.Property {
+	if len(props) == cap(props) {
+		newCap := cap(props) * 2
+		if cap(props) == 4 {
+			newCap = 5
+		} else if cap(props) == 0 {
+			newCap = 4
+		}
+		grown := make([]js_ast.Property, len(props), newCap)
+		copy(grown, props)
+		props = grown
+	}
+	return append(props, prop)
+}
+
 func (p *parser) parsePrefix(level js_ast.L, errors *deferredErrors, flags exprFlag) js_ast.Expr {
 	loc := p.saveExprCommentsHere()
 
@@ -3947,7 +3966,7 @@ func (p *parser) parsePrefix(level js_ast.L, errors *deferredErrors, flags exprF
 				dotLoc := p.saveExprCommentsHere()
 				p.lexer.Next()
 				value := p.parseExprOrBindings(js_ast.LComma, &selfErrors)
-				properties = append(properties, js_ast.Property{
+				properties = appendObjectProperty(properties, js_ast.Property{
 					Kind:       js_ast.PropertySpread,
 					Loc:        dotLoc,
 					ValueOrNil: value,
@@ -3960,7 +3979,7 @@ func (p *parser) parsePrefix(level js_ast.L, errors *deferredErrors, flags exprF
 			} else {
 				// This property may turn out to be a type in TypeScript, which should be ignored
 				if property, ok := p.parseProperty(p.saveExprCommentsHere(), js_ast.PropertyField, propertyOpts{}, &selfErrors); ok {
-					properties = append(properties, property)
+					properties = appendObjectProperty(properties, property)
 				}
 			}
 
