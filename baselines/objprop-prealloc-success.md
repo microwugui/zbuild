@@ -169,3 +169,27 @@ line 6538 `properties := []js_ast.Property{}` 零容量起步）。实测固定 
 同 class body，big40 函数参数 `fn.Args`（line 6330 append, 9.5MB）固定 cap 预分配：
 cap2=719488128 / cap4=738523816，均 > 基线 712705912（+0.9%/+3.6%）。
 big40 函数参数普遍 0-2 个，固定 cap 空槽浪费 > 收益。**负结果，已回滚**（同批量8处小slice）。
+
+## 追加（第245代审核纠偏）：真实 scope-chain 语料 —— [42209] 的诚实答案
+
+审计指出 deepfast 是"每块只引用自己 local / O(1) findSymbol"的人造语料，回避了深度嵌套
+真正的 scope-chain walk，不代表 16G 痛点。本代造真实语料 `chain_1k_150.js`
+（150 函数 × 1000 层嵌套 block，**每层 `let v=acc+N; if(v>0) acc=v` 引用外层 acc**，
+6.1MB，强制 findSymbol 每层向上走完整 scope 链，构建 3.5s）。
+
+### 新 profile（/tmp/chain-prof.*.prof）
+alloc_space / inuse_space 双口径第一大头仍是 `pushScopeForParsePass` 的 `&Scope{}`：
+- alloc 21.0%（line1171 &Scope{} 13.2MB + line1211 scopesInOrder 3MB）
+- inuse 21.0%（line1171 27.57MB = 15万 scope × 192B）。
+CPU 口径（旧 cpu-deep12k.prof）findSymbol 44% + ScopeMembers.Get 40% = 87%，
+证实 scope-chain walk 是深嵌套真正开销。
+
+### 诚实 A/B（main 9dff11c vs exp-expr 当前全部 5 处改动，chain_1k_150，配对 n=10）
+| 指标 | main | exp-expr | 变化 | 区间 |
+| --- | ---: | ---: | ---: | --- |
+| TotalAlloc | 233039080 | 213748672 | **−8.28%** | 不重叠 |
+| 峰值 RSS | 215704 KB | 214008 KB | **−0.79%** | **重叠，不显著** |
+**诚实结论：深度嵌套的 TotalAlloc 有 −8.28%（stmts cap4 + symbol 2× 贡献），
+但峰值驻留内存（用户 16G 痛点）几乎无改善（−0.79%，区间重叠）——此前 deepfast 宣称的
+RSS −12.86% 是 O(1) 人造语料的假象。** [42209] 的诚实答案：目前深嵌套内存问题**未解决**，
+Scope 存活堆（21%）未被任何现有改动触及。继续追 Scope，不结案。
