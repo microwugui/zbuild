@@ -160,6 +160,16 @@ type parser struct {
 	suspiciousLogicalOperatorInsideArrow js_ast.E
 	moduleScope                          *js_ast.Scope
 
+	// === goport exp-declbind: declaration-time symbol resolution fast path ===
+	// fastSymInit: whether the lazy resolver has been initialized for this file.
+	// fastSymOn: safe file -> use O(1) shadow-stack lookup in findSymbol.
+	// fastSymVerify: env GOPORT_FASTSYM_VERIFY=1 -> compare fast vs slow result.
+	fastSymInit  bool
+	fastSymOn    bool
+	fastSymVerify bool
+	fastVis      map[string][]*js_ast.Scope // name -> scopes declaring it (innermost at end)
+	fastFrames   []fastScopeFrame            // one frame per entered visit-pass scope
+
 	// This is internal-only data used for the implementation of Yarn PnP
 	manifestForYarnPnP     js_ast.Expr
 	stringLocalsForYarnPnP map[ast.Ref]stringLocalForYarnPnP
@@ -1263,6 +1273,11 @@ func (p *parser) popScope() {
 
 			p.symbols[member.Ref.InnerIndex].Flags |= ast.MustNotBeRenamed
 		})
+	}
+
+	// goport exp-declbind: unwind the shadow stack in lockstep with the scope tree.
+	if p.fastSymOn {
+		p.fastPop()
 	}
 
 	p.currentScope = p.currentScope.Parent
@@ -8707,6 +8722,12 @@ func (p *parser) pushScopeForVisitPass(kind js_ast.ScopeKind, loc logger.Loc) {
 	if part := p.currentPart; part != nil {
 		part.Scopes = append(part.Scopes, order.scope)
 	}
+
+	// goport exp-declbind: track the visit-pass scope path on the shadow stack.
+	// Before fastInit this is a no-op (the initial path is rebuilt there).
+	if p.fastSymOn {
+		p.fastPush(order.scope)
+	}
 }
 
 type findSymbolResult struct {
@@ -8715,7 +8736,33 @@ type findSymbolResult struct {
 	isInsideWithScope bool
 }
 
+// findSymbol is the declaration-time fast path. On safe files it resolves a
+// name in O(1) via the shadow stack instead of walking s=s.Parent (the O(n^2)
+// deep12k hotspot). It reproduces the slow path's only live side effect here,
+// recordUsage; with/TS/class side effects are excluded by fastBindFileIsSafe.
 func (p *parser) findSymbol(loc logger.Loc, name string) findSymbolResult {
+	if !p.fastSymInit {
+		p.fastInit()
+	}
+	if p.fastSymOn {
+		if ref, declareLoc, ok := p.fastFind(name); ok {
+			if p.fastSymVerify {
+				sref, sloc, sok := p.findSymbolPure(name)
+				if !sok || sref.InnerIndex != ref.InnerIndex || sref.SourceIndex != ref.SourceIndex || sloc.Start != declareLoc.Start {
+					panic(fmt.Sprintf("FASTBIND MISMATCH name=%q fast=(%d,%d,%d) slow=(%d,%d,%v)",
+						name, ref.InnerIndex, ref.SourceIndex, declareLoc.Start, sref.InnerIndex, sloc.Start, sok))
+				}
+			}
+			p.recordUsage(ref)
+			return findSymbolResult{ref, declareLoc, false}
+		}
+	}
+	return p.findSymbolSlow(loc, name)
+}
+
+// findSymbolSlow is the original parent-chain walk, kept verbatim as the
+// fallback for unsafe files and for names not present on the shadow stack.
+func (p *parser) findSymbolSlow(loc logger.Loc, name string) findSymbolResult {
 	var ref ast.Ref
 	var declareLoc logger.Loc
 	isInsideWithScope := false
