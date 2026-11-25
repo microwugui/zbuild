@@ -82,3 +82,12 @@ gen8 profile 次热点：`items=append`（js_parser.go:3877）47.85MB alloc_spac
 - **累计相对 main(9dff11c)**：TotalAlloc −19.72%（522955→419830）、峰值 RSS −15.49%（687.6→581.1MB）。
 - 判断：array 增量本身 <10% 单靶门，但是已验证手法的第2例、代价 1 行、字节门全过、区间不重叠、
   累计收益继续扩大 → 采纳。不外推 16G。
+
+## 追加（同代继续）：批量 8 处小 slice 预分配 — 负结果，回滚
+把参数/解构类零容量 slice（args Arg/Expr、ArrayBinding、PropertyBinding、ClauseItem 共 8 处）
+统一改 `make(..., 0, 4)`。字节门 3 语料一致、go test 全绿，但
+TotalAlloc gen8 419830→419830（0%）、big40 +0.01%、deep12k 0% —— 收益为零。
+根因：这些 slice 元素数少/实例少，固定 cap 的额外空槽浪费 ≈ 省下的扩容复制。
+**按纪律回滚，只保留已成功的 properties(120B×海量小object) 和 items(24B×array) 两处。**
+教训：固定 cap 预分配只对"元素结构较大 + 实例海量 + 元素数稳定少"的 slice 有效，
+不可无差别推广到所有零容量 slice。
