@@ -75,3 +75,22 @@ CPU profile（deep12k，parse-only）：
 - A/B 原始数据：本轮控制台输出（deep3k/deep12k/big4/big40/gen8 × base/cand，n=8）。
 - 代码：internal/js_parser/js_parser.go:8681 findSymbol；:8656 pushScopeForVisitPass；:1215 popScope；
   internal/js_parser/fastbind.go 全文。
+
+## 七、追加验证（同代继续推进，checkpoint 后）
+### 回退路径字节门（with/class 文件禁用快路径）
+构造 deep3k-with.js（外层 with 块）、deep3k-class.js（顶层 class），严格基线 vs 候选 vs 候选+双算断言：
+产物 BYTE-IDENTICAL，rc 全 0 → 不安全文件 100% 走原 findSymbolSlow，改动对它们零影响。
+
+### 深度外推梯度（parse-only，确认线性趋势保持）
+| 语料 | 深度 | base/parse | cand/parse | 比值 |
+| --- | ---: | ---: | ---: | ---: |
+| deep3k | 3000 | 159.8ms | 55.4ms | 2.88× |
+| deep12k | 12000 | 2147.6ms | 266.6ms | 8.06× |
+| **deep24k** | **24000** | **8145.7ms** | **474.3ms** | **17.2×** |
+
+斜率（parse 中位数）：
+- base：3k→24k（8× 深度）→ **50.97×** 时间（近二次64×，坐实 O(n²)）；12k→24k（2×）→3.79×
+- cand：3k→24k → **8.56×** 时间（线性8×）；12k→24k（2×）→1.78×
+- 收益随深度单调放大：8.1× (12k) → 17.2× (24k)
+
+证据：/tmp/deep24k.js（1.16MB）、/tmp/deep3k-{with,class}.js；/tmp/pb-{base,cand} parse-only harness。
