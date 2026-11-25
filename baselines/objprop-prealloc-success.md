@@ -103,3 +103,13 @@ big40（4万浅函数、symbol 密度 54/110B）cap 严重不足，Go 默认 ~1.
 - 字节门 3 语料逐字节一致；go test 全绿；`p.symbols` 仅 newSymbol 一处 append（封装完整）。
 - 判断：单靶 <10% 门，但真实收益、零字节差异、不伤其他语料、风险低 → 采纳累积。不外推 16G。
 - 累计相对 main(9dff11c)：加上本项后 big40 TotalAlloc/RSS 进一步下降（逐项累积，见各节）。
+
+## 累计整体验证（对照 main 9dff11c，全部 3 处代码改动一起）
+严格同源：main 无优化 vs exp-expr 最终(0d6db8f)。字节门 big40/gen8/deep12k 逐字节一致。
+配对 A/B n=8、GOMAXPROCS=1、区间不重叠：
+| 语料 | TotalAlloc | 峰值 RSS |
+| --- | ---: | ---: |
+| gen8 (19MB object字面量) | 522955→419830 KB = **−19.72%** | 687.6→581.0MB = **−15.50%** |
+| big40 (8.2MB 4万函数) | 545857→489901 KB = **−10.25%** | 779.2→717.1MB = **−7.96%** |
+三处改动合计仅 +22 行（symbol 2× 增长 + object properties cap4 + array items cap4），
+零新抽象、字节安全。这是本会话内存优化的可交付成果。不外推 16G。
