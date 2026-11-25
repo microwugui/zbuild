@@ -3843,7 +3843,10 @@ func (p *parser) parsePrefix(level js_ast.L, errors *deferredErrors, flags exprF
 	case js_lexer.TOpenBracket:
 		p.lexer.Next()
 		isSingleLine := !p.lexer.HasNewlineBefore
-		items := []js_ast.Expr{}
+		// goport exp-expr: array literals are usually short; a small inline
+		// capacity avoids repeated append-growth copies of 24B Expr structs
+		// (pprof: items=append is 47MB alloc_space on gen8).
+		items := make([]js_ast.Expr, 0, 4)
 		selfErrors := deferredErrors{}
 		commaAfterSpread := logger.Loc{}
 

@@ -70,3 +70,15 @@ gen8 TotalAlloc KB/parse（parse-only n=6，同源编译仅改 cap）：
 | 16 | OOM Killed | 过量预分配反噬 |
 cap=4 是甜点：object 字面量通常 ≤4 属性，cap=8 多分配空槽浪费，cap=16 在海量 object 下直接 OOM。
 **确认已提交的 cap=4 为最优，无需改动。**
+
+## 追加（同代继续）：array 字面量 items 预分配（同一手法第2例）
+gen8 profile 次热点：`items=append`（js_parser.go:3877）47.85MB alloc_space，array 字面量 `[...]`
+从 `items := []js_ast.Expr{}` 零容量起步。改动：`make([]js_ast.Expr, 0, 4)`（parsePrefix 的 TOpenBracket 分支）。
+- 字节门：big40/gen8/deep12k 逐字节一致；go test 全绿。
+- 增量（对照 8109497 仅 properties 版，隔离 array 单独效果）：
+  - TotalAlloc gen8 436705→419830（**−3.86%**）、big40 −1.1%、deep12k 0%
+  - 峰值 RSS gen8 598.5→581.1MB（**−2.92%**，8 次区间不重叠）
+- cap 梯度：cap=2 431080、cap=4 419830、cap=8 419830（并列）、cap=16 464830（过量浪费）→ 保持 cap=4。
+- **累计相对 main(9dff11c)**：TotalAlloc −19.72%（522955→419830）、峰值 RSS −15.49%（687.6→581.1MB）。
+- 判断：array 增量本身 <10% 单靶门，但是已验证手法的第2例、代价 1 行、字节门全过、区间不重叠、
+  累计收益继续扩大 → 采纳。不外推 16G。
